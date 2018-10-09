@@ -102,5 +102,8 @@
   <ItemGroup>
     <SplashScreen Include="Images\StartLogo.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dartboard.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

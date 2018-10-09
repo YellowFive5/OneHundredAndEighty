@@ -24,5 +24,11 @@ namespace OneHundredAndEighty
         {
             InitializeComponent();
         }
+
+        private void PointsShow(object sender, MouseEventArgs e)
+        {
+            Shape O = sender as Shape;
+            Points.Content = O.Tag.ToString();
+        }
     }
 }

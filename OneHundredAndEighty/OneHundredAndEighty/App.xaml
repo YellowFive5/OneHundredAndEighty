@@ -5,28 +5,6 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <Style x:Key="DartboardControls">
-            
-            <Setter Property="Shape.Stroke" Value="Black"/>
-            <Setter Property="Shape.StrokeThickness" Value="0.5"/>
-            
-            <Setter Property="Shape.Fill">
-                <Setter.Value>
-                    <SolidColorBrush Color="Aqua" Opacity="0.1"/>
-                </Setter.Value>
-            </Setter>
-            
-            <Style.Triggers>
-                <Trigger Property="Shape.IsMouseOver" Value="True">
-                    <Setter Property="Shape.Fill">
-                        <Setter.Value>
-                            <SolidColorBrush Color="Red" Opacity="0.3"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-
-        </Style>
 
     </Application.Resources>
 

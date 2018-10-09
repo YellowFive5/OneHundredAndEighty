@@ -5,66 +5,1599 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OneHundredAndEighty"
         mc:Ignorable="d"
-        Height="482"
-        Width="818"
-        Title="OneHundredAndEighty"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="800"
+        Width="1200"
+        Title="OneHundredAndEighty"
         >
-    <Grid>
-        <Path Data="M212.25,50.127999 C122.6418,50.127998 49.999996,122.7698 49.999994,212.378 49.999996,301.9862 122.6418,374.628 212.25,374.628 301.8582,374.628 374.5,301.9862 374.5,212.378 374.5,122.7698 301.8582,50.127998 212.25,50.127999 z M212.25,0 C329.47244,0 424.5,95.027561 424.5,212.24999 424.5,329.47245 329.47244,424.50001 212.25,424.50001 95.027557,424.50001 -3.8146973E-06,329.47245 0,212.24999 -3.8146973E-06,95.027561 95.027557,0 212.25,0 z"
-              HorizontalAlignment="Left"
-              Height="424.5"
-              Margin="185.334,10,0,0"
-              Stretch="Fill"
-              VerticalAlignment="Top"
-              Width="424.5"
-              Style="{StaticResource DartboardControls}"
-              />
-        <Path Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-              HorizontalAlignment="Left"
-              Height="14.238"
-              Margin="374,59.822,0,0"
-              RenderTransformOrigin="3.70095941499626,22.7888786651953"
-              Stretch="Fill"
-              VerticalAlignment="Top"
-              Width="50.588"
-              Style="{StaticResource DartboardControls}"
-              />
-        <Path Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-              HorizontalAlignment="Left"
-              Height="135.243"
-              Margin="375.688,70.785,0,0"
-              RenderTransformOrigin="3.70042197988737,2.23224627976145"
-              Stretch="Fill"
-              VerticalAlignment="Top"
-              Width="47.072"
-              Style="{StaticResource DartboardControls}"
-              />
-        <Path Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-              HorizontalAlignment="Left"
-              Height="11.014"
-              Margin="382.565,119.444,0,0"
-              RenderTransformOrigin="5.2878564715272,23.2162256220044"
-              Stretch="Fill"
-              VerticalAlignment="Top"
-              Width="31.941"
-              Style="{StaticResource DartboardControls}"
-              />
-        <Path Data="M16.52,9.0839996 C12.193954,9.0839996 8.6870003,12.590954 8.6870003,16.917 8.6870003,21.243046 12.193954,24.75 16.52,24.75 20.846046,24.75 24.353001,21.243046 24.353001,16.917 24.353001,12.590954 20.846046,9.0839996 16.52,9.0839996 z M16.6665,0 C25.871153,0 33.333,7.4618464 33.333,16.6665 33.333,25.871153 25.871153,33.333 16.6665,33.333 7.4618464,33.333 0,25.871153 0,16.6665 0,7.4618464 7.4618464,0 16.6665,0 z"
-              HorizontalAlignment="Left"
-              Height="33.334"
-              Margin="381,205.319,0,0"
-              Stretch="Fill"
-              VerticalAlignment="Top"
-              Width="33.332"
-              Style="{StaticResource DartboardControls}"
-              />
-        <Ellipse HorizontalAlignment="Left"
-                 Height="16"
-                 Margin="389,215,0,0"
-                 VerticalAlignment="Top"
-                 Width="16"
-                 Style="{StaticResource DartboardControls}"
-                 />
+    <Window.Resources>
+        <Style x:Key="CommonSegment">
+            <EventSetter Event="Shape.MouseEnter" Handler="PointsShow"/>
+            
+            <Setter Property="Shape.Stroke" Value="Black"/>
+            <Setter Property="Shape.StrokeThickness" Value="0.2"/>
+            <Setter Property="Shape.Cursor" Value="Hand"/>
+            <Setter Property="Shape.Opacity" Value="1"/>
+            <Setter Property="Shape.Fill">
+                <Setter.Value>
+                    <SolidColorBrush Color="Transparent"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DarkSegment" BasedOn="{StaticResource CommonSegment}">
+            <Style.Triggers>
+                <Trigger Property="Shape.IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Name="Blink">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Aqua"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0"
+                                                 To="0.55"
+                                                 Duration="0:0:0.20"
+                                                 AutoReverse="True"
+                                                 RepeatBehavior="Forever"
+                                                 >
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="Blink" />
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Transparent"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LightSegment" BasedOn="{StaticResource CommonSegment}">
+            <Style.Triggers>
+                <Trigger Property="Shape.IsMouseOver" Value="True">
+
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Name="Blink">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="DarkOrchid"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0"
+                                                 To="0.55"
+                                                 Duration="0:0:0.20"
+                                                 AutoReverse="True"
+                                                 RepeatBehavior="Forever"
+                                                 >
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="Blink" />
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Transparent"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RedSegment" BasedOn="{StaticResource CommonSegment}">
+            <Style.Triggers>
+                <Trigger Property="Shape.IsMouseOver" Value="True">
+
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Name="Blink">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="LawnGreen"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0"
+                                                 To="0.55"
+                                                 Duration="0:0:0.20"
+                                                 AutoReverse="True"
+                                                 RepeatBehavior="Forever"
+                                                 >
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="Blink" />
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Transparent"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="GreenSegment" BasedOn="{StaticResource CommonSegment}">
+            <Style.Triggers>
+                <Trigger Property="Shape.IsMouseOver" Value="True">
+
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Name="Blink">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Salmon"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0"
+                                                 To="0.55"
+                                                 Duration="0:0:0.20"
+                                                 AutoReverse="True"
+                                                 RepeatBehavior="Forever"
+                                                 >
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="Blink" />
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Transparent"
+                                                Duration="0:0:0.0">
+                                </ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="BoardSection">
+        <!--Image-->
+        <Image
+            x:Name="DartboardImg"
+            HorizontalAlignment="Left"
+            Height="622"
+            Margin="518,61,0,0"
+            VerticalAlignment="Top"
+            Width="622"
+            Source="Images/Dartboard.png"
+            />
+        <!--Zero-->
+        <Path
+            x:Name="Zero"
+            Tag="0"
+            Data="M212.25,50.127999 C122.6418,50.127998 49.999996,122.7698 49.999994,212.378 49.999996,301.9862 122.6418,374.628 212.25,374.628 301.8582,374.628 374.5,301.9862 374.5,212.378 374.5,122.7698 301.8582,50.127998 212.25,50.127999 z M212.25,0 C329.47244,0 424.5,95.027561 424.5,212.24999 424.5,329.47245 329.47244,424.50001 212.25,424.50001 95.027557,424.50001 -3.8146973E-06,329.47245 0,212.24999 -3.8146973E-06,95.027561 95.027557,0 212.25,0 z"
+            HorizontalAlignment="Left"
+            Height="625.833"
+            Margin="516.418,59.418,0,0"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="625.833"
+            Style="{StaticResource DarkSegment}"
+            />
+        <!--Bull-->
+        <Ellipse
+            x:Name="Bull"
+            Tag="50"
+            HorizontalAlignment="Left"
+            Height="23"
+            Margin="817,361,0,0"
+            VerticalAlignment="Top"
+            Width="23"
+            Style="{StaticResource RedSegment}" RenderTransformOrigin="0.522,0.5"
+            />
+        <!--25-->
+        <Path 
+            x:Name="_25"
+            Tag="25"
+            Data="M16.52,9.0839996 C12.193954,9.0839996 8.6870003,12.590954 8.6870003,16.917 8.6870003,21.243046 12.193954,24.75 16.52,24.75 20.846046,24.75 24.353001,21.243046 24.353001,16.917 24.353001,12.590954 20.846046,9.0839996 16.52,9.0839996 z M16.6665,0 C25.871153,0 33.333,7.4618464 33.333,16.6665 33.333,25.871153 25.871153,33.333 16.6665,33.333 7.4618464,33.333 0,25.871153 0,16.6665 0,7.4618464 7.4618464,0 16.6665,0 z"
+            HorizontalAlignment="Left"
+            Height="48.096"
+            Margin="805.057,347.953,0,0"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="48.094"
+            Style="{StaticResource GreenSegment}"
+            />
+        <!--20-->
+        <Path
+            x:Name="_20"
+            Tag="20"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="798.828,151.946,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource DarkSegment}"
+            />
+        <!--D20-->
+        <Path
+            x:Name="D20"
+            Tag="40"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="797.17,135.488,0,0"
+            RenderTransformOrigin="0.488,0.417"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="73.161"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="1.316"/>
+                    <TranslateTransform X="0.271" Y="-0.127"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T20-->
+        <Path
+            x:Name="T20"
+            Tag="60"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="835.87,199.077,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.232"/>
+                    <TranslateTransform X="-27.714" Y="23.669"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--1-->
+        <Path
+            x:Name="_1"
+            Tag="1"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="196.744"
+            Margin="797.502,150.572,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.477"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="18.38"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D1-->
+        <Path
+            x:Name="D1"
+            Tag="2"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="797.17,135.488,0,0"
+            RenderTransformOrigin="0.432,13.246"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="73.161"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="17.887"/>
+                    <TranslateTransform X="0.094" Y="-0.131"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T1-->
+        <Path
+            x:Name="T1"
+            Tag="3"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="834.87,198.577,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="18.322"/>
+                    <TranslateTransform X="-27.714" Y="23.669"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--18-->
+        <Path
+            x:Name="_18"
+            Tag="18"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="799.495,151.613,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="36.084"/>
+                    <TranslateTransform X="-0.258" Y="-0.262"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D18-->
+        <Path
+            x:Name="D18"
+            Tag="36"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="797.17,135.488,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="73.161"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="35.918"/>
+                    <TranslateTransform X="61.802" Y="25.342"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T18-->
+        <Path
+            x:Name="T18"
+            Tag="54"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="835.87,198.827,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="36.214"/>
+                    <TranslateTransform X="-28.049" Y="23.651"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--4-->
+        <Path
+            x:Name="_4"
+            Tag="4"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="799.245,152.238,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="54.109"/>
+                    <TranslateTransform X="-0.029" Y="-0.297"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D4-->
+        <Path
+            x:Name="D4"
+            Tag="8"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.466,132.013,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="55.07"/>
+                    <TranslateTransform X="83.958" Y="51.352"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T4-->
+        <Path
+            x:Name="T4"
+            Tag="12"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="836.276,199.827,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="53.599"/>
+                    <TranslateTransform X="-27.965" Y="23.881"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--13-->
+        <Path
+            x:Name="_13"
+            Tag="13"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="799.245,152.238,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="72.219"/>
+                    <TranslateTransform X="-0.071" Y="-0.413"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D13-->
+        <Path
+            x:Name="D13"
+            Tag="26"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.466,132.013,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="73.18"/>
+                    <TranslateTransform X="97.718" Y="82.377"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T13-->
+        <Path
+            x:Name="T13"
+            Tag="39"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="836.651,200.452,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="71.709"/>
+                    <TranslateTransform X="-28.601" Y="23.987"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--6-->
+        <Path
+            x:Name="_6"
+            Tag="6"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="798.013,150.28,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.084"/>
+                    <TranslateTransform X="-0.03" Y="-0.443"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D6-->
+        <Path
+            x:Name="D6"
+            Tag="12"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.382,132.93,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.681"/>
+                    <TranslateTransform X="101.123" Y="115.797"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T6-->
+        <Path
+            x:Name="T6"
+            Tag="18"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="841.626,202.844,0,0"
+            RenderTransformOrigin="0.456,1.375"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.423"/>
+                    <TranslateTransform X="96.524" Y="150.925"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--10-->
+        <Path
+            x:Name="_10"
+            Tag="10"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="798.013,150.28,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="107.98"/>
+                    <TranslateTransform X="0.557" Y="0.133"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D10-->
+        <Path
+            x:Name="D10"
+            Tag="20"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.132,133.93,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="108.06"/>
+                    <TranslateTransform X="93.669" Y="148.643"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T10-->
+        <Path
+            x:Name="T10"
+            Tag="30"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="841.626,202.844,0,0"
+            RenderTransformOrigin="0.456,1.375"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="108.319"/>
+                    <TranslateTransform X="89.838" Y="190.887"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--15-->
+        <Path
+            x:Name="_15"
+            Tag="15"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="798.013,150.28,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="125.843"/>
+                    <TranslateTransform X="0.554" Y="0.267"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D15-->
+        <Path
+            x:Name="D15"
+            Tag="30"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.132,133.93,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="125.923"/>
+                    <TranslateTransform X="76.126" Y="177.617"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T15-->
+        <Path
+            x:Name="T15"
+            Tag="45"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="841.626,202.844,0,0"
+            RenderTransformOrigin="0.456,1.375"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="126.182"/>
+                    <TranslateTransform X="71.283" Y="226.946"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--2-->
+        <Path
+            x:Name="_2"
+            Tag="2"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="798.846,148.905,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="144.221"/>
+                    <TranslateTransform X="0.548" Y="0.312"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D2-->
+        <Path
+            x:Name="D2"
+            Tag="4"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.876"
+            Margin="794.339,134.722,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="143.822"/>
+                    <TranslateTransform X="50.451" Y="199.692"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T2-->
+        <Path
+            x:Name="T2"
+            Tag="6"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="841.729,202.76,0,0"
+            RenderTransformOrigin="0.456,1.375"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.106"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="143.48"/>
+                    <TranslateTransform X="42.579" Y="255.549"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--17-->
+        <Path
+            x:Name="_17"
+            Tag="17"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="798.346,149.155,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="161.955"/>
+                    <TranslateTransform X="0.751" Y="0.603"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D17-->
+        <Path
+            x:Name="D17"
+            Tag="24"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.876"
+            Margin="795.214,133.722,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="162.1"/>
+                    <TranslateTransform X="19.154" Y="212.49"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T17-->
+        <Path
+            x:Name="T17"
+            Tag="51"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.416"
+            Margin="841.022,203.885,0,0"
+            RenderTransformOrigin="0.456,1.375"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="161.641"/>
+                    <TranslateTransform X="6.834" Y="273.744"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--3-->
+        <Path
+            x:Name="_3"
+            Tag="3"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="798.828,152.946,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180.021"/>
+                    <TranslateTransform X="0.66" Y="0.064"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D3-->
+        <Path
+            x:Name="D3"
+            Tag="6"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="797.545,133.363,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="73.161"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-179.976"/>
+                    <TranslateTransform X="-16.46" Y="216.234"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T3-->
+        <Path
+            x:Name="T3"
+            Tag="9"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="835.87,198.077,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-179.789"/>
+                    <TranslateTransform X="-27.884" Y="23.738"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--19-->
+        <Path
+            x:Name="_19"
+            Tag="19"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="196.744"
+            Margin="798.877,150.572,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.477"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-161.641"/>
+                    <TranslateTransform X="2.009" Y="-1.727"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D19-->
+        <Path
+            x:Name="D19"
+            Tag="28"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.963"
+            Margin="798.888,131.634,0,0"
+            RenderTransformOrigin="0.432,13.246"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.11"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-161.946"/>
+                    <TranslateTransform X="-0.144" Y="1.408"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T19-->
+        <Path
+            x:Name="T19"
+            Tag="57"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="835.37,197.327,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-161.699"/>
+                    <TranslateTransform X="-26.378" Y="23.782"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--7-->
+        <Path
+            x:Name="_7"
+            Tag="7"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="799.495,151.613,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-143.937"/>
+                    <TranslateTransform X="1.087" Y="0.426"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D7-->
+        <Path
+            x:Name="D7"
+            Tag="14"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="799.17,134.113,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="73.161"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-144.103"/>
+                    <TranslateTransform X="-79.105" Y="190.35"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T7-->
+        <Path
+            x:Name="T7"
+            Tag="21"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="836.912,197.66,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-143.807"/>
+                    <TranslateTransform X="-28.519" Y="23.691"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--16-->
+        <Path
+            x:Name="_16"
+            Tag="16"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="798.37,152.738,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-125.912"/>
+                    <TranslateTransform X="0.911" Y="0.548"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D16-->
+        <Path
+            x:Name="D16"
+            Tag="32"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.091,129.138,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-125.73"/>
+                    <TranslateTransform X="-96.682" Y="169.973"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T16-->
+        <Path
+            x:Name="T16"
+            Tag="48"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="836.901,200.452,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-126.302"/>
+                    <TranslateTransform X="-29.015" Y="21.218"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--8-->
+        <Path
+            x:Name="_8"
+            Tag="8"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="195.138"
+            Margin="798.245,152.613,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="67.918"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-107.802"/>
+                    <TranslateTransform X="0.978" Y="0.761"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D8-->
+        <Path
+            x:Name="D8"
+            Tag="16"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.966,130.513,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-107.4"/>
+                    <TranslateTransform X="-110.679" Y="138.438"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T8-->
+        <Path
+            x:Name="T8"
+            Tag="24"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="13.929"
+            Margin="839.026,200.202,0,0"
+            RenderTransformOrigin="0.458,10.757"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="45.575"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-108.312"/>
+                    <TranslateTransform X="-30.709" Y="20.741"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--11-->
+        <Path
+            x:Name="_11"
+            Tag="11"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="797.721,149.863,0,0"
+            RenderTransformOrigin="0.438,1.13"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-89.937"/>
+                    <TranslateTransform X="2.053" Y="0.636"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D11-->
+        <Path
+            x:Name="D11"
+            Tag="22"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="795.382,132.93,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-89.34"/>
+                    <TranslateTransform X="-114.152" Y="102.481"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T11-->
+        <Path
+            x:Name="T11"
+            Tag="33"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="840.501,202.844,0,0"
+            RenderTransformOrigin="0.456,1.375"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-89.598"/>
+                    <TranslateTransform X="-163.173" Y="149.611"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--14-->
+        <Path
+            x:Name="_14"
+            Tag="14"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="797.68,150.779,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-71.751"/>
+                    <TranslateTransform X="1.347" Y="1.323"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D14-->
+        <Path
+            x:Name="D14"
+            Tag="24"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="794.799,134.597,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-71.961"/>
+                    <TranslateTransform X="-106.602" Y="67.103"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T14-->
+        <Path
+            x:Name="T14"
+            Tag="42"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="841.459,202.427,0,0"
+            RenderTransformOrigin="0.526,0.478"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-72.113"/>
+                    <TranslateTransform X="-171.022" Y="115.811"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--9-->
+        <Path
+            x:Name="_9"
+            Tag="9"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="798.013,149.655,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-54.178"/>
+                    <TranslateTransform X="1.211" Y="1.225"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D9-->
+        <Path
+            x:Name="D9"
+            Tag="18"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.877"
+            Margin="795.299,134.763,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-54.098"/>
+                    <TranslateTransform X="-88.799" Y="37.641"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T9-->
+        <Path
+            x:Name="T9"
+            Tag="27"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="841.959,201.843,0,0"
+            RenderTransformOrigin="0.491,0.665"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-53.296"/>
+                    <TranslateTransform X="-147.051" Y="77.157"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--12-->
+        <Path
+            x:Name="_12"
+            Tag="12"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="799.179,148.405,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource DarkSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-35.8"/>
+                    <TranslateTransform X="-0.928" Y="3.176"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D12-->
+        <Path
+            x:Name="D12"
+            Tag="24"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.876"
+            Margin="794.339,136.722,0,0"
+            RenderTransformOrigin="0.55,7.243"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-36.199"/>
+                    <TranslateTransform X="-62.735" Y="13.165"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T12-->
+        <Path
+            x:Name="T12"
+            Tag="36"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.417"
+            Margin="841.438,201.093,0,0"
+            RenderTransformOrigin="0.518,0.487"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.106"
+            Style="{StaticResource RedSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-35.862"/>
+                    <TranslateTransform X="-117.838" Y="46.733"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--5-->
+        <Path
+            x:Name="_5"
+            Tag="5"
+            Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
+            HorizontalAlignment="Left"
+            Height="197.138"
+            Margin="798.096,148.405,0,0"
+            RenderTransformOrigin="0.438,1.127"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="68.614"
+            Style="{StaticResource LightSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-18.066"/>
+                    <TranslateTransform X="0.736" Y="2.834"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--D5-->
+        <Path
+            x:Name="D5"
+            Tag="10"
+            Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
+            HorizontalAlignment="Left"
+            Height="17.876"
+            Margin="795.339,134.972,0,0"
+            RenderTransformOrigin="0.481,0.443"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="74.062"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-17.236"/>
+                    <TranslateTransform X="-70.08" Y="9.585"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <!--T5-->
+        <Path
+            x:Name="T5"
+            Tag="15"
+            Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
+            HorizontalAlignment="Left"
+            Height="14.416"
+            Margin="840.397,203.01,0,0"
+            RenderTransformOrigin="0.456,1.375"
+            Stretch="Fill"
+            VerticalAlignment="Top"
+            Width="46.105"
+            Style="{StaticResource GreenSegment}"
+            >
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-18.38"/>
+                    <TranslateTransform X="-72.224" Y="25.902"/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+
+        <Label x:Name="Points"
+               Content="Label"
+               HorizontalAlignment="Left"
+               Margin="545,653,0,0"
+               VerticalAlignment="Top"
+               Height="36"
+               Width="66"
+               FontSize="20"
+               />
     </Grid>
+      
 </Window>
