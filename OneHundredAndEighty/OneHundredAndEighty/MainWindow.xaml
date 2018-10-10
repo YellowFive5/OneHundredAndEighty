@@ -32,8 +32,8 @@
                                 </ColorAnimation>
                                 <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                                  From="0"
-                                                 To="0.55"
-                                                 Duration="0:0:0.20"
+                                                 To="0.45"
+                                                 Duration="0:0:0.25"
                                                  AutoReverse="True"
                                                  RepeatBehavior="Forever"
                                                  >
@@ -55,7 +55,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <!--<Style x:Key="DarkSegment"
                BasedOn="{StaticResource CommonSegment}">
         </Style>
@@ -68,19 +68,17 @@
         <Style x:Key="GreenSegment"
                BasedOn="{StaticResource CommonSegment}">
         </Style>-->
-        
+
     </Window.Resources>
     <Canvas>
+        <!--Image-->
+        <Image x:Name="DartboardImg"
+            Height="748"
+            Width="748"
+            Source="Images/Dartboard.png" Canvas.Left="407" Canvas.Top="20"
+            />
         <Canvas x:Name="BoardPanel"
                 Height="764" Canvas.Left="389" Width="778" Canvas.Top="10">
-            <!--Image-->
-            <Image
-            x:Name="DartboardImg"
-            Height="748"
-            Margin="18,10,0,0"
-            Width="748"
-            Source="Images/Dartboard.png"
-            />
             <!--Zero-->
             <Path
             x:Name="Zero"
@@ -1457,7 +1455,9 @@
                VerticalAlignment="Top"
                Height="46"
                Width="76"
-               FontSize="36" FontFamily="Agency FB" FontWeight="Bold"
+               FontSize="36"
+               FontFamily="Agency FB"
+               FontWeight="Bold"
                />
 
         </Canvas>
@@ -1468,10 +1468,10 @@
                 Width="80"
                 Canvas.Top="21" Canvas.Left="-1">
                 <Rectangle
-                Height="31"
+                Height="32"
                 Stroke="Black"
                 Width="79"
-                Grid.RowSpan="2" Canvas.Top="1"
+                Grid.RowSpan="2"
                 >
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1521,10 +1521,11 @@
                 />
             </Canvas>
             <Canvas x:Name="WhoThrowSlider"
+                    x:FieldModifier="public"
                 Height="32"
                 Width="25"
                 Canvas.Left="316"
-                Canvas.Top="52">
+                Canvas.Top="21">
                 <Rectangle
                 Height="32"
                 Stroke="Black"
@@ -1564,10 +1565,10 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <Rectangle
-                Height="62"
+                Height="63"
                 Stroke="Black"
                 Width="240"
-                Grid.RowSpan="2" Canvas.Left="1" Canvas.Top="23">
+                Grid.RowSpan="2" Canvas.Left="1" Canvas.Top="22">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF535353" Offset="1"/>
@@ -1576,10 +1577,10 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <Rectangle
-                Height="62"
+                Height="63"
                 Stroke="Black"
                 Width="124"
-                Grid.RowSpan="2" Canvas.Left="117" Canvas.Top="23"
+                Grid.RowSpan="2" Canvas.Left="117" Canvas.Top="22"
                 >
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1594,10 +1595,10 @@
                 Grid.Row="1" Height="32" Canvas.Left="1" Canvas.Top="53"
                 />
                 <Rectangle
-                Height="62"
+                Height="63"
                 Stroke="Black"
                 Width="34"
-                Grid.RowSpan="2" Canvas.Left="149" Canvas.Top="23"
+                Grid.RowSpan="2" Canvas.Left="149" Canvas.Top="22"
                 />
                 <Label
                 Content="First to 5 legs in 3 sets"
@@ -1641,44 +1642,81 @@
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="20"
-                Grid.RowSpan="2" Canvas.Left="124" Canvas.Top="23" Height="30"/>
+                Grid.RowSpan="2"
+                Canvas.Left="118"
+                Canvas.Top="23"
+                Height="30"
+                Width="31"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"/>
                 <Label x:Name="Player2SetsWon"
                 Content="7"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="20"
-                Grid.Row="1" Canvas.Left="124" Canvas.Top="53" Height="32"/>
+                Grid.Row="1"
+                Canvas.Left="118"
+                Canvas.Top="53"
+                Height="32"
+                Width="31"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                />
                 <Label x:Name="Player1LegsWon"
                 Content="3"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="20"
-                Grid.RowSpan="2" Canvas.Left="156" Canvas.Top="23" Height="30"/>
+                Grid.RowSpan="2"
+                Canvas.Left="150"
+                Canvas.Top="23"
+                Height="30"
+                Width="32"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                />
                 <Label x:Name="Player2LegsWon"
                 Content="9"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="20"
-                Grid.Row="1" Canvas.Left="156" Canvas.Top="53" Height="32"/>
+                Grid.Row="1"
+                Canvas.Left="150"
+                Canvas.Top="53"
+                Height="32"
+                Width="32"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                />
                 <Label x:Name="Player1Points"
                 Content="120"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="20"
-                Grid.Row="1" Canvas.Left="195" Canvas.Top="23" Height="30"
+                Grid.Row="1"
+                Canvas.Left="184"
+                Canvas.Top="23"
+                Height="30"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center" Width="56"
                 />
                 <Label x:Name="Player2Points"
                 Content="180"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="20"
-                Grid.RowSpan="2" Canvas.Left="195" Canvas.Top="53" Height="32"
+                Grid.RowSpan="2"
+                Canvas.Left="182"
+                Canvas.Top="53"
+                Height="32"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center" Width="58"
                 />
                 <Ellipse x:Name="Player1SetDot"
                 Height="8"
                 Stroke="Black"
                 Width="8"
-                Grid.Row="1" Canvas.Left="98" Canvas.Top="35"
+                Grid.Row="1" Canvas.Left="98" Canvas.Top="35" Visibility="Hidden"
                 >
                     <Ellipse.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
