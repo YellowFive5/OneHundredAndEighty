@@ -30,5 +30,10 @@ namespace OneHundredAndEighty
             Shape O = sender as Shape;
             Points.Content = O.Tag.ToString();
         }
+
+        private void GameOn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(PointsBox.Text + " " + SetBox.Text + " " + LegBox.Text);
+        }
     }
 }

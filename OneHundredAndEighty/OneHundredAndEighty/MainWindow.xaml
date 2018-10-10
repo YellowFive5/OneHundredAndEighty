@@ -7,25 +7,20 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="800"
+        Height="810"
         Width="1200"
+        Background="#FF595959"
         Title="OneHundredAndEighty"
         >
     <Window.Resources>
         <Style x:Key="CommonSegment">
             <EventSetter Event="Shape.MouseEnter" Handler="PointsShow"/>
-            
-            <Setter Property="Shape.Stroke" Value="Black"/>
-            <Setter Property="Shape.StrokeThickness" Value="0.2"/>
+
+            <Setter Property="Shape.Stroke" Value="Transparent"/>
+            <Setter Property="Shape.StrokeThickness" Value="0"/>
             <Setter Property="Shape.Cursor" Value="Hand"/>
             <Setter Property="Shape.Opacity" Value="1"/>
-            <Setter Property="Shape.Fill">
-                <Setter.Value>
-                    <SolidColorBrush Color="Transparent"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="DarkSegment" BasedOn="{StaticResource CommonSegment}">
+            <Setter Property="Shape.Fill" Value="Transparent"/>
             <Style.Triggers>
                 <Trigger Property="Shape.IsMouseOver" Value="True">
                     <Trigger.EnterActions>
@@ -60,1544 +55,1652 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="LightSegment" BasedOn="{StaticResource CommonSegment}">
-            <Style.Triggers>
-                <Trigger Property="Shape.IsMouseOver" Value="True">
-
-                    <Trigger.EnterActions>
-                        <BeginStoryboard Name="Blink">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                                To="DarkOrchid"
-                                                Duration="0:0:0.0">
-                                </ColorAnimation>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                 From="0"
-                                                 To="0.55"
-                                                 Duration="0:0:0.20"
-                                                 AutoReverse="True"
-                                                 RepeatBehavior="Forever"
-                                                 >
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <StopStoryboard BeginStoryboardName="Blink" />
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                                To="Transparent"
-                                                Duration="0:0:0.0">
-                                </ColorAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </Style.Triggers>
+        
+        <!--<Style x:Key="DarkSegment"
+               BasedOn="{StaticResource CommonSegment}">
         </Style>
-        <Style x:Key="RedSegment" BasedOn="{StaticResource CommonSegment}">
-            <Style.Triggers>
-                <Trigger Property="Shape.IsMouseOver" Value="True">
-
-                    <Trigger.EnterActions>
-                        <BeginStoryboard Name="Blink">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                                To="LawnGreen"
-                                                Duration="0:0:0.0">
-                                </ColorAnimation>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                 From="0"
-                                                 To="0.55"
-                                                 Duration="0:0:0.20"
-                                                 AutoReverse="True"
-                                                 RepeatBehavior="Forever"
-                                                 >
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <StopStoryboard BeginStoryboardName="Blink" />
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                                To="Transparent"
-                                                Duration="0:0:0.0">
-                                </ColorAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </Style.Triggers>
+        <Style x:Key="LightSegment"
+               BasedOn="{StaticResource CommonSegment}">
         </Style>
-        <Style x:Key="GreenSegment" BasedOn="{StaticResource CommonSegment}">
-            <Style.Triggers>
-                <Trigger Property="Shape.IsMouseOver" Value="True">
-
-                    <Trigger.EnterActions>
-                        <BeginStoryboard Name="Blink">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                                To="Salmon"
-                                                Duration="0:0:0.0">
-                                </ColorAnimation>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                 From="0"
-                                                 To="0.55"
-                                                 Duration="0:0:0.20"
-                                                 AutoReverse="True"
-                                                 RepeatBehavior="Forever"
-                                                 >
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <StopStoryboard BeginStoryboardName="Blink" />
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
-                                                To="Transparent"
-                                                Duration="0:0:0.0">
-                                </ColorAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </Style.Triggers>
+        <Style x:Key="RedSegment"
+               BasedOn="{StaticResource CommonSegment}">
         </Style>
+        <Style x:Key="GreenSegment"
+               BasedOn="{StaticResource CommonSegment}">
+        </Style>-->
+        
     </Window.Resources>
-    <Grid x:Name="BoardSection">
-        <!--Image-->
-        <Image
+    <Canvas>
+        <Canvas x:Name="BoardPanel"
+                Height="764" Canvas.Left="389" Width="778" Canvas.Top="10">
+            <!--Image-->
+            <Image
             x:Name="DartboardImg"
-            HorizontalAlignment="Left"
-            Height="622"
-            Margin="518,61,0,0"
-            VerticalAlignment="Top"
-            Width="622"
+            Height="748"
+            Margin="18,10,0,0"
+            Width="748"
             Source="Images/Dartboard.png"
             />
-        <!--Zero-->
-        <Path
+            <!--Zero-->
+            <Path
             x:Name="Zero"
             Tag="0"
             Data="M212.25,50.127999 C122.6418,50.127998 49.999996,122.7698 49.999994,212.378 49.999996,301.9862 122.6418,374.628 212.25,374.628 301.8582,374.628 374.5,301.9862 374.5,212.378 374.5,122.7698 301.8582,50.127998 212.25,50.127999 z M212.25,0 C329.47244,0 424.5,95.027561 424.5,212.24999 424.5,329.47245 329.47244,424.50001 212.25,424.50001 95.027557,424.50001 -3.8146973E-06,329.47245 0,212.24999 -3.8146973E-06,95.027561 95.027557,0 212.25,0 z"
-            HorizontalAlignment="Left"
-            Height="625.833"
-            Margin="516.418,59.418,0,0"
+            Height="751.833"
+            Margin="15.418,8.418,0,0"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="625.833"
-            Style="{StaticResource DarkSegment}"
+            Width="751.833"
+            Style="{StaticResource CommonSegment}"
             />
-        <!--Bull-->
-        <Ellipse
+            <!--Bull-->
+            <Ellipse
             x:Name="Bull"
             Tag="50"
-            HorizontalAlignment="Left"
-            Height="23"
-            Margin="817,361,0,0"
-            VerticalAlignment="Top"
-            Width="23"
-            Style="{StaticResource RedSegment}" RenderTransformOrigin="0.522,0.5"
+            Height="28"
+            Margin="378,371,0,0"
+            Width="28"
+            Style="{StaticResource CommonSegment}"
+            RenderTransformOrigin="0.522,0.5"
             />
-        <!--25-->
-        <Path 
+            <!--25-->
+            <Path 
             x:Name="_25"
             Tag="25"
             Data="M16.52,9.0839996 C12.193954,9.0839996 8.6870003,12.590954 8.6870003,16.917 8.6870003,21.243046 12.193954,24.75 16.52,24.75 20.846046,24.75 24.353001,21.243046 24.353001,16.917 24.353001,12.590954 20.846046,9.0839996 16.52,9.0839996 z M16.6665,0 C25.871153,0 33.333,7.4618464 33.333,16.6665 33.333,25.871153 25.871153,33.333 16.6665,33.333 7.4618464,33.333 0,25.871153 0,16.6665 0,7.4618464 7.4618464,0 16.6665,0 z"
-            HorizontalAlignment="Left"
-            Height="48.096"
-            Margin="805.057,347.953,0,0"
+            Height="57.779"
+            Margin="362.195,355.15,0,0"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="48.094"
-            Style="{StaticResource GreenSegment}"
+            Width="57.777"
+            Style="{StaticResource CommonSegment}"
             />
-        <!--20-->
-        <Path
+            <!--20-->
+            <Path
             x:Name="_20"
             Tag="20"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="798.828,151.946,0,0"
+            Height="234.425"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource DarkSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}"
+            Canvas.Left="355.247"
+            Canvas.Top="119.309"
             />
-        <!--D20-->
-        <Path
+            <!--D20-->
+            <Path
             x:Name="D20"
             Tag="40"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="797.17,135.488,0,0"
+            Height="22.046"
             RenderTransformOrigin="0.488,0.417"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="73.161"
-            Style="{StaticResource RedSegment}"
+            Width="87.58"
+            Style="{StaticResource CommonSegment}"
+            Canvas.Left="352.452" Canvas.Top="98.766"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="1.316"/>
-                    <TranslateTransform X="0.271" Y="-0.127"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T20-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.718"/>
+                        <RotateTransform Angle="-0.195"/>
+                        <TranslateTransform X="0.692" Y="-0.123"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T20-->
+            <Path
             x:Name="T20"
             Tag="60"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="835.87,199.077,0,0"
+            Height="16.733"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource RedSegment}"
+            Width="54.751"
+            Style="{StaticResource CommonSegment}"
+            Canvas.Left="394.625"
+            Canvas.Top="180.687"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.232"/>
-                    <TranslateTransform X="-27.714" Y="23.669"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--1-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.232"/>
+                        <TranslateTransform X="-27.714" Y="23.669"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--1-->
+            <Path
             x:Name="_1"
             Tag="1"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="196.744"
-            Margin="797.502,150.572,0,0"
+            Height="236.355"
+            Margin="353.235,118.081,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.477"
-            Style="{StaticResource LightSegment}"
+            Width="82.264"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="18.38"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D1-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="18.38"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D1-->
+            <Path
             x:Name="D1"
             Tag="2"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="797.17,135.488,0,0"
-            RenderTransformOrigin="0.432,13.246"
+            Height="22.033"
+            RenderTransformOrigin="0.535,0.347"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="73.161"
-            Style="{StaticResource GreenSegment}"
+            Width="87.521"
+            Style="{StaticResource CommonSegment}" Canvas.Left="367.814" Canvas.Top="101.619"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="17.887"/>
-                    <TranslateTransform X="0.094" Y="-0.131"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T1-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="18.69"/>
+                        <TranslateTransform X="70.387" Y="13.271"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T1-->
+            <Path
             x:Name="T1"
             Tag="3"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="834.87,198.577,0,0"
+            Height="16.732"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource GreenSegment}"
+            Width="54.751"
+            Style="{StaticResource CommonSegment}" Canvas.Left="394.583" Canvas.Top="180.532"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="18.322"/>
-                    <TranslateTransform X="-27.714" Y="23.669"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--18-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="18.322"/>
+                        <TranslateTransform X="-27.714" Y="23.669"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--18-->
+            <Path
             x:Name="_18"
             Tag="18"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="799.495,151.613,0,0"
+            Height="234.424"
+            Margin="355.399,119.248,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource DarkSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="36.084"/>
-                    <TranslateTransform X="-0.258" Y="-0.262"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D18-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="36.084"/>
+                        <TranslateTransform X="-0.258" Y="-0.262"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D18-->
+            <Path
             x:Name="D18"
             Tag="36"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="797.17,135.488,0,0"
-            RenderTransformOrigin="0.55,7.243"
+            Height="20.88"
+            RenderTransformOrigin="0.515,0.337"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="73.161"
-            Style="{StaticResource RedSegment}"
+            Width="88.188"
+            Style="{StaticResource CommonSegment}" Canvas.Left="380.333" Canvas.Top="108.393"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="35.918"/>
-                    <TranslateTransform X="61.802" Y="25.342"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T18-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="36.57"/>
+                        <TranslateTransform X="134.713" Y="47.316"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T18-->
+            <Path
             x:Name="T18"
             Tag="54"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="835.87,198.827,0,0"
+            Height="16.732"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource RedSegment}"
+            Width="58.352"
+            Style="{StaticResource CommonSegment}" Canvas.Left="393.806" Canvas.Top="181.109"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="36.214"/>
-                    <TranslateTransform X="-28.049" Y="23.651"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--4-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="36.214"/>
+                        <TranslateTransform X="-28.049" Y="23.651"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--4-->
+            <Path
             x:Name="_4"
             Tag="4"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="799.245,152.238,0,0"
+            Height="234.426"
+            Margin="355.184,119.914,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource LightSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="54.109"/>
-                    <TranslateTransform X="-0.029" Y="-0.297"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D4-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="54.109"/>
+                        <TranslateTransform X="-0.029" Y="-0.297"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D4-->
+            <Path
             x:Name="D4"
             Tag="8"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.466,132.013,0,0"
-            RenderTransformOrigin="0.55,7.243"
+            Height="21.693"
+            RenderTransformOrigin="0.505,0.441"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="87.24"
+            Style="{StaticResource CommonSegment}" Canvas.Left="402.3" Canvas.Top="123.019"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="55.07"/>
-                    <TranslateTransform X="83.958" Y="51.352"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T4-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="54.05"/>
+                        <TranslateTransform X="172.963" Y="94.406"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T4-->
+            <Path
             x:Name="T4"
             Tag="12"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="836.276,199.827,0,0"
+            Height="16.734"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource GreenSegment}"
+            Width="54.752"
+            Style="{StaticResource CommonSegment}" Canvas.Left="396.124" Canvas.Top="183.466"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="53.599"/>
-                    <TranslateTransform X="-27.965" Y="23.881"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--13-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="53.599"/>
+                        <TranslateTransform X="-27.965" Y="23.881"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--13-->
+            <Path
             x:Name="_13"
             Tag="13"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="799.245,152.238,0,0"
+            Height="234.426"
+            Margin="355.17,119.879,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource DarkSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="72.219"/>
-                    <TranslateTransform X="-0.071" Y="-0.413"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D13-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="72.219"/>
+                        <TranslateTransform X="-0.071" Y="-0.413"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D13-->
+            <Path
             x:Name="D13"
             Tag="26"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.466,132.013,0,0"
-            RenderTransformOrigin="0.55,7.243"
+            Height="20.602"
+            RenderTransformOrigin="0.506,0.422"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource RedSegment}"
+            Width="87.751"
+            Style="{StaticResource CommonSegment}" Canvas.Left="395.75" Canvas.Top="129.75"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="73.18"/>
-                    <TranslateTransform X="97.718" Y="82.377"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T13-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="72.397"/>
+                        <TranslateTransform X="216.757" Y="165.907"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T13-->
+            <Path
             x:Name="T13"
             Tag="39"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="836.651,200.452,0,0"
+            Height="16.734"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource RedSegment}"
+            Width="54.752"
+            Style="{StaticResource CommonSegment}" Canvas.Left="397.457" Canvas.Top="182.8"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="71.709"/>
-                    <TranslateTransform X="-28.601" Y="23.987"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--6-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="71.709"/>
+                        <TranslateTransform X="-28.601" Y="23.987"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--6-->
+            <Path
             x:Name="_6"
             Tag="6"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="798.013,150.28,0,0"
+            Height="236.828"
+            Margin="353.766,117.482,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource LightSegment}"
+            Width="82.428"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="90.084"/>
-                    <TranslateTransform X="-0.03" Y="-0.443"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D6-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90.084"/>
+                        <TranslateTransform X="-0.03" Y="-0.443"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D6-->
+            <Path
             x:Name="D6"
             Tag="12"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.382,132.93,0,0"
+            Height="21.477"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="88.973"
+            Style="{StaticResource CommonSegment}" Canvas.Left="372.68" Canvas.Top="122.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="90.681"/>
-                    <TranslateTransform X="101.123" Y="115.797"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T6-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90.681"/>
+                        <TranslateTransform X="101.123" Y="115.797"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T6-->
+            <Path
             x:Name="T6"
             Tag="18"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="841.626,202.844,0,0"
+            Height="17.32"
+            Margin="425.612,211.177,0,0"
             RenderTransformOrigin="0.456,1.375"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource GreenSegment}"
+            Width="55.388"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="90.423"/>
-                    <TranslateTransform X="96.524" Y="150.925"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--10-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90.423"/>
+                        <TranslateTransform X="96.524" Y="150.925"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--10-->
+            <Path
             x:Name="_10"
             Tag="10"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="798.013,150.28,0,0"
+            Height="236.828"
+            Margin="353.887,117.596,0,0"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource DarkSegment}"
+            Width="82.428"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="107.98"/>
-                    <TranslateTransform X="0.557" Y="0.133"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D10-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="107.98"/>
+                        <TranslateTransform X="0.557" Y="0.133"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D10-->
+            <Path
             x:Name="D10"
             Tag="20"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.132,133.93,0,0"
+            Height="21.476"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource RedSegment}"
+            Width="88.063"
+            Style="{StaticResource CommonSegment}" Canvas.Left="370.667" Canvas.Top="130.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="108.06"/>
-                    <TranslateTransform X="93.669" Y="148.643"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T10-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="108.06"/>
+                        <TranslateTransform X="93.669" Y="148.643"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T10-->
+            <Path
             x:Name="T10"
             Tag="30"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="841.626,202.844,0,0"
+            Height="17.32"
             RenderTransformOrigin="0.456,1.375"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource RedSegment}"
+            Width="55.387"
+            Style="{StaticResource CommonSegment}" Canvas.Left="425.667" Canvas.Top="218.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="108.319"/>
-                    <TranslateTransform X="89.838" Y="190.887"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--15-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="108.319"/>
+                        <TranslateTransform X="89.838" Y="190.887"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--15-->
+            <Path
             x:Name="_15"
             Tag="15"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="798.013,150.28,0,0"
+            Height="236.829"
+            Margin="353.894,117.627,0,0"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource LightSegment}"
+            Width="82.427"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="125.843"/>
-                    <TranslateTransform X="0.554" Y="0.267"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D15-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="125.843"/>
+                        <TranslateTransform X="0.554" Y="0.267"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D15-->
+            <Path
             x:Name="D15"
             Tag="30"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.132,133.93,0,0"
+            Height="21.725"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="88.973"
+            Style="{StaticResource CommonSegment}" Canvas.Left="367.014" Canvas.Top="131.471"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="125.923"/>
-                    <TranslateTransform X="76.126" Y="177.617"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T15-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="125.923"/>
+                        <TranslateTransform X="76.126" Y="177.617"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T15-->
+            <Path
             x:Name="T15"
             Tag="45"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="841.626,202.844,0,0"
+            Height="17.319"
+            Margin="420.468,226.362,0,0"
             RenderTransformOrigin="0.456,1.375"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource GreenSegment}"
+            Width="55.388"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="126.182"/>
-                    <TranslateTransform X="71.283" Y="226.946"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--2-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="126.182"/>
+                        <TranslateTransform X="71.283" Y="226.946"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--2-->
+            <Path
             x:Name="_2"
             Tag="2"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="798.846,148.905,0,0"
+            Height="236.828"
+            Margin="354.923,116.076,0,0"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource DarkSegment}"
+            Width="82.428"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="144.221"/>
-                    <TranslateTransform X="0.548" Y="0.312"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D2-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="144.221"/>
+                        <TranslateTransform X="0.548" Y="0.312"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D2-->
+            <Path
             x:Name="D2"
             Tag="4"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.876"
-            Margin="794.339,134.722,0,0"
-            RenderTransformOrigin="0.55,7.243"
+            Height="21.335"
+            RenderTransformOrigin="0.501,0.427"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource RedSegment}"
+            Width="88.066"
+            Style="{StaticResource CommonSegment}" Canvas.Left="377.279" Canvas.Top="184.076"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="143.822"/>
-                    <TranslateTransform X="50.451" Y="199.692"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T2-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="144.323"/>
+                        <TranslateTransform X="128.933" Y="417.742"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T2-->
+            <Path
             x:Name="T2"
             Tag="6"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="841.729,202.76,0,0"
+            Height="17.319"
+            Margin="414.868,232.13,0,0"
             RenderTransformOrigin="0.456,1.375"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.106"
-            Style="{StaticResource RedSegment}"
+            Width="55.388"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="143.48"/>
-                    <TranslateTransform X="42.579" Y="255.549"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--17-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="143.48"/>
+                        <TranslateTransform X="42.579" Y="255.549"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--17-->
+            <Path
             x:Name="_17"
             Tag="17"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="798.346,149.155,0,0"
+            Height="236.828"
+            Margin="354.331,116.39,0,0"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource LightSegment}"
+            Width="82.427"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="161.955"/>
-                    <TranslateTransform X="0.751" Y="0.603"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D17-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="161.955"/>
+                        <TranslateTransform X="0.751" Y="0.603"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D17-->
+            <Path
             x:Name="D17"
             Tag="24"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.876"
-            Margin="795.214,133.722,0,0"
+            Height="21.475"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="88.972"
+            Style="{StaticResource CommonSegment}" Canvas.Left="354.681" Canvas.Top="142.667"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="162.1"/>
-                    <TranslateTransform X="19.154" Y="212.49"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T17-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="162.1"/>
+                        <TranslateTransform X="19.154" Y="212.49"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T17-->
+            <Path
             x:Name="T17"
             Tag="51"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.416"
-            Margin="841.022,203.885,0,0"
+            Height="17.318"
+            Margin="406.737,236.979,0,0"
             RenderTransformOrigin="0.456,1.375"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource GreenSegment}"
+            Width="55.388"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="161.641"/>
-                    <TranslateTransform X="6.834" Y="273.744"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--3-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="161.641"/>
+                        <TranslateTransform X="6.834" Y="273.744"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--3-->
+            <Path
             x:Name="_3"
             Tag="3"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="798.828,152.946,0,0"
+            Height="234.425"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource DarkSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}" Canvas.Left="356.715" Canvas.Top="119.821"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-180.021"/>
-                    <TranslateTransform X="0.66" Y="0.064"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D3-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180.373"/>
+                        <TranslateTransform X="0.66" Y="0.064"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D3-->
+            <Path
             x:Name="D3"
             Tag="6"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="797.545,133.363,0,0"
+            Height="21.476"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="73.161"
-            Style="{StaticResource RedSegment}"
+            Width="87.892"
+            Style="{StaticResource CommonSegment}" Canvas.Left="352.054" Canvas.Top="142.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-179.976"/>
-                    <TranslateTransform X="-16.46" Y="216.234"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T3-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-179.976"/>
+                        <TranslateTransform X="-16.46" Y="216.234"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T3-->
+            <Path
             x:Name="T3"
             Tag="9"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="835.87,198.077,0,0"
+            Height="16.733"
+            Margin="393.738,180.312,0,0"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource RedSegment}"
+            Width="54.751"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-179.789"/>
-                    <TranslateTransform X="-27.884" Y="23.738"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--19-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-179.789"/>
+                        <TranslateTransform X="-27.884" Y="23.738"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--19-->
+            <Path
             x:Name="_19"
             Tag="19"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="196.744"
-            Margin="798.877,150.572,0,0"
+            Height="236.356"
+            Margin="355.196,117.789,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.477"
-            Style="{StaticResource LightSegment}"
+            Width="82.264"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-161.641"/>
-                    <TranslateTransform X="2.009" Y="-1.727"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D19-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-161.641"/>
+                        <TranslateTransform X="2.009" Y="-1.727"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D19-->
+            <Path
             x:Name="D19"
             Tag="28"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.963"
-            Margin="798.888,131.634,0,0"
+            Height="21.58"
             RenderTransformOrigin="0.432,13.246"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.11"
-            Style="{StaticResource GreenSegment}"
+            Width="89.032"
+            Style="{StaticResource CommonSegment}" Canvas.Left="355" Canvas.Top="96.543"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-161.946"/>
-                    <TranslateTransform X="-0.144" Y="1.408"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T19-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-161.946"/>
+                        <TranslateTransform X="-0.144" Y="1.408"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T19-->
+            <Path
             x:Name="T19"
             Tag="57"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="835.37,197.327,0,0"
+            Height="16.733"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource GreenSegment}"
+            Width="54.75"
+            Style="{StaticResource CommonSegment}" Canvas.Left="393.458" Canvas.Top="181.133"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-161.699"/>
-                    <TranslateTransform X="-26.378" Y="23.782"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--7-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-161.699"/>
+                        <TranslateTransform X="-26.378" Y="23.782"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--7-->
+            <Path
             x:Name="_7"
             Tag="7"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="799.495,151.613,0,0"
+            Height="234.424"
+            Margin="355.716,119.316,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource DarkSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-143.937"/>
-                    <TranslateTransform X="1.087" Y="0.426"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D7-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-143.937"/>
+                        <TranslateTransform X="1.087" Y="0.426"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D7-->
+            <Path
             x:Name="D7"
             Tag="14"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="799.17,134.113,0,0"
+            Height="21.477"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="73.161"
-            Style="{StaticResource RedSegment}"
+            Width="87.89"
+            Style="{StaticResource CommonSegment}" Canvas.Left="339.055" Canvas.Top="139.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-144.103"/>
-                    <TranslateTransform X="-79.105" Y="190.35"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T7-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-144.103"/>
+                        <TranslateTransform X="-79.105" Y="190.35"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T7-->
+            <Path
             x:Name="T7"
             Tag="21"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="836.912,197.66,0,0"
+            Height="16.734"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource RedSegment}"
+            Width="54.75"
+            Style="{StaticResource CommonSegment}" Canvas.Left="395.458" Canvas.Top="180.466"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-143.807"/>
-                    <TranslateTransform X="-28.519" Y="23.691"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--16-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-143.807"/>
+                        <TranslateTransform X="-28.519" Y="23.691"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--16-->
+            <Path
             x:Name="_16"
             Tag="16"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="798.37,152.738,0,0"
+            Height="234.426"
+            Margin="354.317,120.774,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource LightSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-125.912"/>
-                    <TranslateTransform X="0.911" Y="0.548"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D16-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-125.912"/>
+                        <TranslateTransform X="0.911" Y="0.548"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D16-->
+            <Path
             x:Name="D16"
             Tag="32"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.091,129.138,0,0"
+            Height="21.477"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="88.973"
+            Style="{StaticResource CommonSegment}" Canvas.Left="331.014" Canvas.Top="130.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-125.73"/>
-                    <TranslateTransform X="-96.682" Y="169.973"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T16-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-125.73"/>
+                        <TranslateTransform X="-96.682" Y="169.973"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T16-->
+            <Path
             x:Name="T16"
             Tag="48"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="836.901,200.452,0,0"
+            Height="16.734"
+            Margin="394.545,182.519,0,0"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource GreenSegment}"
+            Width="54.751"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-126.302"/>
-                    <TranslateTransform X="-29.015" Y="21.218"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--8-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-126.302"/>
+                        <TranslateTransform X="-29.015" Y="21.218"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--8-->
+            <Path
             x:Name="_8"
             Tag="8"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="195.138"
-            Margin="798.245,152.613,0,0"
+            Height="234.425"
+            Margin="354.201,120.684,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="67.918"
-            Style="{StaticResource DarkSegment}"
+            Width="81.592"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-107.802"/>
-                    <TranslateTransform X="0.978" Y="0.761"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D8-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-107.802"/>
+                        <TranslateTransform X="0.978" Y="0.761"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D8-->
+            <Path
             x:Name="D8"
             Tag="16"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.966,130.513,0,0"
+            Height="21.477"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource RedSegment}"
+            Width="88.974"
+            Style="{StaticResource CommonSegment}" Canvas.Left="328.68" Canvas.Top="124.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-107.4"/>
-                    <TranslateTransform X="-110.679" Y="138.438"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T8-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-107.4"/>
+                        <TranslateTransform X="-110.679" Y="138.438"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T8-->
+            <Path
             x:Name="T8"
             Tag="24"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="13.929"
-            Margin="839.026,200.202,0,0"
+            Height="16.732"
+            Margin="396.686,182.12,0,0"
             RenderTransformOrigin="0.458,10.757"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="45.575"
-            Style="{StaticResource RedSegment}"
+            Width="54.751"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-108.312"/>
-                    <TranslateTransform X="-30.709" Y="20.741"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--11-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-108.312"/>
+                        <TranslateTransform X="-30.709" Y="20.741"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--11-->
+            <Path
             x:Name="_11"
             Tag="11"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="797.721,149.863,0,0"
+            Height="236.828"
+            Margin="353.865,117.327,0,0"
             RenderTransformOrigin="0.438,1.13"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource LightSegment}"
+            Width="82.428"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-89.937"/>
-                    <TranslateTransform X="2.053" Y="0.636"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D11-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-89.937"/>
+                        <TranslateTransform X="2.053" Y="0.636"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D11-->
+            <Path
             x:Name="D11"
             Tag="22"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="795.382,132.93,0,0"
+            Height="21.477"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="88.974"
+            Style="{StaticResource CommonSegment}" Canvas.Left="325.68" Canvas.Top="119.667"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-89.34"/>
-                    <TranslateTransform X="-114.152" Y="102.481"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T11-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-89.34"/>
+                        <TranslateTransform X="-114.152" Y="102.481"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T11-->
+            <Path
             x:Name="T11"
             Tag="33"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="840.501,202.844,0,0"
+            Height="17.319"
+            Margin="372.049,210.895,0,0"
             RenderTransformOrigin="0.456,1.375"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource GreenSegment}"
+            Width="55.387"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-89.598"/>
-                    <TranslateTransform X="-163.173" Y="149.611"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--14-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-89.598"/>
+                        <TranslateTransform X="-163.173" Y="149.611"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--14-->
+            <Path
             x:Name="_14"
             Tag="14"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="797.68,150.779,0,0"
+            Height="236.828"
+            Margin="353.679,118.567,0,0"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource DarkSegment}"
+            Width="82.428"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-71.751"/>
-                    <TranslateTransform X="1.347" Y="1.323"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D14-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-71.751"/>
+                        <TranslateTransform X="1.347" Y="1.323"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D14-->
+            <Path
             x:Name="D14"
             Tag="24"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="794.799,134.597,0,0"
+            Height="21.475"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource RedSegment}"
+            Width="88.972"
+            Style="{StaticResource CommonSegment}" Canvas.Left="328.014" Canvas.Top="114"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-71.961"/>
-                    <TranslateTransform X="-106.602" Y="67.103"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T14-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-71.961"/>
+                        <TranslateTransform X="-106.602" Y="67.103"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T14-->
+            <Path
             x:Name="T14"
             Tag="42"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="841.459,202.427,0,0"
+            Height="17.32"
+            Margin="371.463,203.639,0,0"
             RenderTransformOrigin="0.526,0.478"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource RedSegment}"
+            Width="55.389"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-72.113"/>
-                    <TranslateTransform X="-171.022" Y="115.811"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--9-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-72.113"/>
+                        <TranslateTransform X="-171.022" Y="115.811"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--9-->
+            <Path
             x:Name="_9"
             Tag="9"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="798.013,149.655,0,0"
+            Height="236.828"
+            Margin="354.038,117.225,0,0"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource LightSegment}"
+            Width="82.429"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-54.178"/>
-                    <TranslateTransform X="1.211" Y="1.225"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D9-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-54.178"/>
+                        <TranslateTransform X="1.211" Y="1.225"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D9-->
+            <Path
             x:Name="D9"
             Tag="18"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.877"
-            Margin="795.299,134.763,0,0"
+            Height="21.475"
             RenderTransformOrigin="0.55,7.243"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="88.973"
+            Style="{StaticResource CommonSegment}" Canvas.Left="332.68" Canvas.Top="106.333"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-54.098"/>
-                    <TranslateTransform X="-88.799" Y="37.641"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T9-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-54.098"/>
+                        <TranslateTransform X="-88.799" Y="37.641"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T9-->
+            <Path
             x:Name="T9"
             Tag="27"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="841.959,201.843,0,0"
+            Height="17.319"
+            Margin="376.989,195.118,0,0"
             RenderTransformOrigin="0.491,0.665"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource GreenSegment}"
+            Width="55.388"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-53.296"/>
-                    <TranslateTransform X="-147.051" Y="77.157"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--12-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-53.296"/>
+                        <TranslateTransform X="-147.051" Y="77.157"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--12-->
+            <Path
             x:Name="_12"
             Tag="12"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="799.179,148.405,0,0"
+            Height="236.828"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource DarkSegment}"
+            Width="82.428"
+            Style="{StaticResource CommonSegment}" Canvas.Left="355.667" Canvas.Top="116.086"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-35.8"/>
-                    <TranslateTransform X="-0.928" Y="3.176"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D12-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-35.924"/>
+                        <TranslateTransform X="-0.928" Y="3.176"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D12-->
+            <Path
             x:Name="D12"
             Tag="24"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.876"
-            Margin="794.339,136.722,0,0"
-            RenderTransformOrigin="0.55,7.243"
+            Height="21.74"
+            RenderTransformOrigin="0.476,0.413"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource RedSegment}"
+            Width="88.322"
+            Style="{StaticResource CommonSegment}" Canvas.Left="326.986" Canvas.Top="109.196"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-36.199"/>
-                    <TranslateTransform X="-62.735" Y="13.165"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T12-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-35.722"/>
+                        <TranslateTransform X="-136.823" Y="40.968"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T12-->
+            <Path
             x:Name="T12"
             Tag="36"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.417"
-            Margin="841.438,201.093,0,0"
+            Height="17.319"
             RenderTransformOrigin="0.518,0.487"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.106"
-            Style="{StaticResource RedSegment}"
+            Width="55.387"
+            Style="{StaticResource CommonSegment}" Canvas.Left="384" Canvas.Top="188"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-35.862"/>
-                    <TranslateTransform X="-117.838" Y="46.733"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--5-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-35.862"/>
+                        <TranslateTransform X="-117.838" Y="46.733"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--5-->
+            <Path
             x:Name="_5"
             Tag="5"
             Data="M20.8665,57.955002 C25.703297,57.955002 30.454238,58.322594 35.092913,59.031372 L36.729361,59.302498 36.592128,60.080589 C33.144232,79.628822 28.961308,103.33253 23.887103,132.07236 L23.454072,134.52499 23.306811,134.49951 C22.477328,134.37669 21.62778,134.313 20.762875,134.313 20.474576,134.313 20.187989,134.32008 19.903271,134.33406 L19.197774,134.38606 8.2766197,58.802372 8.9686553,58.705536 C12.864793,58.210274 16.835835,57.955002 20.8665,57.955002 z M21.728221,0 C29.652047,1.7851401E-07 37.435221,0.59384239 45.034461,1.7388573 L46.821997,2.0309019 46.578154,3.4164805 C44.632289,14.471908 42.073275,28.997923 38.708922,48.077644 L38.371833,49.989231 36.251597,49.637951 C31.153607,48.858994 25.932233,48.455002 20.6165,48.455002 16.186723,48.455002 11.822472,48.735554 7.5405466,49.279858 L6.9133832,49.367615 0,1.5211124 2.2367227,1.2124774 C8.6195295,0.41239053 15.125038,1.7851401E-07 21.728221,0 z"
-            HorizontalAlignment="Left"
-            Height="197.138"
-            Margin="798.096,148.405,0,0"
+            Height="236.828"
             RenderTransformOrigin="0.438,1.127"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="68.614"
-            Style="{StaticResource LightSegment}"
+            Width="82.428"
+            Style="{StaticResource CommonSegment}" Canvas.Left="355.272" Canvas.Top="115.943"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-18.066"/>
-                    <TranslateTransform X="0.736" Y="2.834"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--D5-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-18.066"/>
+                        <TranslateTransform X="0.736" Y="2.834"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--D5-->
+            <Path
             x:Name="D5"
             Tag="10"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
-            HorizontalAlignment="Left"
-            Height="17.876"
-            Margin="795.339,134.972,0,0"
+            Height="20.925"
+            Margin="337.354,101.963,0,0"
             RenderTransformOrigin="0.481,0.443"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="74.062"
-            Style="{StaticResource GreenSegment}"
+            Width="87.371"
+            Style="{StaticResource CommonSegment}"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-17.236"/>
-                    <TranslateTransform X="-70.08" Y="9.585"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-        <!--T5-->
-        <Path
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-17.399"/>
+                        <TranslateTransform X="-70.08" Y="9.585"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <!--T5-->
+            <Path
             x:Name="T5"
             Tag="15"
             Data="M13.70312,0 C19.018853,0 24.240228,0.4039917 29.338218,1.1829491 L31.458449,1.5342293 31.111873,3.4996262 C30.880366,4.8124084 30.645225,6.1457481 30.40639,7.4999657 L29.815978,10.847496 28.17953,10.57637 C23.540858,9.8675919 18.789918,9.5 13.95312,9.5 9.9224558,9.5 5.9514122,9.7552719 2.0552759,10.250534 L1.3632364,10.347374 0,0.91261292 0.62716722,0.8248558 C4.9090919,0.28055191 9.2733431,0 13.70312,0 z"
-            HorizontalAlignment="Left"
-            Height="14.416"
-            Margin="840.397,203.01,0,0"
+            Height="17.318"
             RenderTransformOrigin="0.456,1.375"
             Stretch="Fill"
-            VerticalAlignment="Top"
-            Width="46.105"
-            Style="{StaticResource GreenSegment}"
+            Width="55.387"
+            Style="{StaticResource CommonSegment}" Canvas.Left="391.667" Canvas.Top="185"
             >
-            <Path.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-18.38"/>
-                    <TranslateTransform X="-72.224" Y="25.902"/>
-                </TransformGroup>
-            </Path.RenderTransform>
-        </Path>
-
-        <Label x:Name="Points"
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-18.38"/>
+                        <TranslateTransform X="-72.224" Y="25.902"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+        </Canvas>
+        <Canvas x:Name="SettingsPanel"
+                Height="276" Canvas.Left="85" Canvas.Top="129" Width="182">
+            <TextBox x:Name="Player1NameBox"
+            HorizontalAlignment="Left"
+            Height="28"
+            Margin="28,19,0,0"
+            TextWrapping="Wrap"
+            Text="Player1"
+            VerticalAlignment="Top"
+            Width="79"
+            FontFamily="Agency FB"
+            FontWeight="Bold" FontSize="19"/>
+            <Label
+            Content="Player 1"
+            HorizontalAlignment="Left"
+            Margin="107,17,0,0"
+            VerticalAlignment="Top"
+            FontFamily="Agency FB"
+            FontWeight="Bold" Height="34" Width="61" FontSize="19"/>
+            <TextBox x:Name="Player2NameBox"
+            HorizontalAlignment="Left"
+            Height="28"
+            Margin="28,52,0,0"
+            TextWrapping="Wrap"
+            Text="Player2"
+            VerticalAlignment="Top"
+            Width="79"
+            FontFamily="Agency FB"
+            FontWeight="Bold" FontSize="19"/>
+            <Label
+            Content="Player 2"
+            HorizontalAlignment="Left"
+            Margin="107,49,0,0"
+            VerticalAlignment="Top"
+            FontFamily="Agency FB"
+            FontWeight="Bold" Height="34" Width="66" FontSize="19"/>
+            <ComboBox x:Name="PointsBox"
+            HorizontalAlignment="Left"
+            Margin="28,85,0,0"
+            VerticalAlignment="Top"
+            Width="79"
+            SelectedIndex="2"
+            FontFamily="Agency FB"
+            FontWeight="Bold" Height="30" FontSize="19">
+                <ListBoxItem Content="101"/>
+                <ListBoxItem Content="301"/>
+                <ListBoxItem Content="501"/>
+                <ListBoxItem Content="1001"/>
+            </ComboBox>
+            <Label
+            Content="Points"
+            HorizontalAlignment="Left"
+            Margin="107,83,0,0"
+            VerticalAlignment="Top"
+            FontFamily="Agency FB"
+            FontWeight="Bold" Height="34" Width="52" FontSize="19"/>
+            <ComboBox x:Name="SetBox"
+            HorizontalAlignment="Left"
+            Margin="28,121,0,0"
+            VerticalAlignment="Top"
+            Width="79"
+            FontFamily="Agency FB"
+            FontWeight="Bold"
+            SelectedIndex="1" Height="29" FontSize="19">
+                <ListBoxItem Content="1"/>
+                <ListBoxItem Content="3"/>
+                <ListBoxItem Content="5"/>
+                <ListBoxItem Content="7"/>
+            </ComboBox>
+            <Label
+            Content="Sets"
+            HorizontalAlignment="Left"
+            Margin="107,118,0,0"
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            FontFamily="Agency FB" Height="35" Width="40" FontSize="19"/>
+            <ComboBox x:Name="LegBox"
+            HorizontalAlignment="Left"
+            Margin="28,156,0,0"
+            VerticalAlignment="Top"
+            Width="79"
+            FontFamily="Agency FB"
+            FontWeight="Bold"
+            SelectedIndex="1" Height="30" FontSize="19">
+                <ListBoxItem Content="1"/>
+                <ListBoxItem Content="3"/>
+                <ListBoxItem Content="5"/>
+                <ListBoxItem Content="7"/>
+            </ComboBox>
+            <Label
+            Content="Legs"
+            HorizontalAlignment="Left"
+            Margin="107,154,0,0"
+            VerticalAlignment="Top"
+            FontFamily="Agency FB"
+            FontWeight="Bold" Height="34" Width="41" FontSize="19"/>
+            <Button x:Name="GameOn"
+            Content="Game ON !"
+            HorizontalAlignment="Left"
+            Margin="28,195,0,0"
+            VerticalAlignment="Top"
+            Width="104"
+            BorderBrush="Black"
+            Foreground="Black"
+            Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="22" Click="GameOn_Click"
+            >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF006300" Offset="1"/>
+                        <GradientStop Color="#FF00DE00"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label x:Name="Points"
                Content="Label"
                HorizontalAlignment="Left"
-               Margin="545,653,0,0"
+               Margin="28,228,0,0"
                VerticalAlignment="Top"
-               Height="36"
-               Width="66"
-               FontSize="20"
+               Height="46"
+               Width="76"
+               FontSize="36" FontFamily="Agency FB" FontWeight="Bold"
                />
-    </Grid>
-      
+
+        </Canvas>
+        <Canvas x:Name="InfoPanel"
+                Height="115" Canvas.Left="18" Canvas.Top="624" Width="344">
+            <Canvas x:Name="Player1Help"
+                Height="32"
+                Width="80"
+                Canvas.Top="21" Canvas.Left="-1">
+                <Rectangle
+                Height="31"
+                Stroke="Black"
+                Width="79"
+                Grid.RowSpan="2" Canvas.Top="1"
+                >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF646464" Offset="1"/>
+                            <GradientStop Color="#FFE8E8E8"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label x:Name="Player1PointsHelp"
+                Content="D20 T20 D30"
+                FontFamily="Agency FB"
+                FontSize="15"
+                HorizontalContentAlignment="Center"
+                Width="77"
+                Height="30" Grid.Row="1" Canvas.Top="2"
+                VerticalContentAlignment="Center" FontWeight="Bold"
+                />
+            </Canvas>
+            <Canvas x:Name="Player2Help"
+                Height="32"
+                Width="76"
+                Canvas.Left="-1"
+                Canvas.Top="52">
+                <Rectangle
+                Height="32"
+                Stroke="Black"
+                Width="79"
+                Grid.Row="1"
+                >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF043C0E" Offset="1"/>
+                            <GradientStop Color="#FF00FF2E"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label x:Name="Player2PointsHelp"
+                Content="D20 T13"
+                FontFamily="Agency FB"
+                FontSize="15"
+                HorizontalContentAlignment="Center"
+                Grid.RowSpan="2"
+                Canvas.Top="2"
+                Height="30"
+                Width="77"
+                VerticalContentAlignment="Center" FontWeight="Bold"
+                />
+            </Canvas>
+            <Canvas x:Name="WhoThrowSlider"
+                Height="32"
+                Width="25"
+                Canvas.Left="316"
+                Canvas.Top="52">
+                <Rectangle
+                Height="32"
+                Stroke="Black"
+                Width="25"
+                Grid.Row="1"
+                >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF064010" Offset="1"/>
+                            <GradientStop Color="#FF09B828"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label
+                    Content="&lt;"
+                    Canvas.Top="-2"
+                    Height="31"
+                    Width="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Agency FB" FontSize="20"
+                    />
+
+            </Canvas>
+            <Canvas x:Name="MainBox"
+                    Height="112"
+                    Width="242"
+                    Canvas.Left="76" Canvas.Top="-1"
+                    >
+                <Rectangle
+                Stroke="Black"
+                Grid.RowSpan="2"
+                Height="103" Canvas.Left="1" Canvas.Top="2" Width="240"
+                >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="#FF191717" Offset="0.971"/>
+                            <GradientStop Color="#FF616161"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle
+                Height="62"
+                Stroke="Black"
+                Width="240"
+                Grid.RowSpan="2" Canvas.Left="1" Canvas.Top="23">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF535353" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.008"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle
+                Height="62"
+                Stroke="Black"
+                Width="124"
+                Grid.RowSpan="2" Canvas.Left="117" Canvas.Top="23"
+                >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF004409" Offset="1"/>
+                            <GradientStop Color="#FF02F323" Offset="0.012"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle
+                Stroke="Black"
+                Width="240"
+                Grid.Row="1" Height="32" Canvas.Left="1" Canvas.Top="53"
+                />
+                <Rectangle
+                Height="62"
+                Stroke="Black"
+                Width="34"
+                Grid.RowSpan="2" Canvas.Left="149" Canvas.Top="23"
+                />
+                <Label
+                Content="First to 5 legs in 3 sets"
+                FontFamily="Agency FB"
+                Height="26"
+                Width="116"
+                Foreground="Black" Canvas.Left="1" FontWeight="Bold" Canvas.Top="1"
+                />
+                <Label
+                Content="Sets"
+                FontFamily="Agency FB"
+                FontSize="13" Canvas.Left="117" FontWeight="Bold" Width="32" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                />
+                <Label
+                Content="Points"
+                FontFamily="Agency FB"
+                FontSize="13" Canvas.Left="183" FontWeight="Bold" Width="57" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                />
+                <Label
+                Content="Legs"
+                FontFamily="Agency FB"
+                FontSize="13" Canvas.Left="149" FontWeight="Bold" Width="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                />
+                <Label x:Name="Player1Name"
+                Content="{Binding Text, ElementName=Player1NameBox}"
+                Background="Transparent"
+                FontFamily="Agency FB"
+                FontWeight="Bold"
+                FontSize="18"
+                Grid.RowSpan="2" Canvas.Left="7" Canvas.Top="23"
+                />
+                <Label x:Name="Player2Name"
+                Content="{Binding Text, ElementName=Player2NameBox}"
+                Background="Transparent"
+                FontFamily="Agency FB"
+                FontWeight="Bold"
+                FontSize="18"
+                Grid.Row="1" Canvas.Left="7" Canvas.Top="53"/>
+                <Label x:Name="Player1SetsWon"
+                Content="5"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="20"
+                Grid.RowSpan="2" Canvas.Left="124" Canvas.Top="23" Height="30"/>
+                <Label x:Name="Player2SetsWon"
+                Content="7"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="20"
+                Grid.Row="1" Canvas.Left="124" Canvas.Top="53" Height="32"/>
+                <Label x:Name="Player1LegsWon"
+                Content="3"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="20"
+                Grid.RowSpan="2" Canvas.Left="156" Canvas.Top="23" Height="30"/>
+                <Label x:Name="Player2LegsWon"
+                Content="9"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="20"
+                Grid.Row="1" Canvas.Left="156" Canvas.Top="53" Height="32"/>
+                <Label x:Name="Player1Points"
+                Content="120"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="20"
+                Grid.Row="1" Canvas.Left="195" Canvas.Top="23" Height="30"
+                />
+                <Label x:Name="Player2Points"
+                Content="180"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="20"
+                Grid.RowSpan="2" Canvas.Left="195" Canvas.Top="53" Height="32"
+                />
+                <Ellipse x:Name="Player1SetDot"
+                Height="8"
+                Stroke="Black"
+                Width="8"
+                Grid.Row="1" Canvas.Left="98" Canvas.Top="35"
+                >
+                    <Ellipse.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF043C0E" Offset="1"/>
+                            <GradientStop Color="#FF07D32B"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse x:Name="Player2SetDot"
+                Height="8"
+                Stroke="Black"
+                Width="8" Grid.RowSpan="2" Canvas.Left="98" Canvas.Top="65"
+                >
+                    <Ellipse.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF043C0E" Offset="1"/>
+                            <GradientStop Color="#FF07D32B"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Canvas>
+        </Canvas>
+    </Canvas>
+
 </Window>
