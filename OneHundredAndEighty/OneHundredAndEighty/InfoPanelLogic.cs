@@ -13,7 +13,7 @@ namespace OneHundredAndEighty
 {
     public class InfoPanelLogic //  Класс логики инфо-панели
     {
-        MainWindow MV = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
+        MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
         SortedList<int, string> CheckoutTable = new SortedList<int, string>()
         {
             [2] = "D1",
@@ -181,25 +181,25 @@ namespace OneHundredAndEighty
         };  //  Коллекция закрытия сета
         TimeSpan Time = TimeSpan.FromSeconds(0.23);  //  Hide/show animation duration
 
-        public void InfoPanelShow()
+        public void ShowPanel()
         {
-            MV.InfoPanel.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.InfoPanel.Visibility = System.Windows.Visibility.Visible;
         }   //  Спрятать инфо-панель
-        public void InfoPanelHide()
+        public void HidePanel()
         {
-            MV.InfoPanel.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.InfoPanel.Visibility = System.Windows.Visibility.Hidden;
         }   //  Показать инфо-панель
         public void DotSet(string s)
         {
             if (s == "1")
             {
-                MV.Player1SetDot.Opacity = 1;
-                MV.Player2SetDot.Opacity = 0;
+                MainWindow.Player1SetDot.Opacity = 1;
+                MainWindow.Player2SetDot.Opacity = 0;
             }
             else
             {
-                MV.Player1SetDot.Opacity = 0;
-                MV.Player2SetDot.Opacity = 1;
+                MainWindow.Player1SetDot.Opacity = 0;
+                MainWindow.Player2SetDot.Opacity = 1;
             }
         }   //  Установка точки начала сета
         public void DotToggle()
@@ -210,18 +210,18 @@ namespace OneHundredAndEighty
             SB.Children.Add(fadein);
             SB.Children.Add(fadeout);
 
-            if (MV.Player1SetDot.Opacity != 0)
+            if (MainWindow.Player1SetDot.Opacity != 0)
             {
-                Storyboard.SetTarget(fadeout, MV.Player1SetDot);
+                Storyboard.SetTarget(fadeout, MainWindow.Player1SetDot);
                 Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-                Storyboard.SetTarget(fadein, MV.Player2SetDot);
+                Storyboard.SetTarget(fadein, MainWindow.Player2SetDot);
                 Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
             }
             else
             {
-                Storyboard.SetTarget(fadeout, MV.Player2SetDot);
+                Storyboard.SetTarget(fadeout, MainWindow.Player2SetDot);
                 Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-                Storyboard.SetTarget(fadein, MV.Player1SetDot);
+                Storyboard.SetTarget(fadein, MainWindow.Player1SetDot);
                 Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
             }
             SB.Begin();
@@ -230,15 +230,15 @@ namespace OneHundredAndEighty
         {
             if (s == "1")
             {
-                Canvas.SetTop(MV.WhoThrowSlider, 21);
-                MV.Player1HelpBackground.Opacity = 1;
-                MV.Player2HelpBackground.Opacity = 0;
+                Canvas.SetTop(MainWindow.WhoThrowSlider, 21);
+                MainWindow.Player1HelpBackground.Opacity = 1;
+                MainWindow.Player2HelpBackground.Opacity = 0;
             }
             else
             {
-                Canvas.SetTop(MV.WhoThrowSlider, 52);
-                MV.Player1HelpBackground.Opacity = 0;
-                MV.Player2HelpBackground.Opacity = 1;
+                Canvas.SetTop(MainWindow.WhoThrowSlider, 52);
+                MainWindow.Player1HelpBackground.Opacity = 0;
+                MainWindow.Player2HelpBackground.Opacity = 1;
             }
 
         }   //  Установка слайдера текущего броска
@@ -250,103 +250,144 @@ namespace OneHundredAndEighty
             DoubleAnimation fadeout = new DoubleAnimation(1, 0, Time);
             DoubleAnimation hide = new DoubleAnimation() { From = 316, To = 292, Duration = Time };
 
-            Storyboard.SetTarget(hide, MV.WhoThrowSlider);
+            Storyboard.SetTarget(hide, MainWindow.WhoThrowSlider);
             Storyboard.SetTargetProperty(hide, new System.Windows.PropertyPath(Canvas.LeftProperty));
             Slider.Children.Add(hide);
 
-            if (Canvas.GetTop(MV.WhoThrowSlider) == 52)
+            if (Canvas.GetTop(MainWindow.WhoThrowSlider) == 52)
             {
                 DoubleAnimation toggle = new DoubleAnimation() { From = 52, To = 21, Duration = TimeSpan.FromSeconds(0), BeginTime = Time };
-                Storyboard.SetTarget(toggle, MV.WhoThrowSlider);
+                Storyboard.SetTarget(toggle, MainWindow.WhoThrowSlider);
                 Storyboard.SetTargetProperty(toggle, new System.Windows.PropertyPath(Canvas.TopProperty));
                 Slider.Children.Add(toggle);
 
-                Storyboard.SetTarget(fadeout, MV.Player2HelpBackground);
+                Storyboard.SetTarget(fadeout, MainWindow.Player2HelpBackground);
                 Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-                Storyboard.SetTarget(fadein, MV.Player1HelpBackground);
+                Storyboard.SetTarget(fadein, MainWindow.Player1HelpBackground);
                 Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
             }
             else
             {
                 DoubleAnimation toggle = new DoubleAnimation() { From = 21, To = 52, Duration = TimeSpan.FromSeconds(0), BeginTime = Time };
-                Storyboard.SetTarget(toggle, MV.WhoThrowSlider);
+                Storyboard.SetTarget(toggle, MainWindow.WhoThrowSlider);
                 Storyboard.SetTargetProperty(toggle, new System.Windows.PropertyPath(Canvas.TopProperty));
                 Slider.Children.Add(toggle);
 
-                Storyboard.SetTarget(fadeout, MV.Player1HelpBackground);
+                Storyboard.SetTarget(fadeout, MainWindow.Player1HelpBackground);
                 Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-                Storyboard.SetTarget(fadein, MV.Player2HelpBackground);
+                Storyboard.SetTarget(fadein, MainWindow.Player2HelpBackground);
                 Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
             }
             Slider.Children.Add(fadein);
             Slider.Children.Add(fadeout);
 
             DoubleAnimation show = new DoubleAnimation() { From = 292, To = 316, Duration = Time, BeginTime = Time };
-            Storyboard.SetTarget(show, MV.WhoThrowSlider);
+            Storyboard.SetTarget(show, MainWindow.WhoThrowSlider);
             Storyboard.SetTargetProperty(show, new System.Windows.PropertyPath(Canvas.LeftProperty));
             Slider.Children.Add(show);
 
             Slider.Begin();
         }   // Переключатель слайдера текущего броска
-        public void HelpCheck(int p,object o)
+        public void HelpCheck(int points, string s)
         {
-            if (CheckoutTable.ContainsKey(p) == true)
-                MV.Player1PointsHelp.Content = CheckoutTable[p];
+            if (s == "1")
+            {
+                if (CheckoutTable.ContainsKey(points) == true)
+                {
+                    MainWindow.Player1PointsHelp.Content = CheckoutTable[points];
+                    if (MainWindow.Player1Help.Tag.ToString() != "ON")
+                    {
+                        HelpShow("1");
+                    }
+                }
+                else
+                {
+                    MainWindow.Player1PointsHelp.Content = "";
+                    HelpHide("1");
+                }
+            }
             else
             {
-                MV.Player1PointsHelp.Content = "";
-                HelpHide("1");
+                if (CheckoutTable.ContainsKey(points) == true)
+                {
+                    MainWindow.Player2PointsHelp.Content = CheckoutTable[points];
+                    if (MainWindow.Player2Help.Tag.ToString() != "ON")
+                    {
+                        HelpShow("2");
+                    }
+                }
+                else
+                {
+                    MainWindow.Player2PointsHelp.Content = "";
+                    HelpHide("2");
+                }
             }
         }  //  Установка помощи очков на закрытие сета
         public void HelpShow(string s)
         {
             DoubleAnimation animation = new DoubleAnimation(77, -1, Time);
             if (s == "1")
-                MV.Player1Help.BeginAnimation(Canvas.LeftProperty, animation);
+            {
+                MainWindow.Player1Help.BeginAnimation(Canvas.LeftProperty, animation);
+                MainWindow.Player1Help.Tag = "ON";
+            }
             else
-                MV.Player2Help.BeginAnimation(Canvas.LeftProperty, animation);
+            {
+                MainWindow.Player2Help.BeginAnimation(Canvas.LeftProperty, animation);
+                MainWindow.Player2Help.Tag = "ON";
+
+            }
         }  //  Показ бокса помощи
         public void HelpHide(string s)
         {
             DoubleAnimation animation = new DoubleAnimation(-1, 77, Time);
             if (s == "1")
-                MV.Player1Help.BeginAnimation(Canvas.LeftProperty, animation);
+            {
+                MainWindow.Player1Help.BeginAnimation(Canvas.LeftProperty, animation);
+                MainWindow.Player1Help.Tag = "OFF";
+            }
             else
-                MV.Player2Help.BeginAnimation(Canvas.LeftProperty, animation);
+            {
+                MainWindow.Player2Help.BeginAnimation(Canvas.LeftProperty, animation);
+                MainWindow.Player2Help.Tag = "OFF";
+            }
         }  //  Скрытие бокса помощи
-        public void SetsClear(int p)
+        public void PanelNewGame(int points, string legs, string sets, string first)
         {
-            MV.Player1SetsWon.Content = 0;
-            MV.Player2SetsWon.Content = 0;
-            MV.Player1LegsWon.Content = 0;
-            MV.Player2LegsWon.Content = 0;
-            PointsClear(p);
+            MainWindow.MainBoxSummary.Content = (new StringBuilder().Append("First to ").Append(legs).Append(" legs in ").Append(sets).Append(" sets")).ToString();
+            MainWindow.Player1SetsWon.Content = 0;
+            MainWindow.Player2SetsWon.Content = 0;
+            MainWindow.Player1LegsWon.Content = 0;
+            MainWindow.Player2LegsWon.Content = 0;
+            PointsClear(points);
+            DotSet(first);
+            WhoThrowSliderSet(first);
         }   //  Установка в 0 в начале игры
         public void PointsClear(int p)
         {
-            MV.Player1Points.Content = p;
-            MV.Player2Points.Content = p;
+            MainWindow.Player1Points.Content = p;
+            MainWindow.Player2Points.Content = p;
         }    //  Установка очков в начале сета
         public void PointsSet(string s, int p)
         {
             if (s == "1")
-                MV.Player1Points.Content = p.ToString();
+                MainWindow.Player1Points.Content = p.ToString();
             else
-                MV.Player2Points.Content = p.ToString();
+                MainWindow.Player2Points.Content = p.ToString();
         }  //  Установка текущих очков
         public void SetIncrement(string s)
         {
             if (s == "1")
-                MV.Player1SetsWon.Content = (Int32.Parse((MV.Player1SetsWon.Content).ToString()) + 1).ToString();
+                MainWindow.Player1SetsWon.Content = (Int32.Parse((MainWindow.Player1SetsWon.Content).ToString()) + 1).ToString();
             else
-                MV.Player2SetsWon.Content = (Int32.Parse((MV.Player2SetsWon.Content).ToString()) + 1).ToString();
+                MainWindow.Player2SetsWon.Content = (Int32.Parse((MainWindow.Player2SetsWon.Content).ToString()) + 1).ToString();
         }  //  +1 к сету
         public void LegIncrement(string s)
         {
             if (s == "1")
-                MV.Player1LegsWon.Content = (Int32.Parse((MV.Player1LegsWon.Content).ToString()) + 1).ToString();
+                MainWindow.Player1LegsWon.Content = (Int32.Parse((MainWindow.Player1LegsWon.Content).ToString()) + 1).ToString();
             else
-                MV.Player2LegsWon.Content = (Int32.Parse((MV.Player2LegsWon.Content).ToString()) + 1).ToString();
+                MainWindow.Player2LegsWon.Content = (Int32.Parse((MainWindow.Player2LegsWon.Content).ToString()) + 1).ToString();
         }  //  +1 к легу
     }
 }

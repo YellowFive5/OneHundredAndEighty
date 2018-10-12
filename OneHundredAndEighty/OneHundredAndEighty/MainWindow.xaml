@@ -69,13 +69,23 @@
         </Style>-->
     </Window.Resources>
     <Canvas>
+        <Label x:Name="Points"
+               Content="Label"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Height="46"
+               Width="76"
+               FontSize="36"
+               FontFamily="Agency FB"
+               FontWeight="Bold" Canvas.Left="373" Canvas.Top="88"
+               />
         <Image x:Name="DartboardImg"
             Height="748"
             Width="748"
             Source="Images/Dartboard.png" Canvas.Left="407" Canvas.Top="20"
             />
         <Canvas x:Name="BoardPanel"
-                Height="764" Canvas.Left="389" Width="778" Canvas.Top="10">
+                Height="764" Canvas.Left="389" Width="778" Canvas.Top="10" Visibility="Hidden">
             <Path x:Name="Zero"
             Tag="0"
             Data="M212.25,50.127999 C122.6418,50.127998 49.999996,122.7698 49.999994,212.378 49.999996,301.9862 122.6418,374.628 212.25,374.628 301.8582,374.628 374.5,301.9862 374.5,212.378 374.5,122.7698 301.8582,50.127998 212.25,50.127999 z M212.25,0 C329.47244,0 424.5,95.027561 424.5,212.24999 424.5,329.47245 329.47244,424.50001 212.25,424.50001 95.027557,424.50001 -3.8146973E-06,329.47245 0,212.24999 -3.8146973E-06,95.027561 95.027557,0 212.25,0 z"
@@ -1207,69 +1217,57 @@
             </Path>
         </Canvas>
         <Canvas x:Name="SettingsPanel"
-                Height="276" Canvas.Left="85" Canvas.Top="129" Width="182">
+                Height="259" Canvas.Left="98" Canvas.Top="219" Width="224">
             <TextBox x:Name="Player1NameBox"
             HorizontalAlignment="Left"
             Height="28"
-            Margin="28,19,0,0"
             TextWrapping="Wrap"
             Text="Player1"
             VerticalAlignment="Top"
             Width="79"
             FontFamily="Agency FB"
-            FontWeight="Bold" FontSize="19"/>
+            FontWeight="Bold" FontSize="19" Canvas.Left="50" Canvas.Top="54" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label
-            Content="Player 1"
+            Content="Players names"
             HorizontalAlignment="Left"
-            Margin="107,17,0,0"
             VerticalAlignment="Top"
             FontFamily="Agency FB"
-            FontWeight="Bold" Height="34" Width="61" FontSize="19"/>
+            FontWeight="Bold" Height="27" Width="93" FontSize="16" Canvas.Left="84" Canvas.Top="29"/>
             <TextBox x:Name="Player2NameBox"
             HorizontalAlignment="Left"
             Height="28"
-            Margin="28,52,0,0"
             TextWrapping="Wrap"
             Text="Player2"
             VerticalAlignment="Top"
             Width="79"
             FontFamily="Agency FB"
-            FontWeight="Bold" FontSize="19"/>
-            <Label
-            Content="Player 2"
-            HorizontalAlignment="Left"
-            Margin="107,49,0,0"
-            VerticalAlignment="Top"
-            FontFamily="Agency FB"
-            FontWeight="Bold" Height="34" Width="66" FontSize="19"/>
+            FontWeight="Bold" FontSize="19" Canvas.Left="134" Canvas.Top="54" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <ComboBox x:Name="PointsBox"
             HorizontalAlignment="Left"
-            Margin="28,85,0,0"
             VerticalAlignment="Top"
             Width="79"
             SelectedIndex="2"
             FontFamily="Agency FB"
-            FontWeight="Bold" Height="30" FontSize="19">
+            FontWeight="Bold" Height="30" FontSize="19" Canvas.Left="50" Canvas.Top="108">
                 <ListBoxItem Content="101"/>
                 <ListBoxItem Content="301"/>
                 <ListBoxItem Content="501"/>
+                <ListBoxItem Content="701"/>
                 <ListBoxItem Content="1001"/>
             </ComboBox>
             <Label
             Content="Points"
             HorizontalAlignment="Left"
-            Margin="107,83,0,0"
             VerticalAlignment="Top"
             FontFamily="Agency FB"
-            FontWeight="Bold" Height="34" Width="52" FontSize="19"/>
+            FontWeight="Bold" Height="34" Width="52" FontSize="19" Canvas.Left="134" Canvas.Top="109"/>
             <ComboBox x:Name="SetBox"
             HorizontalAlignment="Left"
-            Margin="28,121,0,0"
             VerticalAlignment="Top"
             Width="79"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            SelectedIndex="1" Height="29" FontSize="19">
+            SelectedIndex="1" Height="29" FontSize="19" Canvas.Left="50" Canvas.Top="143">
                 <ListBoxItem Content="1"/>
                 <ListBoxItem Content="3"/>
                 <ListBoxItem Content="5"/>
@@ -1278,18 +1276,16 @@
             <Label
             Content="Sets"
             HorizontalAlignment="Left"
-            Margin="107,118,0,0"
             VerticalAlignment="Top"
             FontWeight="Bold"
-            FontFamily="Agency FB" Height="35" Width="40" FontSize="19"/>
+            FontFamily="Agency FB" Height="35" Width="40" FontSize="19" Canvas.Left="134" Canvas.Top="143"/>
             <ComboBox x:Name="LegBox"
             HorizontalAlignment="Left"
-            Margin="28,156,0,0"
             VerticalAlignment="Top"
             Width="79"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            SelectedIndex="1" Height="30" FontSize="19">
+            SelectedIndex="1" Height="30" FontSize="19" Canvas.Left="50" Canvas.Top="177">
                 <ListBoxItem Content="1"/>
                 <ListBoxItem Content="3"/>
                 <ListBoxItem Content="5"/>
@@ -1298,19 +1294,17 @@
             <Label
             Content="Legs"
             HorizontalAlignment="Left"
-            Margin="107,154,0,0"
             VerticalAlignment="Top"
             FontFamily="Agency FB"
-            FontWeight="Bold" Height="34" Width="41" FontSize="19"/>
+            FontWeight="Bold" Height="34" Width="41" FontSize="19" Canvas.Left="134" Canvas.Top="175"/>
             <Button x:Name="GameOn"
             Content="Game ON !"
             HorizontalAlignment="Left"
-            Margin="28,195,0,0"
             VerticalAlignment="Top"
-            Width="104"
+            Width="163"
             BorderBrush="Black"
             Foreground="Black"
-            Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="22" Click="GameOn_Click"
+            Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="22" Click="GameOn_Click" Canvas.Left="50" Canvas.Top="215"
             >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1319,25 +1313,34 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Label x:Name="Points"
-               Content="Label"
-               HorizontalAlignment="Left"
-               Margin="28,228,0,0"
-               VerticalAlignment="Top"
-               Height="46"
-               Width="76"
-               FontSize="36"
-               FontFamily="Agency FB"
-               FontWeight="Bold"
-               />
-
+            <RadioButton x:Name="Player1Radiobutton"
+                Canvas.Left="66"
+                Canvas.Top="87"
+                Width="15"
+                Height="16"
+                GroupName="Who"
+                IsChecked="True"
+                />
+            <RadioButton x:Name="Player2Radiobutton"
+                Canvas.Left="179"
+                Canvas.Top="87"
+                Width="15"
+                Height="16"
+                GroupName="Who"/>
+            <Label
+                Content="Who throw first"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Agency FB"
+                FontWeight="Bold" Height="26" Width="98" FontSize="16" Canvas.Left="81" Canvas.Top="80"/>
         </Canvas>
         <Canvas x:Name="InfoPanel"
-                Height="115" Canvas.Left="38" Canvas.Top="536" Width="344">
+                Height="115" Canvas.Left="38" Canvas.Top="536" Width="344" Visibility="Hidden">
             <Canvas x:Name="Player1Help"
+                Tag="OFF"
                 Height="32"
                 Width="80"
-                Canvas.Top="21" Canvas.Left="-1">
+                Canvas.Top="21" Canvas.Left="77">
                 <Rectangle x:Name="Player1HelpStroke"
                 Height="32"
                 Stroke="Black"
@@ -1371,9 +1374,10 @@
                 />
             </Canvas>
             <Canvas x:Name="Player2Help"
+                Tag="OFF"
                 Height="32"
                 Width="80"
-                Canvas.Left="-1"
+                Canvas.Left="77"
                 Canvas.Top="52">
                 <Rectangle x:Name="Player2HelpStroke"
                 Height="32"
@@ -1488,12 +1492,17 @@
                 Width="34"
                 Grid.RowSpan="2" Canvas.Left="149" Canvas.Top="22"
                 />
-                <Label
-                Content="First to 5 legs in 3 sets"
+                <Label x:Name="MainBoxSummary"
+                Content="First to 7 legs in 3 sets"
                 FontFamily="Agency FB"
-                Height="26"
+                Height="24"
                 Width="116"
-                Foreground="Black" Canvas.Left="1" FontWeight="Bold" Canvas.Top="1"
+                Foreground="Black"
+                Canvas.Left="1"
+                FontWeight="Bold"
+                Canvas.Top="1"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
                 />
                 <Label
                 Content="Sets"

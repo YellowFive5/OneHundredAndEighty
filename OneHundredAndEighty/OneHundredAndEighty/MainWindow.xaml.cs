@@ -35,9 +35,7 @@ namespace OneHundredAndEighty
 
         private void GameOn_Click(object sender, RoutedEventArgs e)
         {
-            InfoPanelLogic IPL = new InfoPanelLogic();
-            //MessageBox.Show(PointsBox.Text + " " + SetBox.Text + " " + LegBox.Text);
-
+            Game G = new Game();
         }
     }
 }
