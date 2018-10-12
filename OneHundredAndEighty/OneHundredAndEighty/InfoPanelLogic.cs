@@ -181,26 +181,36 @@ namespace OneHundredAndEighty
         };  //  Коллекция закрытия сета
         TimeSpan Time = TimeSpan.FromSeconds(0.23);  //  Hide/show animation duration
 
-        public void ShowPanel()
+        public void PanelShow()
         {
             MainWindow.InfoPanel.Visibility = System.Windows.Visibility.Visible;
         }   //  Спрятать инфо-панель
-        public void HidePanel()
+        public void PanelHide()
         {
             MainWindow.InfoPanel.Visibility = System.Windows.Visibility.Hidden;
         }   //  Показать инфо-панель
-        public void DotSet(string s)
+        public void PanelNewGame(int points, string legs, string sets, Player p1, Player p2, Player first)
         {
-            if (s == "1")
-            {
-                MainWindow.Player1SetDot.Opacity = 1;
+
+            MainWindow.MainBoxSummary.Content = (new StringBuilder().Append("First to ").Append(legs).Append(" legs in ").Append(sets).Append(" sets")).ToString();
+            MainWindow.Player1Name.Content = p1.Name;
+            MainWindow.Player2Name.Content = p2.Name;
+            p1.SetsWonLabel.Content = 0;
+            p2.SetsWonLabel.Content = 0;
+            p1.LegsWonLabel.Content = 0;
+            p2.LegsWonLabel.Content = 0;
+            PointsClear(points);
+            DotSet(first);
+            WhoThrowSliderSet(first);
+        }   //  Установка в 0 в начале игры
+        public void DotSet(Player p)
+        {
+            p.DotPoint.Opacity = 1;
+
+            if (p.Tag == "Player1")
                 MainWindow.Player2SetDot.Opacity = 0;
-            }
-            else
-            {
+            if (p.Tag == "Player2")
                 MainWindow.Player1SetDot.Opacity = 0;
-                MainWindow.Player2SetDot.Opacity = 1;
-            }
         }   //  Установка точки начала сета
         public void DotToggle()
         {
@@ -226,15 +236,15 @@ namespace OneHundredAndEighty
             }
             SB.Begin();
         }  //  Переключатель точки начала сета
-        public void WhoThrowSliderSet(string s)
+        public void WhoThrowSliderSet(Player p)
         {
-            if (s == "1")
+            if (p.Tag == "Player1")
             {
                 Canvas.SetTop(MainWindow.WhoThrowSlider, 21);
                 MainWindow.Player1HelpBackground.Opacity = 1;
                 MainWindow.Player2HelpBackground.Opacity = 0;
             }
-            else
+            if (p.Tag == "Player2")
             {
                 Canvas.SetTop(MainWindow.WhoThrowSlider, 52);
                 MainWindow.Player1HelpBackground.Opacity = 0;
@@ -288,106 +298,60 @@ namespace OneHundredAndEighty
 
             Slider.Begin();
         }   // Переключатель слайдера текущего броска
-        public void HelpCheck(int points, string s)
+        public void HelpCheck(Player p)
         {
-            if (s == "1")
+            if (CheckoutTable.ContainsKey(p.PointsToOut) == true)
             {
-                if (CheckoutTable.ContainsKey(points) == true)
-                {
-                    MainWindow.Player1PointsHelp.Content = CheckoutTable[points];
-                    if (MainWindow.Player1Help.Tag.ToString() != "ON")
-                    {
-                        HelpShow("1");
-                    }
-                }
-                else
-                {
-                    MainWindow.Player1PointsHelp.Content = "";
-                    HelpHide("1");
-                }
+                p.HelpLabel.Content = CheckoutTable[p.PointsToOut];
+                HelpShow(p);
             }
             else
             {
-                if (CheckoutTable.ContainsKey(points) == true)
-                {
-                    MainWindow.Player2PointsHelp.Content = CheckoutTable[points];
-                    if (MainWindow.Player2Help.Tag.ToString() != "ON")
-                    {
-                        HelpShow("2");
-                    }
-                }
-                else
-                {
-                    MainWindow.Player2PointsHelp.Content = "";
-                    HelpHide("2");
-                }
+                p.HelpLabel.Content = "";
+                HelpHide(p);
             }
         }  //  Установка помощи очков на закрытие сета
-        public void HelpShow(string s)
-        {
-            DoubleAnimation animation = new DoubleAnimation(77, -1, Time);
-            if (s == "1")
-            {
-                MainWindow.Player1Help.BeginAnimation(Canvas.LeftProperty, animation);
-                MainWindow.Player1Help.Tag = "ON";
-            }
-            else
-            {
-                MainWindow.Player2Help.BeginAnimation(Canvas.LeftProperty, animation);
-                MainWindow.Player2Help.Tag = "ON";
 
-            }
-        }  //  Показ бокса помощи
-        public void HelpHide(string s)
+        public void HelpShow(Player p)
         {
-            DoubleAnimation animation = new DoubleAnimation(-1, 77, Time);
-            if (s == "1")
+            if (p.HelpPanel.Tag.ToString() == "OFF")
             {
-                MainWindow.Player1Help.BeginAnimation(Canvas.LeftProperty, animation);
-                MainWindow.Player1Help.Tag = "OFF";
+                DoubleAnimation animation = new DoubleAnimation(77, -1, Time);
+                p.HelpPanel.BeginAnimation(Canvas.LeftProperty, animation);
+                p.HelpPanel.Tag = "ON";
             }
-            else
+
+        }  //  Показ бокса помощи
+        public void HelpHide(Player p)
+        {
+            if (p.HelpPanel.Tag.ToString() == "ON")
             {
-                MainWindow.Player2Help.BeginAnimation(Canvas.LeftProperty, animation);
-                MainWindow.Player2Help.Tag = "OFF";
+                DoubleAnimation animation = new DoubleAnimation(-1, 77, Time);
+                p.HelpPanel.BeginAnimation(Canvas.LeftProperty, animation);
+                p.HelpPanel.Tag = "OFF";
             }
         }  //  Скрытие бокса помощи
-        public void PanelNewGame(int points, string legs, string sets, string first)
+        public void PointsSet(Player p)
         {
-            MainWindow.MainBoxSummary.Content = (new StringBuilder().Append("First to ").Append(legs).Append(" legs in ").Append(sets).Append(" sets")).ToString();
-            MainWindow.Player1SetsWon.Content = 0;
-            MainWindow.Player2SetsWon.Content = 0;
-            MainWindow.Player1LegsWon.Content = 0;
-            MainWindow.Player2LegsWon.Content = 0;
-            PointsClear(points);
-            DotSet(first);
-            WhoThrowSliderSet(first);
-        }   //  Установка в 0 в начале игры
+            p.PointsLabel.Content = p.PointsToOut;
+        }  //  Установка текущих очков
         public void PointsClear(int p)
         {
             MainWindow.Player1Points.Content = p;
             MainWindow.Player2Points.Content = p;
         }    //  Установка очков в начале сета
-        public void PointsSet(string s, int p)
+        public void SetsClear()
         {
-            if (s == "1")
-                MainWindow.Player1Points.Content = p.ToString();
-            else
-                MainWindow.Player2Points.Content = p.ToString();
-        }  //  Установка текущих очков
-        public void SetIncrement(string s)
+            MainWindow.Player1SetsWon.Content = 0;
+            MainWindow.Player2SetsWon.Content = 0;
+        }
+        public void SetIncrement(Player p)
         {
-            if (s == "1")
-                MainWindow.Player1SetsWon.Content = (Int32.Parse((MainWindow.Player1SetsWon.Content).ToString()) + 1).ToString();
-            else
-                MainWindow.Player2SetsWon.Content = (Int32.Parse((MainWindow.Player2SetsWon.Content).ToString()) + 1).ToString();
+            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) + 1;
         }  //  +1 к сету
-        public void LegIncrement(string s)
+        public void LegIncrement(Player p)
         {
-            if (s == "1")
-                MainWindow.Player1LegsWon.Content = (Int32.Parse((MainWindow.Player1LegsWon.Content).ToString()) + 1).ToString();
-            else
-                MainWindow.Player2LegsWon.Content = (Int32.Parse((MainWindow.Player2LegsWon.Content).ToString()) + 1).ToString();
+            p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) + 1;
         }  //  +1 к легу
     }
 }

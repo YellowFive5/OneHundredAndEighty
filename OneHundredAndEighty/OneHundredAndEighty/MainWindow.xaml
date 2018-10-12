@@ -15,6 +15,7 @@
     <Window.Resources>
         <Style x:Key="CommonSegment">
             <EventSetter Event="Shape.MouseEnter" Handler="PointsShow"/>
+            <EventSetter Event="Shape.MouseLeftButtonDown" Handler="Throw"/>
 
             <Setter Property="Shape.Stroke" Value="Transparent"/>
             <Setter Property="Shape.StrokeThickness" Value="0"/>
@@ -736,7 +737,7 @@
                 </Path.RenderTransform>
             </Path>
             <Path x:Name="D19"
-            Tag="28"
+            Tag="38"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
             Height="21.58"
             RenderTransformOrigin="0.432,13.246"
@@ -1014,7 +1015,7 @@
                 </Path.RenderTransform>
             </Path>
             <Path x:Name="D14"
-            Tag="24"
+            Tag="28"
             Data="M23.651916,0 L24.578045,0.0086692096 27.146826,0.041174499 29.389315,0.10418882 30.44322,0.14423394 33.063183,0.26698174 C35.175419,0.38577987 37.277054,0.54363422 39.367351,0.73982524 L42.367203,1.0496583 42.672035,1.0845044 45.603504,1.4426911 C46.636951,1.5787616 47.667381,1.7242377 48.694702,1.8790281 L50.627922,2.1948721 50.364204,3.693355 C49.80302,6.8816995 49.194679,10.336953 48.535236,14.081327 L48.505375,14.250867 46.254021,13.877864 C38.706337,12.724597 30.975977,12.126475 23.105921,12.126475 16.547541,12.126475 10.086172,12.541838 3.7466851,13.347691 L1.7220274,13.631 0,1.713252 2.7999479,1.3214573 C5.5470542,0.9722542 8.3152884,0.69073658 11.102922,0.47863062 L15.138763,0.22287594 15.597766,0.20137665 19.16185,0.065952496 22.269096,0.017498171 z"
             Height="21.475"
             RenderTransformOrigin="0.55,7.243"
@@ -1246,7 +1247,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Width="79"
-            SelectedIndex="2"
+            SelectedIndex="0"
             FontFamily="Agency FB"
             FontWeight="Bold" Height="30" FontSize="19" Canvas.Left="50" Canvas.Top="108">
                 <ListBoxItem Content="101"/>
@@ -1413,7 +1414,7 @@
                 />
             </Canvas>
             <Canvas x:Name="WhoThrowSlider"
-                    x:FieldModifier="public"
+                Tag="Player1"
                 Height="32"
                 Width="25"
                 Canvas.Left="316"
@@ -1442,7 +1443,8 @@
             <Canvas x:Name="MainBox"
                     Height="112"
                     Width="242"
-                    Canvas.Left="76" Canvas.Top="-1"
+                    Canvas.Left="76"
+                    Canvas.Top="-1"
                     >
                 <Rectangle
                 Stroke="Black"
@@ -1520,7 +1522,7 @@
                 FontSize="13" Canvas.Left="149" FontWeight="Bold" Width="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 />
                 <Label x:Name="Player1Name"
-                Content="{Binding Text, ElementName=Player1NameBox}"
+                Content="Player1"
                 Background="Transparent"
                 FontFamily="Agency FB"
                 FontWeight="Bold"
@@ -1528,7 +1530,7 @@
                 Grid.RowSpan="2" Canvas.Left="7" Canvas.Top="23"
                 />
                 <Label x:Name="Player2Name"
-                Content="{Binding Text, ElementName=Player2NameBox}"
+                Content="Player2"
                 Background="Transparent"
                 FontFamily="Agency FB"
                 FontWeight="Bold"
@@ -1610,10 +1612,13 @@
                 HorizontalContentAlignment="Center" Width="58"
                 />
                 <Ellipse x:Name="Player1SetDot"
+                Tag="ON"
                 Height="8"
                 Stroke="Black"
                 Width="8"
-                Grid.Row="1" Canvas.Left="98" Canvas.Top="35" Opacity="0"
+                Grid.Row="1"
+                Canvas.Left="98"
+                Canvas.Top="35"
                 >
                     <Ellipse.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1623,9 +1628,14 @@
                     </Ellipse.Fill>
                 </Ellipse>
                 <Ellipse x:Name="Player2SetDot"
+                Tag="OFF"
                 Height="8"
                 Stroke="Black"
-                Width="8" Grid.RowSpan="2" Canvas.Left="98" Canvas.Top="65"
+                Width="8"
+                Grid.RowSpan="2"
+                Canvas.Left="98"
+                Canvas.Top="65"
+                Opacity="0"
                 >
                     <Ellipse.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

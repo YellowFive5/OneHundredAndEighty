@@ -22,8 +22,11 @@ namespace OneHundredAndEighty
     /// </summary>
     public partial class MainWindow : Window
     {
+        Game G = null;
+
         public MainWindow()
         {
+            G = new Game();
             InitializeComponent();
         }
 
@@ -35,7 +38,16 @@ namespace OneHundredAndEighty
 
         private void GameOn_Click(object sender, RoutedEventArgs e)
         {
-            Game G = new Game();
+            G.StartGame();
         }
+        private void Throw(object sender, RoutedEventArgs e)
+        {
+            G.BoardPanelLogic.PanelHide();
+            Shape O = sender as Shape;
+            int points = Int32.Parse(O.Tag.ToString());
+            G.AnotherThrow(points);
+            G.BoardPanelLogic.PanelShow();
+        }
+
     }
 }

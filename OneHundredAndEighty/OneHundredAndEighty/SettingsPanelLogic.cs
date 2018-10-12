@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OneHundredAndEighty
 {
-    class SettingsPanelLogic    //  Класс логики панели настроек
+    public class SettingsPanelLogic    //  Класс логики панели настроек
     {
         MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
         public void PanelShow()
@@ -17,13 +17,32 @@ namespace OneHundredAndEighty
         {
             MainWindow.SettingsPanel.Visibility = System.Windows.Visibility.Hidden;
         }   //  Спрятать панель настроек
-        public string WhoThrowFirst()
+        public Player WhoThrowFirst(Player p1,Player p2)
         {
             if (MainWindow.Player1Radiobutton.IsChecked == true)
-                return "1";
+                return p1;
             else
-                return "2";
+                return p2;
         }   //  Кто бросает первым
+        public int LegsToGo()
+        {
+            return Int32.Parse(MainWindow.LegBox.Text);
+        }
+        public int SetsToGo()
+        {
+            return Int32.Parse(MainWindow.SetBox.Text);
+        }
+        public int PointsToGo()
+        {
+            return Int32.Parse(MainWindow.PointsBox.Text);
+        }
+        public string PlayerName(string s)
+        {
+            if (s == "Player1")
+                return MainWindow.Player1NameBox.Text;
+            else
+                return MainWindow.Player2NameBox.Text;
+        }
 
     }
 }

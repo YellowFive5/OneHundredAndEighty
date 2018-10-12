@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OneHundredAndEighty
 {
-    class BoardPanelLogic    //  Класс логики панели секторов
+    public class BoardPanelLogic    //  Класс логики панели секторов
     {
         MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
         public void PanelShow()
