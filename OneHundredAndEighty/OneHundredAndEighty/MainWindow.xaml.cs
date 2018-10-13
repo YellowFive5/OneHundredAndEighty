@@ -29,24 +29,18 @@ namespace OneHundredAndEighty
             G = new Game();
             InitializeComponent();
         }
-
-        private void PointsShow(object sender, MouseEventArgs e)
+        private void PointsShow(object sender, MouseEventArgs e)    //  Показ очков сектора
         {
             Shape O = sender as Shape;
-            Points.Content = O.Tag.ToString();
+            HowManyPoints.Content = O.Tag.ToString();
         }
-
-        private void GameOn_Click(object sender, RoutedEventArgs e)
+        private void GameOn_Click(object sender, RoutedEventArgs e) //  Кнопка GAMEON
         {
             G.StartGame();
         }
-        private void Throw(object sender, RoutedEventArgs e)
+        private void Throw(object sender, RoutedEventArgs e)    //  Бросок
         {
-            G.BoardPanelLogic.PanelHide();
-            Shape O = sender as Shape;
-            int points = Int32.Parse(O.Tag.ToString());
-            G.AnotherThrow(points);
-            G.BoardPanelLogic.PanelShow();
+            G.NextThrow(new Throw(sender));
         }
 
     }

@@ -27,22 +27,22 @@ namespace OneHundredAndEighty
         public int LegsToGo()
         {
             return Int32.Parse(MainWindow.LegBox.Text);
-        }
+        }   //  Сколько играем легов
         public int SetsToGo()
         {
             return Int32.Parse(MainWindow.SetBox.Text);
-        }
+        }   //  Сколько сетов в леге
         public int PointsToGo()
         {
             return Int32.Parse(MainWindow.PointsBox.Text);
-        }
-        public string PlayerName(string s)
+        }   //  Сколько очков в сете
+        public string Player1Name()
         {
-            if (s == "Player1")
                 return MainWindow.Player1NameBox.Text;
-            else
+        }   //  Имя 1 игрока
+        public string Player2Name()
+        {
                 return MainWindow.Player2NameBox.Text;
-        }
-
+        }   //  Имя 2 игрока
     }
 }

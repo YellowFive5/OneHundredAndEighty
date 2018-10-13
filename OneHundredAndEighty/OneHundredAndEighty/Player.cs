@@ -8,29 +8,38 @@ using System.Windows.Shapes;
 
 namespace OneHundredAndEighty
 {
-    public class Player
+    public class Player //  Класс игрока
     {
-        public string Name { get; private set; }
-        public string Tag { get; private set; }
-        public bool OnThrow = false;
-        public bool Legstart = false;
-        public int LegsWon = 0;
-        public int SetsWon = 0;
-        public int PointsToOut = 0;
+        public string Name; //  Имя игрока
+        public string Tag;  //  Тэг
 
-        public int HandPoints = 0;
-        public int? FirstThrow = null;
-        public int? SecondThrow = null;
-        public int? ThirdThrow = null;
+        //Матч
+        public int LegsWon; //  Количество выигранных легов
+        public int SetsWon; //  Количество выигранных сетов
+        public int PointsToOut; //  Количество очков на завершение сета
 
-        public Canvas HelpPanel { get; private set; }
-        public Label HelpLabel { get; set; }
-        public Label SetsWonLabel { get; private set; }
-        public Label LegsWonLabel { get; private set; }
-        public Label PointsLabel { get; private set; }
-        public Ellipse DotPoint { get; private set; }
+        //Очередной подход
+        public int HandPoints;  //  Набранное количестов очков
+        public Throw Throw1 = new Throw();  //  Первый бросок
+        public Throw Throw2 = new Throw();  //  Второй бросок
+        public Throw Throw3 = new Throw();  //  Третий бросок
+        public void ClearHand() //  Обнуление очередного подхода
+        {
+            this.HandPoints = 0;
+            this.Throw1.ClearThrow();
+            this.Throw2.ClearThrow();
+            this.Throw3.ClearThrow();
+        }
 
-        public Player(string Tag, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, Ellipse DotPoint, int PointsToOut)
+        //  Инфо-панель
+        public Canvas HelpPanel;    //  Панель помощи
+        public Label HelpLabel; //  Лейбл помощи
+        public Label SetsWonLabel;  //  Лейбл выиграных сетов
+        public Label LegsWonLabel;  //  Лейбл выиграных легов
+        public Label PointsLabel;   //  Лейбл набраных очнов
+        public Ellipse DotPoint;    //  Точка начала сета
+
+        public Player(string Tag, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, Ellipse DotPoint, int PointsToOut) //  Конструктор нового игрока
         {
             this.Tag = Tag;
             this.Name = Name;
