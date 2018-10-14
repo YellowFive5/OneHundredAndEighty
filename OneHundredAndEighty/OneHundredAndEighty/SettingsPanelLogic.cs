@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace OneHundredAndEighty
 {
     public class SettingsPanelLogic    //  Класс логики панели настроек
     {
         MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
+        TimeSpan PanelFadeTime = TimeSpan.FromSeconds(0.5); //  Время анимации фейда панели
+
         public void PanelShow()
         {
             MainWindow.SettingsPanel.Visibility = System.Windows.Visibility.Visible;
+            DoubleAnimation animation = new DoubleAnimation(0, 1, PanelFadeTime);
+            MainWindow.SettingsPanel.BeginAnimation(UIElement.OpacityProperty, animation);
         }   //  Показать панель настроек
         public void PanelHide()
         {
+            DoubleAnimation animation = new DoubleAnimation(1, 0, PanelFadeTime);
+            MainWindow.InfoPanel.BeginAnimation(UIElement.OpacityProperty, animation);
             MainWindow.SettingsPanel.Visibility = System.Windows.Visibility.Hidden;
         }   //  Спрятать панель настроек
         public Player WhoThrowFirst(Player p1,Player p2)

@@ -302,19 +302,26 @@ namespace OneHundredAndEighty
             [36] = "D18",
             [38] = "D19",
             [40] = "D20",
+            [50] = "Bull"
         };  //  Коллекция закрытия сета на три броска
 
-        TimeSpan ThrowSlideTime = TimeSpan.FromSeconds(0.23);  //  Время анимации слайдера броска
-        TimeSpan HelpSlideTime = TimeSpan.FromSeconds(0.5);  //  Время анимации слайда помощи
-        TimeSpan FadeTime = TimeSpan.FromSeconds(0.5);  //  Время анимации фейда помощи
+        TimeSpan ThrowSlideTime = TimeSpan.FromSeconds(0.15);  //  Время анимации слайдера броска
+        TimeSpan HelpSlideTime = TimeSpan.FromSeconds(0.23);  //  Время анимации слайда помощи
+        TimeSpan HelpFadeTime = TimeSpan.FromSeconds(0.23);  //  Время анимации фейда помощи
+        TimeSpan DotFadeTime = TimeSpan.FromSeconds(0.23);  //  Время анимации фейда помощи
+        TimeSpan PanelFadeTime = TimeSpan.FromSeconds(0.5);  //  Время анимации фейда панели
 
         public void PanelShow()
         {
-            MainWindow.InfoPanel.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.InfoPanel.Visibility = Visibility.Visible;
+            DoubleAnimation animation = new DoubleAnimation(0, 1, PanelFadeTime);
+            MainWindow.InfoPanel.BeginAnimation(UIElement.OpacityProperty, animation);
         }   //  Спрятать инфо-панель
         public void PanelHide()
         {
-            MainWindow.InfoPanel.Visibility = System.Windows.Visibility.Hidden;
+            DoubleAnimation animation = new DoubleAnimation(1, 0, PanelFadeTime);
+            MainWindow.InfoPanel.BeginAnimation(UIElement.OpacityProperty, animation);
+            MainWindow.InfoPanel.Visibility = Visibility.Hidden;
         }   //  Показать инфо-панель
         public void PanelNewGame(int points, string legs, string sets, Player p1, Player p2, Player first)
         {
@@ -331,32 +338,29 @@ namespace OneHundredAndEighty
         }   //  Установка в 0 в начале игры
         public void DotSet(Player p)
         {
-            MainWindow.Player2SetDot.Opacity = 0;
-            MainWindow.Player1SetDot.Opacity = 0;
-            p.DotPoint.Opacity = 1;
-
-        }   //  Установка точки начала сета
-        public void DotToggle()
-        {
             Storyboard SB = new Storyboard();
-            DoubleAnimation fadein = new DoubleAnimation(0, 1, FadeTime);
-            DoubleAnimation fadeout = new DoubleAnimation(1, 0, FadeTime);
+            DoubleAnimation fadein = new DoubleAnimation(0, 1, DotFadeTime);
+            DoubleAnimation fadeout = new DoubleAnimation(1, 0, DotFadeTime);
             Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
             Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-            if (MainWindow.Player1SetDot.Opacity == 1)
-            {
-                Storyboard.SetTarget(fadeout, MainWindow.Player1SetDot);
-                Storyboard.SetTarget(fadein, MainWindow.Player2SetDot);
-            }
-            else
+            if (p.Tag == "Player1")
             {
                 Storyboard.SetTarget(fadeout, MainWindow.Player2SetDot);
                 Storyboard.SetTarget(fadein, MainWindow.Player1SetDot);
+                MainWindow.Player1SetDot.Tag = "ON";
+                MainWindow.Player2SetDot.Tag = "OFF";
+            }
+            if (p.Tag == "Player2")
+            {
+                Storyboard.SetTarget(fadeout, MainWindow.Player1SetDot);
+                Storyboard.SetTarget(fadein, MainWindow.Player2SetDot);
+                MainWindow.Player2SetDot.Tag = "ON";
+                MainWindow.Player1SetDot.Tag = "OFF";
             }
             SB.Children.Add(fadein);
             SB.Children.Add(fadeout);
             SB.Begin();
-        }  //  Переключатель точки начала сета
+        }   //  Установка точки начала сета
         public void WhoThrowSliderSet(Player p)
         {
             Storyboard Slider = new Storyboard();
@@ -369,10 +373,10 @@ namespace OneHundredAndEighty
             Storyboard.SetTarget(show, MainWindow.WhoThrowSlider);
             Storyboard.SetTargetProperty(show, new System.Windows.PropertyPath(Canvas.LeftProperty));
 
-            DoubleAnimation fadeout = new DoubleAnimation(1, 0, FadeTime);
+            DoubleAnimation fadeout = new DoubleAnimation(1, 0, HelpFadeTime);
             Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
 
-            DoubleAnimation fadein = new DoubleAnimation(0, 1, FadeTime);
+            DoubleAnimation fadein = new DoubleAnimation(0, 1, HelpFadeTime);
             Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
 
             DoubleAnimation toggle = null;
@@ -427,8 +431,8 @@ namespace OneHundredAndEighty
         {
             if (p.HelpPanel.Tag.ToString() == "OFF")
             {
-                DoubleAnimation animation = new DoubleAnimation(77, -1, HelpSlideTime);
-                p.HelpPanel.BeginAnimation(Canvas.LeftProperty, animation);
+                DoubleAnimation show = new DoubleAnimation(77, -1, HelpSlideTime);
+                p.HelpPanel.BeginAnimation(Canvas.LeftProperty, show);
                 p.HelpPanel.Tag = "ON";
             }
 
@@ -437,8 +441,8 @@ namespace OneHundredAndEighty
         {
             if (p.HelpPanel.Tag.ToString() == "ON")
             {
-                DoubleAnimation animation = new DoubleAnimation(-1, 77, HelpSlideTime);
-                p.HelpPanel.BeginAnimation(Canvas.LeftProperty, animation);
+                DoubleAnimation hide = new DoubleAnimation(-1, 77, HelpSlideTime);
+                p.HelpPanel.BeginAnimation(Canvas.LeftProperty, hide);
                 p.HelpPanel.Tag = "OFF";
             }
         }  //  Скрытие бокса помощи

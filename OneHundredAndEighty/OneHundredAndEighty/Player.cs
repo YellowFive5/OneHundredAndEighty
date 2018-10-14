@@ -10,14 +10,12 @@ namespace OneHundredAndEighty
 {
     public class Player //  Класс игрока
     {
-        public string Name; //  Имя игрока
-        public string Tag;  //  Тэг
-
+        public string Name { get; private set; }    //  Имя игрока
+        public string Tag { get; private set; } //  Тэг
         //Матч
         public int LegsWon; //  Количество выигранных легов
         public int SetsWon; //  Количество выигранных сетов
         public int PointsToOut; //  Количество очков на завершение сета
-
         //Очередной подход
         public int HandPoints;  //  Набранное количестов очков
         public Throw Throw1 = new Throw();  //  Первый бросок
@@ -30,16 +28,14 @@ namespace OneHundredAndEighty
             this.Throw2.ClearThrow();
             this.Throw3.ClearThrow();
         }
-
         //  Инфо-панель
         public Canvas HelpPanel;    //  Панель помощи
         public Label HelpLabel; //  Лейбл помощи
         public Label SetsWonLabel;  //  Лейбл выиграных сетов
         public Label LegsWonLabel;  //  Лейбл выиграных легов
         public Label PointsLabel;   //  Лейбл набраных очнов
-        public Ellipse DotPoint;    //  Точка начала сета
 
-        public Player(string Tag, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, Ellipse DotPoint, int PointsToOut) //  Конструктор нового игрока
+        public Player(string Tag, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, int PointsToOut) //  Конструктор нового игрока
         {
             this.Tag = Tag;
             this.Name = Name;
@@ -48,7 +44,6 @@ namespace OneHundredAndEighty
             this.SetsWonLabel = SetsWonLabel;
             this.LegsWonLabel = LegsWonLabel;
             this.PointsLabel = PointsLabel;
-            this.DotPoint = DotPoint;
             this.PointsToOut = PointsToOut;
         }
     }

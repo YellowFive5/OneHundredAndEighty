@@ -40,7 +40,10 @@ namespace OneHundredAndEighty
         }
         private void Throw(object sender, RoutedEventArgs e)    //  Бросок
         {
+            G.BoardPanelLogic.PanelHide();    //  Скрываем панель секторов
             G.NextThrow(new Throw(sender));
+            if (G.IsOn)   //  Если игра продолжается
+                G.BoardPanelLogic.PanelShow();    //  Показываем панель секторов и бросаем дальше
         }
 
     }
