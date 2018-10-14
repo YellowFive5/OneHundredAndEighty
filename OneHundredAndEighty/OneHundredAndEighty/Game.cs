@@ -43,6 +43,17 @@ namespace OneHundredAndEighty
             InfoPanelLogic.PanelNewGame(PointsToGo, LegsToGo.ToString(), SetsToGo.ToString(), Player1, Player2, PlayerOnThrow); //  Новая инфопанель
             InfoPanelLogic.HelpCheck(Player1);  //  Проверка помощи
             InfoPanelLogic.HelpCheck(Player2);  //  Проверка помощи
+            //  Текстовая панель
+            InfoPanelLogic.TextLogAdd(new StringBuilder()
+                .Append("First to ")
+                .Append(LegsToGo)
+                .Append(" legs in ")
+                .Append(SetsToGo)
+                .Append(" sets in ")
+                .Append(PointsToGo)
+                .Append(" points").ToString());
+            InfoPanelLogic.TextLogAdd("Game on");
+            InfoPanelLogic.TextLogAdd(new StringBuilder().Append(PlayerOnThrow.Name).Append(" on throw:").ToString());
         }
         void EndGame()   //  Конец матча
         {
@@ -51,6 +62,7 @@ namespace OneHundredAndEighty
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
+            InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
             //  Сообщение
             MessageBox.Show("Победитель матча: " + PlayerOnThrow.Name);
         }
@@ -61,17 +73,14 @@ namespace OneHundredAndEighty
             PlayerOnThrow = p;
             InfoPanelLogic.WhoThrowSliderSet(PlayerOnThrow);
             InfoPanelLogic.HelpCheck(PlayerOnThrow);  //  Проверка помощи
+            InfoPanelLogic.TextLogAdd(new StringBuilder().Append(PlayerOnThrow.Name).Append(" on throw:").ToString());  //  Пишем в текстовую панель
         }
         void TogglePlayerOnThrow()   //  Смена игрока на подходе
         {
-            InfoPanelLogic.HelpCheck(PlayerOnThrow);  //  Проверка помощи
             if (PlayerOnThrow.Tag == "Player1") //  Меняем игрока
-                PlayerOnThrow = Player2;
+                SetPlayerOnThrow(Player2);
             else if (PlayerOnThrow.Tag == "Player2")
-                PlayerOnThrow = Player1;
-            InfoPanelLogic.WhoThrowSliderSet(PlayerOnThrow);    //  Меняем слайдер инфо-панели
-            InfoPanelLogic.HelpCheck(PlayerOnThrow);  //  Проверка помощи
-
+                SetPlayerOnThrow(Player1);
         }
         void TogglePlayerOnSet() //  Смена игрока на начало сета
         {
@@ -91,6 +100,8 @@ namespace OneHundredAndEighty
 
         public void NextThrow(Throw T)  //  Очередной бросок
         {
+            InfoPanelLogic.TextLogAdd(new StringBuilder().Append("    > ").Append(PlayerOnThrow.Name).Append(" throws ").Append(T.Points).ToString());
+
             if (!PlayerOnThrow.Throw1.IsThrown) //  Первый бросок
                 PlayerOnThrow.Throw1 = T;   //  Записываем первый бросок игрока на подходе
             else if (!PlayerOnThrow.Throw2.IsThrown)    //  Второй бросок
@@ -111,6 +122,7 @@ namespace OneHundredAndEighty
             //  НЕПРАВИЛЬНОЕ окончание сета
             if (PlayerOnThrow.PointsToOut < 0 || PlayerOnThrow.PointsToOut == 1 || (PlayerOnThrow.PointsToOut == 0 && (T.Multiplier != "Double" && T.Multiplier != "Bull_Eye")))    //  Если игрок ушел в минус или оставил единицу, или закрыл сет не корректно (не через удвоение или Bulleye)
             {
+                InfoPanelLogic.TextLogAdd(new StringBuilder().Append("    > ").Append(PlayerOnThrow.Name).Append(" FAULT").ToString());  //  Пишем в текстовую панель
                 PlayerOnThrow.PointsToOut += PlayerOnThrow.HandPoints;  //  Отменяем подход игрока
                 InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
                 ClearHands();   //  Очищаем броски
@@ -120,6 +132,7 @@ namespace OneHundredAndEighty
             //  ПРАВИЛЬНОЕ окончание сета
             else if (PlayerOnThrow.PointsToOut == 0)    //  Игрок правильно закрылся
             {
+                InfoPanelLogic.TextLogAdd(new StringBuilder().Append("Set goes to ").Append(PlayerOnThrow.Name).ToString());  //  Пишем в текстовую панель
                 PlayerOnThrow.SetsWon += 1; //  Плюсуем выиграный сет
                 InfoPanelLogic.SetIncrement(PlayerOnThrow); //  Обновляем инфопанель
                 ClearHands();   //  Очищаем броски
@@ -146,6 +159,7 @@ namespace OneHundredAndEighty
         {
             if (PlayerOnThrow.SetsWon == SetsToGo)  //  Если игрок выиграл требуемое количество сетов
             {
+                InfoPanelLogic.TextLogAdd(new StringBuilder().Append("Leg goes to ").Append(PlayerOnThrow.Name).ToString());  //  Пишем в текстовую панель
                 PlayerOnThrow.LegsWon += 1; //  Добавляем игроку выигранный лег
                 Player1.SetsWon = 0;    //  Обнуляем сеты игроков
                 Player2.SetsWon = 0;    //  Обнуляем сеты игроков

@@ -9,13 +9,9 @@ namespace OneHundredAndEighty
 {
     public class Throw  // Бросок
     {
-        //public bool IsThrown;   //  Совершен ли данный бросок
         public bool IsThrown { get; private set; }  //  Совершен ли данный бросок
-        //public string Sector;   //  Сектор попадания
         public string Sector { get; private set; }  //  Сектор попадания
-        //public string Multiplier;    //  Мультипликатор
         public string Multiplier { get; private set; }  //  Мультипликатор
-        //public int? Points = null;  //  Очки
         public int? Points { get; private set; } = null;    //  Очки
 
         public Throw()  //  Пустой бросок
@@ -51,8 +47,8 @@ namespace OneHundredAndEighty
                     this.Multiplier = "Bull_Eye";
                     break;
             }
-
             this.Sector = S.Name;   //  Сохранияем имя сектора
+
         }
         public void ClearThrow()    //  Очищаем бросок
         {
