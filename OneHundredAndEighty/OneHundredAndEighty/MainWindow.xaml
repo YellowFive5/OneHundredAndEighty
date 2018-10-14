@@ -33,7 +33,7 @@
                                 </ColorAnimation>
                                 <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                                  From="0"
-                                                 To="0.45"
+                                                 To="0.5"
                                                  Duration="0:0:0.25"
                                                  AutoReverse="True"
                                                  RepeatBehavior="Forever"
@@ -54,6 +54,23 @@
                         </BeginStoryboard>
                     </Trigger.ExitActions>
                 </Trigger>
+                <!--<EventTrigger RoutedEvent="Shape.MouseLeftButtonDown">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Red"
+                                                Duration="0:0:0.15"
+                                                AutoReverse="True">
+                                </ColorAnimation>
+                                <ColorAnimation Storyboard.TargetProperty="Fill.Color"
+                                                To="Transparent"
+                                                Duration="0:0:0.15">
+                                </ColorAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>-->
             </Style.Triggers>
         </Style>
         <!--<Style x:Key="DarkSegment"
@@ -1247,10 +1264,12 @@
             </Path>
         </Canvas>
         <Canvas x:Name="SettingsPanel"
-            Height="259"
-            Canvas.Left="98"
-            Canvas.Top="219"
-            Width="224">
+            Height="258"
+            Canvas.Left="72"
+            Canvas.Top="239"
+            Width="224"
+            Visibility="Visible"
+            >
             <TextBox x:Name="Player1NameBox"
             HorizontalAlignment="Left"
             Height="28"
@@ -1430,16 +1449,47 @@
                 />
         </Canvas>
         <Canvas x:Name="InfoPanel"
-                Height="115"
-                Canvas.Left="135"
-                Canvas.Top="653"
-                Width="344"
+                Height="753"
+                Canvas.Left="72"
+                Canvas.Top="15"
+                Width="312"
                 Visibility="Hidden">
+            <TextBox x:Name="TextLog"
+                Height="562"
+                Canvas.Left="30"
+                TextWrapping="Wrap"
+                Canvas.Top="27"
+                Width="241"
+                BorderBrush="Black"
+                FontFamily="Agency FB"
+                FontSize="20"
+                AcceptsReturn="True"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                IsTabStop="False"
+                IsUndoEnabled="False"
+                AllowDrop="False"
+                IsHitTestVisible="True" SelectionBrush="#FF51FF00"
+                >
+                <TextBox.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF272727" Offset="1"/>
+                        <GradientStop Color="#FF616161"/>
+                    </LinearGradientBrush>
+                </TextBox.Background>
+                <TextBox.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF17CB3F" Offset="0"/>
+                        <GradientStop Color="#FF17FF00" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBox.Foreground>
+            </TextBox>
             <Canvas x:Name="Player1Help"
                 Tag="OFF"
                 Height="32"
                 Width="80"
-                Canvas.Top="21" Canvas.Left="77">
+                Canvas.Top="652" Canvas.Left="30">
                 <Rectangle x:Name="Player1HelpStroke"
                 Height="32"
                 Stroke="Black"
@@ -1480,8 +1530,8 @@
                 Tag="OFF"
                 Height="32"
                 Width="80"
-                Canvas.Left="77"
-                Canvas.Top="52">
+                Canvas.Left="30"
+                Canvas.Top="683">
                 <Rectangle x:Name="Player2HelpStroke"
                 Height="32"
                 Stroke="Black"
@@ -1521,13 +1571,12 @@
                 Tag="Player1"
                 Height="32"
                 Width="25"
-                Canvas.Left="316"
-                Canvas.Top="21">
+                Canvas.Left="245"
+                Canvas.Top="652">
                 <Rectangle
                 Height="32"
                 Stroke="Black"
                 Width="25"
-                Grid.Row="1"
                 >
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1551,8 +1600,8 @@
             <Canvas x:Name="MainBox"
                     Height="112"
                     Width="242"
-                    Canvas.Left="76"
-                    Canvas.Top="-1"
+                    Canvas.Left="29"
+                    Canvas.Top="630"
                     >
                 <Rectangle
                 Stroke="Black"

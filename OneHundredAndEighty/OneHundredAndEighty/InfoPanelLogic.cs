@@ -365,11 +365,11 @@ namespace OneHundredAndEighty
         {
             Storyboard Slider = new Storyboard();
 
-            DoubleAnimation hide = new DoubleAnimation() { From = 316, To = 292, Duration = ThrowSlideTime };
+            DoubleAnimation hide = new DoubleAnimation() { From = 269, To = 245, Duration = ThrowSlideTime };
             Storyboard.SetTarget(hide, MainWindow.WhoThrowSlider);
             Storyboard.SetTargetProperty(hide, new System.Windows.PropertyPath(Canvas.LeftProperty));
 
-            DoubleAnimation show = new DoubleAnimation() { From = 292, To = 316, Duration = ThrowSlideTime, BeginTime = ThrowSlideTime };
+            DoubleAnimation show = new DoubleAnimation() { From = 245, To = 269, Duration = ThrowSlideTime, BeginTime = ThrowSlideTime };
             Storyboard.SetTarget(show, MainWindow.WhoThrowSlider);
             Storyboard.SetTargetProperty(show, new System.Windows.PropertyPath(Canvas.LeftProperty));
 
@@ -385,7 +385,7 @@ namespace OneHundredAndEighty
                 Storyboard.SetTarget(fadeout, MainWindow.Player1HelpBackground);
                 Storyboard.SetTarget(fadein, MainWindow.Player2HelpBackground);
 
-                toggle = new DoubleAnimation() { From = 21, To = 52, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
+                toggle = new DoubleAnimation() { From =652 , To = 683, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
                 MainWindow.WhoThrowSlider.Tag = "Player1";
             }
             else
@@ -393,7 +393,7 @@ namespace OneHundredAndEighty
                 Storyboard.SetTarget(fadein, MainWindow.Player1HelpBackground);
                 Storyboard.SetTarget(fadeout, MainWindow.Player2HelpBackground);
 
-                toggle = new DoubleAnimation() { From = 52, To = 21, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
+                toggle = new DoubleAnimation() { From = 683, To = 652, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
                 MainWindow.WhoThrowSlider.Tag = "Player2";
             }
             Storyboard.SetTarget(toggle, MainWindow.WhoThrowSlider);
@@ -431,7 +431,7 @@ namespace OneHundredAndEighty
         {
             if (p.HelpPanel.Tag.ToString() == "OFF")
             {
-                DoubleAnimation show = new DoubleAnimation(77, -1, HelpSlideTime);
+                DoubleAnimation show = new DoubleAnimation(77, -48, HelpSlideTime);
                 p.HelpPanel.BeginAnimation(Canvas.LeftProperty, show);
                 p.HelpPanel.Tag = "ON";
             }
@@ -441,7 +441,7 @@ namespace OneHundredAndEighty
         {
             if (p.HelpPanel.Tag.ToString() == "ON")
             {
-                DoubleAnimation hide = new DoubleAnimation(-1, 77, HelpSlideTime);
+                DoubleAnimation hide = new DoubleAnimation(-48, 77, HelpSlideTime);
                 p.HelpPanel.BeginAnimation(Canvas.LeftProperty, hide);
                 p.HelpPanel.Tag = "OFF";
             }
@@ -468,5 +468,14 @@ namespace OneHundredAndEighty
         {
             p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) + 1;
         }  //  +1 к легу
+        public void TextLogAdd(string s)    //  Новая строка в текстовую панель
+        {
+            MainWindow.TextLog.Text += new StringBuilder().Append(s).Append("\n").ToString();
+            MainWindow.TextLog.ScrollToEnd();   //  Прокручиваем вниз
+        }
+        public void TextLogClear()    //  Очищаем текстовую панель текстовую панель
+        {
+            MainWindow.TextLog.Clear();
+        }
     }
 }
