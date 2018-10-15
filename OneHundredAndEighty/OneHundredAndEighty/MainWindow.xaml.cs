@@ -46,5 +46,9 @@ namespace OneHundredAndEighty
                 G.BoardPanelLogic.PanelShow();    //  Показываем панель секторов и бросаем дальше
         }
 
+        private void EndMatchButton_Click(object sender, RoutedEventArgs e)
+        {
+            G.AbortGame();
+        }
     }
 }
