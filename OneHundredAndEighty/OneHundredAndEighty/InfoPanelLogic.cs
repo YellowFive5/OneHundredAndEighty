@@ -464,5 +464,10 @@ namespace OneHundredAndEighty
         {
             p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) + 1;
         }  //  +1 к легу
+        public void SetIncrement(Player p)
+        {
+            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) + 1;
+        }  //  +1 к сету
+
     }
 }
