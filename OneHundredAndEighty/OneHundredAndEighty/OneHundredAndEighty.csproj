@@ -57,9 +57,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BoardPanelLogic.cs" />
-    <Compile Include="SettingsPanelLogic.cs" />
-    <Compile Include="Throw.cs" />
+    <Compile Include="Classes\BoardPanelLogic.cs" />
+    <Compile Include="Classes\SettingsPanelLogic.cs" />
+    <Compile Include="Classes\Throw.cs" />
+    <Compile Include="Classes\WinnerWindowLogic.cs" />
+    <Compile Include="Windows\WinnerWindow.xaml.cs">
+      <DependentUpon>WinnerWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,15 +72,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Game.cs" />
-    <Compile Include="InfoPanelLogic.cs" />
+    <Compile Include="Classes\Game.cs" />
+    <Compile Include="Classes\InfoPanelLogic.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\WinnerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player.cs" />
+    <Compile Include="Classes\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -111,5 +119,6 @@
   <ItemGroup>
     <Resource Include="Images\Dartboard.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
