@@ -79,8 +79,10 @@ namespace OneHundredAndEighty
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
             InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
-            //  Сообщение
-            MessageBox.Show("Матч отменен");
+            //  Окно
+            Windows.AbortWindow window = new Windows.AbortWindow();
+            window.Owner = MainWindow;
+            window.ShowDialog();
         }
 
         void SetPlayerOnThrow(Player p)  //  Установка игрока на подходе
