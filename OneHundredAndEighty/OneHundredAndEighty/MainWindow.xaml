@@ -11,6 +11,7 @@
         Width="1200"
         Background="#FF595959"
         Title="OneHundredAndEighty"
+        Closing="MainWindow_Closing"
         >
     <Window.Resources>
         <Style x:Key="CommonSegment">
