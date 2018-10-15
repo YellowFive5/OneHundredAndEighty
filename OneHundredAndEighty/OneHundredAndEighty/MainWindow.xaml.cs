@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -46,9 +47,32 @@ namespace OneHundredAndEighty
                 G.BoardPanelLogic.PanelShow();    //  Показываем панель секторов и бросаем дальше
         }
 
-        private void EndMatchButton_Click(object sender, RoutedEventArgs e)
+        private void EndMatchButton_Click(object sender, RoutedEventArgs e) //  Кнопка отмены матча
         {
+            this.FadeIn();
             G.AbortGame();
+            this.FadeOut();
         }
+
+        private void MainWindow_Closing(object sender, CancelEventArgs e)   //  Выход из приложения
+        {
+            this.FadeIn();
+            Windows.ExitWindow window = new Windows.ExitWindow();
+            window.Owner = this;
+            window.ShowDialog();
+            if (window.result)
+                e.Cancel = true;
+            this.FadeOut();
+
+        }
+        public void FadeIn()
+        {
+            this.Opacity = 0.4;
+        }
+        public void FadeOut()
+        {
+            this.Opacity = 1;
+        }
+
     }
 }

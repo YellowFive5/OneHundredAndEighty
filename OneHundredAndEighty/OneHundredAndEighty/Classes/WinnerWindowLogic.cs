@@ -19,11 +19,13 @@ namespace OneHundredAndEighty
         public void ShowWinner(Player p)
         {
             MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Обновляем ссылку на главное окно
+            MainWindow.FadeIn();
             Windows.WinnerWindow WinnerWindow = new Windows.WinnerWindow(); //  Обновляем ссылку на окно победителя
             WinnerWindow.Owner = MainWindow;    //  Прописываем владельца
 
             WinnerWindow.WinnerName.Content = new StringBuilder().Append("[ ").Append(p.Name).Append(" ]").ToString() ;
             WinnerWindow.ShowDialog();  //  Показываем диалоговое окно
+            MainWindow.FadeOut();
         }
     }
 }

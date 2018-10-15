@@ -64,6 +64,9 @@
     <Compile Include="Windows\AbortWindow.xaml.cs">
       <DependentUpon>AbortWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ExitWindow.xaml.cs">
+      <DependentUpon>ExitWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WinnerWindow.xaml.cs">
       <DependentUpon>WinnerWindow.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\AbortWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ExitWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
