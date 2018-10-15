@@ -66,6 +66,17 @@ namespace OneHundredAndEighty
             //  Сообщение
             MessageBox.Show("Победитель матча: " + PlayerOnThrow.Name);
         }
+        public void AbortGame()
+        {
+            IsOn = false;
+            //  Панели
+            InfoPanelLogic.PanelHide(); //  Прячем инфопанель
+            BoardPanelLogic.PanelHide();    //  Прячем панель секторов
+            SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
+            InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
+            //  Сообщение
+            MessageBox.Show("Матч отменен");
+        }
 
         void SetPlayerOnThrow(Player p)  //  Установка игрока на подходе
         {
