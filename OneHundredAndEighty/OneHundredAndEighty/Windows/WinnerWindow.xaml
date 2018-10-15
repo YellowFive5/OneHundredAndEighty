@@ -5,23 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OneHundredAndEighty.Windows"
         mc:Ignorable="d"
-        Title="Congrats!"
+        Title="OneHundredAndEighty"
         Height="393.635"
         Width="578.051"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         >
 
-    <Canvas
+    <Canvas x:Name="WinnerCanvas"
             Height="365"
             VerticalAlignment="Top"
             Width="568" Margin="0,0,0,-2"
             >
         <Canvas.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF191919" Offset="1"/>
-                <GradientStop Color="#FF0FA000"/>
+                <GradientStop Color="#FF303030" Offset="1"/>
+                <GradientStop Color="#FF13CD00"/>
             </LinearGradientBrush>
         </Canvas.Background>
+        <Label Content="And the winner is:"
+               Canvas.Left="27"
+               Canvas.Top="77"
+               FontWeight="Bold"
+               FontFamily="Agency FB"
+               FontSize="48"
+               RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-8.94"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="WinnerName"
+                Content="Player"
+                Canvas.Left="250"
+                Canvas.Top="178"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="72" RenderTransformOrigin="0.5,0.5" Background="{x:Null}"
+               >
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="5.383"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
     </Canvas>
 </Window>
