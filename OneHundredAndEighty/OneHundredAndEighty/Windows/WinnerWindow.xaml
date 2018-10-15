@@ -1,0 +1,27 @@
+﻿<Window x:Class="OneHundredAndEighty.Windows.WinnerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OneHundredAndEighty.Windows"
+        mc:Ignorable="d"
+        Title="Congrats!"
+        Height="393.635"
+        Width="578.051"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        >
+
+    <Canvas
+            Height="365"
+            VerticalAlignment="Top"
+            Width="568" Margin="0,0,0,-2"
+            >
+        <Canvas.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF191919" Offset="1"/>
+                <GradientStop Color="#FF0FA000"/>
+            </LinearGradientBrush>
+        </Canvas.Background>
+    </Canvas>
+</Window>

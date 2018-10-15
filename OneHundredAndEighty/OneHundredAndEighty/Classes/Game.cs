@@ -14,6 +14,7 @@ namespace OneHundredAndEighty
         public InfoPanelLogic InfoPanelLogic = new InfoPanelLogic();    //  Инфо-панель
         public SettingsPanelLogic SettingsPanelLogic = new SettingsPanelLogic();    //  Панель настроек матча
         public BoardPanelLogic BoardPanelLogic = new BoardPanelLogic(); //  Панель секторов
+        public WinnerWindowLogic WinnerWindowLogic = new WinnerWindowLogic();
         public bool IsOn { get; private set; }  //  Флаг работы матча
         Player Player1 = null;  //  Игрок 1
         Player Player2 = null;  //  Игрок 2
@@ -64,7 +65,11 @@ namespace OneHundredAndEighty
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
             InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
             //  Сообщение
-            MessageBox.Show("Победитель матча: " + PlayerOnThrow.Name);
+            //MessageBox.Show("Победитель матча: " + PlayerOnThrow.Name);
+            //Windows.WinnerWindow WW = new Windows.WinnerWindow();
+            //WW.Owner = MainWindow;
+            //WW.ShowDialog();
+            WinnerWindowLogic.ShowWinner(PlayerOnThrow);
         }
         public void AbortGame()
         {
