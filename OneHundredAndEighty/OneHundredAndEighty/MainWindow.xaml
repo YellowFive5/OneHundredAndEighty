@@ -1352,7 +1352,7 @@
             Height="29"
             FontSize="19"
             Canvas.Left="50"
-            Canvas.Top="143"
+            Canvas.Top="182"
             >
                 <ListBoxItem Content="1" IsHitTestVisible="False"/>
                 <ListBoxItem Content="3" IsHitTestVisible="False"/>
@@ -1369,7 +1369,7 @@
             Width="40"
             FontSize="19"
             Canvas.Left="134"
-            Canvas.Top="143"/>
+            Canvas.Top="182"/>
             <ComboBox x:Name="LegBox"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -1380,7 +1380,7 @@
             Height="30"
             FontSize="19"
             Canvas.Left="50"
-            Canvas.Top="177"
+            Canvas.Top="145"
             >
                 <ListBoxItem Content="1" IsHitTestVisible="False"/>
                 <ListBoxItem Content="3" IsHitTestVisible="False"/>
@@ -1397,7 +1397,7 @@
             Width="41"
             FontSize="19"
             Canvas.Left="134"
-            Canvas.Top="175"
+            Canvas.Top="143"
             />
             <Button x:Name="GameOn"
             Content="Game ON !"
@@ -1412,7 +1412,7 @@
             FontSize="22"
             Click="GameOn_Click"
             Canvas.Left="50"
-            Canvas.Top="215"
+            Canvas.Top="217"
             >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
