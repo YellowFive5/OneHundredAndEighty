@@ -325,7 +325,7 @@ namespace OneHundredAndEighty
         }   //  Показать инфо-панель
         public void PanelNewGame(int points, string legs, string sets, Player p1, Player p2, Player first)
         {
-            MainWindow.MainBoxSummary.Content = new StringBuilder().Append("First to ").Append(legs).Append(" legs in ").Append(sets).Append(" sets").ToString();
+            MainWindow.MainBoxSummary.Content = new StringBuilder().Append("First to ").Append(sets).Append(" sets in ").Append(legs).Append(" legs").ToString();
             MainWindow.Player1Name.Content = p1.Name;
             MainWindow.Player2Name.Content = p2.Name;
             p1.SetsWonLabel.Content = 0;
@@ -455,19 +455,19 @@ namespace OneHundredAndEighty
             MainWindow.Player1Points.Content = p;
             MainWindow.Player2Points.Content = p;
         }    //  Установка очков в начале сета
-        public void SetsClear()
+        public void LegsClear()
         {
-            MainWindow.Player1SetsWon.Content = 0;
-            MainWindow.Player2SetsWon.Content = 0;
-        }   //  Очистить сеты
-        public void SetIncrement(Player p)
-        {
-            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) + 1;
-        }  //  +1 к сету
+            MainWindow.Player1LegsWon.Content = 0;
+            MainWindow.Player2LegsWon.Content = 0;
+        }   //  Очистить леги
         public void LegIncrement(Player p)
         {
             p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) + 1;
         }  //  +1 к легу
+        public void SetIncrement(Player p)
+        {
+            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) + 1;
+        }  //  +1 к сету
         public void TextLogAdd(string s)    //  Новая строка в текстовую панель
         {
             MainWindow.TextLog.Text += new StringBuilder().Append(s).Append("\n").ToString();
