@@ -15,7 +15,7 @@ namespace OneHundredAndEighty
         //Матч
         public int LegsWon; //  Количество выигранных легов
         public int SetsWon; //  Количество выигранных сетов
-        public int PointsToOut; //  Количество очков на завершение сета
+        public int PointsToOut; //  Количество очков на завершение лега
         //Очередной подход
         public int HandPoints;  //  Набранное количестов очков
         public Throw Throw1 = new Throw();  //  Первый бросок
