@@ -20,6 +20,8 @@ namespace OneHundredAndEighty
         Player Player2 = null;  //  Игрок 2
         Player PlayerOnThrow = null;    //  Чей подход
         Player PlayerOnLeg = null;  //  Кто начинает лег
+        //Throw LastThrow = null; //  Последний бросок
+        Stack<Throw> AllMatchThrows = new Stack<Throw>();    //  Коллекция бросков матча
         int PointsToGo; //  Очков в леге
         int LegsToGo;   //  Легов в сете
         int SetsToGo;   //  Сетов в матче
@@ -59,21 +61,19 @@ namespace OneHundredAndEighty
         void EndGame()   //  Конец матча
         {
             IsOn = false;
+            ClearThrowsCollections();
             //  Панели
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
             InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
             //  Сообщение
-            //MessageBox.Show("Победитель матча: " + PlayerOnThrow.Name);
-            //Windows.WinnerWindow WW = new Windows.WinnerWindow();
-            //WW.Owner = MainWindow;
-            //WW.ShowDialog();
             WinnerWindowLogic.ShowWinner(PlayerOnThrow);
         }
-        public void AbortGame()
+        public void AbortGame() //  Отмена текущего матча
         {
             IsOn = false;
+            ClearThrowsCollections();
             //  Панели
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
@@ -120,31 +120,219 @@ namespace OneHundredAndEighty
         {
             InfoPanelLogic.TextLogAdd(new StringBuilder().Append("    > ").Append(PlayerOnThrow.Name).Append(" throws ").Append(T.Points).ToString());
 
-            if (!PlayerOnThrow.Throw1.IsThrown) //  Первый бросок
+            AllMatchThrows.Push(T);  //  Записываем в последный бросок в коллекцию матча
+            PlayerOnThrow.AllPlayerThrows.Push(T);  //  Записываем последний бросок игроку
+
+            if (PlayerOnThrow.Throw1 == null) //  Первый бросок
+            {
+                T.HandNumber = 1;   //  Записываем броску номер в подходе
                 PlayerOnThrow.Throw1 = T;   //  Записываем первый бросок игрока на подходе
-            else if (!PlayerOnThrow.Throw2.IsThrown)    //  Второй бросок
+            }
+            else if (PlayerOnThrow.Throw2 == null)    //  Второй бросок
+            {
+                T.HandNumber = 2;   //  Записываем броску номер в подходе
                 PlayerOnThrow.Throw2 = T;   //  Записываем второй бросок игрока на подходе
-            else if (!PlayerOnThrow.Throw3.IsThrown)    //  Третий бросок
+            }
+            else if (PlayerOnThrow.Throw3 == null)    //  Третий бросок
+            {
+                T.HandNumber = 3;   //  Записываем броску номер в подходе
                 PlayerOnThrow.Throw3 = T;   //  Записываем третий бросок игрока на подходе
+            }
 
             PlayerOnThrow.PointsToOut -= (int)T.Points; //  Вычитаем набраные за бросок очки игрока из общего результата лега
             PlayerOnThrow.HandPoints += (int)T.Points;  //  Плюсуем набраные за подход очки игрока
             InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
             InfoPanelLogic.HelpCheck(PlayerOnThrow);
 
-            IsLegIsOver(T);  // Проверяем законечен ли лег
+            IsLegIsOver();  // Проверяем законечен ли лег
+
         }
-        void IsLegIsOver(Throw T)    //  Или штраф, или правильное окончание лега, или это был последний бросок в подходе 
+        public void UndoThrow() //  Отмена последнего броска
+        {
+            if (PlayerOnThrow.Throw1 != null && PlayerOnThrow.Throw2 == null)
+            {
+                AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок игрока из коллекции бросков игрока
+                PlayerOnThrow.PointsToOut += (int)PlayerOnThrow.Throw1.Points;  //  Возвращаем игроку очки для выхода
+                PlayerOnThrow.HandPoints -= (int)PlayerOnThrow.Throw1.Points;   //  Возвращаем игроку очки подхода
+                PlayerOnThrow.Throw1 = null;    //  Очищаем первый бросок
+                InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                InfoPanelLogic.TextLogUndo();   //  Удаляем последнюю строку текстовой панели
+            }   //  Первый бросок брошен
+            else if (PlayerOnThrow.Throw2 != null && PlayerOnThrow.Throw3 == null)
+            {
+                AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок игрока из коллекции бросков игрока
+                PlayerOnThrow.PointsToOut += (int)PlayerOnThrow.Throw2.Points;  //  Возвращаем игроку очки для выхода
+                PlayerOnThrow.HandPoints -= (int)PlayerOnThrow.Throw2.Points;   //  Возвращаем игроку очки подхода
+                PlayerOnThrow.Throw2 = null;    //  Очищаем второй бросок
+                InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                InfoPanelLogic.TextLogUndo();   //  Удаляем последнюю строку текстовой панели
+            }   //  Второй бросок брошен
+            else if (PlayerOnThrow.Throw1 == null && AllMatchThrows.Count != 0)
+            {
+                if (AllMatchThrows.Peek().IsLegWon) //  Если последним броском выигран лег
+                {
+                    if (AllMatchThrows.Peek().IsSetWon) //  Если последним броском выигран сет
+                    {
+                        InfoPanelLogic.SetDecrement(PlayerOnThrow); //  Уменьшаем сет игрока
+                        InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                        InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+
+
+                    }
+                    switch (AllMatchThrows.Peek().HandNumber)   //  Смотрим на каком броске закончил подход предыдущий игрок
+                    {
+                        case 1:
+                            AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                            TogglePlayerOnLeg();  //  Возвращаем бросавшего игрока
+                            PlayerOnThrow.LegsWon -= 1; //  Удаляем игроку выиграный лег
+                            InfoPanelLogic.LegDecrement(PlayerOnThrow); //  Обновляем инфо-панель
+
+                            PlayerOnThrow.PointsToOut = 0;  //  Зануляем очки для победы в леге
+                            PlayerOnThrow.PointsToOut += (int)PlayerOnThrow.AllPlayerThrows.Pop().Points;  //  Возвращаем игроку очки последнего результативного броска и удаляем его из коллекции
+
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                            InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                            break;
+                        case 2:
+                            AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                            TogglePlayerOnLeg();  //  Возвращаем бросавшего игрока
+                            PlayerOnThrow.LegsWon -= 1; //  Удаляем игроку выиграный лег
+                            InfoPanelLogic.LegDecrement(PlayerOnThrow); //  Обновляем инфо-панель
+
+                            PlayerOnThrow.PointsToOut = 0;  //  Зануляем очки для победы в леге
+                            PlayerOnThrow.PointsToOut += (int)PlayerOnThrow.AllPlayerThrows.Pop().Points;  //  Возвращаем игроку очки последнего результативного броска и удаляем его из коллекции
+
+                            PlayerOnThrow.Throw1 = PlayerOnThrow.AllPlayerThrows.Peek(); //  Восстанавливаем первый бросок игрока в подходе
+                            PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw1.Points;   //  Возвращаем игроку набранные очки подхода
+                            
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                            InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                            break;
+                        case 3:
+                            AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                            TogglePlayerOnLeg();  //  Возвращаем бросавшего игрока
+                            PlayerOnThrow.LegsWon -= 1; //  Удаляем игроку выиграный лег
+                            InfoPanelLogic.LegDecrement(PlayerOnThrow); //  Обновляем инфо-панель
+                            PlayerOnThrow.PointsToOut = 0;  //  Зануляем очки для победы в леге
+                            PlayerOnThrow.PointsToOut += (int)PlayerOnThrow.AllPlayerThrows.Pop().Points;  //  Возвращаем игроку очки последнего результативного броска и удаляем его из коллекции
+                            PlayerOnThrow.Throw2 = PlayerOnThrow.AllPlayerThrows.Pop(); //  Восстанавливаем второй бросок игрока в подходе
+                            PlayerOnThrow.Throw1 = PlayerOnThrow.AllPlayerThrows.Peek(); //  Восстанавливаем первый бросок игрока в подходе
+                            PlayerOnThrow.AllPlayerThrows.Push(PlayerOnThrow.Throw2);   //  Возвращаем бросок его в коллекцию игрока
+                            PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw1.Points;   //  Возвращаем игроку набранные очки подхода 
+                            PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw2.Points;   //  Возвращаем игроку набранные очки подхода 
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                            InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                            break;
+                    }
+
+                }
+                if (AllMatchThrows.Peek().IsSetWon) //  Если последним броском выигран еще и сет
+                {
+
+                }
+                if (AllMatchThrows.Peek().IsFault) //  Бросок был штрафным
+                {
+                    switch (AllMatchThrows.Peek().HandNumber)   //  Смотрим какой бросок подхода был штрафным
+                    {
+                        case 1:
+                            TogglePlayerOnThrow();  //  Возвращаем бросавшего игрока
+                            AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                            PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок игрока из коллекции бросков игрока
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                            InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                            break;
+                        case 2:
+                            AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                            TogglePlayerOnThrow();  //  Возвращаем бросавшего игрока
+                            PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок игрока из коллекции бросков игрока
+                            PlayerOnThrow.Throw1 = PlayerOnThrow.AllPlayerThrows.Peek(); //  Восстанавливаем первый бросок игрока в подходе
+                            PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw1.Points;   //  Возвращаем игроку набранные очки подхода 
+                            PlayerOnThrow.PointsToOut -= PlayerOnThrow.HandPoints;  //  Возвращаем игроку очки для победы в леге
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                            InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                            break;
+                        case 3:
+                            AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                            TogglePlayerOnThrow();  //  Возвращаем бросавшего игрока
+                            PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок игрока из коллекции бросков игрока
+                            PlayerOnThrow.Throw2 = PlayerOnThrow.AllPlayerThrows.Pop(); //  Восстанавливаем второй бросок игрока в подходе
+                            PlayerOnThrow.Throw1 = PlayerOnThrow.AllPlayerThrows.Peek(); //  Восстанавливаем первый бросок игрока в подходе
+                            PlayerOnThrow.AllPlayerThrows.Push(PlayerOnThrow.Throw2);   //  Возвращаем бросок его в коллекцию игрока
+
+                            PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw1.Points;   //  Возвращаем игроку набранные очки подхода 
+                            PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw2.Points;   //  Возвращаем игроку набранные очки подхода 
+
+                            PlayerOnThrow.PointsToOut -= PlayerOnThrow.HandPoints;  //  Возвращаем игроку очки для победы в леге
+
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                            InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                            InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                            break;
+                    }
+                }
+                else    //  Простой бросок с переходом хода
+                {
+                    AllMatchThrows.Pop();   //  Удаляем последний бросок из коллекции бросков матча
+                    TogglePlayerOnThrow();  //  Возвращаем бросавшего игрока
+                    PlayerOnThrow.PointsToOut += (int)PlayerOnThrow.AllPlayerThrows.Pop().Points;   //  Возвращаем игроку очки отмененного броска
+
+                    PlayerOnThrow.Throw2 = PlayerOnThrow.AllPlayerThrows.Pop(); //  Восстанавливаем второй бросок игрока в подходе
+                    PlayerOnThrow.Throw1 = PlayerOnThrow.AllPlayerThrows.Pop(); //  Восстанавливаем первый бросок игрока в подходе
+                    PlayerOnThrow.AllPlayerThrows.Push(PlayerOnThrow.Throw1);   //  Возвращаем бросок его в коллекцию игрока
+                    PlayerOnThrow.AllPlayerThrows.Push(PlayerOnThrow.Throw2);   //  Возвращаем бросок его в коллекцию игрока
+
+                    PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw1.Points;   //  Возвращаем игроку набранные очки подхода 
+                    PlayerOnThrow.HandPoints += (int)PlayerOnThrow.Throw2.Points;   //  Возвращаем игроку набранные очки подхода 
+
+                    InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                    InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                    InfoPanelLogic.TextLogUndo();   //  Очищаем строку текстовой панели
+                    InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
+                    InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Обновляем помощь
+                }
+
+            }   //  В коллекции бросков матча есть броски. Первый не брошен, значит ход перешел к другому игроку
+
+        }
+        void IsLegIsOver()    //  Или штраф, или правильное окончание лега, или это был последний бросок в подходе 
         {
             //  Проверяем окончен ли лег
             //  НЕПРАВИЛЬНОЕ окончание лега
-            if (PlayerOnThrow.PointsToOut < 0 || PlayerOnThrow.PointsToOut == 1 || (PlayerOnThrow.PointsToOut == 0 && (T.Multiplier != "Double" && T.Multiplier != "Bull_Eye")))    //  Если игрок ушел в минус или оставил единицу, или закрыл лег не корректно (не через удвоение или Bulleye)
+            if (PlayerOnThrow.PointsToOut < 0 || PlayerOnThrow.PointsToOut == 1 || (PlayerOnThrow.PointsToOut == 0 && (AllMatchThrows.Peek().Multiplier != "Double" && AllMatchThrows.Peek().Multiplier != "Bull_Eye")))    //  Если игрок ушел в минус или оставил единицу, или закрыл лег не корректно (не через удвоение или Bulleye)
             {
                 InfoPanelLogic.TextLogAdd(new StringBuilder().Append("    > ").Append(PlayerOnThrow.Name).Append(" FAULT").ToString());  //  Пишем в текстовую панель
                 PlayerOnThrow.PointsToOut += PlayerOnThrow.HandPoints;  //  Отменяем подход игрока
                 InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
                 ClearHands();   //  Очищаем броски
                 TogglePlayerOnThrow();  //  Меняем игрока на броске
+                AllMatchThrows.Peek().IsFault = true;   //  Помечаем бросок как штрафной
                 //  Выходим
             }
             //  ПРАВИЛЬНОЕ окончание лега
@@ -154,6 +342,7 @@ namespace OneHundredAndEighty
                 PlayerOnThrow.LegsWon += 1; //  Плюсуем выиграный лег
                 InfoPanelLogic.LegIncrement(PlayerOnThrow); //  Обновляем инфопанель
                 ClearHands();   //  Очищаем броски
+                AllMatchThrows.Peek().IsLegWon = true;  //  Помечаем бросок как выигравший лег
                 IsSetIsOver();  //  Проверяем не закончен ли сет
                 if (IsOn)   //  Если игра продолжается
                 {
@@ -167,7 +356,7 @@ namespace OneHundredAndEighty
                 //  Выходим
             }
             //  Лег не окончен и это был последний бросок игрока в подходе
-            else if (PlayerOnThrow.Throw3.IsThrown) //  Если это был последний бросок игрока
+            else if (PlayerOnThrow.Throw3 != null) //  Если это был последний бросок игрока
             {
                 ClearHands();   //  Очищаем броски
                 TogglePlayerOnThrow();  //  Меняем игрока на броске
@@ -183,15 +372,26 @@ namespace OneHundredAndEighty
                 Player2.LegsWon = 0;    //  Обнуляем леги игроков
                 InfoPanelLogic.SetIncrement(PlayerOnThrow); //  Обновляем инфопанель
                 InfoPanelLogic.LegsClear(); //  Обновляем инфопанель
+                AllMatchThrows.Peek().IsSetWon = true;  //  Помечаем бросок как выигравший сет
                 IsGameIsOver(); //  Проверяем не закончен ли матч
             }
         }
         void IsGameIsOver()   //  Проверка закончен ли матч
         {
             if (PlayerOnThrow.SetsWon == SetsToGo)  //  Если игрок выиграл требуемое количество сетов
+            {
+                AllMatchThrows.Peek().IsSetWon = true;  //  Помечаем бросок как выигравший матч
                 EndGame();  //  Матч окончен
+            }
+        }
+        void ClearThrowsCollections()  //  Зануляем коллекции бросков
+        {
+            AllMatchThrows.Clear(); //  Зануляем коллекцию бросков матча
+            Player1.AllPlayerThrows.Clear();    //  Зануляем коллекцию бросков игроков
+            Player2.AllPlayerThrows.Clear();
         }
     }
+
 
 
 }

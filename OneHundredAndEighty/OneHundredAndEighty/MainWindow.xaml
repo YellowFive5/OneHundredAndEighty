@@ -1827,8 +1827,8 @@
             </Canvas>
             <Button x:Name="EndMatchButton"
                 Content="End match"
-                Canvas.Left="211"
-                Canvas.Top="595"
+                Canvas.Left="30"
+                Canvas.Top="594"
                 Width="59"
                 Height="31"
                 BorderBrush="Black"
@@ -1841,6 +1841,25 @@
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF890808" Offset="1"/>
                         <GradientStop Color="#FF8D6060"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="UndoThrow"
+                Content="&lt;&lt; Undo throw "
+                Canvas.Left="211"
+                Canvas.Top="594"
+                Width="59"
+                Height="31"
+                BorderBrush="Black"
+                FontFamily="Agency FB"
+                FontWeight="Bold"
+                FontSize="11"
+                Click="UndoThrow_Click"
+                >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF083D89" Offset="1"/>
+                        <GradientStop Color="#FF00FF80"/>
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>

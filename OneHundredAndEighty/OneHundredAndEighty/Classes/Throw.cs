@@ -9,20 +9,23 @@ namespace OneHundredAndEighty
 {
     public class Throw  // Бросок
     {
-        public bool IsThrown { get; private set; }  //  Совершен ли данный бросок
         public string Sector { get; private set; }  //  Сектор попадания
         public string Multiplier { get; private set; }  //  Мультипликатор
         public int? Points { get; private set; } = null;    //  Очки
+        public bool IsLegWon { get; set; } //  Выигран ли броском лег
+        public bool IsSetWon { get; set; } //  Выигран ли броском сет
+        public bool IsMatchWon { get; set; } //  Выигран ли броском матч
+        public bool IsFault { get; set; } //  Был ли бросок штрафным
+        public int HandNumber { get; set; } //  Номер броска в подходе
 
-        public Throw()  //  Пустой бросок
-        {
+        //public Throw()  //  Пустой бросок
+        //{
 
-        }
+        //}
 
         public Throw(object o)  //  Конструктор очередного броска
         {
             Shape S = o as Shape;   //  Берем сектор дартса
-            this.IsThrown = true;   //  Бросок совершен
             this.Points = Int32.Parse(S.Tag.ToString());    //  Сохнаряем очки броска
 
             string s = S.Name.Substring(0, 1);  //  Смотрим имя сектора дартса
@@ -49,13 +52,6 @@ namespace OneHundredAndEighty
             }
             this.Sector = S.Name;   //  Сохранияем имя сектора
 
-        }
-        public void ClearThrow()    //  Очищаем бросок
-        {
-            this.IsThrown = false;
-            this.Sector = "";
-            this.Multiplier = "";
-            this.Points = null;
         }
     }
 }

@@ -16,17 +16,18 @@ namespace OneHundredAndEighty
         public int LegsWon; //  Количество выигранных легов
         public int SetsWon; //  Количество выигранных сетов
         public int PointsToOut; //  Количество очков на завершение лега
+        public Stack<Throw> AllPlayerThrows = new Stack<Throw>();   //  Коллекция бросков игрока в матче
         //Очередной подход
         public int HandPoints;  //  Набранное количестов очков
-        public Throw Throw1 = new Throw();  //  Первый бросок
-        public Throw Throw2 = new Throw();  //  Второй бросок
-        public Throw Throw3 = new Throw();  //  Третий бросок
+        public Throw Throw1 = null;  //  Первый бросок
+        public Throw Throw2 = null;  //  Второй бросок
+        public Throw Throw3 = null;  //  Третий бросок
         public void ClearHand() //  Обнуление очередного подхода
         {
             this.HandPoints = 0;
-            this.Throw1.ClearThrow();
-            this.Throw2.ClearThrow();
-            this.Throw3.ClearThrow();
+            this.Throw1 = null;
+            this.Throw2 = null;
+            this.Throw3 = null;
         }
         //  Инфо-панель
         public Canvas HelpPanel;    //  Панель помощи
