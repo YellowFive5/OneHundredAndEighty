@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\BoardPanelLogic.cs" />
+    <Compile Include="Classes\SavePoint.cs" />
     <Compile Include="Classes\SettingsPanelLogic.cs" />
     <Compile Include="Classes\Throw.cs" />
     <Compile Include="Classes\WinnerWindowLogic.cs" />

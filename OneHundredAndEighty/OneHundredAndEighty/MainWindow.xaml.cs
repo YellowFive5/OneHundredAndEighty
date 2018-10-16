@@ -76,7 +76,9 @@ namespace OneHundredAndEighty
 
         private void UndoThrow_Click(object sender, RoutedEventArgs e)  //  Кнопка отмены броска
         {
+            UndoThrow.IsEnabled = false;
             G.UndoThrow();
+            UndoThrow.IsEnabled = true;
         }
     }
 }

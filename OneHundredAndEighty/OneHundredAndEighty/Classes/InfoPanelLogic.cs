@@ -435,7 +435,6 @@ namespace OneHundredAndEighty
                 p.HelpPanel.BeginAnimation(Canvas.LeftProperty, show);
                 p.HelpPanel.Tag = "ON";
             }
-
         }  //  Показ бокса помощи
         public void HelpHide(Player p)
         {
@@ -460,22 +459,14 @@ namespace OneHundredAndEighty
             MainWindow.Player1LegsWon.Content = 0;
             MainWindow.Player2LegsWon.Content = 0;
         }   //  Очистить леги
-        public void LegIncrement(Player p)
+        public void LegsSet(Player p)
         {
-            p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) + 1;
-        }  //  +1 к легу
-        public void SetIncrement(Player p)
+            p.LegsWonLabel.Content = p.LegsWon;
+        }  //  Установка текущих легов игрока
+        public void SetsSet(Player p)
         {
-            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) + 1;
-        }  //  +1 к сету
-        public void LegDecrement(Player p)
-        {
-            p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) - 1;
-        }  //  -1 к легу
-        public void SetDecrement(Player p)
-        {
-            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) - 1;
-        }  //  -1 к сету
+            p.SetsWonLabel.Content = p.SetsWon;
+        }  //  Установка текущих сетов игрока
         public void TextLogAdd(string s)    //  Новая строка в текстовую панель
         {
             MainWindow.TextLog.Text += new StringBuilder().Append(s).Append("\n").ToString();

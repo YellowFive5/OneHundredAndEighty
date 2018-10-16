@@ -15,7 +15,6 @@ namespace OneHundredAndEighty
     {
         MainWindow MainWindow = null;    //  Ссылка на главное окно, зануляем
         Windows.WinnerWindow WinnerWindow = null;    //  Ссылка на окно победителя, зануляем
-
         public void ShowWinner(Player p)
         {
             MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Обновляем ссылку на главное окно
