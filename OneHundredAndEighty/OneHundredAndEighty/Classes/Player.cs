@@ -13,10 +13,13 @@ namespace OneHundredAndEighty
         public string Name { get; private set; }    //  Имя игрока
         public string Tag { get; private set; } //  Тэг
         //Матч
-        public int LegsWon; //  Количество выигранных легов
         public int SetsWon; //  Количество выигранных сетов
+        public int LegsWon; //  Количество выигранных легов в сете
         public int PointsToOut; //  Количество очков на завершение лега
         public Stack<Throw> AllPlayerThrows = new Stack<Throw>();   //  Коллекция бросков игрока в матче
+        public Stack<int> LossPoints = new Stack<int>();   //  Коллекция оставшихся очков на момент проигрыша лега
+        public Stack<int> LossLegs = new Stack<int>();   //  Коллекция оставшихся очков на момент проигрыша лега
+
         //Очередной подход
         public int HandPoints;  //  Набранное количестов очков
         public Throw Throw1 = null;  //  Первый бросок
