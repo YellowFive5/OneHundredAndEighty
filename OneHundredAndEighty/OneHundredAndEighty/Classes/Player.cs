@@ -13,20 +13,20 @@ namespace OneHundredAndEighty
         public string Name { get; private set; }    //  Имя игрока
         public string Tag { get; private set; } //  Тэг
         //Матч
-        public int LegsWon; //  Количество выигранных легов
         public int SetsWon; //  Количество выигранных сетов
+        public int LegsWon; //  Количество выигранных легов в сете
         public int PointsToOut; //  Количество очков на завершение лега
-        //Очередной подход
-        public int HandPoints;  //  Набранное количестов очков
-        public Throw Throw1 = new Throw();  //  Первый бросок
-        public Throw Throw2 = new Throw();  //  Второй бросок
-        public Throw Throw3 = new Throw();  //  Третий бросок
+        public Stack<Throw> AllPlayerThrows = new Stack<Throw>();   //  Коллекция бросков игрока в матче
+        public int HandPoints;  //  Набранное количестов очков в подходе
+        public Throw Throw1 = null;  //  Первый бросок
+        public Throw Throw2 = null;  //  Второй бросок
+        public Throw Throw3 = null;  //  Третий бросок
         public void ClearHand() //  Обнуление очередного подхода
         {
             this.HandPoints = 0;
-            this.Throw1.ClearThrow();
-            this.Throw2.ClearThrow();
-            this.Throw3.ClearThrow();
+            this.Throw1 = null;
+            this.Throw2 = null;
+            this.Throw3 = null;
         }
         //  Инфо-панель
         public Canvas HelpPanel;    //  Панель помощи

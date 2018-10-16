@@ -385,7 +385,7 @@ namespace OneHundredAndEighty
                 Storyboard.SetTarget(fadeout, MainWindow.Player1HelpBackground);
                 Storyboard.SetTarget(fadein, MainWindow.Player2HelpBackground);
 
-                toggle = new DoubleAnimation() { From =652 , To = 683, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
+                toggle = new DoubleAnimation() { From = 652, To = 683, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
                 MainWindow.WhoThrowSlider.Tag = "Player1";
             }
             else
@@ -408,12 +408,12 @@ namespace OneHundredAndEighty
         }   //  Установка слайдера текущего броска
         public void HelpCheck(Player p)
         {
-            SortedList<int, string> Table = null; ;
-            if (!p.Throw1.IsThrown)
+            SortedList<int, string> Table = CheckoutTableThreeThrows; ;
+            if (p.Throw1 == null)
                 Table = CheckoutTableThreeThrows;
-            else if (p.Throw1.IsThrown && !p.Throw2.IsThrown)
+            else if (p.Throw2 == null && p.Throw1 != null)
                 Table = CheckoutTableTwoThrows;
-            else if (p.Throw2.IsThrown)
+            else if (p.Throw3 == null && p.Throw2 != null)
                 Table = CheckoutTableOneThrow;
 
             if (Table.ContainsKey(p.PointsToOut) == true)
@@ -435,7 +435,6 @@ namespace OneHundredAndEighty
                 p.HelpPanel.BeginAnimation(Canvas.LeftProperty, show);
                 p.HelpPanel.Tag = "ON";
             }
-
         }  //  Показ бокса помощи
         public void HelpHide(Player p)
         {
@@ -460,17 +459,24 @@ namespace OneHundredAndEighty
             MainWindow.Player1LegsWon.Content = 0;
             MainWindow.Player2LegsWon.Content = 0;
         }   //  Очистить леги
-        public void LegIncrement(Player p)
+        public void LegsSet(Player p)
         {
-            p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) + 1;
-        }  //  +1 к легу
-        public void SetIncrement(Player p)
+            p.LegsWonLabel.Content = p.LegsWon;
+        }  //  Установка текущих легов игрока
+        public void SetsSet(Player p)
         {
-            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) + 1;
-        }  //  +1 к сету
+            p.SetsWonLabel.Content = p.SetsWon;
+        }  //  Установка текущих сетов игрока
         public void TextLogAdd(string s)    //  Новая строка в текстовую панель
         {
             MainWindow.TextLog.Text += new StringBuilder().Append(s).Append("\n").ToString();
+            MainWindow.TextLog.ScrollToEnd();   //  Прокручиваем вниз
+        }
+        public void TextLogUndo()    // Удаление последный строки в текстовой панели
+        {
+            MainWindow.TextLog.Text = MainWindow.TextLog.Text.Remove(MainWindow.TextLog.Text.LastIndexOf("\n"));
+            MainWindow.TextLog.Text = MainWindow.TextLog.Text.Remove(MainWindow.TextLog.Text.LastIndexOf("\n"));
+            MainWindow.TextLog.AppendText("\n");
             MainWindow.TextLog.ScrollToEnd();   //  Прокручиваем вниз
         }
         public void TextLogClear()    //  Очищаем текстовую панель текстовую панель

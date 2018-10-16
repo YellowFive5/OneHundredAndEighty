@@ -25,11 +25,21 @@ namespace OneHundredAndEighty
     {
         Game G = null;
 
+        public void FadeIn()    //  Затухание главного окна
+        {
+            this.Opacity = 0.4;
+        }
+        public void FadeOut()   //  Появление главного окна
+        {
+            this.Opacity = 1;
+        }
+
         public MainWindow()
         {
             G = new Game();
             InitializeComponent();
         }
+
         private void PointsShow(object sender, MouseEventArgs e)    //  Показ очков сектора
         {
             Shape O = sender as Shape;
@@ -46,14 +56,12 @@ namespace OneHundredAndEighty
             if (G.IsOn)   //  Если игра продолжается
                 G.BoardPanelLogic.PanelShow();    //  Показываем панель секторов и бросаем дальше
         }
-
         private void EndMatchButton_Click(object sender, RoutedEventArgs e) //  Кнопка отмены матча
         {
             this.FadeIn();
             G.AbortGame();
             this.FadeOut();
         }
-
         private void MainWindow_Closing(object sender, CancelEventArgs e)   //  Выход из приложения
         {
             this.FadeIn();
@@ -65,14 +73,12 @@ namespace OneHundredAndEighty
             this.FadeOut();
 
         }
-        public void FadeIn()
-        {
-            this.Opacity = 0.4;
-        }
-        public void FadeOut()
-        {
-            this.Opacity = 1;
-        }
 
+        private void UndoThrow_Click(object sender, RoutedEventArgs e)  //  Кнопка отмены броска
+        {
+            UndoThrow.IsEnabled = false;
+            G.UndoThrow();
+            UndoThrow.IsEnabled = true;
+        }
     }
 }
