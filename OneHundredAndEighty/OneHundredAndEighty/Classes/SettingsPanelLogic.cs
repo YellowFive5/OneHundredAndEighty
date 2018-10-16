@@ -32,18 +32,18 @@ namespace OneHundredAndEighty
             else
                 return p2;
         }   //  Кто бросает первым
-        public int LegsToGo()
-        {
-            return Int32.Parse(MainWindow.LegBox.Text);
-        }   //  Сколько играем легов
-        public int SetsToGo()
-        {
-            return Int32.Parse(MainWindow.SetBox.Text);
-        }   //  Сколько сетов в леге
         public int PointsToGo()
         {
             return Int32.Parse(MainWindow.PointsBox.Text);
-        }   //  Сколько очков в сете
+        }   //  Сколько очков в леге
+        public int LegsToGo()
+        {
+            return Int32.Parse(MainWindow.LegBox.Text);
+        }   //  Сколько играем легов в сете
+        public int SetsToGo()
+        {
+            return Int32.Parse(MainWindow.SetBox.Text);
+        }   //  Сколько легов в метче
         public string Player1Name()
         {
                 return MainWindow.Player1NameBox.Text;

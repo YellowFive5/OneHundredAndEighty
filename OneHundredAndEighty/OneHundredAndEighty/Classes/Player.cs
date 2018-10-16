@@ -17,11 +17,7 @@ namespace OneHundredAndEighty
         public int LegsWon; //  Количество выигранных легов в сете
         public int PointsToOut; //  Количество очков на завершение лега
         public Stack<Throw> AllPlayerThrows = new Stack<Throw>();   //  Коллекция бросков игрока в матче
-        public Stack<int> LossPoints = new Stack<int>();   //  Коллекция оставшихся очков на момент проигрыша лега
-        public Stack<int> LossLegs = new Stack<int>();   //  Коллекция оставшихся очков на момент проигрыша лега
-
-        //Очередной подход
-        public int HandPoints;  //  Набранное количестов очков
+        public int HandPoints;  //  Набранное количестов очков в подходе
         public Throw Throw1 = null;  //  Первый бросок
         public Throw Throw2 = null;  //  Второй бросок
         public Throw Throw3 = null;  //  Третий бросок
