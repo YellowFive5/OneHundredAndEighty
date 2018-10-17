@@ -1855,6 +1855,7 @@
                 FontWeight="Bold"
                 FontSize="11"
                 Click="UndoThrow_Click"
+                IsEnabled="False"
                 >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

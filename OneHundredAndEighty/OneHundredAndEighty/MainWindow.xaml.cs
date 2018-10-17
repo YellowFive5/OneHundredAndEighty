@@ -71,14 +71,13 @@ namespace OneHundredAndEighty
             if (window.result)
                 e.Cancel = true;
             this.FadeOut();
-
         }
 
         private void UndoThrow_Click(object sender, RoutedEventArgs e)  //  Кнопка отмены броска
         {
-            UndoThrow.IsEnabled = false;
+            //UndoThrow.IsEnabled = false;
             G.UndoThrow();
-            UndoThrow.IsEnabled = true;
+            //UndoThrow.IsEnabled = true;
         }
     }
 }
