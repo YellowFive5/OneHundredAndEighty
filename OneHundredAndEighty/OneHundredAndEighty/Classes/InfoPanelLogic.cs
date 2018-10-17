@@ -483,5 +483,13 @@ namespace OneHundredAndEighty
         {
             MainWindow.TextLog.Clear();
         }
+        public void UndoThrowButtonOn()  //  Разблокируем кнопку отмены броска
+        {
+            MainWindow.UndoThrow.IsEnabled = true;
+        }
+        public void UndoThrowButtonOff()  //  Блокируем кнопку отмены броска
+        {
+            MainWindow.UndoThrow.IsEnabled = false;
+        }
     }
 }

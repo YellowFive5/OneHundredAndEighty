@@ -23,7 +23,7 @@ namespace OneHundredAndEighty
     /// </summary>
     public partial class MainWindow : Window
     {
-        Game G = null;
+        public Game G = null;
 
         public void FadeIn()    //  Затухание главного окна
         {
@@ -59,7 +59,11 @@ namespace OneHundredAndEighty
         private void EndMatchButton_Click(object sender, RoutedEventArgs e) //  Кнопка отмены матча
         {
             this.FadeIn();
-            G.AbortGame();
+            Windows.AbortWindowConfirm window = new Windows.AbortWindowConfirm();
+            window.Owner = this;
+            window.ShowDialog();
+            if (window.result)
+                G.AbortGame();
             this.FadeOut();
         }
         private void MainWindow_Closing(object sender, CancelEventArgs e)   //  Выход из приложения
@@ -75,9 +79,7 @@ namespace OneHundredAndEighty
 
         private void UndoThrow_Click(object sender, RoutedEventArgs e)  //  Кнопка отмены броска
         {
-            //UndoThrow.IsEnabled = false;
             G.UndoThrow();
-            //UndoThrow.IsEnabled = true;
         }
     }
 }

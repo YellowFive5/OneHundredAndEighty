@@ -6,16 +6,17 @@
         xmlns:local="clr-namespace:OneHundredAndEighty.Windows"
         mc:Ignorable="d"
         Title="OneHundredAndEighty"
-        Height="393.635"
-        Width="578.051"
+        Height="257.602"
+        Width="332.065"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
+        WindowStyle="None"
+        BorderBrush="Black"
         >
 
     <Canvas x:Name="WinnerCanvas"
-            Height="365"
+            Height="258"
             VerticalAlignment="Top"
-            Width="568" Margin="0,0,0,-2"
             >
         <Canvas.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -24,11 +25,11 @@
             </LinearGradientBrush>
         </Canvas.Background>
         <Label Content="And the winner is:"
-               Canvas.Left="27"
-               Canvas.Top="77"
+               Canvas.Left="14"
+               Canvas.Top="25"
                FontWeight="Bold"
                FontFamily="Agency FB"
-               FontSize="48"
+               FontSize="30"
                RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -41,20 +42,48 @@
         </Label>
         <Label x:Name="WinnerName"
                 Content="Player"
-                Canvas.Left="250"
-                Canvas.Top="178"
+                Canvas.Left="100"
+                Canvas.Top="96"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
-                FontSize="72" RenderTransformOrigin="0.5,0.5" Background="{x:Null}"
+                FontSize="55"
+                RenderTransformOrigin="0.5,0.5"
                >
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="5.383"/>
+                    <RotateTransform Angle="5.14"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
+        <Button x:Name="OKButton"
+                Content="OK"
+                Canvas.Left="119"
+                Canvas.Top="188"
+                Width="90"
+                Height="35"
+                BorderBrush="Black"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="16"
+                RenderTransformOrigin="0.5,0.5" Click="OKButton_Click"
+                >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="5.85"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E2C00" Offset="1"/>
+                    <GradientStop Color="#FF51FF00"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Canvas>
 </Window>

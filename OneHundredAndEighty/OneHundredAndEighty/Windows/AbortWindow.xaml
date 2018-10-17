@@ -6,17 +6,18 @@
         xmlns:local="clr-namespace:OneHundredAndEighty.Windows"
         mc:Ignorable="d"
         Title="OneHundredAndEighty"
-        Height="233.602"
-        Width="277.565"
+        Height="257.602"
+        Width="332.065"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
-        WindowStyle="SingleBorderWindow"
+        WindowStyle="None"
+        BorderBrush="Black"
         >
     <Canvas
         HorizontalAlignment="Left"
-        Height="204"
+        Height="258"
         VerticalAlignment="Top"
-        Width="268"
+        Width="332"
         >
         <Canvas.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -26,8 +27,8 @@
         </Canvas.Background>
 
         <Label Content="Match has"
-               Canvas.Left="42"
-               Canvas.Top="40"
+               Canvas.Left="59"
+               Canvas.Top="46"
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="48"
@@ -42,8 +43,8 @@
             </Label.RenderTransform>
         </Label>
         <Label Content="been canceled"
-               Canvas.Left="14"
-               Canvas.Top="81"
+               Canvas.Left="34"
+               Canvas.Top="96"
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="48"
@@ -57,7 +58,34 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-
+        <Button x:Name="OKButton"
+                Content="OK"
+                Canvas.Left="184"
+                Canvas.Top="154"
+                Width="90"
+                Height="35"
+                BorderBrush="Black"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="16"
+                RenderTransformOrigin="0.5,0.5"
+                Click="OKButton_Click"
+                >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-7.902"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E2C00" Offset="1"/>
+                    <GradientStop Color="#FF51FF00"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Canvas>
 
 </Window>
