@@ -15,26 +15,25 @@ using System.Windows.Shapes;
 namespace OneHundredAndEighty.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для ExitWindow.xaml
+    /// Логика взаимодействия для AbortWindowConfirm.xaml
     /// </summary>
-    public partial class ExitWindow : Window
+    public partial class AbortWindowConfirm : Window
     {
         public bool result { get; private set; }    //  Результат выбора
-
-        public ExitWindow()
+        public AbortWindowConfirm()
         {
             InitializeComponent();
         }
 
-        private void StayButton_Click(object sender, RoutedEventArgs e) //  Остаёмся в приложении
+        private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
-            this.result = true;
+            this.result = false;
             this.Close();
         }
 
-        private void LeaveButton_Click(object sender, RoutedEventArgs e)    //  Выходим из приложения
+        private void AbortButton_Click(object sender, RoutedEventArgs e)
         {
-            this.result = false;
+            this.result = true;
             this.Close();
         }
     }

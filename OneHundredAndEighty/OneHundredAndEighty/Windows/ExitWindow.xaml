@@ -71,7 +71,8 @@
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="16"
-                RenderTransformOrigin="0.5,0.5" Click="StayButton_Click"
+                RenderTransformOrigin="0.5,0.5"
+                Click="StayButton_Click"
                 >
             <Button.RenderTransform>
                 <TransformGroup>
@@ -98,7 +99,8 @@
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="16"
-                RenderTransformOrigin="0.5,0.5" Click="LeaveButton_Click"
+                RenderTransformOrigin="0.5,0.5"
+                Click="LeaveButton_Click"
                 >
             <Button.RenderTransform>
                 <TransformGroup>

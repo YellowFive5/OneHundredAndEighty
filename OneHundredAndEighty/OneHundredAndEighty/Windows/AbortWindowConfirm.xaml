@@ -1,0 +1,138 @@
+﻿<Window x:Class="OneHundredAndEighty.Windows.AbortWindowConfirm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OneHundredAndEighty.Windows"
+        mc:Ignorable="d"
+        Title="OneHundredAndEighty"
+        Height="257.602"
+        Width="332.065"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        BorderBrush="Black"
+        >
+    <Grid>
+        <Canvas
+            HorizontalAlignment="Left"
+            Height="258"
+            VerticalAlignment="Top"
+            Width="332">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FFB87500"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <Label Content="Do you want to abort"
+            Canvas.Left="9"
+            Canvas.Top="46"
+            FontWeight="Bold"
+            FontFamily="Agency FB"
+            FontSize="30"
+            RenderTransformOrigin="0.5,0.5"
+               >
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-11.378"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label Content="current match ?"
+            Canvas.Left="99"
+            Canvas.Top="58"
+            FontWeight="Bold"
+            FontFamily="Agency FB"
+            FontSize="30"
+            RenderTransformOrigin="0.5,0.5"
+               >
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-11.378"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label Content="*All unsaved data will be lost"
+            Canvas.Left="120"
+            Canvas.Top="83"
+            FontWeight="Bold"
+            FontFamily="Agency FB"
+            FontSize="20"
+            RenderTransformOrigin="0.5,0.5"
+               >
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-11.378"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Button x:Name="ContinueButton"
+                Content="Continue match"
+                Canvas.Left="81"
+                Canvas.Top="158"
+                Width="90"
+                Height="35"
+                BorderBrush="Black"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="16"
+                RenderTransformOrigin="0.5,0.5"
+                Click="ContinueButton_Click"
+                >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-10.36"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF0E2C00" Offset="1"/>
+                        <GradientStop Color="#FF51FF00"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="AbortButton"
+                Content="Abort match"
+                Canvas.Left="175"
+                Canvas.Top="140"
+                Width="90"
+                Height="36"
+                BorderBrush="Black"
+                FontWeight="Bold"
+                FontFamily="Agency FB"
+                FontSize="16"
+                RenderTransformOrigin="0.5,0.5"
+                Click="AbortButton_Click"
+                >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-10.36"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C0000" Offset="1"/>
+                        <GradientStop Color="#FFE20E0E"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Canvas>
+
+    </Grid>
+</Window>
