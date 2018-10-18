@@ -282,9 +282,5 @@ namespace OneHundredAndEighty
                 EndGame();  //  Матч окончен
             }
         }
-
     }
-
-
-
 }

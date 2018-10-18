@@ -279,6 +279,10 @@ namespace OneHundredAndEighty
             [97] = "T19 D20",
             [98] = "T20 D19",
             [100] = "T20 D20",
+            [101] = "T17 Bull",
+            [104] = "T18 Bull",
+            [107] = "T19 Bull",
+            [110] = "T20 Bull"
         };  //  Коллекция закрытия сета на два броска
         SortedList<int, string> CheckoutTableOneThrow = new SortedList<int, string>()
         {
