@@ -342,28 +342,32 @@ namespace OneHundredAndEighty
         }   //  Установка в 0 в начале игры
         public void DotSet(Player p)
         {
-            Storyboard SB = new Storyboard();
-            DoubleAnimation fadein = new DoubleAnimation(0, 1, DotFadeTime);
-            DoubleAnimation fadeout = new DoubleAnimation(1, 0, DotFadeTime);
-            Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-            if (p.Tag == "Player1")
+            if ((p.Tag == "Player1" && MainWindow.Player1SetDot.Tag.ToString() == "OFF") || (p.Tag == "Player2" && MainWindow.Player2SetDot.Tag.ToString() == "OFF"))
             {
-                Storyboard.SetTarget(fadeout, MainWindow.Player2SetDot);
-                Storyboard.SetTarget(fadein, MainWindow.Player1SetDot);
-                MainWindow.Player1SetDot.Tag = "ON";
-                MainWindow.Player2SetDot.Tag = "OFF";
+                Storyboard SB = new Storyboard();
+                DoubleAnimation fadein = new DoubleAnimation(0, 1, DotFadeTime);
+                DoubleAnimation fadeout = new DoubleAnimation(1, 0, DotFadeTime);
+                Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
+                Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
+                if (p.Tag == "Player1")
+                {
+                    Storyboard.SetTarget(fadeout, MainWindow.Player2SetDot);
+                    Storyboard.SetTarget(fadein, MainWindow.Player1SetDot);
+                    MainWindow.Player1SetDot.Tag = "ON";
+                    MainWindow.Player2SetDot.Tag = "OFF";
+                }
+                if (p.Tag == "Player2")
+                {
+                    Storyboard.SetTarget(fadeout, MainWindow.Player1SetDot);
+                    Storyboard.SetTarget(fadein, MainWindow.Player2SetDot);
+                    MainWindow.Player2SetDot.Tag = "ON";
+                    MainWindow.Player1SetDot.Tag = "OFF";
+                }
+                SB.Children.Add(fadein);
+                SB.Children.Add(fadeout);
+
+                SB.Begin();
             }
-            if (p.Tag == "Player2")
-            {
-                Storyboard.SetTarget(fadeout, MainWindow.Player1SetDot);
-                Storyboard.SetTarget(fadein, MainWindow.Player2SetDot);
-                MainWindow.Player2SetDot.Tag = "ON";
-                MainWindow.Player1SetDot.Tag = "OFF";
-            }
-            SB.Children.Add(fadein);
-            SB.Children.Add(fadeout);
-            SB.Begin();
         }   //  Установка точки начала сета
         public void WhoThrowSliderSet(Player p)
         {

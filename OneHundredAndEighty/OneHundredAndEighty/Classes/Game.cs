@@ -163,6 +163,8 @@ namespace OneHundredAndEighty
         {
             if (AllMatchThrows.Count != 0)  //  Проверяем возможность отмены броска, если коллекция бросков матча не пуста
             {
+                InfoPanelLogic.UndoThrowButtonOff();    //  Выключаем кнопку отмены броска
+
                 Player1.SetsWon = SavePoints.Peek().Player1SetsWon; //  Восстанавливаем Игроку 1 выигранные сеты
                 Player1.LegsWon = SavePoints.Peek().Player1LegsWon; //  Восстанавливаем Игроку 1 выигранные леги
                 Player1.PointsToOut = SavePoints.Peek().Player1PointsToOut; //  Восстанавливаем Игроку 1 очки на завершение лега
@@ -208,6 +210,8 @@ namespace OneHundredAndEighty
                 AllMatchThrows.Pop();   //  Удалаяем последний бросок из коллекции матча
                 PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок из коллекции игрока
                 SavePoints.Pop();   //  Удаляем последнюю точку сохранения
+
+                InfoPanelLogic.UndoThrowButtonOn();    //  Включаем кнопку отмены броска
 
                 if (AllMatchThrows.Count == 0)  //  Если бросков для отмены больше нет
                     InfoPanelLogic.UndoThrowButtonOff();    //  Выключаем кнопку отмены броска
