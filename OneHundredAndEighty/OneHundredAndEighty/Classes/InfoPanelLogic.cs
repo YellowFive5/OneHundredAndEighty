@@ -279,6 +279,10 @@ namespace OneHundredAndEighty
             [97] = "T19 D20",
             [98] = "T20 D19",
             [100] = "T20 D20",
+            [101] = "T17 Bull",
+            [104] = "T18 Bull",
+            [107] = "T19 Bull",
+            [110] = "T20 Bull"
         };  //  Коллекция закрытия сета на два броска
         SortedList<int, string> CheckoutTableOneThrow = new SortedList<int, string>()
         {
@@ -338,38 +342,42 @@ namespace OneHundredAndEighty
         }   //  Установка в 0 в начале игры
         public void DotSet(Player p)
         {
-            Storyboard SB = new Storyboard();
-            DoubleAnimation fadein = new DoubleAnimation(0, 1, DotFadeTime);
-            DoubleAnimation fadeout = new DoubleAnimation(1, 0, DotFadeTime);
-            Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
-            if (p.Tag == "Player1")
+            if ((p.Tag == "Player1" && MainWindow.Player1SetDot.Tag.ToString() == "OFF") || (p.Tag == "Player2" && MainWindow.Player2SetDot.Tag.ToString() == "OFF"))
             {
-                Storyboard.SetTarget(fadeout, MainWindow.Player2SetDot);
-                Storyboard.SetTarget(fadein, MainWindow.Player1SetDot);
-                MainWindow.Player1SetDot.Tag = "ON";
-                MainWindow.Player2SetDot.Tag = "OFF";
+                Storyboard SB = new Storyboard();
+                DoubleAnimation fadein = new DoubleAnimation(0, 1, DotFadeTime);
+                DoubleAnimation fadeout = new DoubleAnimation(1, 0, DotFadeTime);
+                Storyboard.SetTargetProperty(fadein, new System.Windows.PropertyPath(UIElement.OpacityProperty));
+                Storyboard.SetTargetProperty(fadeout, new System.Windows.PropertyPath(UIElement.OpacityProperty));
+                if (p.Tag == "Player1")
+                {
+                    Storyboard.SetTarget(fadeout, MainWindow.Player2SetDot);
+                    Storyboard.SetTarget(fadein, MainWindow.Player1SetDot);
+                    MainWindow.Player1SetDot.Tag = "ON";
+                    MainWindow.Player2SetDot.Tag = "OFF";
+                }
+                if (p.Tag == "Player2")
+                {
+                    Storyboard.SetTarget(fadeout, MainWindow.Player1SetDot);
+                    Storyboard.SetTarget(fadein, MainWindow.Player2SetDot);
+                    MainWindow.Player2SetDot.Tag = "ON";
+                    MainWindow.Player1SetDot.Tag = "OFF";
+                }
+                SB.Children.Add(fadein);
+                SB.Children.Add(fadeout);
+
+                SB.Begin();
             }
-            if (p.Tag == "Player2")
-            {
-                Storyboard.SetTarget(fadeout, MainWindow.Player1SetDot);
-                Storyboard.SetTarget(fadein, MainWindow.Player2SetDot);
-                MainWindow.Player2SetDot.Tag = "ON";
-                MainWindow.Player1SetDot.Tag = "OFF";
-            }
-            SB.Children.Add(fadein);
-            SB.Children.Add(fadeout);
-            SB.Begin();
         }   //  Установка точки начала сета
         public void WhoThrowSliderSet(Player p)
         {
             Storyboard Slider = new Storyboard();
 
-            DoubleAnimation hide = new DoubleAnimation() { From = 316, To = 292, Duration = ThrowSlideTime };
+            DoubleAnimation hide = new DoubleAnimation() { From = 269, To = 245, Duration = ThrowSlideTime };
             Storyboard.SetTarget(hide, MainWindow.WhoThrowSlider);
             Storyboard.SetTargetProperty(hide, new System.Windows.PropertyPath(Canvas.LeftProperty));
 
-            DoubleAnimation show = new DoubleAnimation() { From = 292, To = 316, Duration = ThrowSlideTime, BeginTime = ThrowSlideTime };
+            DoubleAnimation show = new DoubleAnimation() { From = 245, To = 269, Duration = ThrowSlideTime, BeginTime = ThrowSlideTime };
             Storyboard.SetTarget(show, MainWindow.WhoThrowSlider);
             Storyboard.SetTargetProperty(show, new System.Windows.PropertyPath(Canvas.LeftProperty));
 
@@ -385,7 +393,7 @@ namespace OneHundredAndEighty
                 Storyboard.SetTarget(fadeout, MainWindow.Player1HelpBackground);
                 Storyboard.SetTarget(fadein, MainWindow.Player2HelpBackground);
 
-                toggle = new DoubleAnimation() { From = 21, To = 52, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
+                toggle = new DoubleAnimation() { From = 652, To = 683, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
                 MainWindow.WhoThrowSlider.Tag = "Player1";
             }
             else
@@ -393,7 +401,7 @@ namespace OneHundredAndEighty
                 Storyboard.SetTarget(fadein, MainWindow.Player1HelpBackground);
                 Storyboard.SetTarget(fadeout, MainWindow.Player2HelpBackground);
 
-                toggle = new DoubleAnimation() { From = 52, To = 21, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
+                toggle = new DoubleAnimation() { From = 683, To = 652, Duration = TimeSpan.FromSeconds(0), BeginTime = ThrowSlideTime };
                 MainWindow.WhoThrowSlider.Tag = "Player2";
             }
             Storyboard.SetTarget(toggle, MainWindow.WhoThrowSlider);
@@ -408,12 +416,12 @@ namespace OneHundredAndEighty
         }   //  Установка слайдера текущего броска
         public void HelpCheck(Player p)
         {
-            SortedList<int, string> Table = null; ;
-            if (!p.Throw1.IsThrown)
+            SortedList<int, string> Table = CheckoutTableThreeThrows; ;
+            if (p.Throw1 == null)
                 Table = CheckoutTableThreeThrows;
-            else if (p.Throw1.IsThrown && !p.Throw2.IsThrown)
+            else if (p.Throw2 == null && p.Throw1 != null)
                 Table = CheckoutTableTwoThrows;
-            else if (p.Throw2.IsThrown)
+            else if (p.Throw3 == null && p.Throw2 != null)
                 Table = CheckoutTableOneThrow;
 
             if (Table.ContainsKey(p.PointsToOut) == true)
@@ -431,17 +439,16 @@ namespace OneHundredAndEighty
         {
             if (p.HelpPanel.Tag.ToString() == "OFF")
             {
-                DoubleAnimation show = new DoubleAnimation(77, -1, HelpSlideTime);
+                DoubleAnimation show = new DoubleAnimation(77, -48, HelpSlideTime);
                 p.HelpPanel.BeginAnimation(Canvas.LeftProperty, show);
                 p.HelpPanel.Tag = "ON";
             }
-
         }  //  Показ бокса помощи
         public void HelpHide(Player p)
         {
             if (p.HelpPanel.Tag.ToString() == "ON")
             {
-                DoubleAnimation hide = new DoubleAnimation(-1, 77, HelpSlideTime);
+                DoubleAnimation hide = new DoubleAnimation(-48, 77, HelpSlideTime);
                 p.HelpPanel.BeginAnimation(Canvas.LeftProperty, hide);
                 p.HelpPanel.Tag = "OFF";
             }
@@ -460,14 +467,37 @@ namespace OneHundredAndEighty
             MainWindow.Player1LegsWon.Content = 0;
             MainWindow.Player2LegsWon.Content = 0;
         }   //  Очистить леги
-        public void LegIncrement(Player p)
+        public void LegsSet(Player p)
         {
-            p.LegsWonLabel.Content = Int32.Parse((p.LegsWonLabel.Content).ToString()) + 1;
-        }  //  +1 к легу
-        public void SetIncrement(Player p)
+            p.LegsWonLabel.Content = p.LegsWon;
+        }  //  Установка текущих легов игрока
+        public void SetsSet(Player p)
         {
-            p.SetsWonLabel.Content = Int32.Parse((p.SetsWonLabel.Content).ToString()) + 1;
-        }  //  +1 к сету
-
+            p.SetsWonLabel.Content = p.SetsWon;
+        }  //  Установка текущих сетов игрока
+        public void TextLogAdd(string s)    //  Новая строка в текстовую панель
+        {
+            MainWindow.TextLog.Text += new StringBuilder().Append(s).Append("\n").ToString();
+            MainWindow.TextLog.ScrollToEnd();   //  Прокручиваем вниз
+        }
+        public void TextLogUndo()    // Удаление последный строки в текстовой панели
+        {
+            MainWindow.TextLog.Text = MainWindow.TextLog.Text.Remove(MainWindow.TextLog.Text.LastIndexOf("\n"));
+            MainWindow.TextLog.Text = MainWindow.TextLog.Text.Remove(MainWindow.TextLog.Text.LastIndexOf("\n"));
+            MainWindow.TextLog.AppendText("\n");
+            MainWindow.TextLog.ScrollToEnd();   //  Прокручиваем вниз
+        }
+        public void TextLogClear()    //  Очищаем текстовую панель текстовую панель
+        {
+            MainWindow.TextLog.Clear();
+        }
+        public void UndoThrowButtonOn()  //  Разблокируем кнопку отмены броска
+        {
+            MainWindow.UndoThrow.IsEnabled = true;
+        }
+        public void UndoThrowButtonOff()  //  Блокируем кнопку отмены броска
+        {
+            MainWindow.UndoThrow.IsEnabled = false;
+        }
     }
 }

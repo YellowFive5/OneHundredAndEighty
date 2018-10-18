@@ -17,6 +17,5 @@ namespace OneHundredAndEighty
         {
             MainWindow.BoardPanel.Visibility = System.Windows.Visibility.Hidden;
         }   //  Спрятать панель секторов
-
     }
 }
