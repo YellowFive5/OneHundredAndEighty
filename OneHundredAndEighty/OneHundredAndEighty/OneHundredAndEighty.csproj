@@ -60,6 +60,7 @@
     <Compile Include="Classes\BoardPanelLogic.cs" />
     <Compile Include="Classes\SavePoint.cs" />
     <Compile Include="Classes\SettingsPanelLogic.cs" />
+    <Compile Include="Classes\StatisticsWindowLogic.cs" />
     <Compile Include="Classes\Throw.cs" />
     <Compile Include="Classes\WinnerWindowLogic.cs" />
     <Compile Include="Windows\AbortWindow.xaml.cs">
@@ -70,6 +71,9 @@
     </Compile>
     <Compile Include="Windows\ExitWindow.xaml.cs">
       <DependentUpon>ExitWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StatisticWindow.xaml.cs">
+      <DependentUpon>StatisticWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WinnerWindow.xaml.cs">
       <DependentUpon>WinnerWindow.xaml</DependentUpon>
@@ -97,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ExitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StatisticWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
