@@ -85,5 +85,89 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+
+
+        <Canvas 
+            Height="100"
+            Canvas.Left="232"
+            Canvas.Top="158"
+            Width="100">
+            <Path HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="White" Data="M0.5,0.5 L44.121613,44.121613 0.5,87.743225 z" Height="124.717" RenderTransformOrigin="0.990775489230051,0.501001634920845" Stretch="Fill" Width="63.065" Canvas.Left="37.167" Canvas.Top="37.167">
+                <Path.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="443.29" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF090011" Offset="1"/>
+                        <GradientStop Color="#FF7600EC"/>
+                    </LinearGradientBrush>
+                </Path.Fill>
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-315"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Label Content="Full match"
+               Canvas.Left="31"
+               Canvas.Top="52"
+               FontWeight="Bold"
+               FontFamily="Agency FB"
+               FontSize="18"
+               RenderTransformOrigin="0.5,0.5" Foreground="White">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-45.154"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label Content="stats"
+               Canvas.Left="61"
+               Canvas.Top="67"
+               FontWeight="Bold"
+               FontFamily="Agency FB"
+               FontSize="18"
+               RenderTransformOrigin="0.5,0.5" Foreground="White">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-45.154"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Path x:Name="ShowStatsButton"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Data="M0.5,0.5 L44.121613,44.121613 0.5,87.743225 z"
+                    Height="124.717"
+                    RenderTransformOrigin="0.990775489230051,0.501001634920845"
+                    Stretch="Fill"
+                    Width="63.065"
+                    Canvas.Left="38"
+                    Canvas.Top="37" Fill="#00FF0000" MouseLeftButtonDown="ShowStatsButton_MouseLeftButtonDown">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-315"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+        </Canvas>
+
     </Canvas>
 </Window>
