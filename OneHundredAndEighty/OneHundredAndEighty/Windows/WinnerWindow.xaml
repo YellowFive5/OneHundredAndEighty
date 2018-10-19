@@ -7,12 +7,16 @@
         mc:Ignorable="d"
         Title="OneHundredAndEighty"
         Height="257.602"
-        Width="332.065"
+        Width="1150"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowStyle="None"
         BorderBrush="Black"
         >
+    <Window.Background>
+        <SolidColorBrush Color="White" Opacity="0"/>
+    </Window.Background>
 
     <Canvas x:Name="WinnerCanvas"
             Height="258"
@@ -20,13 +24,24 @@
             >
         <Canvas.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF303030" Offset="1"/>
-                <GradientStop Color="#FF13CD00"/>
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#CC427000" Offset="0.29"/>
+                <GradientStop Color="#FF4BCF00" Offset="0.523"/>
+                <GradientStop Color="#CC427000" Offset="0.726"/>
+                <GradientStop Color="#00420303" Offset="1"/>
+                <GradientStop Color="#00400303"/>
             </LinearGradientBrush>
         </Canvas.Background>
         <Label Content="And the winner is:"
-               Canvas.Left="14"
-               Canvas.Top="25"
+               Canvas.Left="458"
+               Canvas.Top="24"
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="30"
@@ -42,12 +57,12 @@
         </Label>
         <Label x:Name="WinnerName"
                 Content="Player"
-                Canvas.Left="100"
-                Canvas.Top="96"
+                Canvas.Left="574"
+                Canvas.Top="80"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="55"
-                RenderTransformOrigin="0.5,0.5"
+                RenderTransformOrigin="0.5,0.5" Width="261" VerticalContentAlignment="Center"
                >
             <Label.RenderTransform>
                 <TransformGroup>
@@ -60,21 +75,21 @@
         </Label>
         <Button x:Name="OKButton"
                 Content="OK"
-                Canvas.Left="119"
-                Canvas.Top="188"
+                Canvas.Left="494"
+                Canvas.Top="145"
                 Width="90"
                 Height="35"
                 BorderBrush="Black"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="16"
-                RenderTransformOrigin="0.5,0.5" Click="OKButton_Click"
+                RenderTransformOrigin="0.5,0.5" Click="OKButton_Click" Cursor="Hand"
                 >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="5.85"/>
+                    <RotateTransform Angle="11.028"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Button.RenderTransform>
@@ -85,14 +100,12 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-
-
         <Canvas 
             Height="100"
-            Canvas.Left="232"
-            Canvas.Top="158"
+            Canvas.Left="416"
+            Canvas.Top="153"
             Width="100">
-            <Path HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="White" Data="M0.5,0.5 L44.121613,44.121613 0.5,87.743225 z" Height="124.717" RenderTransformOrigin="0.990775489230051,0.501001634920845" Stretch="Fill" Width="63.065" Canvas.Left="37.167" Canvas.Top="37.167">
+            <Path HorizontalAlignment="Left" VerticalAlignment="Top" Stroke="White" Data="M0.5,0.5 L44.121613,44.121613 0.5,87.743225 z" Height="88.679" RenderTransformOrigin="0.990775489230051,0.501001634920845" Stretch="Fill" Width="44.841" Canvas.Left="65.997" Canvas.Top="28.868">
                 <Path.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <LinearGradientBrush.RelativeTransform>
@@ -111,39 +124,40 @@
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-315"/>
+                        <RotateTransform Angle="-258.908"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
             <Label Content="Full match"
-               Canvas.Left="31"
-               Canvas.Top="52"
+               Canvas.Left="89"
+               Canvas.Top="27"
                FontWeight="Bold"
                FontFamily="Agency FB"
-               FontSize="18"
+               FontSize="14
+                   "
                RenderTransformOrigin="0.5,0.5" Foreground="White">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-45.154"/>
+                        <RotateTransform Angle="10.865"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
             <Label Content="stats"
-               Canvas.Left="61"
-               Canvas.Top="67"
+               Canvas.Left="97"
+               Canvas.Top="40"
                FontWeight="Bold"
                FontFamily="Agency FB"
-               FontSize="18"
+               FontSize="14"
                RenderTransformOrigin="0.5,0.5" Foreground="White">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-45.154"/>
+                        <RotateTransform Angle="10.701"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Label.RenderTransform>
@@ -152,22 +166,59 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Data="M0.5,0.5 L44.121613,44.121613 0.5,87.743225 z"
-                    Height="124.717"
+                    Height="91.457"
                     RenderTransformOrigin="0.990775489230051,0.501001634920845"
                     Stretch="Fill"
-                    Width="63.065"
-                    Canvas.Left="38"
-                    Canvas.Top="37" Fill="#00FF0000" MouseLeftButtonDown="ShowStatsButton_MouseLeftButtonDown">
+                    Width="44.991"
+                    Canvas.Left="66.227"
+                    Canvas.Top="28.476" Fill="#00FF0000" MouseLeftButtonDown="ShowStatsButton_MouseLeftButtonDown" Cursor="Hand">
                 <Path.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-315"/>
+                        <RotateTransform Angle="-258.974"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
         </Canvas>
-
+        <Rectangle Height="8" Width="1150">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#CC000000" Offset="0.29"/>
+                    <GradientStop Color="Black" Offset="0.523"/>
+                    <GradientStop Color="#CC000000" Offset="0.726"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                    <GradientStop Color="#00000000"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Height="8" Canvas.Top="250" Width="1150">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#CC000000" Offset="0.29"/>
+                    <GradientStop Color="Black" Offset="0.523"/>
+                    <GradientStop Color="#CC000000" Offset="0.726"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                    <GradientStop Color="#00000000"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
     </Canvas>
 </Window>
