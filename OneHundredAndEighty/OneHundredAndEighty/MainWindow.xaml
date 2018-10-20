@@ -9,7 +9,7 @@
         ResizeMode="NoResize"
         Height="810"
         Width="1200"
-        Background="#FF595959"
+        Background="{x:Null}"
         Title="OneHundredAndEighty"
         Closing="MainWindow_Closing"
         >
@@ -88,6 +88,20 @@
         </Style>-->
     </Window.Resources>
     <Canvas>
+        <Canvas.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF191919" Offset="0"/>
+                <GradientStop Color="#FF939393" Offset="1"/>
+            </LinearGradientBrush>
+        </Canvas.Background>
         <Image x:Name="DartboardImg"
             Height="748"
             Width="748"
@@ -1323,13 +1337,13 @@
             Height="30"
             FontSize="19"
             Canvas.Left="50"
-            Canvas.Top="108"
+            Canvas.Top="108" Cursor="Hand"
             >
-                <ListBoxItem Content="101" IsHitTestVisible="False"/>
-                <ListBoxItem Content="301" IsHitTestVisible="False"/>
-                <ListBoxItem Content="501" IsHitTestVisible="False"/>
-                <ListBoxItem Content="701" IsHitTestVisible="False"/>
-                <ListBoxItem Content="1001" IsHitTestVisible="False"/>
+                <ListBoxItem Content="101" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="301" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="501" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="701" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="1001" IsHitTestVisible="False" Cursor="Hand"/>
             </ComboBox>
             <Label
             Content="Points"
@@ -1353,12 +1367,12 @@
             Height="29"
             FontSize="19"
             Canvas.Left="50"
-            Canvas.Top="182"
+            Canvas.Top="182" Cursor="Hand"
             >
-                <ListBoxItem Content="1" IsHitTestVisible="False"/>
-                <ListBoxItem Content="3" IsHitTestVisible="False"/>
-                <ListBoxItem Content="5" IsHitTestVisible="False"/>
-                <ListBoxItem Content="7" IsHitTestVisible="False"/>
+                <ListBoxItem Content="1" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="3" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="5" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="7" IsHitTestVisible="False" Cursor="Hand"/>
             </ComboBox>
             <Label
             Content="Sets"
@@ -1381,12 +1395,12 @@
             Height="30"
             FontSize="19"
             Canvas.Left="50"
-            Canvas.Top="145"
+            Canvas.Top="145" Cursor="Hand"
             >
-                <ListBoxItem Content="1" IsHitTestVisible="False"/>
-                <ListBoxItem Content="3" IsHitTestVisible="False"/>
-                <ListBoxItem Content="5" IsHitTestVisible="False"/>
-                <ListBoxItem Content="7" IsHitTestVisible="False"/>
+                <ListBoxItem Content="1" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="3" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="5" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="7" IsHitTestVisible="False" Cursor="Hand"/>
             </ComboBox>
             <Label
             Content="Legs"
@@ -1413,7 +1427,7 @@
             FontSize="22"
             Click="GameOn_Click"
             Canvas.Left="50"
-            Canvas.Top="217"
+            Canvas.Top="217" Cursor="Hand"
             >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1428,14 +1442,14 @@
                 Width="15"
                 Height="16"
                 GroupName="Who"
-                IsChecked="True"
+                IsChecked="True" Cursor="Hand"
                 />
             <RadioButton x:Name="Player2Radiobutton"
                 Canvas.Left="179"
                 Canvas.Top="87"
                 Width="15"
                 Height="16"
-                GroupName="Who"/>
+                GroupName="Who" Cursor="Hand"/>
             <Label
                 Content="Who throw first"
                 HorizontalAlignment="Left"
@@ -1835,7 +1849,7 @@
                 FontFamily="Agency FB"
                 FontWeight="Bold"
                 FontSize="14"
-                Click="EndMatchButton_Click"
+                Click="EndMatchButton_Click" Cursor="Hand"
                 >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1855,7 +1869,7 @@
                 FontWeight="Bold"
                 FontSize="11"
                 Click="UndoThrow_Click"
-                IsEnabled="False"
+                IsEnabled="False" Cursor="Hand"
                 >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

@@ -7,27 +7,42 @@
         mc:Ignorable="d"
         Title="OneHundredAndEighty"
         Height="257.602"
-        Width="332.065"
+        Width="1150"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowStyle="None"
         BorderBrush="Black"
         >
+    <Window.Background>
+        <SolidColorBrush Color="White" Opacity="0"/>
+    </Window.Background>
     <Grid>
         <Canvas
             HorizontalAlignment="Left"
             Height="258"
             VerticalAlignment="Top"
-            Width="332">
+            Width="1150">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="#FFB87500"/>
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#CC893800" Offset="0.29"/>
+                    <GradientStop Color="#FFCFA000" Offset="0.523"/>
+                    <GradientStop Color="#CC893800" Offset="0.726"/>
+                    <GradientStop Color="#00420303" Offset="1"/>
+                    <GradientStop Color="#00400303"/>
                 </LinearGradientBrush>
             </Canvas.Background>
             <Label Content="Do you want to abort"
-            Canvas.Left="9"
-            Canvas.Top="46"
+            Canvas.Left="404"
+            Canvas.Top="60"
             FontWeight="Bold"
             FontFamily="Agency FB"
             FontSize="30"
@@ -43,8 +58,8 @@
                 </Label.RenderTransform>
             </Label>
             <Label Content="current match ?"
-            Canvas.Left="99"
-            Canvas.Top="58"
+            Canvas.Left="494"
+            Canvas.Top="72"
             FontWeight="Bold"
             FontFamily="Agency FB"
             FontSize="30"
@@ -60,8 +75,8 @@
                 </Label.RenderTransform>
             </Label>
             <Label Content="*All unsaved data will be lost"
-            Canvas.Left="120"
-            Canvas.Top="83"
+            Canvas.Left="515"
+            Canvas.Top="97"
             FontWeight="Bold"
             FontFamily="Agency FB"
             FontSize="20"
@@ -78,8 +93,8 @@
             </Label>
             <Button x:Name="ContinueButton"
                 Content="Continue match"
-                Canvas.Left="81"
-                Canvas.Top="158"
+                Canvas.Left="476"
+                Canvas.Top="172"
                 Width="90"
                 Height="35"
                 BorderBrush="Black"
@@ -87,7 +102,7 @@
                 FontFamily="Agency FB"
                 FontSize="16"
                 RenderTransformOrigin="0.5,0.5"
-                Click="ContinueButton_Click"
+                Click="ContinueButton_Click" Cursor="Hand"
                 >
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -106,8 +121,8 @@
             </Button>
             <Button x:Name="AbortButton"
                 Content="Abort match"
-                Canvas.Left="175"
-                Canvas.Top="140"
+                Canvas.Left="570"
+                Canvas.Top="154"
                 Width="90"
                 Height="36"
                 BorderBrush="Black"
@@ -115,7 +130,7 @@
                 FontFamily="Agency FB"
                 FontSize="16"
                 RenderTransformOrigin="0.5,0.5"
-                Click="AbortButton_Click"
+                Click="AbortButton_Click" Cursor="Hand"
                 >
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -132,6 +147,44 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+            <Rectangle Height="8" Width="1150">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#CC000000" Offset="0.29"/>
+                        <GradientStop Color="Black" Offset="0.523"/>
+                        <GradientStop Color="#CC000000" Offset="0.726"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                        <GradientStop Color="#00000000"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Height="8" Canvas.Top="250" Width="1150">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#CC000000" Offset="0.29"/>
+                        <GradientStop Color="Black" Offset="0.523"/>
+                        <GradientStop Color="#CC000000" Offset="0.726"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                        <GradientStop Color="#00000000"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
         </Canvas>
 
     </Grid>

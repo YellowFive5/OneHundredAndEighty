@@ -7,28 +7,42 @@
         mc:Ignorable="d"
         Title="OneHundredAndEighty"
         Height="257.602"
-        Width="332.065"
+        Width="1150"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowStyle="None"
         BorderBrush="Black"
         >
+    <Window.Background>
+        <SolidColorBrush Color="White" Opacity="0"/>
+    </Window.Background>
     <Canvas
         HorizontalAlignment="Left"
         Height="258"
         VerticalAlignment="Top"
-        Width="332"
+        Width="1150"
         >
         <Canvas.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF131313" Offset="1"/>
-                <GradientStop Color="#FFBF0000"/>
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#CC400303" Offset="0.29"/>
+                <GradientStop Color="#FF780000" Offset="0.523"/>
+                <GradientStop Color="#CC420303" Offset="0.726"/>
+                <GradientStop Color="#00420303" Offset="1"/>
+                <GradientStop Color="#00400303"/>
             </LinearGradientBrush>
         </Canvas.Background>
-
         <Label Content="Match has"
-               Canvas.Left="59"
-               Canvas.Top="46"
+               Canvas.Left="480"
+               Canvas.Top="57"
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="48"
@@ -43,8 +57,8 @@
             </Label.RenderTransform>
         </Label>
         <Label Content="been canceled"
-               Canvas.Left="34"
-               Canvas.Top="96"
+               Canvas.Left="455"
+               Canvas.Top="107"
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="48"
@@ -60,8 +74,8 @@
         </Label>
         <Button x:Name="OKButton"
                 Content="OK"
-                Canvas.Left="184"
-                Canvas.Top="154"
+                Canvas.Left="605"
+                Canvas.Top="165"
                 Width="90"
                 Height="35"
                 BorderBrush="Black"
@@ -69,7 +83,7 @@
                 FontFamily="Agency FB"
                 FontSize="16"
                 RenderTransformOrigin="0.5,0.5"
-                Click="OKButton_Click"
+                Click="OKButton_Click" Cursor="Hand"
                 >
             <Button.RenderTransform>
                 <TransformGroup>
@@ -86,6 +100,45 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <Rectangle Height="8" Width="1150">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#CC000000" Offset="0.29"/>
+                    <GradientStop Color="Black" Offset="0.523"/>
+                    <GradientStop Color="#CC000000" Offset="0.726"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                    <GradientStop Color="#00000000"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Height="8" Canvas.Top="250" Width="1150">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#CC000000" Offset="0.29"/>
+                    <GradientStop Color="Black" Offset="0.523"/>
+                    <GradientStop Color="#CC000000" Offset="0.726"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                    <GradientStop Color="#00000000"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
     </Canvas>
 
 </Window>

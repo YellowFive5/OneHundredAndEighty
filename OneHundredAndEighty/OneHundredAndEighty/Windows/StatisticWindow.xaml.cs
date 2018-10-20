@@ -15,24 +15,17 @@ using System.Windows.Shapes;
 namespace OneHundredAndEighty.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для WinnerWindow.xaml
+    /// Логика взаимодействия для StatisticWindow.xaml
     /// </summary>
-    public partial class WinnerWindow : Window
+    public partial class StatisticWindow : Window
     {
-        public bool StatsShow { get; private set; } //  Показ статистики
-        public WinnerWindow()
+        public StatisticWindow()
         {
             InitializeComponent();
         }
 
-        private void OKButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-        }
-
-        private void ShowStatsButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            StatsShow = true;
             this.Close();
         }
     }

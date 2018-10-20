@@ -15,6 +15,7 @@ namespace OneHundredAndEighty
         public SettingsPanelLogic SettingsPanelLogic = new SettingsPanelLogic();    //  Панель настроек матча
         public BoardPanelLogic BoardPanelLogic = new BoardPanelLogic(); //  Панель секторов
         public WinnerWindowLogic WinnerWindowLogic = new WinnerWindowLogic();   //  Окно победителя
+        public StatisticsWindowLogic StatisticsWindowLogic = new StatisticsWindowLogic();   //  Окно статистики
         public bool IsOn { get; private set; }  //  Флаг работы матча
         Player Player1 = null;  //  Игрок 1
         Player Player2 = null;  //  Игрок 2
@@ -28,6 +29,7 @@ namespace OneHundredAndEighty
 
         public void StartGame() //  Начало нового матча
         {
+
             IsOn = true;    //  Флаг матча
             //  Панели
             SettingsPanelLogic.PanelHide(); //  Прячем панель настроек
@@ -61,14 +63,14 @@ namespace OneHundredAndEighty
         void EndGame()   //  Конец матча
         {
             IsOn = false;   //  Флаг матча
-            ClearCollections();   //  Зануляем коллекции бросков
             //  Панели
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
             InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
             //  Сообщение
-            WinnerWindowLogic.ShowWinner(PlayerOnThrow);    //  Показываем окно победителя
+            WinnerWindowLogic.ShowWinner(PlayerOnThrow, Player1, Player2, AllMatchThrows);    //  Показываем окно победителя и статистику
+            ClearCollections();   //  Зануляем коллекции бросков
         }
         public void AbortGame() //  Отмена текущего матча
         {
@@ -153,6 +155,8 @@ namespace OneHundredAndEighty
 
             PlayerOnThrow.PointsToOut -= (int)T.Points; //  Вычитаем набраные за бросок очки игрока из общего результата лега
             PlayerOnThrow.HandPoints += (int)T.Points;  //  Плюсуем набраные за подход очки игрока
+            if (PlayerOnThrow.HandPoints == 180)    //  Если в подходе набрано 180
+                PlayerOnThrow._180 += 1;    //  Записываем
             InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
             InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Проверяем помощь
 
