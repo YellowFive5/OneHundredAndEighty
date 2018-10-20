@@ -1280,8 +1280,8 @@
         </Canvas>
         <Canvas x:Name="SettingsPanel"
             Height="258"
-            Canvas.Left="72"
-            Canvas.Top="239"
+            Canvas.Left="100"
+            Canvas.Top="160"
             Width="224"
             Visibility="Visible"
             >
@@ -1370,9 +1370,17 @@
             Canvas.Top="182" Cursor="Hand"
             >
                 <ListBoxItem Content="1" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="2" IsHitTestVisible="False" Cursor="Hand"/>
                 <ListBoxItem Content="3" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="4" IsHitTestVisible="False" Cursor="Hand"/>
                 <ListBoxItem Content="5" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="6" IsHitTestVisible="False" Cursor="Hand"/>
                 <ListBoxItem Content="7" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="8" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="9" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="10" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="11" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="12" IsHitTestVisible="False" Cursor="Hand"/>
             </ComboBox>
             <Label
             Content="Sets"
@@ -1398,9 +1406,17 @@
             Canvas.Top="145" Cursor="Hand"
             >
                 <ListBoxItem Content="1" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="2" IsHitTestVisible="False" Cursor="Hand"/>
                 <ListBoxItem Content="3" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="4" IsHitTestVisible="False" Cursor="Hand"/>
                 <ListBoxItem Content="5" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="6" IsHitTestVisible="False" Cursor="Hand"/>
                 <ListBoxItem Content="7" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="8" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="9" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="10" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="11" IsHitTestVisible="False" Cursor="Hand"/>
+                <ListBoxItem Content="12" IsHitTestVisible="False" Cursor="Hand"/>
             </ComboBox>
             <Label
             Content="Legs"
@@ -1485,7 +1501,7 @@
                 IsTabStop="False"
                 IsUndoEnabled="False"
                 AllowDrop="False"
-                IsHitTestVisible="True" SelectionBrush="#FF51FF00"
+                IsHitTestVisible="True" SelectionBrush="#FF51FF00" Focusable="False"
                 >
                 <TextBox.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
