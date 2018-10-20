@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Icon2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -141,14 +141,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <SplashScreen Include="Images\StartLogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Dartboard.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SplashScreen Include="Images\Start logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon2.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

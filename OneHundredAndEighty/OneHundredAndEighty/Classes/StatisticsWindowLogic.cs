@@ -9,75 +9,59 @@ using System.Windows.Media;
 namespace OneHundredAndEighty
 {
 
-    public class StatisticsWindowLogic
+    public class StatisticsWindowLogic  //  Статистика матча
     {
         MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
         Windows.StatisticWindow StatisticWindow = null;
-
-        public int Throws { get; private set; }
-        public int Player1Throws { get; private set; }
-        public int Player2Throws { get; private set; }
-
-        public int Points { get; private set; }
-        public int Player1Points { get; private set; }
-        public int Player2Points { get; private set; }
-
-        public double AveragePoints { get; private set; }
-        public double AveragePlayer1Points { get; private set; }
-        public double AveragePlayer2Points { get; private set; }
-
-        public int SetsPlayed { get; private set; }
-        public int Player1SetsWon { get; private set; }
-        public int Player2SetsWon { get; private set; }
-
-        public int LegsPlayed { get; private set; }
-        public int Player1LegsWon { get; private set; }
-        public int Player2LegsWon { get; private set; }
-
-        public int FaultThrows { get; private set; }
-        public int Player1FaultThrows { get; private set; }
-        public int Player2FaultThrows { get; private set; }
-
-        public int _180 { get; private set; }
-        public int Player1_180 { get; private set; }
-        public int Player2_180 { get; private set; }
-
-        public int SingleThrows { get; private set; }
-        public int Player1SingleThrows { get; private set; }
-        public int Player2SingleThrows { get; private set; }
-
-        public int DoubleThrows { get; private set; }
-        public int Player1DoubleThrows { get; private set; }
-        public int Player2DoubleThrows { get; private set; }
-
-        public int TrembleThrows { get; private set; }
-        public int Player1TrembleThrows { get; private set; }
-        public int Player2TrembleThrows { get; private set; }
-
-        public int _25Throws { get; private set; }
-        public int Player1_25Throws { get; private set; }
-        public int Player2_25Throws { get; private set; }
-
-        public int BulleyeThrows { get; private set; }
-        public int Player1BulleyeThrows { get; private set; }
-        public int Player2BulleyeThrows { get; private set; }
-
-        public int ZeroThrows { get; private set; }
-        public int Player1ZeroThrows { get; private set; }
-        public int Player2ZeroThrows { get; private set; }
-
-
+        public int Throws { get; private set; } //  Всего бросков
+        public int Player1Throws { get; private set; }  //  Бросков у игрока 1
+        public int Player2Throws { get; private set; }  //  Бросков у игрока 2
+        public int Points { get; private set; } //  Всего очков
+        public int Player1Points { get; private set; }  //  Очков у игрока 1
+        public int Player2Points { get; private set; }  //  Очков у игрока 2
+        public double AveragePoints { get; private set; }   //  Средние очки за бросок
+        public double AveragePlayer1Points { get; private set; }    //  Средние очки за бросок игрока 1
+        public double AveragePlayer2Points { get; private set; }    //  Средние очки за бросок игрока 2
+        public int SetsPlayed { get; private set; } //  Сыграно сетов
+        public int Player1SetsWon { get; private set; } //  Выиграно сетов игроком 1
+        public int Player2SetsWon { get; private set; } //  Выиграно сетов игроком 2
+        public int LegsPlayed { get; private set; } //  Сыграно легов
+        public int Player1LegsWon { get; private set; } //  Выиграно легов игроком 1
+        public int Player2LegsWon { get; private set; } //  Выиграно легов игроком 2
+        public int FaultThrows { get; private set; }    //  Штрафных бросков
+        public int Player1FaultThrows { get; private set; } //  Штрафных бросков игрока 1
+        public int Player2FaultThrows { get; private set; } //  Штрафных бросков игрока 2
+        public int _180 { get; private set; }   //  Количество набора 180 очков
+        public int Player1_180 { get; private set; }    //  180 у игрока 1
+        public int Player2_180 { get; private set; }    //  180 у игрока 2
+        public int SingleThrows { get; private set; }   //  Бросков в одинарный сектор
+        public int Player1SingleThrows { get; private set; }    //  Бросков в одинарный сектор игрока 1
+        public int Player2SingleThrows { get; private set; }    //  Бросков в одинарный сектор игрока 2
+        public int DoubleThrows { get; private set; }   //  Бросков в удвоение
+        public int Player1DoubleThrows { get; private set; }    //  Бросков в удвоение игрока 1
+        public int Player2DoubleThrows { get; private set; }    //  Бросков в удвоение игрока 2
+        public int TrembleThrows { get; private set; }  //  Бросков в утроение
+        public int Player1TrembleThrows { get; private set; }   //  Бросков в утроение игрока 1
+        public int Player2TrembleThrows { get; private set; }   //  Бросков в утроение игрока 2
+        public int _25Throws { get; private set; }  //  Бросков в 25
+        public int Player1_25Throws { get; private set; }   //  Бросков в 25 игрока 1
+        public int Player2_25Throws { get; private set; }   //  Бросков в 25 игрока 2
+        public int BulleyeThrows { get; private set; }  //  Бросков в булл
+        public int Player1BulleyeThrows { get; private set; }   //  Бросков в булл игрока 1
+        public int Player2BulleyeThrows { get; private set; }   //  Бросков в булл игрока 2
+        public int ZeroThrows { get; private set; } //  Бросков в 0
+        public int Player1ZeroThrows { get; private set; }  //  Бросков в 0 игрока 1
+        public int Player2ZeroThrows { get; private set; }  //  Бросков в 0 игрока 2
 
         public void ShowMatchStatistics(Player winner, Player p1, Player p2, Stack<Throw> AllMatchThrows)   //  Показать статистику матча
         {
             StatisticWindow = new Windows.StatisticWindow();    //  Ссылка на окно статистики матча
             StatisticWindow.Owner = MainWindow;    //  Прописываем владельца
-            while (AllMatchThrows.Count != 0)
+            while (AllMatchThrows.Count != 0)   //  Разбираем бросок на запчасти
             {
                 Throw T = AllMatchThrows.Pop();
                 Throws += 1;
                 Points += (int)T.Points;
-
                 if (T.WhoThrow == "Player1")
                 {
                     Player1Throws += 1;
@@ -160,8 +144,9 @@ namespace OneHundredAndEighty
                         break;
                 }
             }
-            AveragePlayer1Points = (Player1Throws == 0) ? 0 : Math.Round((double)Player1Points / Player1Throws, 2);
-            AveragePlayer2Points = (Player2Throws == 0) ? 0 : Math.Round((double)Player2Points / Player2Throws, 2);
+            AveragePlayer1Points = (Player1Throws == 0) ? 0 : Math.Round((double)Player1Points / Player1Throws, 2); //  Средние очки игрока 1
+            AveragePlayer2Points = (Player2Throws == 0) ? 0 : Math.Round((double)Player2Points / Player2Throws, 2); //  Средние очки игрока 2
+            //  Передаем данные в окно статистики
             //  Winner label
             if (winner.Tag == "Player1")
                 Canvas.SetLeft(StatisticWindow.WinnerLabel, 541);
@@ -254,7 +239,7 @@ namespace OneHundredAndEighty
             if (ZeroThrows == 0)
                 StatisticWindow.PlayersZeroThrows.Fill = Brush(0, 0);
             else
-                StatisticWindow.PlayersZeroThrows.Fill = Brush(Player1ZeroThrows, ZeroThrows);
+                StatisticWindow.PlayersZeroThrows.Fill = Brush(ZeroThrows - Player1ZeroThrows, ZeroThrows);
             //  Fault throws box
             StatisticWindow.FaultThrows.Content = FaultThrows;
             StatisticWindow.Player1FaultThrows.Content = Player1FaultThrows;
