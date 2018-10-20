@@ -175,6 +175,8 @@ namespace OneHundredAndEighty
                 Player2.SetsWon = SavePoints.Peek().Player2SetsWon; //  Восстанавливаем Игроку 2 выигранные сеты
                 Player2.LegsWon = SavePoints.Peek().Player2LegsWon; //  Восстанавливаем Игроку 2 выигранные леги
                 Player2.PointsToOut = SavePoints.Peek().Player2PointsToOut; //  Восстанавливаем Игроку 2 очки на завершение лега
+                Player1._180 = SavePoints.Peek().Player1_180;   //  Восстанавливаем Игроку 1 180
+                Player2._180 = SavePoints.Peek().Player2_180;   //  Восстанавливаем Игроку 2 180
                 InfoPanelLogic.SetsSet(Player1);    //  Восстанавливаем в инфо-панели очки выигранных сетов Игрока 1
                 InfoPanelLogic.LegsSet(Player1);    //  Восстанавливаем в инфо-панели очки выигранных легов Игрока 1
                 InfoPanelLogic.PointsSet(Player1);  //  Восстанавливаем в инфо-панели очки на завершение лега Игрока 1
@@ -235,6 +237,8 @@ namespace OneHundredAndEighty
             {
                 InfoPanelLogic.TextLogAdd(new StringBuilder().Append("    > ").Append(PlayerOnThrow.Name).Append(" FAULT").ToString());  //  Пишем в текстовую панель
                 PlayerOnThrow.PointsToOut += PlayerOnThrow.HandPoints;  //  Отменяем подход игрока
+                if (PlayerOnThrow.HandPoints == 180)    //  Если в штрафном подходе было набрано 180 очков
+                    PlayerOnThrow._180 -= 1;    //  Отменяем игроку 180
                 InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
                 ClearHands();   //  Очищаем броски
                 TogglePlayerOnThrow();  //  Меняем игрока на броске
