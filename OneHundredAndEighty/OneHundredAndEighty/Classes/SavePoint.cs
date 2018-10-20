@@ -15,6 +15,8 @@ namespace OneHundredAndEighty
         public int Player2LegsWon{ get; private set; }  //  Количество выигранных легов Игрока 2
         public int Player2SetsWon { get; private set; } //  Количество выигранных сетов Игрока 2
         public int Player2PointsToOut { get; private set; } //  Количество очков на закрытие лега Игрока 2
+        public int Player1_180 { get; private set; } //  Количество 180 Игрока 1
+        public int Player2_180 { get; private set; } //  Количество 180 Игрока 1
         public Player PlayerOnThrow { get; private set; }   //  Игрок на подходе
         public Player PlayerOnLeg { get; private set; } //  Игрок на начало лега
         public Throw FirstThrow { get; private set; }   //  Первый бросок игрока на подходе
@@ -30,6 +32,8 @@ namespace OneHundredAndEighty
             this.Player2SetsWon = Player2.SetsWon;
             this.Player1PointsToOut = Player1.PointsToOut;
             this.Player2PointsToOut = Player2.PointsToOut;
+            this.Player1_180 = Player1._180;
+            this.Player2_180 = Player2._180;
             this.PlayerOnThrow = PlayerOnThrow;
             this.PlayerOnLeg = PlayerOnLeg;
             this.FirstThrow = PlayerOnThrow.Throw1;
