@@ -73,6 +73,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\BoardPanelLogic.cs" />
+    <Compile Include="Classes\DBwork.cs" />
+    <Compile Include="Classes\NewPlayer.cs" />
     <Compile Include="Classes\SavePoint.cs" />
     <Compile Include="Classes\SettingsPanelLogic.cs" />
     <Compile Include="Classes\StatisticsWindowLogic.cs" />
@@ -87,8 +89,14 @@
     <Compile Include="Windows\ExitWindow.xaml.cs">
       <DependentUpon>ExitWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\NewPlayer.xaml.cs">
+      <DependentUpon>NewPlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\StatisticWindow.xaml.cs">
       <DependentUpon>StatisticWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WelcomeNewPlayer.xaml.cs">
+      <DependentUpon>WelcomeNewPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WinnerWindow.xaml.cs">
       <DependentUpon>WinnerWindow.xaml</DependentUpon>
@@ -119,7 +127,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\NewPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\StatisticWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WelcomeNewPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

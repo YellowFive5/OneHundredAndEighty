@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace OneHundredAndEighty
 {
@@ -54,7 +49,7 @@ namespace OneHundredAndEighty
                 .Append(SetsToGo)
                 .Append(" sets in ")
                 .Append(LegsToGo)
-                .Append(" legs in ")
+                .Append(" legs with ")
                 .Append(PointsToGo)
                 .Append(" points").ToString());
             InfoPanelLogic.TextLogAdd("Game on");
