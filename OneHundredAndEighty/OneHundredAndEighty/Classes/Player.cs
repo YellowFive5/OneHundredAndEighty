@@ -7,6 +7,7 @@ namespace OneHundredAndEighty
     {
         public string Name { get; private set; }    //  Имя игрока
         public string Tag { get; private set; } //  Тэг
+        public int DBId { get; private set; }   //  Id игрока в БД
         //Матч
         public int SetsWon; //  Количество выигранных сетов
         public int LegsWon; //  Количество выигранных легов в сете
@@ -31,9 +32,10 @@ namespace OneHundredAndEighty
         public Label LegsWonLabel;  //  Лейбл выиграных легов
         public Label PointsLabel;   //  Лейбл набраных очнов
 
-        public Player(string Tag, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, int PointsToOut) //  Конструктор нового игрока
+        public Player(string Tag, int id, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, int PointsToOut) //  Конструктор нового игрока
         {
             this.Tag = Tag;
+            this.DBId = id;
             this.Name = Name;
             this.HelpPanel = HelpPanel;
             this.HelpLabel = HelpLabel;

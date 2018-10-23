@@ -10,6 +10,15 @@ namespace OneHundredAndEighty
     {
         MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
         Windows.StatisticWindow StatisticWindow = null;
+
+        public int Player1Id { get; private set; } //  Id игрока 1
+        public string Player1Name { get; private set; } //  Имя игрока 1
+        public int Player2Id { get; private set; } //  Id игрока 2
+        public string Player2Name { get; private set; } //  Имя игрока 2
+        public int WinnerId { get; private set; } //  Id победителя
+        public string WinnerName { get; private set; } //  Имя победителя
+        public int LooserId { get; private set; } //  Id проигравшего
+        public string LooserName { get; private set; } //  Имя проигравшего
         public int Throws { get; private set; } //  Всего бросков
         public int Player1Throws { get; private set; }  //  Бросков у игрока 1
         public int Player2Throws { get; private set; }  //  Бросков у игрока 2
@@ -50,10 +59,18 @@ namespace OneHundredAndEighty
         public int Player1ZeroThrows { get; private set; }  //  Бросков в 0 игрока 1
         public int Player2ZeroThrows { get; private set; }  //  Бросков в 0 игрока 2
 
-        public void ShowMatchStatistics(Player winner, Player p1, Player p2, Stack<Throw> AllMatchThrows)   //  Показать статистику матча
+        public void CountMatchStatistics(Player winner, Player p1, Player p2, Stack<Throw> AllMatchThrows)   //  Считаем статистику матча
         {
             StatisticWindow = new Windows.StatisticWindow();    //  Ссылка на окно статистики матча
-            StatisticWindow.Owner = MainWindow;    //  Прописываем владельца
+            Player1Id = p1.DBId;
+            Player1Name = p1.Name;
+            Player2Id = p2.DBId;
+            Player2Name = p2.Name;
+            WinnerName = winner.Name;
+            WinnerId = winner.DBId;
+            LooserName = (WinnerName == p1.Name) ? p2.Name : p1.Name;
+            LooserId = (WinnerName == p1.Name) ? p2.DBId : p1.DBId;
+
             while (AllMatchThrows.Count != 0)   //  Разбираем бросок на запчасти
             {
                 Throw T = AllMatchThrows.Pop();
@@ -245,10 +262,13 @@ namespace OneHundredAndEighty
                 StatisticWindow.PlayersFaultThrows.Fill = Brush(0, 0);
             else
                 StatisticWindow.PlayersFaultThrows.Fill = Brush(FaultThrows - Player1FaultThrows, FaultThrows);
-            //
-            ClearColection();
-            StatisticWindow.ShowDialog();   //  Показываем окно статистики
         }
+        public void ShowMatchStatistics()   //  Показываем окно статистики 
+        {
+            StatisticWindow.Owner = MainWindow;    //  Прописываем владельца
+            StatisticWindow.ShowDialog();
+        }
+
         Brush Brush(double d, double D)   //  Кисть
         {
             double point;
@@ -266,7 +286,7 @@ namespace OneHundredAndEighty
             B.RelativeTransform = new RotateTransform(-0.5);
             return B;
         }
-        void ClearColection()   //  Очистка коллекции
+        public void ClearColection()   //  Очистка коллекции
         {
             Throws = 0;
             Player1Throws = 0;
@@ -307,6 +327,14 @@ namespace OneHundredAndEighty
             ZeroThrows = 0;
             Player1ZeroThrows = 0;
             Player2ZeroThrows = 0;
+            Player1Name = "";
+            Player2Name = "";
+            WinnerName = "";
+            LooserName = "";
+            Player1Id = 0;
+            Player2Id = 0;
+            WinnerId = 0;
+            LooserId = 0;
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿namespace OneHundredAndEighty
 {
-    public class BoardPanelLogic    //  Класс логики панели секторов
+    public static class BoardPanelLogic    //  Класс логики панели секторов
     {
-        MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
-        public void PanelShow()
+        public static void PanelShow()
         {
+            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
             MainWindow.BoardPanel.Visibility = System.Windows.Visibility.Visible;
         }   //  Показать панель секторов 
-        public void PanelHide()
+        public static void PanelHide()
         {
+            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
             MainWindow.BoardPanel.Visibility = System.Windows.Visibility.Hidden;
         }   //  Спрятать панель секторов
     }

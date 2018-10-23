@@ -8,8 +8,6 @@ namespace OneHundredAndEighty
         MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
         public InfoPanelLogic InfoPanelLogic = new InfoPanelLogic();    //  Инфо-панель
         public SettingsPanelLogic SettingsPanelLogic = new SettingsPanelLogic();    //  Панель настроек матча
-        public BoardPanelLogic BoardPanelLogic = new BoardPanelLogic(); //  Панель секторов
-        public WinnerWindowLogic WinnerWindowLogic = new WinnerWindowLogic();   //  Окно победителя
         public StatisticsWindowLogic StatisticsWindowLogic = new StatisticsWindowLogic();   //  Окно статистики
         public bool IsOn { get; private set; }  //  Флаг работы матча
         Player Player1 = null;  //  Игрок 1
@@ -35,8 +33,8 @@ namespace OneHundredAndEighty
             SetsToGo = SettingsPanelLogic.SetsToGo();   //  Получаем количество легов сета
             LegsToGo = SettingsPanelLogic.LegsToGo();   //  Получаем количество сетов матча
             //  Игроки
-            Player1 = new Player("Player1", SettingsPanelLogic.Player1Name(), MainWindow.Player1Help, MainWindow.Player1PointsHelp, MainWindow.Player1SetsWon, MainWindow.Player1LegsWon, MainWindow.Player1Points, PointsToGo);  //  Игрок 1
-            Player2 = new Player("Player2", SettingsPanelLogic.Player2Name(), MainWindow.Player2Help, MainWindow.Player2PointsHelp, MainWindow.Player2SetsWon, MainWindow.Player2LegsWon, MainWindow.Player2Points, PointsToGo);  //  Игрок 2
+            Player1 = new Player("Player1", (int)MainWindow.Player1NameCombobox.SelectedValue, SettingsPanelLogic.Player1Name(), MainWindow.Player1Help, MainWindow.Player1PointsHelp, MainWindow.Player1SetsWon, MainWindow.Player1LegsWon, MainWindow.Player1Points, PointsToGo);  //  Игрок 1
+            Player2 = new Player("Player2", (int)MainWindow.Player2NameCombobox.SelectedValue, SettingsPanelLogic.Player2Name(), MainWindow.Player2Help, MainWindow.Player2PointsHelp, MainWindow.Player2SetsWon, MainWindow.Player2LegsWon, MainWindow.Player2Points, PointsToGo);  //  Игрок 2
             PlayerOnThrow = SettingsPanelLogic.WhoThrowFirst(Player1, Player2); //  Кто первый бросает
             PlayerOnLeg = PlayerOnThrow;    //  Чей первый лег
             //  Инфо-панель
@@ -58,13 +56,15 @@ namespace OneHundredAndEighty
         void EndGame()   //  Конец матча
         {
             IsOn = false;   //  Флаг матча
+            //  Сообщение
+            WinnerWindowLogic.ShowWinner(PlayerOnThrow, Player1, Player2, AllMatchThrows);    //  Показываем окно победителя и статистику
             //  Панели
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
-            InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
-            //  Сообщение
-            WinnerWindowLogic.ShowWinner(PlayerOnThrow, Player1, Player2, AllMatchThrows);    //  Показываем окно победителя и статистику
+            //  Сохранение в БД
+            DBwork.AftermatchSave(StatisticsWindowLogic);
+            //  Обнуление коллекций
             ClearCollections();   //  Зануляем коллекции бросков
         }
         public void AbortGame() //  Отмена текущего матча
@@ -114,6 +114,8 @@ namespace OneHundredAndEighty
         }
         void ClearCollections()  //  Зануляем коллекции бросков
         {
+            StatisticsWindowLogic.ClearColection(); //  Зануляем коллекцию статистики
+            InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
             InfoPanelLogic.UndoThrowButtonOff();    //  Выключаем кнопку отмены броска
             AllMatchThrows.Clear(); //  Зануляем коллекцию бросков матча
             SavePoints.Clear(); //  Зануляем точки сохнанения

@@ -140,6 +140,7 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             GotFocus="PlayerNameBox_GotFocus"
+            MaxLength="20"
             />
         <TextBox x:Name="PlayerNickNameBox"
             HorizontalAlignment="Left"
@@ -156,6 +157,7 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             GotFocus="PlayerNameBox_GotFocus"
+            MaxLength="20"
             />
 
     </Canvas>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
@@ -12,6 +13,12 @@ namespace OneHundredAndEighty
     {
         public Game G = null;
 
+        public MainWindow()
+        {
+            G = new Game();
+            InitializeComponent();
+            DBwork.LoadPlayers();
+        }
         public void FadeIn()    //  Затухание главного окна
         {
             this.Opacity = 0.4;
@@ -19,12 +26,6 @@ namespace OneHundredAndEighty
         public void FadeOut()   //  Появление главного окна
         {
             this.Opacity = 1;
-        }
-        public MainWindow()
-        {
-            G = new Game();
-            InitializeComponent();
-            DBwork.LoadPlayers();
         }
         private void PointsShow(object sender, MouseEventArgs e)    //  Показ очков сектора
         {
@@ -37,10 +38,10 @@ namespace OneHundredAndEighty
         }
         private void Throw(object sender, RoutedEventArgs e)    //  Бросок
         {
-            G.BoardPanelLogic.PanelHide();    //  Скрываем панель секторов
+            BoardPanelLogic.PanelHide();    //  Скрываем панель секторов
             G.NextThrow(new Throw(sender));
             if (G.IsOn)   //  Если игра продолжается
-                G.BoardPanelLogic.PanelShow();    //  Показываем панель секторов и бросаем дальше
+                BoardPanelLogic.PanelShow();    //  Показываем панель секторов и бросаем дальше
         }
         private void EndMatchButton_Click(object sender, RoutedEventArgs e) //  Кнопка отмены матча
         {
