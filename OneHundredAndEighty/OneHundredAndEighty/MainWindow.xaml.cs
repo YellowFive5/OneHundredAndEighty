@@ -18,6 +18,7 @@ namespace OneHundredAndEighty
             G = new Game();
             InitializeComponent();
             DBwork.LoadPlayers();
+            DBwork.LoadSettings();
         }
         public void FadeIn()    //  Затухание главного окна
         {
@@ -59,8 +60,10 @@ namespace OneHundredAndEighty
             Windows.ExitWindow window = new Windows.ExitWindow();
             window.Owner = this;
             window.ShowDialog();
-            if (window.result)
-                e.Cancel = true;
+            if (window.result)  //  Если нажата отмена выхода
+                e.Cancel = true;    //  Остаемся
+            else // Если выходим
+                DBwork.SaveSettings();  //  Сохраняем настройки
             this.FadeOut();
         }
         private void UndoThrow_Click(object sender, RoutedEventArgs e)  //  Кнопка отмены броска

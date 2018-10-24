@@ -7,6 +7,54 @@ namespace OneHundredAndEighty
 {
     public static class DBwork  //  Класс работы с БД
     {
+        public static void SaveSettings()   //  Сохранение настроек в БД
+        {
+            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
+            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                connection.Open();
+                SqlCommand player1namecombobox = new SqlCommand("UPDATE Settings SET IntValue=@value WHERE SettingName='Player1NameBoxSelectedItem'", connection);
+                player1namecombobox.Parameters.AddWithValue("@value", MainWindow.Player1NameCombobox.SelectedIndex);
+                player1namecombobox.ExecuteNonQuery();
+                SqlCommand player2namecombobox = new SqlCommand("UPDATE Settings SET IntValue=@value WHERE SettingName='Player2NameBoxSelectedItem'", connection);
+                player2namecombobox.Parameters.AddWithValue("@value", MainWindow.Player2NameCombobox.SelectedIndex);
+                player2namecombobox.ExecuteNonQuery();
+                SqlCommand setbox = new SqlCommand("UPDATE Settings SET IntValue=@value WHERE SettingName='SetsBoxSelectedItem'", connection);
+                setbox.Parameters.AddWithValue("@value", MainWindow.SetBox.SelectedIndex);
+                setbox.ExecuteNonQuery();
+                SqlCommand legbox = new SqlCommand("UPDATE Settings SET IntValue=@value WHERE SettingName='LegsBoxSelectedItem'", connection);
+                legbox.Parameters.AddWithValue("@value", MainWindow.LegBox.SelectedIndex);
+                legbox.ExecuteNonQuery();
+                SqlCommand pointsbox = new SqlCommand("UPDATE Settings SET IntValue=@value WHERE SettingName='PointsBoxSelectedItem'", connection);
+                pointsbox.Parameters.AddWithValue("@value", MainWindow.PointsBox.SelectedIndex);
+                pointsbox.ExecuteNonQuery();
+                SqlCommand player1radio = new SqlCommand("UPDATE Settings SET BoolValue=@value WHERE SettingName='Player1RadioButtonIsChecked'", connection);
+                player1radio.Parameters.AddWithValue("@value", MainWindow.Player1Radiobutton.IsChecked);
+                player1radio.ExecuteNonQuery();
+                SqlCommand player2radio = new SqlCommand("UPDATE Settings SET BoolValue=@value WHERE SettingName='Player2RadioButtonIsChecked'", connection);
+                player2radio.Parameters.AddWithValue("@value", MainWindow.Player2Radiobutton.IsChecked);
+                player2radio.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+        public static void LoadSettings()   //  Загрузка настроек из БД
+        {
+            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
+            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                connection.Open();
+                MainWindow.Player1NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player1NameBoxSelectedItem'", connection).ExecuteScalar();
+                MainWindow.Player2NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player2NameBoxSelectedItem'", connection).ExecuteScalar();
+                MainWindow.SetBox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='SetsBoxSelectedItem'", connection).ExecuteScalar();
+                MainWindow.LegBox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='LegsBoxSelectedItem'", connection).ExecuteScalar();
+                MainWindow.PointsBox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='PointsBoxSelectedItem'", connection).ExecuteScalar();
+                MainWindow.Player1Radiobutton.IsChecked = (bool)new SqlCommand("SELECT BoolValue FROM Settings WHERE SettingName='Player1RadioButtonIsChecked'", connection).ExecuteScalar();
+                MainWindow.Player2Radiobutton.IsChecked = (bool)new SqlCommand("SELECT BoolValue FROM Settings WHERE SettingName='Player2RadioButtonIsChecked'", connection).ExecuteScalar();
+                connection.Close();
+            }
+        }
         public static void LoadPlayers()    //  Подгрузка имен игроков из ДБ
         {
             MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
@@ -24,8 +72,8 @@ namespace OneHundredAndEighty
                 MainWindow.Player2NameCombobox.ItemsSource = dt.DefaultView;
                 MainWindow.Player2NameCombobox.DisplayMemberPath = "Nickname";
                 MainWindow.Player2NameCombobox.SelectedValuePath = "Id";
-                MainWindow.Player1NameCombobox.SelectedIndex = 0;
-                MainWindow.Player2NameCombobox.SelectedIndex = 1;
+                MainWindow.Player1NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player1NameBoxSelectedItem'", connection).ExecuteScalar();
+                MainWindow.Player2NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player2NameBoxSelectedItem'", connection).ExecuteScalar();
                 connection.Close();
             }
         }
