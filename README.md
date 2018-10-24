@@ -6,11 +6,12 @@ Done:
   * Сustomizable match by PDO rules
   * Full undo-throw history
   * Full aftermatch statistics
+  * Database with players, games, settings
+  * Full results aftermatch save
+  
   
 To do:
  
-  * Players database
-  * Full players results aftermatch save
   * Players comparison
   * Players achivement
   * Style customization
