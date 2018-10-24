@@ -77,7 +77,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label Content="is aiready registered"
+        <Label Content="is already registered"
             Canvas.Left="445"
             Canvas.Top="130"
             FontWeight="Bold"

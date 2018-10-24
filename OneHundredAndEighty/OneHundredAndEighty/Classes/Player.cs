@@ -12,7 +12,6 @@ namespace OneHundredAndEighty
         public int SetsWon; //  Количество выигранных сетов
         public int LegsWon; //  Количество выигранных легов в сете
         public int PointsToOut; //  Количество очков на завершение лега
-        public Stack<Throw> AllPlayerThrows = new Stack<Throw>();   //  Коллекция бросков игрока в матче
         public int HandPoints;  //  Набранное количестов очков в подходе
         public int _180;    //  Количество 180 в матче
         public Throw Throw1 = null; //  Первый бросок

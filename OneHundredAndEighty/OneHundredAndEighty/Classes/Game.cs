@@ -119,8 +119,6 @@ namespace OneHundredAndEighty
             InfoPanelLogic.UndoThrowButtonOff();    //  Выключаем кнопку отмены броска
             AllMatchThrows.Clear(); //  Зануляем коллекцию бросков матча
             SavePoints.Clear(); //  Зануляем точки сохнанения
-            Player1.AllPlayerThrows.Clear();    //  Зануляем коллекцию бросков игрока
-            Player2.AllPlayerThrows.Clear();    //  Зануляем коллекцию бросков игрока
         }
 
         public void NextThrow(Throw T)  //  Очередной бросок
@@ -132,7 +130,6 @@ namespace OneHundredAndEighty
             T.WhoThrow = PlayerOnThrow.Tag; //  Записываем в бросок кто его бросил
 
             AllMatchThrows.Push(T);  //  Записываем в последный бросок в коллекцию матча
-            PlayerOnThrow.AllPlayerThrows.Push(T);  //  Записываем последний бросок бросившему игроку
 
             if (PlayerOnThrow.Throw1 == null) //  Если это был первый бросок игрока на подходе
             {
@@ -211,7 +208,6 @@ namespace OneHundredAndEighty
                 InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Проверяем помощь
 
                 AllMatchThrows.Pop();   //  Удалаяем последний бросок из коллекции матча
-                PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок из коллекции игрока
                 SavePoints.Pop();   //  Удаляем последнюю точку сохранения
 
                 InfoPanelLogic.UndoThrowButtonOn();    //  Включаем кнопку отмены броска
