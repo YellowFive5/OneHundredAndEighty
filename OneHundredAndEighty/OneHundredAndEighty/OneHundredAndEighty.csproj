@@ -92,6 +92,9 @@
     <Compile Include="Windows\NewPlayer.xaml.cs">
       <DependentUpon>NewPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PlayerExists.xaml.cs">
+      <DependentUpon>PlayerExists.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\StatisticWindow.xaml.cs">
       <DependentUpon>StatisticWindow.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PlayerExists.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

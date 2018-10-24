@@ -2,10 +2,10 @@
 
 namespace OneHundredAndEighty
 {
-    public static class NewPlayer
+    public static class NewPlayer   //  Регистрация нового игрока
     {
 
-        public static void ShowNewPlayerRegisterWindow()
+        public static void ShowNewPlayerRegisterWindow()    //  Показать окно регистрации
         {
             MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
             Windows.NewPlayer window = new Windows.NewPlayer();
@@ -14,11 +14,19 @@ namespace OneHundredAndEighty
             window.PlayerNickNameBox.Text = "Enter player nickname";
             window.ShowDialog();
         }
-        public static void ShowWelcomeWindow(string name, string nickname)
+        public static void ShowWelcomeWindow(string name, string nickname)  //  Показать окно после регистрации
         {
             MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
             Windows.WelcomeNewPlayer window = new Windows.WelcomeNewPlayer();
             window.NameNickName.Content = new StringBuilder().Append(name).Append(" \" ").Append(nickname).Append(" \"").ToString();
+            window.Owner = MainWindow;
+            window.ShowDialog();
+        }
+        public static void ShowExistingPlayerWindow(string name, string nickname)   //  Показать окно предупреждения о существовании игрока
+        {
+            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
+            Windows.PlayerExists window = new Windows.PlayerExists();
+            window.ExistingPlayerName.Content = new StringBuilder().Append(name).Append(" \" ").Append(nickname).Append(" \"").ToString();
             window.Owner = MainWindow;
             window.ShowDialog();
         }

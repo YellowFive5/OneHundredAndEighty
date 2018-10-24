@@ -29,7 +29,7 @@ namespace OneHundredAndEighty
                 connection.Close();
             }
         }
-        public static void SaveNewPlayer(string name, string nickname, DateTime date)  //  Сохранение нового игрока в БД
+        public static void SaveNewPlayer(string name, string nickname)  //  Сохранение нового игрока в БД
         {
             MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
             string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
@@ -39,7 +39,7 @@ namespace OneHundredAndEighty
                 SqlCommand cmd = new SqlCommand("INSERT INTO Players (Name,Nickname,RegistrationDate) VALUES(@name,@nickname,@date)", connection);
                 cmd.Parameters.Add(new SqlParameter("@name", name));
                 cmd.Parameters.Add(new SqlParameter("@nickname", nickname));
-                cmd.Parameters.Add(new SqlParameter("@date", date));
+                cmd.Parameters.Add(new SqlParameter("@date", DateTime.Now));
                 cmd.ExecuteNonQuery();
                 connection.Close();
             }
@@ -182,6 +182,25 @@ namespace OneHundredAndEighty
                 SetPlayer2AvarageHandPoints.Parameters.AddWithValue("@Player2AvarageHandPoints", Player2AvarageThrowPoints * 3);
                 SetPlayer2AvarageHandPoints.ExecuteNonQuery();  //  Запись средних очков подхода
             }
+        }
+        public static bool IsPlayerExist(string name, string nickname)  //  Проверяем БД на наличие регистрируемого игрока
+        {
+            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
+            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Id FROM Players WHERE Name=@name AND Nickname=@nickname", connection);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@nickname", nickname);
+                var res = cmd.ExecuteScalar();  //  Результат запроса
+                connection.Close();
+                if (res != null)  //  Если вернулся не null значит запись есть
+                    return true;
+                else
+                    return false;   //  Иначе такого игрока нет и можно сохранять в БД
+            }
+
         }
     }
 }
