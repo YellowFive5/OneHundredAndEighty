@@ -40,8 +40,8 @@
             </LinearGradientBrush>
         </Canvas.Background>
         <Label Content="And the winner is:"
-               Canvas.Left="458"
-               Canvas.Top="24"
+               Canvas.Left="465"
+               Canvas.Top="20"
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="30"
@@ -50,19 +50,19 @@
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-8.94"/>
+                    <RotateTransform Angle="-3.333"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
         <Label x:Name="WinnerName"
                 Content="Player"
-                Canvas.Left="574"
-                Canvas.Top="80"
+                Canvas.Left="270"
+                Canvas.Top="70"
                 FontWeight="Bold"
                 FontFamily="Agency FB"
                 FontSize="55"
-                RenderTransformOrigin="0.5,0.5" Width="261" VerticalContentAlignment="Center"
+                RenderTransformOrigin="0.5,0.5" Width="557" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                >
             <Label.RenderTransform>
                 <TransformGroup>

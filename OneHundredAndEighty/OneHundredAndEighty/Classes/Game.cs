@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace OneHundredAndEighty
 {
@@ -13,8 +8,6 @@ namespace OneHundredAndEighty
         MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
         public InfoPanelLogic InfoPanelLogic = new InfoPanelLogic();    //  Инфо-панель
         public SettingsPanelLogic SettingsPanelLogic = new SettingsPanelLogic();    //  Панель настроек матча
-        public BoardPanelLogic BoardPanelLogic = new BoardPanelLogic(); //  Панель секторов
-        public WinnerWindowLogic WinnerWindowLogic = new WinnerWindowLogic();   //  Окно победителя
         public StatisticsWindowLogic StatisticsWindowLogic = new StatisticsWindowLogic();   //  Окно статистики
         public bool IsOn { get; private set; }  //  Флаг работы матча
         Player Player1 = null;  //  Игрок 1
@@ -40,8 +33,8 @@ namespace OneHundredAndEighty
             SetsToGo = SettingsPanelLogic.SetsToGo();   //  Получаем количество легов сета
             LegsToGo = SettingsPanelLogic.LegsToGo();   //  Получаем количество сетов матча
             //  Игроки
-            Player1 = new Player("Player1", SettingsPanelLogic.Player1Name(), MainWindow.Player1Help, MainWindow.Player1PointsHelp, MainWindow.Player1SetsWon, MainWindow.Player1LegsWon, MainWindow.Player1Points, PointsToGo);  //  Игрок 1
-            Player2 = new Player("Player2", SettingsPanelLogic.Player2Name(), MainWindow.Player2Help, MainWindow.Player2PointsHelp, MainWindow.Player2SetsWon, MainWindow.Player2LegsWon, MainWindow.Player2Points, PointsToGo);  //  Игрок 2
+            Player1 = new Player("Player1", (int)MainWindow.Player1NameCombobox.SelectedValue, SettingsPanelLogic.Player1Name(), MainWindow.Player1Help, MainWindow.Player1PointsHelp, MainWindow.Player1SetsWon, MainWindow.Player1LegsWon, MainWindow.Player1Points, PointsToGo);  //  Игрок 1
+            Player2 = new Player("Player2", (int)MainWindow.Player2NameCombobox.SelectedValue, SettingsPanelLogic.Player2Name(), MainWindow.Player2Help, MainWindow.Player2PointsHelp, MainWindow.Player2SetsWon, MainWindow.Player2LegsWon, MainWindow.Player2Points, PointsToGo);  //  Игрок 2
             PlayerOnThrow = SettingsPanelLogic.WhoThrowFirst(Player1, Player2); //  Кто первый бросает
             PlayerOnLeg = PlayerOnThrow;    //  Чей первый лег
             //  Инфо-панель
@@ -54,7 +47,7 @@ namespace OneHundredAndEighty
                 .Append(SetsToGo)
                 .Append(" sets in ")
                 .Append(LegsToGo)
-                .Append(" legs in ")
+                .Append(" legs with ")
                 .Append(PointsToGo)
                 .Append(" points").ToString());
             InfoPanelLogic.TextLogAdd("Game on");
@@ -63,13 +56,15 @@ namespace OneHundredAndEighty
         void EndGame()   //  Конец матча
         {
             IsOn = false;   //  Флаг матча
+            //  Сообщение
+            WinnerWindowLogic.ShowWinner(PlayerOnThrow, Player1, Player2, AllMatchThrows);    //  Показываем окно победителя и статистику
             //  Панели
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
-            InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
-            //  Сообщение
-            WinnerWindowLogic.ShowWinner(PlayerOnThrow, Player1, Player2, AllMatchThrows);    //  Показываем окно победителя и статистику
+            //  Сохранение в БД
+            DBwork.AftermatchSave(StatisticsWindowLogic);
+            //  Обнуление коллекций
             ClearCollections();   //  Зануляем коллекции бросков
         }
         public void AbortGame() //  Отмена текущего матча
@@ -119,11 +114,11 @@ namespace OneHundredAndEighty
         }
         void ClearCollections()  //  Зануляем коллекции бросков
         {
+            StatisticsWindowLogic.ClearColection(); //  Зануляем коллекцию статистики
+            InfoPanelLogic.TextLogClear();  //  Очищаем текстовую панель
             InfoPanelLogic.UndoThrowButtonOff();    //  Выключаем кнопку отмены броска
             AllMatchThrows.Clear(); //  Зануляем коллекцию бросков матча
             SavePoints.Clear(); //  Зануляем точки сохнанения
-            Player1.AllPlayerThrows.Clear();    //  Зануляем коллекцию бросков игрока
-            Player2.AllPlayerThrows.Clear();    //  Зануляем коллекцию бросков игрока
         }
 
         public void NextThrow(Throw T)  //  Очередной бросок
@@ -135,7 +130,6 @@ namespace OneHundredAndEighty
             T.WhoThrow = PlayerOnThrow.Tag; //  Записываем в бросок кто его бросил
 
             AllMatchThrows.Push(T);  //  Записываем в последный бросок в коллекцию матча
-            PlayerOnThrow.AllPlayerThrows.Push(T);  //  Записываем последний бросок бросившему игроку
 
             if (PlayerOnThrow.Throw1 == null) //  Если это был первый бросок игрока на подходе
             {
@@ -175,6 +169,8 @@ namespace OneHundredAndEighty
                 Player2.SetsWon = SavePoints.Peek().Player2SetsWon; //  Восстанавливаем Игроку 2 выигранные сеты
                 Player2.LegsWon = SavePoints.Peek().Player2LegsWon; //  Восстанавливаем Игроку 2 выигранные леги
                 Player2.PointsToOut = SavePoints.Peek().Player2PointsToOut; //  Восстанавливаем Игроку 2 очки на завершение лега
+                Player1._180 = SavePoints.Peek().Player1_180;   //  Восстанавливаем Игроку 1 180
+                Player2._180 = SavePoints.Peek().Player2_180;   //  Восстанавливаем Игроку 2 180
                 InfoPanelLogic.SetsSet(Player1);    //  Восстанавливаем в инфо-панели очки выигранных сетов Игрока 1
                 InfoPanelLogic.LegsSet(Player1);    //  Восстанавливаем в инфо-панели очки выигранных легов Игрока 1
                 InfoPanelLogic.PointsSet(Player1);  //  Восстанавливаем в инфо-панели очки на завершение лега Игрока 1
@@ -212,7 +208,6 @@ namespace OneHundredAndEighty
                 InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Проверяем помощь
 
                 AllMatchThrows.Pop();   //  Удалаяем последний бросок из коллекции матча
-                PlayerOnThrow.AllPlayerThrows.Pop();    //  Удаляем последний бросок из коллекции игрока
                 SavePoints.Pop();   //  Удаляем последнюю точку сохранения
 
                 InfoPanelLogic.UndoThrowButtonOn();    //  Включаем кнопку отмены броска
@@ -235,6 +230,8 @@ namespace OneHundredAndEighty
             {
                 InfoPanelLogic.TextLogAdd(new StringBuilder().Append("    > ").Append(PlayerOnThrow.Name).Append(" FAULT").ToString());  //  Пишем в текстовую панель
                 PlayerOnThrow.PointsToOut += PlayerOnThrow.HandPoints;  //  Отменяем подход игрока
+                if (PlayerOnThrow.HandPoints == 180)    //  Если в штрафном подходе было набрано 180 очков
+                    PlayerOnThrow._180 -= 1;    //  Отменяем игроку 180
                 InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
                 ClearHands();   //  Очищаем броски
                 TogglePlayerOnThrow();  //  Меняем игрока на броске

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Shapes;
 
 namespace OneHundredAndEighty
 {
@@ -12,11 +7,11 @@ namespace OneHundredAndEighty
     {
         public string Name { get; private set; }    //  Имя игрока
         public string Tag { get; private set; } //  Тэг
+        public int DBId { get; private set; }   //  Id игрока в БД
         //Матч
         public int SetsWon; //  Количество выигранных сетов
         public int LegsWon; //  Количество выигранных легов в сете
         public int PointsToOut; //  Количество очков на завершение лега
-        public Stack<Throw> AllPlayerThrows = new Stack<Throw>();   //  Коллекция бросков игрока в матче
         public int HandPoints;  //  Набранное количестов очков в подходе
         public int _180;    //  Количество 180 в матче
         public Throw Throw1 = null; //  Первый бросок
@@ -36,9 +31,10 @@ namespace OneHundredAndEighty
         public Label LegsWonLabel;  //  Лейбл выиграных легов
         public Label PointsLabel;   //  Лейбл набраных очнов
 
-        public Player(string Tag, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, int PointsToOut) //  Конструктор нового игрока
+        public Player(string Tag, int id, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, int PointsToOut) //  Конструктор нового игрока
         {
             this.Tag = Tag;
+            this.DBId = id;
             this.Name = Name;
             this.HelpPanel = HelpPanel;
             this.HelpLabel = HelpLabel;

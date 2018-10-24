@@ -112,8 +112,8 @@
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="30"
-               Width="201"
-               VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Canvas.Left="397"
+               Width="588"
+               VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Canvas.Left="10"
                >
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -137,7 +137,7 @@
                FontWeight="Bold"
                FontFamily="Agency FB"
                FontSize="30"
-               Width="202"
+               Width="588"
                VerticalContentAlignment="Center"
                >
             <Label.Foreground>
