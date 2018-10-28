@@ -5,9 +5,9 @@ namespace OneHundredAndEighty
 {
     public static class WinnerWindowLogic  //  Класс логики окна победителя
     {
+        static MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
         public static void ShowWinner(Player winner, Player p1, Player p2, Stack<Throw> AllMatchThrows)
         {
-            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
             Windows.WinnerWindow WinnerWindow = null;
             WinnerWindow = new Windows.WinnerWindow(); //  Ссылка на окно победителя
             MainWindow.FadeIn();

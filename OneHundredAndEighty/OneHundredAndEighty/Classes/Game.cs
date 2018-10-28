@@ -25,9 +25,11 @@ namespace OneHundredAndEighty
 
             IsOn = true;    //  Флаг матча
             //  Панели
+            MainWindow.PlayerTab.IsEnabled = false;
             SettingsPanelLogic.PanelHide(); //  Прячем панель настроек
             InfoPanelLogic.PanelShow(); //  Показываем инфо-панель
-            BoardPanelLogic.PanelShow(); //  Показываем панель секторов
+            BoardPanelLogic.PanelShow();    //  Показываем панель секторов
+            PlayerOverview.ClearPanel();    //  Очищаем панель данных игроков
             //  Настройка матча
             PointsToGo = SettingsPanelLogic.PointsToGo();   //  Получаем количество очков лега
             SetsToGo = SettingsPanelLogic.SetsToGo();   //  Получаем количество легов сета
@@ -53,12 +55,14 @@ namespace OneHundredAndEighty
             InfoPanelLogic.TextLogAdd("Game on");
             InfoPanelLogic.TextLogAdd(new StringBuilder().Append(PlayerOnThrow.Name).Append(" on throw:").ToString());
         }
+
         void EndGame()   //  Конец матча
         {
             IsOn = false;   //  Флаг матча
             //  Сообщение
             WinnerWindowLogic.ShowWinner(PlayerOnThrow, Player1, Player2, AllMatchThrows);    //  Показываем окно победителя и статистику
             //  Панели
+            MainWindow.PlayerTab.IsEnabled = true;
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
@@ -72,6 +76,7 @@ namespace OneHundredAndEighty
             IsOn = false;   //  Флаг матча
             ClearCollections();   //  Зануляем коллекции бросков
             //  Панели
+            MainWindow.PlayerTab.IsEnabled = true;
             InfoPanelLogic.PanelHide(); //  Прячем инфопанель
             BoardPanelLogic.PanelHide();    //  Прячем панель секторов
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек

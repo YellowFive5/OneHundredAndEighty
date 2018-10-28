@@ -177,7 +177,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Label Content="Number of throws:"
+        <Label Content="Throws:"
                Canvas.Left="495"
                Canvas.Top="72"
                FontFamily="Agency FB"
@@ -1221,10 +1221,5 @@
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
-
-
-
-
-
     </Canvas>
 </Window>

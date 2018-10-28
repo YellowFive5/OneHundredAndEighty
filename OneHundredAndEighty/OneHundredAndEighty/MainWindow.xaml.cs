@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shapes;
 
@@ -75,6 +76,24 @@ namespace OneHundredAndEighty
             this.FadeIn();
             NewPlayer.ShowNewPlayerRegisterWindow();
             this.FadeOut();
+        }
+        private void PlayerTabNameCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) //  Изменение выделенного игрока в вкладке данных игроков
+        {
+            ComboBox CB = sender as ComboBox;
+            if (CB.SelectedIndex == -1)
+            {
+                if (CB.Name == "Player1TabNameCombobox")
+                    PlayerOverview.ClearPlayer1();
+                else
+                    PlayerOverview.ClearPlayer2();
+            }
+            else
+            {
+                if (CB.Name == "Player1TabNameCombobox")
+                    PlayerOverview.RefreshPlayer1((int)CB.SelectedValue);
+                else
+                    PlayerOverview.RefreshPlayer2((int)CB.SelectedValue);
+            }
         }
     }
 }

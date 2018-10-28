@@ -75,6 +75,7 @@
     <Compile Include="Classes\BoardPanelLogic.cs" />
     <Compile Include="Classes\DBwork.cs" />
     <Compile Include="Classes\NewPlayer.cs" />
+    <Compile Include="Classes\PlayerOverview.cs" />
     <Compile Include="Classes\SavePoint.cs" />
     <Compile Include="Classes\SettingsPanelLogic.cs" />
     <Compile Include="Classes\StatisticsWindowLogic.cs" />

@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace OneHundredAndEighty
 {
     public static class DBwork  //  Класс работы с БД
     {
+        static MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
+        static string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
+
         public static void SaveSettings()   //  Сохранение настроек в БД
         {
-            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
-            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 connection.Open();
@@ -40,8 +42,6 @@ namespace OneHundredAndEighty
         }
         public static void LoadSettings()   //  Загрузка настроек из БД
         {
-            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
-            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 connection.Open();
@@ -55,32 +55,37 @@ namespace OneHundredAndEighty
                 connection.Close();
             }
         }
-        public static void LoadPlayers()    //  Подгрузка имен игроков из ДБ
+        public static void LoadPlayers()    //  Подгрузка имен игроков из ДБ в комбобоксы
         {
-            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
-            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 connection.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Players", connection);
+                SqlCommand cmd = new SqlCommand("SELECT Id,Name,Nickname FROM Players", connection);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
                 MainWindow.Player1NameCombobox.ItemsSource = dt.DefaultView;
                 MainWindow.Player1NameCombobox.DisplayMemberPath = "Nickname";
                 MainWindow.Player1NameCombobox.SelectedValuePath = "Id";
+                MainWindow.Player1NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player1NameBoxSelectedItem'", connection).ExecuteScalar();
                 MainWindow.Player2NameCombobox.ItemsSource = dt.DefaultView;
                 MainWindow.Player2NameCombobox.DisplayMemberPath = "Nickname";
                 MainWindow.Player2NameCombobox.SelectedValuePath = "Id";
-                MainWindow.Player1NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player1NameBoxSelectedItem'", connection).ExecuteScalar();
                 MainWindow.Player2NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player2NameBoxSelectedItem'", connection).ExecuteScalar();
+
+                MainWindow.Player1TabNameCombobox.ItemsSource = dt.DefaultView;
+                MainWindow.Player1TabNameCombobox.DisplayMemberPath = "Nickname";
+                MainWindow.Player1TabNameCombobox.SelectedValuePath = "Id";
+                MainWindow.Player2TabNameCombobox.ItemsSource = dt.DefaultView;
+                MainWindow.Player2TabNameCombobox.DisplayMemberPath = "Nickname";
+                MainWindow.Player2TabNameCombobox.SelectedValuePath = "Id";
+                MainWindow.Player1TabNameCombobox.SelectedIndex = -1;
+                MainWindow.Player2TabNameCombobox.SelectedIndex = -1;
                 connection.Close();
             }
         }
         public static void SaveNewPlayer(string name, string nickname)  //  Сохранение нового игрока в БД
         {
-            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
-            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 connection.Open();
@@ -95,9 +100,7 @@ namespace OneHundredAndEighty
         }
         public static void AftermatchSave(StatisticsWindowLogic game)   //  Сохранение данных матча в БД
         {
-            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
             MainWindow.Cursor = Cursors.Wait;   //  Изменяем курсор
-            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";  //  Строка подключения к БД
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 connection.Open();  //  Открываем подключение
@@ -139,6 +142,9 @@ namespace OneHundredAndEighty
                 UpdateRow("Players", game.Player2Id, "Faults", game.Player2FaultThrows, connection);
                 //  Среднее игроков
                 UpdatePlayersAvarages(game.Player1Id, game.Player2Id, connection);    //  Вычисляем и обновляем Avarages игроков
+                //  Проверяем лучший средний набор и обновляем если нужно
+                CheckAndUpdateBestHand(game.Player1Id, game.AveragePlayer1Points * 3);
+                CheckAndUpdateBestHand(game.Player2Id, game.AveragePlayer2Points * 3);
                 //  Матч    //  Сохраняем матч в БД 
                 SqlCommand savematch = new SqlCommand("INSERT INTO Games VALUES (@Player1ID,@Player1Name,@Player2ID,@Player2Name,@Datetime,@WinnerID,@WinnerName,@LooserID,@LooserName,@SetsPlayed,@Player1SetsWon,@Player2SetsWon,@LegsPlayed,@Player1LegsWon,@Player2LegsWon,@Throws,@Player1Throws,@Player2Throws,@Points,@Player1Points,@Player2Points,@AvarageThrowPoints,@Player1AvaragePoints,@Player1AvarageHand,@Player2AvaragePoints,@Player2AvarageHand,@_180,@Player1180,@Player2180,@Trembles,@Player1Trembles,@Player2Trembles,@Bulleyes,@Player1Bulleyes,@Player2Bulleyes,@Doubles,@Player1Doubles,@Player2Doubles,@Singles,@Player1Singles,@Player2Singles,@_25,@Player125,@Player225,@Zeroes,@Player1Zeroes,@Player2Zeroes,@Faults,@Player1Faults,@Player2Faults,@Log)", connection);
                 savematch.Parameters.AddWithValue("@Player1ID", game.Player1Id);
@@ -230,11 +236,25 @@ namespace OneHundredAndEighty
                 SetPlayer2AvarageHandPoints.Parameters.AddWithValue("@Player2AvarageHandPoints", Player2AvarageThrowPoints * 3);
                 SetPlayer2AvarageHandPoints.ExecuteNonQuery();  //  Запись средних очков подхода
             }
+            void CheckAndUpdateBestHand(int Id, double AvHand)   //  Проверяем лучший средний набор и обновляем если нужно
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    connection.Open();
+                    SqlCommand GetPlayerBestHand = new SqlCommand(string.Format("SELECT AvarageHandMatchRecord FROM Players WHERE Id = {0}", Id), connection);
+                    double PlayerBestHand = (double)GetPlayerBestHand.ExecuteScalar();  //  Получение лучшего среднего набора игрока
+                    if (AvHand > PlayerBestHand)    //  Если в матче установлен новый рекорд - записываем
+                    {
+                        SqlCommand SetPlayerBestHand = new SqlCommand(string.Format("UPDATE Players SET AvarageHandMatchRecord = @PlayerBestHand WHERE Id={0}", Id), connection);
+                        SetPlayerBestHand.Parameters.AddWithValue("@PlayerBestHand", AvHand);
+                        SetPlayerBestHand.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+            }
         }
         public static bool IsPlayerExist(string name, string nickname)  //  Проверяем БД на наличие регистрируемого игрока
         {
-            MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
-            string connectionstring = @"Data Source =(LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\DB.mdf; Integrated Security = True; Pooling=True";
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 connection.Open();
@@ -249,6 +269,21 @@ namespace OneHundredAndEighty
                     return false;   //  Иначе такого игрока нет и можно сохранять в БД
             }
 
+        }
+        public static DataTable LoadPlayerData(int PlayerId)    //  Загрузка данных игрока
+        {
+
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Players WHERE Id=@Id", connection);
+                cmd.Parameters.AddWithValue("@Id", PlayerId);
+                DataTable PlayerData = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(PlayerData);
+                connection.Close();
+                return PlayerData;
+            }
         }
     }
 }
