@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OneHundredAndEighty
+﻿namespace OneHundredAndEighty
 {
-    public class BoardPanelLogic    //  Класс логики панели секторов
+    public static class BoardPanelLogic    //  Класс логики панели секторов
     {
-        MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
-        public void PanelShow()
+        static MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
+
+        public static void PanelShow()
         {
+            //MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
             MainWindow.BoardPanel.Visibility = System.Windows.Visibility.Visible;
         }   //  Показать панель секторов 
-        public void PanelHide()
+        public static void PanelHide()
         {
+            //MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
             MainWindow.BoardPanel.Visibility = System.Windows.Visibility.Hidden;
         }   //  Спрятать панель секторов
     }

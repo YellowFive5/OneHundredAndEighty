@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -46,11 +42,11 @@ namespace OneHundredAndEighty
         }   //  Сколько легов в метче
         public string Player1Name()
         {
-                return MainWindow.Player1NameBox.Text;
+                return MainWindow.Player1NameCombobox.Text;
         }   //  Имя 1 игрока
         public string Player2Name()
         {
-                return MainWindow.Player2NameBox.Text;
+                return MainWindow.Player2NameCombobox.Text;
         }   //  Имя 2 игрока
     }
 }
