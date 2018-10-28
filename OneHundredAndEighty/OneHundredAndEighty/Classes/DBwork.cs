@@ -69,11 +69,19 @@ namespace OneHundredAndEighty
                 MainWindow.Player1NameCombobox.ItemsSource = dt.DefaultView;
                 MainWindow.Player1NameCombobox.DisplayMemberPath = "Nickname";
                 MainWindow.Player1NameCombobox.SelectedValuePath = "Id";
+                MainWindow.Player1NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player1NameBoxSelectedItem'", connection).ExecuteScalar();
                 MainWindow.Player2NameCombobox.ItemsSource = dt.DefaultView;
                 MainWindow.Player2NameCombobox.DisplayMemberPath = "Nickname";
                 MainWindow.Player2NameCombobox.SelectedValuePath = "Id";
-                MainWindow.Player1NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player1NameBoxSelectedItem'", connection).ExecuteScalar();
                 MainWindow.Player2NameCombobox.SelectedIndex = (int)new SqlCommand("SELECT IntValue FROM Settings WHERE SettingName='Player2NameBoxSelectedItem'", connection).ExecuteScalar();
+
+                MainWindow.Player1TabNameCombobox.ItemsSource = dt.DefaultView;
+                MainWindow.Player1TabNameCombobox.DisplayMemberPath = "Nickname";
+                MainWindow.Player1TabNameCombobox.SelectedValuePath = "Id";
+                MainWindow.Player2TabNameCombobox.ItemsSource = dt.DefaultView;
+                MainWindow.Player2TabNameCombobox.DisplayMemberPath = "Nickname";
+                MainWindow.Player2TabNameCombobox.SelectedValuePath = "Id";
+
                 connection.Close();
             }
         }

@@ -1221,10 +1221,5 @@
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
-
-
-
-
-
     </Canvas>
 </Window>
