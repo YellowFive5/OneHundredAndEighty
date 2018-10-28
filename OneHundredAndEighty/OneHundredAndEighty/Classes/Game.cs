@@ -28,7 +28,8 @@ namespace OneHundredAndEighty
             MainWindow.PlayerTab.IsEnabled = false;
             SettingsPanelLogic.PanelHide(); //  Прячем панель настроек
             InfoPanelLogic.PanelShow(); //  Показываем инфо-панель
-            BoardPanelLogic.PanelShow(); //  Показываем панель секторов
+            BoardPanelLogic.PanelShow();    //  Показываем панель секторов
+            PlayerOverview.ClearPanel();    //  Очищаем панель данных игроков
             //  Настройка матча
             PointsToGo = SettingsPanelLogic.PointsToGo();   //  Получаем количество очков лега
             SetsToGo = SettingsPanelLogic.SetsToGo();   //  Получаем количество легов сета
@@ -54,6 +55,7 @@ namespace OneHundredAndEighty
             InfoPanelLogic.TextLogAdd("Game on");
             InfoPanelLogic.TextLogAdd(new StringBuilder().Append(PlayerOnThrow.Name).Append(" on throw:").ToString());
         }
+
         void EndGame()   //  Конец матча
         {
             IsOn = false;   //  Флаг матча

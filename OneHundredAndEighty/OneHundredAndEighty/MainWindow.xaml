@@ -111,7 +111,6 @@
         FontWeight="Bold" 
         FontSize="18"
         SelectedIndex="0"
-        Cursor="Hand"
         >
         <TabControl.Resources>
             <Style TargetType="TabItem">
@@ -154,6 +153,7 @@
         <TabItem x:Name="NewGameTab"
             Header="New Match"
             IsSelected="True"
+            Cursor="Hand"
             >
             <Canvas>
                 <Image x:Name="DartboardImg"
@@ -2047,9 +2047,13 @@
             </Canvas>
         </TabItem>
         <TabItem x:Name="PlayerTab"
-            Header="Player overview">
-            <Canvas Margin="-3,-35,-3,-4"
-                    >
+            Header="Player overview"
+            Cursor="Hand"
+            >
+            <Canvas
+                Margin="-3,-35,-3,-4"
+                Cursor="Arrow"
+                >
                 <Canvas.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <LinearGradientBrush.RelativeTransform>
@@ -2080,6 +2084,8 @@
                 FontSize="19"
                 Canvas.Left="440"
                 Height="28"
+                SelectionChanged="PlayerTabNameCombobox_SelectionChanged"
+                Cursor="Hand"
                 />
                 <ComboBox x:Name="Player2TabNameCombobox"
                 Canvas.Top="85"
@@ -2090,6 +2096,8 @@
                 FontSize="19"
                 Canvas.Left="599"
                 Height="28"
+                SelectionChanged="PlayerTabNameCombobox_SelectionChanged"
+                Cursor="Hand"
                 />
                 <Label Content="|"
                     Canvas.Left="587"
@@ -2151,9 +2159,9 @@
 
                 <Rectangle x:Name="ThrowsRect"
                     Height="21"
-                    Canvas.Left="493"
+                    Canvas.Left="278"
                     Stroke="Black"
-                    Canvas.Top="171"
+                    Canvas.Top="441"
                     Width="210">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2170,26 +2178,26 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label Content="Number of throws:"
-                    Canvas.Left="493"
-                    Canvas.Top="167"
+                <Label Content="Throws:"
+                    Canvas.Left="278"
+                    Canvas.Top="437"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
                     />
-                <Label x:Name="NumberOfThrows"
-                    Content="10"
-                    Canvas.Left="655"
-                    Canvas.Top="167"
+                <Label x:Name="TabNumberOfThrows"
+                    Content="0"
+                    Canvas.Left="384"
+                    Canvas.Top="437"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                     />
-                <Rectangle x:Name="PlayersThrows"
+                <Rectangle x:Name="TabPlayersThrowsSlider"
                     Height="20"
-                    Canvas.Left="493"
+                    Canvas.Left="278"
                     Stroke="Black"
-                    Canvas.Top="191"
+                    Canvas.Top="461"
                     Width="210" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2209,30 +2217,30 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="PlayerTabPlayer1Throws"
-                    Content="10"
-                    Canvas.Left="493"
-                    Canvas.Top="187"
+                <Label x:Name="TabPlayer1Throws"
+                    Content="0"
+                    Canvas.Left="278"
+                    Canvas.Top="457"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
-                    Width="46"
+                    Width="101"
                     VerticalContentAlignment="Center"
                     />
-                <Label x:Name="PlayerTabPlayer2Throws"
-                    Content="10"
-                    Canvas.Left="655"
-                    Canvas.Top="187"
+                <Label x:Name="TabPlayer2Throws"
+                    Content="0"
+                    Canvas.Left="384"
+                    Canvas.Top="457"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                     />
 
                 <Rectangle x:Name="PointsRect"
                     Height="40"
-                    Canvas.Left="493"
+                    Canvas.Left="278"
                     Stroke="Black"
-                    Canvas.Top="216"
+                    Canvas.Top="486"
                     Width="210">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2250,28 +2258,28 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <Label Content="Points:"
-                    Canvas.Left="493"
-                    Canvas.Top="212"
+                    Canvas.Left="278"
+                    Canvas.Top="482"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
                     />
-                <Label x:Name="NumberOfPoints"
-                    Content="10"
-                    Canvas.Left="655"
-                    Canvas.Top="212"
+                <Label x:Name="TabNumberOfPoints"
+                    Content="0"
+                    Canvas.Left="384"
+                    Canvas.Top="482"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
-                    Width="48"
+                    Width="104"
                     HorizontalContentAlignment="Right"
                     VerticalContentAlignment="Center"
                    />
-                <Rectangle x:Name="PlayersPoints"
+                <Rectangle x:Name="TabPlayersPointsSlider"
                     Height="20"
-                    Canvas.Left="493"
+                    Canvas.Left="278"
                     Stroke="Black"
-                    Canvas.Top="236"
+                    Canvas.Top="506"
                     Width="210" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2291,28 +2299,28 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="PlayerTabPlayer1Points"
-                    Content="10"
-                    Canvas.Left="493"
-                    Canvas.Top="232"
+                <Label x:Name="TabPlayer1Points"
+                    Content="0"
+                    Canvas.Left="278"
+                    Canvas.Top="502"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="46" VerticalContentAlignment="Center"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
                     />
-                <Label x:Name="PlayerTabPlayer2Points"
-                    Content="10"
-                    Canvas.Left="655"
-                    Canvas.Top="232"
+                <Label x:Name="TabPlayer2Points"
+                    Content="0"
+                    Canvas.Left="384"
+                    Canvas.Top="502"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                     />
 
                 <Rectangle x:Name="AvaragePointsRect"
                     Height="40"
                     Canvas.Left="493"
                     Stroke="Black"
-                    Canvas.Top="261"
+                    Canvas.Top="306"
                     Width="210">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2331,27 +2339,27 @@
                 </Rectangle>
                 <Label Content="Avarage throw points:"
             Canvas.Left="493"
-            Canvas.Top="257"
+            Canvas.Top="302"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="AvaragePoints"
-            Content="10"
-            Canvas.Left="655"
-            Canvas.Top="257"
+                <Label x:Name="TabAvaragePoints"
+                    Content="0"
+            Canvas.Left="598"
+            Canvas.Top="302"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="105"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersAvaragePoints"
+                <Rectangle x:Name="TabPlayersAvaragePointsSlider"
             Height="20"
             Canvas.Left="493"
             Stroke="Black"
-            Canvas.Top="281"
+            Canvas.Top="326"
             Width="210" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2371,21 +2379,21 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1AvaragePoints"
-            Content="10"
+                <Label x:Name="TabPlayer1AvaragePoints"
+                    Content="0"
             Canvas.Left="493"
-            Canvas.Top="277"
+            Canvas.Top="322"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="101" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2AvaragePoints"
-            Content="10"
-            Canvas.Left="655"
-            Canvas.Top="277"
+                <Label x:Name="TabPlayer2AvaragePoints"
+                    Content="0"
+            Canvas.Left="599"
+            Canvas.Top="322"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+            FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                />
 
                 <Rectangle x:Name="SetsPlayedRect"
@@ -2416,18 +2424,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="SetsPlayed"
-            Content="10"
-            Canvas.Left="440"
+                <Label x:Name="TabSetsPlayed"
+                    Content="0"
+            Canvas.Left="385"
             Canvas.Top="257"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersSetsPlayed"
+                <Rectangle x:Name="TabPlayersSetsPlayedSlider"
             Height="20"
             Canvas.Left="278"
             Stroke="Black"
@@ -2451,21 +2459,21 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1Sen"
-            Content="10"
+                <Label x:Name="TabPlayer1SetsPlayed"
+                    Content="0"
             Canvas.Left="278"
             Canvas.Top="277"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="102" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2sWon"
-            Content="10"
-            Canvas.Left="440"
+                <Label x:Name="TabPlayer2SetsPlayed"
+                    Content="0"
+            Canvas.Left="385"
             Canvas.Top="277"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+            FontSize="16" Width="103" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                />
 
                 <Rectangle x:Name="GamesPlayedRect"
@@ -2496,18 +2504,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="GamesPlayed"
-            Content="10"
-            Canvas.Left="440"
+                <Label x:Name="TabGamesPlayed"
+                    Content="0"
+            Canvas.Left="385"
             Canvas.Top="167"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersGamesPlayed"
+                <Rectangle x:Name="TabPlayersGamesPlayedSlider"
             Height="20"
             Canvas.Left="278"
             Stroke="Black"
@@ -2531,21 +2539,21 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1GamesPlayed"
-            Content="10"
+                <Label x:Name="TabPlayer1GamesPlayed"
+                    Content="0"
             Canvas.Left="278"
             Canvas.Top="187"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="102" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2GamesPlayed"
-            Content="10"
-            Canvas.Left="440"
+                <Label x:Name="TabPlayer2GamesPlayed"
+                    Content="0"
+            Canvas.Left="385"
             Canvas.Top="187"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+            FontSize="16" Width="103" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                />
 
                 <Rectangle x:Name="LegsPlayedRect"
@@ -2576,18 +2584,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="LegsPlayed"
-            Content="10"
-            Canvas.Left="440"
+                <Label x:Name="TabLegsPlayed"
+                    Content="0"
+            Canvas.Left="385"
             Canvas.Top="347"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersLegsPlayed"
+                <Rectangle x:Name="TabPlayersLegsPlayedSlider"
             Height="20"
             Canvas.Left="278"
             Stroke="Black"
@@ -2611,31 +2619,31 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="PlaLegsWon"
-            Content="10"
+                <Label x:Name="TabPlayer1LegsPlayed"
+                    Content="0"
             Canvas.Left="278"
             Canvas.Top="367"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="102" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2on"
-                Content="10"
-                Canvas.Left="440"
+                <Label x:Name="TabPlayer2LegsPlayed"
+                    Content="0"
+                Canvas.Left="385"
                 Canvas.Top="367"
                 FontFamily="Agency FB"
                 FontWeight="Bold"
                 FontSize="16"
-                Width="48"
+                Width="103"
                 HorizontalContentAlignment="Right" 
                 VerticalContentAlignment="Center"
                />
 
                 <Rectangle x:Name="FaultThrowsRect"
             Height="40"
-            Canvas.Left="493"
+            Canvas.Left="708"
             Stroke="Black"
-            Canvas.Top="396"
+            Canvas.Top="441"
             Width="210">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2653,28 +2661,28 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <Label Content="Fault throws:"
-            Canvas.Left="493"
-            Canvas.Top="392"
+            Canvas.Left="708"
+            Canvas.Top="437"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="FaultThrows"
-            Content="10"
-            Canvas.Left="655"
-            Canvas.Top="392"
+                <Label x:Name="TabFaultThrows"
+                    Content="0"
+            Canvas.Left="814"
+            Canvas.Top="437"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="104"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersFaultThrows"
+                <Rectangle x:Name="TabPlayersFaultThrowsSlider"
             Height="20"
-            Canvas.Left="493"
+            Canvas.Left="708"
             Stroke="Black"
-            Canvas.Top="416"
+            Canvas.Top="461"
             Width="210" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2694,22 +2702,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1FaultThrows"
-            Content="10"
-            Canvas.Left="493"
-            Canvas.Top="412"
+                <Label x:Name="TabPlayer1FaultThrows"
+                    Content="0"
+            Canvas.Left="708"
+            Canvas.Top="457"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="101" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2FaultThrows"
-            Content="10"
-            Canvas.Left="655"
-            Canvas.Top="412"
+                <Label x:Name="TabPlayer2FaultThrows"
+                    Content="0"
+            Canvas.Left="813"
+            Canvas.Top="457"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="105"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -2718,7 +2726,7 @@
             Height="40"
             Canvas.Left="493"
             Stroke="Black"
-            Canvas.Top="351"
+            Canvas.Top="171"
             Width="210">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2737,27 +2745,27 @@
                 </Rectangle>
                 <Label Content="180's:"
             Canvas.Left="493"
-            Canvas.Top="347"
+            Canvas.Top="167"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="_180"
-            Content="10"
-            Canvas.Left="655"
-            Canvas.Top="347"
+                <Label x:Name="Tab_180"
+                    Content="0"
+            Canvas.Left="599"
+            Canvas.Top="167"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="104"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="Players_180"
+                <Rectangle x:Name="TabPlayers_180Slider"
             Height="20"
             Canvas.Left="493"
             Stroke="Black"
-            Canvas.Top="371"
+            Canvas.Top="191"
             Width="210" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -2777,22 +2785,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1_180"
-            Content="10"
+                <Label x:Name="TabPlayer1_180"
+                    Content="0"
             Canvas.Left="493"
-            Canvas.Top="367"
+            Canvas.Top="187"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="101" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2_180"
-            Content="10"
-            Canvas.Left="655"
-            Canvas.Top="367"
+                <Label x:Name="TabPlayer2_180"
+                    Content="0"
+            Canvas.Left="599"
+            Canvas.Top="187"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="104"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -2825,18 +2833,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="ZeroThrows"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabZeroThrows"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="392"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersZeroThrows"
+                <Rectangle x:Name="TabPlayersZeroThrowsSlider"
             Height="20"
             Canvas.Left="708"
             Stroke="Black"
@@ -2860,22 +2868,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1ZeroThrow"
-            Content="10"
+                <Label x:Name="TabPlayer1ZeroThrow"
+                    Content="0"
             Canvas.Left="708"
             Canvas.Top="412"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="107" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2ZeroThrow"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabPlayer2ZeroThrow"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="412"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -2908,18 +2916,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="SingleThrows"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabSingleThrows"
+                    Content="0"
+            Canvas.Left="812"
             Canvas.Top="347"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="106"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersSingleThrows"
+                <Rectangle x:Name="TabPlayersSingleThrowsSlider"
             Height="20"
             Canvas.Left="708"
             Stroke="Black"
@@ -2943,22 +2951,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1SingleThrow"
-            Content="10"
+                <Label x:Name="TabPlayer1SingleThrow"
+                    Content="0"
             Canvas.Left="708"
             Canvas.Top="367"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="107" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2SingleThrow"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabPlayer2SingleThrow"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="367"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -2991,18 +2999,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="DoubleThrows"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabDoubleThrows"
+                    Content="0"
+            Canvas.Left="812"
             Canvas.Top="257"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="106"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersDoubleThrows"
+                <Rectangle x:Name="TabPlayersDoubleThrowsSlider"
             Height="20"
             Canvas.Left="708"
             Stroke="Black"
@@ -3026,22 +3034,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1DoubleThrow"
-            Content="10"
+                <Label x:Name="TabPlayer1DoubleThrow"
+                    Content="0"
             Canvas.Left="708"
             Canvas.Top="277"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="107" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2DoubleThrow"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabPlayer2DoubleThrow"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="277"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -3074,18 +3082,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="TrembleThrows"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabTrembleThrows"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="167"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersTrembleThrows"
+                <Rectangle x:Name="TabPlayersTrembleThrowsSlider"
             Height="20"
             Canvas.Left="708"
             Stroke="Black"
@@ -3109,22 +3117,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1TrembleThrow"
-            Content="10"
+                <Label x:Name="TabPlayer1TrembleThrow"
+                    Content="0"
             Canvas.Left="708"
             Canvas.Top="187"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="107" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2TrembleThrow"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabPlayer2TrembleThrow"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="187"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -3157,18 +3165,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="_25Throws"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="Tab_25Throws"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="302"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="Players_25Throws"
+                <Rectangle x:Name="TabPlayers_25ThrowsSlider"
             Height="20"
             Canvas.Left="708"
             Stroke="Black"
@@ -3192,22 +3200,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1_25Throw"
-            Content="10"
+                <Label x:Name="TabPlayer1_25Throw"
+                    Content="0"
             Canvas.Left="708"
             Canvas.Top="322"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="107" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2_25Throw"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabPlayer2_25Throw"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="322"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -3240,18 +3248,18 @@
             FontWeight="Bold"
             FontSize="16"
                />
-                <Label x:Name="BulleyeThrows"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabBulleyeThrows"
+                    Content="0"
+            Canvas.Left="812"
             Canvas.Top="212"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="106"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersBulleyeThrows"
+                <Rectangle x:Name="TabPlayersBulleyeThrowsSlider"
             Height="20"
             Canvas.Left="708"
             Stroke="Black"
@@ -3275,22 +3283,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1BulleyeThrow"
-            Content="10"
+                <Label x:Name="TabPlayer1BulleyeThrow"
+                    Content="0"
             Canvas.Left="708"
             Canvas.Top="232"
             FontFamily="Agency FB"
             FontWeight="Bold"
-            FontSize="16" Width="46" VerticalContentAlignment="Center"
+            FontSize="16" Width="99" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2BulleyeThrow"
-            Content="10"
-            Canvas.Left="870"
+                <Label x:Name="TabPlayer2BulleyeThrow"
+                    Content="0"
+            Canvas.Left="815"
             Canvas.Top="232"
             FontFamily="Agency FB"
             FontWeight="Bold"
             FontSize="16"
-            Width="48"
+            Width="103"
             HorizontalContentAlignment="Right" 
             VerticalContentAlignment="Center"
                />
@@ -3323,18 +3331,18 @@
                     FontWeight="Bold"
                     FontSize="16"
                />
-                <Label x:Name="GamesWon"
-                    Content="10"
-                    Canvas.Left="440"
+                <Label x:Name="TabGamesWon"
+                    Content="0"
+                    Canvas.Left="385"
                     Canvas.Top="212"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
-                    Width="48"
+                    Width="103"
                     HorizontalContentAlignment="Right"
                     VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersGamesWon"
+                <Rectangle x:Name="TabPlayersGamesWonSlider"
                     Height="20"
                     Canvas.Left="278"
                     Stroke="Black"
@@ -3358,21 +3366,21 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1GamesWon"
-                    Content="10"
+                <Label x:Name="TabPlayer1GamesWon"
+                    Content="0"
                     Canvas.Left="278"
                     Canvas.Top="232"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="46" VerticalContentAlignment="Center"
+                    FontSize="16" Width="102" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2GamesWon"
-                    Content="10"
-                    Canvas.Left="440"
+                <Label x:Name="TabPlayer2GamesWon"
+                    Content="0"
+                    Canvas.Left="385"
                     Canvas.Top="232"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontSize="16" Width="103" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                />
 
                 <Rectangle x:Name="SetsWonRect"
@@ -3403,18 +3411,18 @@
                     FontWeight="Bold"
                     FontSize="16"
                />
-                <Label x:Name="SetsWon"
-                    Content="10"
-                    Canvas.Left="440"
+                <Label x:Name="TabSetsWon"
+                    Content="0"
+                    Canvas.Left="380"
                     Canvas.Top="302"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
-                    Width="48"
+                    Width="108"
                     HorizontalContentAlignment="Right"
                     VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersSetsWon"
+                <Rectangle x:Name="TabPlayersSetsWonSlider"
                     Height="20"
                     Canvas.Left="278"
                     Stroke="Black"
@@ -3438,21 +3446,21 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="PlayerTabPlayer1SetsWon"
-                    Content="10"
+                <Label x:Name="TabPlayer1SetsWon"
+                    Content="0"
                     Canvas.Left="278"
                     Canvas.Top="322"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="46" VerticalContentAlignment="Center"
+                    FontSize="16" Width="102" VerticalContentAlignment="Center"
                />
-                <Label x:Name="PlayerTabPlayer2SetsWon"
-                    Content="10"
-                    Canvas.Left="440"
+                <Label x:Name="TabPlayer2SetsWon"
+                    Content="0"
+                    Canvas.Left="385"
                     Canvas.Top="322"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontSize="16" Width="103" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                />
 
                 <Rectangle x:Name="LegsWonRect"
@@ -3483,18 +3491,18 @@
                     FontWeight="Bold"
                     FontSize="16"
                />
-                <Label x:Name="LegsWon"
-                    Content="10"
-                    Canvas.Left="440"
+                <Label x:Name="TabLegsWon"
+                    Content="0"
+                    Canvas.Left="385"
                     Canvas.Top="392"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
-                    Width="48"
+                    Width="103"
                     HorizontalContentAlignment="Right"
                     VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersLegsWon"
+                <Rectangle x:Name="TabPlayersLegsWonSlider"
                     Height="20"
                     Canvas.Left="278"
                     Stroke="Black"
@@ -3518,22 +3526,22 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="PlayerTabPlayer1LegsWon"
-                    Content="10"
+                <Label x:Name="TabPlayer1LegsWon"
+                    Content="0"
                     Canvas.Left="278"
                     Canvas.Top="412"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="46" VerticalContentAlignment="Center"
+                    FontSize="16" Width="102" VerticalContentAlignment="Center"
                />
-                <Label x:Name="PlayerTabPlayer2LegsWon"
-                    Content="10"
-                    Canvas.Left="440"
+                <Label x:Name="TabPlayer2LegsWon"
+                    Content="0"
+                    Canvas.Left="385"
                     Canvas.Top="412"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
-                    Width="48"
+                    Width="103"
                     HorizontalContentAlignment="Right" 
                     VerticalContentAlignment="Center"
                />
@@ -3542,7 +3550,7 @@
                     Height="40"
                     Canvas.Left="493"
                     Stroke="Black"
-                    Canvas.Top="306"
+                    Canvas.Top="261"
                     Width="210">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -3561,27 +3569,27 @@
                 </Rectangle>
                 <Label Content="Avarage hand points:"
                     Canvas.Left="493"
-                    Canvas.Top="302"
+                    Canvas.Top="257"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
                />
-                <Label x:Name="AvarageHand"
-                    Content="10"
-                    Canvas.Left="655"
-                    Canvas.Top="302"
+                <Label x:Name="TabAvarageHand"
+                    Content="0"
+                    Canvas.Left="599"
+                    Canvas.Top="257"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
                     FontSize="16"
-                    Width="48"
+                    Width="104"
                     HorizontalContentAlignment="Right"
                     VerticalContentAlignment="Center"
                />
-                <Rectangle x:Name="PlayersAvarageHandPoints"
+                <Rectangle x:Name="TabPlayersAvarageHandPointsSlider"
                     Height="20"
                     Canvas.Left="493"
                     Stroke="Black"
-                    Canvas.Top="326"
+                    Canvas.Top="281"
                     Width="210" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -3601,28 +3609,100 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label x:Name="Player1AvarageHandPoints"
-                    Content="10"
+                <Label x:Name="TabPlayer1AvarageHandPoints"
+                    Content="0"
                     Canvas.Left="493"
-                    Canvas.Top="322"
+                    Canvas.Top="277"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="46" VerticalContentAlignment="Center"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
                />
-                <Label x:Name="Player2AvarageHandPoints"
-                    Content="10"
-                    Canvas.Left="655"
-                    Canvas.Top="322"
+                <Label x:Name="TabPlayer2AvarageHandPoints"
+                    Content="0"
+                    Canvas.Left="598"
+                    Canvas.Top="277"
                     FontFamily="Agency FB"
                     FontWeight="Bold"
-                    FontSize="16" Width="48" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontSize="16" Width="105" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                />
 
-                <Canvas x:Name="_180Achieve"
+                <Rectangle x:Name="BestHandRect"
+                    Height="40"
+                    Canvas.Left="493"
+                    Stroke="Black"
+                    Canvas.Top="215"
+                    Width="210">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF004203" Offset="1"/>
+                            <GradientStop Color="#FF769900"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label Content="Best match avarage hand :"
+                    Canvas.Left="493"
+                    Canvas.Top="211"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+               />
+                <Rectangle x:Name="TabPlayersBestHandSlider"
+                    Height="20"
+                    Canvas.Left="493"
+                    Stroke="Black"
+                    Canvas.Top="235"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF4B0131"/>
+                            <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                            <GradientStop Color="Black" Offset="0.5"/>
+                            <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                            <GradientStop Color="#FF023042" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label x:Name="TabPlayer1BestHand"
+                    Content="0"
+                    Canvas.Left="493"
+                    Canvas.Top="231"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+               />
+                <Label x:Name="TabPlayer2BestHand"
+                    Content="0"
+                    Canvas.Left="599"
+                    Canvas.Top="231"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right" 
+                    VerticalContentAlignment="Center"
+               />
+
+                <Canvas x:Name="Achieve"
                     Height="61"
                     Canvas.Left="211"
                     Canvas.Top="171"
-                    Width="61">
+                    Width="61" Visibility="Hidden">
                     <Rectangle
                         Height="61"
                         StrokeThickness="2"
@@ -3642,31 +3722,10 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Image
-                        Height="61"
-                        Width="61"
-                        Source="Images/1.png"/>
-                </Canvas>
-                <Canvas x:Name="_10Achieve"
-                    Height="61"
-                    Canvas.Left="144"
-                    Canvas.Top="171"
-                    Width="61">
-                    <Rectangle
-                        Height="62"
-                        StrokeThickness="2"
-                        Width="62"/>
-                    <Image
-                        Height="62"
-                        Width="62"
-                        Source="Images/1.png"/>
                 </Canvas>
 
 
             </Canvas>
         </TabItem>
-        <TabItem x:Name="OptionsTab"
-            Header="Options"
-            />
     </TabControl>
 </Window>
