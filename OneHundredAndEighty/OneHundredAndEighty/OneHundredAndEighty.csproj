@@ -74,6 +74,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\BoardPanelLogic.cs" />
     <Compile Include="Classes\DBwork.cs" />
+    <Compile Include="Classes\NewAchieve.cs" />
     <Compile Include="Classes\NewPlayer.cs" />
     <Compile Include="Classes\PlayerOverview.cs" />
     <Compile Include="Classes\SavePoint.cs" />
@@ -89,6 +90,9 @@
     </Compile>
     <Compile Include="Windows\ExitWindow.xaml.cs">
       <DependentUpon>ExitWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NewAchieve.xaml.cs">
+      <DependentUpon>NewAchieve.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\NewPlayer.xaml.cs">
       <DependentUpon>NewPlayer.xaml</DependentUpon>
@@ -128,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ExitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewAchieve.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +204,25 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>DB.mdf</DependentUpon>
     </Content>
+    <Resource Include="Images\Achieves\wings.png" />
+    <Resource Include="Images\Achieves\mr.Z.png" />
+    <Resource Include="Images\Achieves\1000000Points.png" />
+    <Resource Include="Images\Achieves\100000Points.png" />
+    <Resource Include="Images\Achieves\100000Throws.png" />
+    <Resource Include="Images\Achieves\10000Points.png" />
+    <Resource Include="Images\Achieves\10000Throws.png" />
+    <Resource Include="Images\Achieves\1000MatchesPlayed.png" />
+    <Resource Include="Images\Achieves\1000MatchesWon.png" />
+    <Resource Include="Images\Achieves\1000Throws.png" />
+    <Resource Include="Images\Achieves\100MatchesPlayed.png" />
+    <Resource Include="Images\Achieves\100MatchesWon.png" />
+    <Resource Include="Images\Achieves\10MatchesPlayed.png" />
+    <Resource Include="Images\Achieves\10MatchesWon.png" />
+    <Resource Include="Images\Achieves\180x10.png" />
+    <Resource Include="Images\Achieves\180x100.png" />
+    <Resource Include="Images\Achieves\180x1000.png" />
+    <Resource Include="Images\Achieves\3Bull.png" />
+    <Resource Include="Images\Achieves\First180.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

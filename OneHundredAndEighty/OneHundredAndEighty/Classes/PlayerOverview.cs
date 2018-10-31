@@ -36,6 +36,24 @@ namespace OneHundredAndEighty
             MainWindow.TabPlayer1SingleThrow.Content = 0;
             MainWindow.TabPlayer1ZeroThrow.Content = 0;
             DrawSliders();
+            MainWindow.AchievePlayer110MatchesLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1100MatchesLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer11000MatchesLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer110WinLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1100WinLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer11000WinLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer11000ThrowsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer110000ThrowsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1100000ThrowsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer110000PointsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1100000PointsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer11000000PointsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1180x10Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1180x100Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1180x1000Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1First180Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer13BullLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer1mrZLight.Visibility = System.Windows.Visibility.Hidden;
         }
         public static void ClearPlayer2()   //  Зануляем данные игрока 2
         {
@@ -59,6 +77,25 @@ namespace OneHundredAndEighty
             MainWindow.TabPlayer2SingleThrow.Content = 0;
             MainWindow.TabPlayer2ZeroThrow.Content = 0;
             DrawSliders();
+            MainWindow.AchievePlayer210MatchesLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2100MatchesLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer21000MatchesLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer210WinLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2100WinLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer21000WinLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer21000ThrowsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer210000ThrowsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2100000ThrowsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer210000PointsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2100000PointsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer21000000PointsLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2180x10Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2180x100Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2180x1000Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2First180Light.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer23BullLight.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.AchievePlayer2mrZLight.Visibility = System.Windows.Visibility.Hidden;
+
         }
         public static void RefreshPlayer1(int PlayerId) //  Обновить данные игрока 1
         {
@@ -83,6 +120,42 @@ namespace OneHundredAndEighty
             MainWindow.TabPlayer1ZeroThrow.Content = (int)(PlayerData.Rows[0][22]);
             MainWindow.TabPlayer1FaultThrows.Content = (int)(PlayerData.Rows[0][23]);
             DrawSliders();
+            if ((bool)(PlayerData.Rows[0][24]))
+                MainWindow.AchievePlayer110MatchesLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][25]))
+                MainWindow.AchievePlayer1100MatchesLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][26]))
+                MainWindow.AchievePlayer11000MatchesLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][27]))
+                MainWindow.AchievePlayer110WinLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][28]))
+                MainWindow.AchievePlayer1100WinLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][29]))
+                MainWindow.AchievePlayer11000WinLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][30]))
+                MainWindow.AchievePlayer11000ThrowsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][31]))
+                MainWindow.AchievePlayer110000ThrowsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][32]))
+                MainWindow.AchievePlayer1100000ThrowsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][33]))
+                MainWindow.AchievePlayer110000PointsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][34]))
+                MainWindow.AchievePlayer1100000PointsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][35]))
+                MainWindow.AchievePlayer11000000PointsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][36]))
+                MainWindow.AchievePlayer1180x10Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][37]))
+                MainWindow.AchievePlayer1180x100Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][38]))
+                MainWindow.AchievePlayer1180x1000Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][39]))
+                MainWindow.AchievePlayer1First180Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][40]))
+                MainWindow.AchievePlayer13BullLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][41]))
+                MainWindow.AchievePlayer1mrZLight.Visibility = System.Windows.Visibility.Visible;
         }
         public static void RefreshPlayer2(int PlayerId) //  Обновить данные игрока 2
         {
@@ -107,6 +180,42 @@ namespace OneHundredAndEighty
             MainWindow.TabPlayer2ZeroThrow.Content = (int)(PlayerData.Rows[0][22]);
             MainWindow.TabPlayer2FaultThrows.Content = (int)(PlayerData.Rows[0][23]);
             DrawSliders();
+            if ((bool)(PlayerData.Rows[0][24]))
+                MainWindow.AchievePlayer210MatchesLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][25]))
+                MainWindow.AchievePlayer2100MatchesLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][26]))
+                MainWindow.AchievePlayer21000MatchesLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][27]))
+                MainWindow.AchievePlayer210WinLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][28]))
+                MainWindow.AchievePlayer2100WinLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][29]))
+                MainWindow.AchievePlayer21000WinLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][30]))
+                MainWindow.AchievePlayer21000ThrowsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][31]))
+                MainWindow.AchievePlayer210000ThrowsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][32]))
+                MainWindow.AchievePlayer2100000ThrowsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][33]))
+                MainWindow.AchievePlayer210000PointsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][34]))
+                MainWindow.AchievePlayer2100000PointsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][35]))
+                MainWindow.AchievePlayer21000000PointsLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][36]))
+                MainWindow.AchievePlayer2180x10Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][37]))
+                MainWindow.AchievePlayer2180x100Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][38]))
+                MainWindow.AchievePlayer2180x1000Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][39]))
+                MainWindow.AchievePlayer2First180Light.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][40]))
+                MainWindow.AchievePlayer23BullLight.Visibility = System.Windows.Visibility.Visible;
+            if ((bool)(PlayerData.Rows[0][41]))
+                MainWindow.AchievePlayer2mrZLight.Visibility = System.Windows.Visibility.Visible;
         }
         static void DrawSliders()   //  Отрисовка слайдеров
         {

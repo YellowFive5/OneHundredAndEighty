@@ -68,6 +68,7 @@ namespace OneHundredAndEighty
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
             //  Сохранение в БД
             DBwork.AftermatchSave(StatisticsWindowLogic);
+            DBwork.UpdateAchieves(StatisticsWindowLogic);
             //  Обнуление коллекций
             ClearCollections();   //  Зануляем коллекции бросков
         }

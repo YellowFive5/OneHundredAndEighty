@@ -90,9 +90,15 @@ namespace OneHundredAndEighty
             else
             {
                 if (CB.Name == "Player1TabNameCombobox")
+                {
+                    PlayerOverview.ClearPlayer1();
                     PlayerOverview.RefreshPlayer1((int)CB.SelectedValue);
+                }
                 else
+                {
+                    PlayerOverview.ClearPlayer2();
                     PlayerOverview.RefreshPlayer2((int)CB.SelectedValue);
+                }
             }
         }
     }
