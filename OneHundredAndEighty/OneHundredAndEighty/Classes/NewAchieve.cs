@@ -160,18 +160,18 @@ namespace OneHundredAndEighty
                         B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF34CF07"), 1));
                         B.RelativeTransform = new RotateTransform(250);
                         break;
-                    case "A3Bull":
+                    case "AmrZ":
                         B.StartPoint = new Point(0.5, 0);
                         B.EndPoint = new Point(0.5, 1);
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFFF4600"), 0));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF34CF07"), 1));
-                        B.RelativeTransform = new RotateTransform(250);
+                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF5B5B5B"), 0));
+                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFF7F7F7"), 1));
+                        B.RelativeTransform = new RotateTransform(225);
                         break;
-                    case "AmrZ":
+                    case "A3Bull":
                         RadialGradientBrush R = new RadialGradientBrush();
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFC70900"), 0));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF00420F"), 0.577));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF360146"), 1));
+                        R.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFC70900"), 0));
+                        R.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF00420F"), 0.577));
+                        R.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF360146"), 1));
                         return R;
                         break;
                     default:

@@ -58,6 +58,10 @@ namespace OneHundredAndEighty
         public int ZeroThrows { get; private set; } //  Бросков в 0
         public int Player1ZeroThrows { get; private set; }  //  Бросков в 0 игрока 1
         public int Player2ZeroThrows { get; private set; }  //  Бросков в 0 игрока 2
+        public bool Player1IsmrZ { get; private set; }  //  Ачивка игрока 1
+        public bool Player1Is3Bull { get; private set; }  //  Ачивка игрока 1
+        public bool Player2IsmrZ { get; private set; }  //  Ачивка игрока 2
+        public bool Player2Is3Bull { get; private set; }  //  Ачивка игрока 2
 
         public void CountMatchStatistics(Player winner, Player p1, Player p2, Stack<Throw> AllMatchThrows)   //  Считаем статистику матча
         {
@@ -70,7 +74,10 @@ namespace OneHundredAndEighty
             WinnerId = winner.DBId;
             LooserName = (WinnerName == p1.Name) ? p2.Name : p1.Name;
             LooserId = (WinnerName == p1.Name) ? p2.DBId : p1.DBId;
-
+            Player1IsmrZ = p1.IsmrZ;
+            Player2IsmrZ = p2.IsmrZ;
+            Player1Is3Bull = p1.Is3Bull;
+            Player2Is3Bull = p2.Is3Bull;
             while (AllMatchThrows.Count != 0)   //  Разбираем бросок на запчасти
             {
                 Throw T = AllMatchThrows.Pop();
@@ -335,6 +342,10 @@ namespace OneHundredAndEighty
             Player2Id = 0;
             WinnerId = 0;
             LooserId = 0;
+            Player1IsmrZ = false;
+            Player1Is3Bull = false;
+            Player2IsmrZ = false;
+            Player2Is3Bull = false;
         }
     }
 }

@@ -6,7 +6,7 @@
         public int Player1LegsWon { get; private set; } //  Количество выигранных легов Игрока 1
         public int Player1SetsWon { get; private set; } //  Количество выигранных сетов Игрока 1
         public int Player1PointsToOut { get; private set; } //  Количество очков на закрытие лега Игрока 1
-        public int Player2LegsWon{ get; private set; }  //  Количество выигранных легов Игрока 2
+        public int Player2LegsWon { get; private set; }  //  Количество выигранных легов Игрока 2
         public int Player2SetsWon { get; private set; } //  Количество выигранных сетов Игрока 2
         public int Player2PointsToOut { get; private set; } //  Количество очков на закрытие лега Игрока 2
         public int Player1_180 { get; private set; } //  Количество 180 Игрока 1
@@ -17,8 +17,12 @@
         public Throw SecondThrow { get; private set; }  //  Второй бросок игрока на подходе
         public Throw ThirdThrow { get; private set; }   //  Третий бросок игрока на подходе
         public int PlayerOnThrowHand { get; private set; }  //  Очки подхода игрока на подходе
+        public bool Player1Is3Bull { get; private set; }
+        public bool Player2Is3Bull { get; private set; }
+        public bool Player1IsmrZ { get; private set; }
+        public bool Player2IsmrZ { get; private set; }
 
-        public SavePoint(Player Player1,Player Player2,Player PlayerOnThrow,Player PlayerOnLeg) //  Конструктор точки сохранения
+        public SavePoint(Player Player1, Player Player2, Player PlayerOnThrow, Player PlayerOnLeg) //  Конструктор точки сохранения
         {
             this.Player1LegsWon = Player1.LegsWon;
             this.Player2LegsWon = Player2.LegsWon;
@@ -34,6 +38,10 @@
             this.SecondThrow = PlayerOnThrow.Throw2;
             this.ThirdThrow = PlayerOnThrow.Throw3;
             this.PlayerOnThrowHand = PlayerOnThrow.HandPoints;
+            Player1Is3Bull = Player1.Is3Bull;
+            Player2Is3Bull = Player2.Is3Bull;
+            Player1IsmrZ = Player1.IsmrZ;
+            Player2IsmrZ = Player2.IsmrZ;
         }
     }
 }

@@ -289,11 +289,71 @@ namespace OneHundredAndEighty
                     }
                 }
             }
-
             if (!CheckPlayerHasAchieve(game.Player1Id, "A3Bull"))
-            {   /*  ?   */  }
+            {
+                if (game.Player1Is3Bull)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET A3Bull = 'True' WHERE Id = {0}", game.Player1Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player1Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "A3Bull");
+                        connection.Close();
+                    }
+                }
+            }
+            if (!CheckPlayerHasAchieve(game.Player2Id, "A3Bull"))
+            {
+                if (game.Player2Is3Bull)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET A3Bull = 'True' WHERE Id = {0}", game.Player2Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player2Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "A3Bull");
+                        connection.Close();
+                    }
+                }
+            }
             if (!CheckPlayerHasAchieve(game.Player1Id, "AmrZ"))
-            {   /*  ?   */  }
+            {
+                if (game.Player1IsmrZ)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET AmrZ = 'True' WHERE Id = {0}", game.Player1Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player1Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "AmrZ");
+                        connection.Close();
+                    }
+                }
+            }
+            if (!CheckPlayerHasAchieve(game.Player2Id, "AmrZ"))
+            {
+                if (game.Player2IsmrZ)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET AmrZ = 'True' WHERE Id = {0}", game.Player2Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player2Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "AmrZ");
+                        connection.Close();
+                    }
+                }
+            }
+
             void CheckPlayer(int Id)
             {   //  Если ачивка не получена - проверяем на получение в матче
                 if (!CheckPlayerHasAchieve(Id, "A10matchespalyed"))
