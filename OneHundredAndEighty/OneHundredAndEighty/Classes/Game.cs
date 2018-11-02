@@ -68,6 +68,7 @@ namespace OneHundredAndEighty
             SettingsPanelLogic.PanelShow(); //  Показываем панель настроек
             //  Сохранение в БД
             DBwork.AftermatchSave(StatisticsWindowLogic);
+            DBwork.UpdateAchieves(StatisticsWindowLogic);
             //  Обнуление коллекций
             ClearCollections();   //  Зануляем коллекции бросков
         }
@@ -156,6 +157,23 @@ namespace OneHundredAndEighty
             PlayerOnThrow.HandPoints += (int)T.Points;  //  Плюсуем набраные за подход очки игрока
             if (PlayerOnThrow.HandPoints == 180)    //  Если в подходе набрано 180
                 PlayerOnThrow._180 += 1;    //  Записываем
+            if (!PlayerOnThrow.Is3Bull) //  Проверяем на ачивку 3Bull
+            {
+                if (PlayerOnThrow.HandPoints == 150)
+                {
+                    if (PlayerOnThrow.Throw1.Points == 50 && PlayerOnThrow.Throw2.Points == 50 && PlayerOnThrow.Throw3.Points == 50)
+                    {
+                        PlayerOnThrow.Is3Bull = true;
+                    }
+                }
+            }
+            if (!PlayerOnThrow.IsmrZ) //  Проверяем на ачивку mrZ
+            {
+                if (PlayerOnThrow.HandPoints == 0)
+                {
+                    PlayerOnThrow.IsmrZ = true;
+                }
+            }
             InfoPanelLogic.PointsSet(PlayerOnThrow);    //  Обновляем инфопанель
             InfoPanelLogic.HelpCheck(PlayerOnThrow);    //  Проверяем помощь
 
@@ -168,6 +186,10 @@ namespace OneHundredAndEighty
             {
                 InfoPanelLogic.UndoThrowButtonOff();    //  Выключаем кнопку отмены броска
 
+                Player1.Is3Bull = SavePoints.Peek().Player1Is3Bull;
+                Player2.Is3Bull = SavePoints.Peek().Player2Is3Bull;
+                Player1.IsmrZ = SavePoints.Peek().Player1IsmrZ;
+                Player2.IsmrZ = SavePoints.Peek().Player2IsmrZ;
                 Player1.SetsWon = SavePoints.Peek().Player1SetsWon; //  Восстанавливаем Игроку 1 выигранные сеты
                 Player1.LegsWon = SavePoints.Peek().Player1LegsWon; //  Восстанавливаем Игроку 1 выигранные леги
                 Player1.PointsToOut = SavePoints.Peek().Player1PointsToOut; //  Восстанавливаем Игроку 1 очки на завершение лега

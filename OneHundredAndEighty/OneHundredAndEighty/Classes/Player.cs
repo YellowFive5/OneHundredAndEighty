@@ -14,6 +14,8 @@ namespace OneHundredAndEighty
         public int PointsToOut; //  Количество очков на завершение лега
         public int HandPoints;  //  Набранное количестов очков в подходе
         public int _180;    //  Количество 180 в матче
+        public bool IsmrZ;  //  Ачивка 
+        public bool Is3Bull;  //  Ачивка 
         public Throw Throw1 = null; //  Первый бросок
         public Throw Throw2 = null; //  Второй бросок
         public Throw Throw3 = null; //  Третий бросок

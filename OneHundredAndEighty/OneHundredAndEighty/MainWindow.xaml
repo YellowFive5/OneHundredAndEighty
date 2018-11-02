@@ -1833,17 +1833,19 @@
                 Width="34"
                 Grid.RowSpan="2" Canvas.Left="149" Canvas.Top="22"
                 />
+
                         <Label x:Name="MainBoxSummary"
                 Content="First to 7 legs in 3 sets"
                 FontFamily="Agency FB"
-                Height="24"
-                Width="116"
+                Height="20"
+                Width="106"
                 Foreground="Black"
-                Canvas.Left="1"
+                Canvas.Left="11"
                 FontWeight="Bold"
-                Canvas.Top="1"
-                HorizontalAlignment="Left"
+                Canvas.Top="3"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                FontSize="12" Padding="0" VerticalContentAlignment="Center"
                 />
                         <Label
                 Content="Sets"
@@ -3698,30 +3700,1308 @@
                     VerticalContentAlignment="Center"
                />
 
-                <Canvas x:Name="Achieve"
+                <Canvas x:Name="Player1Achieves"
+                    Height="479"
+                    Width="195"
+                    Canvas.Left="78"
+                    Canvas.Top="146"
+                    >
+                    <Label Content="Achieves :"
+                        FontFamily="Agency FB"
+                        FontWeight="Bold"
+                        FontSize="16" Canvas.Left="-3" Height="30" Width="105"
+                        />
+                    <Canvas x:Name="AchievePlayer110Matches"
                     Height="61"
-                    Canvas.Left="211"
-                    Canvas.Top="171"
-                    Width="61" Visibility="Hidden">
-                    <Rectangle
+                    Canvas.Left="134"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Play 10 matches"
+                    Canvas.Top="25"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer110MatchesLight"
                         Height="61"
                         StrokeThickness="2"
-                        Width="61">
-                        <Rectangle.Fill>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <LinearGradientBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                        <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </LinearGradientBrush.RelativeTransform>
-                                <GradientStop Color="#FF00420F" Offset="0"/>
-                                <GradientStop Color="#FF2DC700" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10MatchesPlayed.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1100Matches"
+                    Height="61"
+                    Canvas.Left="68"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Play 100 matches"
+                    Canvas.Top="25"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1100MatchesLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100MatchesPlayed.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer11000Matches"
+                    Height="61"
+                    Canvas.Left="2"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Play 1000 matches"
+                    Canvas.Top="25"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer11000MatchesLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000MatchesPlayed.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer110Win"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="91"
+                    Width="61"
+                    ToolTip="Win 10 matches"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer110WinLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10MatchesWon.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1100Win"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="91"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Win 100 matches"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1100WinLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100MatchesWon.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer11000Win"
+                    Height="61"
+                    Canvas.Left="2"
+                    Canvas.Top="91"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Win 1000 matches"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer11000WinLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000MatchesWon.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer11000Throws"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="157"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Make 1000 throws"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer11000ThrowsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000Throws.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer110000Throws"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="157"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Make 10000 throws"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer110000ThrowsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10000Throws.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1100000Throws"
+                    Height="61"
+                    Canvas.Left="2"
+                    Canvas.Top="157"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Make 100000 throws"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1100000ThrowsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100000Throws.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer110000Points"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="223"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Collect 10000 points"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer110000PointsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10000Points.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1100000Points"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="223"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Collect 100000 points"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1100000PointsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100000Points.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer11000000Points"
+                    Height="61"
+                    Canvas.Left="2"
+                    Canvas.Top="223"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Collect 1000000 points"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer11000000PointsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000000Points.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1180x10"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="289"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Commit 180 hand 10 times"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1180x10Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/180x10.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1180x100"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="289"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Commit 180 hand 100 times"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1180x100Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/180x100.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1180x1000"
+                    Height="61"
+                    Canvas.Left="2"
+                    Canvas.Top="289"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Commit 180 hand 1000 times"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1180x1000Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/180x1000.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1First180"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="355"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="It's you first 180 !"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1First180Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="170.538" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFFF4600" Offset="0"/>
+                                    <GradientStop Color="#FF34CF07" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/First180.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer13Bull"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="355"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Does the bull have three eyes?"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer13BullLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#FF00420F" Offset="0.577"/>
+                                    <GradientStop Color="#FFC70900"/>
+                                    <GradientStop Color="#FF360146" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/3Bull.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer1mrZ"
+                    Height="61"
+                    Canvas.Left="2"
+                    Canvas.Top="355"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="You should try again"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer1mrZLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF5B5B5B" Offset="0"/>
+                                    <GradientStop Color="#FFF7F7F7" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/mr.Z.png"
+                        />
+                    </Canvas>
+                </Canvas>
+                <Canvas x:Name="Player2Achieves"
+                    Height="479"
+                    Width="194"
+                    Canvas.Left="922"
+                    Canvas.Top="146"
+                    >
+                    <Label Content="Achieves :"
+                        FontFamily="Agency FB"
+                        FontWeight="Bold"
+                        FontSize="16" Canvas.Left="-3" Height="30" Width="105"
+                        />
+                    <Canvas x:Name="AchievePlayer210Matches"
+                    Height="61"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Play 10 matches"
+                    Canvas.Top="25"
+                    Canvas.Left="2"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer210MatchesLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10MatchesPlayed.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2100Matches"
+                    Height="61"
+                    Canvas.Left="68"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Play 100 matches"
+                    Canvas.Top="25"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2100MatchesLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100MatchesPlayed.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer21000Matches"
+                    Height="61"
+                    Canvas.Left="134"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Play 1000 matches"
+                    Canvas.Top="25"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer21000MatchesLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000MatchesPlayed.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer210Win"
+                    Height="61"
+                    Canvas.Top="91"
+                    Width="61"
+                    ToolTip="Win 10 matches"
+                    Canvas.Left="2"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer210WinLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10MatchesWon.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2100Win"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="91"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Win 100 matches"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2100WinLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100MatchesWon.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer21000Win"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="91"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Win 1000 matches"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer21000WinLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000MatchesWon.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer21000Throws"
+                    Height="61"
+                    Canvas.Top="157"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Make 1000 throws" Canvas.Left="2"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer21000ThrowsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000Throws.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer210000Throws"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="157"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Make 10000 throws"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer210000ThrowsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10000Throws.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2100000Throws"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="157"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Make 100000 throws"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2100000ThrowsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100000Throws.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer210000Points"
+                    Height="61"
+                    Canvas.Top="223"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Collect 10000 points"
+                    Canvas.Left="2"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer210000PointsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/10000Points.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2100000Points"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="223"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Collect 100000 points"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2100000PointsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/100000Points.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer21000000Points"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="223"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Collect 1000000 points"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer21000000PointsLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/1000000Points.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2180x10"
+                    Height="61"
+                    Canvas.Top="289"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Commit 180 hand 10 times"
+                    Canvas.Left="2"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2180x10Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF00420F" Offset="0"/>
+                                    <GradientStop Color="#FF2DC700" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/180x10.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2180x100"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="289"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Commit 180 hand 100 times"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2180x100Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF050078" Offset="0"/>
+                                    <GradientStop Color="#FF00B1D8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/180x100.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2180x1000"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="289"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Commit 180 hand 1000 times"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2180x1000Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF610000" Offset="0"/>
+                                    <GradientStop Color="#FF81009E" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/180x1000.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2First180"
+                    Height="61"
+                    Canvas.Top="355"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="It's you first 180 !"
+                    Canvas.Left="2"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2First180Light"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="170.538" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFFF4600" Offset="0"/>
+                                    <GradientStop Color="#FF34CF07" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/First180.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer23Bull"
+                    Height="61"
+                    Canvas.Left="68"
+                    Canvas.Top="355"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="Does the bull have  three eyes?"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer23BullLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#FF00420F" Offset="0.577"/>
+                                    <GradientStop Color="#FFC70900"/>
+                                    <GradientStop Color="#FF360146" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/3Bull.png"
+                        />
+                    </Canvas>
+                    <Canvas x:Name="AchievePlayer2mrZ"
+                    Height="61"
+                    Canvas.Left="134"
+                    Canvas.Top="355"
+                    Width="61"
+                    Visibility="Visible"
+                    ToolTip="You should try again"
+                    Cursor="Help"
+                    >
+                        <Rectangle x:Name="AchievePlayer2mrZLight"
+                        Height="61"
+                        StrokeThickness="2"
+                        Width="61"
+                        Visibility="Hidden" 
+                        >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                            <RotateTransform Angle="225" CenterY="0.5" CenterX="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF5B5B5B" Offset="0"/>
+                                    <GradientStop Color="#FFF7F7F7" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image
+                        Height="61"
+                        Width="61"
+                        Source="Images/Achieves/mr.Z.png"
+                        />
+                    </Canvas>
                 </Canvas>
 
 
