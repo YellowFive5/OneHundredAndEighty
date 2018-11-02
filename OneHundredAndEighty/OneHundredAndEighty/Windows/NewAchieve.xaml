@@ -58,7 +58,6 @@
                     Canvas.Top="50"
                     Width="115"
                     Visibility="Visible"
-                    ToolTip="It's you first 180 !"
                     Cursor="Help" RenderTransformOrigin="0.5,0.5"
                     >
             <Canvas.RenderTransform>

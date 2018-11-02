@@ -15,7 +15,7 @@ namespace OneHundredAndEighty
         public static void ShowNewAchieveWindow(string name, string achieve)    //  Показываем окно новой ачивки
         {
             Windows.NewAchieve window = new Windows.NewAchieve();
-            switch (achieve)
+            switch (achieve)    //  В зависимости от названия ачивки вибираем сообщение, картинку и кисть
             {
                 case "A10matchespalyed":
                     window.AchieveName.Content = "\"10 games played\"";
@@ -98,12 +98,12 @@ namespace OneHundredAndEighty
                     window.AchieveLight.Fill = Brush(achieve);
                     break;
                 case "A3Bull":
-                    window.AchieveName.Content = "\"Seems like bulls really have 3 eyes\"";
+                    window.AchieveName.Content = "\"3-eyed bull\"";
                     window.AchieveImage.Source = new BitmapImage(new Uri("/OneHundredAndEighty;component/Images/Achieves/3Bull.png", UriKind.Relative));
                     window.AchieveLight.Fill = Brush(achieve);
                     break;
                 case "AmrZ":
-                    window.AchieveName.Content = "\"Now you are mr.Z\"";
+                    window.AchieveName.Content = "\"Absolute zero\"";
                     window.AchieveImage.Source = new BitmapImage(new Uri("/OneHundredAndEighty;component/Images/Achieves/mr.Z.png", UriKind.Relative));
                     window.AchieveLight.Fill = Brush(achieve);
                     break;
@@ -115,7 +115,7 @@ namespace OneHundredAndEighty
             MainWindow.FadeIn();
             window.ShowDialog();
             MainWindow.FadeOut();
-            Brush Brush(string achievename)
+            Brush Brush(string achievename) //  Выбираем кисть
             {
                 LinearGradientBrush B = new LinearGradientBrush();
                 switch (achievename)

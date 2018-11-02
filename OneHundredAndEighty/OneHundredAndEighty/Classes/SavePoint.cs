@@ -17,7 +17,7 @@
         public Throw SecondThrow { get; private set; }  //  Второй бросок игрока на подходе
         public Throw ThirdThrow { get; private set; }   //  Третий бросок игрока на подходе
         public int PlayerOnThrowHand { get; private set; }  //  Очки подхода игрока на подходе
-        public bool Player1Is3Bull { get; private set; }
+        public bool Player1Is3Bull { get; private set; }    //  Спец-ачивки игроков
         public bool Player2Is3Bull { get; private set; }
         public bool Player1IsmrZ { get; private set; }
         public bool Player2IsmrZ { get; private set; }
