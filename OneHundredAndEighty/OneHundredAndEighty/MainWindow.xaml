@@ -3701,7 +3701,7 @@
                />
 
                 <Canvas x:Name="Player1Achieves"
-                    Height="479"
+                    Height="424"
                     Width="195"
                     Canvas.Left="78"
                     Canvas.Top="146"
@@ -4353,7 +4353,7 @@
                     </Canvas>
                 </Canvas>
                 <Canvas x:Name="Player2Achieves"
-                    Height="479"
+                    Height="424"
                     Width="194"
                     Canvas.Left="922"
                     Canvas.Top="146"
@@ -5003,7 +5003,1111 @@
                         />
                     </Canvas>
                 </Canvas>
+                <Line 
+                    Fill="Black"
+                    Height="20"
+                    Canvas.Left="265"
+                    Stroke="Black"
+                    Canvas.Top="550"
+                    Width="657"
+                    X1="655"
+                    X2="10"
+                    Y1="10"
+                    Y2="10"
+                    StrokeThickness="2"
+                    />
+                <Label Content="PvP info:"
+                    Canvas.Left="560"
+                    Canvas.Top="559"
+                    FontWeight="Bold"
+                    FontFamily="Agency FB"
+                    FontSize="22"/>
 
+                <Canvas x:Name="PvPPanel"
+                    Height="214"
+                    Width="1069"
+                    Canvas.Left="65"
+                    Canvas.Top="591"
+                    >
+                    <Rectangle x:Name="PvPGamesRect"
+                    Height="40"
+                    Stroke="Black"
+                    Canvas.Top="1"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Games/won:"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPGames"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="106"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPGamesSlider"
+                    Tag="+"
+                    Height="20"
+                    Stroke="Black"
+                    Canvas.Top="21"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPGames"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPGames"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="106"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPLegsRect"
+                    Height="40"
+                    Canvas.Left="430"
+                    Stroke="Black"
+                    Canvas.Top="1"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Legs/won:"
+                    Canvas.Left="430"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPLegs"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="536"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPLegsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="430"
+                    Stroke="Black"
+                    Canvas.Top="21"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPLegs"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="430"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPLegs"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="536"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPSetsRect"
+                    Height="40"
+                    Canvas.Left="215"
+                    Stroke="Black"
+                    Canvas.Top="1"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Sets/won:"
+                    Canvas.Left="215"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPSets"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="321"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPSetsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="215"
+                    Stroke="Black"
+                    Canvas.Top="21"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPSets"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="215"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPSets"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="321"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPThrowsRect"
+                    Height="21"
+                    Canvas.Left="644"
+                    Stroke="Black"
+                    Canvas.Top="1"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Throws:"
+                    Canvas.Left="644"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPNumberOfThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="750"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+                    <Rectangle x:Name="TabPvPPlayersThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="644"
+                    Stroke="Black"
+                    Canvas.Top="21"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPvPPlayer1Throws"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="644"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="101"
+                    VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPvPPlayer2Throws"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="750"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPPointsRect"
+                    Height="40"
+                    Canvas.Left="859"
+                    Stroke="Black"
+                    Canvas.Top="1"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Points:"
+                    Canvas.Left="859"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPNumberOfPoints"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="965"
+                    Canvas.Top="-3"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPPlayersPointsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="859"
+                    Stroke="Black"
+                    Canvas.Top="21"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPvPPlayer1Points"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="859"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPvPPlayer2Points"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="965"
+                    Canvas.Top="17"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvP180Rect"
+                    Height="40"
+                    Stroke="Black"
+                    Canvas.Top="45"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="180's:"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvP180"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="106"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvP180Slider"
+                    Tag="+"
+                    Height="20"
+                    Stroke="Black"
+                    Canvas.Top="65"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvP180"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvP180"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="106"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPBullEyeThrows"
+                    Height="40"
+                    Canvas.Left="430"
+                    Stroke="Black"
+                    Canvas.Top="45"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Bull eye throws:"
+                    Canvas.Left="430"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPBulleyethrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="536"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPBulleyeThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="430"
+                    Stroke="Black"
+                    Canvas.Top="65"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPBullEyeThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="430"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPBullEyeThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="536"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPTrembleThrowsRect"
+                    Height="40"
+                    Canvas.Left="215"
+                    Stroke="Black"
+                    Canvas.Top="45"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Tremble throws:"
+                    Canvas.Left="215"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPTrembleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="321"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPTrembleThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="215"
+                    Stroke="Black"
+                    Canvas.Top="65"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPTrembleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="215"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPTrembleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="321"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPDoubleThrowsRect"
+                    Height="21"
+                    Canvas.Left="644"
+                    Stroke="Black"
+                    Canvas.Top="45"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Double throws:"
+                    Canvas.Left="644"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPDoubleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="750"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+                    <Rectangle x:Name="TabPvPDoubleThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="644"
+                    Stroke="Black"
+                    Canvas.Top="65"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPvPPlayer1DoubleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="644"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="101"
+                    VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPvPPlayer2DoubleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="750"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvP25ThrowsRect"
+                    Height="40"
+                    Canvas.Left="859"
+                    Stroke="Black"
+                    Canvas.Top="45"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="25 throws:"
+                    Canvas.Left="859"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvP25Throws"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="965"
+                    Canvas.Top="41"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvP25ThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="859"
+                    Stroke="Black"
+                    Canvas.Top="65"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvP25Throws"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="859"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvP25Throws"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="965"
+                    Canvas.Top="61"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPSingleThrowsRect"
+                    Height="40"
+                    Stroke="Black"
+                    Canvas.Top="89"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Single throws:"
+                    Canvas.Top="85"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPSingleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="106"
+                    Canvas.Top="85"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPSingleThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Stroke="Black"
+                    Canvas.Top="109"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPSingleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Top="105"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPSingleThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="106"
+                    Canvas.Top="105"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPZeroThrowsRect"
+                    Height="40"
+                    Canvas.Left="215"
+                    Stroke="Black"
+                    Canvas.Top="89"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Zero throws:"
+                    Canvas.Left="215"
+                    Canvas.Top="85"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPZeroThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="321"
+                    Canvas.Top="85"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPZeroThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="215"
+                    Stroke="Black"
+                    Canvas.Top="109"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPZeroThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="215"
+                    Canvas.Top="105"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPZeroThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="321"
+                    Canvas.Top="105"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                    <Rectangle x:Name="PvPFaultThrowsRect"
+                    Height="40"
+                    Canvas.Left="430"
+                    Stroke="Black"
+                    Canvas.Top="89"
+                    Width="210">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF004203" Offset="1"/>
+                                <GradientStop Color="#FF769900"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Fault throws:"
+                    Canvas.Left="430"
+                    Canvas.Top="85"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    />
+                    <Label x:Name="TabPvPFaultThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="536"
+                    Canvas.Top="85"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Width="104"
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                   />
+                    <Rectangle x:Name="TabPvPFaultThrowsSlider"
+                    Tag="+"
+                    Height="20"
+                    Canvas.Left="430"
+                    Stroke="Black"
+                    Canvas.Top="109"
+                    Width="210" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF4B0131"/>
+                                <GradientStop Color="#FFC300CD" Offset="0.495"/>
+                                <GradientStop Color="Black" Offset="0.5"/>
+                                <GradientStop Color="#FF0095EA" Offset="0.505"/>
+                                <GradientStop Color="#FF023042" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="TabPlayer1PvPFaultThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="430"
+                    Canvas.Top="105"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="101" VerticalContentAlignment="Center"
+                    />
+                    <Label x:Name="TabPlayer2PvPFaultThrows"
+                    Tag="+"
+                    Content="0"
+                    Canvas.Left="536"
+                    Canvas.Top="105"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    FontSize="16" Width="104" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    />
+
+                </Canvas>
 
             </Canvas>
         </TabItem>

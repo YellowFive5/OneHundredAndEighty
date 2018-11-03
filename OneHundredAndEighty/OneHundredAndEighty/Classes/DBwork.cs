@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -450,5 +451,75 @@ namespace OneHundredAndEighty
                 return PlayerData;
             }
         }
+        public static int[] FindPvP(int Player1Id, int Player2Id)   //  Ищем инфу PvP
+        {
+            int[] arr = new int[39];    //  Массив для найденных данных
+            using (SqlConnection connection = new SqlConnection(connectionstring))  //  Считаем всего игр и побед
+            {
+                connection.Open();
+                arr[0] = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                arr[1] = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1} AND WinnerId={0}) OR (Player1Id={1} AND Player2Id={0} AND WinnerId={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                arr[2] = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1} AND WinnerId={1}) OR (Player1Id={1} AND Player2Id={0} AND WinnerId={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                connection.Close();
+            }
+            //  Считаем остальное
+            arr[3] = GamesData("LegsPlayed");
+            PlayerData(out arr[4], out arr[5], "LegsPlayer1Won", "LegsPlayer2Won");
+            arr[6] = GamesData("SetsPlayed");
+            PlayerData(out arr[7], out arr[8], "SetsPlayer1Won", "SetsPlayer2Won");
+            arr[9] = GamesData("Throws");
+            PlayerData(out arr[10], out arr[11], "Player1Throws", "Player2Throws");
+            arr[12] = GamesData("Points");
+            PlayerData(out arr[13], out arr[14], "Player1Points", "Player2Points");
+            arr[15] = GamesData("_180");
+            PlayerData(out arr[16], out arr[17], "Player1180", "Player2180");
+            arr[18] = GamesData("Trembles");
+            PlayerData(out arr[19], out arr[20], "Player1Trembles", "Player2Trembles");
+            arr[21] = GamesData("Bulleyes");
+            PlayerData(out arr[22], out arr[23], "Player1Bulleyes", "Player2Bulleyes");
+            arr[24] = GamesData("Doubles");
+            PlayerData(out arr[25], out arr[26], "Player1Doubles", "Player2Doubles");
+            arr[27] = GamesData("_25");
+            PlayerData(out arr[28], out arr[29], "Player125", "Player225");
+            arr[30] = GamesData("Singles");
+            PlayerData(out arr[31], out arr[32], "Player1Singles", "Player2Singles");
+            arr[33] = GamesData("Zeroes");
+            PlayerData(out arr[34], out arr[35], "Player1Zeroes", "Player2Zeroes");
+            arr[36] = GamesData("Faults");
+            PlayerData(out arr[37], out arr[38], "Player1Faults", "Player2Faults");
+
+            void PlayerData(out int p1, out int p2, string row1, string row2)   //  Считаем данные общие данные матча
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    connection.Open();
+                    var p1d1 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id, row1), connection).ExecuteScalar();
+                    int player1data = (p1d1 == DBNull.Value) ? 0 : (int)p1d1;
+                    var p1d2 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id, row2), connection).ExecuteScalar();
+                    player1data += (p1d2 == DBNull.Value) ? 0 : (int)p1d2;
+                    p1 = player1data;
+
+                    var p2d1 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id, row2), connection).ExecuteScalar();
+                    int player2data = (p2d1 == DBNull.Value) ? 0 : (int)p2d1;
+                    var p2d2 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id, row1), connection).ExecuteScalar();
+                    player2data += (p2d2 == DBNull.Value) ? 0 : (int)p2d2;
+                    p2 = player2data;
+                    connection.Close();
+                }
+            }
+            int GamesData(string row)   //  Считаем за каждого игрока
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    connection.Open();
+                    var res = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id, row), connection).ExecuteScalar();
+                    int result = (res == DBNull.Value) ? 0 : (int)res;
+                    connection.Close();
+                    return result;
+                }
+            }
+            return arr;
+        }
+
     }
 }
