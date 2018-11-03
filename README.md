@@ -9,12 +9,14 @@ Done:
   * Players database
   * Full players and match results aftermatch save
   * Players comparison
+  * PvP data
+  * Players achives
   
 To do:
  
-  * Players achivement
   * Style customization
   * Multilanguage
   * Selfplay
   * 
+  * [AUTO THROW REGISTRATION] =)
   
