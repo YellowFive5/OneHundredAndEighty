@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -253,6 +254,171 @@ namespace OneHundredAndEighty
                 }
             }
         }
+        public static void UpdateAchieves(StatisticsWindowLogic game)   //  Проверка ачивок
+        {
+            //  Проверка стандартных ачивок
+            CheckPlayer(game.Player1Id);
+            CheckPlayer(game.Player2Id);
+            //  Проверка спецачивок
+            if (!CheckPlayerHasAchieve(game.Player1Id, "AFirst180"))
+            {
+                if (game.Player1_180 > 0)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd2 = new SqlCommand(string.Format("UPDATE Players SET AFirst180 = 'True' WHERE Id = {0}", game.Player1Id), connection);
+                        cmd2.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player1Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "AFirst180");
+                    }
+                }
+            }
+            if (!CheckPlayerHasAchieve(game.Player2Id, "AFirst180"))
+            {
+                if (game.Player2_180 > 0)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd2 = new SqlCommand(string.Format("UPDATE Players SET AFirst180 = 'True' WHERE Id = {0}", game.Player2Id), connection);
+                        cmd2.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player2Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "AFirst180");
+                    }
+                }
+            }
+            if (!CheckPlayerHasAchieve(game.Player1Id, "A3Bull"))
+            {
+                if (game.Player1Is3Bull)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET A3Bull = 'True' WHERE Id = {0}", game.Player1Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player1Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "A3Bull");
+                        connection.Close();
+                    }
+                }
+            }
+            if (!CheckPlayerHasAchieve(game.Player2Id, "A3Bull"))
+            {
+                if (game.Player2Is3Bull)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET A3Bull = 'True' WHERE Id = {0}", game.Player2Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player2Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "A3Bull");
+                        connection.Close();
+                    }
+                }
+            }
+            if (!CheckPlayerHasAchieve(game.Player1Id, "AmrZ"))
+            {
+                if (game.Player1IsmrZ)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET AmrZ = 'True' WHERE Id = {0}", game.Player1Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player1Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "AmrZ");
+                        connection.Close();
+                    }
+                }
+            }
+            if (!CheckPlayerHasAchieve(game.Player2Id, "AmrZ"))
+            {
+                if (game.Player2IsmrZ)
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionstring))
+                    {
+                        connection.Open();
+                        SqlCommand cmd = new SqlCommand(string.Format("UPDATE Players SET AmrZ = 'True' WHERE Id = {0}", game.Player2Id), connection);
+                        cmd.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", game.Player2Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, "AmrZ");
+                        connection.Close();
+                    }
+                }
+            }
+
+            void CheckPlayer(int Id)
+            {   //  Если ачивка не получена - проверяем на получение в матче
+                if (!CheckPlayerHasAchieve(Id, "A10matchespalyed"))
+                    CheckPlayerGetAchieve(Id, "GamesPlayed", "A10matchespalyed", 10);
+                if (!CheckPlayerHasAchieve(Id, "A100MatchesPalyed"))
+                    CheckPlayerGetAchieve(Id, "GamesPlayed", "A100MatchesPalyed", 100);
+                if (!CheckPlayerHasAchieve(Id, "A1000MatchesPalyed"))
+                    CheckPlayerGetAchieve(Id, "GamesPlayed", "A1000MatchesPalyed", 1000);
+                if (!CheckPlayerHasAchieve(Id, "A10MatchesWon"))
+                    CheckPlayerGetAchieve(Id, "GamesWon", "A10MatchesWon", 10);
+                if (!CheckPlayerHasAchieve(Id, "A100MatchesWon"))
+                    CheckPlayerGetAchieve(Id, "GamesWon", "A100MatchesWon", 100);
+                if (!CheckPlayerHasAchieve(Id, "A1000MatchesWon"))
+                    CheckPlayerGetAchieve(Id, "GamesWon", "A1000MatchesWon", 1000);
+                if (!CheckPlayerHasAchieve(Id, "A1000Throws"))
+                    CheckPlayerGetAchieve(Id, "Throws", "A1000Throws", 1000);
+                if (!CheckPlayerHasAchieve(Id, "A10000Throws"))
+                    CheckPlayerGetAchieve(Id, "Throws", "A10000Throws", 10000);
+                if (!CheckPlayerHasAchieve(Id, "A100000Throws"))
+                    CheckPlayerGetAchieve(Id, "Throws", "A100000Throws", 100000);
+                if (!CheckPlayerHasAchieve(Id, "A10000Points"))
+                    CheckPlayerGetAchieve(Id, "Points", "A10000Points", 10000);
+                if (!CheckPlayerHasAchieve(Id, "A100000Points"))
+                    CheckPlayerGetAchieve(Id, "Points", "A100000Points", 100000);
+                if (!CheckPlayerHasAchieve(Id, "A1000000Points"))
+                    CheckPlayerGetAchieve(Id, "Points", "A1000000Points", 1000000);
+                if (!CheckPlayerHasAchieve(Id, "A180x10"))
+                    CheckPlayerGetAchieve(Id, "_180", "A180x10", 10);
+                if (!CheckPlayerHasAchieve(Id, "A180x100"))
+                    CheckPlayerGetAchieve(Id, "_180", "A180x100", 100);
+                if (!CheckPlayerHasAchieve(Id, "A180x1000"))
+                    CheckPlayerGetAchieve(Id, "_180", "A180x1000", 1000);
+            }
+            bool CheckPlayerHasAchieve(int Id, string achieve)    //  Проверка игрока на наличие ачивки
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    connection.Open();
+                    SqlCommand cmd = new SqlCommand(string.Format("SELECT {0} FROM Players WHERE Id = {1}", achieve, Id), connection);
+                    bool result = (bool)cmd.ExecuteScalar();
+                    connection.Close();
+                    return result;
+                }
+            }
+            void CheckPlayerGetAchieve(int Id, string playerrow, string achieve, int number)
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    connection.Open();
+                    SqlCommand cmd = new SqlCommand(string.Format("SELECT {0} FROM Players WHERE Id = {1}", playerrow, Id), connection);
+                    int result = (int)cmd.ExecuteScalar();
+                    connection.Close();
+                    if (result >= number)   //  Ачивка получена в процессе матча
+                    {
+                        connection.Open();
+                        SqlCommand cmd2 = new SqlCommand(string.Format("UPDATE Players SET {0} = 'True' WHERE Id = {1}", achieve, Id), connection);
+                        cmd2.ExecuteNonQuery();
+                        string name = (string)new SqlCommand(string.Format("SELECT Nickname FROM Players WHERE Id = {0}", Id), connection).ExecuteScalar();
+                        connection.Close();
+                        NewAchieve.ShowNewAchieveWindow(name, achieve);
+                    }
+                }
+            }
+        }
         public static bool IsPlayerExist(string name, string nickname)  //  Проверяем БД на наличие регистрируемого игрока
         {
             using (SqlConnection connection = new SqlConnection(connectionstring))
@@ -285,5 +451,75 @@ namespace OneHundredAndEighty
                 return PlayerData;
             }
         }
+        public static int[] FindPvP(int Player1Id, int Player2Id)   //  Ищем инфу PvP
+        {
+            int[] arr = new int[39];    //  Массив для найденных данных
+            using (SqlConnection connection = new SqlConnection(connectionstring))  //  Считаем всего игр и побед
+            {
+                connection.Open();
+                arr[0] = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                arr[1] = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1} AND WinnerId={0}) OR (Player1Id={1} AND Player2Id={0} AND WinnerId={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                arr[2] = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1} AND WinnerId={1}) OR (Player1Id={1} AND Player2Id={0} AND WinnerId={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                connection.Close();
+            }
+            //  Считаем остальное
+            arr[3] = GamesData("LegsPlayed");
+            PlayerData(out arr[4], out arr[5], "LegsPlayer1Won", "LegsPlayer2Won");
+            arr[6] = GamesData("SetsPlayed");
+            PlayerData(out arr[7], out arr[8], "SetsPlayer1Won", "SetsPlayer2Won");
+            arr[9] = GamesData("Throws");
+            PlayerData(out arr[10], out arr[11], "Player1Throws", "Player2Throws");
+            arr[12] = GamesData("Points");
+            PlayerData(out arr[13], out arr[14], "Player1Points", "Player2Points");
+            arr[15] = GamesData("_180");
+            PlayerData(out arr[16], out arr[17], "Player1180", "Player2180");
+            arr[18] = GamesData("Trembles");
+            PlayerData(out arr[19], out arr[20], "Player1Trembles", "Player2Trembles");
+            arr[21] = GamesData("Bulleyes");
+            PlayerData(out arr[22], out arr[23], "Player1Bulleyes", "Player2Bulleyes");
+            arr[24] = GamesData("Doubles");
+            PlayerData(out arr[25], out arr[26], "Player1Doubles", "Player2Doubles");
+            arr[27] = GamesData("_25");
+            PlayerData(out arr[28], out arr[29], "Player125", "Player225");
+            arr[30] = GamesData("Singles");
+            PlayerData(out arr[31], out arr[32], "Player1Singles", "Player2Singles");
+            arr[33] = GamesData("Zeroes");
+            PlayerData(out arr[34], out arr[35], "Player1Zeroes", "Player2Zeroes");
+            arr[36] = GamesData("Faults");
+            PlayerData(out arr[37], out arr[38], "Player1Faults", "Player2Faults");
+
+            void PlayerData(out int p1, out int p2, string row1, string row2)   //  Считаем данные общие данные матча
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    connection.Open();
+                    var p1d1 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id, row1), connection).ExecuteScalar();
+                    int player1data = (p1d1 == DBNull.Value) ? 0 : (int)p1d1;
+                    var p1d2 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id, row2), connection).ExecuteScalar();
+                    player1data += (p1d2 == DBNull.Value) ? 0 : (int)p1d2;
+                    p1 = player1data;
+
+                    var p2d1 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id, row2), connection).ExecuteScalar();
+                    int player2data = (p2d1 == DBNull.Value) ? 0 : (int)p2d1;
+                    var p2d2 = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id, row1), connection).ExecuteScalar();
+                    player2data += (p2d2 == DBNull.Value) ? 0 : (int)p2d2;
+                    p2 = player2data;
+                    connection.Close();
+                }
+            }
+            int GamesData(string row)   //  Считаем за каждого игрока
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    connection.Open();
+                    var res = new SqlCommand(string.Format("SELECT SUM({2}) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id, row), connection).ExecuteScalar();
+                    int result = (res == DBNull.Value) ? 0 : (int)res;
+                    connection.Close();
+                    return result;
+                }
+            }
+            return arr;
+        }
+
     }
 }

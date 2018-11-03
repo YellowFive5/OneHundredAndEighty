@@ -90,9 +90,19 @@ namespace OneHundredAndEighty
             else
             {
                 if (CB.Name == "Player1TabNameCombobox")
+                {
+                    PlayerOverview.ClearPlayer1();
                     PlayerOverview.RefreshPlayer1((int)CB.SelectedValue);
+                }
                 else
+                {
+                    PlayerOverview.ClearPlayer2();
                     PlayerOverview.RefreshPlayer2((int)CB.SelectedValue);
+                }
+            }
+            if (Player1TabNameCombobox.SelectedIndex != -1 && Player2TabNameCombobox.SelectedIndex != -1)   //  Если выбраны два игрока обновляем PvP данные
+            {
+                PlayerOverview.RefreshPvP((int)Player1TabNameCombobox.SelectedValue, (int)Player2TabNameCombobox.SelectedValue);
             }
         }
     }
