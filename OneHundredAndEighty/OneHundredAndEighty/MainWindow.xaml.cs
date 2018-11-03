@@ -100,6 +100,10 @@ namespace OneHundredAndEighty
                     PlayerOverview.RefreshPlayer2((int)CB.SelectedValue);
                 }
             }
+            if (Player1TabNameCombobox.SelectedIndex != -1 && Player2TabNameCombobox.SelectedIndex != -1)   //  Если выбраны два игрока обновляем PvP данные
+            {
+                PlayerOverview.RefreshPvP((int)Player1TabNameCombobox.SelectedValue, (int)Player2TabNameCombobox.SelectedValue);
+            }
         }
     }
 }

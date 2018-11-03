@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -449,6 +450,216 @@ namespace OneHundredAndEighty
                 connection.Close();
                 return PlayerData;
             }
+        }
+        public static int[] FindPvP(int Player1Id, int Player2Id)
+        {
+            int[] arr = new int[39];
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                connection.Open();
+
+                int games = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                arr[0] = games;
+                int player1wins = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1} AND WinnerId={0}) OR (Player1Id={1} AND Player2Id={0} AND WinnerId={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                arr[1] = player1wins;
+                int player2wins = (int)new SqlCommand(string.Format("SELECT COUNT(*) FROM Games WHERE (Player1Id={0} AND Player2Id={1} AND WinnerId={1}) OR (Player1Id={1} AND Player2Id={0} AND WinnerId={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                arr[2] = player2wins;
+
+                var legsres = new SqlCommand(string.Format("SELECT SUM(LegsPlayed) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int legs = (legsres == DBNull.Value) ? 0 : (int)legsres;
+                arr[3] = legs;
+
+                var p1lw1 = new SqlCommand(string.Format("SELECT SUM(LegsPlayer1Won) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1legswon = (p1lw1 == DBNull.Value) ? 0 : (int)p1lw1;
+                var p1lw2 = new SqlCommand(string.Format("SELECT SUM(LegsPlayer2Won) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1legswon += (p1lw2 == DBNull.Value) ? 0 : (int)p1lw2;
+                arr[4] = player1legswon;
+
+                var p2lw1 = new SqlCommand(string.Format("SELECT SUM(LegsPlayer2Won) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2legswon = (p2lw1 == DBNull.Value) ? 0 : (int)p2lw1;
+                var p2lw2 = new SqlCommand(string.Format("SELECT SUM(LegsPlayer1Won) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2legswon += (p2lw2 == DBNull.Value) ? 0 : (int)p2lw2;
+                arr[5] = player2legswon;
+
+                var setsres = new SqlCommand(string.Format("SELECT SUM(SetsPlayed) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int sets = (setsres == DBNull.Value) ? 0 : (int)setsres;
+                arr[6] = sets;
+
+                var p1ls1 = new SqlCommand(string.Format("SELECT SUM(SetsPlayer1Won) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1setswon = (p1ls1 == DBNull.Value) ? 0 : (int)p1ls1;
+                var p1ls2 = new SqlCommand(string.Format("SELECT SUM(SetsPlayer2Won) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1setswon += (p1ls2 == DBNull.Value) ? 0 : (int)p1ls2;
+                arr[7] = player1setswon;
+
+                var p2ls1 = new SqlCommand(string.Format("SELECT SUM(SetsPlayer2Won) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2setswon = (p2ls1 == DBNull.Value) ? 0 : (int)p2ls1;
+                var p2ls2 = new SqlCommand(string.Format("SELECT SUM(SetsPlayer1Won) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2setswon += (p2ls2 == DBNull.Value) ? 0 : (int)p2ls2;
+                arr[8] = player2setswon;
+
+                var throwsres = new SqlCommand(string.Format("SELECT SUM(Throws) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int throws = (throwsres == DBNull.Value) ? 0 : (int)throwsres;
+                arr[9] = throws;
+
+                var p1t1 = new SqlCommand(string.Format("SELECT SUM(Player1Throws) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1throws = (p1t1 == DBNull.Value) ? 0 : (int)p1t1;
+                var p1t2 = new SqlCommand(string.Format("SELECT SUM(Player2Throws) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1throws += (p1t2 == DBNull.Value) ? 0 : (int)p1t2;
+                arr[10] = player1throws;
+
+                var p2t1 = new SqlCommand(string.Format("SELECT SUM(Player2Throws) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2throws = (p2t1 == DBNull.Value) ? 0 : (int)p2t1;
+                var p2t2 = new SqlCommand(string.Format("SELECT SUM(Player1Throws) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2throws += (p2t2 == DBNull.Value) ? 0 : (int)p2t2;
+                arr[11] = player2throws;
+
+                var pointssres = new SqlCommand(string.Format("SELECT SUM(Points) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int points = (pointssres == DBNull.Value) ? 0 : (int)pointssres;
+                arr[12] = points;
+
+                var p1p1 = new SqlCommand(string.Format("SELECT SUM(Player1Points) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1points = (p1p1 == DBNull.Value) ? 0 : (int)p1p1;
+                var p1p2 = new SqlCommand(string.Format("SELECT SUM(Player2Points) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1points += (p1p2 == DBNull.Value) ? 0 : (int)p1p2;
+                arr[13] = player1points;
+
+                var p2p1 = new SqlCommand(string.Format("SELECT SUM(Player2Points) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2points = (p2p1 == DBNull.Value) ? 0 : (int)p2p1;
+                var p2p2 = new SqlCommand(string.Format("SELECT SUM(Player1Points) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2points += (p2p2 == DBNull.Value) ? 0 : (int)p2p2;
+                arr[14] = player2points;
+
+                var _180res = new SqlCommand(string.Format("SELECT SUM(_180) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int _180 = (_180res == DBNull.Value) ? 0 : (int)_180res;
+                arr[15] = _180;
+
+                var p1_1801 = new SqlCommand(string.Format("SELECT SUM(Player1180) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_180 = (p1_1801 == DBNull.Value) ? 0 : (int)p1_1801;
+                var p1_1802 = new SqlCommand(string.Format("SELECT SUM(Player2180) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_180 += (p1_1802 == DBNull.Value) ? 0 : (int)p1_1802;
+                arr[16] = player1_180;
+
+                var p2_1801 = new SqlCommand(string.Format("SELECT SUM(Player2180) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_180 = (p2_1801 == DBNull.Value) ? 0 : (int)p2_1801;
+                var p2_1802 = new SqlCommand(string.Format("SELECT SUM(Player1180) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_180 += (p2_1802 == DBNull.Value) ? 0 : (int)p2_1802;
+                arr[17] = player2_180;
+
+                var trembleres = new SqlCommand(string.Format("SELECT SUM(Trembles) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int trembles = (trembleres == DBNull.Value) ? 0 : (int)trembleres;
+                arr[18] = trembles;
+
+                var p1_trembles1 = new SqlCommand(string.Format("SELECT SUM(Player1Trembles) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_trembles = (p1_trembles1 == DBNull.Value) ? 0 : (int)p1_trembles1;
+                var p1_trembles2 = new SqlCommand(string.Format("SELECT SUM(Player2Trembles) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_trembles += (p1_trembles2 == DBNull.Value) ? 0 : (int)p1_trembles2;
+                arr[19] = player1_trembles;
+
+                var p2_trembles1 = new SqlCommand(string.Format("SELECT SUM(Player2Trembles) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_trembles = (p2_trembles1 == DBNull.Value) ? 0 : (int)p2_trembles1;
+                var p2_trembles2 = new SqlCommand(string.Format("SELECT SUM(Player1Trembles) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_trembles += (p2_trembles2 == DBNull.Value) ? 0 : (int)p2_trembles2;
+                arr[20] = player2_trembles;
+
+                var bullres = new SqlCommand(string.Format("SELECT SUM(Bulleyes) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int bulleyes = (bullres == DBNull.Value) ? 0 : (int)bullres;
+                arr[21] = bulleyes;
+
+                var p1_bulls1 = new SqlCommand(string.Format("SELECT SUM(Player1Bulleyes) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_bulleyes = (p1_bulls1 == DBNull.Value) ? 0 : (int)p1_bulls1;
+                var p1_bulls2 = new SqlCommand(string.Format("SELECT SUM(Player2Bulleyes) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_bulleyes += (p1_bulls2 == DBNull.Value) ? 0 : (int)p1_bulls2;
+                arr[22] = player1_bulleyes;
+
+                var p2_bulls1 = new SqlCommand(string.Format("SELECT SUM(Player2Bulleyes) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_bulleyes = (p2_bulls1 == DBNull.Value) ? 0 : (int)p2_bulls1;
+                var p2_bulls2 = new SqlCommand(string.Format("SELECT SUM(Player1Bulleyes) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_bulleyes += (p2_bulls2 == DBNull.Value) ? 0 : (int)p2_bulls2;
+                arr[23] = player2_bulleyes;
+
+                var doubleres = new SqlCommand(string.Format("SELECT SUM(Doubles) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int doublethrows = (doubleres == DBNull.Value) ? 0 : (int)doubleres;
+                arr[24] = doublethrows;
+
+                var p1_d1 = new SqlCommand(string.Format("SELECT SUM(Player1Doubles) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_doublethrows = (p1_d1 == DBNull.Value) ? 0 : (int)p1_d1;
+                var p1_d2 = new SqlCommand(string.Format("SELECT SUM(Player2Doubles) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_doublethrows += (p1_d2 == DBNull.Value) ? 0 : (int)p1_d2;
+                arr[25] = player1_doublethrows;
+
+                var p2_d1 = new SqlCommand(string.Format("SELECT SUM(Player2Doubles) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_doublethrows = (p2_d1 == DBNull.Value) ? 0 : (int)p2_d1;
+                var p2_d2 = new SqlCommand(string.Format("SELECT SUM(Player1Doubles) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_doublethrows += (p2_d2 == DBNull.Value) ? 0 : (int)p2_d2;
+                arr[26] = player2_doublethrows;
+
+                var _25res = new SqlCommand(string.Format("SELECT SUM(_25) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int _25throws = (_25res == DBNull.Value) ? 0 : (int)_25res;
+                arr[27] = _25throws;
+
+                var p1_251 = new SqlCommand(string.Format("SELECT SUM(Player125) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_25throws = (p1_251 == DBNull.Value) ? 0 : (int)p1_251;
+                var p1_252 = new SqlCommand(string.Format("SELECT SUM(Player225) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_25throws += (p1_252 == DBNull.Value) ? 0 : (int)p1_252;
+                arr[28] = player1_25throws;
+
+                var p2_251 = new SqlCommand(string.Format("SELECT SUM(Player225) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_25throws = (p2_251 == DBNull.Value) ? 0 : (int)p2_251;
+                var p2_252 = new SqlCommand(string.Format("SELECT SUM(Player125) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_25throws += (p2_252 == DBNull.Value) ? 0 : (int)p2_252;
+                arr[29] = player2_25throws;
+
+                var singleres = new SqlCommand(string.Format("SELECT SUM(Singles) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int singlethrows = (singleres == DBNull.Value) ? 0 : (int)singleres;
+                arr[30] = singlethrows;
+
+                var p1_s1 = new SqlCommand(string.Format("SELECT SUM(Player1Singles) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_singlethrows = (p1_s1 == DBNull.Value) ? 0 : (int)p1_s1;
+                var p1_s2 = new SqlCommand(string.Format("SELECT SUM(Player2Singles) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_singlethrows += (p1_s2 == DBNull.Value) ? 0 : (int)p1_s2;
+                arr[31] = player1_singlethrows;
+
+                var p2_s1 = new SqlCommand(string.Format("SELECT SUM(Player2Singles) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_singlethrows = (p2_s1 == DBNull.Value) ? 0 : (int)p2_s1;
+                var p2_s2 = new SqlCommand(string.Format("SELECT SUM(Player1Singles) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_singlethrows += (p2_s2 == DBNull.Value) ? 0 : (int)p2_s2;
+                arr[32] = player2_singlethrows;
+
+                var zerores = new SqlCommand(string.Format("SELECT SUM(Zeroes) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int zerothrows = (zerores == DBNull.Value) ? 0 : (int)zerores;
+                arr[33] = zerothrows;
+
+                var p1_z1 = new SqlCommand(string.Format("SELECT SUM(Player1Zeroes) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_zerothrows = (p1_z1 == DBNull.Value) ? 0 : (int)p1_z1;
+                var p1_z2 = new SqlCommand(string.Format("SELECT SUM(Player2Zeroes) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_zerothrows += (p1_z2 == DBNull.Value) ? 0 : (int)p1_z2;
+                arr[34] = player1_zerothrows;
+
+                var p2_z1 = new SqlCommand(string.Format("SELECT SUM(Player2Zeroes) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_zerothrows = (p2_z1 == DBNull.Value) ? 0 : (int)p2_z1;
+                var p2_z2 = new SqlCommand(string.Format("SELECT SUM(Player1Zeroes) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_zerothrows += (p2_z2 == DBNull.Value) ? 0 : (int)p2_z2;
+                arr[35] = player2_zerothrows;
+
+                var faultres = new SqlCommand(string.Format("SELECT SUM(Faults) FROM Games WHERE (Player1Id={0} AND Player2Id={1}) OR (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int faultthrows = (faultres == DBNull.Value) ? 0 : (int)faultres;
+                arr[36] = faultthrows;
+
+                var p1_f1 = new SqlCommand(string.Format("SELECT SUM(Player1Faults) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player1_faultthrows = (p1_f1 == DBNull.Value) ? 0 : (int)p1_f1;
+                var p1_f2 = new SqlCommand(string.Format("SELECT SUM(Player2Faults) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player1_faultthrows += (p1_f2 == DBNull.Value) ? 0 : (int)p1_f2;
+                arr[37] = player1_faultthrows;
+
+                var p2_f1 = new SqlCommand(string.Format("SELECT SUM(Player2Faults) FROM Games WHERE (Player1Id={0} AND Player2Id={1})", Player1Id, Player2Id), connection).ExecuteScalar();
+                int player2_faultthrows = (p2_f1 == DBNull.Value) ? 0 : (int)p2_f1;
+                var p2_f2 = new SqlCommand(string.Format("SELECT SUM(Player1Faults) FROM Games WHERE (Player1Id={1} AND Player2Id={0})", Player1Id, Player2Id), connection).ExecuteScalar();
+                player2_faultthrows += (p2_f2 == DBNull.Value) ? 0 : (int)p2_f2;
+                arr[38] = player2_faultthrows;
+
+                connection.Close();
+            }
+            return arr;
         }
     }
 }

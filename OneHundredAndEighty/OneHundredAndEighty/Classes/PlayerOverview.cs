@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Windows;
 using System.Windows.Media;
 
 namespace OneHundredAndEighty
@@ -11,8 +12,76 @@ namespace OneHundredAndEighty
         {
             ClearPlayer1();
             ClearPlayer2();
+            ClearPvP();
             MainWindow.Player2TabNameCombobox.SelectedIndex = -1;
             MainWindow.Player1TabNameCombobox.SelectedIndex = -1;
+        }
+        public static void ClearPvP()   //  Зануляем окно PvP
+        {
+            MainWindow.TabPvPGames.Content = 0;
+            MainWindow.TabPlayer1PvPGames.Content = 0;
+            MainWindow.TabPlayer2PvPGames.Content = 0;
+            MainWindow.TabPvPGamesSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPLegs.Content = 0;
+            MainWindow.TabPlayer1PvPLegs.Content = 0;
+            MainWindow.TabPlayer2PvPLegs.Content = 0;
+            MainWindow.TabPvPLegsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPSets.Content = 0;
+            MainWindow.TabPlayer1PvPSets.Content = 0;
+            MainWindow.TabPlayer2PvPSets.Content = 0;
+            MainWindow.TabPvPSetsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPNumberOfThrows.Content = 0;
+            MainWindow.TabPvPPlayer1Throws.Content = 0;
+            MainWindow.TabPvPPlayer2Throws.Content = 0;
+            MainWindow.TabPvPPlayersThrowsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPNumberOfPoints.Content = 0;
+            MainWindow.TabPvPPlayer1Points.Content = 0;
+            MainWindow.TabPvPPlayer2Points.Content = 0;
+            MainWindow.TabPvPPlayersPointsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvP180.Content = 0;
+            MainWindow.TabPlayer1PvP180.Content = 0;
+            MainWindow.TabPlayer2PvP180.Content = 0;
+            MainWindow.TabPvP180Slider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPTrembleThrows.Content = 0;
+            MainWindow.TabPlayer1PvPTrembleThrows.Content = 0;
+            MainWindow.TabPlayer2PvPTrembleThrows.Content = 0;
+            MainWindow.TabPvPTrembleThrowsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPBulleyethrows.Content = 0;
+            MainWindow.TabPlayer1PvPBullEyeThrows.Content = 0;
+            MainWindow.TabPlayer2PvPBullEyeThrows.Content = 0;
+            MainWindow.TabPvPBulleyeThrowsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPDoubleThrows.Content = 0;
+            MainWindow.TabPvPPlayer1DoubleThrows.Content = 0;
+            MainWindow.TabPvPPlayer2DoubleThrows.Content = 0;
+            MainWindow.TabPvPDoubleThrowsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvP25Throws.Content = 0;
+            MainWindow.TabPlayer1PvP25Throws.Content = 0;
+            MainWindow.TabPlayer2PvP25Throws.Content = 0;
+            MainWindow.TabPvP25ThrowsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabPvPSingleThrows.Content = 0;
+            MainWindow.TabPlayer1PvPSingleThrows.Content = 0;
+            MainWindow.TabPlayer2PvPSingleThrows.Content = 0;
+            MainWindow.TabPvPSingleThrowsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabZeroThrows.Content = 0;
+            MainWindow.TabPlayer1PvPZeroThrows.Content = 0;
+            MainWindow.TabPlayer2PvPZeroThrows.Content = 0;
+            MainWindow.TabPvPZeroThrowsSlider.Fill = Brush(0, 0);
+
+            MainWindow.TabFaultThrows.Content = 0;
+            MainWindow.TabPlayer1PvPFaultThrows.Content = 0;
+            MainWindow.TabPlayer2PvPFaultThrows.Content = 0;
+            MainWindow.TabPvPFaultThrowsSlider.Fill = Brush(0, 0);
         }
         public static void ClearPlayer1()   //  Зануляем данные игрока 1
         {
@@ -216,6 +285,76 @@ namespace OneHundredAndEighty
                 MainWindow.AchievePlayer23BullLight.Visibility = System.Windows.Visibility.Visible;
             if ((bool)(PlayerData.Rows[0][41]))
                 MainWindow.AchievePlayer2mrZLight.Visibility = System.Windows.Visibility.Visible;
+        }
+        public static void RefreshPvP(int Player1Id, int Player2Id)
+        {
+            int[] arr = new int[9];
+            arr = DBwork.FindPvP(Player1Id, Player2Id);
+            MainWindow.TabPvPGames.Content = arr[0];
+            MainWindow.TabPlayer1PvPGames.Content = arr[1];
+            MainWindow.TabPlayer2PvPGames.Content = arr[2];
+            MainWindow.TabPvPGamesSlider.Fill = Brush(arr[1], arr[2]);
+
+            MainWindow.TabPvPLegs.Content = arr[3];
+            MainWindow.TabPlayer1PvPLegs.Content = arr[4];
+            MainWindow.TabPlayer2PvPLegs.Content = arr[5];
+            MainWindow.TabPvPLegsSlider.Fill = Brush(arr[4], arr[5]);
+
+            MainWindow.TabPvPSets.Content = arr[6];
+            MainWindow.TabPlayer1PvPSets.Content = arr[7];
+            MainWindow.TabPlayer2PvPSets.Content = arr[8];
+            MainWindow.TabPvPSetsSlider.Fill = Brush(arr[7], arr[8]);
+
+            MainWindow.TabPvPNumberOfThrows.Content = arr[9];
+            MainWindow.TabPvPPlayer1Throws.Content = arr[10];
+            MainWindow.TabPvPPlayer2Throws.Content = arr[11];
+            MainWindow.TabPvPPlayersThrowsSlider.Fill = Brush(arr[10], arr[11]);
+
+            MainWindow.TabPvPNumberOfPoints.Content = arr[12];
+            MainWindow.TabPvPPlayer1Points.Content = arr[13];
+            MainWindow.TabPvPPlayer2Points.Content = arr[14];
+            MainWindow.TabPvPPlayersPointsSlider.Fill = Brush(arr[13], arr[14]);
+
+            MainWindow.TabPvP180.Content = arr[15];
+            MainWindow.TabPlayer1PvP180.Content = arr[16];
+            MainWindow.TabPlayer2PvP180.Content = arr[17];
+            MainWindow.TabPvP180Slider.Fill = Brush(arr[16], arr[17]);
+
+            MainWindow.TabPvPTrembleThrows.Content = arr[18];
+            MainWindow.TabPlayer1PvPTrembleThrows.Content = arr[19];
+            MainWindow.TabPlayer2PvPTrembleThrows.Content = arr[20];
+            MainWindow.TabPvPTrembleThrowsSlider.Fill = Brush(arr[19], arr[20]);
+
+            MainWindow.TabPvPBulleyethrows.Content = arr[21];
+            MainWindow.TabPlayer1PvPBullEyeThrows.Content = arr[22];
+            MainWindow.TabPlayer2PvPBullEyeThrows.Content = arr[23];
+            MainWindow.TabPvPBulleyeThrowsSlider.Fill = Brush(arr[22], arr[23]);
+
+            MainWindow.TabPvPDoubleThrows.Content = arr[24];
+            MainWindow.TabPvPPlayer1DoubleThrows.Content = arr[25];
+            MainWindow.TabPvPPlayer2DoubleThrows.Content = arr[26];
+            MainWindow.TabPvPDoubleThrowsSlider.Fill = Brush(arr[25], arr[26]);
+
+            MainWindow.TabPvP25Throws.Content = arr[27];
+            MainWindow.TabPlayer1PvP25Throws.Content = arr[28];
+            MainWindow.TabPlayer2PvP25Throws.Content = arr[29];
+            MainWindow.TabPvP25ThrowsSlider.Fill = Brush(arr[28], arr[29]);
+
+            MainWindow.TabPvPSingleThrows.Content = arr[30];
+            MainWindow.TabPlayer1PvPSingleThrows.Content = arr[31];
+            MainWindow.TabPlayer2PvPSingleThrows.Content = arr[32];
+            MainWindow.TabPvPSingleThrowsSlider.Fill = Brush(arr[31], arr[32]);
+
+            MainWindow.TabPvPZeroThrows.Content = arr[33];
+            MainWindow.TabPlayer1PvPZeroThrows.Content = arr[34];
+            MainWindow.TabPlayer2PvPZeroThrows.Content = arr[35];
+            MainWindow.TabPvPZeroThrowsSlider.Fill = Brush(arr[34], arr[35]);
+
+            MainWindow.TabPvPFaultThrows.Content = arr[36];
+            MainWindow.TabPlayer1PvPFaultThrows.Content = arr[37];
+            MainWindow.TabPlayer2PvPFaultThrows.Content = arr[38];
+            MainWindow.TabPvPFaultThrowsSlider.Fill = Brush(arr[37], arr[38]);
+
         }
         static void DrawSliders()   //  Отрисовка слайдеров
         {
