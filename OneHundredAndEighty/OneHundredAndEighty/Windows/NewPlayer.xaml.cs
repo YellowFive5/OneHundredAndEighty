@@ -1,34 +1,42 @@
-﻿using System;
+﻿#region Usings
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+
+#endregion
 
 namespace OneHundredAndEighty.Windows
 {
     /// <summary>
     /// Логика взаимодействия для NewPlayer.xaml
     /// </summary>
-    public partial class NewPlayer : Window
+    public partial class NewPlayer
     {
-        MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
-        string PlayerName;  //  Имя нового игрока
-        string PlayerNickName;  //  Ник нового игрока
+        private MainWindow mainWindow = (MainWindow) Application.Current.MainWindow; //  Ссылка на главное окно для доступа к элементам
+        private string playerName; //  Имя нового игрока
+        private string playerNickName; //  Ник нового игрока
 
         public NewPlayer()
         {
             InitializeComponent();
         }
+
         private void ExitButton_Click(object sender, RoutedEventArgs e) //  Кнопка выхода
         {
-            this.Close();
+            Close();
         }
-        private void PlayerNameBox_GotFocus(object sender, RoutedEventArgs e)   //  Фокус на текстбоксе
+
+        private void PlayerNameBox_GotFocus(object sender, RoutedEventArgs e) //  Фокус на текстбоксе
         {
-            TextBox T = sender as TextBox;
+            var T = sender as TextBox;
             T.Foreground = new SolidColorBrush(Colors.Black);
             if (T.Text == "Enter player nickname" || T.Text == "Enter player name" || T.Text == "Player must have nickname!" || T.Text == "Player must have name!") //  Убираем пояснения
+            {
                 T.Text = "";
+            }
         }
+
         private void RegisterButton_Click(object sender, RoutedEventArgs e) //  Кнопка регистрации нового игрока
         {
             //  Поля неправильно заполнены
@@ -39,6 +47,7 @@ namespace OneHundredAndEighty.Windows
                     PlayerNickNameBox.Foreground = new SolidColorBrush(Colors.Red);
                     PlayerNickNameBox.Text = "Player must have nickname!";
                 }
+
                 if (PlayerNameBox.Text == "" || PlayerNameBox.Text == "Enter player name")
                 {
                     PlayerNameBox.Foreground = new SolidColorBrush(Colors.Red);
@@ -49,18 +58,18 @@ namespace OneHundredAndEighty.Windows
             else
             {
                 //  Сохраняем имя и ник
-                PlayerName = PlayerNameBox.Text;
-                PlayerNickName = PlayerNickNameBox.Text;
-                this.Close();   //  Закрываем окно регистрации
-                if (DBwork.IsPlayerExist(PlayerName, PlayerNickName))   //  Если в базе уже есть игрок с тиким именем и фамилией
+                playerName = PlayerNameBox.Text;
+                playerNickName = PlayerNickNameBox.Text;
+                Close(); //  Закрываем окно регистрации
+                if (DBwork.IsPlayerExist(playerName, playerNickName)) //  Если в базе уже есть игрок с тиким именем и фамилией
                 {
-                    OneHundredAndEighty.NewPlayer.ShowExistingPlayerWindow(PlayerName,PlayerNickName);  //  Показываем предупреждение
-                    OneHundredAndEighty.NewPlayer.ShowNewPlayerRegisterWindow();    //  Заново открываем окно регистрации
+                    OneHundredAndEighty.NewPlayer.ShowExistingPlayerWindow(playerName, playerNickName); //  Показываем предупреждение
+                    OneHundredAndEighty.NewPlayer.ShowNewPlayerRegisterWindow(); //  Заново открываем окно регистрации
                 }
-                else  //    Игрока в базе нет   -   можно сохранять
+                else //    Игрока в базе нет   -   можно сохранять
                 {
-                    DBwork.SaveNewPlayer(PlayerName, PlayerNickName);   //  Сохраняем игрока
-                    OneHundredAndEighty.NewPlayer.ShowWelcomeWindow(PlayerName, PlayerNickName);    //  Показываем окно приветствия
+                    DBwork.SaveNewPlayer(playerName, playerNickName); //  Сохраняем игрока
+                    OneHundredAndEighty.NewPlayer.ShowWelcomeWindow(playerName, playerNickName); //  Показываем окно приветствия
                 }
             }
         }

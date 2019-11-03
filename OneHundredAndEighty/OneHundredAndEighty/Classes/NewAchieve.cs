@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+#endregion
+
 namespace OneHundredAndEighty
 {
-    public static class NewAchieve  //  Заработана новая ачивка
+    public static class NewAchieve //  Заработана новая ачивка
     {
-        static MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Cсылка на главное окно
-        public static void ShowNewAchieveWindow(string name, string achieve)    //  Показываем окно новой ачивки
+        private static readonly MainWindow MainWindow = (MainWindow) Application.Current.MainWindow; //  Cсылка на главное окно
+
+        public static void ShowNewAchieveWindow(string name, string achieve) //  Показываем окно новой ачивки
         {
-            Windows.NewAchieve window = new Windows.NewAchieve();
-            switch (achieve)    //  В зависимости от названия ачивки вибираем сообщение, картинку и кисть
+            var window = new Windows.NewAchieve();
+            switch (achieve) //  В зависимости от названия ачивки вибираем сообщение, картинку и кисть
             {
                 case "A10matchespalyed":
                     window.AchieveName.Content = "\"10 games played\"";
@@ -107,77 +108,75 @@ namespace OneHundredAndEighty
                     window.AchieveImage.Source = new BitmapImage(new Uri("/OneHundredAndEighty;component/Images/Achieves/mr.Z.png", UriKind.Relative));
                     window.AchieveLight.Fill = Brush(achieve);
                     break;
-                default:
-                    break;
             }
+
             window.PlayerName.Content = name;
             window.Owner = MainWindow;
             MainWindow.FadeIn();
             window.ShowDialog();
             MainWindow.FadeOut();
-            Brush Brush(string achievename) //  Выбираем кисть
+
+            Brush Brush(string achieveName) //  Выбираем кисть
             {
-                LinearGradientBrush B = new LinearGradientBrush();
-                switch (achievename)
+                var brush = new LinearGradientBrush();
+                switch (achieveName)
                 {
                     case "A10matchespalyed":
                     case "A10MatchesWon":
                     case "A1000Throws":
                     case "A10000Points":
                     case "A180x10":
-                        B.StartPoint = new Point(0.5, 1);
-                        B.EndPoint = new Point(0.5, 0);
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF00420F"), 0));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF2DC700"), 1));
-                        B.RelativeTransform = new RotateTransform(225);
+                        brush.StartPoint = new Point(0.5, 1);
+                        brush.EndPoint = new Point(0.5, 0);
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF00420F"), 0));
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF2DC700"), 1));
+                        brush.RelativeTransform = new RotateTransform(225);
                         break;
                     case "A100MatchesPalyed":
                     case "A100MatchesWon":
                     case "A10000Throws":
                     case "A100000Points":
                     case "A180x100":
-                        B.StartPoint = new Point(0.5, 1);
-                        B.EndPoint = new Point(0.5, 0);
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF050078"), 0));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF00B1D8"), 1));
-                        B.RelativeTransform = new RotateTransform(225);
+                        brush.StartPoint = new Point(0.5, 1);
+                        brush.EndPoint = new Point(0.5, 0);
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF050078"), 0));
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF00B1D8"), 1));
+                        brush.RelativeTransform = new RotateTransform(225);
                         break;
                     case "A1000MatchesPalyed":
                     case "A1000MatchesWon":
                     case "A100000Throws":
                     case "A1000000Points":
                     case "A180x1000":
-                        B.StartPoint = new Point(0.5, 1);
-                        B.EndPoint = new Point(0.5, 0);
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF610000"), 0));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF81009E"), 1));
-                        B.RelativeTransform = new RotateTransform(225);
+                        brush.StartPoint = new Point(0.5, 1);
+                        brush.EndPoint = new Point(0.5, 0);
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF610000"), 0));
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF81009E"), 1));
+                        brush.RelativeTransform = new RotateTransform(225);
                         break;
                     case "AFirst180":
-                        B.StartPoint = new Point(0.5, 0);
-                        B.EndPoint = new Point(0.5, 1);
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFFF4600"), 0));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF34CF07"), 1));
-                        B.RelativeTransform = new RotateTransform(250);
+                        brush.StartPoint = new Point(0.5, 0);
+                        brush.EndPoint = new Point(0.5, 1);
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FFFF4600"), 0));
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF34CF07"), 1));
+                        brush.RelativeTransform = new RotateTransform(250);
                         break;
                     case "AmrZ":
-                        B.StartPoint = new Point(0.5, 0);
-                        B.EndPoint = new Point(0.5, 1);
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF5B5B5B"), 0));
-                        B.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFF7F7F7"), 1));
-                        B.RelativeTransform = new RotateTransform(225);
+                        brush.StartPoint = new Point(0.5, 0);
+                        brush.EndPoint = new Point(0.5, 1);
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF5B5B5B"), 0));
+                        brush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FFF7F7F7"), 1));
+                        brush.RelativeTransform = new RotateTransform(225);
                         break;
                     case "A3Bull":
-                        RadialGradientBrush R = new RadialGradientBrush();
-                        R.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FFC70900"), 0));
-                        R.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF00420F"), 0.577));
-                        R.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#FF360146"), 1));
-                        return R;
-                        break;
-                    default:
-                        break;
+                        var gradientBrush = new RadialGradientBrush();
+                        gradientBrush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FFC70900"), 0));
+                        gradientBrush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF00420F"), 0.577));
+                        gradientBrush.GradientStops.Add(new GradientStop((Color) ColorConverter.ConvertFromString("#FF360146"), 1));
+                        return gradientBrush;
                 }
-                return B;
+
+                return brush;
             }
         }
     }

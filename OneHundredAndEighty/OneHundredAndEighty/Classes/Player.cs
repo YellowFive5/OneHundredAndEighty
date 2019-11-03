@@ -1,49 +1,57 @@
-﻿using System.Collections.Generic;
+﻿#region Usings
+
 using System.Windows.Controls;
+
+#endregion
 
 namespace OneHundredAndEighty
 {
     public class Player //  Класс игрока
     {
-        public string Name { get; private set; }    //  Имя игрока
-        public string Tag { get; private set; } //  Тэг
-        public int DBId { get; private set; }   //  Id игрока в БД
+        public string Name { get; } //  Имя игрока
+        public string Tag { get; } //  Тэг
+
+        public int DbId { get; } //  Id игрока в БД
+
         //Матч
-        public int SetsWon; //  Количество выигранных сетов
-        public int LegsWon; //  Количество выигранных легов в сете
-        public int PointsToOut; //  Количество очков на завершение лега
-        public int HandPoints;  //  Набранное количестов очков в подходе
-        public int _180;    //  Количество 180 в матче
-        public bool IsmrZ;  //  Ачивка 
-        public bool Is3Bull;  //  Ачивка 
-        public Throw Throw1 = null; //  Первый бросок
-        public Throw Throw2 = null; //  Второй бросок
-        public Throw Throw3 = null; //  Третий бросок
+        public int setsWon; //  Количество выигранных сетов
+        public int legsWon; //  Количество выигранных легов в сете
+        public int pointsToOut; //  Количество очков на завершение лега
+        public int handPoints; //  Набранное количестов очков в подходе
+        public int _180; //  Количество 180 в матче
+        public bool ismrZ; //  Ачивка 
+        public bool is3Bull; //  Ачивка 
+        public Throw throw1; //  Первый бросок
+        public Throw throw2; //  Второй бросок
+        public Throw throw3; //  Третий бросок
+
         public void ClearHand() //  Обнуление очередного подхода
         {
-            this.HandPoints = 0;
-            this.Throw1 = null;
-            this.Throw2 = null;
-            this.Throw3 = null;
+            handPoints = 0;
+            throw1 = null;
+            throw2 = null;
+            throw3 = null;
         }
-        //  Инфо-панель
-        public Canvas HelpPanel;    //  Панель помощи
-        public Label HelpLabel; //  Лейбл помощи
-        public Label SetsWonLabel;  //  Лейбл выиграных сетов
-        public Label LegsWonLabel;  //  Лейбл выиграных легов
-        public Label PointsLabel;   //  Лейбл набраных очнов
 
-        public Player(string Tag, int id, string Name, Canvas HelpPanel, Label HelpLabel, Label SetsWonLabel, Label LegsWonLabel, Label PointsLabel, int PointsToOut) //  Конструктор нового игрока
+        //  Инфо-панель
+        public readonly Canvas helpPanel; //  Панель помощи
+        public readonly Label helpLabel; //  Лейбл помощи
+        public readonly Label setsWonLabel; //  Лейбл выиграных сетов
+        public readonly Label legsWonLabel; //  Лейбл выиграных легов
+        public readonly Label pointsLabel; //  Лейбл набраных очнов
+
+        public Player(string tag, int id, string name, Canvas helpPanel, Label helpLabel,
+                      Label setsWonLabel, Label legsWonLabel, Label pointsLabel, int pointsToOut) //  Конструктор нового игрока
         {
-            this.Tag = Tag;
-            this.DBId = id;
-            this.Name = Name;
-            this.HelpPanel = HelpPanel;
-            this.HelpLabel = HelpLabel;
-            this.SetsWonLabel = SetsWonLabel;
-            this.LegsWonLabel = LegsWonLabel;
-            this.PointsLabel = PointsLabel;
-            this.PointsToOut = PointsToOut;
+            Tag = tag;
+            DbId = id;
+            Name = name;
+            this.helpPanel = helpPanel;
+            this.helpLabel = helpLabel;
+            this.setsWonLabel = setsWonLabel;
+            this.legsWonLabel = legsWonLabel;
+            this.pointsLabel = pointsLabel;
+            this.pointsToOut = pointsToOut;
         }
     }
 }

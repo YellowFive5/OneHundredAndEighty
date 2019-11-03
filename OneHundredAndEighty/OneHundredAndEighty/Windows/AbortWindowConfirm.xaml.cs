@@ -5,9 +5,10 @@ namespace OneHundredAndEighty.Windows
     /// <summary>
     /// Логика взаимодействия для AbortWindowConfirm.xaml
     /// </summary>
-    public partial class AbortWindowConfirm : Window
+    public partial class AbortWindowConfirm
     {
-        public bool result { get; private set; }    //  Результат выбора
+        public bool Result { get; private set; } //  Результат выбора
+
         public AbortWindowConfirm()
         {
             InitializeComponent();
@@ -15,14 +16,14 @@ namespace OneHundredAndEighty.Windows
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
-            this.result = false;
-            this.Close();
+            Result = false;
+            Close();
         }
 
         private void AbortButton_Click(object sender, RoutedEventArgs e)
         {
-            this.result = true;
-            this.Close();
+            Result = true;
+            Close();
         }
     }
 }

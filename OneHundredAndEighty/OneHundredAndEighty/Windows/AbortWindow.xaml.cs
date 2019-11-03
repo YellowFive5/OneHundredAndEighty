@@ -5,7 +5,7 @@ namespace OneHundredAndEighty.Windows
     /// <summary>
     /// Логика взаимодействия для AbortWindow.xaml
     /// </summary>
-    public partial class AbortWindow : Window
+    public partial class AbortWindow
     {
         public AbortWindow()
         {
@@ -14,7 +14,7 @@ namespace OneHundredAndEighty.Windows
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

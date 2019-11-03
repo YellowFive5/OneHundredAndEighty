@@ -1,30 +1,30 @@
-﻿using System.Text;
+﻿#region Usings
+
+using System.Text;
+
+#endregion
 
 namespace OneHundredAndEighty
 {
-    public static class NewPlayer   //  Регистрация нового игрока
+    public static class NewPlayer //  Регистрация нового игрока
     {
-        static MainWindow MainWindow = ((MainWindow)System.Windows.Application.Current.MainWindow);    //  Ссылка на главное окно для доступа к элементам
-        public static void ShowNewPlayerRegisterWindow()    //  Показать окно регистрации
+        private static readonly MainWindow MainWindow = (MainWindow) System.Windows.Application.Current.MainWindow; //  Ссылка на главное окно для доступа к элементам
+
+        public static void ShowNewPlayerRegisterWindow() //  Показать окно регистрации
         {
-            Windows.NewPlayer window = new Windows.NewPlayer();
-            window.Owner = MainWindow;
-            window.PlayerNameBox.Text = "Enter player name";
-            window.PlayerNickNameBox.Text = "Enter player nickname";
+            var window = new Windows.NewPlayer {Owner = MainWindow, PlayerNameBox = {Text = "Enter player name"}, PlayerNickNameBox = {Text = "Enter player nickname"}};
             window.ShowDialog();
         }
-        public static void ShowWelcomeWindow(string name, string nickname)  //  Показать окно после регистрации
+
+        public static void ShowWelcomeWindow(string name, string nickname) //  Показать окно после регистрации
         {
-            Windows.WelcomeNewPlayer window = new Windows.WelcomeNewPlayer();
-            window.NameNickName.Content = new StringBuilder().Append(name).Append(" \" ").Append(nickname).Append(" \"").ToString();
-            window.Owner = MainWindow;
+            var window = new Windows.WelcomeNewPlayer {NameNickName = {Content = new StringBuilder().Append(name).Append(" \" ").Append(nickname).Append(" \"").ToString()}, Owner = MainWindow};
             window.ShowDialog();
         }
-        public static void ShowExistingPlayerWindow(string name, string nickname)   //  Показать окно предупреждения о существовании игрока
+
+        public static void ShowExistingPlayerWindow(string name, string nickname) //  Показать окно предупреждения о существовании игрока
         {
-            Windows.PlayerExists window = new Windows.PlayerExists();
-            window.ExistingPlayerName.Content = new StringBuilder().Append(name).Append(" \" ").Append(nickname).Append(" \"").ToString();
-            window.Owner = MainWindow;
+            var window = new Windows.PlayerExists {ExistingPlayerName = {Content = new StringBuilder().Append(name).Append(" \" ").Append(nickname).Append(" \"").ToString()}, Owner = MainWindow};
             window.ShowDialog();
         }
     }
