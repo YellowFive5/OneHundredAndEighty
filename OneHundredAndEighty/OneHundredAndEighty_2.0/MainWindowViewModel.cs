@@ -1,4 +1,10 @@
-﻿namespace OneHundredAndEighty_2._0
+﻿#region Usings
+
+using System.Collections.Generic;
+
+#endregion
+
+namespace OneHundredAndEighty_2._0
 {
     public class MainWindowViewModel
     {
@@ -9,7 +15,9 @@
             this.window = window;
             var dbService = new DBService();
 
-            dbService.SaveNewPlayer("Name1","Nickname1");
+            dbService.SaveNewPlayer("Player", "One");
+            dbService.SaveNewPlayer("Player", "Two");
+            dbService.StartNewGame(GameType.FreeThrows_1, new List<string> {"One", "Two"});
         }
     }
 }
