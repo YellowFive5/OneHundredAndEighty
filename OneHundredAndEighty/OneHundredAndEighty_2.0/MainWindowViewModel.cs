@@ -15,9 +15,17 @@ namespace OneHundredAndEighty_2._0
             this.window = window;
             var dbService = new DBService();
 
-            dbService.SaveNewPlayer("Player", "One");
-            dbService.SaveNewPlayer("Player", "Two");
-            dbService.StartNewGame(GameType.FreeThrows_1, new List<string> {"One", "Two"});
+            // var p1 = new Player("Player", "One");
+            // var p2 = new Player("Player", "Two");
+            // dbService.SaveNewPlayer(p1);
+            // dbService.SaveNewPlayer(p2);
+            //
+            // dbService.StartNewGame(GameType.FreeThrows,
+            //                        new List<Player>
+            //                        {
+            //                            p1,
+            //                            p2
+            //                        });
         }
     }
 }
