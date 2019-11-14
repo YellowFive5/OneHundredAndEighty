@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Globalization;
 
 #endregion
 
@@ -89,6 +90,16 @@ namespace OneHundredAndEighty_2._0
                 ExecuteNonQueryInternal($"INSERT INTO [GameStatistics] (Game,Statistics)" +
                                         $" VALUES ({newGameId},{id})");
             }
+        }
+
+        public void SaveThrow(Throw thrw)
+        {
+            var newThrowQuery = $"INSERT INTO [Throws] (Player,Game,Sector,Type,Resultativity,Number,Points,PoiX,PoiY,ProjectionResolution,Timestamp)" +
+                                $"VALUES ({thrw.Player.Id},{thrw.GameId},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Resultativity},{thrw.Number}," +
+                                $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
+            ExecuteNonQueryInternal(newThrowQuery);
+
+            var newThrowId = ExecuteScalarInternal("SELECT MAX(Id) FROM [Throws]");
         }
 
         public void Dispose()
