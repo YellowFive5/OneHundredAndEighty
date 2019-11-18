@@ -59,22 +59,23 @@ namespace OneHundredAndEighty_2._0
             }
         }
 
-        public void StartNewGame(GameType type, List<Player> players)
+        public void StartNewGame(Game game, List<Player> players)
         {
             var newGameQuery = $"INSERT INTO [Games] (StartTimestamp,EndTimestamp,Type)" +
-                               $" VALUES ('{DateTime.Now}','','{(int) type}')";
+                               $" VALUES ('{game.StartTimeStamp}','','{(int) game.Type}')";
             ExecuteNonQueryInternal(newGameQuery);
 
             var newGameId = ExecuteScalarInternal("SELECT MAX(Id) FROM [Games]");
+            game.SetId(Convert.ToInt32(newGameId));
             var newGameStatisticsIds = new List<object>();
 
             foreach (var player in players)
             {
-                switch (type)
+                switch (game.Type)
                 {
                     case GameType.FreeThrows:
-                        var newGameStatisticsQuery = $"INSERT INTO [StatisticsFreeThrows] (Player,GameResult,Throws,Points,_180,Trembles,Doubles,Singles,Bulleyes,_25,Zeroes,Faults)" +
-                                                     $"VALUES ({player.Id},1,0,0,0,0,0,0,0,0,0,0)";
+                        var newGameStatisticsQuery = $"INSERT INTO [StatisticsFreeThrows] (Player,GameResult,Throws,Points,_180,Tremble,Double,Single,Bulleye,_25,Zero,Fault)" +
+                                                     $"VALUES ({player.Id},{(int) GameResultType.NotDefined},0,0,0,0,0,0,0,0,0,0)";
                         ExecuteNonQueryInternal(newGameStatisticsQuery);
 
                         var newGameStatisticsId = ExecuteScalarInternal("SELECT MAX(Id) FROM [StatisticsFreeThrows]");
@@ -92,14 +93,110 @@ namespace OneHundredAndEighty_2._0
             }
         }
 
+        public void EndGame(Game game, Player winner = null)
+        {
+            game.SetEndTimeStamp();
+            var gameEndTimestampQuery = $"UPDATE [Games] SET [EndTimestamp] = '{game.EndTimeStamp}' " +
+                                        $"WHERE [Id] = {game.Id}";
+            ExecuteNonQueryInternal(gameEndTimestampQuery);
+
+            if (winner != null)
+            {
+                var winnerGameStatisticsResultQuery = string.Empty;
+                var loosersGameStatisticsResultQuery = string.Empty;
+
+                switch (game.Type)
+                {
+                    case GameType.FreeThrows:
+                        winnerGameStatisticsResultQuery = $"UPDATE [StatisticsFreeThrows] SET [GameResult] = {(int) GameResultType.Win} " +
+                                                          $"WHERE [Id] = (SELECT [Id] FROM [StatisticsFreeThrows] AS [SFT] " +
+                                                          $"INNER JOIN [GameStatistics] AS [GS] " +
+                                                          $"ON [GS].[Game] = {game.Id} " +
+                                                          $"AND [GS].[Statistics] = [SFT].[Id] " +
+                                                          $"WHERE[Player] = {winner.Id})";
+                        loosersGameStatisticsResultQuery = $"UPDATE [StatisticsFreeThrows] SET [GameResult] = {(int) GameResultType.Loose} " +
+                                                           $"WHERE [Id] IN (SELECT [Id] FROM [StatisticsFreeThrows] AS [SFT] " +
+                                                           $"INNER JOIN [GameStatistics] AS [GS] " +
+                                                           $"ON [GS].[Game] = {game.Id} " +
+                                                           $"AND [GS].[Statistics] = [SFT].[Id] " +
+                                                           $"WHERE[Player] <> {winner.Id})";
+                        break;
+                    // todo another game types
+                }
+
+                ExecuteNonQueryInternal(winnerGameStatisticsResultQuery);
+                ExecuteNonQueryInternal(loosersGameStatisticsResultQuery);
+
+                var winnerPlayerStatisticsQuery = $"UPDATE [PlayerStatistics] SET [GamesWon] = [GamesWon] + 1 " +
+                                                  $"WHERE [Id] = (SELECT [Statistics] FROM [Players] WHERE [Id] = {winner.Id})";
+                ExecuteNonQueryInternal(winnerPlayerStatisticsQuery);
+            }
+
+            var playersStatisticsQuery = $"UPDATE [PlayerStatistics] SET [GamesPlayed] = [GamesPlayed] + 1 " +
+                                         $"WHERE [Id] IN (SELECT [P].[Statistics] FROM [Players] AS [P] " +
+                                         $"INNER JOIN [StatisticsFreeThrows] AS [SFT] " +
+                                         $"ON [SFT].[Player] = [P].[Id]" +
+                                         $"INNER JOIN [GameStatistics] AS [GS] " +
+                                         $"ON [GS].[Game] = {game.Id} " +
+                                         $"AND [GS].[Statistics] = [SFT].[Id])";
+            // todo another game types
+            ExecuteNonQueryInternal(playersStatisticsQuery);
+        }
+
         public void SaveThrow(Throw thrw)
         {
             var newThrowQuery = $"INSERT INTO [Throws] (Player,Game,Sector,Type,Resultativity,Number,Points,PoiX,PoiY,ProjectionResolution,Timestamp)" +
-                                $"VALUES ({thrw.Player.Id},{thrw.GameId},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Resultativity},{thrw.Number}," +
+                                $"VALUES ({thrw.Player.Id},{thrw.Game.Id},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Resultativity},{thrw.Number}," +
                                 $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
             ExecuteNonQueryInternal(newThrowQuery);
 
             var newThrowId = ExecuteScalarInternal("SELECT MAX(Id) FROM [Throws]");
+            thrw.SetId(Convert.ToInt32(newThrowId));
+            var incrementThrowGameStatisticsQuery = string.Empty;
+            var incrementPointsGameStatisticsQuery = string.Empty;
+            var incrementThrowTypeGameStatisticsQuery = string.Empty;
+            switch (thrw.Game.Type)
+            {
+                case GameType.FreeThrows:
+                    incrementThrowGameStatisticsQuery = $"UPDATE [StatisticsFreeThrows] SET [Throws] = [Throws] + 1 " +
+                                                        $"WHERE [Id] = (SELECT [Id] FROM [StatisticsFreeThrows] AS [SFT] " +
+                                                        $"INNER JOIN [GameStatistics] AS [GS] " +
+                                                        $"ON [GS].[Game] = {thrw.Game.Id} " +
+                                                        $"AND [GS].[Statistics] = [SFT].[Id] " +
+                                                        $"WHERE[Player] = {thrw.Player.Id})";
+                    incrementPointsGameStatisticsQuery = $"UPDATE [StatisticsFreeThrows] SET [Points] = [Points] + {thrw.Points} " +
+                                                         $"WHERE [Id] = (SELECT [Id] FROM [StatisticsFreeThrows] AS [SFT] " +
+                                                         $"INNER JOIN [GameStatistics] AS [GS] " +
+                                                         $"ON [GS].[Game] = {thrw.Game.Id} " +
+                                                         $"AND [GS].[Statistics] = [SFT].[Id] " +
+                                                         $"WHERE[Player] = {thrw.Player.Id})";
+                    incrementThrowTypeGameStatisticsQuery = $"UPDATE [StatisticsFreeThrows] SET [{thrw.Type}] = [{thrw.Type}] + 1 " +
+                                                            $"WHERE [Id] = (SELECT [Id] FROM [StatisticsFreeThrows] AS [SFT] " +
+                                                            $"INNER JOIN [GameStatistics] AS [GS] " +
+                                                            $"ON [GS].[Game] = {thrw.Game.Id} " +
+                                                            $"AND [GS].[Statistics] = [SFT].[Id] " +
+                                                            $"WHERE[Player] = {thrw.Player.Id})";
+                    // todo fault add
+                    // todo _180 add
+                    // todo another game types
+                    break;
+            }
+
+            ExecuteNonQueryInternal(incrementThrowGameStatisticsQuery);
+            ExecuteNonQueryInternal(incrementPointsGameStatisticsQuery);
+            ExecuteNonQueryInternal(incrementThrowTypeGameStatisticsQuery);
+
+            var incrementThrowPlayerStatisticsQuery = $"UPDATE [PlayerStatistics] SET [Throws] = [Throws] + 1 " +
+                                                      $"WHERE [Id] = (SELECT [Statistics] FROM [Players] WHERE [Id] = {thrw.Player.Id})";
+            ExecuteNonQueryInternal(incrementThrowPlayerStatisticsQuery);
+
+            var incrementPointsPlayerStatisticsQuery = $"UPDATE [PlayerStatistics] SET [Points] = [Points] + {thrw.Points} " +
+                                                       $"WHERE [Id] = (SELECT [Statistics] FROM [Players] WHERE [Id] = {thrw.Player.Id})";
+            ExecuteNonQueryInternal(incrementPointsPlayerStatisticsQuery);
+
+            var incrementThrowTypePlayerStatisticsQuery = $"UPDATE [PlayerStatistics] SET [{thrw.Type}] = [{thrw.Type}] + 1 " +
+                                                          $"WHERE [Id] = (SELECT [Statistics] FROM [Players] WHERE [Id] = {thrw.Player.Id})";
+            ExecuteNonQueryInternal(incrementThrowTypePlayerStatisticsQuery);
         }
 
         public void Dispose()

@@ -14,10 +14,13 @@ namespace OneHundredAndEighty_2._0
 
         public Player(string name, string nickName, int id = -1)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(nickName))
+            if (string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(nickName) ||
+                string.IsNullOrEmpty(name) ||
+                string.IsNullOrEmpty(nickName))
             {
                 //todo: message
-                throw new Exception("Name or NickName can't be empty");
+                throw new Exception("Name or NickName can't be empty, null or whitespace");
             }
 
             Id = id;

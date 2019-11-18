@@ -14,7 +14,7 @@ namespace OneHundredAndEighty_2._0
         Double,
         Tremble,
         _25,
-        Bull
+        Bulleye
     }
 
     public enum ThrowResultativity
@@ -28,12 +28,24 @@ namespace OneHundredAndEighty_2._0
 
     public class Throw
     {
-        public Throw(int id, Player player, int gameId, int sector, ThrowType type, ThrowResultativity resultativity,
-                     int number, int points, PointF poi, int projectionResolution)
+        public int Id { get; private set; }
+        public Player Player { get; }
+        public Game Game { get; }
+        public int Sector { get; }
+        public ThrowType Type { get; }
+        public ThrowResultativity Resultativity { get; }
+        public int Number { get; }
+        public int Points { get; }
+        public PointF Poi { get; }
+        public int ProjectionResolution { get; }
+        public DateTime TimeStamp { get; }
+
+        public Throw(Player player, Game game, int sector, ThrowType type, ThrowResultativity resultativity,
+                     int number, int points, PointF poi, int projectionResolution, int id = -1)
         {
             Id = id;
             Player = player;
-            GameId = gameId;
+            Game = game;
             Sector = sector;
             Type = type;
             Resultativity = resultativity;
@@ -44,16 +56,9 @@ namespace OneHundredAndEighty_2._0
             TimeStamp = DateTime.Now;
         }
 
-        public int Id { get; set; }
-        public Player Player { get; set; }
-        public int GameId { get; set; }
-        public int Sector { get; set; }
-        public ThrowType Type { get; set; }
-        public ThrowResultativity Resultativity { get; set; }
-        public int Number { get; set; }
-        public int Points { get; }
-        public PointF Poi { get; }
-        public int ProjectionResolution { get; }
-        public DateTime TimeStamp { get; set; }
+        public void SetId(int id)
+        {
+            Id = id;
+        }
     }
 }
