@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,123 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cam1EnabledCheckBoxText" xml:space="preserve">
+    <value>Cam 1 enabled</value>
+  </data>
+  <data name="Cam1SettingsTabName" xml:space="preserve">
+    <value>Cam1</value>
+  </data>
+  <data name="Cam2EnabledCheckBoxText" xml:space="preserve">
+    <value>Cam 2 enabled</value>
+  </data>
+  <data name="Cam2SettingsTabName" xml:space="preserve">
+    <value>Cam2</value>
+  </data>
+  <data name="Cam3EnabledCheckBoxText" xml:space="preserve">
+    <value>Cam 3 enabled</value>
+  </data>
+  <data name="Cam3SettingsTabName" xml:space="preserve">
+    <value>Cam3</value>
+  </data>
+  <data name="Cam4EnabledCheckBoxText" xml:space="preserve">
+    <value>Cam 4 enabled</value>
+  </data>
+  <data name="Cam4SettingsTabName" xml:space="preserve">
+    <value>Cam4</value>
+  </data>
+  <data name="CamCheckBoxHelperText" xml:space="preserve">
+    <value>Enable/disable camera</value>
+  </data>
+  <data name="CamFovHelperText" xml:space="preserve">
+    <value>Cameras horizontal field of view</value>
+  </data>
+  <data name="CamFovLabelText" xml:space="preserve">
+    <value>Cameras HFOV</value>
+  </data>
+  <data name="CamIdHelperText" xml:space="preserve">
+    <value>Camera Id. Use CamCalibrator to find it</value>
+  </data>
+  <data name="CamResHHelperText" xml:space="preserve">
+    <value>Cam vertical resolution. For now 720 max available</value>
+  </data>
+  <data name="CamResHLabelText" xml:space="preserve">
+    <value>Cam resolution height</value>
+  </data>
+  <data name="CamResWHelperText" xml:space="preserve">
+    <value>Cam horizontal resolution. For now 1280 max available</value>
+  </data>
+  <data name="CamResWLabelText" xml:space="preserve">
+    <value>Cam resolution width</value>
+  </data>
+  <data name="CamXSetupPointHelperText" xml:space="preserve">
+    <value>Camera X.Setup point on projection image. Use 'Calibrate' button on Cam setup tab to setup</value>
+  </data>
+  <data name="CamYSetupPointHelperText" xml:space="preserve">
+    <value>Camera Y.Setup point on projection image. Use 'Calibrate' button on Cam setup tab to setup</value>
+  </data>
+  <data name="ExtractionSleepTimeLabelText" xml:space="preserve">
+    <value>Extraction sleep time</value>
+  </data>
+  <data name="ExtrectionSleepTimeHelperText" xml:space="preserve">
+    <value>Threshold sleep time in seconds for darts extraction from dartboard process. Default value is '4'</value>
+  </data>
+  <data name="GeneralSettingsTabName" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="MainSettingsTabName" xml:space="preserve">
+    <value>Setup</value>
+  </data>
+  <data name="MinContourArcHelperText" xml:space="preserve">
+    <value>Minimal dart contour arc on image to be detected. Default value is '120'</value>
+  </data>
+  <data name="MinContourArcLabelText" xml:space="preserve">
+    <value>Minimal contour arc</value>
+  </data>
+  <data name="MovesDartHelperText" xml:space="preserve">
+    <value>Value of moves, indicating that another throw is done. Default value is '600'</value>
+  </data>
+  <data name="MovesDartLabelText" xml:space="preserve">
+    <value>Moves dart value</value>
+  </data>
+  <data name="MovesDetectedHelperText" xml:space="preserve">
+    <value>After move detected threshold sleep time in seconds. Default value is '0.25'</value>
+  </data>
+  <data name="MovesDetectedLabelText" xml:space="preserve">
+    <value>Move detected sleep time</value>
+  </data>
+  <data name="MovesExtractionHelperText" xml:space="preserve">
+    <value>Value of moves, indicating that you extract darts from dartboard after throws. Default value is '8000'</value>
+  </data>
+  <data name="MovesExtractionLabelText" xml:space="preserve">
+    <value>Moves extraction value</value>
+  </data>
+  <data name="MovesNoiseHelperText" xml:space="preserve">
+    <value>Value of noise moves. Default value is '150'</value>
+  </data>
+  <data name="MovesNoiseLabelText" xml:space="preserve">
+    <value>Moves noise value</value>
+  </data>
+  <data name="SmoothGausHelperText" xml:space="preserve">
+    <value>Gaussian smooth of ROI image. Default value is '5'</value>
+  </data>
+  <data name="SmoothGausLabelText" xml:space="preserve">
+    <value>Smooth gaussian value</value>
+  </data>
+  <data name="ThresholdSleepTimeHelperText" xml:space="preserve">
+    <value>Threshold sleep time between cams work in seconds. Default value is '0.125'</value>
+  </data>
+  <data name="ThresholdSleepTimeLabelText" xml:space="preserve">
+    <value>Threshold sleep time</value>
+  </data>
+  <data name="ToCamHelperText" xml:space="preserve">
+    <value>Distance from camera to bull in cm</value>
+  </data>
+  <data name="VersionsMistmatchErrorText" xml:space="preserve">
+    <value>DB version and App version is different</value>
+  </data>
 </root>

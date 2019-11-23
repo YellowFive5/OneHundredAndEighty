@@ -73,7 +73,7 @@ namespace OneHundredAndEighty_2._0
             return (string)ExecuteScalarInternal(query);
         }
 
-        public void SaveSettingsValue(SettingsType name, object value)
+        public void SaveSettingsValue(SettingsType name, string value)
         {
             var query = $"UPDATE [{Table.Settings}] SET [{Column.Value}] = '{value}' WHERE [{Column.Name}] = '{name}'";
             ExecuteNonQueryInternal(query);

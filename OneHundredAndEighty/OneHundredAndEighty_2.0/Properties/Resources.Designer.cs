@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OneHundredAndEighty_2._0.Properties
-{
-
-
+namespace OneHundredAndEighty_2._0.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,52 +19,386 @@ namespace OneHundredAndEighty_2._0.Properties
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    public class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OneHundredAndEighty_2._0.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam 1 enabled.
+        /// </summary>
+        public static string Cam1EnabledCheckBoxText {
+            get {
+                return ResourceManager.GetString("Cam1EnabledCheckBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam1.
+        /// </summary>
+        public static string Cam1SettingsTabName {
+            get {
+                return ResourceManager.GetString("Cam1SettingsTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam 2 enabled.
+        /// </summary>
+        public static string Cam2EnabledCheckBoxText {
+            get {
+                return ResourceManager.GetString("Cam2EnabledCheckBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam2.
+        /// </summary>
+        public static string Cam2SettingsTabName {
+            get {
+                return ResourceManager.GetString("Cam2SettingsTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam 3 enabled.
+        /// </summary>
+        public static string Cam3EnabledCheckBoxText {
+            get {
+                return ResourceManager.GetString("Cam3EnabledCheckBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam3.
+        /// </summary>
+        public static string Cam3SettingsTabName {
+            get {
+                return ResourceManager.GetString("Cam3SettingsTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam 4 enabled.
+        /// </summary>
+        public static string Cam4EnabledCheckBoxText {
+            get {
+                return ResourceManager.GetString("Cam4EnabledCheckBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam4.
+        /// </summary>
+        public static string Cam4SettingsTabName {
+            get {
+                return ResourceManager.GetString("Cam4SettingsTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable/disable camera.
+        /// </summary>
+        public static string CamCheckBoxHelperText {
+            get {
+                return ResourceManager.GetString("CamCheckBoxHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cameras horizontal field of view.
+        /// </summary>
+        public static string CamFovHelperText {
+            get {
+                return ResourceManager.GetString("CamFovHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cameras HFOV.
+        /// </summary>
+        public static string CamFovLabelText {
+            get {
+                return ResourceManager.GetString("CamFovLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Camera Id. Use CamCalibrator to find it.
+        /// </summary>
+        public static string CamIdHelperText {
+            get {
+                return ResourceManager.GetString("CamIdHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam vertical resolution. For now 720 max available.
+        /// </summary>
+        public static string CamResHHelperText {
+            get {
+                return ResourceManager.GetString("CamResHHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam resolution height.
+        /// </summary>
+        public static string CamResHLabelText {
+            get {
+                return ResourceManager.GetString("CamResHLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam horizontal resolution. For now 1280 max available.
+        /// </summary>
+        public static string CamResWHelperText {
+            get {
+                return ResourceManager.GetString("CamResWHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cam resolution width.
+        /// </summary>
+        public static string CamResWLabelText {
+            get {
+                return ResourceManager.GetString("CamResWLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Camera X.Setup point on projection image. Use &apos;Calibrate&apos; button on Cam setup tab to setup.
+        /// </summary>
+        public static string CamXSetupPointHelperText {
+            get {
+                return ResourceManager.GetString("CamXSetupPointHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Camera Y.Setup point on projection image. Use &apos;Calibrate&apos; button on Cam setup tab to setup.
+        /// </summary>
+        public static string CamYSetupPointHelperText {
+            get {
+                return ResourceManager.GetString("CamYSetupPointHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extraction sleep time.
+        /// </summary>
+        public static string ExtractionSleepTimeLabelText {
+            get {
+                return ResourceManager.GetString("ExtractionSleepTimeLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshold sleep time in seconds for darts extraction from dartboard process. Default value is &apos;4&apos;.
+        /// </summary>
+        public static string ExtrectionSleepTimeHelperText {
+            get {
+                return ResourceManager.GetString("ExtrectionSleepTimeHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string GeneralSettingsTabName {
+            get {
+                return ResourceManager.GetString("GeneralSettingsTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setup.
+        /// </summary>
+        public static string MainSettingsTabName {
+            get {
+                return ResourceManager.GetString("MainSettingsTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal dart contour arc on image to be detected. Default value is &apos;120&apos;.
+        /// </summary>
+        public static string MinContourArcHelperText {
+            get {
+                return ResourceManager.GetString("MinContourArcHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal contour arc.
+        /// </summary>
+        public static string MinContourArcLabelText {
+            get {
+                return ResourceManager.GetString("MinContourArcLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value of moves, indicating that another throw is done. Default value is &apos;600&apos;.
+        /// </summary>
+        public static string MovesDartHelperText {
+            get {
+                return ResourceManager.GetString("MovesDartHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moves dart value.
+        /// </summary>
+        public static string MovesDartLabelText {
+            get {
+                return ResourceManager.GetString("MovesDartLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After move detected threshold sleep time in seconds. Default value is &apos;0.25&apos;.
+        /// </summary>
+        public static string MovesDetectedHelperText {
+            get {
+                return ResourceManager.GetString("MovesDetectedHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move detected sleep time.
+        /// </summary>
+        public static string MovesDetectedLabelText {
+            get {
+                return ResourceManager.GetString("MovesDetectedLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value of moves, indicating that you extract darts from dartboard after throws. Default value is &apos;8000&apos;.
+        /// </summary>
+        public static string MovesExtractionHelperText {
+            get {
+                return ResourceManager.GetString("MovesExtractionHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moves extraction value.
+        /// </summary>
+        public static string MovesExtractionLabelText {
+            get {
+                return ResourceManager.GetString("MovesExtractionLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value of noise moves. Default value is &apos;150&apos;.
+        /// </summary>
+        public static string MovesNoiseHelperText {
+            get {
+                return ResourceManager.GetString("MovesNoiseHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moves noise value.
+        /// </summary>
+        public static string MovesNoiseLabelText {
+            get {
+                return ResourceManager.GetString("MovesNoiseLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gaussian smooth of ROI image. Default value is &apos;5&apos;.
+        /// </summary>
+        public static string SmoothGausHelperText {
+            get {
+                return ResourceManager.GetString("SmoothGausHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smooth gaussian value.
+        /// </summary>
+        public static string SmoothGausLabelText {
+            get {
+                return ResourceManager.GetString("SmoothGausLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshold sleep time between cams work in seconds. Default value is &apos;0.125&apos;.
+        /// </summary>
+        public static string ThresholdSleepTimeHelperText {
+            get {
+                return ResourceManager.GetString("ThresholdSleepTimeHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshold sleep time.
+        /// </summary>
+        public static string ThresholdSleepTimeLabelText {
+            get {
+                return ResourceManager.GetString("ThresholdSleepTimeLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance from camera to bull in cm.
+        /// </summary>
+        public static string ToCamHelperText {
+            get {
+                return ResourceManager.GetString("ToCamHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DB version and App version is different.
+        /// </summary>
+        public static string VersionsMistmatchErrorText {
+            get {
+                return ResourceManager.GetString("VersionsMistmatchErrorText", resourceCulture);
             }
         }
     }

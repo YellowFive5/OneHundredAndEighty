@@ -1,7 +1,8 @@
 ﻿#region Usings
 
 using System.ComponentModel;
-using System.ComponentModel.Design;
+using System.Windows;
+using System.Windows.Controls;
 using Autofac;
 using NLog;
 using OneHundredAndEighty_2._0.Recognition;
@@ -13,7 +14,8 @@ namespace OneHundredAndEighty_2._0
 {
     public partial class MainWindow
     {
-        private MainWindowViewModel viewModel;
+        private readonly double AppVersion = 2.0;
+        private readonly MainWindowViewModel viewModel;
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
         public static IContainer ServiceContainer { get; private set; }
 
@@ -26,6 +28,7 @@ namespace OneHundredAndEighty_2._0
             RegisterContainer();
             viewModel = new MainWindowViewModel(this);
             DataContext = viewModel;
+            viewModel.CheckVersion(AppVersion);
             viewModel.LoadSettings();
         }
 
@@ -60,6 +63,18 @@ namespace OneHundredAndEighty_2._0
             logger.Debug("MainWindow on closing");
 
             viewModel.SaveSettings();
+        }
+
+        private void OnTabSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void StartButtonClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void StopButtonClick(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
