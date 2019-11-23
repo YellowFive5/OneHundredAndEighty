@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -16,14 +17,14 @@ namespace OneHundredAndEighty_2._0
             this.window = window;
             var dbService = new DBService();
 
-            // var version = dbService.GetSettingsValue(SettingsType.DBVersion);
-            // dbService.SaveSettingsValue(SettingsType.DBVersion,2);
-            //
-            var p1 = new Player("Player", "One", 1);
-            var p2 = new Player("Player", "Two", 2);
-            // dbService.SaveNewPlayer(p1);
-            // dbService.SaveNewPlayer(p2);
-            //
+            var version = dbService.GetSettingsValue(SettingsType.DBVersion);
+            dbService.SaveSettingsValue(SettingsType.DBVersion, Convert.ToInt32(version) + 1);
+            
+            var p1 = new Player("Player1", "p1");
+            var p2 = new Player("Player2", "p2");
+            dbService.SaveNewPlayer(p1);
+            dbService.SaveNewPlayer(p2);
+
             var game = new Game(GameType.FreeThrows);
             dbService.StartNewGame(game,
                                    new List<Player>
