@@ -60,17 +60,17 @@ namespace OneHundredAndEighty_2._0
     public class DBService : IDisposable
     {
         private readonly SQLiteConnection connection;
-        private const string DbSource = "Database.db";
+        private const string DatabaseName = "Database.db";
 
         public DBService()
         {
-            connection = new SQLiteConnection($"Data Source={DbSource}; Pooling=true;");
+            connection = new SQLiteConnection($"Data Source={DatabaseName}; Pooling=true;");
         }
 
-        public object GetSettingsValue(SettingsType name)
+        public string GetSettingsValue(SettingsType name)
         {
             var query = $"SELECT [{Column.Value}] FROM [{Table.Settings}] WHERE [{Column.Name}] = '{name}'";
-            return ExecuteScalarInternal(query);
+            return (string)ExecuteScalarInternal(query);
         }
 
         public void SaveSettingsValue(SettingsType name, object value)
@@ -250,13 +250,6 @@ namespace OneHundredAndEighty_2._0
             ExecuteNonQueryInternal(incrementThrowTypePlayerStatisticsQuery);
         }
 
-        public void Dispose()
-        {
-            // todo: checkThis
-            connection.Close();
-            connection?.Dispose();
-        }
-
         private object ExecuteScalarInternal(string query)
         {
             var cmd = new SQLiteCommand(query) {Connection = connection};
@@ -294,6 +287,40 @@ namespace OneHundredAndEighty_2._0
             {
                 connection.Close();
             }
+        }
+
+        private object ExecuteReaderInternal(string query)
+        {
+            var cmd = new SQLiteCommand(query) {Connection = connection};
+
+            try
+            {
+                object result = null;
+                connection.Open();
+                var sqReader = cmd.ExecuteReader();
+                while (sqReader.Read())
+                {
+                    result = sqReader.GetValue(0);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                //todo errorMessage
+                throw e;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void Dispose()
+        {
+            // todo: checkThis
+            connection.Close();
+            connection?.Dispose();
         }
     }
 }
