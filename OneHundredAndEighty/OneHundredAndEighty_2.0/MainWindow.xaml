@@ -33,21 +33,6 @@
                              IsReadOnly="True"
                              FontWeight="Bold"
                              FontSize="30" />
-                    <Button x:Name="StartButton"
-                            Content="Start"
-                            Click="StartButtonClick"
-                            Height="32"
-                            VerticalAlignment="Top"
-                            Margin="10,390,0,0"
-                            HorizontalAlignment="Left"
-                            Width="402" />
-                    <Button x:Name="StopButton"
-                            Content="Stop"
-                            Click="StopButtonClick"
-                            Height="32"
-                            IsEnabled="False"
-                            VerticalAlignment="Top"
-                            Margin="606,390,10.6,0" />
                 </Grid>
             </TabItem>
             <TabItem Name="SetupTabItem"
@@ -55,7 +40,8 @@
                 <Grid>
                     <TabControl Name="SetupTabControl"
                                 Height="494"
-                                Width="978">
+                                Width="978"
+                                SelectionChanged="OnTabSelectionChanged">
                         <TabItem Name="GeneralSetupTabItem"
                                  Header="{x:Static resx:Resources.GeneralSettingsTabName}">
                             <Grid>
@@ -74,21 +60,24 @@
                                           IsChecked="True"
                                           Margin="407,134,0,0"
                                           ToolTip="Enables detection process"
-                                          Width="121" />
+                                          Width="121"
+                                          Click="SetSettingDirty"/>
                                 <CheckBox x:Name="Cam1CheckBox"
                                           Content="{x:Static resx:Resources.Cam1EnabledCheckBoxText}"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Top"
                                           IsChecked="True"
                                           Margin="407,12,0,0"
-                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}" />
+                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
+                                          Click="SetSettingDirty"/>
                                 <CheckBox x:Name="Cam2CheckBox"
                                           Content="{x:Static resx:Resources.Cam2EnabledCheckBoxText}"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Top"
                                           IsChecked="True"
                                           Margin="407,44,0,0"
-                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}" />
+                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
+                                          Click="SetSettingDirty"/>
                                 <CheckBox x:Name="Cam3CheckBox"
                                           Content="{x:Static resx:Resources.Cam3EnabledCheckBoxText}"
                                           HorizontalAlignment="Left"
@@ -96,14 +85,16 @@
                                           IsChecked="True"
                                           Margin="407,75,0,0"
                                           RenderTransformOrigin="0.527,0.533"
-                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}" />
+                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
+                                          Click="SetSettingDirty"/>
                                 <CheckBox x:Name="Cam4CheckBox"
                                           Content="{x:Static resx:Resources.Cam4EnabledCheckBoxText}"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Top"
                                           IsChecked="True"
                                           Margin="407,105,0,0"
-                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}" />
+                                          ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
+                                          Click="SetSettingDirty"/>
                                 <Label Content="{x:Static resx:Resources.CamFovLabelText}"
                                        Margin="84,16,743,427.4"
                                        HorizontalContentAlignment="Left"
@@ -115,7 +106,8 @@
                                          Margin="16,16,893,427.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamFovHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.CamFovHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.CamResWLabelText}"
                                        Margin="84,50,743,393.4"
                                        HorizontalContentAlignment="Left"
@@ -127,7 +119,8 @@
                                          Margin="16,50,893,393.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamResWHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.CamResWHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.CamResHLabelText}"
                                        Margin="84,82,743,361.4"
                                        HorizontalContentAlignment="Left"
@@ -139,14 +132,16 @@
                                          Margin="16,82,893,361.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamResHHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.CamResHHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <TextBox x:Name="MinContourArcTextBox"
                                          Height="23"
                                          TextWrapping="Wrap"
                                          Margin="16,307,893,136.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MinContourArcHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.MinContourArcHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.MinContourArcLabelText}"
                                        Margin="87,308,743,135.4"
                                        HorizontalContentAlignment="Left"
@@ -158,7 +153,8 @@
                                          Margin="16,115,893,328.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesExtractionHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.MovesExtractionHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.MovesExtractionLabelText}"
                                        Margin="85,115,742,328.4"
                                        HorizontalContentAlignment="Left"
@@ -170,7 +166,8 @@
                                          Margin="16,341,893,102.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesDartHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.MovesDartHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.MovesDartLabelText}"
                                        Margin="85,341,742,102.4"
                                        HorizontalContentAlignment="Left"
@@ -182,7 +179,8 @@
                                          Margin="16,178,893,265.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesNoiseHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.MovesNoiseHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.MovesNoiseLabelText}"
                                        Margin="85,178,743,265.4"
                                        HorizontalContentAlignment="Left"
@@ -193,7 +191,8 @@
                                          Margin="16,209,893,235.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.SmoothGausHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.SmoothGausHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.SmoothGausLabelText}"
                                        Margin="85,209,743,235.4"
                                        HorizontalContentAlignment="Left"
@@ -205,7 +204,8 @@
                                          Margin="16,146,893,297.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesDetectedHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.MovesDetectedHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.MovesDetectedLabelText}"
                                        Margin="85,146,743,297.4"
                                        HorizontalContentAlignment="Left"
@@ -217,7 +217,8 @@
                                          Margin="16,275,893,168.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ExtrectionSleepTimeHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.ExtrectionSleepTimeHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.ExtractionSleepTimeLabelText}"
                                        Margin="87,275,743,168.4"
                                        HorizontalContentAlignment="Left"
@@ -229,7 +230,8 @@
                                          Margin="515,8,367,435.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="Id" Margin="610,42,335,403.4"
                                        HorizontalContentAlignment="Left"
                                        VerticalContentAlignment="Center"
@@ -264,7 +266,8 @@
                                          Margin="515,40,367,403.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="Id"
                                        Margin="610,101,335,342.4"
                                        HorizontalContentAlignment="Left"
@@ -300,7 +303,8 @@
                                          Margin="515,71,367,374.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="Id"
                                        Margin="610,72,335,374.4"
                                        HorizontalContentAlignment="Left"
@@ -335,7 +339,8 @@
                                          Margin="515,100,367,342.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="Id"
                                        Margin="610,8,335,435.4"
                                        HorizontalContentAlignment="Left"
@@ -371,7 +376,8 @@
                                          Margin="16,241,893,202.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ThresholdSleepTimeHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.ThresholdSleepTimeHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.ThresholdSleepTimeLabelText}"
                                        Margin="85,242,743,201.4"
                                        HorizontalContentAlignment="Left"
@@ -383,27 +389,31 @@
                                          Margin="649,101,257,342.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <TextBox x:Name="ToCam3Distance"
                                          TextWrapping="Wrap"
                                          Margin="649,71,257,372.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <TextBox x:Name="ToCam2Distance"
                                          Height="23"
                                          TextWrapping="Wrap"
                                          Margin="649,40,257,403.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <TextBox x:Name="ToCam1Distance"
                                          Height="23"
                                          TextWrapping="Wrap"
                                          Margin="649,8,257,435.4"
                                          HorizontalContentAlignment="Left"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
+                                         TextChanged="SetSettingDirty" />
                                 <Label Content="cm"
                                        Margin="720,8,226,435.4"
                                        HorizontalContentAlignment="Left"
@@ -438,7 +448,8 @@
                                         Maximum="255"
                                         Value="197"
                                         RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -456,7 +467,8 @@
                                         Width="392"
                                         Maximum="1000"
                                         Value="357"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -474,7 +486,8 @@
                                         Width="390"
                                         Maximum="1000"
                                         Value="133"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -492,7 +505,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -510,7 +524,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -662,7 +677,8 @@
                                         Maximum="255"
                                         Value="197"
                                         RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -680,7 +696,8 @@
                                         Width="392"
                                         Maximum="1000"
                                         Value="357"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -698,7 +715,8 @@
                                         Width="390"
                                         Maximum="1000"
                                         Value="133"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -716,7 +734,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -734,7 +753,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -886,7 +906,8 @@
                                         Maximum="255"
                                         Value="197"
                                         RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -904,7 +925,8 @@
                                         Width="392"
                                         Maximum="1000"
                                         Value="357"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -922,7 +944,8 @@
                                         Width="390"
                                         Maximum="1000"
                                         Value="133"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -940,7 +963,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -958,7 +982,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -1110,7 +1135,8 @@
                                         Maximum="255"
                                         Value="197"
                                         RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -1128,7 +1154,8 @@
                                         Width="392"
                                         Maximum="1000"
                                         Value="357"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -1146,7 +1173,8 @@
                                         Width="390"
                                         Maximum="1000"
                                         Value="133"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -1164,7 +1192,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -1182,7 +1211,8 @@
                                         Width="395"
                                         Maximum="1000"
                                         Value="536"
-                                        IsEnabled="False">
+                                        IsEnabled="False"
+                                        ValueChanged="SetSettingDirty">
                                     <Slider.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />

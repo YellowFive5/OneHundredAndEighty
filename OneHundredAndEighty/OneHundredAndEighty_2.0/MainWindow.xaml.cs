@@ -62,23 +62,17 @@ namespace OneHundredAndEighty_2._0
         {
             logger.Debug("MainWindow on closing");
 
-            viewModel.SaveSettings();
+            viewModel.SaveSettingsIfDirty();
         }
 
         private void OnTabSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-        }
-
-        private void StartButtonClick(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void StopButtonClick(object sender, RoutedEventArgs e)
-        {
+            viewModel.SaveSettingsIfDirty();
         }
 
         private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)
         {
+            viewModel.IsSettingsDirty = true;
             viewModel.CalibrateCamsSetupPoint();
         }
 
@@ -97,6 +91,14 @@ namespace OneHundredAndEighty_2._0
             {
                 var grid = button.Parent as Grid;
                 viewModel.StopCamSetupCapturing(grid.Name);
+            }
+        }
+
+        private void SetSettingDirty(object sender, RoutedEventArgs e)
+        {
+            if (viewModel != null)
+            {
+                viewModel.IsSettingsDirty = true;
             }
         }
     }

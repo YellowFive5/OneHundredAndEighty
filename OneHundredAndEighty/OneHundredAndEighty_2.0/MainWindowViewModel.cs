@@ -27,6 +27,7 @@ namespace OneHundredAndEighty_2._0
         private readonly ConfigService configService;
         private readonly DrawService drawService;
         private CancellationTokenSource cts;
+        public bool IsSettingsDirty { get; set; }
 
         public MainWindowViewModel()
         {
@@ -134,47 +135,74 @@ namespace OneHundredAndEighty_2._0
             mainWindow.Cam4RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam4RoiPosYSlider);
             mainWindow.Cam4RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam4RoiHeightSlider);
 
+            IsSettingsDirty = false;
+
             logger.Debug("Load settings end");
         }
 
-        public void SaveSettings()
+        public void SaveSettingsIfDirty()
         {
             logger.Debug("Save settings start");
+            logger.Debug($"Is settings dirty: {IsSettingsDirty}");
 
-            configService.Write(SettingsType.MainWindowPositionLeft, mainWindow.Left);
-            configService.Write(SettingsType.MainWindowPositionTop, mainWindow.Top);
-            configService.Write(SettingsType.CamFovAngle, mainWindow.CamFovTextBox.Text);
-            configService.Write(SettingsType.ResolutionHeight, mainWindow.CamResolutionHeightTextBox.Text);
-            configService.Write(SettingsType.ResolutionWidth, mainWindow.CamResolutionWidthTextBox.Text);
-            configService.Write(SettingsType.MovesExtraction, mainWindow.MovesExtractionTextBox.Text);
-            configService.Write(SettingsType.MoveDetectedSleepTime, mainWindow.MoveDetectedSleepTimeTextBox.Text);
-            configService.Write(SettingsType.MovesNoise, mainWindow.MovesNoiseTextBox.Text);
-            configService.Write(SettingsType.SmoothGauss, mainWindow.SmoothGaussTextBox.Text);
-            configService.Write(SettingsType.ThresholdSleepTime, mainWindow.ThresholdSleepTimeTimeTextBox.Text);
-            configService.Write(SettingsType.ExtractionSleepTime, mainWindow.ExtractionSleepTimeTimeTextBox.Text);
-            configService.Write(SettingsType.MinContourArc, mainWindow.MinContourArcTextBox.Text);
-            configService.Write(SettingsType.MovesDart, mainWindow.MovesDartTextBox.Text);
-            configService.Write(SettingsType.Cam1Id, mainWindow.Cam1IdTextBox.Text);
-            configService.Write(SettingsType.Cam2Id, mainWindow.Cam2IdTextBox.Text);
-            configService.Write(SettingsType.Cam3Id, mainWindow.Cam3IdTextBox.Text);
-            configService.Write(SettingsType.Cam4Id, mainWindow.Cam4IdTextBox.Text);
-            configService.Write(SettingsType.ToCam1Distance, mainWindow.ToCam1Distance.Text);
-            configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
-            configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
-            configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
-            configService.Write(SettingsType.Cam1X, mainWindow.Cam1XTextBox.Text);
-            configService.Write(SettingsType.Cam2X, mainWindow.Cam2XTextBox.Text);
-            configService.Write(SettingsType.Cam3X, mainWindow.Cam3XTextBox.Text);
-            configService.Write(SettingsType.Cam4X, mainWindow.Cam4XTextBox.Text);
-            configService.Write(SettingsType.Cam1Y, mainWindow.Cam1YTextBox.Text);
-            configService.Write(SettingsType.Cam2Y, mainWindow.Cam2YTextBox.Text);
-            configService.Write(SettingsType.Cam3Y, mainWindow.Cam3YTextBox.Text);
-            configService.Write(SettingsType.Cam4Y, mainWindow.Cam4YTextBox.Text);
-            configService.Write(SettingsType.Cam1CheckBox, mainWindow.Cam1CheckBox.IsChecked);
-            configService.Write(SettingsType.Cam2CheckBox, mainWindow.Cam2CheckBox.IsChecked);
-            configService.Write(SettingsType.Cam3CheckBox, mainWindow.Cam3CheckBox.IsChecked);
-            configService.Write(SettingsType.Cam4CheckBox, mainWindow.Cam4CheckBox.IsChecked);
-            configService.Write(SettingsType.WithDetectionCheckBox, mainWindow.WithDetectionCheckBox.IsChecked);
+            if (IsSettingsDirty)
+            {
+                configService.Write(SettingsType.MainWindowPositionLeft, mainWindow.Left);
+                configService.Write(SettingsType.MainWindowPositionTop, mainWindow.Top);
+                configService.Write(SettingsType.CamFovAngle, mainWindow.CamFovTextBox.Text);
+                configService.Write(SettingsType.ResolutionHeight, mainWindow.CamResolutionHeightTextBox.Text);
+                configService.Write(SettingsType.ResolutionWidth, mainWindow.CamResolutionWidthTextBox.Text);
+                configService.Write(SettingsType.MovesExtraction, mainWindow.MovesExtractionTextBox.Text);
+                configService.Write(SettingsType.MoveDetectedSleepTime, mainWindow.MoveDetectedSleepTimeTextBox.Text);
+                configService.Write(SettingsType.MovesNoise, mainWindow.MovesNoiseTextBox.Text);
+                configService.Write(SettingsType.SmoothGauss, mainWindow.SmoothGaussTextBox.Text);
+                configService.Write(SettingsType.ThresholdSleepTime, mainWindow.ThresholdSleepTimeTimeTextBox.Text);
+                configService.Write(SettingsType.ExtractionSleepTime, mainWindow.ExtractionSleepTimeTimeTextBox.Text);
+                configService.Write(SettingsType.MinContourArc, mainWindow.MinContourArcTextBox.Text);
+                configService.Write(SettingsType.MovesDart, mainWindow.MovesDartTextBox.Text);
+                configService.Write(SettingsType.Cam1Id, mainWindow.Cam1IdTextBox.Text);
+                configService.Write(SettingsType.Cam2Id, mainWindow.Cam2IdTextBox.Text);
+                configService.Write(SettingsType.Cam3Id, mainWindow.Cam3IdTextBox.Text);
+                configService.Write(SettingsType.Cam4Id, mainWindow.Cam4IdTextBox.Text);
+                configService.Write(SettingsType.ToCam1Distance, mainWindow.ToCam1Distance.Text);
+                configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
+                configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
+                configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
+                configService.Write(SettingsType.Cam1X, mainWindow.Cam1XTextBox.Text);
+                configService.Write(SettingsType.Cam2X, mainWindow.Cam2XTextBox.Text);
+                configService.Write(SettingsType.Cam3X, mainWindow.Cam3XTextBox.Text);
+                configService.Write(SettingsType.Cam4X, mainWindow.Cam4XTextBox.Text);
+                configService.Write(SettingsType.Cam1Y, mainWindow.Cam1YTextBox.Text);
+                configService.Write(SettingsType.Cam2Y, mainWindow.Cam2YTextBox.Text);
+                configService.Write(SettingsType.Cam3Y, mainWindow.Cam3YTextBox.Text);
+                configService.Write(SettingsType.Cam4Y, mainWindow.Cam4YTextBox.Text);
+                configService.Write(SettingsType.Cam1CheckBox, mainWindow.Cam1CheckBox.IsChecked);
+                configService.Write(SettingsType.Cam2CheckBox, mainWindow.Cam2CheckBox.IsChecked);
+                configService.Write(SettingsType.Cam3CheckBox, mainWindow.Cam3CheckBox.IsChecked);
+                configService.Write(SettingsType.Cam4CheckBox, mainWindow.Cam4CheckBox.IsChecked);
+                configService.Write(SettingsType.WithDetectionCheckBox, mainWindow.WithDetectionCheckBox.IsChecked);
+                configService.Write(SettingsType.Cam1TresholdSlider, mainWindow.Cam1TresholdSlider.Value);
+                configService.Write(SettingsType.Cam1SurfaceSlider, mainWindow.Cam1SurfaceSlider.Value);
+                configService.Write(SettingsType.Cam1SurfaceCenterSlider, mainWindow.Cam1SurfaceCenterSlider.Value);
+                configService.Write(SettingsType.Cam1RoiPosYSlider, mainWindow.Cam1RoiPosYSlider.Value);
+                configService.Write(SettingsType.Cam1RoiHeightSlider, mainWindow.Cam1RoiHeightSlider.Value);
+                configService.Write(SettingsType.Cam2TresholdSlider, mainWindow.Cam2TresholdSlider.Value);
+                configService.Write(SettingsType.Cam2SurfaceSlider, mainWindow.Cam2SurfaceSlider.Value);
+                configService.Write(SettingsType.Cam2SurfaceCenterSlider, mainWindow.Cam2SurfaceCenterSlider.Value);
+                configService.Write(SettingsType.Cam2RoiPosYSlider, mainWindow.Cam2RoiPosYSlider.Value);
+                configService.Write(SettingsType.Cam2RoiHeightSlider, mainWindow.Cam2RoiHeightSlider.Value);
+                configService.Write(SettingsType.Cam3TresholdSlider, mainWindow.Cam3TresholdSlider.Value);
+                configService.Write(SettingsType.Cam3SurfaceSlider, mainWindow.Cam3SurfaceSlider.Value);
+                configService.Write(SettingsType.Cam3SurfaceCenterSlider, mainWindow.Cam3SurfaceCenterSlider.Value);
+                configService.Write(SettingsType.Cam3RoiPosYSlider, mainWindow.Cam3RoiPosYSlider.Value);
+                configService.Write(SettingsType.Cam3RoiHeightSlider, mainWindow.Cam3RoiHeightSlider.Value);
+                configService.Write(SettingsType.Cam4TresholdSlider, mainWindow.Cam4TresholdSlider.Value);
+                configService.Write(SettingsType.Cam4SurfaceSlider, mainWindow.Cam4SurfaceSlider.Value);
+                configService.Write(SettingsType.Cam4SurfaceCenterSlider, mainWindow.Cam4SurfaceCenterSlider.Value);
+                configService.Write(SettingsType.Cam4RoiPosYSlider, mainWindow.Cam4RoiPosYSlider.Value);
+                configService.Write(SettingsType.Cam4RoiHeightSlider, mainWindow.Cam4RoiHeightSlider.Value);
+                IsSettingsDirty = false;
+            }
 
             logger.Debug("Save settings end");
         }
@@ -275,42 +303,6 @@ namespace OneHundredAndEighty_2._0
         {
             cts?.Cancel();
             ToggleCamSetupGridControls(gridName);
-            SaveCamSetupSliders(gridName);
-        }
-
-        private void SaveCamSetupSliders(string gridName)
-        {
-            switch (gridName)
-            {
-                case "Cam1Grid":
-                    configService.Write(SettingsType.Cam1TresholdSlider, mainWindow.Cam1TresholdSlider.Value);
-                    configService.Write(SettingsType.Cam1SurfaceSlider, mainWindow.Cam1SurfaceSlider.Value);
-                    configService.Write(SettingsType.Cam1SurfaceCenterSlider, mainWindow.Cam1SurfaceCenterSlider.Value);
-                    configService.Write(SettingsType.Cam1RoiPosYSlider, mainWindow.Cam1RoiPosYSlider.Value);
-                    configService.Write(SettingsType.Cam1RoiHeightSlider, mainWindow.Cam1RoiHeightSlider.Value);
-                    break;
-                case "Cam2Grid":
-                    configService.Write(SettingsType.Cam2TresholdSlider, mainWindow.Cam2TresholdSlider.Value);
-                    configService.Write(SettingsType.Cam2SurfaceSlider, mainWindow.Cam2SurfaceSlider.Value);
-                    configService.Write(SettingsType.Cam2SurfaceCenterSlider, mainWindow.Cam2SurfaceCenterSlider.Value);
-                    configService.Write(SettingsType.Cam2RoiPosYSlider, mainWindow.Cam2RoiPosYSlider.Value);
-                    configService.Write(SettingsType.Cam2RoiHeightSlider, mainWindow.Cam2RoiHeightSlider.Value);
-                    break;
-                case "Cam3Grid":
-                    configService.Write(SettingsType.Cam3TresholdSlider, mainWindow.Cam3TresholdSlider.Value);
-                    configService.Write(SettingsType.Cam3SurfaceSlider, mainWindow.Cam3SurfaceSlider.Value);
-                    configService.Write(SettingsType.Cam3SurfaceCenterSlider, mainWindow.Cam3SurfaceCenterSlider.Value);
-                    configService.Write(SettingsType.Cam3RoiPosYSlider, mainWindow.Cam3RoiPosYSlider.Value);
-                    configService.Write(SettingsType.Cam3RoiHeightSlider, mainWindow.Cam3RoiHeightSlider.Value);
-                    break;
-                case "Cam4Grid":
-                    configService.Write(SettingsType.Cam4TresholdSlider, mainWindow.Cam4TresholdSlider.Value);
-                    configService.Write(SettingsType.Cam4SurfaceSlider, mainWindow.Cam4SurfaceSlider.Value);
-                    configService.Write(SettingsType.Cam4SurfaceCenterSlider, mainWindow.Cam4SurfaceCenterSlider.Value);
-                    configService.Write(SettingsType.Cam4RoiPosYSlider, mainWindow.Cam4RoiPosYSlider.Value);
-                    configService.Write(SettingsType.Cam4RoiHeightSlider, mainWindow.Cam4RoiHeightSlider.Value);
-                    break;
-            }
         }
 
         private void ToggleCamSetupGridControls(string gridName)
