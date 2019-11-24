@@ -4,13 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Reflection;
-using System.Resources;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using Autofac;
 using NLog;
 using OneHundredAndEighty_2._0.Recognition;
@@ -26,7 +24,14 @@ namespace OneHundredAndEighty_2._0
         private readonly DBService dbService;
         private readonly ConfigService configService;
         private readonly DrawService drawService;
+        private readonly ThrowService throwService;
         private CancellationTokenSource cts;
+        private List<CamService> cams;
+        private double moveDetectedSleepTime;
+        private double extractionSleepTime;
+        private double thresholdSleepTime;
+        private bool withDetection;
+
         public bool IsSettingsDirty { get; set; }
 
         public MainWindowViewModel()
@@ -40,7 +45,9 @@ namespace OneHundredAndEighty_2._0
             dbService = MainWindow.ServiceContainer.Resolve<DBService>();
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
+            throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
 
+            drawService.ProjectionPrepare();
 
             // var _int = configService.Read<int>(SettingsType.DBVersion);
             // configService.Write(SettingsType.DBVersion, _int + 1);
@@ -75,6 +82,19 @@ namespace OneHundredAndEighty_2._0
             //
             // dbService.EndGame(game);
         }
+
+        public void CheckVersion(double appVersion)
+        {
+            var dbVersion = configService.Read<double>(SettingsType.DBVersion);
+            if (appVersion != dbVersion)
+            {
+                var errorText = Properties.Resources.ResourceManager.GetString("VersionsMistmatchErrorText");
+                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
+                throw new Exception("DB version and App version is different");
+            }
+        }
+
+        #region Settings
 
         public void LoadSettings()
         {
@@ -207,16 +227,7 @@ namespace OneHundredAndEighty_2._0
             logger.Debug("Save settings end");
         }
 
-        public void CheckVersion(double appVersion)
-        {
-            var dbVersion = configService.Read<double>(SettingsType.DBVersion);
-            if (appVersion != dbVersion)
-            {
-                var errorText = Properties.Resources.ResourceManager.GetString("VersionsMistmatchErrorText");
-                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
-                throw new Exception("DB version and App version is different");
-            }
-        }
+        #endregion
 
         public void CalibrateCamsSetupPoint()
         {
@@ -279,7 +290,7 @@ namespace OneHundredAndEighty_2._0
             configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
         }
 
-        public void RunCamSetupCapturing(string gridName)
+        public void StartCamSetupCapturing(string gridName)
         {
             ToggleCamSetupGridControls(gridName);
             cts = new CancellationTokenSource();
@@ -287,15 +298,16 @@ namespace OneHundredAndEighty_2._0
 
             Task.Run(() =>
                      {
-                         var camService = new CamService(mainWindow, gridName);
+                         var cam = new CamService(mainWindow, gridName, CamServiceWorkingMode.Setup);
 
                          while (!cancelToken.IsCancellationRequested)
                          {
-                             camService.DoCapture(true);
-                             camService.RefreshImageBoxes();
+                             cam.DoCapture(true);
+                             cam.RefreshImageBoxes();
                          }
 
-                         camService.ClearImageBoxes();
+                         cam.ClearImageBoxes();
+                         cam.Dispose();
                      });
         }
 
@@ -303,6 +315,142 @@ namespace OneHundredAndEighty_2._0
         {
             cts?.Cancel();
             ToggleCamSetupGridControls(gridName);
+        }
+
+        public void StartFreeThrowsGame()
+        {
+            ToggleMainTabItems();
+            ToggleMainTabItemControls();
+            drawService.ProjectionClear();
+            cams = new List<CamService>();
+            if (mainWindow.Cam1CheckBox.IsChecked.Value)
+            {
+                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name));
+            }
+
+            if (mainWindow.Cam2CheckBox.IsChecked.Value)
+            {
+                cams.Add(new CamService(mainWindow, mainWindow.Cam2Grid.Name));
+            }
+
+            if (mainWindow.Cam3CheckBox.IsChecked.Value)
+            {
+                cams.Add(new CamService(mainWindow, mainWindow.Cam3Grid.Name));
+            }
+
+            if (mainWindow.Cam4CheckBox.IsChecked.Value)
+            {
+                cams.Add(new CamService(mainWindow, mainWindow.Cam4Grid.Name));
+            }
+
+            cts = new CancellationTokenSource();
+            var cancelToken = cts.Token;
+
+            extractionSleepTime = configService.Read<double>(SettingsType.ExtractionSleepTime);
+            thresholdSleepTime = configService.Read<double>(SettingsType.ThresholdSleepTime);
+            moveDetectedSleepTime = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
+            withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
+
+            Task.Run(() =>
+                     {
+                         Thread.CurrentThread.Name = $"Recognition_workerThread";
+
+                         ClearAllCamsImages();
+
+                         while (!cancelToken.IsCancellationRequested)
+                         {
+                             foreach (var cam in cams)
+                             {
+                                 logger.Debug($"Cam_{cam.camNumber} detection start");
+
+                                 var response = withDetection
+                                                    ? cam.DetectMove()
+                                                    : ResponseType.Nothing;
+
+                                 if (response == ResponseType.Move)
+                                 {
+                                     Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
+                                     response = cam.DetectThrow();
+
+                                     if (response == ResponseType.Trow)
+                                     {
+                                         cam.FindAndProcessDartContour();
+
+                                         FindThrowOnRemainingCams(cam);
+
+                                         logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Trow}'. Cycle break");
+                                         break;
+                                     }
+
+                                     if (response == ResponseType.Extraction)
+                                     {
+                                         Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
+
+                                         drawService.ProjectionClear();
+                                         ClearAllCamsImages();
+
+                                         logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Extraction}'. Cycle break");
+                                         break;
+                                     }
+                                 }
+
+                                 Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
+
+                                 logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Nothing}'");
+                             }
+                         }
+
+                         foreach (var cam in cams)
+                         {
+                             cam.Dispose();
+                             cam.ClearImageBoxes();
+                         }
+
+                         logger.Info($"Detection for {cams.Count} cams end. Cancellation requested");
+                     });
+        }
+
+        public void StopFreeThrowsGame()
+        {
+            ToggleMainTabItems();
+            ToggleMainTabItemControls();
+            cts?.Cancel();
+            drawService.ProjectionClear();
+        }
+
+        private void FindThrowOnRemainingCams(CamService succeededCam)
+        {
+            logger.Info($"Finding throws from remaining cams start. Succeeded cam: {succeededCam.camNumber}");
+
+            foreach (var cam in cams.Where(cam => cam != succeededCam))
+            {
+                cam.FindThrow();
+                cam.FindAndProcessDartContour();
+            }
+
+            throwService.CalculateAndSaveThrow();
+
+            logger.Info($"Finding throws from remaining cams end");
+        }
+
+        private void ClearAllCamsImages()
+        {
+            logger.Debug($"Clear all cams imageboxes start");
+
+            foreach (var cam in cams)
+            {
+                cam.DoCapture(true);
+            }
+
+            logger.Debug($"Clear all cams imageboxes end");
+        }
+
+        #region Toggles
+
+        private void ToggleMainTabItemControls()
+        {
+            mainWindow.StartFreeThrowsButton.IsEnabled = !mainWindow.StartFreeThrowsButton.IsEnabled;
+            mainWindow.StopFreeThrowsButton.IsEnabled = !mainWindow.StopFreeThrowsButton.IsEnabled;
         }
 
         private void ToggleCamSetupGridControls(string gridName)
@@ -366,5 +514,7 @@ namespace OneHundredAndEighty_2._0
                 tabItem.IsEnabled = !tabItem.IsEnabled;
             }
         }
+
+        #endregion
     }
 }

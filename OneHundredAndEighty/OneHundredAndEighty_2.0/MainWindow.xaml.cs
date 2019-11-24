@@ -14,7 +14,7 @@ namespace OneHundredAndEighty_2._0
 {
     public partial class MainWindow
     {
-        private readonly double AppVersion = 2.0;
+        private const double AppVersion = 2.0;
         private readonly MainWindowViewModel viewModel;
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
         public static IContainer ServiceContainer { get; private set; }
@@ -81,7 +81,7 @@ namespace OneHundredAndEighty_2._0
             if (e.Source is Button button)
             {
                 var grid = button.Parent as Grid;
-                viewModel.RunCamSetupCapturing(grid.Name);
+                viewModel.StartCamSetupCapturing(grid.Name);
             }
         }
 
@@ -100,6 +100,16 @@ namespace OneHundredAndEighty_2._0
             {
                 viewModel.IsSettingsDirty = true;
             }
+        }
+
+        private void StartFreeThrowsButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.StartFreeThrowsGame();
+        }
+
+        private void StopFreeThrowsButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.StopFreeThrowsGame();
         }
     }
 }
