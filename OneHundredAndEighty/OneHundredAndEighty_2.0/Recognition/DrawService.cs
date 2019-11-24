@@ -60,8 +60,8 @@ namespace OneHundredAndEighty_2._0.Recognition
             projectionFrameSide = 1300;
             DartboardProjectionFrameBackground = new Image<Bgr, byte>(projectionFrameSide,
                                                                       projectionFrameSide);
-            projectionCenterPoint = new PointF((float)DartboardProjectionFrameBackground.Width / 2,
-                                               (float)DartboardProjectionFrameBackground.Height / 2);
+            projectionCenterPoint = new PointF((float) DartboardProjectionFrameBackground.Width / 2,
+                                               (float) DartboardProjectionFrameBackground.Height / 2);
         }
 
         public void DrawLine(Image<Bgr, byte> image,
@@ -71,8 +71,8 @@ namespace OneHundredAndEighty_2._0.Recognition
                              int thickness)
         {
             CvInvoke.Line(image,
-                          new Point((int)point1.X, (int)point1.Y),
-                          new Point((int)point2.X, (int)point2.Y),
+                          new Point((int) point1.X, (int) point1.Y),
+                          new Point((int) point2.X, (int) point2.Y),
                           color,
                           thickness);
         }
@@ -92,7 +92,7 @@ namespace OneHundredAndEighty_2._0.Recognition
                                int thickness)
         {
             CvInvoke.Circle(image,
-                            new Point((int)centerpoint.X, (int)centerpoint.Y),
+                            new Point((int) centerpoint.X, (int) centerpoint.Y),
                             radius,
                             color,
                             thickness);
@@ -154,10 +154,10 @@ namespace OneHundredAndEighty_2._0.Recognition
             DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, projectionCoefficent * 170, projectionGridColor, projectionGridThickness);
             for (var i = 0; i <= 360; i += 9)
             {
-                var segmentPoint1 = new PointF((float)(projectionCenterPoint.X + Math.Cos(0.314159 * i - 0.15708) * projectionCoefficent * 170),
-                                               (float)(projectionCenterPoint.Y + Math.Sin(0.314159 * i - 0.15708) * projectionCoefficent * 170));
-                var segmentPoint2 = new PointF((float)(projectionCenterPoint.X + Math.Cos(0.314159 * i - 0.15708) * projectionCoefficent * 17),
-                                               (float)(projectionCenterPoint.Y + Math.Sin(0.314159 * i - 0.15708) * projectionCoefficent * 17));
+                var segmentPoint1 = new PointF((float) (projectionCenterPoint.X + Math.Cos(0.314159 * i - 0.15708) * projectionCoefficent * 170),
+                                               (float) (projectionCenterPoint.Y + Math.Sin(0.314159 * i - 0.15708) * projectionCoefficent * 170));
+                var segmentPoint2 = new PointF((float) (projectionCenterPoint.X + Math.Cos(0.314159 * i - 0.15708) * projectionCoefficent * 17),
+                                               (float) (projectionCenterPoint.Y + Math.Sin(0.314159 * i - 0.15708) * projectionCoefficent * 17));
                 DrawLine(DartboardProjectionFrameBackground, segmentPoint1, segmentPoint2, projectionGridColor, projectionGridThickness);
             }
 
@@ -176,8 +176,8 @@ namespace OneHundredAndEighty_2._0.Recognition
             {
                 DrawString(DartboardProjectionFrameBackground,
                            sector.ToString(),
-                           (int)(projectionCenterPoint.X - 40 + Math.Cos(radSector) * projectionCoefficent * 190),
-                           (int)(projectionCenterPoint.Y + 20 + Math.Sin(radSector) * projectionCoefficent * 190),
+                           (int) (projectionCenterPoint.X - 40 + Math.Cos(radSector) * projectionCoefficent * 190),
+                           (int) (projectionCenterPoint.Y + 20 + Math.Sin(radSector) * projectionCoefficent * 190),
                            projectionDigitsScale,
                            projectionDigitsColor,
                            projectionDigitsThickness);
@@ -196,20 +196,35 @@ namespace OneHundredAndEighty_2._0.Recognition
             // mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.PointsBox.Text = string.Empty));
         }
 
-        // public BitmapImage ToBitmap(IImage image)
-        // {
-        //     var imageToSave = new BitmapImage();
-        //
-        //     using (var stream = new MemoryStream())
-        //     {
-        //         image.Bitmap.Save(stream, ImageFormat.Bmp);
-        //         imageToSave.BeginInit();
-        //         imageToSave.StreamSource = new MemoryStream(stream.ToArray());
-        //         imageToSave.EndInit();
-        //     }
-        //
-        //     return imageToSave;
-        // }
+        public BitmapImage ToBitmap(Image<Bgr, byte> image)
+        {
+            var imageToSave = new BitmapImage();
+
+            using (var stream = new MemoryStream())
+            {
+                image.Bitmap.Save(stream, ImageFormat.Bmp);
+                imageToSave.BeginInit();
+                imageToSave.StreamSource = new MemoryStream(stream.ToArray());
+                imageToSave.EndInit();
+            }
+
+            return imageToSave;
+        } // todo something happened with IImage interface
+
+        public BitmapImage ToBitmap(Image<Gray, byte> image)
+        {
+            var imageToSave = new BitmapImage();
+
+            using (var stream = new MemoryStream())
+            {
+                image.Bitmap.Save(stream, ImageFormat.Bmp);
+                imageToSave.BeginInit();
+                imageToSave.StreamSource = new MemoryStream(stream.ToArray());
+                imageToSave.EndInit();
+            }
+
+            return imageToSave;
+        }
 
         public void SaveToFile(BitmapSource image, string path = null)
         {

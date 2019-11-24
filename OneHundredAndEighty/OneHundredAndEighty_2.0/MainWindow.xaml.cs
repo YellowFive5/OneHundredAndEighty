@@ -84,12 +84,20 @@ namespace OneHundredAndEighty_2._0
 
         private void CamSetupStartButtonClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (e.Source is Button button)
+            {
+                var grid = button.Parent as Grid;
+                viewModel.RunCamSetupCapturing(grid.Name);
+            }
         }
 
         private void CamSetupStopButtonClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (e.Source is Button button)
+            {
+                var grid = button.Parent as Grid;
+                viewModel.StopCamSetupCapturing(grid.Name);
+            }
         }
     }
 }

@@ -43,6 +43,10 @@ namespace OneHundredAndEighty_2._0.Recognition
                 {
                     value = Convert.ToDecimal(dbService.GetSettingsValue(key), CultureInfo.InvariantCulture);
                 }
+                else if (typeof(T) == typeof(float))
+                {
+                    value = (float) Convert.ToDecimal(dbService.GetSettingsValue(key), CultureInfo.InvariantCulture);
+                }
                 else if (typeof(T) == typeof(int))
                 {
                     value = Convert.ToInt32(dbService.GetSettingsValue(key));

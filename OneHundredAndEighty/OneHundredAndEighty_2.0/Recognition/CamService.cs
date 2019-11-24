@@ -3,6 +3,7 @@
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Autofac;
 using DirectShowLib;
@@ -17,7 +18,8 @@ namespace OneHundredAndEighty_2._0.Recognition
 {
     public class CamService
     {
-        private readonly MainWindow camWindow; // todo window
+        private readonly MainWindow mainWindow;
+        private string parentGridName;
         private readonly DrawService drawService;
         public readonly VideoCapture videoCapture;
         private readonly ConfigService configService;
@@ -52,18 +54,45 @@ namespace OneHundredAndEighty_2._0.Recognition
         private readonly int movesNoise;
         private readonly int smoothGauss;
 
-        public CamService(MainWindow camWindow) // todo window
+        public CamService(MainWindow mainWindow, string parentGridName)
         {
-            this.camWindow = camWindow;
+            this.mainWindow = mainWindow;
+            this.parentGridName = parentGridName;
             logger = MainWindow.ServiceContainer.Resolve<Logger>();
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
-            withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
+            var camIndex = -1;
+            switch (parentGridName)
+            {
+                case "Cam1Grid":
+                    camNumber = 1;
+                    setupPoint = new PointF(configService.Read<float>(SettingsType.Cam1X),
+                                            configService.Read<float>(SettingsType.Cam1Y));
+                    camIndex = GetCamIndex(SettingsType.Cam1Id);
+                    break;
+                case "Cam2Grid":
+                    camNumber = 2;
+                    setupPoint = new PointF(configService.Read<float>(SettingsType.Cam2X),
+                                            configService.Read<float>(SettingsType.Cam2Y));
+                    camIndex = GetCamIndex(SettingsType.Cam2Id);
+                    break;
+                case "Cam3Grid":
+                    camNumber = 3;
+                    setupPoint = new PointF(configService.Read<float>(SettingsType.Cam3X),
+                                            configService.Read<float>(SettingsType.Cam3Y));
+                    camIndex = GetCamIndex(SettingsType.Cam3Id);
+                    break;
+                case "Cam4Grid":
+                    camNumber = 4;
+                    setupPoint = new PointF(configService.Read<float>(SettingsType.Cam4X),
+                                            configService.Read<float>(SettingsType.Cam4Y));
+                    camIndex = GetCamIndex(SettingsType.Cam4Id);
+                    break;
+            }
+
             surfacePoint1 = new PointF();
             surfacePoint2 = new PointF();
-            // camNumber = camWindow.camNumber;
-            // setupPoint = new PointF(configService.Read<float>($"Cam{camNumber}X"),
-            //                         configService.Read<float>($"Cam{camNumber}Y"));
+            withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
             resolutionWidth = configService.Read<int>(SettingsType.ResolutionWidth);
             resolutionHeight = configService.Read<int>(SettingsType.ResolutionHeight);
             movesExtraction = configService.Read<int>(SettingsType.MovesExtraction);
@@ -71,29 +100,54 @@ namespace OneHundredAndEighty_2._0.Recognition
             movesNoise = configService.Read<int>(SettingsType.MovesNoise);
             smoothGauss = configService.Read<int>(SettingsType.SmoothGauss);
             toBullAngle = MeasureService.FindAngle(setupPoint, drawService.projectionCenterPoint);
-            videoCapture = new VideoCapture(GetCamIndex(camNumber), VideoCapture.API.DShow);
+            videoCapture = new VideoCapture(camIndex, VideoCapture.API.DShow);
             videoCapture.SetCaptureProperty(CapProp.FrameWidth, resolutionWidth);
             videoCapture.SetCaptureProperty(CapProp.FrameHeight, resolutionHeight);
             GetSlidersData();
             RefreshImageBoxes();
         }
 
-        private int GetCamIndex(int camNumber)
+        private int GetCamIndex(SettingsType camIdSetting)
         {
             var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
-            // var camId = configService.Read<string>($"Cam{camNumber}Id");
-            // var index = allCams.FindIndex(x => x.DevicePath.Contains(camId));
-            var index = -1;
+            var camId = configService.Read<string>(camIdSetting);
+            var index = allCams.FindIndex(x => x.DevicePath.Contains(camId));
             return index;
         }
 
         private void GetSlidersData()
         {
-            // camWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = camWindow.TresholdSlider.Value));
-            // camWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = camWindow.RoiPosYSlider.Value));
-            // camWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = camWindow.RoiHeightSlider.Value));
-            // camWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = camWindow.SurfaceSlider.Value));
-            // camWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = camWindow.SurfaceCenterSlider.Value));
+            switch (parentGridName)
+            {
+                case "Cam1Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam1TresholdSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam1RoiPosYSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam1RoiHeightSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam1SurfaceSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam1SurfaceCenterSlider.Value));
+                    break;
+                case "Cam2Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam2TresholdSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam2RoiPosYSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam2RoiHeightSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam2SurfaceSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam2SurfaceCenterSlider.Value));
+                    break;
+                case "Cam3Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam3TresholdSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam3RoiPosYSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam3RoiHeightSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam3SurfaceSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam3SurfaceCenterSlider.Value));
+                    break;
+                case "Cam4Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam4TresholdSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam4RoiPosYSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam4RoiHeightSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam4SurfaceSlider.Value));
+                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam4SurfaceCenterSlider.Value));
+                    break;
+            }
         }
 
         private void DrawSetupLines()
@@ -102,26 +156,26 @@ namespace OneHundredAndEighty_2._0.Recognition
             LinedFrame = OriginFrame.Clone();
 
             roiRectangle = new Rectangle(0,
-                                         (int)roiPosYSlider,
+                                         (int) roiPosYSlider,
                                          resolutionWidth,
-                                         (int)roiHeightSlider);
+                                         (int) roiHeightSlider);
 
             drawService.DrawRectangle(LinedFrame,
                                       roiRectangle,
                                       drawService.camRoiRectColor.MCvScalar,
                                       drawService.camRoiRectThickness);
 
-            surfacePoint1 = new PointF(0, (float)surfaceSlider);
+            surfacePoint1 = new PointF(0, (float) surfaceSlider);
             surfacePoint2 = new PointF(resolutionWidth,
-                                       (float)surfaceSlider);
+                                       (float) surfaceSlider);
             drawService.DrawLine(LinedFrame,
                                  surfacePoint1,
                                  surfacePoint2,
                                  drawService.camSurfaceLineColor.MCvScalar,
                                  drawService.camSurfaceLineThickness);
 
-            surfaceCenterPoint1 = new PointF((float)surfaceCenterSlider,
-                                             (float)surfaceSlider);
+            surfaceCenterPoint1 = new PointF((float) surfaceCenterSlider,
+                                             (float) surfaceSlider);
 
             surfaceCenterPoint2 = new PointF(surfaceCenterPoint1.X,
                                              surfaceCenterPoint1.Y - 50);
@@ -131,11 +185,11 @@ namespace OneHundredAndEighty_2._0.Recognition
                                  drawService.camSurfaceLineColor.MCvScalar,
                                  drawService.camSurfaceLineThickness);
 
-            surfaceLeftPoint1 = new PointF((float)surfaceCenterSlider - LinedFrame.Cols / 3,
-                                           (float)surfaceSlider);
+            surfaceLeftPoint1 = new PointF((float) surfaceCenterSlider - LinedFrame.Cols / 3,
+                                           (float) surfaceSlider);
 
-            surfaceRightPoint1 = new PointF((float)surfaceCenterSlider + LinedFrame.Cols / 3,
-                                            (float)surfaceSlider);
+            surfaceRightPoint1 = new PointF((float) surfaceCenterSlider + LinedFrame.Cols / 3,
+                                            (float) surfaceSlider);
         }
 
         private void ThresholdRoi(Image<Gray, byte> roiFrame)
@@ -165,19 +219,58 @@ namespace OneHundredAndEighty_2._0.Recognition
             logger.Debug($"Doing capture for cam_{camNumber} end");
         }
 
-        private void RefreshImageBoxes()
+        public void RefreshImageBoxes()
         {
             logger.Debug($"Refreshing imageboxes for cam_{camNumber} start");
 
-            // camWindow.Dispatcher.Invoke(new Action(() => camWindow.ImageBox.Source = LinedFrame?.Data != null
-            //                                                                              ? drawService.ToBitmap(LinedFrame)
-            //                                                                              : new BitmapImage()));
-            // camWindow.Dispatcher.Invoke(new Action(() => camWindow.ImageBoxRoi.Source = RoiFrame?.Data != null
-            //                                                                                 ? drawService.ToBitmap(RoiFrame)
-            //                                                                                 : new BitmapImage()));
-            // camWindow.Dispatcher.Invoke(new Action(() => camWindow.ImageBoxRoiLastThrow.Source = RoiLastThrowFrame?.Data != null
-            //                                                                                          ? drawService.ToBitmap(RoiLastThrowFrame)
-            //                                                                                          : new BitmapImage()));
+            switch (parentGridName)
+            {
+                case "Cam1Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBox.Source = LinedFrame?.Data != null
+                                                                                                       ? drawService.ToBitmap(LinedFrame)
+                                                                                                       : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiFrame)
+                                                                                                          : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                          : new BitmapImage()));
+                    break;
+                case "Cam2Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBox.Source = LinedFrame?.Data != null
+                                                                                                       ? drawService.ToBitmap(LinedFrame)
+                                                                                                       : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiFrame)
+                                                                                                          : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                          : new BitmapImage()));
+                    break;
+                case "Cam3Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBox.Source = LinedFrame?.Data != null
+                                                                                                       ? drawService.ToBitmap(LinedFrame)
+                                                                                                       : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiFrame)
+                                                                                                          : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                          : new BitmapImage()));
+                    break;
+                case "Cam4Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBox.Source = LinedFrame?.Data != null
+                                                                                                       ? drawService.ToBitmap(LinedFrame)
+                                                                                                       : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiFrame)
+                                                                                                          : new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                          ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                          : new BitmapImage()));
+                    break;
+            }
+
             logger.Debug($"Refreshing imageboxes for cam_{camNumber} end");
         }
 
@@ -271,6 +364,35 @@ namespace OneHundredAndEighty_2._0.Recognition
 
             logger.Debug($"Capture and diff for cam_{camNumber} end");
             return diffImage;
+        }
+
+        public void ClearImageBoxes()
+        {
+            switch (parentGridName)
+            {
+                case "Cam1Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBox.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage()));
+                    break;
+                case "Cam2Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBox.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage()));
+                    break;
+                case "Cam3Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBox.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage()));
+                    break;
+                case "Cam4Grid":
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBox.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage()));
+                    break;
+            }
+
+            videoCapture.Dispose();
         }
     }
 }

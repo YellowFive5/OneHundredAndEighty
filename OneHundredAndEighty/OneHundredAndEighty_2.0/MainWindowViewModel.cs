@@ -6,7 +6,11 @@ using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Autofac;
 using NLog;
 using OneHundredAndEighty_2._0.Recognition;
@@ -22,6 +26,7 @@ namespace OneHundredAndEighty_2._0
         private readonly DBService dbService;
         private readonly ConfigService configService;
         private readonly DrawService drawService;
+        private CancellationTokenSource cts;
 
         public MainWindowViewModel()
         {
@@ -34,6 +39,7 @@ namespace OneHundredAndEighty_2._0
             dbService = MainWindow.ServiceContainer.Resolve<DBService>();
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
+
 
             // var _int = configService.Read<int>(SettingsType.DBVersion);
             // configService.Write(SettingsType.DBVersion, _int + 1);
@@ -243,6 +249,130 @@ namespace OneHundredAndEighty_2._0
             configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
             configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
             configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
+        }
+
+        public void RunCamSetupCapturing(string gridName)
+        {
+            ToggleCamSetupGridControls(gridName);
+            cts = new CancellationTokenSource();
+            var cancelToken = cts.Token;
+
+            Task.Run(() =>
+                     {
+                         var camService = new CamService(mainWindow, gridName);
+
+                         while (!cancelToken.IsCancellationRequested)
+                         {
+                             camService.DoCapture(true);
+                             camService.RefreshImageBoxes();
+                         }
+
+                         camService.ClearImageBoxes();
+                     });
+        }
+
+        public void StopCamSetupCapturing(string gridName)
+        {
+            cts?.Cancel();
+            ToggleCamSetupGridControls(gridName);
+            SaveCamSetupSliders(gridName);
+        }
+
+        private void SaveCamSetupSliders(string gridName)
+        {
+            switch (gridName)
+            {
+                case "Cam1Grid":
+                    configService.Write(SettingsType.Cam1TresholdSlider, mainWindow.Cam1TresholdSlider.Value);
+                    configService.Write(SettingsType.Cam1SurfaceSlider, mainWindow.Cam1SurfaceSlider.Value);
+                    configService.Write(SettingsType.Cam1SurfaceCenterSlider, mainWindow.Cam1SurfaceCenterSlider.Value);
+                    configService.Write(SettingsType.Cam1RoiPosYSlider, mainWindow.Cam1RoiPosYSlider.Value);
+                    configService.Write(SettingsType.Cam1RoiHeightSlider, mainWindow.Cam1RoiHeightSlider.Value);
+                    break;
+                case "Cam2Grid":
+                    configService.Write(SettingsType.Cam2TresholdSlider, mainWindow.Cam2TresholdSlider.Value);
+                    configService.Write(SettingsType.Cam2SurfaceSlider, mainWindow.Cam2SurfaceSlider.Value);
+                    configService.Write(SettingsType.Cam2SurfaceCenterSlider, mainWindow.Cam2SurfaceCenterSlider.Value);
+                    configService.Write(SettingsType.Cam2RoiPosYSlider, mainWindow.Cam2RoiPosYSlider.Value);
+                    configService.Write(SettingsType.Cam2RoiHeightSlider, mainWindow.Cam2RoiHeightSlider.Value);
+                    break;
+                case "Cam3Grid":
+                    configService.Write(SettingsType.Cam3TresholdSlider, mainWindow.Cam3TresholdSlider.Value);
+                    configService.Write(SettingsType.Cam3SurfaceSlider, mainWindow.Cam3SurfaceSlider.Value);
+                    configService.Write(SettingsType.Cam3SurfaceCenterSlider, mainWindow.Cam3SurfaceCenterSlider.Value);
+                    configService.Write(SettingsType.Cam3RoiPosYSlider, mainWindow.Cam3RoiPosYSlider.Value);
+                    configService.Write(SettingsType.Cam3RoiHeightSlider, mainWindow.Cam3RoiHeightSlider.Value);
+                    break;
+                case "Cam4Grid":
+                    configService.Write(SettingsType.Cam4TresholdSlider, mainWindow.Cam4TresholdSlider.Value);
+                    configService.Write(SettingsType.Cam4SurfaceSlider, mainWindow.Cam4SurfaceSlider.Value);
+                    configService.Write(SettingsType.Cam4SurfaceCenterSlider, mainWindow.Cam4SurfaceCenterSlider.Value);
+                    configService.Write(SettingsType.Cam4RoiPosYSlider, mainWindow.Cam4RoiPosYSlider.Value);
+                    configService.Write(SettingsType.Cam4RoiHeightSlider, mainWindow.Cam4RoiHeightSlider.Value);
+                    break;
+            }
+        }
+
+        private void ToggleCamSetupGridControls(string gridName)
+        {
+            ToggleMainTabItems();
+            ToggleSetupTabItems();
+
+            switch (gridName)
+            {
+                case "Cam1Grid":
+                    mainWindow.Cam1StartButton.IsEnabled = !mainWindow.Cam1StartButton.IsEnabled;
+                    mainWindow.Cam1StopButton.IsEnabled = !mainWindow.Cam1StopButton.IsEnabled;
+                    mainWindow.Cam1TresholdSlider.IsEnabled = !mainWindow.Cam1TresholdSlider.IsEnabled;
+                    mainWindow.Cam1SurfaceSlider.IsEnabled = !mainWindow.Cam1SurfaceSlider.IsEnabled;
+                    mainWindow.Cam1SurfaceCenterSlider.IsEnabled = !mainWindow.Cam1SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam1RoiPosYSlider.IsEnabled = !mainWindow.Cam1RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam1RoiHeightSlider.IsEnabled = !mainWindow.Cam1RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam2Grid":
+                    mainWindow.Cam2StartButton.IsEnabled = !mainWindow.Cam2StartButton.IsEnabled;
+                    mainWindow.Cam2StopButton.IsEnabled = !mainWindow.Cam2StopButton.IsEnabled;
+                    mainWindow.Cam2TresholdSlider.IsEnabled = !mainWindow.Cam2TresholdSlider.IsEnabled;
+                    mainWindow.Cam2SurfaceSlider.IsEnabled = !mainWindow.Cam2SurfaceSlider.IsEnabled;
+                    mainWindow.Cam2SurfaceCenterSlider.IsEnabled = !mainWindow.Cam2SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam2RoiPosYSlider.IsEnabled = !mainWindow.Cam2RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam2RoiHeightSlider.IsEnabled = !mainWindow.Cam2RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam3Grid":
+                    mainWindow.Cam3StartButton.IsEnabled = !mainWindow.Cam3StartButton.IsEnabled;
+                    mainWindow.Cam3StopButton.IsEnabled = !mainWindow.Cam3StopButton.IsEnabled;
+                    mainWindow.Cam3TresholdSlider.IsEnabled = !mainWindow.Cam3TresholdSlider.IsEnabled;
+                    mainWindow.Cam3SurfaceSlider.IsEnabled = !mainWindow.Cam3SurfaceSlider.IsEnabled;
+                    mainWindow.Cam3SurfaceCenterSlider.IsEnabled = !mainWindow.Cam3SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam3RoiPosYSlider.IsEnabled = !mainWindow.Cam3RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam3RoiHeightSlider.IsEnabled = !mainWindow.Cam3RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam4Grid":
+                    mainWindow.Cam4StartButton.IsEnabled = !mainWindow.Cam4StartButton.IsEnabled;
+                    mainWindow.Cam4StopButton.IsEnabled = !mainWindow.Cam4StopButton.IsEnabled;
+                    mainWindow.Cam4TresholdSlider.IsEnabled = !mainWindow.Cam4TresholdSlider.IsEnabled;
+                    mainWindow.Cam4SurfaceSlider.IsEnabled = !mainWindow.Cam4SurfaceSlider.IsEnabled;
+                    mainWindow.Cam4SurfaceCenterSlider.IsEnabled = !mainWindow.Cam4SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam4RoiPosYSlider.IsEnabled = !mainWindow.Cam4RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam4RoiHeightSlider.IsEnabled = !mainWindow.Cam4RoiHeightSlider.IsEnabled;
+                    break;
+            }
+        }
+
+        private void ToggleSetupTabItems()
+        {
+            foreach (TabItem tabItem in mainWindow.SetupTabControl.Items)
+            {
+                tabItem.IsEnabled = !tabItem.IsEnabled;
+            }
+        }
+
+        private void ToggleMainTabItems()
+        {
+            foreach (TabItem tabItem in mainWindow.MainTabControl.Items)
+            {
+                tabItem.IsEnabled = !tabItem.IsEnabled;
+            }
         }
     }
 }
