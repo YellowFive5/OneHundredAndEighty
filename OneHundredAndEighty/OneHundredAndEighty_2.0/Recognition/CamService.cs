@@ -39,7 +39,6 @@ namespace OneHundredAndEighty_2._0.Recognition
         private Rectangle roiRectangle;
         private readonly bool runtimeCapturing;
         private readonly bool withDetection;
-        private readonly double toCamDistance;
         private Image<Bgr, byte> OriginFrame { get; set; }
         private Image<Bgr, byte> LinedFrame { get; set; }
         private Image<Gray, byte> RoiFrame { get; set; }
@@ -59,7 +58,6 @@ namespace OneHundredAndEighty_2._0.Recognition
             logger = MainWindow.ServiceContainer.Resolve<Logger>();
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
-            runtimeCapturing = configService.Read<bool>(SettingsType.RuntimeCapturingCheckBox);
             withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
             surfacePoint1 = new PointF();
             surfacePoint2 = new PointF();
@@ -72,7 +70,6 @@ namespace OneHundredAndEighty_2._0.Recognition
             movesDart = configService.Read<int>(SettingsType.MovesDart);
             movesNoise = configService.Read<int>(SettingsType.MovesNoise);
             smoothGauss = configService.Read<int>(SettingsType.SmoothGauss);
-            // toCamDistance = configService.Read<double>($"ToCam{camNumber}Distance");
             toBullAngle = MeasureService.FindAngle(setupPoint, drawService.projectionCenterPoint);
             videoCapture = new VideoCapture(GetCamIndex(camNumber), VideoCapture.API.DShow);
             videoCapture.SetCaptureProperty(CapProp.FrameWidth, resolutionWidth);
@@ -274,45 +271,6 @@ namespace OneHundredAndEighty_2._0.Recognition
 
             logger.Debug($"Capture and diff for cam_{camNumber} end");
             return diffImage;
-        }
-
-        public void CalibrateCamSetupPoint()
-        {
-            const double startRadSector = -3.14159;
-            const double radSectorStep = 0.314159;
-            const int dartboardDiameterInPixels = 1020;
-            const int dartboardDiameterInCm = 34;
-            var toCamPixels = dartboardDiameterInPixels * toCamDistance / dartboardDiameterInCm;
-            var i = 1;
-            switch (camNumber)
-            {
-                case 1:
-                    i = 2;
-                    break;
-                case 2:
-                    i = 4;
-                    break;
-                case 3:
-                    i = 6;
-                    break;
-                case 4:
-                    i = 8;
-                    break;
-            }
-
-            var calibratedCamSetupPoint = new PointF
-            {
-                X = (int)(drawService.projectionCenterPoint.X + Math.Cos(startRadSector + i * radSectorStep) * toCamPixels),
-                Y = (int)(drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + i * radSectorStep) * toCamPixels)
-            };
-
-            // camWindow.XTextBox.Text = calibratedCamSetupPoint.X.ToString();
-            // camWindow.YTextBox.Text = calibratedCamSetupPoint.Y.ToString();
-
-            // configService.Write($"Cam{camNumber}X", calibratedCamSetupPoint.X);
-            // configService.Write($"Cam{camNumber}Y", calibratedCamSetupPoint.Y);
-
-            setupPoint = calibratedCamSetupPoint;
         }
     }
 }

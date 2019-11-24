@@ -401,5 +401,14 @@ namespace OneHundredAndEighty_2._0.Properties {
                 return ResourceManager.GetString("VersionsMistmatchErrorText", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detection enabled.
+        /// </summary>
+        public static string WithDetectionCheckBoxText {
+            get {
+                return ResourceManager.GetString("WithDetectionCheckBoxText", resourceCulture);
+            }
+        }
     }
 }

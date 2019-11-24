@@ -21,6 +21,7 @@ namespace OneHundredAndEighty_2._0
         private readonly Logger logger;
         private readonly DBService dbService;
         private readonly ConfigService configService;
+        private readonly DrawService drawService;
 
         public MainWindowViewModel()
         {
@@ -32,6 +33,7 @@ namespace OneHundredAndEighty_2._0
             logger = MainWindow.ServiceContainer.Resolve<Logger>();
             dbService = MainWindow.ServiceContainer.Resolve<DBService>();
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
+            drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
 
             // var _int = configService.Read<int>(SettingsType.DBVersion);
             // configService.Write(SettingsType.DBVersion, _int + 1);
@@ -100,6 +102,31 @@ namespace OneHundredAndEighty_2._0
             mainWindow.Cam2YTextBox.Text = configService.Read<int>(SettingsType.Cam2Y).ToString();
             mainWindow.Cam3YTextBox.Text = configService.Read<int>(SettingsType.Cam3Y).ToString();
             mainWindow.Cam4YTextBox.Text = configService.Read<int>(SettingsType.Cam4Y).ToString();
+            mainWindow.Cam1CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam1CheckBox);
+            mainWindow.Cam2CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam2CheckBox);
+            mainWindow.Cam3CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam3CheckBox);
+            mainWindow.Cam4CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam4CheckBox);
+            mainWindow.WithDetectionCheckBox.IsChecked = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
+            mainWindow.Cam1TresholdSlider.Value = configService.Read<double>(SettingsType.Cam1TresholdSlider);
+            mainWindow.Cam1SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam1SurfaceSlider);
+            mainWindow.Cam1SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam1SurfaceCenterSlider);
+            mainWindow.Cam1RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam1RoiPosYSlider);
+            mainWindow.Cam1RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam1RoiHeightSlider);
+            mainWindow.Cam2TresholdSlider.Value = configService.Read<double>(SettingsType.Cam2TresholdSlider);
+            mainWindow.Cam2SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam2SurfaceSlider);
+            mainWindow.Cam2SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam2SurfaceCenterSlider);
+            mainWindow.Cam2RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam2RoiPosYSlider);
+            mainWindow.Cam2RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam2RoiHeightSlider);
+            mainWindow.Cam3TresholdSlider.Value = configService.Read<double>(SettingsType.Cam3TresholdSlider);
+            mainWindow.Cam3SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam3SurfaceSlider);
+            mainWindow.Cam3SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam3SurfaceCenterSlider);
+            mainWindow.Cam3RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam3RoiPosYSlider);
+            mainWindow.Cam3RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam3RoiHeightSlider);
+            mainWindow.Cam4TresholdSlider.Value = configService.Read<double>(SettingsType.Cam4TresholdSlider);
+            mainWindow.Cam4SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam4SurfaceSlider);
+            mainWindow.Cam4SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam4SurfaceCenterSlider);
+            mainWindow.Cam4RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam4RoiPosYSlider);
+            mainWindow.Cam4RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam4RoiHeightSlider);
 
             logger.Debug("Load settings end");
         }
@@ -137,6 +164,11 @@ namespace OneHundredAndEighty_2._0
             configService.Write(SettingsType.Cam2Y, mainWindow.Cam2YTextBox.Text);
             configService.Write(SettingsType.Cam3Y, mainWindow.Cam3YTextBox.Text);
             configService.Write(SettingsType.Cam4Y, mainWindow.Cam4YTextBox.Text);
+            configService.Write(SettingsType.Cam1CheckBox, mainWindow.Cam1CheckBox.IsChecked);
+            configService.Write(SettingsType.Cam2CheckBox, mainWindow.Cam2CheckBox.IsChecked);
+            configService.Write(SettingsType.Cam3CheckBox, mainWindow.Cam3CheckBox.IsChecked);
+            configService.Write(SettingsType.Cam4CheckBox, mainWindow.Cam4CheckBox.IsChecked);
+            configService.Write(SettingsType.WithDetectionCheckBox, mainWindow.WithDetectionCheckBox.IsChecked);
 
             logger.Debug("Save settings end");
         }
@@ -150,6 +182,67 @@ namespace OneHundredAndEighty_2._0
                 MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
                 throw new Exception("DB version and App version is different");
             }
+        }
+
+        public void CalibrateCamsSetupPoint()
+        {
+            const double startRadSector = -3.14159;
+            const double radSectorStep = 0.314159;
+            const int dartboardDiameterInPixels = 1020;
+            const int dartboardDiameterInCm = 34;
+
+            var toCam1CmDistance = Convert.ToDouble(mainWindow.ToCam1Distance.Text, CultureInfo.InvariantCulture);
+            var toCam2CmDistance = Convert.ToDouble(mainWindow.ToCam2Distance.Text, CultureInfo.InvariantCulture);
+            var toCam3CmDistance = Convert.ToDouble(mainWindow.ToCam3Distance.Text, CultureInfo.InvariantCulture);
+            var toCam4CmDistance = Convert.ToDouble(mainWindow.ToCam4Distance.Text, CultureInfo.InvariantCulture);
+
+            var toCam1Pixels = dartboardDiameterInPixels * toCam1CmDistance / dartboardDiameterInCm;
+            var toCam2Pixels = dartboardDiameterInPixels * toCam2CmDistance / dartboardDiameterInCm;
+            var toCam3Pixels = dartboardDiameterInPixels * toCam3CmDistance / dartboardDiameterInCm;
+            var toCam4Pixels = dartboardDiameterInPixels * toCam4CmDistance / dartboardDiameterInCm;
+
+            var calibratedCam1SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 2 * radSectorStep) * toCam1Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 2 * radSectorStep) * toCam1Pixels)
+                                           };
+            var calibratedCam2SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 4 * radSectorStep) * toCam2Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 4 * radSectorStep) * toCam2Pixels)
+                                           };
+            var calibratedCam3SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 6 * radSectorStep) * toCam3Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 6 * radSectorStep) * toCam3Pixels)
+                                           };
+            var calibratedCam4SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 8 * radSectorStep) * toCam4Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 8 * radSectorStep) * toCam4Pixels)
+                                           };
+
+            mainWindow.Cam1XTextBox.Text = calibratedCam1SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam1YTextBox.Text = calibratedCam1SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam2XTextBox.Text = calibratedCam2SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam2YTextBox.Text = calibratedCam2SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam3XTextBox.Text = calibratedCam3SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam3YTextBox.Text = calibratedCam3SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam4XTextBox.Text = calibratedCam4SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam4YTextBox.Text = calibratedCam4SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+
+            configService.Write(SettingsType.Cam1X, calibratedCam1SetupPoint.X);
+            configService.Write(SettingsType.Cam1Y, calibratedCam1SetupPoint.Y);
+            configService.Write(SettingsType.Cam2X, calibratedCam2SetupPoint.X);
+            configService.Write(SettingsType.Cam2Y, calibratedCam2SetupPoint.Y);
+            configService.Write(SettingsType.Cam3X, calibratedCam3SetupPoint.X);
+            configService.Write(SettingsType.Cam3Y, calibratedCam3SetupPoint.Y);
+            configService.Write(SettingsType.Cam4X, calibratedCam4SetupPoint.X);
+            configService.Write(SettingsType.Cam4Y, calibratedCam4SetupPoint.Y);
+            configService.Write(SettingsType.ToCam1Distance, mainWindow.ToCam1Distance.Text);
+            configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
+            configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
+            configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
         }
     }
 }

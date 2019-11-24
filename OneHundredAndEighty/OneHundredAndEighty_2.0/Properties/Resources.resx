@@ -231,4 +231,7 @@
   <data name="VersionsMistmatchErrorText" xml:space="preserve">
     <value>DB version and App version is different</value>
   </data>
+  <data name="WithDetectionCheckBoxText" xml:space="preserve">
+    <value>Detection enabled</value>
+  </data>
 </root>

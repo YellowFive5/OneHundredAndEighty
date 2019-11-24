@@ -76,5 +76,20 @@ namespace OneHundredAndEighty_2._0
         private void StopButtonClick(object sender, RoutedEventArgs e)
         {
         }
+
+        private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.CalibrateCamsSetupPoint();
+        }
+
+        private void CamSetupStartButtonClick(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void CamSetupStopButtonClick(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
