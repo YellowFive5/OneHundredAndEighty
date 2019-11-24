@@ -7,17 +7,7 @@ using System.Drawing;
 
 namespace OneHundredAndEighty_2._0.Recognition
 {
-    public enum ThrowType
-    {
-        Zero,
-        Single,
-        Double,
-        Tremble,
-        _25,
-        Bull
-    }
-
-    public class Throw
+    public class DetectedThrow
     {
         public PointF Poi { get; }
         public ThrowType Type { get; }
@@ -26,7 +16,7 @@ namespace OneHundredAndEighty_2._0.Recognition
         public int Multiplier { get; }
         public int ProjectionResolution { get; }
 
-        public Throw(PointF poi, int sector, ThrowType type, int projectionSide)
+        public DetectedThrow(PointF poi, int sector, ThrowType type, int projectionSide)
         {
             ProjectionResolution = projectionSide;
             Poi = poi;
@@ -54,7 +44,7 @@ namespace OneHundredAndEighty_2._0.Recognition
                     Multiplier = 2;
                     TotalPoints = 25;
                     break;
-                case ThrowType.Bull:
+                case ThrowType.Bulleye:
                     Multiplier = 3;
                     TotalPoints = 50;
                     break;
@@ -68,7 +58,7 @@ namespace OneHundredAndEighty_2._0.Recognition
             string str;
             switch (Type)
             {
-                case ThrowType.Bull:
+                case ThrowType.Bulleye:
                     str = "Bull";
                     break;
                 case ThrowType._25:

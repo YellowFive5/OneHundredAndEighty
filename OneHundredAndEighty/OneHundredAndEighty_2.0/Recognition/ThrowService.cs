@@ -15,17 +15,15 @@ namespace OneHundredAndEighty_2._0.Recognition
         private readonly DrawService drawService;
         private readonly Logger logger;
         private readonly List<Ray> rays;
-        private readonly Queue<Throw> throwsCollection;
 
         public ThrowService(DrawService drawService, Logger logger)
         {
             this.logger = logger;
             this.drawService = drawService;
             rays = new List<Ray>();
-            throwsCollection = new Queue<Throw>();
         }
 
-        public void CalculateAndSaveThrow()
+        public DetectedThrow GetThrow()
         {
             logger.Debug($"Calculate throw start");
 
@@ -34,7 +32,7 @@ namespace OneHundredAndEighty_2._0.Recognition
                 logger.Debug($"Rays count < 2. Calculate throw end.");
 
                 rays.Clear();
-                return;
+                return null;
             }
 
             foreach (var ray in rays)
@@ -53,18 +51,19 @@ namespace OneHundredAndEighty_2._0.Recognition
                                                            secondBestRay.CamPoint,
                                                            secondBestRay.RayPoint);
             var anotherThrow = PrepareThrowData(poi);
-            throwsCollection.Enqueue(anotherThrow);
 
             drawService.ProjectionDrawLine(firstBestRay.CamPoint, firstBestRay.RayPoint, new Bgr(Color.Aqua).MCvScalar, true);
             drawService.ProjectionDrawLine(secondBestRay.CamPoint, secondBestRay.RayPoint, new Bgr(Color.Aqua).MCvScalar, false);
             drawService.ProjectionDrawThrow(poi, false);
             drawService.PrintThrow(anotherThrow);
 
+
             logger.Info($"Throw:{anotherThrow}");
             logger.Debug($"Calculate throw end.");
+            return anotherThrow;
         }
 
-        private Throw PrepareThrowData(PointF poi)
+        private DetectedThrow PrepareThrowData(PointF poi)
         {
             var sectors = new List<int>()
                           {
@@ -93,7 +92,7 @@ namespace OneHundredAndEighty_2._0.Recognition
             if (distance <= drawService.projectionCoefficent * 7)
             {
                 sector = 50;
-                type = ThrowType.Bull;
+                type = ThrowType.Bulleye;
             }
             else if (distance > drawService.projectionCoefficent * 7 &&
                      distance <= drawService.projectionCoefficent * 17)
@@ -125,7 +124,7 @@ namespace OneHundredAndEighty_2._0.Recognition
                 }
             }
 
-            return new Throw(poi, sector, type, drawService.projectionFrameSide);
+            return new DetectedThrow(poi, sector, type, drawService.projectionFrameSide);
         }
 
         public void SaveRay(Ray ray)

@@ -25,12 +25,9 @@ namespace OneHundredAndEighty_2._0
         private readonly ConfigService configService;
         private readonly DrawService drawService;
         private readonly ThrowService throwService;
+        private readonly GameService gameService;
         private CancellationTokenSource cts;
-        private List<CamService> cams;
-        private double moveDetectedSleepTime;
-        private double extractionSleepTime;
-        private double thresholdSleepTime;
-        private bool withDetection;
+        private CancellationToken cancelToken;
 
         public bool IsSettingsDirty { get; set; }
 
@@ -46,7 +43,7 @@ namespace OneHundredAndEighty_2._0
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
             throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
-
+            gameService = MainWindow.ServiceContainer.Resolve<GameService>();
             drawService.ProjectionPrepare();
 
             // var _int = configService.Read<int>(SettingsType.DBVersion);
@@ -321,128 +318,18 @@ namespace OneHundredAndEighty_2._0
         {
             ToggleMainTabItems();
             ToggleMainTabItemControls();
-            drawService.ProjectionClear();
-            cams = new List<CamService>();
-            if (mainWindow.Cam1CheckBox.IsChecked.Value)
-            {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name));
-            }
+            var player = new Player("Player", "One", 1);
+            // dbService.SaveNewPlayer(player);
+            var players = new List<Player> {player};
 
-            if (mainWindow.Cam2CheckBox.IsChecked.Value)
-            {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam2Grid.Name));
-            }
-
-            if (mainWindow.Cam3CheckBox.IsChecked.Value)
-            {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam3Grid.Name));
-            }
-
-            if (mainWindow.Cam4CheckBox.IsChecked.Value)
-            {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam4Grid.Name));
-            }
-
-            cts = new CancellationTokenSource();
-            var cancelToken = cts.Token;
-
-            extractionSleepTime = configService.Read<double>(SettingsType.ExtractionSleepTime);
-            thresholdSleepTime = configService.Read<double>(SettingsType.ThresholdSleepTime);
-            moveDetectedSleepTime = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
-            withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
-
-            Task.Run(() =>
-                     {
-                         Thread.CurrentThread.Name = $"Recognition_workerThread";
-
-                         ClearAllCamsImages();
-
-                         while (!cancelToken.IsCancellationRequested)
-                         {
-                             foreach (var cam in cams)
-                             {
-                                 logger.Debug($"Cam_{cam.camNumber} detection start");
-
-                                 var response = withDetection
-                                                    ? cam.DetectMove()
-                                                    : ResponseType.Nothing;
-
-                                 if (response == ResponseType.Move)
-                                 {
-                                     Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
-                                     response = cam.DetectThrow();
-
-                                     if (response == ResponseType.Trow)
-                                     {
-                                         cam.FindAndProcessDartContour();
-
-                                         FindThrowOnRemainingCams(cam);
-
-                                         logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Trow}'. Cycle break");
-                                         break;
-                                     }
-
-                                     if (response == ResponseType.Extraction)
-                                     {
-                                         Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
-
-                                         drawService.ProjectionClear();
-                                         ClearAllCamsImages();
-
-                                         logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Extraction}'. Cycle break");
-                                         break;
-                                     }
-                                 }
-
-                                 Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
-
-                                 logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Nothing}'");
-                             }
-                         }
-
-                         foreach (var cam in cams)
-                         {
-                             cam.Dispose();
-                             cam.ClearImageBoxes();
-                         }
-
-                         logger.Info($"Detection for {cams.Count} cams end. Cancellation requested");
-                     });
+            gameService.StartMatch(GameType.FreeThrows, players);
         }
 
         public void StopFreeThrowsGame()
         {
             ToggleMainTabItems();
             ToggleMainTabItemControls();
-            cts?.Cancel();
-            drawService.ProjectionClear();
-        }
-
-        private void FindThrowOnRemainingCams(CamService succeededCam)
-        {
-            logger.Info($"Finding throws from remaining cams start. Succeeded cam: {succeededCam.camNumber}");
-
-            foreach (var cam in cams.Where(cam => cam != succeededCam))
-            {
-                cam.FindThrow();
-                cam.FindAndProcessDartContour();
-            }
-
-            throwService.CalculateAndSaveThrow();
-
-            logger.Info($"Finding throws from remaining cams end");
-        }
-
-        private void ClearAllCamsImages()
-        {
-            logger.Debug($"Clear all cams imageboxes start");
-
-            foreach (var cam in cams)
-            {
-                cam.DoCapture(true);
-            }
-
-            logger.Debug($"Clear all cams imageboxes end");
+            gameService.StopMatch();
         }
 
         #region Toggles

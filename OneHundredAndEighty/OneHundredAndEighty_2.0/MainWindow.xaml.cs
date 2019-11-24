@@ -52,6 +52,8 @@ namespace OneHundredAndEighty_2._0
             var throwService = new ThrowService(drawService, logger);
             cb.Register(r => throwService).AsSelf().SingleInstance();
 
+            var gameService = new GameService(this, throwService, configService, drawService, logger, dbService);
+            cb.Register(r => gameService).AsSelf().SingleInstance();
 
             ServiceContainer = cb.Build();
 

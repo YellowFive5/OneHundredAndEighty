@@ -114,7 +114,7 @@ namespace OneHundredAndEighty_2._0.Recognition
                        thickness);
         }
 
-        public void PrintThrow(Throw thrw)
+        public void PrintThrow(DetectedThrow thrw)
         {
             mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.PointsBox.Text = thrw.ToString()));
         }

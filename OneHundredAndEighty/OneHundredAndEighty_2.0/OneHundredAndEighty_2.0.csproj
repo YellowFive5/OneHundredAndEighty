@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Game.cs" />
+    <Compile Include="GameService.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -104,7 +105,7 @@
     <Compile Include="Recognition\MeasureService.cs" />
     <Compile Include="Recognition\Ray.cs" />
     <Compile Include="Recognition\ResponseType.cs" />
-    <Compile Include="Recognition\Throw.cs" />
+    <Compile Include="Recognition\DetectedThrow.cs" />
     <Compile Include="Recognition\ThrowService.cs" />
     <Compile Include="SettingsType.cs" />
     <Compile Include="Throw.cs" />
