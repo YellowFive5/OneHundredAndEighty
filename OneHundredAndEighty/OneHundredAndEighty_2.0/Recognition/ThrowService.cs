@@ -50,6 +50,12 @@ namespace OneHundredAndEighty_2._0.Recognition
                                                            firstBestRay.RayPoint,
                                                            secondBestRay.CamPoint,
                                                            secondBestRay.RayPoint);
+            if (float.IsNaN(poi.X) || float.IsNaN(poi.Y))
+            {
+                logger.Info($"Corrupted poi. Abort");
+                return null;
+            }
+
             var anotherThrow = PrepareThrowData(poi);
 
             drawService.ProjectionDrawLine(firstBestRay.CamPoint, firstBestRay.RayPoint, new Bgr(Color.Aqua).MCvScalar, true);
