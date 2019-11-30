@@ -101,6 +101,7 @@
     <Compile Include="Recognition\CamService.cs" />
     <Compile Include="Recognition\ConfigService.cs" />
     <Compile Include="Recognition\DartContour.cs" />
+    <Compile Include="Recognition\DetectionService.cs" />
     <Compile Include="Recognition\DrawService.cs" />
     <Compile Include="Recognition\MeasureService.cs" />
     <Compile Include="Recognition\Ray.cs" />

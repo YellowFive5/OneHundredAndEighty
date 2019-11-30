@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -89,6 +88,85 @@ namespace OneHundredAndEighty_2._0
                 MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
                 throw new Exception("DB version and App version is different");
             }
+        }
+
+        public void CalibrateCamsSetupPoint()
+        {
+            const double startRadSector = -3.14159;
+            const double radSectorStep = 0.314159;
+            const int dartboardDiameterInPixels = 1020;
+            const int dartboardDiameterInCm = 34;
+
+            var toCam1CmDistance = Convert.ToDouble(mainWindow.ToCam1Distance.Text, CultureInfo.InvariantCulture);
+            var toCam2CmDistance = Convert.ToDouble(mainWindow.ToCam2Distance.Text, CultureInfo.InvariantCulture);
+            var toCam3CmDistance = Convert.ToDouble(mainWindow.ToCam3Distance.Text, CultureInfo.InvariantCulture);
+            var toCam4CmDistance = Convert.ToDouble(mainWindow.ToCam4Distance.Text, CultureInfo.InvariantCulture);
+
+            var toCam1Pixels = dartboardDiameterInPixels * toCam1CmDistance / dartboardDiameterInCm;
+            var toCam2Pixels = dartboardDiameterInPixels * toCam2CmDistance / dartboardDiameterInCm;
+            var toCam3Pixels = dartboardDiameterInPixels * toCam3CmDistance / dartboardDiameterInCm;
+            var toCam4Pixels = dartboardDiameterInPixels * toCam4CmDistance / dartboardDiameterInCm;
+
+            var calibratedCam1SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 2 * radSectorStep) * toCam1Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 2 * radSectorStep) * toCam1Pixels)
+                                           };
+            var calibratedCam2SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 4 * radSectorStep) * toCam2Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 4 * radSectorStep) * toCam2Pixels)
+                                           };
+            var calibratedCam3SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 6 * radSectorStep) * toCam3Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 6 * radSectorStep) * toCam3Pixels)
+                                           };
+            var calibratedCam4SetupPoint = new PointF
+                                           {
+                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 8 * radSectorStep) * toCam4Pixels),
+                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 8 * radSectorStep) * toCam4Pixels)
+                                           };
+
+            mainWindow.Cam1XTextBox.Text = calibratedCam1SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam1YTextBox.Text = calibratedCam1SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam2XTextBox.Text = calibratedCam2SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam2YTextBox.Text = calibratedCam2SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam3XTextBox.Text = calibratedCam3SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam3YTextBox.Text = calibratedCam3SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam4XTextBox.Text = calibratedCam4SetupPoint.X.ToString(CultureInfo.InvariantCulture);
+            mainWindow.Cam4YTextBox.Text = calibratedCam4SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
+
+            configService.Write(SettingsType.Cam1X, calibratedCam1SetupPoint.X);
+            configService.Write(SettingsType.Cam1Y, calibratedCam1SetupPoint.Y);
+            configService.Write(SettingsType.Cam2X, calibratedCam2SetupPoint.X);
+            configService.Write(SettingsType.Cam2Y, calibratedCam2SetupPoint.Y);
+            configService.Write(SettingsType.Cam3X, calibratedCam3SetupPoint.X);
+            configService.Write(SettingsType.Cam3Y, calibratedCam3SetupPoint.Y);
+            configService.Write(SettingsType.Cam4X, calibratedCam4SetupPoint.X);
+            configService.Write(SettingsType.Cam4Y, calibratedCam4SetupPoint.Y);
+            configService.Write(SettingsType.ToCam1Distance, mainWindow.ToCam1Distance.Text);
+            configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
+            configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
+            configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
+        }
+
+        public void StartFreeThrowsGame()
+        {
+            ToggleMainTabItems();
+            ToggleMainTabItemControls();
+            var player = new Player("Player", "One", 1);
+            // dbService.SaveNewPlayer(player);
+            var players = new List<Player> {player};
+
+            gameService.StartGame(GameType.FreeThrows, players);
+        }
+
+        public void StopFreeThrowsGame()
+        {
+            ToggleMainTabItems();
+            ToggleMainTabItemControls();
+            gameService.StopGame();
         }
 
         #region Settings
@@ -226,66 +304,7 @@ namespace OneHundredAndEighty_2._0
 
         #endregion
 
-        public void CalibrateCamsSetupPoint()
-        {
-            const double startRadSector = -3.14159;
-            const double radSectorStep = 0.314159;
-            const int dartboardDiameterInPixels = 1020;
-            const int dartboardDiameterInCm = 34;
-
-            var toCam1CmDistance = Convert.ToDouble(mainWindow.ToCam1Distance.Text, CultureInfo.InvariantCulture);
-            var toCam2CmDistance = Convert.ToDouble(mainWindow.ToCam2Distance.Text, CultureInfo.InvariantCulture);
-            var toCam3CmDistance = Convert.ToDouble(mainWindow.ToCam3Distance.Text, CultureInfo.InvariantCulture);
-            var toCam4CmDistance = Convert.ToDouble(mainWindow.ToCam4Distance.Text, CultureInfo.InvariantCulture);
-
-            var toCam1Pixels = dartboardDiameterInPixels * toCam1CmDistance / dartboardDiameterInCm;
-            var toCam2Pixels = dartboardDiameterInPixels * toCam2CmDistance / dartboardDiameterInCm;
-            var toCam3Pixels = dartboardDiameterInPixels * toCam3CmDistance / dartboardDiameterInCm;
-            var toCam4Pixels = dartboardDiameterInPixels * toCam4CmDistance / dartboardDiameterInCm;
-
-            var calibratedCam1SetupPoint = new PointF
-                                           {
-                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 2 * radSectorStep) * toCam1Pixels),
-                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 2 * radSectorStep) * toCam1Pixels)
-                                           };
-            var calibratedCam2SetupPoint = new PointF
-                                           {
-                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 4 * radSectorStep) * toCam2Pixels),
-                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 4 * radSectorStep) * toCam2Pixels)
-                                           };
-            var calibratedCam3SetupPoint = new PointF
-                                           {
-                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 6 * radSectorStep) * toCam3Pixels),
-                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 6 * radSectorStep) * toCam3Pixels)
-                                           };
-            var calibratedCam4SetupPoint = new PointF
-                                           {
-                                               X = (int) (drawService.projectionCenterPoint.X + Math.Cos(startRadSector + 8 * radSectorStep) * toCam4Pixels),
-                                               Y = (int) (drawService.projectionCenterPoint.Y + Math.Sin(startRadSector + 8 * radSectorStep) * toCam4Pixels)
-                                           };
-
-            mainWindow.Cam1XTextBox.Text = calibratedCam1SetupPoint.X.ToString(CultureInfo.InvariantCulture);
-            mainWindow.Cam1YTextBox.Text = calibratedCam1SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
-            mainWindow.Cam2XTextBox.Text = calibratedCam2SetupPoint.X.ToString(CultureInfo.InvariantCulture);
-            mainWindow.Cam2YTextBox.Text = calibratedCam2SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
-            mainWindow.Cam3XTextBox.Text = calibratedCam3SetupPoint.X.ToString(CultureInfo.InvariantCulture);
-            mainWindow.Cam3YTextBox.Text = calibratedCam3SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
-            mainWindow.Cam4XTextBox.Text = calibratedCam4SetupPoint.X.ToString(CultureInfo.InvariantCulture);
-            mainWindow.Cam4YTextBox.Text = calibratedCam4SetupPoint.Y.ToString(CultureInfo.InvariantCulture);
-
-            configService.Write(SettingsType.Cam1X, calibratedCam1SetupPoint.X);
-            configService.Write(SettingsType.Cam1Y, calibratedCam1SetupPoint.Y);
-            configService.Write(SettingsType.Cam2X, calibratedCam2SetupPoint.X);
-            configService.Write(SettingsType.Cam2Y, calibratedCam2SetupPoint.Y);
-            configService.Write(SettingsType.Cam3X, calibratedCam3SetupPoint.X);
-            configService.Write(SettingsType.Cam3Y, calibratedCam3SetupPoint.Y);
-            configService.Write(SettingsType.Cam4X, calibratedCam4SetupPoint.X);
-            configService.Write(SettingsType.Cam4Y, calibratedCam4SetupPoint.Y);
-            configService.Write(SettingsType.ToCam1Distance, mainWindow.ToCam1Distance.Text);
-            configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
-            configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
-            configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
-        }
+        #region CamSetupCapturing
 
         public void StartCamSetupCapturing(string gridName)
         {
@@ -314,23 +333,7 @@ namespace OneHundredAndEighty_2._0
             ToggleCamSetupGridControls(gridName);
         }
 
-        public void StartFreeThrowsGame()
-        {
-            ToggleMainTabItems();
-            ToggleMainTabItemControls();
-            var player = new Player("Player", "One", 1);
-            // dbService.SaveNewPlayer(player);
-            var players = new List<Player> {player};
-
-            gameService.StartMatch(GameType.FreeThrows, players);
-        }
-
-        public void StopFreeThrowsGame()
-        {
-            ToggleMainTabItems();
-            ToggleMainTabItemControls();
-            gameService.StopMatch();
-        }
+        #endregion
 
         #region Toggles
 

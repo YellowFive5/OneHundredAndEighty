@@ -107,7 +107,7 @@ namespace OneHundredAndEighty_2._0
             }
         }
 
-        public void StartNewGame(Game game, List<Player> players)
+        public void SaveNewGame(Game game, List<Player> players)
         {
             var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartTimestamp},{Column.EndTimestamp},{Column.Type})" +
                                $" VALUES ('{game.StartTimeStamp}','','{(int) game.Type}')";

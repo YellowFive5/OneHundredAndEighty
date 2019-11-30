@@ -35,10 +35,7 @@ namespace OneHundredAndEighty_2._0.Recognition
                 return null;
             }
 
-            foreach (var ray in rays)
-            {
-                logger.Info($"Ray:'{ray}'");
-            }
+            rays.ForEach(r => logger.Info($"Ray:'{r}'"));
 
             var firstBestRay = rays.OrderByDescending(i => i.ContourArc).ElementAt(0);
             var secondBestRay = rays.OrderByDescending(i => i.ContourArc).ElementAt(1);
@@ -56,17 +53,17 @@ namespace OneHundredAndEighty_2._0.Recognition
                 return null;
             }
 
-            var anotherThrow = PrepareThrowData(poi);
+            var thrw = PrepareThrowData(poi);
 
             drawService.ProjectionDrawLine(firstBestRay.CamPoint, firstBestRay.RayPoint, new Bgr(Color.Aqua).MCvScalar, true);
             drawService.ProjectionDrawLine(secondBestRay.CamPoint, secondBestRay.RayPoint, new Bgr(Color.Aqua).MCvScalar, false);
             drawService.ProjectionDrawThrow(poi, false);
-            drawService.PrintThrow(anotherThrow);
+            drawService.PrintThrow(thrw);
 
 
-            logger.Info($"Throw:{anotherThrow}");
+            logger.Info($"Throw:{thrw}");
             logger.Debug($"Calculate throw end.");
-            return anotherThrow;
+            return thrw;
         }
 
         private DetectedThrow PrepareThrowData(PointF poi)
