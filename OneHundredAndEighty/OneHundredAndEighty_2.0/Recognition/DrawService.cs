@@ -116,7 +116,12 @@ namespace OneHundredAndEighty_2._0.Recognition
 
         public void PrintThrow(DetectedThrow thrw)
         {
-            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.PointsBox.Text = thrw.ToString()));
+            mainWindow.Dispatcher.Invoke(() =>
+                                         {
+                                             mainWindow.PointsBox.Text = thrw.ToString();
+                                             mainWindow.PointsHistoryBox.Text = $"{mainWindow.PointsHistoryBox.Text}\n{thrw}";
+                                             mainWindow.PointsHistoryBox.ScrollToEnd();
+                                         });
         }
 
         public void ProjectionDrawThrow(PointF poi, bool exclusiveDraw = true)
@@ -128,7 +133,7 @@ namespace OneHundredAndEighty_2._0.Recognition
 
             DrawCircle(DartboardProjectionWorkingFrame, poi, poiRadius, poiColor, poiThickness);
 
-            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame)));
+            mainWindow.Dispatcher.Invoke(() => { mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame); });
         }
 
         public void ProjectionDrawLine(PointF point1, PointF point2, MCvScalar color, bool clearBeforeDraw = true)
@@ -140,7 +145,7 @@ namespace OneHundredAndEighty_2._0.Recognition
 
             DrawLine(DartboardProjectionWorkingFrame, point1, point2, color, poiThickness);
 
-            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame)));
+            mainWindow.Dispatcher.Invoke(() => { mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame); });
         }
 
         public void ProjectionPrepare()
@@ -186,14 +191,22 @@ namespace OneHundredAndEighty_2._0.Recognition
 
             DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
 
-            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame)));
+            mainWindow.Dispatcher.Invoke(() => { mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame); });
         }
 
         public void ProjectionClear()
         {
             DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
-            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionFrameBackground)));
-            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.PointsBox.Text = string.Empty));
+            mainWindow.Dispatcher.Invoke(() =>
+                                         {
+                                             mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionFrameBackground);
+                                             mainWindow.PointsBox.Text = string.Empty;
+                                         });
+        }
+
+        public void PointsHistoryBoxClear()
+        {
+            mainWindow.Dispatcher.Invoke(() => { mainWindow.PointsHistoryBox.Text = string.Empty; });
         }
 
         public BitmapImage ToBitmap(Image<Bgr, byte> image)

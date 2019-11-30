@@ -44,9 +44,10 @@ namespace OneHundredAndEighty_2._0
             game = new Game(type);
             dbService.SaveNewGame(game, players);
             drawService.ProjectionClear();
+            drawService.PointsHistoryBoxClear();
 
             detectionService.RunDetection();
-            
+
             Task.Run(() =>
                      {
                          while (GameRun)
@@ -72,14 +73,14 @@ namespace OneHundredAndEighty_2._0
         private void SaveThrow(DetectedThrow thrw)
         {
             var dbThrow = new Throw(players.First(),
-                                     game,
-                                     thrw.Sector,
-                                     thrw.Type,
-                                     ThrowResultativity.Ordinary, // todo
-                                     1,
-                                     thrw.TotalPoints,
-                                     thrw.Poi,
-                                     drawService.projectionFrameSide);
+                                    game,
+                                    thrw.Sector,
+                                    thrw.Type,
+                                    ThrowResultativity.Ordinary, // todo
+                                    1,
+                                    thrw.TotalPoints,
+                                    thrw.Poi,
+                                    drawService.projectionFrameSide);
             dbService.SaveThrow(dbThrow);
         }
     }

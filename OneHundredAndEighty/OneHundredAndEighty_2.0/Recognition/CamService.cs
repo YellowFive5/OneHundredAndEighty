@@ -129,32 +129,44 @@ namespace OneHundredAndEighty_2._0.Recognition
             switch (parentGridName)
             {
                 case "Cam1Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam1TresholdSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam1RoiPosYSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam1RoiHeightSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam1SurfaceSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam1SurfaceCenterSlider.Value));
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     tresholdSlider = mainWindow.Cam1TresholdSlider.Value;
+                                                     roiPosYSlider = mainWindow.Cam1RoiPosYSlider.Value;
+                                                     roiHeightSlider = mainWindow.Cam1RoiHeightSlider.Value;
+                                                     surfaceSlider = mainWindow.Cam1SurfaceSlider.Value;
+                                                     surfaceCenterSlider = mainWindow.Cam1SurfaceCenterSlider.Value;
+                                                 });
                     break;
                 case "Cam2Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam2TresholdSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam2RoiPosYSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam2RoiHeightSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam2SurfaceSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam2SurfaceCenterSlider.Value));
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     tresholdSlider = mainWindow.Cam2TresholdSlider.Value;
+                                                     roiPosYSlider = mainWindow.Cam2RoiPosYSlider.Value;
+                                                     roiHeightSlider = mainWindow.Cam2RoiHeightSlider.Value;
+                                                     surfaceSlider = mainWindow.Cam2SurfaceSlider.Value;
+                                                     surfaceCenterSlider = mainWindow.Cam2SurfaceCenterSlider.Value;
+                                                 });
                     break;
                 case "Cam3Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam3TresholdSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam3RoiPosYSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam3RoiHeightSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam3SurfaceSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam3SurfaceCenterSlider.Value));
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     tresholdSlider = mainWindow.Cam3TresholdSlider.Value;
+                                                     roiPosYSlider = mainWindow.Cam3RoiPosYSlider.Value;
+                                                     roiHeightSlider = mainWindow.Cam3RoiHeightSlider.Value;
+                                                     surfaceSlider = mainWindow.Cam3SurfaceSlider.Value;
+                                                     surfaceCenterSlider = mainWindow.Cam3SurfaceCenterSlider.Value;
+                                                 });
                     break;
                 case "Cam4Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => tresholdSlider = mainWindow.Cam4TresholdSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiPosYSlider = mainWindow.Cam4RoiPosYSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => roiHeightSlider = mainWindow.Cam4RoiHeightSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceSlider = mainWindow.Cam4SurfaceSlider.Value));
-                    mainWindow.Dispatcher.Invoke(new Action(() => surfaceCenterSlider = mainWindow.Cam4SurfaceCenterSlider.Value));
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     tresholdSlider = mainWindow.Cam4TresholdSlider.Value;
+                                                     roiPosYSlider = mainWindow.Cam4RoiPosYSlider.Value;
+                                                     roiHeightSlider = mainWindow.Cam4RoiHeightSlider.Value;
+                                                     surfaceSlider = mainWindow.Cam4SurfaceSlider.Value;
+                                                     surfaceCenterSlider = mainWindow.Cam4SurfaceCenterSlider.Value;
+                                                 });
                     break;
             }
         }
@@ -238,26 +250,32 @@ namespace OneHundredAndEighty_2._0.Recognition
                     switch (mode)
                     {
                         case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBox.Source = LinedFrame?.Data != null
-                                                                                                               ? drawService.ToBitmap(LinedFrame)
-                                                                                                               : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiFrame)
-                                                                                                                  : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                  : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam1ImageBox.Source = LinedFrame?.Data != null
+                                                                                                  ? drawService.ToBitmap(LinedFrame)
+                                                                                                  : new BitmapImage();
+                                                             mainWindow.Cam1ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiFrame)
+                                                                                                     : new BitmapImage();
+                                                             mainWindow.Cam1ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                     : new BitmapImage();
+                                                         });
                             break;
                         case CamServiceWorkingMode.Work:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
-                                                                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                                                                             : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
-                                                                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                                                                : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                                         ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                                         : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam1ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
+                                                                                                                ? drawService.ToBitmap(LinedFrame)
+                                                                                                                : new BitmapImage();
+                                                             mainWindow.Cam1ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
+                                                                                                                   ? drawService.ToBitmap(RoiFrame)
+                                                                                                                   : new BitmapImage();
+                                                             mainWindow.Cam1ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
+                                                                                                                            ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                                            : new BitmapImage();
+                                                         });
                             break;
                     }
 
@@ -266,26 +284,32 @@ namespace OneHundredAndEighty_2._0.Recognition
                     switch (mode)
                     {
                         case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBox.Source = LinedFrame?.Data != null
-                                                                                                               ? drawService.ToBitmap(LinedFrame)
-                                                                                                               : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiFrame)
-                                                                                                                  : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                  : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam2ImageBox.Source = LinedFrame?.Data != null
+                                                                                                  ? drawService.ToBitmap(LinedFrame)
+                                                                                                  : new BitmapImage();
+                                                             mainWindow.Cam2ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiFrame)
+                                                                                                     : new BitmapImage();
+                                                             mainWindow.Cam2ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                     : new BitmapImage();
+                                                         });
                             break;
                         case CamServiceWorkingMode.Work:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
-                                                                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                                                                             : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
-                                                                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                                                                : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                                         ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                                         : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam2ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
+                                                                                                                ? drawService.ToBitmap(LinedFrame)
+                                                                                                                : new BitmapImage();
+                                                             mainWindow.Cam2ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
+                                                                                                                   ? drawService.ToBitmap(RoiFrame)
+                                                                                                                   : new BitmapImage();
+                                                             mainWindow.Cam2ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
+                                                                                                                            ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                                            : new BitmapImage();
+                                                         });
                             break;
                     }
 
@@ -294,26 +318,32 @@ namespace OneHundredAndEighty_2._0.Recognition
                     switch (mode)
                     {
                         case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBox.Source = LinedFrame?.Data != null
-                                                                                                               ? drawService.ToBitmap(LinedFrame)
-                                                                                                               : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiFrame)
-                                                                                                                  : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                  : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam3ImageBox.Source = LinedFrame?.Data != null
+                                                                                                  ? drawService.ToBitmap(LinedFrame)
+                                                                                                  : new BitmapImage();
+                                                             mainWindow.Cam3ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiFrame)
+                                                                                                     : new BitmapImage();
+                                                             mainWindow.Cam3ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                     : new BitmapImage();
+                                                         });
                             break;
                         case CamServiceWorkingMode.Work:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
-                                                                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                                                                             : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
-                                                                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                                                                : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                                         ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                                         : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam3ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
+                                                                                                                ? drawService.ToBitmap(LinedFrame)
+                                                                                                                : new BitmapImage();
+                                                             mainWindow.Cam3ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
+                                                                                                                   ? drawService.ToBitmap(RoiFrame)
+                                                                                                                   : new BitmapImage();
+                                                             mainWindow.Cam3ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
+                                                                                                                            ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                                            : new BitmapImage();
+                                                         });
                             break;
                     }
 
@@ -322,26 +352,32 @@ namespace OneHundredAndEighty_2._0.Recognition
                     switch (mode)
                     {
                         case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBox.Source = LinedFrame?.Data != null
-                                                                                                               ? drawService.ToBitmap(LinedFrame)
-                                                                                                               : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiFrame)
-                                                                                                                  : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                  ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                  : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam4ImageBox.Source = LinedFrame?.Data != null
+                                                                                                  ? drawService.ToBitmap(LinedFrame)
+                                                                                                  : new BitmapImage();
+                                                             mainWindow.Cam4ImageBoxRoi.Source = RoiFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiFrame)
+                                                                                                     : new BitmapImage();
+                                                             mainWindow.Cam4ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
+                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                     : new BitmapImage();
+                                                         });
                             break;
                         case CamServiceWorkingMode.Work:
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
-                                                                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                                                                             : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
-                                                                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                                                                : new BitmapImage()));
-                            mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
-                                                                                                                                         ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                                                         : new BitmapImage()));
+                            mainWindow.Dispatcher.Invoke(() =>
+                                                         {
+                                                             mainWindow.Cam4ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
+                                                                                                                ? drawService.ToBitmap(LinedFrame)
+                                                                                                                : new BitmapImage();
+                                                             mainWindow.Cam4ImageBoxRoiRecognitionTab.Source = RoiFrame?.Data != null
+                                                                                                                   ? drawService.ToBitmap(RoiFrame)
+                                                                                                                   : new BitmapImage();
+                                                             mainWindow.Cam4ImageBoxRoiLastThrowRecognitionTab.Source = RoiLastThrowFrame?.Data != null
+                                                                                                                            ? drawService.ToBitmap(RoiLastThrowFrame)
+                                                                                                                            : new BitmapImage();
+                                                         });
                             break;
                     }
 
@@ -439,39 +475,48 @@ namespace OneHundredAndEighty_2._0.Recognition
             switch (parentGridName)
             {
                 case "Cam1Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBox.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoiRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam1ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage()));
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     mainWindow.Cam1ImageBox.Source = new BitmapImage();
+                                                     mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam1ImageBoxRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam1ImageBoxRoiRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam1ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage();
+                                                 });
                     break;
                 case "Cam2Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBox.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoiRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam2ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage()));
-
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     mainWindow.Cam2ImageBox.Source = new BitmapImage();
+                                                     mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam2ImageBoxRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam2ImageBoxRoiRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam2ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage();
+                                                 });
                     break;
                 case "Cam3Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBox.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoiRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam3ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage()));
-
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     mainWindow.Cam3ImageBox.Source = new BitmapImage();
+                                                     mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam3ImageBoxRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam3ImageBoxRoiRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam3ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage();
+                                                 });
                     break;
                 case "Cam4Grid":
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBox.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoiRecognitionTab.Source = new BitmapImage()));
-                    mainWindow.Dispatcher.Invoke(new Action(() => mainWindow.Cam4ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage()));
-
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     mainWindow.Cam4ImageBox.Source = new BitmapImage();
+                                                     mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage();
+                                                     mainWindow.Cam4ImageBoxRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam4ImageBoxRoiRecognitionTab.Source = new BitmapImage();
+                                                     mainWindow.Cam4ImageBoxRoiLastThrowRecognitionTab.Source = new BitmapImage();
+                                                 });
                     break;
             }
         }

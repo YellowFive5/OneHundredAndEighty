@@ -68,7 +68,7 @@ namespace OneHundredAndEighty_2._0.Recognition
                     str = "0";
                     break;
                 default:
-                    str = $"{Multiplier} x {Sector} = {TotalPoints}";
+                    str = $"{Type} {Sector} = {TotalPoints}";
                     break;
             }
 
