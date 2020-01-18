@@ -14,7 +14,7 @@ using Point = System.Drawing.Point;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0.Recognition
+namespace OneHundredAndEightyCore.Recognition
 {
     public class DrawService
     {

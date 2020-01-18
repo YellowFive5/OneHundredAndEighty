@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NLog;
-using OneHundredAndEighty_2._0.Recognition;
+using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0
+namespace OneHundredAndEightyCore
 {
     public class GameService
     {

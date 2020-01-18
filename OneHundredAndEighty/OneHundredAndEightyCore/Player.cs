@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0
+namespace OneHundredAndEightyCore
 {
     public class Player
     {

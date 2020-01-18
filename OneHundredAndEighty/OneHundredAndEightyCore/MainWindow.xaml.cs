@@ -5,18 +5,19 @@ using System.Windows;
 using System.Windows.Controls;
 using Autofac;
 using NLog;
-using OneHundredAndEighty_2._0.Recognition;
+using NLog.Web;
+using OneHundredAndEightyCore.Recognition;
 using IContainer = Autofac.IContainer;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0
+namespace OneHundredAndEightyCore
 {
     public partial class MainWindow
     {
         private const double AppVersion = 2.0;
         private readonly MainWindowViewModel viewModel;
-        private readonly Logger logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         public static IContainer ServiceContainer { get; private set; }
 
         public MainWindow()

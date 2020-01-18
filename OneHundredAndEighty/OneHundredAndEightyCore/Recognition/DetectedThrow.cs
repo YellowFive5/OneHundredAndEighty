@@ -5,7 +5,7 @@ using System.Drawing;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0.Recognition
+namespace OneHundredAndEightyCore.Recognition
 {
     public class DetectedThrow
     {

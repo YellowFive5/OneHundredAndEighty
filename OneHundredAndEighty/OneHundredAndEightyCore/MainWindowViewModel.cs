@@ -10,11 +10,11 @@ using System.Windows;
 using System.Windows.Controls;
 using Autofac;
 using NLog;
-using OneHundredAndEighty_2._0.Recognition;
+using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0
+namespace OneHundredAndEightyCore
 {
     public class MainWindowViewModel
     {
@@ -84,7 +84,7 @@ namespace OneHundredAndEighty_2._0
             var dbVersion = configService.Read<double>(SettingsType.DBVersion);
             if (appVersion != dbVersion)
             {
-                var errorText = Properties.Resources.ResourceManager.GetString("VersionsMistmatchErrorText");
+                var errorText = Resources.ResourceManager.GetString("VersionsMistmatchErrorText");
                 MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
                 throw new Exception("DB version and App version is different");
             }

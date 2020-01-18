@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -13,7 +12,7 @@ using NLog;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0.Recognition
+namespace OneHundredAndEightyCore.Recognition
 {
     public enum CamServiceWorkingMode
     {

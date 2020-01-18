@@ -9,7 +9,7 @@ using NLog;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0.Recognition
+namespace OneHundredAndEightyCore.Recognition
 {
     public class DetectionService
     {

@@ -5,7 +5,7 @@ using System.Drawing;
 
 #endregion
 
-namespace OneHundredAndEighty_2._0
+namespace OneHundredAndEightyCore
 {
     public enum ThrowType
     {
