@@ -349,6 +349,15 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New player name and nickname must be filled in....
+        /// </summary>
+        public static string NewPlayerEmptyDataErrorText {
+            get {
+                return ResourceManager.GetString("NewPlayerEmptyDataErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gaussian smooth of ROI image. Default value is &apos;5&apos;.
         /// </summary>
         public static string SmoothGausHelperText {
@@ -396,9 +405,9 @@ namespace OneHundredAndEightyCore {
         /// <summary>
         ///   Looks up a localized string similar to DB version and App version is different.
         /// </summary>
-        public static string VersionsMistmatchErrorText {
+        public static string VersionsMismatchErrorText {
             get {
-                return ResourceManager.GetString("VersionsMistmatchErrorText", resourceCulture);
+                return ResourceManager.GetString("VersionsMismatchErrorText", resourceCulture);
             }
         }
         

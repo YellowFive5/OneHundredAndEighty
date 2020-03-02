@@ -117,5 +117,10 @@ namespace OneHundredAndEightyCore
         {
             viewModel.StopFreeThrowsGame();
         }
+
+        private void OnSaveNewPlayerButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.SaveNewPlayer();
+        }
     }
 }

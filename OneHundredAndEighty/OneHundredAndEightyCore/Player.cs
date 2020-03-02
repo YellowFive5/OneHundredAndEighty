@@ -1,7 +1,5 @@
 ﻿#region Usings
 
-using System;
-
 #endregion
 
 namespace OneHundredAndEightyCore
@@ -14,24 +12,19 @@ namespace OneHundredAndEightyCore
 
         public Player(string name, string nickName, int id = -1)
         {
-            if (string.IsNullOrWhiteSpace(name) ||
-                string.IsNullOrWhiteSpace(nickName) ||
-                string.IsNullOrEmpty(name) ||
-                string.IsNullOrEmpty(nickName))
-            {
-                //todo: message
-                throw new Exception("Name or NickName can't be empty, null or whitespace");
-            }
-
             Id = id;
             Name = name;
             NickName = nickName;
         }
 
-
         public void SetId(int id)
         {
             Id = id;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} - {NickName}";
         }
     }
 }

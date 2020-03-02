@@ -157,21 +157,28 @@
                         </TabItem>
                         <TabItem Name="NewPlayerTabItem"
                                  Header="New player">
+                            <Grid>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="28,25,0,0" VerticalAlignment="Top" Height="27" Width="66" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                <TextBox Name="NewPlayerNameTextBox" HorizontalAlignment="Left" Margin="102,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" VerticalContentAlignment="Center"/>
+                                <Label Content="Nickname" HorizontalAlignment="Left" Margin="28,57,0,0" VerticalAlignment="Top" Height="27" Width="66" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                <TextBox Name="NewPlayerNickNameTextBox" HorizontalAlignment="Left" Margin="102,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" VerticalContentAlignment="Center"/>
+                                <Button Content="Save" HorizontalAlignment="Left" Margin="227,24,0,0" VerticalAlignment="Top" Height="60" Width="60" Background="#FF72DC61" Click="OnSaveNewPlayerButtonClick"/>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </Grid>
             </TabItem>
             <TabItem Name="SetupTabItem"
                      Header="{x:Static resx:Resources.MainSettingsTabName}">
-            <Grid>
-                <TabControl Name="SetupTabControl"
+                <Grid>
+                    <TabControl Name="SetupTabControl"
                             Height="494"
                             Width="978"
                             SelectionChanged="OnTabSelectionChanged">
-                    <TabItem Name="GeneralSetupTabItem"
+                        <TabItem Name="GeneralSetupTabItem"
                              Header="{x:Static resx:Resources.GeneralSettingsTabName}">
-                        <Grid>
-                            <Button Name="CalibrateButton"
+                            <Grid>
+                                <Button Name="CalibrateButton"
                                     Content="Calibrate X/Y"
                                     HorizontalAlignment="Left"
                                     Margin="649,135,0,0"
@@ -179,7 +186,7 @@
                                     Width="88"
                                     Click="CalibrateCamsSetupPointButtonClick"
                                     ToolTip="Calibrate Cam X/Y setup point on projection.&#x0a;Distance from Cam to bull must be setup on MainWindow Setup tab " />
-                            <CheckBox x:Name="WithDetectionCheckBox"
+                                <CheckBox x:Name="WithDetectionCheckBox"
                                       Content="{x:Static resx:Resources.WithDetectionCheckBoxText}"
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
@@ -188,7 +195,7 @@
                                       ToolTip="Enables detection process"
                                       Width="121"
                                       Click="SetSettingDirty" />
-                            <CheckBox x:Name="Cam1CheckBox"
+                                <CheckBox x:Name="Cam1CheckBox"
                                       Content="{x:Static resx:Resources.Cam1EnabledCheckBoxText}"
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
@@ -196,7 +203,7 @@
                                       Margin="407,12,0,0"
                                       ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                       Click="SetSettingDirty" />
-                            <CheckBox x:Name="Cam2CheckBox"
+                                <CheckBox x:Name="Cam2CheckBox"
                                       Content="{x:Static resx:Resources.Cam2EnabledCheckBoxText}"
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
@@ -204,7 +211,7 @@
                                       Margin="407,44,0,0"
                                       ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                       Click="SetSettingDirty" />
-                            <CheckBox x:Name="Cam3CheckBox"
+                                <CheckBox x:Name="Cam3CheckBox"
                                       Content="{x:Static resx:Resources.Cam3EnabledCheckBoxText}"
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
@@ -213,7 +220,7 @@
                                       RenderTransformOrigin="0.527,0.533"
                                       ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                       Click="SetSettingDirty" />
-                            <CheckBox x:Name="Cam4CheckBox"
+                                <CheckBox x:Name="Cam4CheckBox"
                                       Content="{x:Static resx:Resources.Cam4EnabledCheckBoxText}"
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
@@ -221,12 +228,12 @@
                                       Margin="407,105,0,0"
                                       ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                       Click="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.CamFovLabelText}"
+                                <Label Content="{x:Static resx:Resources.CamFovLabelText}"
                                    Margin="84,16,743,427.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox Name="CamFovTextBox"
+                                <TextBox Name="CamFovTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,16,893,427.4"
@@ -234,12 +241,12 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.CamFovHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.CamResWLabelText}"
+                                <Label Content="{x:Static resx:Resources.CamResWLabelText}"
                                    Margin="84,50,743,393.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox Name="CamResolutionWidthTextBox"
+                                <TextBox Name="CamResolutionWidthTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,50,893,393.4"
@@ -247,12 +254,12 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.CamResWHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.CamResHLabelText}"
+                                <Label Content="{x:Static resx:Resources.CamResHLabelText}"
                                    Margin="84,82,743,361.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="CamResolutionHeightTextBox"
+                                <TextBox x:Name="CamResolutionHeightTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,82,893,361.4"
@@ -260,7 +267,7 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.CamResHHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <TextBox x:Name="MinContourArcTextBox"
+                                <TextBox x:Name="MinContourArcTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,307,893,136.4"
@@ -268,12 +275,12 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.MinContourArcHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.MinContourArcLabelText}"
+                                <Label Content="{x:Static resx:Resources.MinContourArcLabelText}"
                                    Margin="87,308,743,135.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="MovesExtractionTextBox"
+                                <TextBox x:Name="MovesExtractionTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,115,893,328.4"
@@ -281,12 +288,12 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.MovesExtractionHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.MovesExtractionLabelText}"
+                                <Label Content="{x:Static resx:Resources.MovesExtractionLabelText}"
                                    Margin="85,115,742,328.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="MovesDartTextBox"
+                                <TextBox x:Name="MovesDartTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,341,893,102.4"
@@ -294,12 +301,12 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.MovesDartHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.MovesDartLabelText}"
+                                <Label Content="{x:Static resx:Resources.MovesDartLabelText}"
                                    Margin="85,341,742,102.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="MovesNoiseTextBox"
+                                <TextBox x:Name="MovesNoiseTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,178,893,265.4"
@@ -307,24 +314,24 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.MovesNoiseHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.MovesNoiseLabelText}"
+                                <Label Content="{x:Static resx:Resources.MovesNoiseLabelText}"
                                    Margin="85,178,743,265.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="SmoothGaussTextBox"
+                                <TextBox x:Name="SmoothGaussTextBox"
                                      TextWrapping="Wrap"
                                      Margin="16,209,893,235.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.SmoothGausHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.SmoothGausLabelText}"
+                                <Label Content="{x:Static resx:Resources.SmoothGausLabelText}"
                                    Margin="85,209,743,235.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="MoveDetectedSleepTimeTextBox"
+                                <TextBox x:Name="MoveDetectedSleepTimeTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,146,893,297.4"
@@ -332,12 +339,12 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.MovesDetectedHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.MovesDetectedLabelText}"
+                                <Label Content="{x:Static resx:Resources.MovesDetectedLabelText}"
                                    Margin="85,146,743,297.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="ExtractionSleepTimeTimeTextBox"
+                                <TextBox x:Name="ExtractionSleepTimeTimeTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="16,275,893,168.4"
@@ -345,12 +352,12 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.ExtrectionSleepTimeHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.ExtractionSleepTimeLabelText}"
+                                <Label Content="{x:Static resx:Resources.ExtractionSleepTimeLabelText}"
                                    Margin="87,275,743,168.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="Cam1IdTextBox"
+                                <TextBox x:Name="Cam1IdTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="515,8,367,435.4"
@@ -358,35 +365,35 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.CamIdHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="Id" Margin="610,42,335,403.4"
+                                <Label Content="Id" Margin="610,42,335,403.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" RenderTransformOrigin="0.5,0.5" />
-                            <TextBox x:Name="Cam1XTextBox"
+                                <TextBox x:Name="Cam1XTextBox"
                                      TextWrapping="Wrap"
                                      Margin="765,8,145,435.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
-                            <Label Content="X"
+                                <Label Content="X"
                                    Margin="832,101,118,342.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" RenderTransformOrigin="0.5,0.5" />
-                            <TextBox x:Name="Cam1YTextBox"
+                                <TextBox x:Name="Cam1YTextBox"
                                      TextWrapping="Wrap"
                                      Margin="869,8,38,435.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
-                            <Label Content="Y"
+                                <Label Content="Y"
                                    Margin="939,101,10,342.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="Cam2IdTextBox"
+                                <TextBox x:Name="Cam2IdTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="515,40,367,403.4"
@@ -394,17 +401,17 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.CamIdHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="Id"
+                                <Label Content="Id"
                                    Margin="610,101,335,342.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <Label Content="X"
+                                <Label Content="X"
                                    Margin="832,8,118,435.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" RenderTransformOrigin="0.5,0.5" />
-                            <TextBox x:Name="Cam2XTextBox"
+                                <TextBox x:Name="Cam2XTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="765,40,145,403.4"
@@ -412,67 +419,67 @@
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
-                            <TextBox x:Name="Cam2YTextBox"
+                                <TextBox x:Name="Cam2YTextBox"
                                      TextWrapping="Wrap"
                                      Margin="869,40,38,403.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
-                            <Label Content="Y"
+                                <Label Content="Y"
                                    Margin="939,42,10,403.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="Cam3IdTextBox"
+                                <TextBox x:Name="Cam3IdTextBox"
                                      TextWrapping="Wrap"
                                      Margin="515,71,367,374.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.CamIdHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="Id"
+                                <Label Content="Id"
                                    Margin="610,72,335,374.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="Cam3XTextBox"
+                                <TextBox x:Name="Cam3XTextBox"
                                      TextWrapping="Wrap"
                                      Margin="765,71,145,372.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
-                            <Label Content="X"
+                                <Label Content="X"
                                    Margin="832,40,118,403.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" RenderTransformOrigin="0.5,0.5" />
-                            <TextBox x:Name="Cam3YTextBox"
+                                <TextBox x:Name="Cam3YTextBox"
                                      TextWrapping="Wrap"
                                      Margin="869,71,38,372.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
-                            <Label Content="Y"
+                                <Label Content="Y"
                                    Margin="939,9,10,435.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="Cam4IdTextBox"
+                                <TextBox x:Name="Cam4IdTextBox"
                                      TextWrapping="Wrap"
                                      Margin="515,100,367,342.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.CamIdHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="Id"
+                                <Label Content="Id"
                                    Margin="610,8,335,435.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="Cam4XTextBox"
+                                <TextBox x:Name="Cam4XTextBox"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="765,101,145,342.4"
@@ -480,36 +487,36 @@
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
-                            <Label Content="X"
+                                <Label Content="X"
                                    Margin="832,72,118,373.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" RenderTransformOrigin="0.5,0.5" />
-                            <TextBox x:Name="Cam4YTextBox"
+                                <TextBox x:Name="Cam4YTextBox"
                                      TextWrapping="Wrap"
                                      Margin="869,101,38,342.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      IsReadOnly="True"
                                      ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
-                            <Label Content="Y"
+                                <Label Content="Y"
                                    Margin="939,71,10,372.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="ThresholdSleepTimeTimeTextBox"
+                                <TextBox x:Name="ThresholdSleepTimeTimeTextBox"
                                      TextWrapping="Wrap"
                                      Margin="16,241,893,202.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.ThresholdSleepTimeHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="{x:Static resx:Resources.ThresholdSleepTimeLabelText}"
+                                <Label Content="{x:Static resx:Resources.ThresholdSleepTimeLabelText}"
                                    Margin="85,242,743,201.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <TextBox x:Name="ToCam4Distance"
+                                <TextBox x:Name="ToCam4Distance"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="649,101,257,342.4"
@@ -517,14 +524,14 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.ToCamHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <TextBox x:Name="ToCam3Distance"
+                                <TextBox x:Name="ToCam3Distance"
                                      TextWrapping="Wrap"
                                      Margin="649,71,257,372.4"
                                      HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.ToCamHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <TextBox x:Name="ToCam2Distance"
+                                <TextBox x:Name="ToCam2Distance"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="649,40,257,403.4"
@@ -532,7 +539,7 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.ToCamHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <TextBox x:Name="ToCam1Distance"
+                                <TextBox x:Name="ToCam1Distance"
                                      Height="23"
                                      TextWrapping="Wrap"
                                      Margin="649,8,257,435.4"
@@ -540,33 +547,33 @@
                                      VerticalContentAlignment="Center"
                                      ToolTip="{x:Static resx:Resources.ToCamHelperText}"
                                      TextChanged="SetSettingDirty" />
-                            <Label Content="cm"
+                                <Label Content="cm"
                                    Margin="720,8,226,435.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <Label Content="cm"
+                                <Label Content="cm"
                                    Margin="720,72,226,373.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0"
                                    RenderTransformOrigin="0.59,0.577" />
-                            <Label Content="cm"
+                                <Label Content="cm"
                                    Margin="720,101,226,342.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                            <Label Content="cm"
+                                <Label Content="cm"
                                    Margin="720,40,226,403.4"
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Center"
                                    Padding="0" />
-                        </Grid>
-                    </TabItem>
-                    <TabItem Name="Cam1SetupTabItem"
+                            </Grid>
+                        </TabItem>
+                        <TabItem Name="Cam1SetupTabItem"
                              Header="{x:Static resx:Resources.Cam1SettingsTabName}">
-                        <Grid Name="Cam1Grid">
-                            <Slider x:Name="Cam1TresholdSlider"
+                            <Grid Name="Cam1Grid">
+                                <Slider x:Name="Cam1TresholdSlider"
                                     HorizontalAlignment="Left"
                                     Margin="524,196,0,0"
                                     VerticalAlignment="Top"
@@ -576,16 +583,16 @@
                                     RenderTransformOrigin="0.5,0.5"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam1RoiPosYSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam1RoiPosYSlider"
                                     HorizontalAlignment="Left"
                                     Margin="581,132,-1,0"
                                     VerticalAlignment="Top"
@@ -595,16 +602,16 @@
                                     Value="357"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam1RoiHeightSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam1RoiHeightSlider"
                                     HorizontalAlignment="Left"
                                     Margin="623,132,-41,0"
                                     VerticalAlignment="Top"
@@ -614,16 +621,16 @@
                                     Value="133"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam1SurfaceSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam1SurfaceSlider"
                                     HorizontalAlignment="Left"
                                     Margin="499,131,0,0"
                                     VerticalAlignment="Top"
@@ -633,16 +640,16 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam1SurfaceCenterSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam1SurfaceCenterSlider"
                                     HorizontalAlignment="Left"
                                     Margin="539,132,0,0"
                                     VerticalAlignment="Top"
@@ -652,33 +659,33 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Image x:Name="Cam1ImageBox"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Image x:Name="Cam1ImageBox"
                                    HorizontalAlignment="Left"
                                    Height="342" Margin="8,6,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam1ImageBoxRoi"
+                                <Image x:Name="Cam1ImageBoxRoi"
                                    HorizontalAlignment="Left"
                                    Height="52"
                                    Margin="8,353,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam1ImageBoxRoiLastThrow"
+                                <Image x:Name="Cam1ImageBoxRoiLastThrow"
                                    HorizontalAlignment="Left"
                                    Height="51"
                                    Margin="8,407,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Label Content="Treshold"
+                                <Label Content="Treshold"
                                    HorizontalAlignment="Left"
                                    Margin="690,406,0,0"
                                    VerticalAlignment="Top"
@@ -688,16 +695,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI Y"
                                    HorizontalAlignment="Left"
                                    Margin="817,417,0,0"
                                    VerticalAlignment="Top"
@@ -707,16 +714,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI Y position">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI height"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI height"
                                    HorizontalAlignment="Left"
                                    Margin="849,410,0,0"
                                    VerticalAlignment="Top"
@@ -726,16 +733,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI height">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface Y"
                                    HorizontalAlignment="Left"
                                    Margin="728,405,0,0"
                                    VerticalAlignment="Top"
@@ -745,16 +752,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface line of dartboard surface">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface center"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface center"
                                    HorizontalAlignment="Left"
                                    Margin="754,413,0,0"
                                    VerticalAlignment="Top"
@@ -764,16 +771,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface center point. Stick dart into bull and set">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Button Name="Cam1StartButton"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Button Name="Cam1StartButton"
                                     Content="Start"
                                     HorizontalAlignment="Left"
                                     Margin="628,6,0,0"
@@ -781,7 +788,7 @@
                                     Width="54"
                                     Height="25"
                                     Click="CamSetupStartButtonClick" />
-                            <Button Name="Cam1StopButton"
+                                <Button Name="Cam1StopButton"
                                     Content="Stop"
                                     HorizontalAlignment="Left"
                                     Margin="628,40,0,0"
@@ -790,12 +797,12 @@
                                     Height="25"
                                     IsEnabled="False"
                                     Click="CamSetupStopButtonClick" />
-                        </Grid>
-                    </TabItem>
-                    <TabItem Name="Cam2SetupTabItem"
+                            </Grid>
+                        </TabItem>
+                        <TabItem Name="Cam2SetupTabItem"
                              Header="{x:Static resx:Resources.Cam2SettingsTabName}">
-                        <Grid Name="Cam2Grid">
-                            <Slider x:Name="Cam2TresholdSlider"
+                            <Grid Name="Cam2Grid">
+                                <Slider x:Name="Cam2TresholdSlider"
                                     HorizontalAlignment="Left"
                                     Margin="524,196,0,0"
                                     VerticalAlignment="Top"
@@ -805,16 +812,16 @@
                                     RenderTransformOrigin="0.5,0.5"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam2RoiPosYSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam2RoiPosYSlider"
                                     HorizontalAlignment="Left"
                                     Margin="581,132,-1,0"
                                     VerticalAlignment="Top"
@@ -824,16 +831,16 @@
                                     Value="357"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam2RoiHeightSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam2RoiHeightSlider"
                                     HorizontalAlignment="Left"
                                     Margin="623,132,-41,0"
                                     VerticalAlignment="Top"
@@ -843,16 +850,16 @@
                                     Value="133"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam2SurfaceSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam2SurfaceSlider"
                                     HorizontalAlignment="Left"
                                     Margin="499,131,0,0"
                                     VerticalAlignment="Top"
@@ -862,16 +869,16 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam2SurfaceCenterSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam2SurfaceCenterSlider"
                                     HorizontalAlignment="Left"
                                     Margin="539,132,0,0"
                                     VerticalAlignment="Top"
@@ -881,33 +888,33 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Image x:Name="Cam2ImageBox"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Image x:Name="Cam2ImageBox"
                                    HorizontalAlignment="Left"
                                    Height="342" Margin="8,6,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam2ImageBoxRoi"
+                                <Image x:Name="Cam2ImageBoxRoi"
                                    HorizontalAlignment="Left"
                                    Height="52"
                                    Margin="8,353,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam2ImageBoxRoiLastThrow"
+                                <Image x:Name="Cam2ImageBoxRoiLastThrow"
                                    HorizontalAlignment="Left"
                                    Height="51"
                                    Margin="8,407,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Label Content="Treshold"
+                                <Label Content="Treshold"
                                    HorizontalAlignment="Left"
                                    Margin="690,406,0,0"
                                    VerticalAlignment="Top"
@@ -917,16 +924,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI Y"
                                    HorizontalAlignment="Left"
                                    Margin="817,417,0,0"
                                    VerticalAlignment="Top"
@@ -936,16 +943,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI Y position">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI height"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI height"
                                    HorizontalAlignment="Left"
                                    Margin="849,410,0,0"
                                    VerticalAlignment="Top"
@@ -955,16 +962,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI height">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface Y"
                                    HorizontalAlignment="Left"
                                    Margin="728,405,0,0"
                                    VerticalAlignment="Top"
@@ -974,16 +981,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface line of dartboard surface">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface center"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface center"
                                    HorizontalAlignment="Left"
                                    Margin="754,413,0,0"
                                    VerticalAlignment="Top"
@@ -993,16 +1000,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface center point. Stick dart into bull and set">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Button Name="Cam2StartButton"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Button Name="Cam2StartButton"
                                     Content="Start"
                                     HorizontalAlignment="Left"
                                     Margin="628,6,0,0"
@@ -1010,7 +1017,7 @@
                                     Width="54"
                                     Height="25"
                                     Click="CamSetupStartButtonClick" />
-                            <Button Name="Cam2StopButton"
+                                <Button Name="Cam2StopButton"
                                     Content="Stop"
                                     HorizontalAlignment="Left"
                                     Margin="628,40,0,0"
@@ -1019,12 +1026,12 @@
                                     Height="25"
                                     IsEnabled="False"
                                     Click="CamSetupStopButtonClick" />
-                        </Grid>
-                    </TabItem>
-                    <TabItem Name="Cam3SetupTabItem"
+                            </Grid>
+                        </TabItem>
+                        <TabItem Name="Cam3SetupTabItem"
                              Header="{x:Static resx:Resources.Cam3SettingsTabName}">
-                        <Grid Name="Cam3Grid">
-                            <Slider x:Name="Cam3TresholdSlider"
+                            <Grid Name="Cam3Grid">
+                                <Slider x:Name="Cam3TresholdSlider"
                                     HorizontalAlignment="Left"
                                     Margin="524,196,0,0"
                                     VerticalAlignment="Top"
@@ -1034,16 +1041,16 @@
                                     RenderTransformOrigin="0.5,0.5"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam3RoiPosYSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam3RoiPosYSlider"
                                     HorizontalAlignment="Left"
                                     Margin="581,132,-1,0"
                                     VerticalAlignment="Top"
@@ -1053,16 +1060,16 @@
                                     Value="357"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam3RoiHeightSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam3RoiHeightSlider"
                                     HorizontalAlignment="Left"
                                     Margin="623,132,-41,0"
                                     VerticalAlignment="Top"
@@ -1072,16 +1079,16 @@
                                     Value="133"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam3SurfaceSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam3SurfaceSlider"
                                     HorizontalAlignment="Left"
                                     Margin="499,131,0,0"
                                     VerticalAlignment="Top"
@@ -1091,16 +1098,16 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam3SurfaceCenterSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam3SurfaceCenterSlider"
                                     HorizontalAlignment="Left"
                                     Margin="539,132,0,0"
                                     VerticalAlignment="Top"
@@ -1110,33 +1117,33 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Image x:Name="Cam3ImageBox"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Image x:Name="Cam3ImageBox"
                                    HorizontalAlignment="Left"
                                    Height="342" Margin="8,6,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam3ImageBoxRoi"
+                                <Image x:Name="Cam3ImageBoxRoi"
                                    HorizontalAlignment="Left"
                                    Height="52"
                                    Margin="8,353,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam3ImageBoxRoiLastThrow"
+                                <Image x:Name="Cam3ImageBoxRoiLastThrow"
                                    HorizontalAlignment="Left"
                                    Height="51"
                                    Margin="8,407,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Label Content="Treshold"
+                                <Label Content="Treshold"
                                    HorizontalAlignment="Left"
                                    Margin="690,406,0,0"
                                    VerticalAlignment="Top"
@@ -1146,16 +1153,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI Y"
                                    HorizontalAlignment="Left"
                                    Margin="817,417,0,0"
                                    VerticalAlignment="Top"
@@ -1165,16 +1172,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI Y position">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI height"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI height"
                                    HorizontalAlignment="Left"
                                    Margin="849,410,0,0"
                                    VerticalAlignment="Top"
@@ -1184,16 +1191,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI height">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface Y"
                                    HorizontalAlignment="Left"
                                    Margin="728,405,0,0"
                                    VerticalAlignment="Top"
@@ -1203,16 +1210,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface line of dartboard surface">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface center"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface center"
                                    HorizontalAlignment="Left"
                                    Margin="754,413,0,0"
                                    VerticalAlignment="Top"
@@ -1222,16 +1229,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface center point. Stick dart into bull and set">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Button Name="Cam3StartButton"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Button Name="Cam3StartButton"
                                     Content="Start"
                                     HorizontalAlignment="Left"
                                     Margin="628,6,0,0"
@@ -1239,7 +1246,7 @@
                                     Width="54"
                                     Height="25"
                                     Click="CamSetupStartButtonClick" />
-                            <Button Name="Cam3StopButton"
+                                <Button Name="Cam3StopButton"
                                     Content="Stop"
                                     HorizontalAlignment="Left"
                                     Margin="628,40,0,0"
@@ -1248,12 +1255,12 @@
                                     Height="25"
                                     IsEnabled="False"
                                     Click="CamSetupStopButtonClick" />
-                        </Grid>
-                    </TabItem>
-                    <TabItem Name="Cam4SetupTabItem"
+                            </Grid>
+                        </TabItem>
+                        <TabItem Name="Cam4SetupTabItem"
                              Header="{x:Static resx:Resources.Cam4SettingsTabName}">
-                        <Grid Name="Cam4Grid">
-                            <Slider x:Name="Cam4TresholdSlider"
+                            <Grid Name="Cam4Grid">
+                                <Slider x:Name="Cam4TresholdSlider"
                                     HorizontalAlignment="Left"
                                     Margin="524,196,0,0"
                                     VerticalAlignment="Top"
@@ -1263,16 +1270,16 @@
                                     RenderTransformOrigin="0.5,0.5"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam4RoiPosYSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam4RoiPosYSlider"
                                     HorizontalAlignment="Left"
                                     Margin="581,132,-1,0"
                                     VerticalAlignment="Top"
@@ -1282,16 +1289,16 @@
                                     Value="357"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam4RoiHeightSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam4RoiHeightSlider"
                                     HorizontalAlignment="Left"
                                     Margin="623,132,-41,0"
                                     VerticalAlignment="Top"
@@ -1301,16 +1308,16 @@
                                     Value="133"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam4SurfaceSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam4SurfaceSlider"
                                     HorizontalAlignment="Left"
                                     Margin="499,131,0,0"
                                     VerticalAlignment="Top"
@@ -1320,16 +1327,16 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Slider x:Name="Cam4SurfaceCenterSlider"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Slider x:Name="Cam4SurfaceCenterSlider"
                                     HorizontalAlignment="Left"
                                     Margin="539,132,0,0"
                                     VerticalAlignment="Top"
@@ -1339,33 +1346,33 @@
                                     Value="536"
                                     IsEnabled="False"
                                     ValueChanged="SetSettingDirty">
-                                <Slider.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Slider.RenderTransform>
-                            </Slider>
-                            <Image x:Name="Cam4ImageBox"
+                                    <Slider.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-90" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Slider.RenderTransform>
+                                </Slider>
+                                <Image x:Name="Cam4ImageBox"
                                    HorizontalAlignment="Left"
                                    Height="342" Margin="8,6,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam4ImageBoxRoi"
+                                <Image x:Name="Cam4ImageBoxRoi"
                                    HorizontalAlignment="Left"
                                    Height="52"
                                    Margin="8,353,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Image x:Name="Cam4ImageBoxRoiLastThrow"
+                                <Image x:Name="Cam4ImageBoxRoiLastThrow"
                                    HorizontalAlignment="Left"
                                    Height="51"
                                    Margin="8,407,0,0"
                                    VerticalAlignment="Top"
                                    Width="609" />
-                            <Label Content="Treshold"
+                                <Label Content="Treshold"
                                    HorizontalAlignment="Left"
                                    Margin="690,406,0,0"
                                    VerticalAlignment="Top"
@@ -1375,16 +1382,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI Y"
                                    HorizontalAlignment="Left"
                                    Margin="817,417,0,0"
                                    VerticalAlignment="Top"
@@ -1394,16 +1401,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI Y position">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="ROI height"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="ROI height"
                                    HorizontalAlignment="Left"
                                    Margin="849,410,0,0"
                                    VerticalAlignment="Top"
@@ -1413,16 +1420,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="ROI height">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface Y"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface Y"
                                    HorizontalAlignment="Left"
                                    Margin="728,405,0,0"
                                    VerticalAlignment="Top"
@@ -1432,16 +1439,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface line of dartboard surface">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="Surface center"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Label Content="Surface center"
                                    HorizontalAlignment="Left"
                                    Margin="754,413,0,0"
                                    VerticalAlignment="Top"
@@ -1451,16 +1458,16 @@
                                    FontWeight="Bold"
                                    RenderTransformOrigin="0.594,0.181"
                                    ToolTip="Surface center point. Stick dart into bull and set">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-45" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Button Name="Cam4StartButton"
+                                    <Label.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="-45" />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Label.RenderTransform>
+                                </Label>
+                                <Button Name="Cam4StartButton"
                                     Content="Start"
                                     HorizontalAlignment="Left"
                                     Margin="628,6,0,0"
@@ -1468,7 +1475,7 @@
                                     Width="54"
                                     Height="25"
                                     Click="CamSetupStartButtonClick" />
-                            <Button Name="Cam4StopButton"
+                                <Button Name="Cam4StopButton"
                                     Content="Stop"
                                     HorizontalAlignment="Left"
                                     Margin="628,40,0,0"
@@ -1477,11 +1484,11 @@
                                     Height="25"
                                     IsEnabled="False"
                                     Click="CamSetupStopButtonClick" />
-                        </Grid>
-                    </TabItem>
-                </TabControl>
-            </Grid>
-        </TabItem>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

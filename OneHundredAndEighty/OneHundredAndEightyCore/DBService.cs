@@ -81,6 +81,12 @@ namespace OneHundredAndEightyCore
 
         public void SaveNewPlayer(Player player)
         {
+            var playerWithNickNameId = ExecuteScalarInternal($"SELECT {Column.Id} FROM [{Table.Players}] WHERE {Column.NickName} = '{player.NickName}'");
+            if (playerWithNickNameId != null)
+            {
+                throw new Exception($"Player with nickname: '{player.NickName}' is already exists in DB");
+            }
+
             var newPlayerStatisticsQuery = $"INSERT INTO [{Table.PlayerStatistics}] DEFAULT VALUES";
             ExecuteNonQueryInternal(newPlayerStatisticsQuery);
             var newPlayerStatisticsId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerStatistics}]");
@@ -88,7 +94,6 @@ namespace OneHundredAndEightyCore
             var newPlayerAchievesQuery = $"INSERT INTO [{Table.PlayerAchieves}] DEFAULT VALUES";
             ExecuteNonQueryInternal(newPlayerAchievesQuery);
             var newPlayerAchievesId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerAchieves}]");
-
 
             var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Statistics}, {Column.Achieves})" +
                                  $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{newPlayerStatisticsId}', '{newPlayerAchievesId}')";

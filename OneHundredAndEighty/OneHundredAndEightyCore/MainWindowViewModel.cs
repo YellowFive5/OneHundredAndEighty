@@ -84,7 +84,7 @@ namespace OneHundredAndEightyCore
             var dbVersion = configService.Read<double>(SettingsType.DBVersion);
             if (appVersion != dbVersion)
             {
-                var errorText = Resources.ResourceManager.GetString("VersionsMistmatchErrorText");
+                var errorText = Resources.ResourceManager.GetString("VersionsMismatchErrorText");
                 MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
                 throw new Exception("DB version and App version is different");
             }
@@ -155,7 +155,7 @@ namespace OneHundredAndEightyCore
         {
             ToggleMainTabItems();
             ToggleMainTabItemControls();
-            var player = new Player("Player", "One", 1);
+            var player = new Player("Player", "One", 1); // todo dummy-delete
             // dbService.SaveNewPlayer(player);
             var players = new List<Player> {player};
 
@@ -406,5 +406,33 @@ namespace OneHundredAndEightyCore
         }
 
         #endregion
+
+        public void SaveNewPlayer()
+        {
+            var newPlayerName = mainWindow.NewPlayerNameTextBox.Text;
+            var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(newPlayerName) || string.IsNullOrWhiteSpace(newPlayerNickName))
+            {
+                var errorText = Resources.ResourceManager.GetString("NewPlayerEmptyDataErrorText");
+                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
+                return;
+            }
+
+            var newPlayer = new Player(newPlayerName, newPlayerNickName);
+
+            try
+            {
+                dbService.SaveNewPlayer(newPlayer);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK); // todo need to explain error
+                return;
+            }
+
+            MessageBox.Show($"{newPlayer}", "New player saved", MessageBoxButton.OK);
+            mainWindow.NewPlayerNameTextBox.Text = string.Empty;
+            mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
+        }
     }
 }
