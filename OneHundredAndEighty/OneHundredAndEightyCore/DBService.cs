@@ -70,7 +70,7 @@ namespace OneHundredAndEightyCore
         public string GetSettingsValue(SettingsType name)
         {
             var query = $"SELECT [{Column.Value}] FROM [{Table.Settings}] WHERE [{Column.Name}] = '{name}'";
-            return (string)ExecuteScalarInternal(query);
+            return (string) ExecuteScalarInternal(query);
         }
 
         public void SaveSettingsValue(SettingsType name, string value)
@@ -87,13 +87,8 @@ namespace OneHundredAndEightyCore
                 throw new Exception($"Player with nickname: '{player.NickName}' is already exists in DB");
             }
 
-            var newPlayerStatisticsQuery = $"INSERT INTO [{Table.PlayerStatistics}] DEFAULT VALUES";
-            ExecuteNonQueryInternal(newPlayerStatisticsQuery);
-            var newPlayerStatisticsId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerStatistics}]");
-
-            var newPlayerAchievesQuery = $"INSERT INTO [{Table.PlayerAchieves}] DEFAULT VALUES";
-            ExecuteNonQueryInternal(newPlayerAchievesQuery);
-            var newPlayerAchievesId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerAchieves}]");
+            var newPlayerStatisticsId = CreateNewPlayerStatistics();
+            var newPlayerAchievesId = CreateNewPlayerAchieves();
 
             var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Statistics}, {Column.Achieves})" +
                                  $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{newPlayerStatisticsId}', '{newPlayerAchievesId}')";
@@ -255,6 +250,22 @@ namespace OneHundredAndEightyCore
             ExecuteNonQueryInternal(incrementThrowTypePlayerStatisticsQuery);
         }
 
+        private object CreateNewPlayerStatistics()
+        {
+            var newPlayerStatisticsQuery = $"INSERT INTO [{Table.PlayerStatistics}] DEFAULT VALUES";
+            ExecuteNonQueryInternal(newPlayerStatisticsQuery);
+            return ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerStatistics}]");
+        }
+
+        private object CreateNewPlayerAchieves()
+        {
+            var newPlayerAchievesQuery = $"INSERT INTO [{Table.PlayerAchieves}] DEFAULT VALUES";
+            ExecuteNonQueryInternal(newPlayerAchievesQuery);
+            return ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerAchieves}]");
+        }
+
+        #region Low level internals
+
         private object ExecuteScalarInternal(string query)
         {
             var cmd = new SQLiteCommand(query) {Connection = connection};
@@ -320,6 +331,8 @@ namespace OneHundredAndEightyCore
                 connection.Close();
             }
         }
+
+        #endregion
 
         public void Dispose()
         {
