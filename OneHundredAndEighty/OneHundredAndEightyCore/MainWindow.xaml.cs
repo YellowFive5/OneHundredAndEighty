@@ -17,7 +17,6 @@ namespace OneHundredAndEightyCore
 {
     public partial class MainWindow
     {
-        private const double AppVersion = 2.0;
         private readonly MainWindowViewModel viewModel;
         private readonly Logger logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         public static IContainer ServiceContainer { get; private set; }
@@ -31,8 +30,6 @@ namespace OneHundredAndEightyCore
             RegisterContainer();
             viewModel = new MainWindowViewModel(this);
             DataContext = viewModel;
-            viewModel.CheckVersion(AppVersion);
-            viewModel.LoadSettings();
         }
 
         private void RegisterContainer()
@@ -75,7 +72,7 @@ namespace OneHundredAndEightyCore
 
         private void OnTabSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            viewModel.SaveSettingsIfDirty();
+            viewModel?.SaveSettingsIfDirty();
         }
 
         private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)

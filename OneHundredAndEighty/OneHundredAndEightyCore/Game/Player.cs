@@ -24,7 +24,7 @@ namespace OneHundredAndEightyCore.Game
 
         public override string ToString()
         {
-            return $"{Name} - {NickName}";
+            return $"{Name} '{NickName}'";
         }
     }
 }

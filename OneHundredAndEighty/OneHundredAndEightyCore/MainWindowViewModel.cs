@@ -30,7 +30,9 @@ namespace OneHundredAndEightyCore
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
 
+        private const double AppVersion = 2.0;
         public bool IsSettingsDirty { get; set; }
+        public List<Player> Players { get; private set; }
 
         public MainWindowViewModel()
         {
@@ -45,43 +47,14 @@ namespace OneHundredAndEightyCore
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
             throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
             gameService = MainWindow.ServiceContainer.Resolve<GameService>();
-            drawService.ProjectionPrepare();
 
-            // var _int = configService.Read<int>(SettingsType.DBVersion);
-            // configService.Write(SettingsType.DBVersion, _int + 1);
-            // var _int2 = configService.Read<int>(SettingsType.DBVersion);
-            // var _bool = configService.Read<bool>(SettingsType.RuntimeCapturingCheckBox);
-            // configService.Write(SettingsType.RuntimeCapturingCheckBox, false);
-            // var _bool2 = configService.Read<bool>(SettingsType.RuntimeCapturingCheckBox);
-            // var _double = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
-            // configService.Write(SettingsType.MoveDetectedSleepTime,1.99);
-            // var _double2 = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
-            // var _string = configService.Read<string>(SettingsType.Cam1Id);
-            // configService.Write(SettingsType.Cam1Id, "1aaa1");
-            // var _string2 = configService.Read<string>(SettingsType.Cam1Id);
-            //
-            // var p1 = new Player("Player1", "p1");
-            // var p2 = new Player("Player2", "p2");
-            // dbService.SaveNewPlayer(p1);
-            // dbService.SaveNewPlayer(p2);
-            //
-            // var game = new Game(GameType.FreeThrows);
-            // dbService.StartNewGame(game,
-            //                        new List<Player>
-            //                        {
-            //                            p1,
-            //                            p2
-            //                        });
-            //
-            // var thr1 = new Throw(p1, game, 20, ThrowType.Double, ThrowResultativity.Ordinary, 2, 10, new PointF(1233.55f, 4442.66f), 1300);
-            // dbService.SaveThrow(thr1);
-            // var thr2 = new Throw(p2, game, 1, ThrowType.Tremble, ThrowResultativity.Fault, 1, 15, new PointF(1311.55f, 4123.66f), 1300);
-            // dbService.SaveThrow(thr2);
-            //
-            // dbService.EndGame(game);
+            CheckVersion(AppVersion);
+            LoadSettings();
+            drawService.ProjectionPrepare();
+            LoadPlayers();
         }
 
-        public void CheckVersion(double appVersion)
+        private void CheckVersion(double appVersion)
         {
             var dbVersion = configService.Read<double>(SettingsType.DBVersion);
             if (appVersion != dbVersion)
@@ -90,6 +63,15 @@ namespace OneHundredAndEightyCore
                 MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
                 throw new Exception("DB version and App version is different");
             }
+        }
+
+        private void LoadPlayers()
+        {
+            Players = new List<Player>()
+                      {
+                          new Player("Ben", "Pen"), // todo temp dummy
+                          new Player("Jebedah", "Muffin")
+                      };
         }
 
         public void CalibrateCamsSetupPoint()
@@ -173,7 +155,7 @@ namespace OneHundredAndEightyCore
 
         #region Settings
 
-        public void LoadSettings()
+        private void LoadSettings()
         {
             logger.Debug("Load settings start");
 

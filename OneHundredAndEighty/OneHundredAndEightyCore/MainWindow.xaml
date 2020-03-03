@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:resx="clr-namespace:OneHundredAndEightyCore"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:OneHundredAndEightyCore"
         Height="562"
         Width="1000"
         Title="OneHundredAndEighty"
         ResizeMode="NoResize"
         Closing="OnClosing">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <TabControl Name="MainTabControl"
                     Height="522"
@@ -21,6 +24,35 @@
                     <TabControl Name="GameTabControl">
                         <TabItem Name="MatchTabItem"
                                  Header="Match">
+                            <Grid>
+                                <Label Content="Game type"
+                                       HorizontalAlignment="Left"
+                                       Margin="27,29,0,0" 
+                                       VerticalAlignment="Top" 
+                                       Width="92" 
+                                       HorizontalContentAlignment="Right"/>
+                                <ComboBox Name="NewMatchTypeComboBox"
+                                          HorizontalAlignment="Left" 
+                                          Margin="124,31,0,0" 
+                                          VerticalAlignment="Top" 
+                                          Width="137"
+                                          SelectedIndex="0">
+                                    <ComboBoxItem Name="NewMatchTypeComboBoxFreeThrowsOption">FreeThrows</ComboBoxItem>
+                                </ComboBox>
+                                <Label Content="Player"
+                                    HorizontalAlignment="Left"
+                                    Margin="27,66,0,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="92" 
+                                    HorizontalContentAlignment="Right"/>
+                                <ComboBox Name="NewMatchPlayerComboBox"
+                                    HorizontalAlignment="Left" 
+                                    Margin="124,68,0,0" 
+                                    VerticalAlignment="Top" 
+                                    Width="137"
+                                    ItemsSource="{Binding Players}">
+                                </ComboBox>
+                            </Grid>
 
                         </TabItem>
                         <TabItem Name="ProjectionTabItem"
