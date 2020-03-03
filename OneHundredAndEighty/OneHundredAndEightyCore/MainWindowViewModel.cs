@@ -10,6 +10,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Autofac;
 using NLog;
+using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 
 #endregion

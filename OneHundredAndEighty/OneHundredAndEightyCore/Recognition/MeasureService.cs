@@ -8,6 +8,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using NLog;
+using OneHundredAndEightyCore.Common;
 
 #endregion
 

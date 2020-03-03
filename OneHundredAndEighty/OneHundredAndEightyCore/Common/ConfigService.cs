@@ -6,7 +6,7 @@ using NLog;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Recognition
+namespace OneHundredAndEightyCore.Common
 {
     public class ConfigService
     {

@@ -1,4 +1,4 @@
-﻿namespace OneHundredAndEightyCore
+﻿namespace OneHundredAndEightyCore.Common
 {
     public enum SettingsType
     {

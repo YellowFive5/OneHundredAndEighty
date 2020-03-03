@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using Emgu.CV.Structure;
 using NLog;
+using OneHundredAndEightyCore.Game;
 
 #endregion
 

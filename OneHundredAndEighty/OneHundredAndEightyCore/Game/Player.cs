@@ -2,7 +2,7 @@
 
 #endregion
 
-namespace OneHundredAndEightyCore
+namespace OneHundredAndEightyCore.Game
 {
     public class Player
     {

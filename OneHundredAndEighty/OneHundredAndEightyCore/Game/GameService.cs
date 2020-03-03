@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NLog;
+using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
-namespace OneHundredAndEightyCore
+namespace OneHundredAndEightyCore.Game
 {
     public class GameService
     {
@@ -18,7 +19,7 @@ namespace OneHundredAndEightyCore
         private readonly ConfigService configService;
         private readonly Logger logger;
         private readonly DBService dbService;
-        private Game game;
+        private OneHundredAndEightyCore.Game.Game game;
         private List<Player> players;
         private bool GameRun { get; set; }
 
@@ -41,7 +42,7 @@ namespace OneHundredAndEightyCore
         {
             GameRun = true;
             this.players = players;
-            game = new Game(type);
+            game = new OneHundredAndEightyCore.Game.Game(type);
             dbService.SaveNewGame(game, players);
             drawService.ProjectionClear();
             drawService.PointsHistoryBoxClear();

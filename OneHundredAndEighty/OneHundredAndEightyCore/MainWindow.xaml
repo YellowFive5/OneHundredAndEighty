@@ -185,7 +185,7 @@
                                     VerticalAlignment="Top"
                                     Width="88"
                                     Click="CalibrateCamsSetupPointButtonClick"
-                                    ToolTip="Calibrate Cam X/Y setup point on projection.&#x0a;Distance from Cam to bull must be setup on MainWindow Setup tab " />
+                                    ToolTip="Calibrate Cam X/Y setup point on projection.&#x0a;Distance from Cam to bull must be setup" />
                                 <CheckBox x:Name="WithDetectionCheckBox"
                                       Content="{x:Static resx:Resources.WithDetectionCheckBoxText}"
                                       HorizontalAlignment="Left"

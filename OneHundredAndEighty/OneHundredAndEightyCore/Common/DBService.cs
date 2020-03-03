@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Globalization;
+using OneHundredAndEightyCore.Game;
 
 #endregion
 
-namespace OneHundredAndEightyCore
+namespace OneHundredAndEightyCore.Common
 {
     public enum Table
     {
@@ -107,7 +108,7 @@ namespace OneHundredAndEightyCore
             }
         }
 
-        public void SaveNewGame(Game game, List<Player> players)
+        public void SaveNewGame(Game.Game game, List<Player> players)
         {
             var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartTimestamp},{Column.EndTimestamp},{Column.Type})" +
                                $" VALUES ('{game.StartTimeStamp}','','{(int) game.Type}')";
@@ -144,7 +145,7 @@ namespace OneHundredAndEightyCore
             }
         }
 
-        public void EndGame(Game game, Player winner = null)
+        public void EndGame(Game.Game game, Player winner = null)
         {
             game.SetEndTimeStamp();
             var gameEndTimestampQuery = $"UPDATE [{Table.Games}] SET [{Column.EndTimestamp}] = '{game.EndTimeStamp}' " +

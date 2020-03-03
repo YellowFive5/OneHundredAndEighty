@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using Autofac;
 using NLog;
 using NLog.Web;
+using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using IContainer = Autofac.IContainer;
 
