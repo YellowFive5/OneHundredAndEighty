@@ -93,6 +93,57 @@ namespace OneHundredAndEightyCore
             Players = playersList;
         }
 
+        public void StartGame()
+        {
+            ToggleMainTabItems();
+            ToggleMatchControls();
+
+            var gameType = GameType.FreeThrows;
+            var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
+
+            var gamePlayers = new List<Player> {selectedPlayer1};
+
+            // gameService.StartGame(GameType.FreeThrows, gamePlayers);
+        }
+
+        public void StopGame()
+        {
+            ToggleMainTabItems();
+            ToggleMatchControls();
+
+            // gameService.StopGame();
+        }
+
+        public void SaveNewPlayer()
+        {
+            var newPlayerName = mainWindow.NewPlayerNameTextBox.Text;
+            var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(newPlayerName) || string.IsNullOrWhiteSpace(newPlayerNickName))
+            {
+                var errorText = Resources.ResourceManager.GetString("NewPlayerEmptyDataErrorText");
+                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
+                return;
+            }
+
+            var newPlayer = new Player(newPlayerName, newPlayerNickName);
+
+            try
+            {
+                dbService.SaveNewPlayer(newPlayer);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK); // todo need to explain error
+                return;
+            }
+
+            MessageBox.Show($"{newPlayer}", "New player saved", MessageBoxButton.OK);
+            mainWindow.NewPlayerNameTextBox.Text = string.Empty;
+            mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
+
+            LoadPlayers();
+        }
+
         public void CalibrateCamsSetupPoint()
         {
             const double startRadSector = -3.14159;
@@ -154,54 +205,6 @@ namespace OneHundredAndEightyCore
             configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
         }
 
-        public void StartFreeThrowsGame()
-        {
-            ToggleMainTabItems();
-            ToggleMainTabItemControls();
-            var player = new Player("Player", "One", 1); // todo dummy-delete
-            // dbService.SaveNewPlayer(player);
-            var players = new List<Player> {player};
-
-            gameService.StartGame(GameType.FreeThrows, players);
-        }
-
-        public void StopFreeThrowsGame()
-        {
-            ToggleMainTabItems();
-            ToggleMainTabItemControls();
-            gameService.StopGame();
-        }
-
-        public void SaveNewPlayer()
-        {
-            var newPlayerName = mainWindow.NewPlayerNameTextBox.Text;
-            var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
-            if (string.IsNullOrWhiteSpace(newPlayerName) || string.IsNullOrWhiteSpace(newPlayerNickName))
-            {
-                var errorText = Resources.ResourceManager.GetString("NewPlayerEmptyDataErrorText");
-                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
-                return;
-            }
-
-            var newPlayer = new Player(newPlayerName, newPlayerNickName);
-
-            try
-            {
-                dbService.SaveNewPlayer(newPlayer);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK); // todo need to explain error
-                return;
-            }
-
-            MessageBox.Show($"{newPlayer}", "New player saved", MessageBoxButton.OK);
-            mainWindow.NewPlayerNameTextBox.Text = string.Empty;
-            mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
-
-            LoadPlayers();
-        }
-
         #region CamSetupCapturing
 
         public void StartCamSetupCapturing(string gridName)
@@ -233,13 +236,7 @@ namespace OneHundredAndEightyCore
 
         #endregion
 
-        #region Toggles
-
-        private void ToggleMainTabItemControls()
-        {
-            mainWindow.StartFreeThrowsButton.IsEnabled = !mainWindow.StartFreeThrowsButton.IsEnabled;
-            mainWindow.StopFreeThrowsButton.IsEnabled = !mainWindow.StopFreeThrowsButton.IsEnabled;
-        }
+        #region Controls toggles
 
         private void ToggleCamSetupGridControls(string gridName)
         {
@@ -301,6 +298,14 @@ namespace OneHundredAndEightyCore
             {
                 tabItem.IsEnabled = !tabItem.IsEnabled;
             }
+        }
+
+        private void ToggleMatchControls()
+        {
+            mainWindow.StartGameButton.IsEnabled = !mainWindow.StartGameButton.IsEnabled;
+            mainWindow.StopGameButton.IsEnabled = !mainWindow.StopGameButton.IsEnabled;
+            mainWindow.NewGameTypeComboBox.IsEnabled = !mainWindow.NewGameTypeComboBox.IsEnabled;
+            mainWindow.NewGamePlayer1ComboBox.IsEnabled = !mainWindow.NewGamePlayer1ComboBox.IsEnabled;
         }
 
         #endregion

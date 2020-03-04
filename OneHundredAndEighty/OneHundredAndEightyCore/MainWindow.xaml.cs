@@ -107,14 +107,14 @@ namespace OneHundredAndEightyCore
             }
         }
 
-        private void StartFreeThrowsButtonClick(object sender, RoutedEventArgs e)
+        private void StartGameButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.StartFreeThrowsGame();
+            viewModel.StartGame();
         }
 
-        private void StopFreeThrowsButtonClick(object sender, RoutedEventArgs e)
+        private void StopGameButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.StopFreeThrowsGame();
+            viewModel.StopGame();
         }
 
         private void OnSaveNewPlayerButtonClick(object sender, RoutedEventArgs e)

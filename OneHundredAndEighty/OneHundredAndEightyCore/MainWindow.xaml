@@ -31,13 +31,13 @@
                                        VerticalAlignment="Top" 
                                        Width="92" 
                                        HorizontalContentAlignment="Right"/>
-                                <ComboBox Name="NewMatchTypeComboBox"
+                                <ComboBox Name="NewGameTypeComboBox"
                                           HorizontalAlignment="Left" 
                                           Margin="124,31,0,0" 
                                           VerticalAlignment="Top" 
                                           Width="137"
                                           SelectedIndex="0">
-                                    <ComboBoxItem Name="NewMatchTypeComboBoxFreeThrowsOption">FreeThrows</ComboBoxItem>
+                                    <ComboBoxItem Name="NewGameTypeComboBoxFreeThrowsOption">FreeThrows</ComboBoxItem>
                                 </ComboBox>
                                 <Label Content="Player"
                                     HorizontalAlignment="Left"
@@ -45,13 +45,30 @@
                                     VerticalAlignment="Top" 
                                     Width="92" 
                                     HorizontalContentAlignment="Right"/>
-                                <ComboBox Name="NewMatchPlayerComboBox"
+                                <ComboBox Name="NewGamePlayer1ComboBox"
                                     HorizontalAlignment="Left" 
                                     Margin="124,68,0,0" 
                                     VerticalAlignment="Top" 
                                     Width="137"
                                     ItemsSource="{Binding Path=Players}">
                                 </ComboBox>
+                                <Button Name="StartGameButton"
+                                        Content="Start Game" 
+                                        HorizontalAlignment="Left"
+                                        Margin="124,108,0,0" 
+                                        VerticalAlignment="Top"
+                                        Width="137" 
+                                        Height="25"
+                                        Click="StartGameButtonClick"/>
+                                <Button Name="StopGameButton"
+                                        Content="Stop Game" 
+                                        HorizontalAlignment="Left"
+                                        Margin="124,148,0,0" 
+                                        VerticalAlignment="Top"
+                                        Width="137" 
+                                        Height="25"
+                                        Click="StopGameButtonClick"
+                                        IsEnabled="False"/>
                             </Grid>
 
                         </TabItem>
@@ -70,30 +87,13 @@
                                          TextWrapping="Wrap"
                                          VerticalAlignment="Top"
                                          Width="318"
-                                         Margin="187,368,0,0"
+                                         Margin="187,404,0,0"
                                          IsReadOnly="True"
                                          FontWeight="Bold"
                                          FontSize="30" />
-                                <Button Name="StartFreeThrowsButton"
-                                        Content="StartFreeThrows"
-                                        HorizontalAlignment="Left"
-                                        Margin="187,425,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="153"
-                                        Height="31"
-                                        Click="StartFreeThrowsButtonClick" />
-                                <Button Name="StopFreeThrowsButton"
-                                        Content="StopFreeThrows"
-                                        HorizontalAlignment="Left"
-                                        Margin="345,425,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="160"
-                                        Height="31"
-                                        Click="StopFreeThrowsButtonClick"
-                                        IsEnabled="False" />
                                 <TextBox x:Name="PointsHistoryBox"
                                          HorizontalAlignment="Left"
-                                         Height="353"
+                                         Height="389"
                                          TextWrapping="Wrap"
                                          VerticalAlignment="Top"
                                          Width="318"

@@ -19,7 +19,7 @@ namespace OneHundredAndEightyCore.Game
         private readonly ConfigService configService;
         private readonly Logger logger;
         private readonly DBService dbService;
-        private OneHundredAndEightyCore.Game.Game game;
+        private Game game;
         private List<Player> players;
         private bool GameRun { get; set; }
 
@@ -42,7 +42,7 @@ namespace OneHundredAndEightyCore.Game
         {
             GameRun = true;
             this.players = players;
-            game = new OneHundredAndEightyCore.Game.Game(type);
+            game = new Game(type);
             dbService.SaveNewGame(game, players);
             drawService.ProjectionClear();
             drawService.PointsHistoryBoxClear();
