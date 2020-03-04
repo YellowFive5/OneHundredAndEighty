@@ -2,8 +2,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +21,7 @@ using OneHundredAndEightyCore.Recognition;
 
 namespace OneHundredAndEightyCore
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly MainWindow mainWindow;
         private readonly Logger logger;
@@ -32,7 +35,18 @@ namespace OneHundredAndEightyCore
 
         private const double AppVersion = 2.0;
         public bool IsSettingsDirty { get; set; }
-        public List<Player> Players { get; private set; }
+
+        private List<Player> players;
+
+        public List<Player> Players
+        {
+            get => players;
+            set
+            {
+                players = value;
+                OnPropertyChanged(nameof(Players));
+            }
+        }
 
         public MainWindowViewModel()
         {
@@ -67,11 +81,16 @@ namespace OneHundredAndEightyCore
 
         private void LoadPlayers()
         {
-            Players = new List<Player>()
-                      {
-                          new Player("Ben", "Pen"), // todo temp dummy
-                          new Player("Jebedah", "Muffin")
-                      };
+            var playersTable = dbService.LoadPlayers();
+            var playersList = new List<Player>();
+            foreach (DataRow playerRow in playersTable.Rows)
+            {
+                playersList.Add(new Player(playerRow[$"{Column.Name}"].ToString(),
+                                           playerRow[$"{Column.NickName}"].ToString(),
+                                           Convert.ToInt32(playerRow[$"{Column.Id}"])));
+            }
+
+            Players = playersList;
         }
 
         public void CalibrateCamsSetupPoint()
@@ -152,6 +171,139 @@ namespace OneHundredAndEightyCore
             ToggleMainTabItemControls();
             gameService.StopGame();
         }
+
+        public void SaveNewPlayer()
+        {
+            var newPlayerName = mainWindow.NewPlayerNameTextBox.Text;
+            var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(newPlayerName) || string.IsNullOrWhiteSpace(newPlayerNickName))
+            {
+                var errorText = Resources.ResourceManager.GetString("NewPlayerEmptyDataErrorText");
+                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
+                return;
+            }
+
+            var newPlayer = new Player(newPlayerName, newPlayerNickName);
+
+            try
+            {
+                dbService.SaveNewPlayer(newPlayer);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK); // todo need to explain error
+                return;
+            }
+
+            MessageBox.Show($"{newPlayer}", "New player saved", MessageBoxButton.OK);
+            mainWindow.NewPlayerNameTextBox.Text = string.Empty;
+            mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
+
+            LoadPlayers();
+        }
+
+        #region CamSetupCapturing
+
+        public void StartCamSetupCapturing(string gridName)
+        {
+            ToggleCamSetupGridControls(gridName);
+            cts = new CancellationTokenSource();
+            var cancelToken = cts.Token;
+
+            Task.Run(() =>
+                     {
+                         var cam = new CamService(mainWindow, gridName, CamServiceWorkingMode.Setup);
+
+                         while (!cancelToken.IsCancellationRequested)
+                         {
+                             cam.DoCapture(true);
+                             cam.RefreshImageBoxes();
+                         }
+
+                         cam.ClearImageBoxes();
+                         cam.Dispose();
+                     });
+        }
+
+        public void StopCamSetupCapturing(string gridName)
+        {
+            cts?.Cancel();
+            ToggleCamSetupGridControls(gridName);
+        }
+
+        #endregion
+
+        #region Toggles
+
+        private void ToggleMainTabItemControls()
+        {
+            mainWindow.StartFreeThrowsButton.IsEnabled = !mainWindow.StartFreeThrowsButton.IsEnabled;
+            mainWindow.StopFreeThrowsButton.IsEnabled = !mainWindow.StopFreeThrowsButton.IsEnabled;
+        }
+
+        private void ToggleCamSetupGridControls(string gridName)
+        {
+            ToggleMainTabItems();
+            ToggleSetupTabItems();
+
+            switch (gridName)
+            {
+                case "Cam1Grid":
+                    mainWindow.Cam1StartButton.IsEnabled = !mainWindow.Cam1StartButton.IsEnabled;
+                    mainWindow.Cam1StopButton.IsEnabled = !mainWindow.Cam1StopButton.IsEnabled;
+                    mainWindow.Cam1TresholdSlider.IsEnabled = !mainWindow.Cam1TresholdSlider.IsEnabled;
+                    mainWindow.Cam1SurfaceSlider.IsEnabled = !mainWindow.Cam1SurfaceSlider.IsEnabled;
+                    mainWindow.Cam1SurfaceCenterSlider.IsEnabled = !mainWindow.Cam1SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam1RoiPosYSlider.IsEnabled = !mainWindow.Cam1RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam1RoiHeightSlider.IsEnabled = !mainWindow.Cam1RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam2Grid":
+                    mainWindow.Cam2StartButton.IsEnabled = !mainWindow.Cam2StartButton.IsEnabled;
+                    mainWindow.Cam2StopButton.IsEnabled = !mainWindow.Cam2StopButton.IsEnabled;
+                    mainWindow.Cam2TresholdSlider.IsEnabled = !mainWindow.Cam2TresholdSlider.IsEnabled;
+                    mainWindow.Cam2SurfaceSlider.IsEnabled = !mainWindow.Cam2SurfaceSlider.IsEnabled;
+                    mainWindow.Cam2SurfaceCenterSlider.IsEnabled = !mainWindow.Cam2SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam2RoiPosYSlider.IsEnabled = !mainWindow.Cam2RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam2RoiHeightSlider.IsEnabled = !mainWindow.Cam2RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam3Grid":
+                    mainWindow.Cam3StartButton.IsEnabled = !mainWindow.Cam3StartButton.IsEnabled;
+                    mainWindow.Cam3StopButton.IsEnabled = !mainWindow.Cam3StopButton.IsEnabled;
+                    mainWindow.Cam3TresholdSlider.IsEnabled = !mainWindow.Cam3TresholdSlider.IsEnabled;
+                    mainWindow.Cam3SurfaceSlider.IsEnabled = !mainWindow.Cam3SurfaceSlider.IsEnabled;
+                    mainWindow.Cam3SurfaceCenterSlider.IsEnabled = !mainWindow.Cam3SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam3RoiPosYSlider.IsEnabled = !mainWindow.Cam3RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam3RoiHeightSlider.IsEnabled = !mainWindow.Cam3RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam4Grid":
+                    mainWindow.Cam4StartButton.IsEnabled = !mainWindow.Cam4StartButton.IsEnabled;
+                    mainWindow.Cam4StopButton.IsEnabled = !mainWindow.Cam4StopButton.IsEnabled;
+                    mainWindow.Cam4TresholdSlider.IsEnabled = !mainWindow.Cam4TresholdSlider.IsEnabled;
+                    mainWindow.Cam4SurfaceSlider.IsEnabled = !mainWindow.Cam4SurfaceSlider.IsEnabled;
+                    mainWindow.Cam4SurfaceCenterSlider.IsEnabled = !mainWindow.Cam4SurfaceCenterSlider.IsEnabled;
+                    mainWindow.Cam4RoiPosYSlider.IsEnabled = !mainWindow.Cam4RoiPosYSlider.IsEnabled;
+                    mainWindow.Cam4RoiHeightSlider.IsEnabled = !mainWindow.Cam4RoiHeightSlider.IsEnabled;
+                    break;
+            }
+        }
+
+        private void ToggleSetupTabItems()
+        {
+            foreach (TabItem tabItem in mainWindow.SetupTabControl.Items)
+            {
+                tabItem.IsEnabled = !tabItem.IsEnabled;
+            }
+        }
+
+        private void ToggleMainTabItems()
+        {
+            foreach (TabItem tabItem in mainWindow.MainTabControl.Items)
+            {
+                tabItem.IsEnabled = !tabItem.IsEnabled;
+            }
+        }
+
+        #endregion
 
         #region Settings
 
@@ -288,135 +440,15 @@ namespace OneHundredAndEightyCore
 
         #endregion
 
-        #region CamSetupCapturing
+        #region PropertyChangingFire
 
-        public void StartCamSetupCapturing(string gridName)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            ToggleCamSetupGridControls(gridName);
-            cts = new CancellationTokenSource();
-            var cancelToken = cts.Token;
-
-            Task.Run(() =>
-                     {
-                         var cam = new CamService(mainWindow, gridName, CamServiceWorkingMode.Setup);
-
-                         while (!cancelToken.IsCancellationRequested)
-                         {
-                             cam.DoCapture(true);
-                             cam.RefreshImageBoxes();
-                         }
-
-                         cam.ClearImageBoxes();
-                         cam.Dispose();
-                     });
-        }
-
-        public void StopCamSetupCapturing(string gridName)
-        {
-            cts?.Cancel();
-            ToggleCamSetupGridControls(gridName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
-
-        #region Toggles
-
-        private void ToggleMainTabItemControls()
-        {
-            mainWindow.StartFreeThrowsButton.IsEnabled = !mainWindow.StartFreeThrowsButton.IsEnabled;
-            mainWindow.StopFreeThrowsButton.IsEnabled = !mainWindow.StopFreeThrowsButton.IsEnabled;
-        }
-
-        private void ToggleCamSetupGridControls(string gridName)
-        {
-            ToggleMainTabItems();
-            ToggleSetupTabItems();
-
-            switch (gridName)
-            {
-                case "Cam1Grid":
-                    mainWindow.Cam1StartButton.IsEnabled = !mainWindow.Cam1StartButton.IsEnabled;
-                    mainWindow.Cam1StopButton.IsEnabled = !mainWindow.Cam1StopButton.IsEnabled;
-                    mainWindow.Cam1TresholdSlider.IsEnabled = !mainWindow.Cam1TresholdSlider.IsEnabled;
-                    mainWindow.Cam1SurfaceSlider.IsEnabled = !mainWindow.Cam1SurfaceSlider.IsEnabled;
-                    mainWindow.Cam1SurfaceCenterSlider.IsEnabled = !mainWindow.Cam1SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam1RoiPosYSlider.IsEnabled = !mainWindow.Cam1RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam1RoiHeightSlider.IsEnabled = !mainWindow.Cam1RoiHeightSlider.IsEnabled;
-                    break;
-                case "Cam2Grid":
-                    mainWindow.Cam2StartButton.IsEnabled = !mainWindow.Cam2StartButton.IsEnabled;
-                    mainWindow.Cam2StopButton.IsEnabled = !mainWindow.Cam2StopButton.IsEnabled;
-                    mainWindow.Cam2TresholdSlider.IsEnabled = !mainWindow.Cam2TresholdSlider.IsEnabled;
-                    mainWindow.Cam2SurfaceSlider.IsEnabled = !mainWindow.Cam2SurfaceSlider.IsEnabled;
-                    mainWindow.Cam2SurfaceCenterSlider.IsEnabled = !mainWindow.Cam2SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam2RoiPosYSlider.IsEnabled = !mainWindow.Cam2RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam2RoiHeightSlider.IsEnabled = !mainWindow.Cam2RoiHeightSlider.IsEnabled;
-                    break;
-                case "Cam3Grid":
-                    mainWindow.Cam3StartButton.IsEnabled = !mainWindow.Cam3StartButton.IsEnabled;
-                    mainWindow.Cam3StopButton.IsEnabled = !mainWindow.Cam3StopButton.IsEnabled;
-                    mainWindow.Cam3TresholdSlider.IsEnabled = !mainWindow.Cam3TresholdSlider.IsEnabled;
-                    mainWindow.Cam3SurfaceSlider.IsEnabled = !mainWindow.Cam3SurfaceSlider.IsEnabled;
-                    mainWindow.Cam3SurfaceCenterSlider.IsEnabled = !mainWindow.Cam3SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam3RoiPosYSlider.IsEnabled = !mainWindow.Cam3RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam3RoiHeightSlider.IsEnabled = !mainWindow.Cam3RoiHeightSlider.IsEnabled;
-                    break;
-                case "Cam4Grid":
-                    mainWindow.Cam4StartButton.IsEnabled = !mainWindow.Cam4StartButton.IsEnabled;
-                    mainWindow.Cam4StopButton.IsEnabled = !mainWindow.Cam4StopButton.IsEnabled;
-                    mainWindow.Cam4TresholdSlider.IsEnabled = !mainWindow.Cam4TresholdSlider.IsEnabled;
-                    mainWindow.Cam4SurfaceSlider.IsEnabled = !mainWindow.Cam4SurfaceSlider.IsEnabled;
-                    mainWindow.Cam4SurfaceCenterSlider.IsEnabled = !mainWindow.Cam4SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam4RoiPosYSlider.IsEnabled = !mainWindow.Cam4RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam4RoiHeightSlider.IsEnabled = !mainWindow.Cam4RoiHeightSlider.IsEnabled;
-                    break;
-            }
-        }
-
-        private void ToggleSetupTabItems()
-        {
-            foreach (TabItem tabItem in mainWindow.SetupTabControl.Items)
-            {
-                tabItem.IsEnabled = !tabItem.IsEnabled;
-            }
-        }
-
-        private void ToggleMainTabItems()
-        {
-            foreach (TabItem tabItem in mainWindow.MainTabControl.Items)
-            {
-                tabItem.IsEnabled = !tabItem.IsEnabled;
-            }
-        }
-
-        #endregion
-
-        public void SaveNewPlayer()
-        {
-            var newPlayerName = mainWindow.NewPlayerNameTextBox.Text;
-            var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
-            if (string.IsNullOrWhiteSpace(newPlayerName) || string.IsNullOrWhiteSpace(newPlayerNickName))
-            {
-                var errorText = Resources.ResourceManager.GetString("NewPlayerEmptyDataErrorText");
-                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
-                return;
-            }
-
-            var newPlayer = new Player(newPlayerName, newPlayerNickName);
-
-            try
-            {
-                dbService.SaveNewPlayer(newPlayer);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK); // todo need to explain error
-                return;
-            }
-
-            MessageBox.Show($"{newPlayer}", "New player saved", MessageBoxButton.OK);
-            mainWindow.NewPlayerNameTextBox.Text = string.Empty;
-            mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
-        }
     }
 }

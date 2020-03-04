@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Globalization;
 using OneHundredAndEightyCore.Game;
@@ -265,6 +266,11 @@ namespace OneHundredAndEightyCore.Common
             return ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerAchieves}]");
         }
 
+        public DataTable LoadPlayers()
+        {
+            return ExecuteReaderInternal($"SELECT * FROM [{Table.Players}]");
+        }
+
         #region Low level internals
 
         private object ExecuteScalarInternal(string query)
@@ -306,21 +312,17 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        private object ExecuteReaderInternal(string query)
+        private DataTable ExecuteReaderInternal(string query)
         {
             var cmd = new SQLiteCommand(query) {Connection = connection};
 
             try
             {
-                object result = null;
                 connection.Open();
-                var sqReader = cmd.ExecuteReader();
-                while (sqReader.Read())
-                {
-                    result = sqReader.GetValue(0);
-                }
-
-                return result;
+                var dataReader = cmd.ExecuteReader();
+                var dataTable = new DataTable();
+                dataTable.Load(dataReader);
+                return dataTable;
             }
             catch (Exception e)
             {
