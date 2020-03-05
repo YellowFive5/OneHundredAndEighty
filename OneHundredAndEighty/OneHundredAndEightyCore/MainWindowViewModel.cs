@@ -82,15 +82,7 @@ namespace OneHundredAndEightyCore
         private void LoadPlayers()
         {
             var playersTable = dbService.LoadPlayers();
-            var playersList = new List<Player>();
-            foreach (DataRow playerRow in playersTable.Rows)
-            {
-                playersList.Add(new Player(playerRow[$"{Column.Name}"].ToString(),
-                                           playerRow[$"{Column.NickName}"].ToString(),
-                                           Convert.ToInt32(playerRow[$"{Column.Id}"])));
-            }
-
-            Players = playersList;
+            Players = Converter.PlayersFromTable(playersTable);
         }
 
         public void StartGame()
