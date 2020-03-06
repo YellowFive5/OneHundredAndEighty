@@ -6,7 +6,7 @@ namespace OneHundredAndEightyCore.Game
 {
     public class Player
     {
-        public int Id { get; private set; }
+        public int Id { get; }
         public string Name { get; }
         public string NickName { get; }
 
@@ -15,11 +15,6 @@ namespace OneHundredAndEightyCore.Game
             Id = id;
             Name = name;
             NickName = nickName;
-        }
-
-        public void SetId(int id)
-        {
-            Id = id;
         }
 
         public override string ToString()

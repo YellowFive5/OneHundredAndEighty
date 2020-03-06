@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -110,7 +109,7 @@ namespace OneHundredAndEightyCore
         {
             var newPlayerName = mainWindow.NewPlayerNameTextBox.Text;
             var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
-            if (string.IsNullOrWhiteSpace(newPlayerName) || string.IsNullOrWhiteSpace(newPlayerNickName))
+            if (!Validator.ValidateNewPlayerNameAndNickName(newPlayerName, newPlayerNickName))
             {
                 var errorText = Resources.ResourceManager.GetString("NewPlayerEmptyDataErrorText");
                 MessageBox.Show(errorText, "Error", MessageBoxButton.OK);

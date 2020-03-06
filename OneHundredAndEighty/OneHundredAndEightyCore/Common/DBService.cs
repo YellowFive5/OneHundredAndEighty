@@ -97,8 +97,6 @@ namespace OneHundredAndEightyCore.Common
             try
             {
                 ExecuteNonQueryInternal(newPlayerQuery);
-                var newPlayerId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Players}]");
-                player.SetId(Convert.ToInt32(newPlayerId));
             }
             catch (Exception e)
             {
