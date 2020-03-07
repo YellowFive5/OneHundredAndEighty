@@ -121,5 +121,10 @@ namespace OneHundredAndEightyCore
         {
             viewModel.SaveNewPlayer();
         }
+
+        private void SelectAvatarImageButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.SelectAvatarImage();
+        }
     }
 }

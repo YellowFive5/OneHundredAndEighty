@@ -69,7 +69,6 @@
                                         Height="25"
                                         Click="StopGameButtonClick"
                                         IsEnabled="False"/>
-                                <Image Name="NewPlayerAvatar" HorizontalAlignment="Left" Height="100" Margin="124,191,0,0" VerticalAlignment="Top" Width="100"/>
 
                             </Grid>
 
@@ -197,6 +196,9 @@
                                 <Label Content="Nickname" HorizontalAlignment="Left" Margin="28,57,0,0" VerticalAlignment="Top" Height="27" Width="66" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
                                 <TextBox Name="NewPlayerNickNameTextBox" HorizontalAlignment="Left" Margin="102,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27" VerticalContentAlignment="Center"/>
                                 <Button Content="Save" HorizontalAlignment="Left" Margin="227,24,0,0" VerticalAlignment="Top" Height="60" Width="60" Background="#FF72DC61" Click="OnSaveNewPlayerButtonClick"/>
+                                <Image Name="NewPlayerAvatar" HorizontalAlignment="Left" Height="119" Margin="102,89,0,0" VerticalAlignment="Top" Width="119"/>
+                                <Label Content="Avatar" HorizontalAlignment="Left" Margin="28,132,0,0" VerticalAlignment="Top" Height="26" Width="66" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                <Button Name="SelectAvatarImageButton" Content="Select image" HorizontalAlignment="Left" Margin="102,213,0,0" VerticalAlignment="Top" Height="20" Width="120" Click="SelectAvatarImageButton_OnClick"/>
                             </Grid>
                         </TabItem>
                     </TabControl>

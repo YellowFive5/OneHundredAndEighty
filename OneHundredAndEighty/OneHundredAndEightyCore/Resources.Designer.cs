@@ -223,6 +223,15 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose player avatar image.
+        /// </summary>
+        public static string ChoosePlayerAvatarText {
+            get {
+                return ResourceManager.GetString("ChoosePlayerAvatarText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap EmptyUserIcon {
@@ -374,6 +383,15 @@ namespace OneHundredAndEightyCore {
         public static string NewPlayerEmptyDataErrorText {
             get {
                 return ResourceManager.GetString("NewPlayerEmptyDataErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avatar image can not be more that 512x512 px..
+        /// </summary>
+        public static string PlayerAvatarTooBigErrorText {
+            get {
+                return ResourceManager.GetString("PlayerAvatarTooBigErrorText", resourceCulture);
             }
         }
         

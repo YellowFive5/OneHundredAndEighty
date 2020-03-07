@@ -47,18 +47,28 @@ namespace OneHundredAndEightyCore.Common
             return image;
         }
 
-        public static Bitmap BitmapImageToBitmap(BitmapImage bitmapImage)
-        {
-            return new Bitmap(bitmapImage.StreamSource);
-        }
-
         public static string BitmapImageToBase64(BitmapImage bitmapImage)
         {
             var image = BitmapImageToBitmap(bitmapImage);
             return ImageToBase64(image, ImageFormat.Bmp);
         }
 
-        public static BitmapImage Base64ToBitmapImage(string base64String)
+        private static Bitmap BitmapImageToBitmap(BitmapImage bitmapImage)
+        {
+            if (bitmapImage.StreamSource != null)
+            {
+                return new Bitmap(bitmapImage.StreamSource);
+            }
+
+            if (bitmapImage.UriSource != null)
+            {
+                return new Bitmap(bitmapImage.UriSource.OriginalString);
+            }
+
+            return null; // todo
+        }
+
+        private static BitmapImage Base64ToBitmapImage(string base64String)
         {
             var image = (Bitmap) Base64ToImage(base64String);
             return BitmapToBitmapImage(image);

@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Autofac;
+using Microsoft.Win32;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
@@ -65,6 +66,7 @@ namespace OneHundredAndEightyCore
             CheckVersion(AppVersion);
             LoadSettings();
             drawService.ProjectionPrepare();
+            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
             LoadPlayers();
         }
 
@@ -83,9 +85,6 @@ namespace OneHundredAndEightyCore
         {
             var playersTable = dbService.LoadPlayers();
             Players = Converter.PlayersFromTable(playersTable);
-
-            mainWindow.NewPlayerAvatar.Source = Players.FirstOrDefault()?.Avatar;
-
         }
 
         public void StartGame()
@@ -120,9 +119,10 @@ namespace OneHundredAndEightyCore
                 return;
             }
 
-            var newPlayer = new Player(newPlayerName, newPlayerNickName);
-
-            var str = Converter.BitmapImageToBase64(newPlayer.Avatar);
+            var newPlayer = new Player(newPlayerName,
+                                       newPlayerNickName,
+                                       -1,
+                                       mainWindow.NewPlayerAvatar.Source as BitmapImage);
 
             try
             {
@@ -137,6 +137,7 @@ namespace OneHundredAndEightyCore
             MessageBox.Show($"{newPlayer}", "New player saved", MessageBoxButton.OK);
             mainWindow.NewPlayerNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
+            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
 
             LoadPlayers();
         }
@@ -200,6 +201,27 @@ namespace OneHundredAndEightyCore
             configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
             configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
             configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
+        }
+
+        public void SelectAvatarImage()
+        {
+            var ofd = new OpenFileDialog
+                     {
+                         Title = $"{Resources.ChoosePlayerAvatarText}",
+                         Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif"
+                     };
+            if (ofd.ShowDialog() == true)
+            {
+                var image = new BitmapImage(new Uri(ofd.FileName));
+                if (Validator.ValidateNewPlayerAvatar(image))
+                {
+                    mainWindow.NewPlayerAvatar.Source = image;
+                }
+                else
+                {
+                    MessageBox.Show(Resources.PlayerAvatarTooBigErrorText, "Error", MessageBoxButton.OK);
+                }
+            }
         }
 
         #region CamSetupCapturing
