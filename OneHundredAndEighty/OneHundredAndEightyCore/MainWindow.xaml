@@ -69,6 +69,8 @@
                                         Height="25"
                                         Click="StopGameButtonClick"
                                         IsEnabled="False"/>
+                                <Image Name="NewPlayerAvatar" HorizontalAlignment="Left" Height="100" Margin="124,191,0,0" VerticalAlignment="Top" Width="100"/>
+
                             </Grid>
 
                         </TabItem>

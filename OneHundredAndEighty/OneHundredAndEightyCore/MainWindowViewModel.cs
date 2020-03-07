@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -82,6 +83,9 @@ namespace OneHundredAndEightyCore
         {
             var playersTable = dbService.LoadPlayers();
             Players = Converter.PlayersFromTable(playersTable);
+
+            mainWindow.NewPlayerAvatar.Source = Players.FirstOrDefault()?.Avatar;
+
         }
 
         public void StartGame()
@@ -117,6 +121,8 @@ namespace OneHundredAndEightyCore
             }
 
             var newPlayer = new Player(newPlayerName, newPlayerNickName);
+
+            var str = Converter.BitmapImageToBase64(newPlayer.Avatar);
 
             try
             {

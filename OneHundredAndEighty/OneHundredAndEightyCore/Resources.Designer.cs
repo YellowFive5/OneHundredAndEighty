@@ -223,6 +223,16 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap EmptyUserIcon {
+            get {
+                object obj = ResourceManager.GetObject("EmptyUserIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Extraction sleep time.
         /// </summary>
         public static string ExtractionSleepTimeLabelText {
@@ -246,6 +256,16 @@ namespace OneHundredAndEightyCore {
         public static string GeneralSettingsTabName {
             get {
                 return ResourceManager.GetString("GeneralSettingsTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon icon2 {
+            get {
+                object obj = ResourceManager.GetObject("icon2", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

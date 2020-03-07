@@ -56,7 +56,8 @@ namespace OneHundredAndEightyCore.Common
         PoiX,
         PoiY,
         ProjectionResolution,
-        Timestamp
+        Timestamp,
+        Avatar
     }
 
     public class DBService : IDisposable
@@ -92,8 +93,8 @@ namespace OneHundredAndEightyCore.Common
             var newPlayerStatisticsId = CreateNewPlayerStatistics();
             var newPlayerAchievesId = CreateNewPlayerAchieves();
 
-            var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Statistics}, {Column.Achieves})" +
-                                 $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{newPlayerStatisticsId}', '{newPlayerAchievesId}')";
+            var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Statistics}, {Column.Achieves}, {Column.Avatar})" +
+                                 $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{newPlayerStatisticsId}', '{newPlayerAchievesId}', '{Converter.BitmapImageToBase64(player.Avatar)}')";
             try
             {
                 ExecuteNonQueryInternal(newPlayerQuery);
