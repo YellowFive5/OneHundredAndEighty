@@ -1,0 +1,39 @@
+﻿namespace OneHundredAndEightyCore.Common
+{
+    public enum Column
+    {
+        Value,
+        Name,
+        Id,
+        NickName,
+        RegistrationTimestamp,
+        Statistics,
+        Achieves,
+        StartTimestamp,
+        EndTimestamp,
+        Type,
+        Player,
+        GameResult,
+        Throws,
+        Points,
+        _180,
+        Tremble,
+        Double,
+        Single,
+        Bulleye,
+        _25,
+        Zero,
+        Fault,
+        Game,
+        GamesWon,
+        GamesPlayed,
+        Sector,
+        Resultativity,
+        Number,
+        PoiX,
+        PoiY,
+        ProjectionResolution,
+        Timestamp,
+        Avatar
+    }
+}

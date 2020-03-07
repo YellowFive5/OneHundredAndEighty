@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Game;
 
@@ -94,6 +95,13 @@ namespace OneHundredAndEightyCore.Common
             ms.Write(imageBytes, 0, imageBytes.Length);
             var image = Image.FromStream(ms, true);
             return image;
+        }
+
+        public static Visibility ControlVisibilityToggle(Visibility visibility)
+        {
+            return visibility == Visibility.Visible
+                       ? Visibility.Hidden
+                       : Visibility.Visible;
         }
     }
 }

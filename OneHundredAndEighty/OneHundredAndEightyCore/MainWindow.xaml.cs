@@ -126,5 +126,10 @@ namespace OneHundredAndEightyCore
         {
             viewModel.SelectAvatarImage();
         }
+
+        private void NewGameTypeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            viewModel?.ToggleNewGameControlsVisibility();
+        }
     }
 }

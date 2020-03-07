@@ -37,7 +37,11 @@ namespace OneHundredAndEightyCore
         private const double AppVersion = 2.0;
         public bool IsSettingsDirty { get; set; }
 
+        #region Bindable props
+
         private List<Player> players;
+
+        #endregion
 
         public List<Player> Players
         {
@@ -89,21 +93,22 @@ namespace OneHundredAndEightyCore
 
         public void StartGame()
         {
-            ToggleMainTabItems();
-            ToggleMatchControls();
+            ToggleMainTabItemsEnabled();
+            ToggleMatchControlsEnabled();
 
-            var gameType = GameType.FreeThrows;
+            var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox.SelectionBoxItem.ToString());
+
             var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
 
-            var gamePlayers = new List<Player> {selectedPlayer1};
+            var newGamePlayers = new List<Player> {selectedPlayer1};
 
-            // gameService.StartGame(GameType.FreeThrows, gamePlayers);
+            gameService.StartGame(selectedGameType, newGamePlayers);
         }
 
         public void StopGame()
         {
-            ToggleMainTabItems();
-            ToggleMatchControls();
+            ToggleMainTabItemsEnabled();
+            ToggleMatchControlsEnabled();
 
             // gameService.StopGame();
         }
@@ -206,10 +211,10 @@ namespace OneHundredAndEightyCore
         public void SelectAvatarImage()
         {
             var ofd = new OpenFileDialog
-                     {
-                         Title = $"{Resources.ChoosePlayerAvatarText}",
-                         Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif"
-                     };
+                      {
+                          Title = $"{Resources.ChoosePlayerAvatarText}",
+                          Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif"
+                      };
             if (ofd.ShowDialog() == true)
             {
                 var image = new BitmapImage(new Uri(ofd.FileName));
@@ -228,7 +233,7 @@ namespace OneHundredAndEightyCore
 
         public void StartCamSetupCapturing(string gridName)
         {
-            ToggleCamSetupGridControls(gridName);
+            ToggleCamSetupGridControlsEnabled(gridName);
             cts = new CancellationTokenSource();
             var cancelToken = cts.Token;
 
@@ -250,17 +255,17 @@ namespace OneHundredAndEightyCore
         public void StopCamSetupCapturing(string gridName)
         {
             cts?.Cancel();
-            ToggleCamSetupGridControls(gridName);
+            ToggleCamSetupGridControlsEnabled(gridName);
         }
 
         #endregion
 
         #region Controls toggles
 
-        private void ToggleCamSetupGridControls(string gridName)
+        private void ToggleCamSetupGridControlsEnabled(string gridName)
         {
-            ToggleMainTabItems();
-            ToggleSetupTabItems();
+            ToggleMainTabItemsEnabled();
+            ToggleSetupTabItemsEnabled();
 
             switch (gridName)
             {
@@ -303,7 +308,7 @@ namespace OneHundredAndEightyCore
             }
         }
 
-        private void ToggleSetupTabItems()
+        private void ToggleSetupTabItemsEnabled()
         {
             foreach (TabItem tabItem in mainWindow.SetupTabControl.Items)
             {
@@ -311,7 +316,7 @@ namespace OneHundredAndEightyCore
             }
         }
 
-        private void ToggleMainTabItems()
+        private void ToggleMainTabItemsEnabled()
         {
             foreach (TabItem tabItem in mainWindow.MainTabControl.Items)
             {
@@ -319,12 +324,43 @@ namespace OneHundredAndEightyCore
             }
         }
 
-        private void ToggleMatchControls()
+        private void ToggleMatchControlsEnabled()
         {
             mainWindow.StartGameButton.IsEnabled = !mainWindow.StartGameButton.IsEnabled;
             mainWindow.StopGameButton.IsEnabled = !mainWindow.StopGameButton.IsEnabled;
             mainWindow.NewGameTypeComboBox.IsEnabled = !mainWindow.NewGameTypeComboBox.IsEnabled;
             mainWindow.NewGamePlayer1ComboBox.IsEnabled = !mainWindow.NewGamePlayer1ComboBox.IsEnabled;
+        }
+
+        public void ToggleNewGameControlsVisibility()
+        {
+            var selectedGameType = Enum.Parse<GameType>((mainWindow.NewGameTypeComboBox.SelectedItem as ListBoxItem)?.Content.ToString());
+
+            switch (selectedGameType)
+            {
+                case GameType.FreeThrows:
+                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Hidden;
+                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameSetsLabel.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
+                    break;
+                case GameType.Classic1001:
+                case GameType.Classic701:
+                case GameType.Classic501:
+                case GameType.Classic301:
+                case GameType.Classic101:
+                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
+                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
+                    mainWindow.NewGameSetsComboBox.Visibility = Visibility.Visible;
+                    mainWindow.NewGameSetsLabel.Visibility = Visibility.Visible;
+                    mainWindow.NewGameLegsComboBox.Visibility = Visibility.Visible;
+                    mainWindow.NewGameLegsLabel.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         #endregion

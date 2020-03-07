@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace OneHundredAndEightyCore.Game
         private readonly DBService dbService;
         private Game game;
         private List<Player> players;
-        private bool GameRun { get; set; }
+        private bool IsGameRun { get; set; }
 
         public GameService(MainWindow mainWindow,
                            DetectionService detectionService,
@@ -40,18 +41,34 @@ namespace OneHundredAndEightyCore.Game
 
         public void StartGame(GameType type, List<Player> players)
         {
-            GameRun = true;
+            IsGameRun = true;
             this.players = players;
             game = new Game(type);
-            dbService.SaveNewGame(game, players);
+
+            switch (type)
+            {
+                case GameType.FreeThrows:
+                    StartFreeThrows();
+                    break;
+                case GameType.Classic1001:
+                case GameType.Classic701:
+                case GameType.Classic501:
+                case GameType.Classic301:
+                case GameType.Classic101:
+                    // todo
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
             drawService.ProjectionClear();
             drawService.PointsHistoryBoxClear();
+            dbService.SaveNewGame(game, players);
 
             detectionService.RunDetection();
 
             Task.Run(() =>
                      {
-                         while (GameRun)
+                         while (IsGameRun)
                          {
                              var thrw = detectionService.TryPopThrow();
                              if (thrw != null)
@@ -64,11 +81,16 @@ namespace OneHundredAndEightyCore.Game
 
         public void StopGame()
         {
-            GameRun = false;
+            IsGameRun = false;
             detectionService.StopDetection();
 
             drawService.ProjectionClear();
             dbService.EndGame(game);
+        }
+
+        private void StartFreeThrows()
+        {
+
         }
 
         private void SaveThrow(DetectedThrow thrw)

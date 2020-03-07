@@ -11,55 +11,6 @@ using OneHundredAndEightyCore.Game;
 
 namespace OneHundredAndEightyCore.Common
 {
-    public enum Table
-    {
-        Settings,
-        PlayerStatistics,
-        PlayerAchieves,
-        Players,
-        Games,
-        StatisticsFreeThrows,
-        GameStatistics,
-        Throws,
-    }
-
-    public enum Column
-    {
-        Value,
-        Name,
-        Id,
-        NickName,
-        RegistrationTimestamp,
-        Statistics,
-        Achieves,
-        StartTimestamp,
-        EndTimestamp,
-        Type,
-        Player,
-        GameResult,
-        Throws,
-        Points,
-        _180,
-        Tremble,
-        Double,
-        Single,
-        Bulleye,
-        _25,
-        Zero,
-        Fault,
-        Game,
-        GamesWon,
-        GamesPlayed,
-        Sector,
-        Resultativity,
-        Number,
-        PoiX,
-        PoiY,
-        ProjectionResolution,
-        Timestamp,
-        Avatar
-    }
-
     public class DBService : IDisposable
     {
         private readonly SQLiteConnection connection;

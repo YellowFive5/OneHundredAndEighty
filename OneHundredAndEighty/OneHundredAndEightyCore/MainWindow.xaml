@@ -13,6 +13,9 @@
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources >
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Window.Resources>
     <Grid>
         <TabControl Name="MainTabControl"
                     Height="522"
@@ -25,53 +28,116 @@
                         <TabItem Name="MatchTabItem"
                                  Header="Match">
                             <Grid>
-                                <Label Content="Game type"
-                                       HorizontalAlignment="Left"
-                                       Margin="27,29,0,0" 
-                                       VerticalAlignment="Top" 
-                                       Width="92" 
-                                       HorizontalContentAlignment="Right"/>
-                                <ComboBox Name="NewGameTypeComboBox"
-                                          HorizontalAlignment="Left" 
-                                          Margin="124,31,0,0" 
-                                          VerticalAlignment="Top" 
-                                          Width="137"
-                                          SelectedIndex="0">
-                                    <ComboBoxItem Name="NewGameTypeComboBoxFreeThrowsOption">FreeThrows</ComboBoxItem>
-                                </ComboBox>
-                                <Label Content="Player"
-                                    HorizontalAlignment="Left"
-                                    Margin="27,66,0,0" 
-                                    VerticalAlignment="Top" 
-                                    Width="92" 
-                                    HorizontalContentAlignment="Right"/>
-                                <ComboBox Name="NewGamePlayer1ComboBox"
-                                    HorizontalAlignment="Left" 
-                                    Margin="124,68,0,0" 
-                                    VerticalAlignment="Top" 
-                                    Width="137"
-                                    ItemsSource="{Binding Path=Players}">
-                                </ComboBox>
-                                <Button Name="StartGameButton"
-                                        Content="Start Game" 
-                                        HorizontalAlignment="Left"
-                                        Margin="124,108,0,0" 
-                                        VerticalAlignment="Top"
-                                        Width="137" 
-                                        Height="25"
-                                        Click="StartGameButtonClick"/>
-                                <Button Name="StopGameButton"
-                                        Content="Stop Game" 
-                                        HorizontalAlignment="Left"
-                                        Margin="124,148,0,0" 
-                                        VerticalAlignment="Top"
-                                        Width="137" 
-                                        Height="25"
-                                        Click="StopGameButtonClick"
-                                        IsEnabled="False"/>
-
+                                <Grid Name="NewGameControls"
+                                      Margin="10,39,461,261">
+                                    <Label Content="Game type"
+                                           HorizontalAlignment="Left"
+                                           Margin="8,14,0,0"
+                                           VerticalAlignment="Top"
+                                           Width="92"
+                                           HorizontalContentAlignment="Right" />
+                                    <ComboBox Name="NewGameTypeComboBox"
+                                              HorizontalAlignment="Left"
+                                              Margin="105,16,0,0"
+                                              VerticalAlignment="Top"
+                                              Width="155"
+                                              SelectedIndex="0"
+                                              SelectionChanged="NewGameTypeComboBox_OnSelectionChanged">
+                                        <ComboBoxItem>FreeThrows</ComboBoxItem>
+                                        <ComboBoxItem>Classic1001</ComboBoxItem>
+                                        <ComboBoxItem>Classic701</ComboBoxItem>
+                                        <ComboBoxItem>Classic501</ComboBoxItem>
+                                        <ComboBoxItem>Classic301</ComboBoxItem>
+                                        <ComboBoxItem>Classic101</ComboBoxItem>
+                                    </ComboBox>
+                                    <Label Content="Player"
+                                           HorizontalAlignment="Left"
+                                           Margin="8,51,0,0"
+                                           VerticalAlignment="Top"
+                                           Width="92"
+                                           HorizontalContentAlignment="Right" />
+                                    <ComboBox Name="NewGamePlayer1ComboBox"
+                                              HorizontalAlignment="Left"
+                                              Margin="105,53,0,0"
+                                              VerticalAlignment="Top"
+                                              Width="155"
+                                              ItemsSource="{Binding Path=Players}" />
+                                    <Button Name="StartGameButton"
+                                            Content="Start Game"
+                                            HorizontalAlignment="Left"
+                                            Margin="105,93,0,0"
+                                            VerticalAlignment="Top"
+                                            Width="155"
+                                            Height="25"
+                                            Click="StartGameButtonClick" />
+                                    <Button Name="StopGameButton"
+                                            Content="Stop Game"
+                                            HorizontalAlignment="Left"
+                                            Margin="105,133,0,0"
+                                            VerticalAlignment="Top"
+                                            Width="155"
+                                            Height="25"
+                                            Click="StopGameButtonClick"
+                                            IsEnabled="False" />
+                                    <ComboBox x:Name="NewGamePlayer2ComboBox"
+                                              HorizontalAlignment="Left"
+                                              Margin="276,53,0,0"
+                                              VerticalAlignment="Top"
+                                              Width="154"
+                                              ItemsSource="{Binding Players}"
+                                              Visibility="Hidden"/>
+                                    <Label Name="NewGamePlayer2Label"
+                                           Content="Player"
+                                           HorizontalAlignment="Left"
+                                           Margin="430,51,0,0"
+                                           VerticalAlignment="Top"
+                                           Width="70"
+                                           HorizontalContentAlignment="Left"
+                                           VerticalContentAlignment="Center"
+                                           Visibility="Hidden"/>
+                                    <ComboBox Name="NewGameSetsComboBox"
+                                              HorizontalAlignment="Left"
+                                              Margin="276,16,0,0"
+                                              VerticalAlignment="Top"
+                                              Width="60"
+                                              Visibility="Hidden">
+                                        <ComboBoxItem>1</ComboBoxItem>
+                                        <ComboBoxItem>3</ComboBoxItem>
+                                        <ComboBoxItem>5</ComboBoxItem>
+                                        <ComboBoxItem>7</ComboBoxItem>
+                                    </ComboBox>
+                                    <ComboBox Name="NewGameLegsComboBox"
+                                              HorizontalAlignment="Left"
+                                              Margin="375,16,0,0"
+                                              VerticalAlignment="Top"
+                                              Width="55"
+                                              Visibility="Hidden">
+                                        <ComboBoxItem>1</ComboBoxItem>
+                                        <ComboBoxItem>3</ComboBoxItem>
+                                        <ComboBoxItem>5</ComboBoxItem>
+                                        <ComboBoxItem>7</ComboBoxItem>
+                                    </ComboBox>
+                                    <Label Name="NewGameSetsLabel"
+                                           Content="Sets"
+                                           HorizontalAlignment="Left"
+                                           Margin="336,14,0,0"
+                                           VerticalAlignment="Top"
+                                           Width="34"
+                                           HorizontalContentAlignment="Left"
+                                           VerticalContentAlignment="Center" Height="26"
+                                           Visibility="Hidden"/>
+                                    <Label Name="NewGameLegsLabel"
+                                           Content="Legs"
+                                           HorizontalAlignment="Left"
+                                           Margin="430,14,0,0"
+                                           VerticalAlignment="Top"
+                                           Width="34"
+                                           HorizontalContentAlignment="Left"
+                                           VerticalContentAlignment="Center"
+                                           Height="26"
+                                           Visibility="Hidden"/>
+                                </Grid>
                             </Grid>
-
                         </TabItem>
                         <TabItem Name="ProjectionTabItem"
                                  Header="Projection">
