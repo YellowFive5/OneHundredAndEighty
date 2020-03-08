@@ -223,8 +223,17 @@
   <data name="MovesNoiseLabelText" xml:space="preserve">
     <value>Moves noise value</value>
   </data>
+  <data name="NewGamePlayersNotSelectedErrorText" xml:space="preserve">
+    <value>Players not selected</value>
+  </data>
   <data name="NewPlayerEmptyDataErrorText" xml:space="preserve">
     <value>New player name and nickname must be filled in...</value>
+  </data>
+  <data name="NewPlayerSuccessfullySavedText" xml:space="preserve">
+    <value>{0} has joined the club!</value>
+  </data>
+  <data name="NotImplementedYetErrorText" xml:space="preserve">
+    <value>This functionality not implemented yet. Coming soon...</value>
   </data>
   <data name="PlayerAvatarTooBigErrorText" xml:space="preserve">
     <value>Avatar image can not be more that 512x512 px.</value>

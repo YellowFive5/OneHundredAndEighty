@@ -121,6 +121,10 @@ namespace OneHundredAndEightyCore.Recognition
             var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
             var camId = configService.Read<string>(camIdSetting);
             var index = allCams.FindIndex(x => x.DevicePath.Contains(camId));
+            if (index == -1)
+            {
+                throw new CamNotFoundException(camNumber, camId);
+            }
             return index;
         }
 
@@ -465,7 +469,6 @@ namespace OneHundredAndEightyCore.Recognition
             var newImage = videoCapture.QueryFrame().ToImage<Gray, byte>().Not();
             ThresholdRoi(newImage);
             var diffImage = RoiFrameBackground.AbsDiff(newImage);
-
             logger.Debug($"Capture and diff for cam_{camNumber} end");
             return diffImage;
         }

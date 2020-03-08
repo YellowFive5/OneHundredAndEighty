@@ -100,22 +100,26 @@
                                               Margin="276,16,0,0"
                                               VerticalAlignment="Top"
                                               Width="60"
-                                              Visibility="Hidden">
+                                              Visibility="Hidden"
+                                              SelectedIndex="2">
                                         <ComboBoxItem>1</ComboBoxItem>
                                         <ComboBoxItem>3</ComboBoxItem>
                                         <ComboBoxItem>5</ComboBoxItem>
                                         <ComboBoxItem>7</ComboBoxItem>
+                                        <ComboBoxItem>9</ComboBoxItem>
                                     </ComboBox>
                                     <ComboBox Name="NewGameLegsComboBox"
                                               HorizontalAlignment="Left"
                                               Margin="375,16,0,0"
                                               VerticalAlignment="Top"
                                               Width="55"
-                                              Visibility="Hidden">
+                                              Visibility="Hidden"
+                                              SelectedIndex="1">
                                         <ComboBoxItem>1</ComboBoxItem>
                                         <ComboBoxItem>3</ComboBoxItem>
                                         <ComboBoxItem>5</ComboBoxItem>
                                         <ComboBoxItem>7</ComboBoxItem>
+                                        <ComboBoxItem>9</ComboBoxItem>
                                     </ComboBox>
                                     <Label Name="NewGameSetsLabel"
                                            Content="Sets"

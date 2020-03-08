@@ -44,7 +44,11 @@ namespace OneHundredAndEightyCore.Recognition
 
         public event ThrowDetectedDelegate OnThrowDetected;
 
-        private void Prepare()
+        public delegate void ExceptionOccurredDelegate(Exception ex);
+
+        public event ExceptionOccurredDelegate OnErrorOccurred;
+
+        public void Prepare()
         {
             cams = new List<CamService>();
             var cam1Active = configService.Read<bool>(SettingsType.Cam1CheckBox);
@@ -80,6 +84,80 @@ namespace OneHundredAndEightyCore.Recognition
             withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
         }
 
+        public async void RunDetection()
+        {
+            try
+            {
+                await Task.Run(() =>
+                               {
+                                   Thread.CurrentThread.Name = $"Recognition_workerThread";
+
+                                   cams.ForEach(c => c.DoCapture(true));
+
+                                   while (!cancelToken.IsCancellationRequested)
+                                   {
+                                       foreach (var cam in cams)
+                                       {
+                                           logger.Debug($"Cam_{cam.camNumber} detection start");
+
+                                           var response = withDetection
+                                                              ? cam.DetectMove()
+                                                              : ResponseType.Nothing;
+
+                                           if (response == ResponseType.Move)
+                                           {
+                                               Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
+                                               response = cam.DetectThrow();
+
+                                               if (response == ResponseType.Trow)
+                                               {
+                                                   cam.FindAndProcessDartContour();
+
+                                                   FindThrowOnRemainingCams(cam);
+
+                                                   logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Trow}'. Cycle break");
+                                                   break;
+                                               }
+
+                                               if (response == ResponseType.Extraction)
+                                               {
+                                                   Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
+
+                                                   drawService.ProjectionClear();
+                                                   cams.ForEach(c => c.DoCapture(true));
+
+                                                   logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Extraction}'. Cycle break");
+                                                   break;
+                                               }
+                                           }
+
+                                           Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
+
+                                           logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Nothing}'");
+                                       }
+                                   }
+
+                                   cams.ForEach(c =>
+                                                {
+                                                    c.Dispose();
+                                                    c.ClearImageBoxes();
+                                                });
+
+                                   logger.Info($"Detection for {cams.Count} cams end. Cancellation requested");
+                               });
+            }
+            catch (Exception e)
+            {
+                OnErrorOccurred?.Invoke(e);
+                StopDetection();
+            }
+        }
+
+        public void StopDetection()
+        {
+            cts?.Cancel();
+        }
+
         private void FindThrowOnRemainingCams(CamService succeededCam)
         {
             logger.Info($"Finding throws from remaining cams start. Succeeded cam: {succeededCam.camNumber}");
@@ -97,74 +175,6 @@ namespace OneHundredAndEightyCore.Recognition
             }
 
             logger.Info($"Finding throws from remaining cams end");
-        }
-
-        public void RunDetection()
-        {
-            Prepare();
-
-            Task.Run(() =>
-                     {
-                         Thread.CurrentThread.Name = $"Recognition_workerThread";
-
-                         cams.ForEach(c => c.DoCapture(true));
-
-                         while (!cancelToken.IsCancellationRequested)
-                         {
-                             foreach (var cam in cams)
-                             {
-                                 logger.Debug($"Cam_{cam.camNumber} detection start");
-
-                                 var response = withDetection
-                                                    ? cam.DetectMove()
-                                                    : ResponseType.Nothing;
-
-                                 if (response == ResponseType.Move)
-                                 {
-                                     Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
-                                     response = cam.DetectThrow();
-
-                                     if (response == ResponseType.Trow)
-                                     {
-                                         cam.FindAndProcessDartContour();
-
-                                         FindThrowOnRemainingCams(cam);
-
-                                         logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Trow}'. Cycle break");
-                                         break;
-                                     }
-
-                                     if (response == ResponseType.Extraction)
-                                     {
-                                         Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
-
-                                         drawService.ProjectionClear();
-                                         cams.ForEach(c => c.DoCapture(true));
-
-                                         logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Extraction}'. Cycle break");
-                                         break;
-                                     }
-                                 }
-
-                                 Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
-
-                                 logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Nothing}'");
-                             }
-                         }
-
-                         cams.ForEach(c =>
-                                      {
-                                          c.Dispose();
-                                          c.ClearImageBoxes();
-                                      });
-
-                         logger.Info($"Detection for {cams.Count} cams end. Cancellation requested");
-                     });
-        }
-
-        public void StopDetection()
-        {
-            cts?.Cancel();
         }
     }
 }

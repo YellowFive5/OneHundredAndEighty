@@ -378,11 +378,38 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Players not selected.
+        /// </summary>
+        public static string NewGamePlayersNotSelectedErrorText {
+            get {
+                return ResourceManager.GetString("NewGamePlayersNotSelectedErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New player name and nickname must be filled in....
         /// </summary>
         public static string NewPlayerEmptyDataErrorText {
             get {
                 return ResourceManager.GetString("NewPlayerEmptyDataErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has joined the club!.
+        /// </summary>
+        public static string NewPlayerSuccessfullySavedText {
+            get {
+                return ResourceManager.GetString("NewPlayerSuccessfullySavedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This functionality not implemented yet. Coming soon....
+        /// </summary>
+        public static string NotImplementedYetErrorText {
+            get {
+                return ResourceManager.GetString("NotImplementedYetErrorText", resourceCulture);
             }
         }
         

@@ -42,7 +42,6 @@ namespace OneHundredAndEightyCore.Game
 
         public void StartGame()
         {
-            IsGameRun = true;
             var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox
                                                                   .SelectionBoxItem
                                                                   .ToString());
@@ -64,31 +63,37 @@ namespace OneHundredAndEightyCore.Game
                 case GameType.Classic301:
                 case GameType.Classic101:
                     players = new List<Player> {selectedPlayer1, selectedPlayer2};
-                    // todo
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectedGameType), selectedGameType, null);
             }
 
-            dbService.SaveNewGame(game, players);
-
+            detectionService.Prepare();
             detectionService.RunDetection();
+
+            dbService.SaveNewGame(game, players);
 
             Task.Run(() =>
                      {
+                         IsGameRun = true;
                          detectionService.OnThrowDetected += OnAnotherThrow;
                          while (IsGameRun)
                          {
                          }
+
                          detectionService.OnThrowDetected -= OnAnotherThrow;
                      });
         }
 
         public void StopGame()
         {
+            if (!IsGameRun)
+            {
+                return;
+            }
+
             IsGameRun = false;
             detectionService.StopDetection();
-
             drawService.ProjectionClear();
             dbService.EndGame(game);
         }

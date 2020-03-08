@@ -30,6 +30,7 @@ namespace OneHundredAndEightyCore
         private readonly ConfigService configService;
         private readonly DrawService drawService;
         private readonly ThrowService throwService;
+        private readonly DetectionService detectionService;
         private readonly GameService gameService;
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
@@ -66,6 +67,8 @@ namespace OneHundredAndEightyCore
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
             throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
             gameService = MainWindow.ServiceContainer.Resolve<GameService>();
+            detectionService = MainWindow.ServiceContainer.Resolve<DetectionService>();
+            detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
             CheckVersion(AppVersion);
             LoadSettings();
@@ -93,10 +96,30 @@ namespace OneHundredAndEightyCore
 
         public void StartGame()
         {
+            if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameControls))
+            {
+                MessageBox.Show(Resources.NotImplementedYetErrorText, "Error", MessageBoxButton.OK);
+                return;
+            }
+
+            if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameControls))
+            {
+                MessageBox.Show(Resources.NewGamePlayersNotSelectedErrorText, "Error", MessageBoxButton.OK);
+                return;
+            }
+
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
-            gameService.StartGame();
+            try
+            {
+                gameService.StartGame();
+            }
+            catch (Exception e)
+            {
+                StopGame();
+                MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
+            }
         }
 
         public void StopGame()
@@ -113,8 +136,7 @@ namespace OneHundredAndEightyCore
             var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
             if (!Validator.ValidateNewPlayerNameAndNickName(newPlayerName, newPlayerNickName))
             {
-                var errorText = Resources.ResourceManager.GetString("NewPlayerEmptyDataErrorText");
-                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
+                MessageBox.Show(Resources.NewPlayerEmptyDataErrorText, "Error", MessageBoxButton.OK);
                 return;
             }
 
@@ -122,7 +144,6 @@ namespace OneHundredAndEightyCore
                                        newPlayerNickName,
                                        -1,
                                        mainWindow.NewPlayerAvatar.Source as BitmapImage);
-
             try
             {
                 dbService.SaveNewPlayer(newPlayer);
@@ -133,7 +154,7 @@ namespace OneHundredAndEightyCore
                 return;
             }
 
-            MessageBox.Show($"{newPlayer}", "New player saved", MessageBoxButton.OK);
+            MessageBox.Show(string.Format(Resources.NewPlayerSuccessfullySavedText, newPlayer), "New player saved", MessageBoxButton.OK);
             mainWindow.NewPlayerNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
@@ -223,27 +244,44 @@ namespace OneHundredAndEightyCore
             }
         }
 
+        #region Error
+
+        private void OnDetectionServiceErrorOccurred(Exception e)
+        {
+            MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
+            StopGame();
+        }
+
+        #endregion
+
         #region CamSetupCapturing
 
-        public void StartCamSetupCapturing(string gridName)
+        public async void StartCamSetupCapturing(string gridName)
         {
             ToggleCamSetupGridControlsEnabled(gridName);
             cts = new CancellationTokenSource();
             var cancelToken = cts.Token;
 
-            Task.Run(() =>
-                     {
-                         var cam = new CamService(mainWindow, gridName, CamServiceWorkingMode.Setup);
+            try
+            {
+                await Task.Run(() =>
+                               {
+                                   var cam = new CamService(mainWindow, gridName, CamServiceWorkingMode.Setup);
+                                   while (!cancelToken.IsCancellationRequested)
+                                   {
+                                       cam.DoCapture(true);
+                                       cam.RefreshImageBoxes();
+                                   }
 
-                         while (!cancelToken.IsCancellationRequested)
-                         {
-                             cam.DoCapture(true);
-                             cam.RefreshImageBoxes();
-                         }
-
-                         cam.ClearImageBoxes();
-                         cam.Dispose();
-                     });
+                                   cam.ClearImageBoxes();
+                                   cam.Dispose();
+                               });
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK);
+                StopCamSetupCapturing(gridName);
+            }
         }
 
         public void StopCamSetupCapturing(string gridName)
