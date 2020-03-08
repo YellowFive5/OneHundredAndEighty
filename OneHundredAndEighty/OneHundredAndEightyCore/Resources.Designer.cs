@@ -414,6 +414,16 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Start_logo4 {
+            get {
+                object obj = ResourceManager.GetObject("Start_logo4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Threshold sleep time between cams work in seconds. Default value is &apos;0.125&apos;.
         /// </summary>
         public static string ThresholdSleepTimeHelperText {
