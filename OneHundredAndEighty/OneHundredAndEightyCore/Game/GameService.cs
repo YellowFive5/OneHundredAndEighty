@@ -22,6 +22,7 @@ namespace OneHundredAndEightyCore.Game
         private readonly DBService dbService;
         private Game game;
         private List<Player> players;
+        private Player playerOnThrow;
         private bool IsGameRun { get; set; }
 
         public GameService(MainWindow mainWindow,
@@ -75,11 +76,11 @@ namespace OneHundredAndEightyCore.Game
 
             Task.Run(() =>
                      {
-                         detectionService.OnThrowDetected += SaveThrow;
+                         detectionService.OnThrowDetected += OnAnotherThrow;
                          while (IsGameRun)
                          {
                          }
-                         detectionService.OnThrowDetected -= SaveThrow;
+                         detectionService.OnThrowDetected -= OnAnotherThrow;
                      });
         }
 
@@ -97,7 +98,7 @@ namespace OneHundredAndEightyCore.Game
             // todo
         }
 
-        private void SaveThrow(DetectedThrow thrw)
+        private void OnAnotherThrow(DetectedThrow thrw)
         {
             var dbThrow = new Throw(players.First(),
                                     game,
