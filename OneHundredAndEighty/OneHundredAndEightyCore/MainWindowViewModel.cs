@@ -96,13 +96,7 @@ namespace OneHundredAndEightyCore
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
-            var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox.SelectionBoxItem.ToString());
-
-            var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
-
-            var newGamePlayers = new List<Player> {selectedPlayer1};
-
-            gameService.StartGame(selectedGameType, newGamePlayers);
+            gameService.StartGame();
         }
 
         public void StopGame()
@@ -110,7 +104,7 @@ namespace OneHundredAndEightyCore
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
-            // gameService.StopGame();
+            gameService.StopGame();
         }
 
         public void SaveNewPlayer()
@@ -330,6 +324,9 @@ namespace OneHundredAndEightyCore
             mainWindow.StopGameButton.IsEnabled = !mainWindow.StopGameButton.IsEnabled;
             mainWindow.NewGameTypeComboBox.IsEnabled = !mainWindow.NewGameTypeComboBox.IsEnabled;
             mainWindow.NewGamePlayer1ComboBox.IsEnabled = !mainWindow.NewGamePlayer1ComboBox.IsEnabled;
+            mainWindow.NewGamePlayer2ComboBox.IsEnabled = !mainWindow.NewGamePlayer2ComboBox.IsEnabled;
+            mainWindow.NewGameSetsComboBox.IsEnabled = !mainWindow.NewGameSetsComboBox.IsEnabled;
+            mainWindow.NewGameLegsComboBox.IsEnabled = !mainWindow.NewGameLegsComboBox.IsEnabled;
         }
 
         public void ToggleNewGameControlsVisibility()

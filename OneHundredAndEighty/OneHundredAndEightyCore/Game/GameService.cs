@@ -39,15 +39,22 @@ namespace OneHundredAndEightyCore.Game
             this.dbService = dbService;
         }
 
-        public void StartGame(GameType type, List<Player> players)
+        public void StartGame()
         {
             IsGameRun = true;
-            this.players = players;
-            game = new Game(type);
+            var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox
+                                                                  .SelectionBoxItem
+                                                                  .ToString());
+            var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
+            var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
+            game = new Game(selectedGameType);
+            drawService.ProjectionClear();
+            drawService.PointsHistoryBoxClear();
 
-            switch (type)
+            switch (selectedGameType)
             {
                 case GameType.FreeThrows:
+                    players = new List<Player> {selectedPlayer1};
                     StartFreeThrows();
                     break;
                 case GameType.Classic1001:
@@ -55,27 +62,24 @@ namespace OneHundredAndEightyCore.Game
                 case GameType.Classic501:
                 case GameType.Classic301:
                 case GameType.Classic101:
+                    players = new List<Player> {selectedPlayer1, selectedPlayer2};
                     // todo
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+                    throw new ArgumentOutOfRangeException(nameof(selectedGameType), selectedGameType, null);
             }
-            drawService.ProjectionClear();
-            drawService.PointsHistoryBoxClear();
+
             dbService.SaveNewGame(game, players);
 
             detectionService.RunDetection();
 
             Task.Run(() =>
                      {
+                         detectionService.OnThrowDetected += SaveThrow;
                          while (IsGameRun)
                          {
-                             var thrw = detectionService.TryPopThrow();
-                             if (thrw != null)
-                             {
-                                 SaveThrow(thrw);
-                             }
                          }
+                         detectionService.OnThrowDetected -= SaveThrow;
                      });
         }
 
@@ -90,7 +94,7 @@ namespace OneHundredAndEightyCore.Game
 
         private void StartFreeThrows()
         {
-
+            // todo
         }
 
         private void SaveThrow(DetectedThrow thrw)

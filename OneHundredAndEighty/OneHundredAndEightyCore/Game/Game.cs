@@ -11,7 +11,7 @@ namespace OneHundredAndEightyCore.Game
         public int Id { get; private set; }
         public GameType Type { get; }
         public DateTime StartTimeStamp { get; }
-        public DateTime EndTimeStamp { get; set; }
+        public DateTime EndTimeStamp { get; private set; }
 
         public Game(GameType type, int id = -1)
         {

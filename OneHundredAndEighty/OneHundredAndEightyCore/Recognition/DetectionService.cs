@@ -26,8 +26,6 @@ namespace OneHundredAndEightyCore.Recognition
         private double extractionSleepTime;
         private double thresholdSleepTime;
         private bool withDetection;
-        private Stack<DetectedThrow> anotherThrows;
-        private readonly object locker = new object();
 
         public DetectionService(MainWindow mainWindow,
                                 DrawService drawService,
@@ -42,9 +40,12 @@ namespace OneHundredAndEightyCore.Recognition
             this.logger = logger;
         }
 
+        public delegate void ThrowDetectedDelegate(DetectedThrow thrw);
+
+        public event ThrowDetectedDelegate OnThrowDetected;
+
         private void Prepare()
         {
-            anotherThrows = new Stack<DetectedThrow>();
             cams = new List<CamService>();
             var cam1Active = configService.Read<bool>(SettingsType.Cam1CheckBox);
             var cam2Active = configService.Read<bool>(SettingsType.Cam2CheckBox);
@@ -92,7 +93,7 @@ namespace OneHundredAndEightyCore.Recognition
             var thrw = throwService.GetThrow();
             if (thrw != null)
             {
-                PushThrow(thrw);
+                OnThrowDetected?.Invoke(thrw);
             }
 
             logger.Info($"Finding throws from remaining cams end");
@@ -164,27 +165,6 @@ namespace OneHundredAndEightyCore.Recognition
         public void StopDetection()
         {
             cts?.Cancel();
-        }
-
-        private void PushThrow(DetectedThrow thrw)
-        {
-            lock (locker)
-            {
-                anotherThrows.Push(thrw);
-            }
-        }
-
-        public DetectedThrow TryPopThrow()
-        {
-            lock (locker)
-            {
-                if (anotherThrows.Count > 0)
-                {
-                    return anotherThrows.Pop();
-                }
-
-                return null;
-            }
         }
     }
 }
