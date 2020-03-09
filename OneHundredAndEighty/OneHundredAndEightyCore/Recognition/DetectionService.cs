@@ -48,7 +48,7 @@ namespace OneHundredAndEightyCore.Recognition
 
         public event ExceptionOccurredDelegate OnErrorOccurred;
 
-        public void Prepare()
+        public void PrepareAndTryCapture()
         {
             cams = new List<CamService>();
             var cam1Active = configService.Read<bool>(SettingsType.Cam1CheckBox);
@@ -82,6 +82,11 @@ namespace OneHundredAndEightyCore.Recognition
             thresholdSleepTime = configService.Read<double>(SettingsType.ThresholdSleepTime);
             moveDetectedSleepTime = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
             withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
+
+            foreach (var cam in cams)
+            {
+                cam.TryQueryFrame();
+            }
         }
 
         public async void RunDetection()

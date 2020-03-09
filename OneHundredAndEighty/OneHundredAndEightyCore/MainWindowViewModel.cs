@@ -279,7 +279,7 @@ namespace OneHundredAndEightyCore
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK);
+                MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
                 StopCamSetupCapturing(gridName);
             }
         }

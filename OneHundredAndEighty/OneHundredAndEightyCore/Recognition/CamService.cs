@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -123,7 +124,7 @@ namespace OneHundredAndEightyCore.Recognition
             var index = allCams.FindIndex(x => x.DevicePath.Contains(camId));
             if (index == -1)
             {
-                throw new CamNotFoundException(camNumber, camId);
+                throw new Exception($"Camera with specified id '{camId}' not found in connected camera devices for Camera#{camNumber}");
             }
             return index;
         }
@@ -536,6 +537,15 @@ namespace OneHundredAndEightyCore.Recognition
         public void Dispose()
         {
             videoCapture.Dispose();
+        }
+
+        public void TryQueryFrame()
+        {
+            var testImage = videoCapture.QueryFrame();
+            if (testImage == null)
+            {
+                throw new Exception($"Error query image from Cam#{camNumber}");
+            }
         }
     }
 }

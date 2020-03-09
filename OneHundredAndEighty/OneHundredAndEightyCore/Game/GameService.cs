@@ -68,7 +68,7 @@ namespace OneHundredAndEightyCore.Game
                     throw new ArgumentOutOfRangeException(nameof(selectedGameType), selectedGameType, null);
             }
 
-            detectionService.Prepare();
+            detectionService.PrepareAndTryCapture();
             detectionService.RunDetection();
 
             dbService.SaveNewGame(game, players);
