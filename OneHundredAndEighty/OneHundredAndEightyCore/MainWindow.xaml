@@ -85,7 +85,7 @@
                                               VerticalAlignment="Top"
                                               Width="154"
                                               ItemsSource="{Binding Players}"
-                                              Visibility="Hidden"/>
+                                              Visibility="Visible"/>
                                     <Label Name="NewGamePlayer2Label"
                                            Content="Player"
                                            HorizontalAlignment="Left"
@@ -94,7 +94,7 @@
                                            Width="70"
                                            HorizontalContentAlignment="Left"
                                            VerticalContentAlignment="Center"
-                                           Visibility="Hidden"/>
+                                           Visibility="Visible"/>
                                     <ComboBox Name="NewGameSetsComboBox"
                                               HorizontalAlignment="Left"
                                               Margin="276,16,0,0"

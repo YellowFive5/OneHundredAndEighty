@@ -9,6 +9,7 @@ using NLog.Web;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
+using OneHundredAndEightyCore.ScoreBoard;
 using IContainer = Autofac.IContainer;
 
 #endregion
@@ -43,6 +44,9 @@ namespace OneHundredAndEightyCore
             var dbService = new DBService();
             cb.Register(r => dbService).AsSelf().SingleInstance();
 
+            var scoreBoardService = new ScoreBoardService();
+            cb.Register(r => scoreBoardService).AsSelf().SingleInstance();
+
             var configService = new ConfigService(logger, dbService);
             cb.Register(r => configService).AsSelf().SingleInstance();
 
@@ -55,7 +59,7 @@ namespace OneHundredAndEightyCore
             var detectionService = new DetectionService(this, drawService, configService, throwService, logger);
             cb.Register(r => detectionService).AsSelf().SingleInstance();
 
-            var gameService = new GameService(this, detectionService, configService, drawService, logger, dbService);
+            var gameService = new GameService(this, scoreBoardService ,detectionService, configService, drawService, logger, dbService);
             cb.Register(r => gameService).AsSelf().SingleInstance();
 
             ServiceContainer = cb.Build();
@@ -67,6 +71,8 @@ namespace OneHundredAndEightyCore
         {
             logger.Debug("MainWindow on closing");
 
+            viewModel.CloseScoreBoard();
+            viewModel.StopGame(GameResultType.Aborted);
             viewModel.SaveSettingsIfDirty();
         }
 

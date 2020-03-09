@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
+using OneHundredAndEightyCore.ScoreBoard;
 
 #endregion
 
@@ -15,6 +16,7 @@ namespace OneHundredAndEightyCore.Game
     public class GameService
     {
         private readonly MainWindow mainWindow;
+        private readonly ScoreBoardService scoreBoardService;
         private readonly DrawService drawService;
         private readonly DetectionService detectionService;
         private readonly ConfigService configService;
@@ -26,6 +28,7 @@ namespace OneHundredAndEightyCore.Game
         private bool IsGameRun { get; set; }
 
         public GameService(MainWindow mainWindow,
+                           ScoreBoardService scoreBoardService,
                            DetectionService detectionService,
                            ConfigService configService,
                            DrawService drawService,
@@ -33,6 +36,7 @@ namespace OneHundredAndEightyCore.Game
                            DBService dbService)
         {
             this.mainWindow = mainWindow;
+            this.scoreBoardService = scoreBoardService;
             this.detectionService = detectionService;
             this.configService = configService;
             this.drawService = drawService;
@@ -42,19 +46,32 @@ namespace OneHundredAndEightyCore.Game
 
         public void StartGame()
         {
+            drawService.ProjectionClear();
+            drawService.PointsHistoryBoxClear();
+
+            detectionService.PrepareAndTryCapture();
+            detectionService.RunDetection();
+
             var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox
                                                                   .SelectionBoxItem
                                                                   .ToString());
             var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
             var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
             game = new Game(selectedGameType);
-            drawService.ProjectionClear();
-            drawService.PointsHistoryBoxClear();
+
+            players = new List<Player>();
+            if (selectedPlayer1 != null)
+            {
+                players.Add(selectedPlayer1);
+            }
+            if (selectedPlayer2 != null)
+            {
+                players.Add(selectedPlayer2);
+            }
 
             switch (selectedGameType)
             {
                 case GameType.FreeThrows:
-                    players = new List<Player> {selectedPlayer1};
                     StartFreeThrows();
                     break;
                 case GameType.Classic1001:
@@ -62,16 +79,14 @@ namespace OneHundredAndEightyCore.Game
                 case GameType.Classic501:
                 case GameType.Classic301:
                 case GameType.Classic101:
-                    players = new List<Player> {selectedPlayer1, selectedPlayer2};
+                    StartClassic();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectedGameType), selectedGameType, null);
             }
-
-            detectionService.PrepareAndTryCapture();
-            detectionService.RunDetection();
-
             dbService.SaveNewGame(game, players);
+
+            scoreBoardService.OpenScoreBoard(game, players);
 
             Task.Run(() =>
                      {
@@ -93,9 +108,15 @@ namespace OneHundredAndEightyCore.Game
             }
 
             IsGameRun = false;
+            scoreBoardService.CloseScoreBoard();
             detectionService.StopDetection();
             drawService.ProjectionClear();
             dbService.EndGame(game,type);
+        }
+
+        private void StartClassic()
+        {
+            // todo
         }
 
         private void StartFreeThrows()

@@ -17,6 +17,7 @@ using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
+using OneHundredAndEightyCore.ScoreBoard;
 
 #endregion
 
@@ -31,12 +32,14 @@ namespace OneHundredAndEightyCore
         private readonly DrawService drawService;
         private readonly ThrowService throwService;
         private readonly DetectionService detectionService;
+        private ScoreBoardService scoreBoardService;
         private readonly GameService gameService;
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
 
         private const double AppVersion = 2.0;
         public bool IsSettingsDirty { get; set; }
+
 
         #region Bindable props
 
@@ -67,6 +70,7 @@ namespace OneHundredAndEightyCore
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
             throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
             gameService = MainWindow.ServiceContainer.Resolve<GameService>();
+            scoreBoardService = MainWindow.ServiceContainer.Resolve<ScoreBoardService>();
             detectionService = MainWindow.ServiceContainer.Resolve<DetectionService>();
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
@@ -117,6 +121,7 @@ namespace OneHundredAndEightyCore
             }
             catch (Exception e)
             {
+                CloseScoreBoard();
                 StopGame(GameResultType.Error);
                 MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
             }
@@ -374,8 +379,6 @@ namespace OneHundredAndEightyCore
             switch (selectedGameType)
             {
                 case GameType.FreeThrows:
-                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Hidden;
-                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Hidden;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGameSetsLabel.Visibility = Visibility.Hidden;
                     mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
@@ -396,6 +399,11 @@ namespace OneHundredAndEightyCore
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public void CloseScoreBoard()
+        {
+            scoreBoardService.CloseScoreBoard();
         }
 
         #endregion

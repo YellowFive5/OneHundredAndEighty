@@ -42,7 +42,8 @@ namespace OneHundredAndEightyCore.Common
             switch (selectedGameType)
             {
                 case GameType.FreeThrows:
-                    valid = selectedPlayer1 != null;
+                    valid = (selectedPlayer1 != null || selectedPlayer2 != null) &&
+                            selectedPlayer1 != selectedPlayer2;
                     break;
                 case GameType.Classic1001:
                 case GameType.Classic701:
