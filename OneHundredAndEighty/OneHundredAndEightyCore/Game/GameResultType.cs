@@ -4,6 +4,8 @@
     {
         NotDefined = 1,
         Win,
-        Loose
+        Loose,
+        Aborted,
+        Error
     }
 }

@@ -85,7 +85,7 @@ namespace OneHundredAndEightyCore.Game
                      });
         }
 
-        public void StopGame()
+        public void StopGame(GameResultType type)
         {
             if (!IsGameRun)
             {
@@ -95,7 +95,7 @@ namespace OneHundredAndEightyCore.Game
             IsGameRun = false;
             detectionService.StopDetection();
             drawService.ProjectionClear();
-            dbService.EndGame(game);
+            dbService.EndGame(game,type);
         }
 
         private void StartFreeThrows()

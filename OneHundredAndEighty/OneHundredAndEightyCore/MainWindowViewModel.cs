@@ -117,17 +117,17 @@ namespace OneHundredAndEightyCore
             }
             catch (Exception e)
             {
-                StopGame();
+                StopGame(GameResultType.Error);
                 MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
             }
         }
 
-        public void StopGame()
+        public void StopGame(GameResultType type = GameResultType.NotDefined)
         {
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
-            gameService.StopGame();
+            gameService.StopGame(type);
         }
 
         public void SaveNewPlayer()
@@ -249,7 +249,7 @@ namespace OneHundredAndEightyCore
         private void OnDetectionServiceErrorOccurred(Exception e)
         {
             MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
-            StopGame();
+            StopGame(GameResultType.Error);
         }
 
         #endregion

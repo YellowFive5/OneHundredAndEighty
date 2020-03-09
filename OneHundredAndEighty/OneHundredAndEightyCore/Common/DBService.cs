@@ -109,59 +109,128 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        public void EndGame(Game.Game game, Player winner = null)
+        public void EndGame(Game.Game game, GameResultType gameResultType = GameResultType.NotDefined, Player winner = null)
+        {
+            WriteGameEndTimeStamp(game);
+
+            if (gameResultType == GameResultType.Aborted ||
+                gameResultType == GameResultType.Error)
+            {
+                switch (game.Type)
+                {
+                    case GameType.FreeThrows:
+                        UpdateFreeThrowsStatistics(game.Id, gameResultType);
+                        break;
+                    case GameType.Classic1001:
+                    case GameType.Classic701:
+                    case GameType.Classic501:
+                    case GameType.Classic301:
+                    case GameType.Classic101:
+                        // todo
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else if (winner != null)
+            {
+                switch (game.Type)
+                {
+                    case GameType.FreeThrows:
+                        UpdateFreeThrowsStatisticsForWinnerAndLoosers(game.Id, winner.Id);
+                        break;
+                    case GameType.Classic1001:
+                    case GameType.Classic701:
+                    case GameType.Classic501:
+                    case GameType.Classic301:
+                    case GameType.Classic101:
+                        //todo
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                UpdateWinnerStatistics(winner.Id);
+            }
+
+            switch (game.Type)
+            {
+                case GameType.FreeThrows:
+                    UpdatePlayerStatistics(game.Id);
+                    break;
+                case GameType.Classic1001:
+                case GameType.Classic701:
+                case GameType.Classic501:
+                case GameType.Classic301:
+                case GameType.Classic101:
+                    //todo
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void WriteGameEndTimeStamp(Game.Game game)
         {
             game.SetEndTimeStamp();
             var gameEndTimestampQuery = $"UPDATE [{Table.Games}] SET [{Column.EndTimestamp}] = '{game.EndTimeStamp}' " +
                                         $"WHERE [Id] = {game.Id}";
             ExecuteNonQueryInternal(gameEndTimestampQuery);
-
-            if (winner != null)
-            {
-                var winnerGameStatisticsResultQuery = string.Empty;
-                var loosersGameStatisticsResultQuery = string.Empty;
-
-                switch (game.Type)
-                {
-                    case GameType.FreeThrows:
-                        winnerGameStatisticsResultQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.GameResult}] = {(int) GameResultType.Win} " +
-                                                          $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
-                                                          $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
-                                                          $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                                          $"AND [GS].[{Column.Statistics}] = [SFT].[{Column.Id}] " +
-                                                          $"WHERE[{Column.Player}] = {winner.Id})";
-                        loosersGameStatisticsResultQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.GameResult}] = {(int) GameResultType.Loose} " +
-                                                           $"WHERE [{Column.Id}] IN (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
-                                                           $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
-                                                           $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                                           $"AND [GS].[{Column.Statistics}] = [SFT].[{Column.Id}] " +
-                                                           $"WHERE[{Column.Player}] <> {winner.Id})";
-                        break;
-                    // todo another game types
-                }
-
-                ExecuteNonQueryInternal(winnerGameStatisticsResultQuery);
-                ExecuteNonQueryInternal(loosersGameStatisticsResultQuery);
-
-                var winnerPlayerStatisticsQuery = $"UPDATE [{Table.PlayerStatistics}] SET [{Column.GamesWon}] = [{Column.GamesWon}] + 1 " +
-                                                  $"WHERE [{Column.Id}] = (SELECT [{Column.Statistics}] FROM [{Table.Players}] WHERE [{Column.Id}] = {winner.Id})";
-                ExecuteNonQueryInternal(winnerPlayerStatisticsQuery);
-            }
-
-            var playersStatisticsQuery = $"UPDATE [{Table.PlayerStatistics}] SET [{Column.GamesPlayed}] = [{Column.GamesPlayed}] + 1 " +
-                                         $"WHERE [{Column.Id}] IN (SELECT [P].[{Column.Statistics}] FROM [{Table.Players}] AS [P] " +
-                                         $"INNER JOIN [{Table.StatisticsFreeThrows}] AS [SFT] " +
-                                         $"ON [SFT].[{Column.Player}] = [P].[{Column.Id}]" +
-                                         $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
-                                         $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                         $"AND [GS].[{Column.Statistics}] = [SFT].[{Column.Id}])";
-            // todo another game types
-            ExecuteNonQueryInternal(playersStatisticsQuery);
         }
 
         #endregion
 
         #region Statistics
+
+        private void UpdateFreeThrowsStatistics(int gameId, GameResultType gameResultType)
+        {
+            var playersGameStatisticsResultQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.GameResult}] = {(int) gameResultType} " +
+                                                   $"WHERE [{Column.Id}] IN (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
+                                                   $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
+                                                   $"ON [GS].[{Column.Game}] = {gameId} " +
+                                                   $"AND [GS].[{Column.Statistics}] = [SFT].[{Column.Id}])";
+
+            ExecuteNonQueryInternal(playersGameStatisticsResultQuery);
+        }
+
+        private void UpdatePlayerStatistics(int gameId)
+        {
+            var playersStatisticsQuery = $"UPDATE [{Table.PlayerStatistics}] SET [{Column.GamesPlayed}] = [{Column.GamesPlayed}] + 1 " +
+                                         $"WHERE [{Column.Id}] IN (SELECT [P].[{Column.Statistics}] FROM [{Table.Players}] AS [P] " +
+                                         $"INNER JOIN [{Table.StatisticsFreeThrows}] AS [SFT] " +
+                                         $"ON [SFT].[{Column.Player}] = [P].[{Column.Id}]" +
+                                         $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
+                                         $"ON [GS].[{Column.Game}] = {gameId} " +
+                                         $"AND [GS].[{Column.Statistics}] = [SFT].[{Column.Id}])";
+
+            ExecuteNonQueryInternal(playersStatisticsQuery);
+        }
+
+        private void UpdateWinnerStatistics(int winnerId)
+        {
+            var winnerPlayerStatisticsQuery = $"UPDATE [{Table.PlayerStatistics}] SET [{Column.GamesWon}] = [{Column.GamesWon}] + 1 " +
+                                              $"WHERE [{Column.Id}] = (SELECT [{Column.Statistics}] FROM [{Table.Players}] WHERE [{Column.Id}] = {winnerId})";
+            ExecuteNonQueryInternal(winnerPlayerStatisticsQuery);
+        }
+
+        private void UpdateFreeThrowsStatisticsForWinnerAndLoosers(int gameId, int winnerId)
+        {
+            var winnerGameStatisticsResultQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.GameResult}] = {(int) GameResultType.Win} " +
+                                                  $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
+                                                  $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
+                                                  $"ON [GS].[{Column.Game}] = {gameId} " +
+                                                  $"AND [GS].[{Column.Statistics}] = [SFT].[{Column.Id}] " +
+                                                  $"WHERE[{Column.Player}] = {winnerId})";
+            var loosersGameStatisticsResultQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.GameResult}] = {(int) GameResultType.Loose} " +
+                                                   $"WHERE [{Column.Id}] IN (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
+                                                   $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
+                                                   $"ON [GS].[{Column.Game}] = {gameId} " +
+                                                   $"AND [GS].[{Column.Statistics}] = [SFT].[{Column.Id}] " +
+                                                   $"WHERE[{Column.Player}] <> {winnerId})";
+
+            ExecuteNonQueryInternal(winnerGameStatisticsResultQuery);
+            ExecuteNonQueryInternal(loosersGameStatisticsResultQuery);
+        }
 
         private void SaveNewFreeThrowsStatistics(int newGameId, List<Player> players)
         {

@@ -114,7 +114,7 @@ namespace OneHundredAndEightyCore
 
         private void StopGameButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.StopGame();
+            viewModel.StopGame(GameResultType.Aborted);
         }
 
         private void OnSaveNewPlayerButtonClick(object sender, RoutedEventArgs e)
