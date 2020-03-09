@@ -2,7 +2,8 @@
 {
     public enum GameType
     {
-        FreeThrows = 1,
+        FreeThrowsSingle = 1,
+        FreeThrowsDouble,
         Classic1001,
         Classic701,
         Classic501,

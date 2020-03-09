@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using OneHundredAndEightyCore.Game;
 
@@ -16,17 +15,25 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region Open/Close
 
-        public void OpenScoreBoard(Game.Game game, List<Player> players)
+        public void OpenScoreBoard(GameType type)
         {
-            if (game.Type != GameType.FreeThrows)
+            switch (type)
             {
-                scoreBoardType = ScoreBoardType.Classic;
-            }
-            else
-            {
-                scoreBoardType = players.Count == 1
-                                     ? ScoreBoardType.FreeThrowsSingle
-                                     : ScoreBoardType.FreeThrowsDouble;
+                case GameType.FreeThrowsSingle:
+                    scoreBoardType = ScoreBoardType.FreeThrowsSingle;
+                    break;
+                case GameType.FreeThrowsDouble:
+                    scoreBoardType = ScoreBoardType.FreeThrowsDouble;
+                    break;
+                case GameType.Classic1001:
+                case GameType.Classic701:
+                case GameType.Classic501:
+                case GameType.Classic301:
+                case GameType.Classic101:
+                    scoreBoardType = ScoreBoardType.Classic;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             scoreBoardWindow = new ScoreBoardWindow();
@@ -76,6 +83,19 @@ namespace OneHundredAndEightyCore.ScoreBoard
         private void PreSetupForClassics()
         {
             scoreBoardWindow.ScoreBoardClassicGrid.Visibility = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region Points
+
+        public void AddPoints(int pointsToAdd)
+        {
+            scoreBoardWindow.Dispatcher.Invoke(() =>
+                                               {
+                                                   scoreBoardWindow.ScoreBoardFreeThrowsSinglePoints.Content = int.Parse(scoreBoardWindow.ScoreBoardFreeThrowsSinglePoints.Content.ToString()) 
+                                                                                                               + pointsToAdd;
+                                               });
         }
 
         #endregion

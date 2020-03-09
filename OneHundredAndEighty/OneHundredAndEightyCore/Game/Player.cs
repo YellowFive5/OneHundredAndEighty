@@ -9,10 +9,21 @@ namespace OneHundredAndEightyCore.Game
 {
     public class Player
     {
+        #region Main
+
         public int Id { get; }
         public string Name { get; }
         public string NickName { get; }
         public BitmapImage Avatar { get; }
+
+        #endregion
+
+        #region Game
+
+        public int Points { get; set; }
+        public int ThrowNumber { get; set; } = 1;
+
+        #endregion
 
         public Player(string name, string nickName, int id = -1, BitmapImage avatar = null)
         {

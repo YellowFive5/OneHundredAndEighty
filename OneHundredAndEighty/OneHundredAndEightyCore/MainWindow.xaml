@@ -43,7 +43,8 @@
                                               Width="155"
                                               SelectedIndex="0"
                                               SelectionChanged="NewGameTypeComboBox_OnSelectionChanged">
-                                        <ComboBoxItem>FreeThrows</ComboBoxItem>
+                                        <ComboBoxItem>FreeThrowsSingle</ComboBoxItem>
+                                        <ComboBoxItem>FreeThrowsDouble</ComboBoxItem>
                                         <ComboBoxItem>Classic1001</ComboBoxItem>
                                         <ComboBoxItem>Classic701</ComboBoxItem>
                                         <ComboBoxItem>Classic501</ComboBoxItem>
@@ -85,7 +86,7 @@
                                               VerticalAlignment="Top"
                                               Width="154"
                                               ItemsSource="{Binding Players}"
-                                              Visibility="Visible"/>
+                                              Visibility="Hidden"/>
                                     <Label Name="NewGamePlayer2Label"
                                            Content="Player"
                                            HorizontalAlignment="Left"
@@ -94,7 +95,7 @@
                                            Width="70"
                                            HorizontalContentAlignment="Left"
                                            VerticalContentAlignment="Center"
-                                           Visibility="Visible"/>
+                                           Visibility="Hidden"/>
                                     <ComboBox Name="NewGameSetsComboBox"
                                               HorizontalAlignment="Left"
                                               Margin="276,16,0,0"

@@ -37,7 +37,7 @@ namespace OneHundredAndEightyCore.Common
             var incrementThrowTypeGameStatisticsQuery = string.Empty;
             switch (thrw.Game.Type)
             {
-                case GameType.FreeThrows:
+                case GameType.FreeThrowsSingle:
                     incrementThrowGameStatisticsQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.Throws}] = [{Column.Throws}] + 1 " +
                                                         $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
                                                         $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
@@ -94,8 +94,10 @@ namespace OneHundredAndEightyCore.Common
 
             switch (game.Type)
             {
-                case GameType.FreeThrows:
+                case GameType.FreeThrowsSingle:
                     SaveNewFreeThrowsStatistics(newGameId, players);
+                    break;
+                case GameType.FreeThrowsDouble:
                     break;
                 case GameType.Classic1001:
                 case GameType.Classic701:
@@ -118,8 +120,10 @@ namespace OneHundredAndEightyCore.Common
             {
                 switch (game.Type)
                 {
-                    case GameType.FreeThrows:
+                    case GameType.FreeThrowsSingle:
                         UpdateFreeThrowsStatistics(game.Id, gameResultType);
+                        break;
+                    case GameType.FreeThrowsDouble:
                         break;
                     case GameType.Classic1001:
                     case GameType.Classic701:
@@ -136,8 +140,10 @@ namespace OneHundredAndEightyCore.Common
             {
                 switch (game.Type)
                 {
-                    case GameType.FreeThrows:
+                    case GameType.FreeThrowsSingle:
                         UpdateFreeThrowsStatisticsForWinnerAndLoosers(game.Id, winner.Id);
+                        break;
+                    case GameType.FreeThrowsDouble:
                         break;
                     case GameType.Classic1001:
                     case GameType.Classic701:
@@ -155,8 +161,10 @@ namespace OneHundredAndEightyCore.Common
 
             switch (game.Type)
             {
-                case GameType.FreeThrows:
+                case GameType.FreeThrowsSingle:
                     UpdatePlayerStatistics(game.Id);
+                    break;
+                case GameType.FreeThrowsDouble:
                     break;
                 case GameType.Classic1001:
                 case GameType.Classic701:

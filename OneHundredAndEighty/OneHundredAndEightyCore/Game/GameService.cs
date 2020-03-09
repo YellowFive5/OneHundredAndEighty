@@ -22,10 +22,13 @@ namespace OneHundredAndEightyCore.Game
         private readonly ConfigService configService;
         private readonly Logger logger;
         private readonly DBService dbService;
-        private Game game;
-        private List<Player> players;
-        private Player playerOnThrow;
+
         private bool IsGameRun { get; set; }
+        private Game Game { get; set; }
+        private List<Player> Players { get; set; }
+        private Player PlayerOnThrow { get; set; }
+        private Player PlayerOnSet { get; set; }
+
 
         public GameService(MainWindow mainWindow,
                            ScoreBoardService scoreBoardService,
@@ -57,22 +60,26 @@ namespace OneHundredAndEightyCore.Game
                                                                   .ToString());
             var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
             var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
-            game = new Game(selectedGameType);
+            Game = new Game(selectedGameType);
 
-            players = new List<Player>();
+            Players = new List<Player>();
             if (selectedPlayer1 != null)
             {
-                players.Add(selectedPlayer1);
+                Players.Add(selectedPlayer1);
             }
+
             if (selectedPlayer2 != null)
             {
-                players.Add(selectedPlayer2);
+                Players.Add(selectedPlayer2);
             }
 
             switch (selectedGameType)
             {
-                case GameType.FreeThrows:
-                    StartFreeThrows();
+                case GameType.FreeThrowsSingle:
+                    StartFreeThrowsSingle();
+                    break;
+                case GameType.FreeThrowsDouble:
+                    StartFreeThrowsDouble();
                     break;
                 case GameType.Classic1001:
                 case GameType.Classic701:
@@ -84,9 +91,13 @@ namespace OneHundredAndEightyCore.Game
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectedGameType), selectedGameType, null);
             }
-            dbService.SaveNewGame(game, players);
 
-            scoreBoardService.OpenScoreBoard(game, players);
+            dbService.SaveNewGame(Game, Players);
+
+            PlayerOnThrow = Players.First();
+            PlayerOnSet = Players.First();
+
+            scoreBoardService.OpenScoreBoard(Game.Type);
 
             Task.Run(() =>
                      {
@@ -111,31 +122,71 @@ namespace OneHundredAndEightyCore.Game
             scoreBoardService.CloseScoreBoard();
             detectionService.StopDetection();
             drawService.ProjectionClear();
-            dbService.EndGame(game,type);
+            dbService.EndGame(Game, type);
         }
 
         private void StartClassic()
         {
+            throw new NotImplementedException();
+        }
+
+        private void StartFreeThrowsSingle()
+        {
             // todo
         }
 
-        private void StartFreeThrows()
+        private void StartFreeThrowsDouble()
         {
-            // todo
+            throw new NotImplementedException();
         }
 
         private void OnAnotherThrow(DetectedThrow thrw)
         {
-            var dbThrow = new Throw(players.First(),
-                                    game,
+            CalculatePoints(thrw.TotalPoints);
+            var dbThrow = new Throw(PlayerOnThrow,
+                                    Game,
                                     thrw.Sector,
                                     thrw.Type,
                                     ThrowResultativity.Ordinary, // todo
-                                    1,
+                                    PlayerOnThrow.ThrowNumber,
                                     thrw.TotalPoints,
                                     thrw.Poi,
                                     drawService.projectionFrameSide);
             dbService.SaveThrow(dbThrow);
+            CheckAndTogglePlayerOnThrow();
+        }
+
+        private void CalculatePoints(int thrwTotalPoints)
+        {
+            switch (Game.Type)
+            {
+                case GameType.FreeThrowsSingle:
+                    PlayerOnThrow.Points += thrwTotalPoints;
+                    PlayerOnThrow.ThrowNumber += 1;
+                    scoreBoardService.AddPoints(thrwTotalPoints);
+                    break;
+                case GameType.FreeThrowsDouble:
+                    break;
+                case GameType.Classic1001:
+                case GameType.Classic701:
+                case GameType.Classic501:
+                case GameType.Classic301:
+                case GameType.Classic101:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }       
+        }
+
+        private void CheckAndTogglePlayerOnThrow()
+        {
+            if (PlayerOnThrow.ThrowNumber == 3)
+            {
+                PlayerOnThrow.ThrowNumber = 1;
+                PlayerOnThrow = Players.Count == 1
+                                    ? Players.First()
+                                    : Players.First(p => p != PlayerOnThrow);
+            }
         }
     }
 }

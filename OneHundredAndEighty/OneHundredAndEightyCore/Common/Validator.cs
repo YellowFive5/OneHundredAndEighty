@@ -41,16 +41,17 @@ namespace OneHundredAndEightyCore.Common
                                   .SelectedItem as Player;
             switch (selectedGameType)
             {
-                case GameType.FreeThrows:
-                    valid = (selectedPlayer1 != null || selectedPlayer2 != null) &&
-                            selectedPlayer1 != selectedPlayer2;
+                case GameType.FreeThrowsSingle:
+                    valid = selectedPlayer1 != null;
                     break;
+                case GameType.FreeThrowsDouble:
                 case GameType.Classic1001:
                 case GameType.Classic701:
                 case GameType.Classic501:
                 case GameType.Classic301:
                 case GameType.Classic101:
-                    valid = selectedPlayer1 != null && selectedPlayer2 != null;
+                    valid = (selectedPlayer1 != null && selectedPlayer2 != null) &&
+                            selectedPlayer1 != selectedPlayer2;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -68,8 +69,9 @@ namespace OneHundredAndEightyCore.Common
                                                         .ToString());
             switch (selectedGameType)
             {
-                case GameType.FreeThrows:
+                case GameType.FreeThrowsSingle:
                     return true;
+                case GameType.FreeThrowsDouble:
                 case GameType.Classic1001:
                 case GameType.Classic701:
                 case GameType.Classic501:

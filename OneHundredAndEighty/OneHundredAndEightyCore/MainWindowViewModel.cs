@@ -378,7 +378,17 @@ namespace OneHundredAndEightyCore
 
             switch (selectedGameType)
             {
-                case GameType.FreeThrows:
+                case GameType.FreeThrowsSingle:
+                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Hidden;
+                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameSetsLabel.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
+                    mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
+                    break;
+                case GameType.FreeThrowsDouble:
+                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
+                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGameSetsLabel.Visibility = Visibility.Hidden;
                     mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
