@@ -55,9 +55,7 @@ namespace OneHundredAndEightyCore.Game
             detectionService.PrepareAndTryCapture();
             detectionService.RunDetection();
 
-            var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox
-                                                                  .SelectionBoxItem
-                                                                  .ToString());
+            var selectedGameType = Converter.NewGameControlsToGameTypeDb(mainWindow.NewGameControls);
             var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
             var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
             Game = new Game(selectedGameType);
@@ -75,17 +73,17 @@ namespace OneHundredAndEightyCore.Game
 
             switch (selectedGameType)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeDb.FreeThrowsSingle:
                     StartFreeThrowsSingle();
                     break;
-                case GameType.FreeThrowsDouble:
+                case GameTypeDb.FreeThrowsDouble:
                     StartFreeThrowsDouble();
                     break;
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
+                case GameTypeDb.Classic1001:
+                case GameTypeDb.Classic701:
+                case GameTypeDb.Classic501:
+                case GameTypeDb.Classic301:
+                case GameTypeDb.Classic101:
                     StartClassic();
                     break;
                 default:
@@ -160,18 +158,18 @@ namespace OneHundredAndEightyCore.Game
         {
             switch (Game.Type)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeDb.FreeThrowsSingle:
                     PlayerOnThrow.Points += thrwTotalPoints;
                     PlayerOnThrow.ThrowNumber += 1;
                     scoreBoardService.AddPoints(thrwTotalPoints);
                     break;
-                case GameType.FreeThrowsDouble:
+                case GameTypeDb.FreeThrowsDouble:
                     break;
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
+                case GameTypeDb.Classic1001:
+                case GameTypeDb.Classic701:
+                case GameTypeDb.Classic501:
+                case GameTypeDb.Classic301:
+                case GameTypeDb.Classic101:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

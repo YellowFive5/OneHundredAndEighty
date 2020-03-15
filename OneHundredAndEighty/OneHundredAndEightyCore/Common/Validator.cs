@@ -2,9 +2,11 @@
 
 using System;
 using System.Linq;
+using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using OneHundredAndEightyCore.Game;
 
 #endregion
@@ -26,11 +28,7 @@ namespace OneHundredAndEightyCore.Common
         public static bool ValidateStartNewGamePlayersSelected(Grid mainWindowNewGameControls)
         {
             bool valid;
-            var selectedGameType = Enum.Parse<GameType>(((ComboBox) mainWindowNewGameControls
-                                                                    .Children.OfType<FrameworkElement>()
-                                                                    .Single(e => e.Name == "NewGameTypeComboBox"))
-                                                        .SelectionBoxItem
-                                                        .ToString());
+            var selectedGameType = Converter.NewGameControlsToGameTypeUi(mainWindowNewGameControls);
             var selectedPlayer1 = ((ComboBox) mainWindowNewGameControls
                                               .Children.OfType<FrameworkElement>()
                                               .Single(e => e.Name == "NewGamePlayer1ComboBox"))
@@ -41,16 +39,12 @@ namespace OneHundredAndEightyCore.Common
                                   .SelectedItem as Player;
             switch (selectedGameType)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeUi.FreeThrowsSingle:
                     valid = selectedPlayer1 != null;
                     break;
-                case GameType.FreeThrowsDouble:
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
-                    valid = (selectedPlayer1 != null && selectedPlayer2 != null) &&
+                case GameTypeUi.FreeThrowsDouble:
+                case GameTypeUi.Classic:
+                    valid = selectedPlayer1 != null && selectedPlayer2 != null &&
                             selectedPlayer1 != selectedPlayer2;
                     break;
                 default:
@@ -62,22 +56,33 @@ namespace OneHundredAndEightyCore.Common
 
         public static bool ValidateImplementedGameTypes(Grid mainWindowNewGameControls)
         {
-            var selectedGameType = Enum.Parse<GameType>(((ComboBox) mainWindowNewGameControls
-                                                                    .Children.OfType<FrameworkElement>()
-                                                                    .Single(e => e.Name == "NewGameTypeComboBox"))
-                                                        .SelectionBoxItem
-                                                        .ToString());
+            var selectedGameType = Converter.NewGameControlsToGameTypeUi(mainWindowNewGameControls);
             switch (selectedGameType)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeUi.FreeThrowsSingle:
                     return true;
-                case GameType.FreeThrowsDouble:
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
+                case GameTypeUi.FreeThrowsDouble:
+                case GameTypeUi.Classic:
                     return false;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public static bool ValidateStartNewClassicGamePoints(Grid mainWindowNewGameControls)
+        {
+            var selectedGameType = Converter.NewGameControlsToGameTypeUi(mainWindowNewGameControls);
+            var selectedGamePoints = (((ComboBox) mainWindowNewGameControls
+                                                  .Children.OfType<FrameworkElement>()
+                                                  .Single(e => e.Name == "NewGamePointsComboBox")).SelectedItem as ComboBoxItem)
+                                     ?.Content.ToString();
+            switch (selectedGameType)
+            {
+                case GameTypeUi.FreeThrowsSingle:
+                case GameTypeUi.FreeThrowsDouble:
+                    return true;
+                case GameTypeUi.Classic:
+                    return selectedGamePoints != "Free";
                 default:
                     throw new ArgumentOutOfRangeException();
             }

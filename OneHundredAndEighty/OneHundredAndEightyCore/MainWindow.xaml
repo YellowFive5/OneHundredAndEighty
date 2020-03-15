@@ -29,7 +29,7 @@
                                  Header="Match">
                             <Grid>
                                 <Grid Name="NewGameControls"
-                                      Margin="10,39,461,261">
+                                      Margin="10,39,362,261">
                                     <Label Content="Game type"
                                            HorizontalAlignment="Left"
                                            Margin="8,14,0,0"
@@ -45,11 +45,7 @@
                                               SelectionChanged="NewGameTypeComboBox_OnSelectionChanged">
                                         <ComboBoxItem>FreeThrowsSingle</ComboBoxItem>
                                         <ComboBoxItem>FreeThrowsDouble</ComboBoxItem>
-                                        <ComboBoxItem>Classic1001</ComboBoxItem>
-                                        <ComboBoxItem>Classic701</ComboBoxItem>
-                                        <ComboBoxItem>Classic501</ComboBoxItem>
-                                        <ComboBoxItem>Classic301</ComboBoxItem>
-                                        <ComboBoxItem>Classic101</ComboBoxItem>
+                                        <ComboBoxItem>Classic</ComboBoxItem>
                                     </ComboBox>
                                     <Label Content="Player"
                                            HorizontalAlignment="Left"
@@ -98,7 +94,7 @@
                                            Visibility="Hidden"/>
                                     <ComboBox Name="NewGameSetsComboBox"
                                               HorizontalAlignment="Left"
-                                              Margin="276,16,0,0"
+                                              Margin="390,16,0,0"
                                               VerticalAlignment="Top"
                                               Width="60"
                                               Visibility="Hidden"
@@ -111,9 +107,9 @@
                                     </ComboBox>
                                     <ComboBox Name="NewGameLegsComboBox"
                                               HorizontalAlignment="Left"
-                                              Margin="375,16,0,0"
+                                              Margin="488,16,0,0"
                                               VerticalAlignment="Top"
-                                              Width="55"
+                                              Width="56"
                                               Visibility="Hidden"
                                               SelectedIndex="1">
                                         <ComboBoxItem>1</ComboBoxItem>
@@ -125,7 +121,7 @@
                                     <Label Name="NewGameSetsLabel"
                                            Content="Sets"
                                            HorizontalAlignment="Left"
-                                           Margin="336,14,0,0"
+                                           Margin="450,14,0,0"
                                            VerticalAlignment="Top"
                                            Width="34"
                                            HorizontalContentAlignment="Left"
@@ -134,13 +130,36 @@
                                     <Label Name="NewGameLegsLabel"
                                            Content="Legs"
                                            HorizontalAlignment="Left"
-                                           Margin="430,14,0,0"
+                                           Margin="544,14,0,0"
                                            VerticalAlignment="Top"
                                            Width="34"
                                            HorizontalContentAlignment="Left"
                                            VerticalContentAlignment="Center"
                                            Height="26"
                                            Visibility="Hidden"/>
+                                    <ComboBox x:Name="NewGamePointsComboBox"
+                                        HorizontalAlignment="Left"
+                                        Margin="276,16,0,0"
+                                        VerticalAlignment="Top"
+                                        Width="60"
+                                        Visibility="Visible"
+                                        SelectedIndex="3">
+                                        <ComboBoxItem Content="Free"/>
+                                        <ComboBoxItem Content="101"/>
+                                        <ComboBoxItem Content="301"/>
+                                        <ComboBoxItem Content="501"/>
+                                        <ComboBoxItem Content="701"/>
+                                        <ComboBoxItem Content="1001"/>
+                                    </ComboBox>
+                                    <Label x:Name="NewGamePointsLabel"
+                                        Content="Points"
+                                        HorizontalAlignment="Left"
+                                        Margin="341,14,0,0"
+                                        VerticalAlignment="Top"
+                                        Width="44"
+                                        HorizontalContentAlignment="Left"
+                                        VerticalContentAlignment="Center" Height="26"
+                                        Visibility="Visible"/>
                                 </Grid>
                             </Grid>
                         </TabItem>

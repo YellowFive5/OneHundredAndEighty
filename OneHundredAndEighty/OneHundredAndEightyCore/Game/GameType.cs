@@ -1,6 +1,6 @@
 ﻿namespace OneHundredAndEightyCore.Game
 {
-    public enum GameType
+    public enum GameTypeDb
     {
         FreeThrowsSingle = 1,
         FreeThrowsDouble,
@@ -9,5 +9,12 @@
         Classic501,
         Classic301,
         Classic101,
+    }
+
+    public enum GameTypeUi
+    {
+        FreeThrowsSingle,
+        FreeThrowsDouble,
+        Classic
     }
 }

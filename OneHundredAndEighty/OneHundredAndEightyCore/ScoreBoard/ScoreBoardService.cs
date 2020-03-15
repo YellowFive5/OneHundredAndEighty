@@ -15,21 +15,21 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region Open/Close
 
-        public void OpenScoreBoard(GameType type)
+        public void OpenScoreBoard(GameTypeDb type)
         {
             switch (type)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeDb.FreeThrowsSingle:
                     scoreBoardType = ScoreBoardType.FreeThrowsSingle;
                     break;
-                case GameType.FreeThrowsDouble:
+                case GameTypeDb.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
                     break;
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
+                case GameTypeDb.Classic1001:
+                case GameTypeDb.Classic701:
+                case GameTypeDb.Classic501:
+                case GameTypeDb.Classic301:
+                case GameTypeDb.Classic101:
                     scoreBoardType = ScoreBoardType.Classic;
                     break;
                 default:

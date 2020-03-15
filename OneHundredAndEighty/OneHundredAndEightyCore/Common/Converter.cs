@@ -6,9 +6,12 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Game;
+using Image = System.Drawing.Image;
 
 #endregion
 
@@ -102,6 +105,64 @@ namespace OneHundredAndEightyCore.Common
             return visibility == Visibility.Visible
                        ? Visibility.Hidden
                        : Visibility.Visible;
+        }
+
+        public static GameTypeUi NewGameControlsToGameTypeUi(Grid mainWindowNewGameControls)
+        {
+            var selectedGameTypeString = Enum.Parse<GameTypeUi>((((ComboBox) mainWindowNewGameControls
+                                                                             .Children.OfType<FrameworkElement>()
+                                                                             .Single(e => e.Name == "NewGameTypeComboBox")).SelectedItem as ComboBoxItem)
+                                                                ?.Content.ToString());
+
+            switch (selectedGameTypeString)
+            {
+                case GameTypeUi.FreeThrowsSingle:
+                    return GameTypeUi.FreeThrowsSingle;
+                case GameTypeUi.FreeThrowsDouble:
+                    return GameTypeUi.FreeThrowsDouble;
+                case GameTypeUi.Classic:
+                    return GameTypeUi.Classic;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public static GameTypeDb NewGameControlsToGameTypeDb(Grid mainWindowNewGameControls)
+        {
+            var selectedGameTypeString = NewGameControlsToGameTypeUi(mainWindowNewGameControls);
+
+            var selectedGamePoints = (((ComboBox) mainWindowNewGameControls
+                                                  .Children.OfType<FrameworkElement>()
+                                                  .Single(e => e.Name == "NewGamePointsComboBox")).SelectedItem as ComboBoxItem)
+                                     ?.Content.ToString();
+
+            switch (selectedGameTypeString)
+            {
+                case GameTypeUi.FreeThrowsSingle:
+                    return GameTypeDb.FreeThrowsSingle;
+                case GameTypeUi.FreeThrowsDouble:
+                    return GameTypeDb.FreeThrowsDouble;
+                case GameTypeUi.Classic:
+                    switch (selectedGamePoints)
+                    {
+                        case "101":
+                            return GameTypeDb.Classic101;
+                        case "301":
+                            return GameTypeDb.Classic301;
+                        case "501":
+                            return GameTypeDb.Classic501;
+                        case "701":
+                            return GameTypeDb.Classic701;
+                        case "1001":
+                            return GameTypeDb.Classic1001;
+                    }
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return GameTypeDb.FreeThrowsSingle; // todo cant get here
         }
     }
 }

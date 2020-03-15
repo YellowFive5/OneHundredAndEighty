@@ -223,6 +223,9 @@
   <data name="MovesNoiseLabelText" xml:space="preserve">
     <value>Moves noise value</value>
   </data>
+  <data name="NewClassicGamePointsNotSelectedErrorText" xml:space="preserve">
+    <value>Points for classic game type can't be 'Free'</value>
+  </data>
   <data name="NewGamePlayersNotSelectedErrorText" xml:space="preserve">
     <value>Players not selected</value>
   </data>

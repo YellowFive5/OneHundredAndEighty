@@ -37,7 +37,7 @@ namespace OneHundredAndEightyCore.Common
             var incrementThrowTypeGameStatisticsQuery = string.Empty;
             switch (thrw.Game.Type)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeDb.FreeThrowsSingle:
                     incrementThrowGameStatisticsQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.Throws}] = [{Column.Throws}] + 1 " +
                                                         $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
                                                         $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
@@ -94,16 +94,16 @@ namespace OneHundredAndEightyCore.Common
 
             switch (game.Type)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeDb.FreeThrowsSingle:
                     SaveNewFreeThrowsStatistics(newGameId, players);
                     break;
-                case GameType.FreeThrowsDouble:
+                case GameTypeDb.FreeThrowsDouble:
                     break;
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
+                case GameTypeDb.Classic1001:
+                case GameTypeDb.Classic701:
+                case GameTypeDb.Classic501:
+                case GameTypeDb.Classic301:
+                case GameTypeDb.Classic101:
                     SaveNewClassicStatistics(newGameId, players);
                     break;
                 default:
@@ -120,16 +120,16 @@ namespace OneHundredAndEightyCore.Common
             {
                 switch (game.Type)
                 {
-                    case GameType.FreeThrowsSingle:
+                    case GameTypeDb.FreeThrowsSingle:
                         UpdateFreeThrowsStatistics(game.Id, gameResultType);
                         break;
-                    case GameType.FreeThrowsDouble:
+                    case GameTypeDb.FreeThrowsDouble:
                         break;
-                    case GameType.Classic1001:
-                    case GameType.Classic701:
-                    case GameType.Classic501:
-                    case GameType.Classic301:
-                    case GameType.Classic101:
+                    case GameTypeDb.Classic1001:
+                    case GameTypeDb.Classic701:
+                    case GameTypeDb.Classic501:
+                    case GameTypeDb.Classic301:
+                    case GameTypeDb.Classic101:
                         // todo
                         break;
                     default:
@@ -140,16 +140,16 @@ namespace OneHundredAndEightyCore.Common
             {
                 switch (game.Type)
                 {
-                    case GameType.FreeThrowsSingle:
+                    case GameTypeDb.FreeThrowsSingle:
                         UpdateFreeThrowsStatisticsForWinnerAndLoosers(game.Id, winner.Id);
                         break;
-                    case GameType.FreeThrowsDouble:
+                    case GameTypeDb.FreeThrowsDouble:
                         break;
-                    case GameType.Classic1001:
-                    case GameType.Classic701:
-                    case GameType.Classic501:
-                    case GameType.Classic301:
-                    case GameType.Classic101:
+                    case GameTypeDb.Classic1001:
+                    case GameTypeDb.Classic701:
+                    case GameTypeDb.Classic501:
+                    case GameTypeDb.Classic301:
+                    case GameTypeDb.Classic101:
                         //todo
                         break;
                     default:
@@ -161,16 +161,16 @@ namespace OneHundredAndEightyCore.Common
 
             switch (game.Type)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeDb.FreeThrowsSingle:
                     UpdatePlayerStatistics(game.Id);
                     break;
-                case GameType.FreeThrowsDouble:
+                case GameTypeDb.FreeThrowsDouble:
                     break;
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
+                case GameTypeDb.Classic1001:
+                case GameTypeDb.Classic701:
+                case GameTypeDb.Classic501:
+                case GameTypeDb.Classic301:
+                case GameTypeDb.Classic101:
                     //todo
                     break;
                 default:

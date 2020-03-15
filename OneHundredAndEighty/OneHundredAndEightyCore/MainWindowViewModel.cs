@@ -112,6 +112,12 @@ namespace OneHundredAndEightyCore
                 return;
             }
 
+            if (!Validator.ValidateStartNewClassicGamePoints(mainWindow.NewGameControls))
+            {
+                MessageBox.Show(Resources.NewClassicGamePointsNotSelectedErrorText, "Error", MessageBoxButton.OK);
+                return;
+            }
+
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
@@ -374,11 +380,11 @@ namespace OneHundredAndEightyCore
 
         public void ToggleNewGameControlsVisibility()
         {
-            var selectedGameType = Enum.Parse<GameType>((mainWindow.NewGameTypeComboBox.SelectedItem as ListBoxItem)?.Content.ToString());
+            var selectedGameType = Converter.NewGameControlsToGameTypeUi(mainWindow.NewGameControls);
 
             switch (selectedGameType)
             {
-                case GameType.FreeThrowsSingle:
+                case GameTypeUi.FreeThrowsSingle:
                     mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGamePlayer2Label.Visibility = Visibility.Hidden;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
@@ -386,7 +392,7 @@ namespace OneHundredAndEightyCore
                     mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
                     break;
-                case GameType.FreeThrowsDouble:
+                case GameTypeUi.FreeThrowsDouble:
                     mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
                     mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
@@ -394,11 +400,7 @@ namespace OneHundredAndEightyCore
                     mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
                     break;
-                case GameType.Classic1001:
-                case GameType.Classic701:
-                case GameType.Classic501:
-                case GameType.Classic301:
-                case GameType.Classic101:
+                case GameTypeUi.Classic:
                     mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
                     mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Visible;

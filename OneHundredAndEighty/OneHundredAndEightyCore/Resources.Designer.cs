@@ -378,6 +378,15 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Points for classic game type can&apos;t be &apos;Free&apos;.
+        /// </summary>
+        public static string NewClassicGamePointsNotSelectedErrorText {
+            get {
+                return ResourceManager.GetString("NewClassicGamePointsNotSelectedErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Players not selected.
         /// </summary>
         public static string NewGamePlayersNotSelectedErrorText {
