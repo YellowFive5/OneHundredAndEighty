@@ -185,7 +185,31 @@
 
         <Grid Name="ScoreBoardFreeThrowsSingleGrid"
               Margin="10,10,10,10"
-              Visibility="Hidden">
+              Visibility="Visible">
+            <Grid Name="PointsHintGrid"
+                  Margin="215,41,351,98">
+                <Rectangle Stroke="Black">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                    <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                    <RotateTransform Angle="-146.31" CenterY="0.5" CenterX="0.5" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF590000" />
+                            <GradientStop Color="#FFB80000" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Label Content="T20     T11     D14" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Width="214" Height="43" FontFamily="Agency FB" FontWeight="Bold"
+                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30"
+                       Foreground="Black" />
+            </Grid>
+
             <Rectangle
                 Margin="214,7,0,0" HorizontalAlignment="Left" Width="503" Height="126" VerticalAlignment="Top"
                 Stroke="Black">
@@ -227,37 +251,15 @@
                    VerticalContentAlignment="Center" />
             <Image HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="54" Margin="398,44,0,0" />
             <Label Name="ScoreBoardFreeThrowsSinglePoints"
-                Content="0" HorizontalAlignment="Left" Margin="641,42,0,0" VerticalAlignment="Top" Height="53"
-                Width="76" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center" Foreground="Black" />
+                   Content="0" HorizontalAlignment="Left" Margin="641,42,0,0" VerticalAlignment="Top" Height="53"
+                   Width="76" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center" Foreground="Black" />
             <Label Content="Free throws" HorizontalAlignment="Left" Margin="231,7,0,0" VerticalAlignment="Top"
                    Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Left"
                    VerticalContentAlignment="Top" Width="98" />
             <Label Content="2020 OneHundredAndEighty" HorizontalAlignment="Left" Margin="231,100,0,0"
                    VerticalAlignment="Top" Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Width="208" Foreground="#FF727272" />
-            <Grid Margin="1,41,565,98">
-                <Rectangle Stroke="Black">
-                    <Rectangle.Fill>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <LinearGradientBrush.RelativeTransform>
-                                <TransformGroup>
-                                    <ScaleTransform CenterY="0.5" CenterX="0.5" />
-                                    <SkewTransform CenterY="0.5" CenterX="0.5" />
-                                    <RotateTransform Angle="-146.31" CenterY="0.5" CenterX="0.5" />
-                                    <TranslateTransform />
-                                </TransformGroup>
-                            </LinearGradientBrush.RelativeTransform>
-                            <GradientStop Color="#FF590000" />
-                            <GradientStop Color="#FFB80000" Offset="1" />
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Label Content="T20     T11     D14" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Width="214" Height="43" FontFamily="Agency FB" FontWeight="Bold"
-                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30"
-                       Foreground="Black" />
-            </Grid>
         </Grid>
 
     </Grid>

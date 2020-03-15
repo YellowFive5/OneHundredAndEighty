@@ -109,12 +109,12 @@ namespace OneHundredAndEightyCore.Common
 
         public static GameTypeUi NewGameControlsToGameTypeUi(Grid mainWindowNewGameControls)
         {
-            var selectedGameTypeString = Enum.Parse<GameTypeUi>((((ComboBox) mainWindowNewGameControls
-                                                                             .Children.OfType<FrameworkElement>()
-                                                                             .Single(e => e.Name == "NewGameTypeComboBox")).SelectedItem as ComboBoxItem)
-                                                                ?.Content.ToString());
+            var selectedGameType = Enum.Parse<GameTypeUi>((((ComboBox) mainWindowNewGameControls
+                                                                       .Children.OfType<FrameworkElement>()
+                                                                       .Single(e => e.Name == "NewGameTypeComboBox")).SelectedItem as ComboBoxItem)
+                                                          ?.Content.ToString());
 
-            switch (selectedGameTypeString)
+            switch (selectedGameType)
             {
                 case GameTypeUi.FreeThrowsSingle:
                     return GameTypeUi.FreeThrowsSingle;
@@ -129,14 +129,14 @@ namespace OneHundredAndEightyCore.Common
 
         public static GameTypeDb NewGameControlsToGameTypeDb(Grid mainWindowNewGameControls)
         {
-            var selectedGameTypeString = NewGameControlsToGameTypeUi(mainWindowNewGameControls);
+            var selectedGameType = NewGameControlsToGameTypeUi(mainWindowNewGameControls);
 
             var selectedGamePoints = (((ComboBox) mainWindowNewGameControls
                                                   .Children.OfType<FrameworkElement>()
                                                   .Single(e => e.Name == "NewGamePointsComboBox")).SelectedItem as ComboBoxItem)
                                      ?.Content.ToString();
 
-            switch (selectedGameTypeString)
+            switch (selectedGameType)
             {
                 case GameTypeUi.FreeThrowsSingle:
                     return GameTypeDb.FreeThrowsSingle;
@@ -163,6 +163,78 @@ namespace OneHundredAndEightyCore.Common
             }
 
             return GameTypeDb.FreeThrowsSingle; // todo cant get here
+        }
+
+        public static GameTypeGameService NewGameControlsToGameTypeGameService(Grid mainWindowNewGameControls)
+        {
+            var selectedGameType = NewGameControlsToGameTypeUi(mainWindowNewGameControls);
+
+            var selectedGamePoints = (((ComboBox) mainWindowNewGameControls
+                                                  .Children.OfType<FrameworkElement>()
+                                                  .Single(e => e.Name == "NewGamePointsComboBox")).SelectedItem as ComboBoxItem)
+                                     ?.Content.ToString();
+
+            switch (selectedGameType)
+            {
+                case GameTypeUi.FreeThrowsSingle:
+                    switch (selectedGamePoints)
+                    {
+                        case "Free":
+                            return GameTypeGameService.FreeThrowsSingleFreePoints;
+                        case "101":
+                            return GameTypeGameService.FreeThrowsSingle101Points;
+                        case "301":
+                            return GameTypeGameService.FreeThrowsSingle301Points;
+                        case "501":
+                            return GameTypeGameService.FreeThrowsSingle501Points;
+                        case "701":
+                            return GameTypeGameService.FreeThrowsSingle701Points;
+                        case "1001":
+                            return GameTypeGameService.FreeThrowsSingle1001Points;
+                    }
+
+                    break;
+
+                case GameTypeUi.FreeThrowsDouble:
+                    switch (selectedGamePoints)
+                    {
+                        case "Free":
+                            return GameTypeGameService.FreeThrowsDoubleFreePoints;
+                        case "101":
+                            return GameTypeGameService.FreeThrowsDouble101Points;
+                        case "301":
+                            return GameTypeGameService.FreeThrowsDouble301Points;
+                        case "501":
+                            return GameTypeGameService.FreeThrowsDouble501Points;
+                        case "701":
+                            return GameTypeGameService.FreeThrowsDouble701Points;
+                        case "1001":
+                            return GameTypeGameService.FreeThrowsDouble1001Points;
+                    }
+
+                    break;
+
+                case GameTypeUi.Classic:
+                    switch (selectedGamePoints)
+                    {
+                        case "101":
+                            return GameTypeGameService.Classic101Points;
+                        case "301":
+                            return GameTypeGameService.Classic301Points;
+                        case "501":
+                            return GameTypeGameService.Classic501Points;
+                        case "701":
+                            return GameTypeGameService.Classic701Points;
+                        case "1001":
+                            return GameTypeGameService.Classic1001Points;
+                    }
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return GameTypeGameService.FreeThrowsSingleFreePoints; // todo cant get here
         }
     }
 }
