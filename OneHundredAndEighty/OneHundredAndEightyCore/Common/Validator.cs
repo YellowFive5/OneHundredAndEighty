@@ -2,11 +2,9 @@
 
 using System;
 using System.Linq;
-using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using OneHundredAndEightyCore.Game;
 
 #endregion
@@ -56,13 +54,27 @@ namespace OneHundredAndEightyCore.Common
 
         public static bool ValidateImplementedGameTypes(Grid mainWindowNewGameControls)
         {
-            var selectedGameType = Converter.NewGameControlsToGameTypeUi(mainWindowNewGameControls);
+            var selectedGameType = Converter.NewGameControlsToGameTypeGameService(mainWindowNewGameControls);
             switch (selectedGameType)
             {
-                case GameTypeUi.FreeThrowsSingle:
+                case GameTypeGameService.FreeThrowsSingleFreePoints:
                     return true;
-                case GameTypeUi.FreeThrowsDouble:
-                case GameTypeUi.Classic:
+                case GameTypeGameService.FreeThrowsSingle101Points:
+                case GameTypeGameService.FreeThrowsSingle301Points:
+                case GameTypeGameService.FreeThrowsSingle501Points:
+                case GameTypeGameService.FreeThrowsSingle701Points:
+                case GameTypeGameService.FreeThrowsSingle1001Points:
+                case GameTypeGameService.FreeThrowsDoubleFreePoints:
+                case GameTypeGameService.FreeThrowsDouble101Points:
+                case GameTypeGameService.FreeThrowsDouble301Points:
+                case GameTypeGameService.FreeThrowsDouble501Points:
+                case GameTypeGameService.FreeThrowsDouble701Points:
+                case GameTypeGameService.FreeThrowsDouble1001Points:
+                case GameTypeGameService.Classic101Points:
+                case GameTypeGameService.Classic301Points:
+                case GameTypeGameService.Classic501Points:
+                case GameTypeGameService.Classic701Points:
+                case GameTypeGameService.Classic1001Points:
                     return false;
                 default:
                     throw new ArgumentOutOfRangeException();

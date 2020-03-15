@@ -94,14 +94,9 @@ namespace OneHundredAndEightyCore.ScoreBoard
         private void AnimationAdd(Label label, int pointsToAdd)
         {
             var sb = new Storyboard();
-
-            var fadeOut = new DoubleAnimation {From = 1, To = 0, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTarget(fadeOut, label);
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime, BeginTime = fadeTime};
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
             Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
             Storyboard.SetTarget(fadeIn, label);
-            sb.Children.Add(fadeOut);
             sb.Children.Add(fadeIn);
             sb.Begin();
 
