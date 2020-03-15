@@ -2,7 +2,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using OneHundredAndEightyCore.Game;
 
@@ -312,32 +314,34 @@ namespace OneHundredAndEightyCore.ScoreBoard
                                                                              [50] = "Bull"
                                                                          };
 
-        private readonly TimeSpan slideTime = TimeSpan.FromSeconds(0.15);
+        private readonly TimeSpan slideTime = TimeSpan.FromSeconds(0.25);
+        private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
 
         private bool IsCheckPointsHintShown;
 
         #region Open/Close
 
-        public void OpenScoreBoard(GameTypeUi type)
+        public void OpenScoreBoard(GameTypeUi type, List<Player> players, string gameTypeString)
         {
+            scoreBoardWindow = new ScoreBoardWindow();
+
             switch (type)
             {
                 case GameTypeUi.FreeThrowsSingle:
                     scoreBoardType = ScoreBoardType.FreeThrowsSingle;
+                    PreSetupForFreeThrowsSingle(players.First(), gameTypeString);
                     break;
                 case GameTypeUi.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
+                    PreSetupForFreeThrowsDouble();
                     break;
                 case GameTypeUi.Classic:
                     scoreBoardType = ScoreBoardType.Classic;
+                    PreSetupForClassics();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            scoreBoardWindow = new ScoreBoardWindow();
-
-            PreSetupWindow();
 
             scoreBoardWindow.Show();
         }
@@ -351,27 +355,12 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region PreSetup
 
-        private void PreSetupWindow()
-        {
-            switch (scoreBoardType)
-            {
-                case ScoreBoardType.FreeThrowsSingle:
-                    PreSetupForFreeThrowsSingle();
-                    break;
-                case ScoreBoardType.Classic:
-                    PreSetupForClassics();
-                    break;
-                case ScoreBoardType.FreeThrowsDouble:
-                    PreSetupForFreeThrowsDouble();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(scoreBoardType), scoreBoardType, null);
-            }
-        }
-
-        private void PreSetupForFreeThrowsSingle()
+        private void PreSetupForFreeThrowsSingle(Player player, string gameTypeString)
         {
             scoreBoardWindow.ScoreBoardFreeThrowsSingleGrid.Visibility = Visibility.Visible;
+            scoreBoardWindow.ScoreBoardFreeThrowsSingleGridGameType.Content = gameTypeString;
+            scoreBoardWindow.ScoreBoardFreeThrowsSingleGridPlayerImage.Source = player.Avatar;
+            scoreBoardWindow.ScoreBoardFreeThrowsSingleGridPlayerName.Content = $"{player.Name} {player.NickName}";
         }
 
         private void PreSetupForFreeThrowsDouble()
@@ -392,13 +381,30 @@ namespace OneHundredAndEightyCore.ScoreBoard
         {
             scoreBoardWindow.Dispatcher.Invoke(() =>
                                                {
-                                                   scoreBoardWindow.ScoreBoardFreeThrowsSinglePoints.Content = int.Parse(scoreBoardWindow.ScoreBoardFreeThrowsSinglePoints.Content.ToString())
-                                                                                                               + pointsToAdd;
+                                                   AnimationAdd(scoreBoardWindow.ScoreBoardFreeThrowsSinglePoints, pointsToAdd);
                                                    SlideCheckPointsHint(scoreBoardWindow.PointsHintGrid);
                                                });
         }
 
         #endregion
+
+        private void AnimationAdd(Label label, int pointsToAdd)
+        {
+            var sb = new Storyboard();
+
+            var fadeOut = new DoubleAnimation {From = 1, To = 0, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
+            Storyboard.SetTarget(fadeOut, label);
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime, BeginTime = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
+            Storyboard.SetTarget(fadeIn, label);
+            sb.Children.Add(fadeOut);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+
+            label.Content = int.Parse(label.Content.ToString())
+                            + pointsToAdd;
+        }
 
         private void SlideCheckPointsHint(FrameworkElement grid)
         {

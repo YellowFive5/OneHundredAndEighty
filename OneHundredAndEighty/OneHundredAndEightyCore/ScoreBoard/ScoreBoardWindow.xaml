@@ -246,15 +246,18 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label Content="Mighty Mike" HorizontalAlignment="Left" Margin="231,42,0,0" VerticalAlignment="Top"
+            <Label Name="ScoreBoardFreeThrowsSingleGridPlayerName"
+                   Content="Mighty Mike" HorizontalAlignment="Left" Margin="231,42,0,0" VerticalAlignment="Top"
                    Height="58" Width="162" FontFamily="Agency FB" FontSize="24" FontWeight="Bold"
                    VerticalContentAlignment="Center" />
-            <Image HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="54" Margin="398,44,0,0" />
+            <Image Name="ScoreBoardFreeThrowsSingleGridPlayerImage"
+                   HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="54" Margin="398,44,0,0" />
             <Label Name="ScoreBoardFreeThrowsSinglePoints"
                    Content="0" HorizontalAlignment="Left" Margin="641,42,0,0" VerticalAlignment="Top" Height="53"
                    Width="76" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center" Foreground="Black" />
-            <Label Content="Free throws" HorizontalAlignment="Left" Margin="231,7,0,0" VerticalAlignment="Top"
+            <Label Name="ScoreBoardFreeThrowsSingleGridGameType"
+                   Content="Free throws" HorizontalAlignment="Left" Margin="231,7,0,0" VerticalAlignment="Top"
                    Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Left"
                    VerticalContentAlignment="Top" Width="98" />
             <Label Content="2020 OneHundredAndEighty" HorizontalAlignment="Left" Margin="231,100,0,0"

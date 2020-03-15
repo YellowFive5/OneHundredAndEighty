@@ -48,6 +48,8 @@ namespace OneHundredAndEightyCore.Game
             this.dbService = dbService;
         }
 
+        #region Start/Stop
+
         public void StartGame()
         {
             drawService.ProjectionClear();
@@ -63,8 +65,6 @@ namespace OneHundredAndEightyCore.Game
             var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
             var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
 
-            Game = new Game(selectedGameTypeDb);
-
             Players = new List<Player>();
             if (selectedPlayer1 != null)
             {
@@ -76,10 +76,18 @@ namespace OneHundredAndEightyCore.Game
                 Players.Add(selectedPlayer2);
             }
 
+            PlayerOnThrow = Players.First();
+            PlayerOnSet = Players.First();
+
+            Game = new Game(selectedGameTypeDb);
+
+            dbService.SaveNewGame(Game, Players);
+
             switch (selectedGameTypeGameService)
             {
                 case GameTypeGameService.FreeThrowsSingleFreePoints:
                     StartFreeThrowsSingleFreePoints();
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, Players, "Free throws");
                     break;
                 case GameTypeGameService.FreeThrowsSingle101Points:
                     break;
@@ -117,13 +125,6 @@ namespace OneHundredAndEightyCore.Game
                     throw new ArgumentOutOfRangeException();
             }
 
-            dbService.SaveNewGame(Game, Players);
-
-            PlayerOnThrow = Players.First();
-            PlayerOnSet = Players.First();
-
-            scoreBoardService.OpenScoreBoard(selectedGameTypeUi);
-
             Task.Run(() =>
                      {
                          IsGameRun = true;
@@ -134,11 +135,6 @@ namespace OneHundredAndEightyCore.Game
 
                          detectionService.OnThrowDetected -= OnAnotherThrow;
                      });
-        }
-
-        private void StartFreeThrowsSingleFreePoints()
-        {
-            GameType = GameTypeGameService.FreeThrowsSingleFreePoints;
         }
 
         public void StopGame(GameResultType type)
@@ -153,6 +149,13 @@ namespace OneHundredAndEightyCore.Game
             detectionService.StopDetection();
             drawService.ProjectionClear();
             dbService.EndGame(Game, type);
+        }
+
+        #endregion
+
+        private void StartFreeThrowsSingleFreePoints()
+        {
+            GameType = GameTypeGameService.FreeThrowsSingleFreePoints;
         }
 
         private void OnAnotherThrow(DetectedThrow thrw)
