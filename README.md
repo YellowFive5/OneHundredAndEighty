@@ -3,6 +3,8 @@
 * Manual darts score calculator with some cool stuff...
   
 # OneHundredAndEightyCore
+![Скриншот 2019-11-09 19 26 52](https://user-images.githubusercontent.com/42347722/77202337-2d73f400-6aff-11ea-82e9-1319734e7007.png)
+
 All-in-all steel tip darts desktop app with:
 - [x] Automatic throw detection using [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition)
 - [x] Database storage
