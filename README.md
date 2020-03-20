@@ -1,4 +1,5 @@
-# OneHundredAndEighty *(archived, not deleted bacause of history =) ) 
+# OneHundredAndEighty 
+*archived, not deleted bacause of history =)
 Manual darts score calculator with some cool stuff...
   
 # OneHundredAndEightyCore
