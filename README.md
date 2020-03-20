@@ -1,22 +1,8 @@
-# OneHundredAndEighty
-Darts score calculator with some cool stuff
-
-Done:
-
-  * Сustomizable match by PDO rules
-  * Full undo-throw history
-  * Full aftermatch statistics
-  * Players database
-  * Full players and match results aftermatch save
-  * Players comparison
-  * PvP data
-  * Players achives
+# OneHundredAndEighty *(archived, not deleted bacause of history =) ) 
+Manual darts score calculator with some cool stuff...
   
-To do:
- 
-  * Style customization
-  * Multilanguage
-  * Selfplay
-  * 
-  * [AUTO THROW REGISTRATION] =)
-  
+# OneHundredAndEightyCore
+All-in-all steel tip darts desktop app with:
+- [x] Automatic throw detection using [DartboardRecognition]
+- [x] Database storage
+- [ ] todo
