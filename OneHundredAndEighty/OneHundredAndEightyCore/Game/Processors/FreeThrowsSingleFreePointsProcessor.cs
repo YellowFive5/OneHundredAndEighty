@@ -12,6 +12,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         public void OnThrow(int thrwTotalPoints, List<Player> players, Player playerOnThrow, ScoreBoardService scoreBoard)
         {
             playerOnThrow.Points += thrwTotalPoints;
+
             scoreBoard.AddPoints(thrwTotalPoints);
 
             AddThrowNumber(playerOnThrow);

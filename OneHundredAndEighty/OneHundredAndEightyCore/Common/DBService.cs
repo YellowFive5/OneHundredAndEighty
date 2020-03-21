@@ -37,7 +37,17 @@ namespace OneHundredAndEightyCore.Common
             var incrementThrowTypeGameStatisticsQuery = string.Empty;
             switch (thrw.Game.Type)
             {
-                case GameTypeDb.FreeThrowsSingle:
+                case GameType.FreeThrowsSingleFreePoints:
+                case GameType.FreeThrowsSingle301Points:
+                case GameType.FreeThrowsSingle501Points:
+                case GameType.FreeThrowsSingle701Points:
+                case GameType.FreeThrowsSingle1001Points:
+                case GameType.FreeThrowsDoubleFreePoints:
+                case GameType.FreeThrowsDouble301Points:
+                case GameType.FreeThrowsDouble501Points:
+                case GameType.FreeThrowsDouble701Points:
+                case GameType.FreeThrowsDouble1001Points:
+
                     incrementThrowGameStatisticsQuery = $"UPDATE [{Table.StatisticsFreeThrows}] SET [{Column.Throws}] = [{Column.Throws}] + 1 " +
                                                         $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.StatisticsFreeThrows}] AS [SFT] " +
                                                         $"INNER JOIN [{Table.GameStatistics}] AS [GS] " +
@@ -60,22 +70,32 @@ namespace OneHundredAndEightyCore.Common
                     // todo _180 add
                     // todo another game types
                     break;
+                case GameType.Classic301Points:
+                    break;
+                case GameType.Classic501Points:
+                    break;
+                case GameType.Classic701Points:
+                    break;
+                case GameType.Classic1001Points:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             ExecuteNonQueryInternal(incrementThrowGameStatisticsQuery);
             ExecuteNonQueryInternal(incrementPointsGameStatisticsQuery);
             ExecuteNonQueryInternal(incrementThrowTypeGameStatisticsQuery);
 
-            var incrementThrowPlayerStatisticsQuery = $"UPDATE [PlayerStatistics] SET [Throws] = [Throws] + 1 " +
-                                                      $"WHERE [Id] = (SELECT [Statistics] FROM [Players] WHERE [Id] = {thrw.Player.Id})";
+            var incrementThrowPlayerStatisticsQuery = $"UPDATE [{Table.PlayerStatistics}] SET [{Column.Throws}] = [{Column.Throws}] + 1 " +
+                                                      $"WHERE [{Column.Id}] = (SELECT [{Column.Statistics}] FROM [{Table.Players}] WHERE [{Column.Id}] = {thrw.Player.Id})";
             ExecuteNonQueryInternal(incrementThrowPlayerStatisticsQuery);
 
-            var incrementPointsPlayerStatisticsQuery = $"UPDATE [PlayerStatistics] SET [Points] = [Points] + {thrw.Points} " +
-                                                       $"WHERE [Id] = (SELECT [Statistics] FROM [Players] WHERE [Id] = {thrw.Player.Id})";
+            var incrementPointsPlayerStatisticsQuery = $"UPDATE [{Table.PlayerStatistics}] SET [{Column.Points}] = [{Column.Points}] + {thrw.Points} " +
+                                                       $"WHERE [{Column.Id}] = (SELECT [{Column.Statistics}] FROM [{Table.Players}] WHERE [{Column.Id}] = {thrw.Player.Id})";
             ExecuteNonQueryInternal(incrementPointsPlayerStatisticsQuery);
 
-            var incrementThrowTypePlayerStatisticsQuery = $"UPDATE [PlayerStatistics] SET [{thrw.Type}] = [{thrw.Type}] + 1 " +
-                                                          $"WHERE [Id] = (SELECT [Statistics] FROM [Players] WHERE [Id] = {thrw.Player.Id})";
+            var incrementThrowTypePlayerStatisticsQuery = $"UPDATE [{Table.PlayerStatistics}] SET [{thrw.Type}] = [{thrw.Type}] + 1 " +
+                                                          $"WHERE [{Column.Id}] = (SELECT [{Column.Statistics}] FROM [{Table.Players}] WHERE [{Column.Id}] = {thrw.Player.Id})";
             ExecuteNonQueryInternal(incrementThrowTypePlayerStatisticsQuery);
         }
 
@@ -94,16 +114,22 @@ namespace OneHundredAndEightyCore.Common
 
             switch (game.Type)
             {
-                case GameTypeDb.FreeThrowsSingle:
+                case GameType.FreeThrowsSingleFreePoints:
+                case GameType.FreeThrowsSingle301Points:
+                case GameType.FreeThrowsSingle501Points:
+                case GameType.FreeThrowsSingle701Points:
+                case GameType.FreeThrowsSingle1001Points:
+                case GameType.FreeThrowsDoubleFreePoints:
+                case GameType.FreeThrowsDouble301Points:
+                case GameType.FreeThrowsDouble501Points:
+                case GameType.FreeThrowsDouble701Points:
+                case GameType.FreeThrowsDouble1001Points:
                     SaveNewFreeThrowsStatistics(newGameId, players);
                     break;
-                case GameTypeDb.FreeThrowsDouble:
-                    break;
-                case GameTypeDb.Classic1001:
-                case GameTypeDb.Classic701:
-                case GameTypeDb.Classic501:
-                case GameTypeDb.Classic301:
-                case GameTypeDb.Classic101:
+                case GameType.Classic301Points:
+                case GameType.Classic501Points:
+                case GameType.Classic701Points:
+                case GameType.Classic1001Points:
                     SaveNewClassicStatistics(newGameId, players);
                     break;
                 default:
@@ -120,17 +146,25 @@ namespace OneHundredAndEightyCore.Common
             {
                 switch (game.Type)
                 {
-                    case GameTypeDb.FreeThrowsSingle:
+                    case GameType.FreeThrowsSingleFreePoints:
+                    case GameType.FreeThrowsSingle301Points:
+                    case GameType.FreeThrowsSingle501Points:
+                    case GameType.FreeThrowsSingle701Points:
+                    case GameType.FreeThrowsSingle1001Points:
+                    case GameType.FreeThrowsDoubleFreePoints:
+                    case GameType.FreeThrowsDouble301Points:
+                    case GameType.FreeThrowsDouble501Points:
+                    case GameType.FreeThrowsDouble701Points:
+                    case GameType.FreeThrowsDouble1001Points:
                         UpdateFreeThrowsStatistics(game.Id, gameResultType);
                         break;
-                    case GameTypeDb.FreeThrowsDouble:
+                    case GameType.Classic301Points:
                         break;
-                    case GameTypeDb.Classic1001:
-                    case GameTypeDb.Classic701:
-                    case GameTypeDb.Classic501:
-                    case GameTypeDb.Classic301:
-                    case GameTypeDb.Classic101:
-                        // todo
+                    case GameType.Classic501Points:
+                        break;
+                    case GameType.Classic701Points:
+                        break;
+                    case GameType.Classic1001Points:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -140,17 +174,25 @@ namespace OneHundredAndEightyCore.Common
             {
                 switch (game.Type)
                 {
-                    case GameTypeDb.FreeThrowsSingle:
+                    case GameType.FreeThrowsSingleFreePoints:
+                    case GameType.FreeThrowsSingle301Points:
+                    case GameType.FreeThrowsSingle501Points:
+                    case GameType.FreeThrowsSingle701Points:
+                    case GameType.FreeThrowsSingle1001Points:
+                    case GameType.FreeThrowsDoubleFreePoints:
+                    case GameType.FreeThrowsDouble301Points:
+                    case GameType.FreeThrowsDouble501Points:
+                    case GameType.FreeThrowsDouble701Points:
+                    case GameType.FreeThrowsDouble1001Points:
                         UpdateFreeThrowsStatisticsForWinnerAndLoosers(game.Id, winner.Id);
                         break;
-                    case GameTypeDb.FreeThrowsDouble:
+                    case GameType.Classic301Points:
                         break;
-                    case GameTypeDb.Classic1001:
-                    case GameTypeDb.Classic701:
-                    case GameTypeDb.Classic501:
-                    case GameTypeDb.Classic301:
-                    case GameTypeDb.Classic101:
-                        //todo
+                    case GameType.Classic501Points:
+                        break;
+                    case GameType.Classic701Points:
+                        break;
+                    case GameType.Classic1001Points:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -161,17 +203,25 @@ namespace OneHundredAndEightyCore.Common
 
             switch (game.Type)
             {
-                case GameTypeDb.FreeThrowsSingle:
+                case GameType.FreeThrowsSingleFreePoints:
+                case GameType.FreeThrowsSingle301Points:
+                case GameType.FreeThrowsSingle501Points:
+                case GameType.FreeThrowsSingle701Points:
+                case GameType.FreeThrowsSingle1001Points:
+                case GameType.FreeThrowsDoubleFreePoints:
+                case GameType.FreeThrowsDouble301Points:
+                case GameType.FreeThrowsDouble501Points:
+                case GameType.FreeThrowsDouble701Points:
+                case GameType.FreeThrowsDouble1001Points:
                     UpdatePlayerStatistics(game.Id);
                     break;
-                case GameTypeDb.FreeThrowsDouble:
+                case GameType.Classic301Points:
                     break;
-                case GameTypeDb.Classic1001:
-                case GameTypeDb.Classic701:
-                case GameTypeDb.Classic501:
-                case GameTypeDb.Classic301:
-                case GameTypeDb.Classic101:
-                    //todo
+                case GameType.Classic501Points:
+                    break;
+                case GameType.Classic701Points:
+                    break;
+                case GameType.Classic1001Points:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

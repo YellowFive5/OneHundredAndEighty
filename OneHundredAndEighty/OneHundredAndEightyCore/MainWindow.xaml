@@ -143,9 +143,8 @@
                                         VerticalAlignment="Top"
                                         Width="60"
                                         Visibility="Visible"
-                                        SelectedIndex="3">
+                                        SelectedIndex="2">
                                         <ComboBoxItem Content="Free"/>
-                                        <ComboBoxItem Content="101"/>
                                         <ComboBoxItem Content="301"/>
                                         <ComboBoxItem Content="501"/>
                                         <ComboBoxItem Content="701"/>

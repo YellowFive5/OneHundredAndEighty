@@ -30,7 +30,7 @@ namespace OneHundredAndEightyCore.Game
     {
         public int Id { get; private set; }
         public Player Player { get; }
-        public OneHundredAndEightyCore.Game.Game Game { get; }
+        public Game Game { get; }
         public int Sector { get; }
         public ThrowType Type { get; }
         public ThrowResultativity Resultativity { get; }
@@ -40,7 +40,7 @@ namespace OneHundredAndEightyCore.Game
         public int ProjectionResolution { get; }
         public DateTime TimeStamp { get; }
 
-        public Throw(Player player, OneHundredAndEightyCore.Game.Game game, int sector, ThrowType type, ThrowResultativity resultativity,
+        public Throw(Player player, Game game, int sector, ThrowType type, ThrowResultativity resultativity,
                      int number, int points, PointF poi, int projectionResolution, int id = -1)
         {
             Id = id;

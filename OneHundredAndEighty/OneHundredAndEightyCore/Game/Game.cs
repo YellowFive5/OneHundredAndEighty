@@ -9,11 +9,11 @@ namespace OneHundredAndEightyCore.Game
     public class Game
     {
         public int Id { get; private set; }
-        public GameTypeDb Type { get; }
+        public GameType Type { get; }
         public DateTime StartTimeStamp { get; }
         public DateTime EndTimeStamp { get; private set; }
 
-        public Game(GameTypeDb type, int id = -1)
+        public Game(GameType type, int id = -1)
         {
             Id = id;
             Type = type;

@@ -29,7 +29,7 @@ namespace OneHundredAndEightyCore.Game
         private List<Player> Players { get; set; }
         private Player PlayerOnThrow { get; set; }
         private Player PlayerOnSet { get; set; }
-        private GameTypeGameService GameType { get; set; }
+        private GameType GameType { get; set; }
         private IGameProcessor GameProcessor { get; set; }
 
         public GameService(MainWindow mainWindow,
@@ -59,11 +59,10 @@ namespace OneHundredAndEightyCore.Game
             detectionService.PrepareAndTryCapture();
             detectionService.RunDetection();
 
-            var selectedGameTypeDb = Converter.NewGameControlsToGameTypeDb(mainWindow.NewGameControls);
             var selectedGameTypeUi = Converter.NewGameControlsToGameTypeUi(mainWindow.NewGameControls);
-            var selectedGameTypeGameService = Converter.NewGameControlsToGameTypeGameService(mainWindow.NewGameControls);
+            var selectedGameType = Converter.NewGameControlsToGameTypeGameService(mainWindow.NewGameControls);
 
-            GameType = selectedGameTypeGameService;
+            GameType = selectedGameType;
 
             var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
             var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
@@ -82,47 +81,41 @@ namespace OneHundredAndEightyCore.Game
             PlayerOnThrow = Players.First();
             PlayerOnSet = Players.First();
 
-            Game = new Game(selectedGameTypeDb);
+            Game = new Game(selectedGameType);
 
             dbService.SaveNewGame(Game, Players);
 
-            switch (selectedGameTypeGameService)
+            switch (selectedGameType)
             {
-                case GameTypeGameService.FreeThrowsSingleFreePoints:
+                case GameType.FreeThrowsSingleFreePoints:
                     GameProcessor = new FreeThrowsSingleFreePointsProcessor();
                     scoreBoardService.OpenScoreBoard(selectedGameTypeUi, Players, "Free throws");
                     break;
-                case GameTypeGameService.FreeThrowsSingle101Points:
+                case GameType.FreeThrowsSingle301Points:
                     break;
-                case GameTypeGameService.FreeThrowsSingle301Points:
+                case GameType.FreeThrowsSingle501Points:
                     break;
-                case GameTypeGameService.FreeThrowsSingle501Points:
+                case GameType.FreeThrowsSingle701Points:
                     break;
-                case GameTypeGameService.FreeThrowsSingle701Points:
+                case GameType.FreeThrowsSingle1001Points:
                     break;
-                case GameTypeGameService.FreeThrowsSingle1001Points:
+                case GameType.FreeThrowsDoubleFreePoints:
                     break;
-                case GameTypeGameService.FreeThrowsDoubleFreePoints:
+                case GameType.FreeThrowsDouble301Points:
                     break;
-                case GameTypeGameService.FreeThrowsDouble101Points:
+                case GameType.FreeThrowsDouble501Points:
                     break;
-                case GameTypeGameService.FreeThrowsDouble301Points:
+                case GameType.FreeThrowsDouble701Points:
                     break;
-                case GameTypeGameService.FreeThrowsDouble501Points:
+                case GameType.FreeThrowsDouble1001Points:
                     break;
-                case GameTypeGameService.FreeThrowsDouble701Points:
+                case GameType.Classic301Points:
                     break;
-                case GameTypeGameService.FreeThrowsDouble1001Points:
+                case GameType.Classic501Points:
                     break;
-                case GameTypeGameService.Classic101Points:
+                case GameType.Classic701Points:
                     break;
-                case GameTypeGameService.Classic301Points:
-                    break;
-                case GameTypeGameService.Classic501Points:
-                    break;
-                case GameTypeGameService.Classic701Points:
-                    break;
-                case GameTypeGameService.Classic1001Points:
+                case GameType.Classic1001Points:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

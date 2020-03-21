@@ -57,24 +57,21 @@ namespace OneHundredAndEightyCore.Common
             var selectedGameType = Converter.NewGameControlsToGameTypeGameService(mainWindowNewGameControls);
             switch (selectedGameType)
             {
-                case GameTypeGameService.FreeThrowsSingleFreePoints:
+                case GameType.FreeThrowsSingleFreePoints:
                     return true;
-                case GameTypeGameService.FreeThrowsSingle101Points:
-                case GameTypeGameService.FreeThrowsSingle301Points:
-                case GameTypeGameService.FreeThrowsSingle501Points:
-                case GameTypeGameService.FreeThrowsSingle701Points:
-                case GameTypeGameService.FreeThrowsSingle1001Points:
-                case GameTypeGameService.FreeThrowsDoubleFreePoints:
-                case GameTypeGameService.FreeThrowsDouble101Points:
-                case GameTypeGameService.FreeThrowsDouble301Points:
-                case GameTypeGameService.FreeThrowsDouble501Points:
-                case GameTypeGameService.FreeThrowsDouble701Points:
-                case GameTypeGameService.FreeThrowsDouble1001Points:
-                case GameTypeGameService.Classic101Points:
-                case GameTypeGameService.Classic301Points:
-                case GameTypeGameService.Classic501Points:
-                case GameTypeGameService.Classic701Points:
-                case GameTypeGameService.Classic1001Points:
+                case GameType.FreeThrowsSingle301Points:
+                case GameType.FreeThrowsSingle501Points:
+                case GameType.FreeThrowsSingle701Points:
+                case GameType.FreeThrowsSingle1001Points:
+                case GameType.FreeThrowsDoubleFreePoints:
+                case GameType.FreeThrowsDouble301Points:
+                case GameType.FreeThrowsDouble501Points:
+                case GameType.FreeThrowsDouble701Points:
+                case GameType.FreeThrowsDouble1001Points:
+                case GameType.Classic301Points:
+                case GameType.Classic501Points:
+                case GameType.Classic701Points:
+                case GameType.Classic1001Points:
                     return false;
                 default:
                     throw new ArgumentOutOfRangeException();
