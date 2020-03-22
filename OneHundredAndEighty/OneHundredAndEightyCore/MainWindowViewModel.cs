@@ -94,7 +94,7 @@ namespace OneHundredAndEightyCore
 
         private void LoadPlayers()
         {
-            var playersTable = dbService.LoadPlayers();
+            var playersTable = dbService.PlayersLoadAll();
             Players = Converter.PlayersFromTable(playersTable);
         }
 
@@ -157,7 +157,7 @@ namespace OneHundredAndEightyCore
                                        mainWindow.NewPlayerAvatar.Source as BitmapImage);
             try
             {
-                dbService.SaveNewPlayer(newPlayer);
+                dbService.PlayerSaveNew(newPlayer);
             }
             catch (Exception e)
             {

@@ -2,6 +2,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
 
 #endregion
@@ -10,7 +12,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class FreeThrowsDoubleFreePointsProcessor : IGameProcessor
     {
-        public void OnThrow(int thrwTotalPoints, List<Player> players, Player playerOnThrow, ScoreBoardService scoreBoard)
+        public void OnThrow(DetectedThrow thrw, List<Player> players, Player playerOnThrow, Game game, ScoreBoardService scoreBoard, DBService dbService)
         {
             AddThrowNumberAndTogglePlayerOnThrow(players, playerOnThrow);
         }

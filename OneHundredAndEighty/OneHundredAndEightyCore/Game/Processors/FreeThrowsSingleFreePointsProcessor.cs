@@ -1,6 +1,8 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
 
 #endregion
@@ -9,11 +11,23 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class FreeThrowsSingleFreePointsProcessor : IGameProcessor
     {
-        public void OnThrow(int thrwTotalPoints, List<Player> players, Player playerOnThrow, ScoreBoardService scoreBoard)
+        public void OnThrow(DetectedThrow thrw, List<Player> players, Player playerOnThrow, Game game, ScoreBoardService scoreBoard, DBService dbService)
         {
-            playerOnThrow.Points += thrwTotalPoints;
+            playerOnThrow.Points += thrw.TotalPoints;
 
-            scoreBoard.AddPoints(thrwTotalPoints);
+            scoreBoard.AddPointsToSinglePlayer(thrw.TotalPoints);
+
+            var dbThrow = new Throw(playerOnThrow,
+                                    game,
+                                    thrw.Sector,
+                                    thrw.Type,
+                                    ThrowResult.Ordinary,
+                                    playerOnThrow.ThrowNumber,
+                                    thrw.TotalPoints,
+                                    thrw.Poi,
+                                    thrw.ProjectionResolution);
+
+            dbService.ThrowSaveNew(dbThrow);
 
             AddThrowNumber(playerOnThrow);
         }

@@ -61,9 +61,9 @@ namespace OneHundredAndEightyCore.ScoreBoard
         private void PreSetupForFreeThrowsSingle(Player player, string gameTypeString)
         {
             scoreBoardWindow.ScoreBoardFreeThrowsSingleGrid.Visibility = Visibility.Visible;
-            scoreBoardWindow.ScoreBoardFreeThrowsSingleGridGameType.Content = gameTypeString;
-            scoreBoardWindow.ScoreBoardFreeThrowsSingleGridPlayerImage.Source = player.Avatar;
-            scoreBoardWindow.ScoreBoardFreeThrowsSingleGridPlayerName.Content = $"{player.Name} {player.NickName}";
+            TextLabelContentChange(scoreBoardWindow.SingleGameTypeLabel, gameTypeString);
+            scoreBoardWindow.SinglePlayerImage.Source = player.Avatar;
+            TextLabelContentChange(scoreBoardWindow.SinglePlayerName, $"{player.Name} {player.NickName}");
         }
 
         private void PreSetupForFreeThrowsDouble()
@@ -80,18 +80,16 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region Points
 
-        public void AddPoints(int pointsToAdd)
+        public void AddPointsToSinglePlayer(int pointsToAdd)
         {
-            scoreBoardWindow.Dispatcher.Invoke(() =>
-                                               {
-                                                   AnimationAdd(scoreBoardWindow.ScoreBoardFreeThrowsSinglePoints, pointsToAdd);
-                                                   SlideCheckPointsHint(scoreBoardWindow.PointsHintGrid);
-                                               });
+            scoreBoardWindow.Dispatcher.Invoke(() => { DigitLabelContentAdd(scoreBoardWindow.SinglePoints, pointsToAdd); });
         }
 
         #endregion
 
-        private void AnimationAdd(Label label, int pointsToAdd)
+        #region Low level
+
+        private void DigitLabelContentAdd(ContentControl label, int pointsToAdd)
         {
             var sb = new Storyboard();
             var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
@@ -104,7 +102,19 @@ namespace OneHundredAndEightyCore.ScoreBoard
                             + pointsToAdd;
         }
 
-        private void SlideCheckPointsHint(FrameworkElement grid)
+        private void TextLabelContentChange(ContentControl label, string text)
+        {
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
+            Storyboard.SetTarget(fadeIn, label);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+
+            label.Content = text;
+        }
+
+        private void CheckPointsHintSlideToggle(FrameworkElement grid)
         {
             var value = IsCheckPointsHintShown
                             ? 214
@@ -134,5 +144,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
             IsCheckPointsHintShown = !IsCheckPointsHintShown;
         }
+
+        #endregion
     }
 }

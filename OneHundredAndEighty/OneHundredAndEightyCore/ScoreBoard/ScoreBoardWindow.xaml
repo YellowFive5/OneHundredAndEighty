@@ -64,45 +64,60 @@
                     </LinearGradientBrush>
                 </Ellipse.Fill>
             </Ellipse>
-            <Label Content="Mighty Mike" HorizontalAlignment="Left" Margin="231,42,0,0" VerticalAlignment="Top"
+            <Label Name="ClassicsPlayer1Name"
+                   Content="Mighty Mike" HorizontalAlignment="Left" Margin="231,42,0,0" VerticalAlignment="Top"
                    Height="58" Width="162" FontFamily="Agency FB" FontSize="24" FontWeight="Bold"
                    VerticalContentAlignment="Center" />
-            <Label Content="Mighty Mike 2" HorizontalAlignment="Left" Margin="231,98,0,0" VerticalAlignment="Top"
+            <Label Name="ClassicsPlayer2Name"
+                   Content="Mighty Mike 2" HorizontalAlignment="Left" Margin="231,98,0,0" VerticalAlignment="Top"
                    Height="58" Width="144" FontFamily="Agency FB" FontSize="24" FontWeight="Bold"
                    VerticalContentAlignment="Center" />
-            <Image HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="54" Margin="398,35,0,0" />
-            <Image HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="54" Margin="398,93,0,0" />
-            <Label Content="501" HorizontalAlignment="Left" Margin="641,42,0,0" VerticalAlignment="Top" Height="53"
+            <Image Name="ClassicsPlayer1Image"
+                   HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="54" Margin="398,35,0,0" />
+            <Image Name="ClassicsPlayer2Image"
+                   HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="54" Margin="398,93,0,0" />
+            <Label Name="ClassicsPlayer1Points"
+                   Content="501" HorizontalAlignment="Left" Margin="641,42,0,0" VerticalAlignment="Top" Height="53"
                    Width="76" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Left" Foreground="Black" />
-            <Label Content="501" HorizontalAlignment="Left" Margin="641,100,0,0" VerticalAlignment="Top" Height="54"
+            <Label Name="ClassicsPlayer2Points"
+                   Content="501" HorizontalAlignment="Left" Margin="641,100,0,0" VerticalAlignment="Top" Height="54"
                    Width="76" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Left" />
-            <Label Content="0" HorizontalAlignment="Left" Margin="496,42,0,0" VerticalAlignment="Top" Height="53"
+            <Label
+                Name="ClassicsPlayer1Sets"
+                Content="0" HorizontalAlignment="Left" Margin="496,42,0,0" VerticalAlignment="Top" Height="53"
+                Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left" Foreground="Black" />
+            <Label Name="ClassicsPlayer1Legs"
+                   Content="0" HorizontalAlignment="Left" Margin="557,42,0,0" VerticalAlignment="Top" Height="53"
                    Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Left" Foreground="Black" />
-            <Label Content="0" HorizontalAlignment="Left" Margin="557,42,0,0" VerticalAlignment="Top" Height="53"
+            <Label Name="ClassicsPlayer2Legs"
+                   Content="0" HorizontalAlignment="Left" Margin="557,100,0,0" VerticalAlignment="Top" Height="54"
                    Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Left" Foreground="Black" />
-            <Label Content="0" HorizontalAlignment="Left" Margin="557,100,0,0" VerticalAlignment="Top" Height="54"
+            <Label Name="ClassicsPlayer2Sets"
+                   Content="0" HorizontalAlignment="Left" Margin="496,100,0,0" VerticalAlignment="Top" Height="54"
                    Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Left" Foreground="Black" />
-            <Label Content="0" HorizontalAlignment="Left" Margin="496,100,0,0" VerticalAlignment="Top" Height="54"
-                   Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Left" Foreground="Black" />
-            <Label Content="Sets" HorizontalAlignment="Left" Margin="488,7,0,0" VerticalAlignment="Top" Height="33"
+            <Label Name="ClassicsSetsLabel"
+                   Content="Sets" HorizontalAlignment="Left" Margin="488,7,0,0" VerticalAlignment="Top" Height="33"
                    FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Top" Width="46" />
-            <Label Content="Legs" HorizontalAlignment="Left" Margin="549,7,0,0" VerticalAlignment="Top" Height="33"
+            <Label Name="ClassicsLegsLabel"
+                   Content="Legs" HorizontalAlignment="Left" Margin="549,7,0,0" VerticalAlignment="Top" Height="33"
                    FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Top" Width="46" />
-            <Label Content="First to 7" HorizontalAlignment="Left" Margin="231,7,0,0" VerticalAlignment="Top"
+            <Label Name="ClassicsGameTypeLabel"
+                   Content="First to 7" HorizontalAlignment="Left" Margin="231,7,0,0" VerticalAlignment="Top"
                    Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Left"
                    VerticalContentAlignment="Top" Width="88" />
             <Label Content="2020 OneHundredAndEighty" HorizontalAlignment="Left" Margin="231,154,0,0"
                    VerticalAlignment="Top" Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Width="208" Foreground="#FF727272" />
-            <Grid Margin="716,89,-1,32">
+            <Grid Name="ClassicsWhoThrowsPointer"
+                  Margin="716,89,-1,32">
                 <Rectangle Height="58" Stroke="Black"
                            Width="64">
                     <Rectangle.Fill>
@@ -138,7 +153,8 @@
                     </Label.Foreground>
                 </Label>
             </Grid>
-            <Grid Margin="1,98,565,41">
+            <Grid Name="PointsHintClassicsPlayer2"
+                  Margin="1,98,565,41">
                 <Rectangle Stroke="Black">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -155,11 +171,14 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label Content="T19     D2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="214"
+                <Label Name="PointsHintClassicsPlayer2Label"
+                       Content="T19     D2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="214"
                        Height="43" FontFamily="Agency FB" FontWeight="Bold" HorizontalContentAlignment="Center"
                        VerticalContentAlignment="Center" FontSize="30" Foreground="Black" />
             </Grid>
-            <Grid Margin="1,41,565,98">
+            <Grid
+                Name="PointsHintClassicsPlayer1"
+                Margin="1,41,565,98">
                 <Rectangle Stroke="Black">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -176,7 +195,8 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label Content="T20     T11     D14" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <Label Name="PointsHintClassicsPlayer1Label"
+                       Content="T20     T11     D14" HorizontalAlignment="Center" VerticalAlignment="Center"
                        Width="214" Height="43" FontFamily="Agency FB" FontWeight="Bold"
                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30"
                        Foreground="Black" />
@@ -185,8 +205,8 @@
 
         <Grid Name="ScoreBoardFreeThrowsSingleGrid"
               Margin="10,10,10,10"
-              Visibility="Visible">
-            <Grid Name="PointsHintGrid"
+              Visibility="Hidden">
+            <Grid Name="PointsHintSingle"
                   Margin="215,41,351,98">
                 <Rectangle Stroke="Black">
                     <Rectangle.Fill>
@@ -246,17 +266,17 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label Name="ScoreBoardFreeThrowsSingleGridPlayerName"
+            <Label Name="SinglePlayerName"
                    Content="Mighty Mike" HorizontalAlignment="Left" Margin="231,42,0,0" VerticalAlignment="Top"
                    Height="58" Width="162" FontFamily="Agency FB" FontSize="24" FontWeight="Bold"
                    VerticalContentAlignment="Center" />
-            <Image Name="ScoreBoardFreeThrowsSingleGridPlayerImage"
+            <Image Name="SinglePlayerImage"
                    HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="54" Margin="398,44,0,0" />
-            <Label Name="ScoreBoardFreeThrowsSinglePoints"
+            <Label Name="SinglePoints"
                    Content="0" HorizontalAlignment="Left" Margin="641,42,0,0" VerticalAlignment="Top" Height="53"
                    Width="76" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center" Foreground="Black" />
-            <Label Name="ScoreBoardFreeThrowsSingleGridGameType"
+            <Label Name="SingleGameTypeLabel"
                    Content="Free throws" HorizontalAlignment="Left" Margin="231,7,0,0" VerticalAlignment="Top"
                    Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Left"
                    VerticalContentAlignment="Top" Width="98" />

@@ -25,7 +25,7 @@ namespace OneHundredAndEightyCore.Common
         {
             lock (locker)
             {
-                dbService.SaveSettingsValue(key, Convert.ToString(value, CultureInfo.InvariantCulture));
+                dbService.SettingsSetValue(key, Convert.ToString(value, CultureInfo.InvariantCulture));
             }
         }
 
@@ -37,27 +37,27 @@ namespace OneHundredAndEightyCore.Common
 
                 if (typeof(T) == typeof(double))
                 {
-                    value = Convert.ToDouble(dbService.GetSettingsValue(key), CultureInfo.InvariantCulture);
+                    value = Convert.ToDouble(dbService.SettingsGetValue(key), CultureInfo.InvariantCulture);
                 }
                 else if (typeof(T) == typeof(decimal))
                 {
-                    value = Convert.ToDecimal(dbService.GetSettingsValue(key), CultureInfo.InvariantCulture);
+                    value = Convert.ToDecimal(dbService.SettingsGetValue(key), CultureInfo.InvariantCulture);
                 }
                 else if (typeof(T) == typeof(float))
                 {
-                    value = (float) Convert.ToDecimal(dbService.GetSettingsValue(key), CultureInfo.InvariantCulture);
+                    value = (float) Convert.ToDecimal(dbService.SettingsGetValue(key), CultureInfo.InvariantCulture);
                 }
                 else if (typeof(T) == typeof(int))
                 {
-                    value = Convert.ToInt32(dbService.GetSettingsValue(key));
+                    value = Convert.ToInt32(dbService.SettingsGetValue(key));
                 }
                 else if (typeof(T) == typeof(bool))
                 {
-                    value = Convert.ToBoolean(dbService.GetSettingsValue(key));
+                    value = Convert.ToBoolean(dbService.SettingsGetValue(key));
                 }
                 else if (typeof(T) == typeof(string))
                 {
-                    value = dbService.GetSettingsValue(key);
+                    value = dbService.SettingsGetValue(key);
                 }
                 else
                 {

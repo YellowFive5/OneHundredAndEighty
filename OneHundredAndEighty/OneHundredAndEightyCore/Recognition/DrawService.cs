@@ -50,6 +50,7 @@ namespace OneHundredAndEightyCore.Recognition
         public readonly int projectionCoefficent = 3;
         public PointF projectionCenterPoint;
         public readonly int projectionFrameSide;
+
         private Image<Bgr, byte> DartboardProjectionFrameBackground { get; }
         private Image<Bgr, byte> DartboardProjectionWorkingFrame { get; set; }
 

@@ -1,6 +1,8 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
 
 #endregion
@@ -9,6 +11,6 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public interface IGameProcessor
     {
-        void OnThrow(int thrwTotalPoints, List<Player> players, Player playerOnThrow, ScoreBoardService scoreBoard);
+        void OnThrow(DetectedThrow thrw, List<Player> players, Player playerOnThrow, Game game, ScoreBoardService scoreBoard, DBService dbService);
     }
 }

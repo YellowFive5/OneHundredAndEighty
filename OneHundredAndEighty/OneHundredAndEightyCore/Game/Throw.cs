@@ -17,13 +17,13 @@ namespace OneHundredAndEightyCore.Game
         Bulleye
     }
 
-    public enum ThrowResultativity
+    public enum ThrowResult
     {
-        LegWon = 1,
+        Ordinary = 1,
+        Fault,
+        LegWon,
         SetWon,
-        MatchWon,
-        Ordinary,
-        Fault
+        MatchWon
     }
 
     public class Throw
@@ -33,14 +33,14 @@ namespace OneHundredAndEightyCore.Game
         public Game Game { get; }
         public int Sector { get; }
         public ThrowType Type { get; }
-        public ThrowResultativity Resultativity { get; }
+        public ThrowResult Result { get; }
         public int Number { get; }
         public int Points { get; }
         public PointF Poi { get; }
         public int ProjectionResolution { get; }
         public DateTime TimeStamp { get; }
 
-        public Throw(Player player, Game game, int sector, ThrowType type, ThrowResultativity resultativity,
+        public Throw(Player player, Game game, int sector, ThrowType type, ThrowResult result,
                      int number, int points, PointF poi, int projectionResolution, int id = -1)
         {
             Id = id;
@@ -48,7 +48,7 @@ namespace OneHundredAndEightyCore.Game
             Game = game;
             Sector = sector;
             Type = type;
-            Resultativity = resultativity;
+            Result = result;
             Number = number;
             Points = points;
             Poi = poi;

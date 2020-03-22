@@ -83,7 +83,7 @@ namespace OneHundredAndEightyCore.Game
 
             Game = new Game(selectedGameType);
 
-            dbService.SaveNewGame(Game, Players);
+            dbService.GameSaveNew(Game, Players);
 
             switch (selectedGameType)
             {
@@ -144,25 +144,14 @@ namespace OneHundredAndEightyCore.Game
             scoreBoardService.CloseScoreBoard();
             detectionService.StopDetection();
             drawService.ProjectionClear();
-            dbService.EndGame(Game, type);
+            dbService.GameEnd(Game, type);
         }
 
         #endregion
 
         private void OnAnotherThrow(DetectedThrow thrw)
         {
-            var dbThrow = new Throw(PlayerOnThrow,
-                                    Game,
-                                    thrw.Sector,
-                                    thrw.Type,
-                                    ThrowResultativity.Ordinary, // todo
-                                    PlayerOnThrow.ThrowNumber,
-                                    thrw.TotalPoints,
-                                    thrw.Poi,
-                                    drawService.projectionFrameSide);
-            dbService.SaveThrow(dbThrow);
-
-            GameProcessor.OnThrow(thrw.TotalPoints, Players, PlayerOnThrow, scoreBoardService);
+            GameProcessor.OnThrow(thrw, Players, PlayerOnThrow, Game, scoreBoardService, dbService);
         }
     }
 }
