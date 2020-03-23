@@ -11,6 +11,11 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public interface IGameProcessor
     {
-        void OnThrow(DetectedThrow thrw, List<Player> players, Player playerOnThrow, Game game, ScoreBoardService scoreBoard, DBService dbService);
+        void OnThrow(DetectedThrow thrw,
+                     List<Player> players,
+                     Player playerOnThrow,
+                     Game game,
+                     ScoreBoardService scoreBoard,
+                     DBService dbService);
     }
 }

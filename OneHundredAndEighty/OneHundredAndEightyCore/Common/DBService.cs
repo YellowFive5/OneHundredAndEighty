@@ -34,22 +34,22 @@ namespace OneHundredAndEightyCore.Common
             thrw.SetId(Convert.ToInt32(newThrowId));
 
             var incrementThrowGameStatisticsQuery = $"UPDATE [{Table.Statistic}] SET [{Column.Throws}] = [{Column.Throws}] + 1 " +
-                                                    $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [SFT] " +
+                                                    $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                     $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
                                                     $"ON [GS].[{Column.Game}] = {thrw.Game.Id} " +
-                                                    $"AND [GS].[{Column.Statistic}] = [SFT].[{Column.Id}] " +
+                                                    $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
                                                     $"WHERE[Player] = {thrw.Player.Id})";
             var incrementPointsGameStatisticsQuery = $"UPDATE [{Table.Statistic}] SET [{Column.Points}] = [{Column.Points}] + {thrw.Points} " +
-                                                     $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [SFT] " +
+                                                     $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                      $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
                                                      $"ON [GS].[{Column.Game}] = {thrw.Game.Id} " +
-                                                     $"AND [GS].[{Column.Statistic}] = [SFT].[{Column.Id}] " +
+                                                     $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
                                                      $"WHERE[{Column.Player}] = {thrw.Player.Id})";
             var incrementThrowTypeGameStatisticsQuery = $"UPDATE [{Table.Statistic}] SET [{thrw.Type}] = [{thrw.Type}] + 1 " +
-                                                        $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [SFT] " +
+                                                        $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                         $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
                                                         $"ON [GS].[{Column.Game}] = {thrw.Game.Id} " +
-                                                        $"AND [GS].[{Column.Statistic}] = [SFT].[{Column.Id}] " +
+                                                        $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
                                                         $"WHERE[{Column.Player}] = {thrw.Player.Id})";
             // todo fault add
             // todo _180 add
@@ -246,6 +246,17 @@ namespace OneHundredAndEightyCore.Common
             var newPlayerAchievesQuery = $"INSERT INTO [{Table.PlayerAchieves}] DEFAULT VALUES";
             ExecuteNonQueryInternal(newPlayerAchievesQuery);
             return ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerAchieves}]");
+        }
+
+        #endregion
+
+        #region _180
+
+        public void _180SaveNew(Game.Game game, Player player)
+        {
+            var new180query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw3},{Column.Throw2},{Column.Throw1}, {Column.Timestamp})" +
+                               $" VALUES ('{player.Id}','{game.Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{DateTime.Now}')";
+            ExecuteNonQueryInternal(new180query);
         }
 
         #endregion

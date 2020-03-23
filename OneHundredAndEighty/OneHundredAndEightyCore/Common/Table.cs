@@ -9,6 +9,7 @@
         Games,
         GameStatistic,
         Throws,
-        Statistic
+        Statistic,
+        _180
     }
 }

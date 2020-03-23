@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Common;
 
@@ -9,7 +10,7 @@ namespace OneHundredAndEightyCore.Game
 {
     public class Player
     {
-        #region Main
+        #region DB
 
         public int Id { get; }
         public string Name { get; }
@@ -20,8 +21,9 @@ namespace OneHundredAndEightyCore.Game
 
         #region Game
 
-        public int Points { get; set; }
+        public int HandPoints { get; set; } = 0;
         public int ThrowNumber { get; set; } = 1;
+        public Stack<Throw> HandThrows { get; set; } = new Stack<Throw>();
 
         #endregion
 

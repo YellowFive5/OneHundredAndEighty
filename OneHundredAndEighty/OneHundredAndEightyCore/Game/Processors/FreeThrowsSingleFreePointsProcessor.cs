@@ -9,11 +9,16 @@ using OneHundredAndEightyCore.ScoreBoard;
 
 namespace OneHundredAndEightyCore.Game.Processors
 {
-    public class FreeThrowsSingleFreePointsProcessor : IGameProcessor
+    public class FreeThrowsSingleFreePointsProcessor : ProcessorBase, IGameProcessor
     {
-        public void OnThrow(DetectedThrow thrw, List<Player> players, Player playerOnThrow, Game game, ScoreBoardService scoreBoard, DBService dbService)
+        public void OnThrow(DetectedThrow thrw,
+                            List<Player> players,
+                            Player playerOnThrow,
+                            Game game,
+                            ScoreBoardService scoreBoard,
+                            DBService dbService)
         {
-            playerOnThrow.Points += thrw.TotalPoints;
+            playerOnThrow.HandPoints += thrw.TotalPoints;
 
             scoreBoard.AddPointsToSinglePlayer(thrw.TotalPoints);
 
@@ -29,14 +34,18 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             dbService.ThrowSaveNew(dbThrow);
 
-            AddThrowNumber(playerOnThrow);
+            ProceedThrow(playerOnThrow, dbThrow, game, dbService);
         }
 
-        private void AddThrowNumber(Player playerOnThrow)
+        private void ProceedThrow(Player playerOnThrow, Throw dbThrow, Game game, DBService dbService)
         {
-            if (playerOnThrow.ThrowNumber == 3)
+            playerOnThrow.HandThrows.Push(dbThrow);
+
+            if (IsHandOver(playerOnThrow))
             {
-                playerOnThrow.ThrowNumber = 1;
+                Check180(game, playerOnThrow, dbService);
+
+                ClearThrows(playerOnThrow);
             }
             else
             {

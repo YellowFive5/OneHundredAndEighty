@@ -34,6 +34,9 @@
         PoiY,
         ProjectionResolution,
         Timestamp,
-        Avatar
+        Avatar,
+        Throw1,
+        Throw2,
+        Throw3
     }
 }

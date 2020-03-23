@@ -10,9 +10,14 @@ using OneHundredAndEightyCore.ScoreBoard;
 
 namespace OneHundredAndEightyCore.Game.Processors
 {
-    public class FreeThrowsDoubleFreePointsProcessor : IGameProcessor
+    public class FreeThrowsDoubleFreePointsProcessor : ProcessorBase, IGameProcessor
     {
-        public void OnThrow(DetectedThrow thrw, List<Player> players, Player playerOnThrow, Game game, ScoreBoardService scoreBoard, DBService dbService)
+        public void OnThrow(DetectedThrow thrw,
+                            List<Player> players,
+                            Player playerOnThrow,
+                            Game game,
+                            ScoreBoardService scoreBoard,
+                            DBService dbService)
         {
             AddThrowNumberAndTogglePlayerOnThrow(players, playerOnThrow);
         }
