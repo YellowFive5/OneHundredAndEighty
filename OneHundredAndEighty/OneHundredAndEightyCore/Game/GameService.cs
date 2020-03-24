@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using NLog;
 using OneHundredAndEightyCore.Common;
@@ -25,12 +24,9 @@ namespace OneHundredAndEightyCore.Game
         private readonly DBService dbService;
 
         private bool IsGameRun { get; set; }
-        private Game Game { get; set; }
-        private List<Player> Players { get; set; }
-        private Player PlayerOnThrow { get; set; }
-        private Player PlayerOnSet { get; set; }
         private GameType GameType { get; set; }
         private IGameProcessor GameProcessor { get; set; }
+        private Game Game { get; set; }
 
         public GameService(MainWindow mainWindow,
                            ScoreBoardService scoreBoardService,
@@ -67,29 +63,26 @@ namespace OneHundredAndEightyCore.Game
             var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
             var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
 
-            Players = new List<Player>();
+            var players = new List<Player>();
             if (selectedPlayer1 != null)
             {
-                Players.Add(selectedPlayer1);
+                players.Add(selectedPlayer1);
             }
 
             if (selectedPlayer2 != null)
             {
-                Players.Add(selectedPlayer2);
+                players.Add(selectedPlayer2);
             }
-
-            PlayerOnThrow = Players.First();
-            PlayerOnSet = Players.First();
 
             Game = new Game(selectedGameType);
 
-            dbService.GameSaveNew(Game, Players);
+            dbService.GameSaveNew(Game, players);
 
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingleFreePoints:
-                    GameProcessor = new FreeThrowsSingleFreePointsProcessor();
-                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, Players, "Free throws");
+                    GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, players);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Free throws");
                     break;
                 case GameType.FreeThrowsSingle301Points:
                     break;
@@ -100,6 +93,8 @@ namespace OneHundredAndEightyCore.Game
                 case GameType.FreeThrowsSingle1001Points:
                     break;
                 case GameType.FreeThrowsDoubleFreePoints:
+                    GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, players);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Free throws");
                     break;
                 case GameType.FreeThrowsDouble301Points:
                     break;
@@ -151,7 +146,7 @@ namespace OneHundredAndEightyCore.Game
 
         private void OnAnotherThrow(DetectedThrow thrw)
         {
-            GameProcessor.OnThrow(thrw, Players, PlayerOnThrow, Game, scoreBoardService, dbService);
+            GameProcessor.OnThrow(thrw, scoreBoardService, dbService);
         }
     }
 }

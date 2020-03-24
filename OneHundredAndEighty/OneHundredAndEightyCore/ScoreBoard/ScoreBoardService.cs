@@ -69,6 +69,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
         private void PreSetupForFreeThrowsDouble()
         {
             scoreBoardWindow.ScoreBoardClassicGrid.Visibility = Visibility.Visible;
+            // todo
         }
 
         private void PreSetupForClassics()
@@ -83,6 +84,11 @@ namespace OneHundredAndEightyCore.ScoreBoard
         public void AddPointsToSinglePlayer(int pointsToAdd)
         {
             scoreBoardWindow.Dispatcher.Invoke(() => { DigitLabelContentAdd(scoreBoardWindow.SinglePoints, pointsToAdd); });
+        }
+
+        public void AddPointsToClassic(int pointsToAdd, Player player)
+        {
+            // todo
         }
 
         #endregion

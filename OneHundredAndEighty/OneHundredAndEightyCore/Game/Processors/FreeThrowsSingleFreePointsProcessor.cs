@@ -11,45 +11,46 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class FreeThrowsSingleFreePointsProcessor : ProcessorBase, IGameProcessor
     {
+        public FreeThrowsSingleFreePointsProcessor(Game game, List<Player> players) : base(game, players)
+        {
+        }
+
         public void OnThrow(DetectedThrow thrw,
-                            List<Player> players,
-                            Player playerOnThrow,
-                            Game game,
                             ScoreBoardService scoreBoard,
                             DBService dbService)
         {
-            playerOnThrow.HandPoints += thrw.TotalPoints;
+            PlayerOnThrow.HandPoints += thrw.TotalPoints;
 
             scoreBoard.AddPointsToSinglePlayer(thrw.TotalPoints);
 
-            var dbThrow = new Throw(playerOnThrow,
-                                    game,
+            var dbThrow = new Throw(PlayerOnThrow,
+                                    Game,
                                     thrw.Sector,
                                     thrw.Type,
                                     ThrowResult.Ordinary,
-                                    playerOnThrow.ThrowNumber,
+                                    PlayerOnThrow.ThrowNumber,
                                     thrw.TotalPoints,
                                     thrw.Poi,
                                     thrw.ProjectionResolution);
 
             dbService.ThrowSaveNew(dbThrow);
 
-            ProceedThrow(playerOnThrow, dbThrow, game, dbService);
+            ProceedThrow(dbThrow, dbService);
         }
 
-        private void ProceedThrow(Player playerOnThrow, Throw dbThrow, Game game, DBService dbService)
+        private void ProceedThrow(Throw dbThrow, DBService dbService)
         {
-            playerOnThrow.HandThrows.Push(dbThrow);
+            PlayerOnThrow.HandThrows.Push(dbThrow);
 
-            if (IsHandOver(playerOnThrow))
+            if (IsHandOver())
             {
-                Check180(game, playerOnThrow, dbService);
+                Check180(dbService);
 
-                ClearThrows(playerOnThrow);
+                ClearThrows();
             }
             else
             {
-                playerOnThrow.ThrowNumber += 1;
+                PlayerOnThrow.ThrowNumber += 1;
             }
         }
     }

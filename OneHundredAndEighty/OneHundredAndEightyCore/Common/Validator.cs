@@ -58,12 +58,12 @@ namespace OneHundredAndEightyCore.Common
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingleFreePoints:
+                case GameType.FreeThrowsDoubleFreePoints:
                     return true;
                 case GameType.FreeThrowsSingle301Points:
                 case GameType.FreeThrowsSingle501Points:
                 case GameType.FreeThrowsSingle701Points:
                 case GameType.FreeThrowsSingle1001Points:
-                case GameType.FreeThrowsDoubleFreePoints:
                 case GameType.FreeThrowsDouble301Points:
                 case GameType.FreeThrowsDouble501Points:
                 case GameType.FreeThrowsDouble701Points:

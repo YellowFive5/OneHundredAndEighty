@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using System.Linq;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
@@ -12,26 +11,48 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class FreeThrowsDoubleFreePointsProcessor : ProcessorBase, IGameProcessor
     {
+        public FreeThrowsDoubleFreePointsProcessor(Game game, List<Player> players) : base(game, players)
+        {
+        }
+
         public void OnThrow(DetectedThrow thrw,
-                            List<Player> players,
-                            Player playerOnThrow,
-                            Game game,
                             ScoreBoardService scoreBoard,
                             DBService dbService)
         {
-            AddThrowNumberAndTogglePlayerOnThrow(players, playerOnThrow);
+            PlayerOnThrow.HandPoints += thrw.TotalPoints;
+
+            scoreBoard.AddPointsToClassic(thrw.TotalPoints, PlayerOnThrow);
+
+            var dbThrow = new Throw(PlayerOnThrow,
+                                    Game,
+                                    thrw.Sector,
+                                    thrw.Type,
+                                    ThrowResult.Ordinary,
+                                    PlayerOnThrow.ThrowNumber,
+                                    thrw.TotalPoints,
+                                    thrw.Poi,
+                                    thrw.ProjectionResolution);
+
+            dbService.ThrowSaveNew(dbThrow);
+
+            ProceedThrow(dbThrow, dbService);
         }
 
-        private void AddThrowNumberAndTogglePlayerOnThrow(List<Player> players, Player playerOnThrow)
+        private void ProceedThrow(Throw dbThrow, DBService dbService)
         {
-            if (playerOnThrow.ThrowNumber == 3)
+            PlayerOnThrow.HandThrows.Push(dbThrow);
+
+            if (IsHandOver())
             {
-                playerOnThrow.ThrowNumber = 1;
-                playerOnThrow = players.First(p => p != playerOnThrow);
+                Check180(dbService);
+
+                ClearThrows();
+
+                TogglePlayerOnThrow();
             }
             else
             {
-                playerOnThrow.ThrowNumber += 1;
+                PlayerOnThrow.ThrowNumber += 1;
             }
         }
     }
