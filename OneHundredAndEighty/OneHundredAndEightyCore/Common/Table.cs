@@ -3,7 +3,6 @@
     public enum Table
     {
         Settings,
-        PlayerStatistic,
         PlayerAchieves,
         Players,
         Games,
