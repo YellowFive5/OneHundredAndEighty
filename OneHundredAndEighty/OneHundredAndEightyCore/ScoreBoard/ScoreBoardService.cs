@@ -17,11 +17,6 @@ namespace OneHundredAndEightyCore.ScoreBoard
         private ScoreBoardWindow scoreBoardWindow;
         private ScoreBoardType scoreBoardType;
 
-        private readonly TimeSpan slideTime = TimeSpan.FromSeconds(0.25);
-        private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
-
-        private bool IsCheckPointsHintShown;
-
         #region Open/Close
 
         public void OpenScoreBoard(GameTypeUi type, List<Player> players, string gameTypeString)
@@ -36,7 +31,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
                     break;
                 case GameTypeUi.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
-                    PreSetupForFreeThrowsDouble();
+                    PreSetupForFreeThrowsDouble(players, gameTypeString);
                     break;
                 case GameTypeUi.Classic:
                     scoreBoardType = ScoreBoardType.Classic;
@@ -66,10 +61,24 @@ namespace OneHundredAndEightyCore.ScoreBoard
             TextLabelContentChange(scoreBoardWindow.SinglePlayerName, $"{player.Name} {player.NickName}");
         }
 
-        private void PreSetupForFreeThrowsDouble()
+        private void PreSetupForFreeThrowsDouble(List<Player> players, string gameTypeString)
         {
+            TextLabelContentChange(scoreBoardWindow.ClassicsGameTypeLabel, gameTypeString);
+
+            scoreBoardWindow.ClassicsPlayer1Image.Source = players.ElementAt(0).Avatar;
+            scoreBoardWindow.ClassicsPlayer2Image.Source = players.ElementAt(1).Avatar;
+
+            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer1Name, $"{players.ElementAt(0).Name} {players.ElementAt(0).NickName}");
+            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer2Name, $"{players.ElementAt(1).Name} {players.ElementAt(1).NickName}");
+
             scoreBoardWindow.ScoreBoardClassicGrid.Visibility = Visibility.Visible;
-            // todo
+            scoreBoardWindow.ClassicsSetsLabel.Visibility = Visibility.Hidden;
+            scoreBoardWindow.ClassicsLegsLabel.Visibility = Visibility.Hidden;
+            scoreBoardWindow.ClassicsPlayer1Legs.Visibility = Visibility.Hidden;
+            scoreBoardWindow.ClassicsPlayer1Sets.Visibility = Visibility.Hidden;
+            scoreBoardWindow.ClassicsPlayer2Legs.Visibility = Visibility.Hidden;
+            scoreBoardWindow.ClassicsPlayer2Sets.Visibility = Visibility.Hidden;
+            scoreBoardWindow.ClassicWhoOnLegPoint.Visibility = Visibility.Hidden;
         }
 
         private void PreSetupForClassics()
@@ -88,12 +97,22 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         public void AddPointsToClassic(int pointsToAdd, Player player)
         {
-            // todo
+            scoreBoardWindow.Dispatcher.Invoke(() =>
+                                               {
+                                                   if (scoreBoardWindow.ClassicsPlayer1Name.Content.ToString() == $"{player.Name} {player.NickName}")
+                                                   {
+                                                       DigitLabelContentAdd(scoreBoardWindow.ClassicsPlayer1Points, pointsToAdd);
+                                                   }
+                                                   else if (scoreBoardWindow.ClassicsPlayer2Name.Content.ToString() == $"{player.Name} {player.NickName}")
+                                                   {
+                                                       DigitLabelContentAdd(scoreBoardWindow.ClassicsPlayer2Points, pointsToAdd);
+                                                   }
+                                               });
         }
 
         #endregion
 
-        #region Low level
+        private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
 
         private void DigitLabelContentAdd(ContentControl label, int pointsToAdd)
         {
@@ -120,12 +139,47 @@ namespace OneHundredAndEightyCore.ScoreBoard
             label.Content = text;
         }
 
-        private void CheckPointsHintSlideToggle(FrameworkElement grid)
-        {
-            var value = IsCheckPointsHintShown
-                            ? 214
-                            : -214;
+        #region PointsHint
 
+        private bool PointsHintSingleShown;
+        private bool PointsHintClassicsPlayer1Shown;
+        private bool PointsHintClassicsPlayer2Shown;
+        private readonly TimeSpan slideTime = TimeSpan.FromSeconds(0.25);
+
+        public void CheckPointsHintShow(FrameworkElement grid)
+        {
+            if (grid == scoreBoardWindow.PointsHintClassicsPlayer1 &&
+                !PointsHintClassicsPlayer1Shown)
+            {
+                CheckPointsHintSlideInternal(grid, -214);
+                PointsHintClassicsPlayer1Shown = !PointsHintClassicsPlayer1Shown;
+            }
+            else if (grid == scoreBoardWindow.PointsHintClassicsPlayer2 &&
+                     !PointsHintClassicsPlayer2Shown)
+            {
+                CheckPointsHintSlideInternal(grid, -214);
+                PointsHintClassicsPlayer2Shown = !PointsHintClassicsPlayer2Shown;
+            }
+        }
+
+        public void CheckPointsHintHide(FrameworkElement grid)
+        {
+            if (grid == scoreBoardWindow.PointsHintClassicsPlayer1 &&
+                PointsHintClassicsPlayer1Shown)
+            {
+                CheckPointsHintSlideInternal(grid, 214);
+                PointsHintClassicsPlayer1Shown = !PointsHintClassicsPlayer1Shown;
+            }
+            else if (grid == scoreBoardWindow.PointsHintClassicsPlayer2 &&
+                     PointsHintClassicsPlayer2Shown)
+            {
+                CheckPointsHintSlideInternal(grid, 214);
+                PointsHintClassicsPlayer2Shown = !PointsHintClassicsPlayer2Shown;
+            }
+        }
+
+        private void CheckPointsHintSlideInternal(FrameworkElement grid, int value)
+        {
             var sb = new Storyboard();
 
             var newPosition = new Thickness()
@@ -147,8 +201,6 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
             sb.Children.Add(slide);
             sb.Begin();
-
-            IsCheckPointsHintShown = !IsCheckPointsHintShown;
         }
 
         #endregion
