@@ -11,13 +11,15 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class FreeThrowsSingleFreePointsProcessor : ProcessorBase, IGameProcessor
     {
-        public FreeThrowsSingleFreePointsProcessor(Game game, List<Player> players) : base(game, players)
+        public FreeThrowsSingleFreePointsProcessor(Game game,
+                                                   List<Player> players,
+                                                   DBService dbService,
+                                                   ScoreBoardService scoreBoard)
+            : base(game, players, dbService, scoreBoard)
         {
         }
 
-        public void OnThrow(DetectedThrow thrw,
-                            ScoreBoardService scoreBoard,
-                            DBService dbService)
+        public void OnThrow(DetectedThrow thrw)
         {
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
 
@@ -35,16 +37,16 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             dbService.ThrowSaveNew(dbThrow);
 
-            ProceedThrow(dbThrow, dbService);
+            ProceedThrow(dbThrow);
         }
 
-        private void ProceedThrow(Throw dbThrow, DBService dbService)
+        private void ProceedThrow(Throw dbThrow)
         {
             PlayerOnThrow.HandThrows.Push(dbThrow);
 
             if (IsHandOver())
             {
-                Check180(dbService);
+                Check180();
 
                 ClearThrows();
             }

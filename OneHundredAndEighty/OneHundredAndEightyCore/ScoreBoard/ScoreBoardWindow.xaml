@@ -18,9 +18,8 @@
               Margin="10,10,10,10"
               Visibility="Visible">
             <Grid Name="ClassicsWhoThrowsPointer"
-                  Margin="651,89,64,32">
-                <Rectangle Height="58" Stroke="Black"
-                           Width="64">
+                  Margin="660,41,60,98">
+                <Rectangle Stroke="Black" Margin="2,0,3,0">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <LinearGradientBrush.RelativeTransform>
@@ -37,7 +36,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <Label Content="◀" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"
-                       Margin="2,0,3,1">
+                       Margin="2,0,7,1">
                     <Label.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <LinearGradientBrush.RelativeTransform>

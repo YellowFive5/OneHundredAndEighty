@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.ScoreBoard;
 
 #endregion
 
@@ -10,20 +11,26 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public abstract class ProcessorBase
     {
-        protected ProcessorBase(Game game, List<Player> players)
+        protected readonly DBService dbService;
+        protected readonly ScoreBoardService scoreBoard;
+
+        protected ProcessorBase(Game game, List<Player> players, DBService dbService, ScoreBoardService scoreBoard)
         {
+            this.dbService = dbService;
+            this.scoreBoard = scoreBoard;
+
             Game = game;
             Players = players;
             PlayerOnThrow = Players.First();
             PlayerOnSet = Players.First();
         }
 
-        protected List<Player> Players { get; set; }
+        protected List<Player> Players { get; }
         protected Player PlayerOnThrow { get; set; }
         protected Player PlayerOnSet { get; set; }
-        protected Game Game { get; set; }
+        protected Game Game { get; }
 
-        protected void Check180(DBService dbService)
+        protected void Check180()
         {
             if (PlayerOnThrow.HandThrows.Sum(t => t.Points) == 180)
             {
@@ -45,6 +52,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected void TogglePlayerOnThrow()
         {
             PlayerOnThrow = Players.First(p => p != PlayerOnThrow);
+            scoreBoard.WhoThrowsPointerSetOn(PlayerOnThrow);
         }
     }
 }

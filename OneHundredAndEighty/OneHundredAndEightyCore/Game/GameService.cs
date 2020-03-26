@@ -81,7 +81,7 @@ namespace OneHundredAndEightyCore.Game
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingleFreePoints:
-                    GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, players);
+                    GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, players, dbService, scoreBoardService);
                     scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Free throws");
                     break;
                 case GameType.FreeThrowsSingle301Points:
@@ -93,7 +93,7 @@ namespace OneHundredAndEightyCore.Game
                 case GameType.FreeThrowsSingle1001Points:
                     break;
                 case GameType.FreeThrowsDoubleFreePoints:
-                    GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, players);
+                    GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, players, dbService, scoreBoardService);
                     scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Free throws");
                     break;
                 case GameType.FreeThrowsDouble301Points:
@@ -146,7 +146,7 @@ namespace OneHundredAndEightyCore.Game
 
         private void OnAnotherThrow(DetectedThrow thrw)
         {
-            GameProcessor.OnThrow(thrw, scoreBoardService, dbService);
+            GameProcessor.OnThrow(thrw);
         }
     }
 }
