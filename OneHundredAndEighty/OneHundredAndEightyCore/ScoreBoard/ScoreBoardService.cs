@@ -220,7 +220,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region WhoThrowsPointer
 
-        private int OnWho = 1;
+        private OnPlayer onPlayer = OnPlayer._1;
 
         public void WhoThrowsPointerSetOn(Player player)
         {
@@ -228,151 +228,13 @@ namespace OneHundredAndEightyCore.ScoreBoard
                                                {
                                                    if (IsForPlayerOne(player))
                                                    {
-                                                       WhoThrowsPointerLeftTopRight();
+                                                       WhoThrowsPointerMoveTo(OnPlayer._1);
                                                    }
                                                    else if (IsForPlayerTwo(player))
                                                    {
-                                                       WhoThrowsPointerLeftBottomRight();
+                                                       WhoThrowsPointerMoveTo(OnPlayer._2);
                                                    }
                                                });
-        }
-
-        private void WhoThrowsPointerLeftBottomRight()
-        {
-            if (OnWho == 2)
-            {
-                return;
-            }
-
-            var sb = new Storyboard();
-
-            var left = new Thickness()
-                       {
-                           Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left - 54,
-                           Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top,
-                           Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right + 54,
-                           Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom
-                       };
-            var slideLeft = new ThicknessAnimation()
-                            {
-                                From = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin,
-                                To = left,
-                                Duration = slideTime
-                            };
-
-            var bottom = new Thickness()
-                         {
-                             Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left - 54,
-                             Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top + 57,
-                             Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right + 54,
-                             Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom - 57
-                         };
-            var slideBottom = new ThicknessAnimation()
-                              {
-                                  From = left,
-                                  To = bottom,
-                                  Duration = slideTime,
-                                  BeginTime = slideTime
-                              };
-
-            var right = new Thickness()
-                        {
-                            Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left,
-                            Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top + 57,
-                            Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right,
-                            Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom - 57
-                        };
-            var slideRight = new ThicknessAnimation()
-                             {
-                                 From = bottom,
-                                 To = right,
-                                 Duration = slideTime,
-                                 BeginTime = slideTime * 2
-                             };
-
-            Storyboard.SetTarget(slideLeft, scoreBoardWindow.ClassicsWhoThrowsPointer);
-            Storyboard.SetTargetProperty(slideLeft, new PropertyPath(FrameworkElement.MarginProperty));
-            Storyboard.SetTarget(slideBottom, scoreBoardWindow.ClassicsWhoThrowsPointer);
-            Storyboard.SetTargetProperty(slideBottom, new PropertyPath(FrameworkElement.MarginProperty));
-            Storyboard.SetTarget(slideRight, scoreBoardWindow.ClassicsWhoThrowsPointer);
-            Storyboard.SetTargetProperty(slideRight, new PropertyPath(FrameworkElement.MarginProperty));
-
-            sb.Children.Add(slideLeft);
-            sb.Children.Add(slideBottom);
-            sb.Children.Add(slideRight);
-
-            sb.Begin();
-
-            OnWho = 2;
-        }
-
-        private void WhoThrowsPointerLeftTopRight()
-        {
-            if (OnWho == 1)
-            {
-                return;
-            }
-
-            var sb = new Storyboard();
-
-            var left = new Thickness()
-                       {
-                           Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left - 54,
-                           Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top,
-                           Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right + 54,
-                           Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom
-                       };
-            var slideLeft = new ThicknessAnimation()
-                            {
-                                From = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin,
-                                To = left,
-                                Duration = slideTime
-                            };
-
-            var top = new Thickness()
-                      {
-                          Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left - 54,
-                          Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top - 57,
-                          Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right + 54,
-                          Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom + 57
-                      };
-            var slideTop = new ThicknessAnimation()
-                           {
-                               From = left,
-                               To = top,
-                               Duration = slideTime,
-                               BeginTime = slideTime
-                           };
-
-            var right = new Thickness()
-                        {
-                            Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left,
-                            Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top - 57,
-                            Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right,
-                            Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom + 57
-                        };
-            var slideRight = new ThicknessAnimation()
-                             {
-                                 From = top,
-                                 To = right,
-                                 Duration = slideTime,
-                                 BeginTime = slideTime * 2
-                             };
-
-            Storyboard.SetTarget(slideLeft, scoreBoardWindow.ClassicsWhoThrowsPointer);
-            Storyboard.SetTargetProperty(slideLeft, new PropertyPath(FrameworkElement.MarginProperty));
-            Storyboard.SetTarget(slideTop, scoreBoardWindow.ClassicsWhoThrowsPointer);
-            Storyboard.SetTargetProperty(slideTop, new PropertyPath(FrameworkElement.MarginProperty));
-            Storyboard.SetTarget(slideRight, scoreBoardWindow.ClassicsWhoThrowsPointer);
-            Storyboard.SetTargetProperty(slideRight, new PropertyPath(FrameworkElement.MarginProperty));
-
-            sb.Children.Add(slideLeft);
-            sb.Children.Add(slideTop);
-            sb.Children.Add(slideRight);
-
-            sb.Begin();
-
-            OnWho = 1;
         }
 
         private void WhoThrowsPointerRight()
@@ -398,6 +260,79 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
             sb.Children.Add(slide);
             sb.Begin();
+        }
+
+        private void WhoThrowsPointerMoveTo(OnPlayer toPlayer)
+        {
+            if (onPlayer == toPlayer)
+            {
+                return;
+            }
+
+            var verticalValue = toPlayer == OnPlayer._1
+                                    ? -57
+                                    : 57;
+
+            var sb = new Storyboard();
+
+            var left = new Thickness()
+                       {
+                           Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left - 54,
+                           Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top,
+                           Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right + 54,
+                           Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom
+                       };
+            var slideLeft = new ThicknessAnimation()
+                            {
+                                From = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin,
+                                To = left,
+                                Duration = slideTime
+                            };
+
+            var vertical = new Thickness()
+                           {
+                               Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left - 54,
+                               Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top + verticalValue,
+                               Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right + 54,
+                               Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom - verticalValue
+                           };
+            var slideVertical = new ThicknessAnimation()
+                                {
+                                    From = left,
+                                    To = vertical,
+                                    Duration = slideTime,
+                                    BeginTime = slideTime
+                                };
+
+            var right = new Thickness()
+                        {
+                            Left = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Left,
+                            Top = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Top + verticalValue,
+                            Right = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Right,
+                            Bottom = scoreBoardWindow.ClassicsWhoThrowsPointer.Margin.Bottom - verticalValue
+                        };
+            var slideRight = new ThicknessAnimation()
+                             {
+                                 From = vertical,
+                                 To = right,
+                                 Duration = slideTime,
+                                 BeginTime = slideTime * 2
+                             };
+
+            Storyboard.SetTarget(slideLeft, scoreBoardWindow.ClassicsWhoThrowsPointer);
+            Storyboard.SetTargetProperty(slideLeft, new PropertyPath(FrameworkElement.MarginProperty));
+            Storyboard.SetTarget(slideVertical, scoreBoardWindow.ClassicsWhoThrowsPointer);
+            Storyboard.SetTargetProperty(slideVertical, new PropertyPath(FrameworkElement.MarginProperty));
+            Storyboard.SetTarget(slideRight, scoreBoardWindow.ClassicsWhoThrowsPointer);
+            Storyboard.SetTargetProperty(slideRight, new PropertyPath(FrameworkElement.MarginProperty));
+
+            sb.Children.Add(slideLeft);
+            sb.Children.Add(slideVertical);
+            sb.Children.Add(slideRight);
+
+            sb.Begin();
+
+            onPlayer = toPlayer;
         }
 
         #endregion
