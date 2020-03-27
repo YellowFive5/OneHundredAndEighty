@@ -9,7 +9,7 @@ using OneHundredAndEightyCore.ScoreBoard;
 
 namespace OneHundredAndEightyCore.Game.Processors
 {
-    public class FreeThrowsSingleFreePointsProcessor : ProcessorBase, IGameProcessor
+    public class FreeThrowsSingleFreePointsProcessor : ProcessorBase
     {
         public FreeThrowsSingleFreePointsProcessor(Game game,
                                                    List<Player> players,
@@ -19,7 +19,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
         }
 
-        public void OnThrow(DetectedThrow thrw)
+        public override void OnThrow(DetectedThrow thrw)
         {
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
 
@@ -37,11 +37,6 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             dbService.ThrowSaveNew(dbThrow);
 
-            ProceedThrow(dbThrow);
-        }
-
-        private void ProceedThrow(Throw dbThrow)
-        {
             PlayerOnThrow.HandThrows.Push(dbThrow);
 
             if (IsHandOver())

@@ -19,7 +19,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region Open/Close
 
-        public void OpenScoreBoard(GameTypeUi type, List<Player> players, string gameTypeString)
+        public void OpenScoreBoard(GameTypeUi type, List<Player> players, string gameTypeString, int writeOffPoints = 0)
         {
             scoreBoardWindow = new ScoreBoardWindow();
 
@@ -27,7 +27,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
             {
                 case GameTypeUi.FreeThrowsSingle:
                     scoreBoardType = ScoreBoardType.FreeThrowsSingle;
-                    PreSetupForFreeThrowsSingle(players.First(), gameTypeString);
+                    PreSetupForFreeThrowsSingle(players.First(), gameTypeString, writeOffPoints);
                     break;
                 case GameTypeUi.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
@@ -53,12 +53,13 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region PreSetup
 
-        private void PreSetupForFreeThrowsSingle(Player player, string gameTypeString)
+        private void PreSetupForFreeThrowsSingle(Player player, string gameTypeString, int writeOffPoints)
         {
             scoreBoardWindow.ScoreBoardFreeThrowsSingleGrid.Visibility = Visibility.Visible;
             TextLabelContentChange(scoreBoardWindow.SingleGameTypeLabel, gameTypeString);
             scoreBoardWindow.SinglePlayerImage.Source = player.Avatar;
             TextLabelContentChange(scoreBoardWindow.SinglePlayerName, $"{player.Name} {player.NickName}");
+            scoreBoardWindow.SinglePoints.Content = writeOffPoints;
         }
 
         private void PreSetupForFreeThrowsDouble(List<Player> players, string gameTypeString)

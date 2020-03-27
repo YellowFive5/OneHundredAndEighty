@@ -85,6 +85,8 @@ namespace OneHundredAndEightyCore.Game
                     scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Free throws");
                     break;
                 case GameType.FreeThrowsSingle301Points:
+                    GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 301);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Write off 301", 301);
                     break;
                 case GameType.FreeThrowsSingle501Points:
                     break;

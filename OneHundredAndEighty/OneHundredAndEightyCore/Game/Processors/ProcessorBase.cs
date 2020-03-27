@@ -3,13 +3,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
 
 #endregion
 
 namespace OneHundredAndEightyCore.Game.Processors
 {
-    public abstract class ProcessorBase
+    public abstract class ProcessorBase : IGameProcessor
     {
         protected readonly DBService dbService;
         protected readonly ScoreBoardService scoreBoard;
@@ -47,12 +48,31 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             PlayerOnThrow.HandThrows.Clear();
             PlayerOnThrow.ThrowNumber = 1;
+            PlayerOnThrow.HandPoints = 0;
         }
 
         protected void TogglePlayerOnThrow()
         {
             PlayerOnThrow = Players.First(p => p != PlayerOnThrow);
             scoreBoard.WhoThrowsPointerSetOn(PlayerOnThrow);
+        }
+
+        protected bool IsFault(DetectedThrow thrw)
+        {
+            return PlayerOnThrow.LegPoints - thrw.TotalPoints == 1 ||
+                   PlayerOnThrow.LegPoints - thrw.TotalPoints < 0 ||
+                   PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
+                   (thrw.Type != ThrowType.Double || thrw.Type != ThrowType.Bulleye);
+        }
+
+        protected bool IsOut(DetectedThrow thrw)
+        {
+            return PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
+                   (thrw.Type == ThrowType.Double || thrw.Type == ThrowType.Bulleye);
+        }
+
+        public virtual void OnThrow(DetectedThrow thrw)
+        {
         }
     }
 }
