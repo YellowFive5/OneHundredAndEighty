@@ -17,5 +17,6 @@ All-in-one steel tip darts desktop app with:
 - [ ] Classic Double players (501/701 and so) game types
 - [ ] UI prettyfy
 - [ ] Player statistics browse
+- [ ] Player achieves
 - [ ] todo
 
