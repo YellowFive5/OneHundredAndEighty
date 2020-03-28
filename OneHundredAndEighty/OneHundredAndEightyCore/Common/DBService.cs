@@ -77,6 +77,30 @@ namespace OneHundredAndEightyCore.Common
 
         #region Statistics
 
+        public void StatisticUpdateAddLegsPlayedForPlayers(int gameId)
+        {
+            var addLegsPlayedForPlayersQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsPlayed}] = [{Column.LegsPlayed}] + 1 " +
+                                               $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
+                                               $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
+                                               $"ON [GS].[{Column.Game}] = {gameId} " +
+                                               $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}])";
+
+            ExecuteNonQueryInternal(addLegsPlayedForPlayersQuery);
+        }
+
+        public void StatisticUpdateAddLegsWonForPlayer(Player player, int gameId)
+        {
+            var addLegsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsWon}] = [{Column.LegsWon}] + 1 " +
+                                               $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
+                                               $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
+                                               $"ON [GS].[{Column.Game}] = {gameId} " +
+                                               $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
+                                               $"WHERE[{Column.Player}] = {player.Id})";
+
+            ExecuteNonQueryInternal(addLegsWonForPlayerQuery);
+
+        }
+
         private void StatisticUpdateAllPlayersSetGameResultAbortedOrError(int gameId, GameResultType gameResultType)
         {
             var playersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) gameResultType} " +

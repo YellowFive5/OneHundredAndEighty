@@ -61,14 +61,29 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             return PlayerOnThrow.LegPoints - thrw.TotalPoints == 1 ||
                    PlayerOnThrow.LegPoints - thrw.TotalPoints < 0 ||
-                   PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
-                   (thrw.Type != ThrowType.Double || thrw.Type != ThrowType.Bulleye);
+                   PlayerOnThrow.LegPoints - thrw.TotalPoints == 0;
         }
 
         protected bool IsOut(DetectedThrow thrw)
         {
             return PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
                    (thrw.Type == ThrowType.Double || thrw.Type == ThrowType.Bulleye);
+        }
+
+        protected Throw ConvertAndSaveThrow(DetectedThrow thrw, ThrowResult throwResult)
+        {
+            var dbThrow = new Throw(PlayerOnThrow,
+                                    Game,
+                                    thrw.Sector,
+                                    thrw.Type,
+                                    throwResult,
+                                    PlayerOnThrow.ThrowNumber,
+                                    thrw.TotalPoints,
+                                    thrw.Poi,
+                                    thrw.ProjectionResolution);
+
+            dbService.ThrowSaveNew(dbThrow);
+            return dbThrow;
         }
 
         public virtual void OnThrow(DetectedThrow thrw)

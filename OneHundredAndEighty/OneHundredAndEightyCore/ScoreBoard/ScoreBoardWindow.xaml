@@ -227,7 +227,8 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label Content="T20     T11     D14" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <Label Name="PointsHintSingleLabel"
+                       Content="T20     T11     D14" HorizontalAlignment="Center" VerticalAlignment="Center"
                        Width="214" Height="43" FontFamily="Agency FB" FontWeight="Bold"
                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30"
                        Foreground="Black" />

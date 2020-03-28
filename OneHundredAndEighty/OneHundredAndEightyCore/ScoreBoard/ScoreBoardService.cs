@@ -151,26 +151,53 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         public void CheckPointsHintFor(Player player)
         {
-            var hint = CheckOut.Get(player.HandPoints, player.ThrowNumber);
+            var hint = CheckOut.Get(player.LegPoints, player.ThrowNumber);
             if (hint != null)
             {
-                // todo
+                PointsHintShowFor(player, hint);
+            }
+            else
+            {
+                PointsHintHideFor(player);
             }
         }
 
-        private void PointsHintShowFor(Player player)
+        private void PointsHintShowFor(Player player, string hint)
         {
             scoreBoardWindow.Dispatcher.Invoke(() =>
                                                {
-                                                   if (IsForPlayerOne(player) && !PointsHintClassicsPlayer1Shown)
+                                                   if (scoreBoardType == ScoreBoardType.Classic || scoreBoardType == ScoreBoardType.FreeThrowsDouble)
                                                    {
-                                                       PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer1, -214);
-                                                       PointsHintClassicsPlayer1Shown = !PointsHintClassicsPlayer1Shown;
+                                                       if (IsForPlayerOne(player))
+                                                       {
+                                                           if (!PointsHintClassicsPlayer1Shown)
+                                                           {
+                                                               PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer1, -214);
+                                                               PointsHintClassicsPlayer1Shown = !PointsHintClassicsPlayer1Shown;
+                                                           }
+
+                                                           TextLabelContentChange(scoreBoardWindow.PointsHintClassicsPlayer1Label, hint);
+                                                       }
+                                                       else if (IsForPlayerTwo(player))
+                                                       {
+                                                           if (!PointsHintClassicsPlayer2Shown)
+                                                           {
+                                                               PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer2, -214);
+                                                               PointsHintClassicsPlayer2Shown = !PointsHintClassicsPlayer2Shown;
+                                                           }
+
+                                                           TextLabelContentChange(scoreBoardWindow.PointsHintClassicsPlayer2Label, hint);
+                                                       }
                                                    }
-                                                   else if (IsForPlayerTwo(player) && !PointsHintClassicsPlayer2Shown)
+                                                   else if (scoreBoardType == ScoreBoardType.FreeThrowsSingle)
                                                    {
-                                                       PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer2, -214);
-                                                       PointsHintClassicsPlayer2Shown = !PointsHintClassicsPlayer2Shown;
+                                                       if (!PointsHintSingleShown)
+                                                       {
+                                                           PointsHintSlideInternal(scoreBoardWindow.PointsHintSingle, -214);
+                                                           PointsHintSingleShown = !PointsHintSingleShown;
+                                                       }
+
+                                                       TextLabelContentChange(scoreBoardWindow.PointsHintSingleLabel, hint);
                                                    }
                                                });
         }
@@ -179,15 +206,26 @@ namespace OneHundredAndEightyCore.ScoreBoard
         {
             scoreBoardWindow.Dispatcher.Invoke(() =>
                                                {
-                                                   if (IsForPlayerOne(player) && PointsHintClassicsPlayer1Shown)
+                                                   if (scoreBoardType == ScoreBoardType.Classic || scoreBoardType == ScoreBoardType.FreeThrowsDouble)
                                                    {
-                                                       PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer1, 214);
-                                                       PointsHintClassicsPlayer1Shown = !PointsHintClassicsPlayer1Shown;
+                                                       if (IsForPlayerOne(player) && PointsHintClassicsPlayer1Shown)
+                                                       {
+                                                           PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer1, 214);
+                                                           PointsHintClassicsPlayer1Shown = !PointsHintClassicsPlayer1Shown;
+                                                       }
+                                                       else if (IsForPlayerTwo(player) && PointsHintClassicsPlayer2Shown)
+                                                       {
+                                                           PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer2, 214);
+                                                           PointsHintClassicsPlayer2Shown = !PointsHintClassicsPlayer2Shown;
+                                                       }
                                                    }
-                                                   else if (IsForPlayerTwo(player) && PointsHintClassicsPlayer2Shown)
+                                                   else if (scoreBoardType == ScoreBoardType.FreeThrowsSingle)
                                                    {
-                                                       PointsHintSlideInternal(scoreBoardWindow.PointsHintClassicsPlayer2, 214);
-                                                       PointsHintClassicsPlayer2Shown = !PointsHintClassicsPlayer2Shown;
+                                                       if (PointsHintSingleShown)
+                                                       {
+                                                           PointsHintSlideInternal(scoreBoardWindow.PointsHintSingle, 214);
+                                                           PointsHintSingleShown = !PointsHintSingleShown;
+                                                       }
                                                    }
                                                });
         }

@@ -25,17 +25,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             scoreBoard.AddPointsToSinglePlayer(thrw.TotalPoints);
 
-            var dbThrow = new Throw(PlayerOnThrow,
-                                    Game,
-                                    thrw.Sector,
-                                    thrw.Type,
-                                    ThrowResult.Ordinary,
-                                    PlayerOnThrow.ThrowNumber,
-                                    thrw.TotalPoints,
-                                    thrw.Poi,
-                                    thrw.ProjectionResolution);
-
-            dbService.ThrowSaveNew(dbThrow);
+            var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
             PlayerOnThrow.HandThrows.Push(dbThrow);
 

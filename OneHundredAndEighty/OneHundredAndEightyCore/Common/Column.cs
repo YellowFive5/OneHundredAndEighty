@@ -26,6 +26,8 @@
         Avatar,
         Throw1,
         Throw2,
-        Throw3
+        Throw3,
+        LegsPlayed,
+        LegsWon
     }
 }

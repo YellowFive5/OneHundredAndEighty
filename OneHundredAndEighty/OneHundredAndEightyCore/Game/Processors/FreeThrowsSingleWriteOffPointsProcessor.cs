@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
@@ -27,70 +26,47 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         public override void OnThrow(DetectedThrow thrw)
         {
-            ThrowResult throwResult;
+            if (IsOut(thrw))
+            {
+                PlayerOnThrow.LegPoints = writeOffPoints;
+                scoreBoard.AddPointsToSinglePlayer(writeOffPoints - thrw.TotalPoints);
+                ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
+
+                dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
+                dbService.StatisticUpdateAddLegsWonForPlayer(PlayerOnThrow, Game.Id);
+                ClearThrows();
+                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+                return;
+            }
 
             if (IsFault(thrw))
             {
-                throwResult = ThrowResult.Fault;
                 PlayerOnThrow.LegPoints += PlayerOnThrow.HandPoints;
                 scoreBoard.AddPointsToSinglePlayer(PlayerOnThrow.HandPoints);
+                ConvertAndSaveThrow(thrw, ThrowResult.Fault);
+                ClearThrows();
+                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+                return;
             }
-            else if (IsOut(thrw))
+
+            PlayerOnThrow.HandPoints += thrw.TotalPoints;
+            PlayerOnThrow.LegPoints -= thrw.TotalPoints;
+            scoreBoard.AddPointsToSinglePlayer(thrw.TotalPoints * -1);
+
+            var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
+
+            PlayerOnThrow.HandThrows.Push(dbThrow);
+            if (IsHandOver())
             {
-                throwResult = ThrowResult.LegWon;
+                Check180();
+                ClearThrows();
             }
             else
             {
-                PlayerOnThrow.HandPoints += thrw.TotalPoints;
-                PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-                throwResult = ThrowResult.Ordinary;
-                scoreBoard.AddPointsToSinglePlayer(thrw.TotalPoints * -1);
+                PlayerOnThrow.ThrowNumber += 1;
             }
 
-            var dbThrow = new Throw(PlayerOnThrow,
-                                    Game,
-                                    thrw.Sector,
-                                    thrw.Type,
-                                    throwResult,
-                                    PlayerOnThrow.ThrowNumber,
-                                    thrw.TotalPoints,
-                                    thrw.Poi,
-                                    thrw.ProjectionResolution);
-
-            dbService.ThrowSaveNew(dbThrow);
-
-            switch (throwResult)
-            {
-                case ThrowResult.Fault:
-
-                    ClearThrows();
-
-                    break;
-                case ThrowResult.Ordinary:
-
-                    PlayerOnThrow.HandThrows.Push(dbThrow);
-
-                    if (IsHandOver())
-                    {
-                        Check180();
-
-                        ClearThrows();
-                    }
-                    else
-                    {
-                        PlayerOnThrow.ThrowNumber += 1;
-                    }
-
-                    break;
-                case ThrowResult.LegWon:
-                    break;
-                case ThrowResult.SetWon:
-                    break;
-                case ThrowResult.MatchWon:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            scoreBoard.CheckPointsHintFor(PlayerOnThrow);
         }
     }
 }
