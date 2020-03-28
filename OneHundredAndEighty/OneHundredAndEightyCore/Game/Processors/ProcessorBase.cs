@@ -49,6 +49,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             PlayerOnThrow.HandThrows.Clear();
             PlayerOnThrow.ThrowNumber = 1;
             PlayerOnThrow.HandPoints = 0;
+            scoreBoard.SetThrowNumber(PlayerOnThrow.ThrowNumber);
         }
 
         protected void TogglePlayerOnThrow()

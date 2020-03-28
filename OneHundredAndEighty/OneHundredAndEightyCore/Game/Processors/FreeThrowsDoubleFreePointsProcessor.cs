@@ -40,6 +40,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             else
             {
                 PlayerOnThrow.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(PlayerOnThrow.ThrowNumber);
             }
         }
     }

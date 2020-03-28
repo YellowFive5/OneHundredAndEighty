@@ -374,6 +374,38 @@ namespace OneHundredAndEightyCore.ScoreBoard
             onPlayer = toPlayer;
         }
 
+        private const string DartSymbol = "⬇";
+
+        public void SetThrowNumber(int throwNumber)
+        {
+            var str = DartSymbol;
+
+            switch (throwNumber)
+            {
+                case 1:
+                    str = $"{DartSymbol}{DartSymbol}{DartSymbol}";
+                    break;
+                case 2:
+                    str = $"{DartSymbol}{DartSymbol}";
+                    break;
+                case 3:
+                    str = $"{DartSymbol}";
+                    break;
+            }
+
+            scoreBoardWindow.Dispatcher.Invoke(() =>
+                                               {
+                                                   if (scoreBoardType == ScoreBoardType.FreeThrowsDouble || scoreBoardType == ScoreBoardType.Classic)
+                                                   {
+                                                       TextLabelContentChange(scoreBoardWindow.ThrowNumberClassicLabel, str);
+                                                   }
+                                                   else if (scoreBoardType == ScoreBoardType.FreeThrowsSingle)
+                                                   {
+                                                       TextLabelContentChange(scoreBoardWindow.ThrowNumberSingleLabel, str);
+                                                   }
+                                               });
+        }
+
         #endregion
 
         private bool IsForPlayerOne(Player player)
