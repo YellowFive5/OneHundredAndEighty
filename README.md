@@ -18,5 +18,6 @@ All-in-one steel tip darts desktop app with:
 - [ ] UI prettyfy
 - [ ] Player statistics browse
 - [ ] Player achieves
+- [ ] Training game types
 - [ ] todo
 
