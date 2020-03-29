@@ -31,7 +31,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
                     break;
                 case GameTypeUi.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
-                    PreSetupForFreeThrowsDouble(players, gameTypeString);
+                    PreSetupForFreeThrowsDouble(players, gameTypeString, writeOffPoints);
                     break;
                 case GameTypeUi.Classic:
                     scoreBoardType = ScoreBoardType.Classic;
@@ -59,10 +59,10 @@ namespace OneHundredAndEightyCore.ScoreBoard
             TextLabelContentChange(scoreBoardWindow.SingleGameTypeLabel, gameTypeString);
             scoreBoardWindow.SinglePlayerImage.Source = player.Avatar;
             TextLabelContentChange(scoreBoardWindow.SinglePlayerName, $"{player.Name} {player.NickName}");
-            scoreBoardWindow.SinglePoints.Content = writeOffPoints;
+            TextLabelContentChange(scoreBoardWindow.SinglePoints, writeOffPoints.ToString());
         }
 
-        private void PreSetupForFreeThrowsDouble(List<Player> players, string gameTypeString)
+        private void PreSetupForFreeThrowsDouble(List<Player> players, string gameTypeString, int writeOffPoints)
         {
             TextLabelContentChange(scoreBoardWindow.ClassicsGameTypeLabel, gameTypeString);
 
@@ -80,6 +80,8 @@ namespace OneHundredAndEightyCore.ScoreBoard
             scoreBoardWindow.ClassicsPlayer2Legs.Visibility = Visibility.Hidden;
             scoreBoardWindow.ClassicsPlayer2Sets.Visibility = Visibility.Hidden;
             scoreBoardWindow.ClassicWhoOnLegPoint.Visibility = Visibility.Hidden;
+            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer1Points, writeOffPoints.ToString());
+            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer2Points, writeOffPoints.ToString());
 
             WhoThrowsPointerRight();
         }
@@ -93,22 +95,42 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region Points
 
+        public void SetPointsToSinglePlayer(int pointsToSet)
+        {
+            AddSetPointsToSinglePlayerInternal(pointsToSet, true);
+        }
+
         public void AddPointsToSinglePlayer(int pointsToAdd)
         {
-            scoreBoardWindow.Dispatcher.Invoke(() => { DigitLabelContentAdd(scoreBoardWindow.SinglePoints, pointsToAdd); });
+            AddSetPointsToSinglePlayerInternal(pointsToAdd);
+        }
+
+        public void SetPointsToClassic(int pointsToSet, Player player)
+        {
+            AddSetPointsToClassicInternal(pointsToSet, player, true);
         }
 
         public void AddPointsToClassic(int pointsToAdd, Player player)
+        {
+            AddSetPointsToClassicInternal(pointsToAdd, player);
+        }
+
+        private void AddSetPointsToSinglePlayerInternal(int points, bool set = false)
+        {
+            scoreBoardWindow.Dispatcher.Invoke(() => { DigitLabelContentSet(scoreBoardWindow.SinglePoints, points, set); });
+        }
+
+        private void AddSetPointsToClassicInternal(int points, Player player, bool set = false)
         {
             scoreBoardWindow.Dispatcher.Invoke(() =>
                                                {
                                                    if (scoreBoardWindow.ClassicsPlayer1Name.Content.ToString() == $"{player.Name} {player.NickName}")
                                                    {
-                                                       DigitLabelContentAdd(scoreBoardWindow.ClassicsPlayer1Points, pointsToAdd);
+                                                       DigitLabelContentSet(scoreBoardWindow.ClassicsPlayer1Points, points, set);
                                                    }
                                                    else if (scoreBoardWindow.ClassicsPlayer2Name.Content.ToString() == $"{player.Name} {player.NickName}")
                                                    {
-                                                       DigitLabelContentAdd(scoreBoardWindow.ClassicsPlayer2Points, pointsToAdd);
+                                                       DigitLabelContentSet(scoreBoardWindow.ClassicsPlayer2Points, points, set);
                                                    }
                                                });
         }
@@ -117,7 +139,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
 
-        private void DigitLabelContentAdd(ContentControl label, int pointsToAdd)
+        private void DigitLabelContentSet(ContentControl label, int number, bool set = false)
         {
             var sb = new Storyboard();
             var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
@@ -126,8 +148,15 @@ namespace OneHundredAndEightyCore.ScoreBoard
             sb.Children.Add(fadeIn);
             sb.Begin();
 
-            label.Content = int.Parse(label.Content.ToString())
-                            + pointsToAdd;
+            if (set)
+            {
+                label.Content = number;
+            }
+            else
+            {
+                label.Content = int.Parse(label.Content.ToString())
+                                + number;
+            }
         }
 
         private void TextLabelContentChange(ContentControl label, string text)

@@ -63,11 +63,11 @@ namespace OneHundredAndEightyCore.Common
                 case GameType.FreeThrowsSingle501Points:
                 case GameType.FreeThrowsSingle701Points:
                 case GameType.FreeThrowsSingle1001Points:
-                    return true;
                 case GameType.FreeThrowsDouble301Points:
                 case GameType.FreeThrowsDouble501Points:
                 case GameType.FreeThrowsDouble701Points:
                 case GameType.FreeThrowsDouble1001Points:
+                    return true;
                 case GameType.Classic301Points:
                 case GameType.Classic501Points:
                 case GameType.Classic701Points:
