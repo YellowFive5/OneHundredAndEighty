@@ -89,10 +89,16 @@ namespace OneHundredAndEightyCore.Game
                     scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Write off 301", 301);
                     break;
                 case GameType.FreeThrowsSingle501Points:
+                    GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 501);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Write off 501", 501);
                     break;
                 case GameType.FreeThrowsSingle701Points:
+                    GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 701);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Write off 701", 701);
                     break;
                 case GameType.FreeThrowsSingle1001Points:
+                    GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 1001);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Write off 1001", 1001);
                     break;
                 case GameType.FreeThrowsDoubleFreePoints:
                     GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, players, dbService, scoreBoardService);

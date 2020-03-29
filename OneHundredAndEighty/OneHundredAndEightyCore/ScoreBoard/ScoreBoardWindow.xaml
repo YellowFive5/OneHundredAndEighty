@@ -298,7 +298,7 @@
             <Label Name="SingleGameTypeLabel"
                    Content="Free throws" HorizontalAlignment="Left" Margin="231,7,0,0" VerticalAlignment="Top"
                    Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Left"
-                   VerticalContentAlignment="Top" Width="98" />
+                   VerticalContentAlignment="Top" Width="247" />
             <Label Content="2020 OneHundredAndEighty" HorizontalAlignment="Left" Margin="231,100,0,0"
                    VerticalAlignment="Top" Height="33" FontFamily="Agency FB" FontWeight="Bold" FontSize="20"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Width="208" Foreground="#FF727272" />
