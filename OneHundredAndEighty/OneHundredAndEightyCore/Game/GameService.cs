@@ -136,11 +136,13 @@ namespace OneHundredAndEightyCore.Game
                      {
                          IsGameRun = true;
                          detectionService.OnThrowDetected += OnAnotherThrow;
+                         detectionService.OnStatusChanged += OnDetectionServiceStatusChanged;
                          while (IsGameRun)
                          {
                          }
 
                          detectionService.OnThrowDetected -= OnAnotherThrow;
+                         detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
                      });
         }
 
@@ -163,6 +165,11 @@ namespace OneHundredAndEightyCore.Game
         private void OnAnotherThrow(DetectedThrow thrw)
         {
             GameProcessor.OnThrow(thrw);
+        }
+
+        private void OnDetectionServiceStatusChanged(DetectionServiceStatus status)
+        {
+            scoreBoardService.SetDetectionStatus(status);
         }
     }
 }

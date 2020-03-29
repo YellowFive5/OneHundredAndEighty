@@ -12,6 +12,13 @@ using OneHundredAndEightyCore.Common;
 
 namespace OneHundredAndEightyCore.Recognition
 {
+    public enum DetectionServiceStatus
+    {
+        WaitingThrow,
+        ProcessingThrow,
+        DartsExtraction
+    }
+
     public class DetectionService
     {
         private readonly MainWindow mainWindow;
@@ -47,6 +54,10 @@ namespace OneHundredAndEightyCore.Recognition
         public delegate void ExceptionOccurredDelegate(Exception ex);
 
         public event ExceptionOccurredDelegate OnErrorOccurred;
+
+        public delegate void StatusDelegate(DetectionServiceStatus status);
+
+        public event StatusDelegate OnStatusChanged;
 
         public void PrepareAndTryCapture()
         {
@@ -95,6 +106,8 @@ namespace OneHundredAndEightyCore.Recognition
             {
                 await Task.Run(() =>
                                {
+                                   OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
+
                                    Thread.CurrentThread.Name = $"Recognition_workerThread";
 
                                    cams.ForEach(c => c.DoCapture(true));
@@ -111,6 +124,8 @@ namespace OneHundredAndEightyCore.Recognition
 
                                            if (response == ResponseType.Move)
                                            {
+                                               OnStatusChanged?.Invoke(DetectionServiceStatus.ProcessingThrow);
+
                                                Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
                                                response = cam.DetectThrow();
 
@@ -121,17 +136,21 @@ namespace OneHundredAndEightyCore.Recognition
                                                    FindThrowOnRemainingCams(cam);
 
                                                    logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Trow}'. Cycle break");
+
+                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
                                                    break;
                                                }
 
                                                if (response == ResponseType.Extraction)
                                                {
+                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.DartsExtraction);
                                                    Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
 
                                                    drawService.ProjectionClear();
                                                    cams.ForEach(c => c.DoCapture(true));
 
                                                    logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Extraction}'. Cycle break");
+                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
                                                    break;
                                                }
                                            }

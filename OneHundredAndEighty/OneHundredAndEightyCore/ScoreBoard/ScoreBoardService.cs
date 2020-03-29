@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using OneHundredAndEightyCore.Game;
+using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
@@ -434,6 +436,37 @@ namespace OneHundredAndEightyCore.ScoreBoard
         }
 
         private const string DartSymbol = "⬇";
+
+        public void SetDetectionStatus(DetectionServiceStatus status)
+        {
+            scoreBoardWindow.Dispatcher.Invoke(() =>
+                                               {
+                                                   SolidColorBrush color;
+                                                   switch (status)
+                                                   {
+                                                       case DetectionServiceStatus.WaitingThrow:
+                                                           color = new SolidColorBrush(Colors.ForestGreen);
+                                                           break;
+                                                       case DetectionServiceStatus.ProcessingThrow:
+                                                           color = new SolidColorBrush(Colors.Red);
+                                                           break;
+                                                       case DetectionServiceStatus.DartsExtraction:
+                                                           color = new SolidColorBrush(Colors.Yellow);
+                                                           break;
+                                                       default:
+                                                           throw new ArgumentOutOfRangeException(nameof(status), status, null);
+                                                   }
+
+                                                   if (scoreBoardType == ScoreBoardType.Classic || scoreBoardType == ScoreBoardType.FreeThrowsDouble)
+                                                   {
+                                                       scoreBoardWindow.DetectionStatusClassic.Fill = color;
+                                                   }
+                                                   else if (scoreBoardType == ScoreBoardType.FreeThrowsSingle)
+                                                   {
+                                                       scoreBoardWindow.DetectionStatusSingle.Fill = color;
+                                                   }
+                                               });
+        }
 
         #endregion
 

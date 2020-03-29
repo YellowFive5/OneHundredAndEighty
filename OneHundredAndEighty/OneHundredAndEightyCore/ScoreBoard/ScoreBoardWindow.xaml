@@ -218,7 +218,10 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
-
+            <Ellipse Name="DetectionStatusClassic"
+                     Margin="666,14,93,161"
+                     Fill="ForestGreen"
+                     Stroke="Black" />
         </Grid>
 
         <Grid Name="ScoreBoardFreeThrowsSingleGrid"
@@ -316,6 +319,10 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
+            <Ellipse Name="DetectionStatusSingle"
+                     Margin="666,13,93,162"
+                     Fill="ForestGreen"
+                     Stroke="Black" />
         </Grid>
 
     </Grid>

@@ -15,7 +15,10 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected readonly DBService dbService;
         protected readonly ScoreBoardService scoreBoard;
 
-        protected ProcessorBase(Game game, List<Player> players, DBService dbService, ScoreBoardService scoreBoard)
+        protected ProcessorBase(Game game,
+                                List<Player> players,
+                                DBService dbService,
+                                ScoreBoardService scoreBoard)
         {
             this.dbService = dbService;
             this.scoreBoard = scoreBoard;
