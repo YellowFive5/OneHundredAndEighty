@@ -165,11 +165,14 @@
   <data name="CamResWLabelText" xml:space="preserve">
     <value>Cam resolution width</value>
   </data>
+  <data name="CamSetupSectorHelperText" xml:space="preserve">
+    <value>Line from bull to sector, where cam is setup</value>
+  </data>
   <data name="CamXSetupPointHelperText" xml:space="preserve">
-    <value>Camera X.Setup point on projection image. Use 'Calibrate' button on Cam setup tab to setup</value>
+    <value>Camera X.Setup point on projection image. Use 'Calibrate' button</value>
   </data>
   <data name="CamYSetupPointHelperText" xml:space="preserve">
-    <value>Camera Y.Setup point on projection image. Use 'Calibrate' button on Cam setup tab to setup</value>
+    <value>Camera Y.Setup point on projection image. Use 'Calibrate' button</value>
   </data>
   <data name="ChoosePlayerAvatarText" xml:space="preserve">
     <value>Choose player avatar image</value>
@@ -194,7 +197,7 @@
     <value>Setup</value>
   </data>
   <data name="MinContourArcHelperText" xml:space="preserve">
-    <value>Minimal dart contour arc on image to be detected. Default value is '120'</value>
+    <value>Minimal dart contour arc on image to be detected. Default value is '105'</value>
   </data>
   <data name="MinContourArcLabelText" xml:space="preserve">
     <value>Minimal contour arc</value>

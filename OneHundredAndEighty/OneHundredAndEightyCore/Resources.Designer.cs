@@ -205,7 +205,16 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Camera X.Setup point on projection image. Use &apos;Calibrate&apos; button on Cam setup tab to setup.
+        ///   Looks up a localized string similar to Line from bull to sector, where cam is setup.
+        /// </summary>
+        public static string CamSetupSectorHelperText {
+            get {
+                return ResourceManager.GetString("CamSetupSectorHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Camera X.Setup point on projection image. Use &apos;Calibrate&apos; button.
         /// </summary>
         public static string CamXSetupPointHelperText {
             get {
@@ -214,7 +223,7 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Camera Y.Setup point on projection image. Use &apos;Calibrate&apos; button on Cam setup tab to setup.
+        ///   Looks up a localized string similar to Camera Y.Setup point on projection image. Use &apos;Calibrate&apos; button.
         /// </summary>
         public static string CamYSetupPointHelperText {
             get {
@@ -288,7 +297,7 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimal dart contour arc on image to be detected. Default value is &apos;120&apos;.
+        ///   Looks up a localized string similar to Minimal dart contour arc on image to be detected. Default value is &apos;105&apos;.
         /// </summary>
         public static string MinContourArcHelperText {
             get {
