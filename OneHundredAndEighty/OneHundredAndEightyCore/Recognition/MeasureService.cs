@@ -26,6 +26,12 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly int minContourArc;
         private readonly double camFovAngle;
 
+        private const double StartRadSector = -3.14159;
+        private const double SectorStepRad = 0.314159;
+        private const double SemiSectorStepRad = SectorStepRad / 2;
+        private const int DartboardDiameterInPixels = 1020;
+        private const int DartboardDiameterInCm = 34;
+
         public MeasureService(CamService camService)
         {
             this.camService = camService;
@@ -87,10 +93,10 @@ namespace OneHundredAndEightyCore.Recognition
             var rect = CvInvoke.MinAreaRect(dartContour.ContourPoints);
             var box = CvInvoke.BoxPoints(rect);
 
-            var contourBoxPoint1 = new PointF(box[0].X, (float)camService.roiPosYSlider + box[0].Y);
-            var contourBoxPoint2 = new PointF(box[1].X, (float)camService.roiPosYSlider + box[1].Y);
-            var contourBoxPoint3 = new PointF(box[2].X, (float)camService.roiPosYSlider + box[2].Y);
-            var contourBoxPoint4 = new PointF(box[3].X, (float)camService.roiPosYSlider + box[3].Y);
+            var contourBoxPoint1 = new PointF(box[0].X, (float) camService.roiPosYSlider + box[0].Y);
+            var contourBoxPoint2 = new PointF(box[1].X, (float) camService.roiPosYSlider + box[1].Y);
+            var contourBoxPoint3 = new PointF(box[2].X, (float) camService.roiPosYSlider + box[2].Y);
+            var contourBoxPoint4 = new PointF(box[3].X, (float) camService.roiPosYSlider + box[3].Y);
 
             // Setup vertical contour middlepoints
             var contourHeight = FindDistance(contourBoxPoint1, contourBoxPoint2);
@@ -114,8 +120,8 @@ namespace OneHundredAndEightyCore.Recognition
             var spikeLinePoint2 = contourBoxMiddlePoint2;
             var spikeLineLength = camService.surfacePoint2.Y - contourBoxMiddlePoint2.Y;
             var spikeAngle = FindAngle(contourBoxMiddlePoint2, contourBoxMiddlePoint1);
-            spikeLinePoint1.X = (float)(contourBoxMiddlePoint2.X + Math.Cos(spikeAngle) * spikeLineLength);
-            spikeLinePoint1.Y = (float)(contourBoxMiddlePoint2.Y + Math.Sin(spikeAngle) * spikeLineLength);
+            spikeLinePoint1.X = (float) (contourBoxMiddlePoint2.X + Math.Cos(spikeAngle) * spikeLineLength);
+            spikeLinePoint1.Y = (float) (contourBoxMiddlePoint2.Y + Math.Sin(spikeAngle) * spikeLineLength);
 
             // Find point of impact with surface
             PointF? camPoi = FindLinesIntersection(spikeLinePoint1, spikeLinePoint2, camService.surfacePoint1, camService.surfacePoint2);
@@ -133,8 +139,8 @@ namespace OneHundredAndEightyCore.Recognition
             var projectionPoiToCenterDistance = Math.Sqrt(Math.Pow(projectionCamToPoiDistance, 2) - Math.Pow(projectionCamToCenterDistance, 2));
             var poiCamCenterAngle = Math.Asin(projectionPoiToCenterDistance / projectionCamToPoiDistance);
 
-            projectionToCenter.X = (float)(camService.setupPoint.X - Math.Cos(camService.toBullAngle) * projectionCamToCenterDistance);
-            projectionToCenter.Y = (float)(camService.setupPoint.Y - Math.Sin(camService.toBullAngle) * projectionCamToCenterDistance);
+            projectionToCenter.X = (float) (camService.setupPoint.X - Math.Cos(camService.toBullAngle) * projectionCamToCenterDistance);
+            projectionToCenter.Y = (float) (camService.setupPoint.Y - Math.Sin(camService.toBullAngle) * projectionCamToCenterDistance);
 
             if (surfaceLeftToPoiDistance < surfaceRightToPoiDistance)
             {
@@ -142,16 +148,16 @@ namespace OneHundredAndEightyCore.Recognition
             }
 
             var projectionPoi = new PointF
-            {
-                X = (float)(camService.setupPoint.X + Math.Cos(camService.toBullAngle + poiCamCenterAngle) * 2000),
-                Y = (float)(camService.setupPoint.Y + Math.Sin(camService.toBullAngle + poiCamCenterAngle) * 2000)
-            };
+                                {
+                                    X = (float) (camService.setupPoint.X + Math.Cos(camService.toBullAngle + poiCamCenterAngle) * 2000),
+                                    Y = (float) (camService.setupPoint.Y + Math.Sin(camService.toBullAngle + poiCamCenterAngle) * 2000)
+                                };
 
             // Draw line from cam through projection POI
             var rayPoint = projectionPoi;
             var angle = FindAngle(camService.setupPoint, rayPoint);
-            rayPoint.X = (float)(camService.setupPoint.X + Math.Cos(angle) * 2000);
-            rayPoint.Y = (float)(camService.setupPoint.Y + Math.Sin(angle) * 2000);
+            rayPoint.X = (float) (camService.setupPoint.X + Math.Cos(angle) * 2000);
+            rayPoint.Y = (float) (camService.setupPoint.Y + Math.Sin(angle) * 2000);
 
             drawService.ProjectionDrawLine(camService.setupPoint, rayPoint, new Bgr(Color.DodgerBlue).MCvScalar);
 
@@ -217,13 +223,26 @@ namespace OneHundredAndEightyCore.Recognition
         public static float FindDistance(PointF point1,
                                          PointF point2)
         {
-            return (float)Math.Sqrt(Math.Pow(point1.X - point2.X, 2) + Math.Pow(point1.Y - point2.Y, 2));
+            return (float) Math.Sqrt(Math.Pow(point1.X - point2.X, 2) + Math.Pow(point1.Y - point2.Y, 2));
         }
 
         public static float FindAngle(PointF point1,
                                       PointF point2)
         {
-            return (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+            return (float) Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+        }
+
+        public static PointF CalculateCamSetupPoint(double toCamCmDistance, string camSetupSector)
+        {
+            var toCamPixels = DartboardDiameterInPixels * toCamCmDistance / DartboardDiameterInCm;
+            var multiplier = Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(camSetupSector); // todo because useful
+
+            var calibratedCamSetupPoint = new PointF
+                                          {
+                                              X = (int) (DrawService.projectionCenterPoint.X + Math.Cos(StartRadSector + multiplier * SemiSectorStepRad) * toCamPixels),
+                                              Y = (int) (DrawService.projectionCenterPoint.Y + Math.Sin(StartRadSector + multiplier * SemiSectorStepRad) * toCamPixels)
+                                          };
+            return calibratedCamSetupPoint;
         }
     }
 }

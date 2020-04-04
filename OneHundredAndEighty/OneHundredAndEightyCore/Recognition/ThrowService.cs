@@ -76,8 +76,8 @@ namespace OneHundredAndEightyCore.Recognition
                               10, 15, 2, 17, 3,
                               19, 7, 16, 8, 11
                           };
-            var angle = MeasureService.FindAngle(drawService.projectionCenterPoint, poi);
-            var distance = MeasureService.FindDistance(drawService.projectionCenterPoint, poi);
+            var angle = MeasureService.FindAngle(DrawService.projectionCenterPoint, poi);
+            var distance = MeasureService.FindDistance(DrawService.projectionCenterPoint, poi);
             var sector = 0;
             var type = ThrowType.Single;
 

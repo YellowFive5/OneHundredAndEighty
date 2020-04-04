@@ -84,7 +84,7 @@ namespace OneHundredAndEightyCore
         private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)
         {
             viewModel.IsSettingsDirty = true;
-            viewModel.CalibrateCamsSetupPoint();
+            viewModel.CalibrateCamsSetupPoints();
         }
 
         private void CamSetupStartButtonClick(object sender, RoutedEventArgs e)

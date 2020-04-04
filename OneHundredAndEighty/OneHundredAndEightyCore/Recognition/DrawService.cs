@@ -48,8 +48,8 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly double projectionDigitsScale = 2;
         private readonly int projectionDigitsThickness = 2;
         public readonly int projectionCoefficent = 3;
-        public PointF projectionCenterPoint;
         public readonly int projectionFrameSide;
+        public static PointF projectionCenterPoint;
 
         private Image<Bgr, byte> DartboardProjectionFrameBackground { get; }
         private Image<Bgr, byte> DartboardProjectionWorkingFrame { get; set; }

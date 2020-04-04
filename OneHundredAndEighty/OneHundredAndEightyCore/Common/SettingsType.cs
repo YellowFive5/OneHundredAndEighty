@@ -30,6 +30,7 @@
         Cam1RoiHeightSlider,
         Cam1SurfaceSlider,
         Cam1SurfaceCenterSlider,
+        Cam1SetupSector,
         Cam2Id,
         ToCam2Distance,
         Cam2X,
@@ -39,6 +40,7 @@
         Cam2RoiHeightSlider,
         Cam2SurfaceSlider,
         Cam2SurfaceCenterSlider,
+        Cam2SetupSector,
         Cam3Id,
         ToCam3Distance,
         Cam3X,
@@ -48,6 +50,7 @@
         Cam3RoiHeightSlider,
         Cam3SurfaceSlider,
         Cam3SurfaceCenterSlider,
+        Cam3SetupSector,
         Cam4Id,
         ToCam4Distance,
         Cam4X,
@@ -57,5 +60,6 @@
         Cam4RoiHeightSlider,
         Cam4SurfaceSlider,
         Cam4SurfaceCenterSlider,
+        Cam4SetupSector
     }
 }

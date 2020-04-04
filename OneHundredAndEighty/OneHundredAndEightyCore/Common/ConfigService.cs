@@ -25,7 +25,7 @@ namespace OneHundredAndEightyCore.Common
         {
             lock (locker)
             {
-                dbService.SettingsSetValue(key, Convert.ToString(value, CultureInfo.InvariantCulture));
+                dbService.SettingsSetValue(key, Converter.ToString(value));
             }
         }
 
@@ -37,23 +37,23 @@ namespace OneHundredAndEightyCore.Common
 
                 if (typeof(T) == typeof(double))
                 {
-                    value = Convert.ToDouble(dbService.SettingsGetValue(key), CultureInfo.InvariantCulture);
+                    value = Converter.ToDouble(dbService.SettingsGetValue(key));
                 }
                 else if (typeof(T) == typeof(decimal))
                 {
-                    value = Convert.ToDecimal(dbService.SettingsGetValue(key), CultureInfo.InvariantCulture);
+                    value = Converter.ToDecimal(dbService.SettingsGetValue(key));
                 }
                 else if (typeof(T) == typeof(float))
                 {
-                    value = (float) Convert.ToDecimal(dbService.SettingsGetValue(key), CultureInfo.InvariantCulture);
+                    value = Converter.ToFloat(dbService.SettingsGetValue(key));
                 }
                 else if (typeof(T) == typeof(int))
                 {
-                    value = Convert.ToInt32(dbService.SettingsGetValue(key));
+                    value = Converter.ToInt(dbService.SettingsGetValue(key));
                 }
                 else if (typeof(T) == typeof(bool))
                 {
-                    value = Convert.ToBoolean(dbService.SettingsGetValue(key));
+                    value = Converter.ToBool(dbService.SettingsGetValue(key));
                 }
                 else if (typeof(T) == typeof(string))
                 {

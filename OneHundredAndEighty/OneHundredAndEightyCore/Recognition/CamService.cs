@@ -109,7 +109,7 @@ namespace OneHundredAndEightyCore.Recognition
             movesDart = configService.Read<int>(SettingsType.MovesDart);
             movesNoise = configService.Read<int>(SettingsType.MovesNoise);
             smoothGauss = configService.Read<int>(SettingsType.SmoothGauss);
-            toBullAngle = MeasureService.FindAngle(setupPoint, drawService.projectionCenterPoint);
+            toBullAngle = MeasureService.FindAngle(setupPoint, DrawService.projectionCenterPoint);
             videoCapture = new VideoCapture(camIndex, VideoCapture.API.DShow);
             videoCapture.SetCaptureProperty(CapProp.FrameWidth, resolutionWidth);
             videoCapture.SetCaptureProperty(CapProp.FrameHeight, resolutionHeight);

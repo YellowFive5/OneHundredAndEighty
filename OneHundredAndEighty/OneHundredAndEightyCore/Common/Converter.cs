@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using OneHundredAndEightyCore.Game;
 using Image = System.Drawing.Image;
 
@@ -191,6 +193,130 @@ namespace OneHundredAndEightyCore.Common
             }
 
             return GameType.FreeThrowsSingleFreePoints; // todo cant get here
+        }
+
+        public static int CamSetupSectorSettingValueToComboboxSelectedIndex(string camSetupSectorSettingValue)
+        {
+            switch (camSetupSectorSettingValue)
+            {
+                case "11":
+                    return 0;
+                case "11/14":
+                    return 1;
+                case "14":
+                    return 2;
+                case "14/9":
+                    return 3;
+                case "9":
+                    return 4;
+                case "9/12":
+                    return 5;
+                case "12":
+                    return 6;
+                case "12/5":
+                    return 7;
+                case "5":
+                    return 8;
+                case "5/20":
+                    return 9;
+                case "20":
+                    return 10;
+                case "20/1":
+                    return 11;
+                case "1":
+                    return 12;
+                case "1/18":
+                    return 13;
+                case "18":
+                    return 14;
+                case "18/4":
+                    return 15;
+                case "4":
+                    return 16;
+                case "4/13":
+                    return 17;
+                case "13":
+                    return 18;
+                case "13/6":
+                    return 19;
+                case "6":
+                    return 20;
+                case "6/10":
+                    return 21;
+                case "10":
+                    return 22;
+                case "10/15":
+                    return 23;
+                case "15":
+                    return 24;
+                case "15/2":
+                    return 25;
+                case "2":
+                    return 26;
+                case "2/17":
+                    return 27;
+                case "17":
+                    return 28;
+                case "17/3":
+                    return 29;
+                case "3":
+                    return 30;
+                case "3/19":
+                    return 31;
+                case "19":
+                    return 32;
+                case "19/7":
+                    return 33;
+                case "7":
+                    return 34;
+                case "7/16":
+                    return 35;
+                case "16":
+                    return 36;
+                case "16/8":
+                    return 37;
+                case "8":
+                    return 38;
+                case "8/11":
+                    return 39;
+                default:
+                    return -1;
+            }
+        }
+
+        public static string ComboBoxSelectedContentToString(ComboBox combobox)
+        {
+            return (combobox.SelectedItem as ComboBoxItem)?.Content.ToString();
+        }
+
+        public static double ToDouble(string value)
+        {
+            return Convert.ToDouble(value, CultureInfo.InvariantCulture);
+        }
+
+        public static decimal ToDecimal(string value)
+        {
+            return Convert.ToDecimal(value, CultureInfo.InvariantCulture);
+        }
+
+        public static float ToFloat(string value)
+        {
+            return (float) ToDecimal(value);
+        }
+
+        public static int ToInt(string value)
+        {
+            return Convert.ToInt32(value);
+        }
+
+        public static bool ToBool(string value)
+        {
+            return Convert.ToBoolean(value);
+        }
+
+        public static string ToString(object value)
+        {
+            return Convert.ToString(value, CultureInfo.InvariantCulture);
         }
     }
 }
