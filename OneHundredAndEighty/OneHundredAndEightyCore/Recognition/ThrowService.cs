@@ -81,30 +81,30 @@ namespace OneHundredAndEightyCore.Recognition
             var sector = 0;
             var type = ThrowType.Single;
 
-            if (distance >= drawService.projectionCoefficent * 95 &&
-                distance <= drawService.projectionCoefficent * 105)
+            if (distance >= DrawService.ProjectionCoefficient * 95 &&
+                distance <= DrawService.ProjectionCoefficient * 105)
             {
                 type = ThrowType.Tremble;
             }
-            else if (distance >= drawService.projectionCoefficent * 160 &&
-                     distance <= drawService.projectionCoefficent * 170)
+            else if (distance >= DrawService.ProjectionCoefficient * 160 &&
+                     distance <= DrawService.ProjectionCoefficient * 170)
             {
                 type = ThrowType.Double;
             }
 
             // Find sector
-            if (distance <= drawService.projectionCoefficent * 7)
+            if (distance <= DrawService.ProjectionCoefficient * 7)
             {
                 sector = 50;
                 type = ThrowType.Bulleye;
             }
-            else if (distance > drawService.projectionCoefficent * 7 &&
-                     distance <= drawService.projectionCoefficent * 17)
+            else if (distance > DrawService.ProjectionCoefficient * 7 &&
+                     distance <= DrawService.ProjectionCoefficient * 17)
             {
                 sector = 25;
                 type = ThrowType._25;
             }
-            else if (distance > drawService.projectionCoefficent * 170)
+            else if (distance > DrawService.ProjectionCoefficient * 170)
             {
                 sector = 0;
                 type = ThrowType.Zero;
@@ -127,7 +127,7 @@ namespace OneHundredAndEightyCore.Recognition
                 }
             }
 
-            return new DetectedThrow(poi, sector, type, drawService.projectionFrameSide);
+            return new DetectedThrow(poi, sector, type, DrawService.ProjectionFrameSide);
         }
 
         public void SaveRay(Ray ray)

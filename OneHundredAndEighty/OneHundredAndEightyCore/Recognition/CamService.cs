@@ -189,7 +189,7 @@ namespace OneHundredAndEightyCore.Recognition
             drawService.DrawRectangle(LinedFrame,
                                       roiRectangle,
                                       drawService.camRoiRectColor.MCvScalar,
-                                      drawService.camRoiRectThickness);
+                                      DrawService.CamRoiRectThickness);
 
             surfacePoint1 = new PointF(0, (float) surfaceSlider);
             surfacePoint2 = new PointF(resolutionWidth,
@@ -198,7 +198,7 @@ namespace OneHundredAndEightyCore.Recognition
                                  surfacePoint1,
                                  surfacePoint2,
                                  drawService.camSurfaceLineColor.MCvScalar,
-                                 drawService.camSurfaceLineThickness);
+                                 DrawService.CamSurfaceLineThickness);
 
             surfaceCenterPoint1 = new PointF((float) surfaceCenterSlider,
                                              (float) surfaceSlider);
@@ -209,7 +209,7 @@ namespace OneHundredAndEightyCore.Recognition
                                  surfaceCenterPoint1,
                                  surfaceCenterPoint2,
                                  drawService.camSurfaceLineColor.MCvScalar,
-                                 drawService.camSurfaceLineThickness);
+                                 DrawService.CamSurfaceLineThickness);
 
             surfaceLeftPoint1 = new PointF((float) surfaceCenterSlider - LinedFrame.Cols / 3,
                                            (float) surfaceSlider);
