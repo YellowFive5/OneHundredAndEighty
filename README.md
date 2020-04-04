@@ -13,8 +13,8 @@ All-in-one steel tip darts desktop app with:
 - [x] Database storage
 - [x] Single player free-throws/free-points game type
 - [x] Double players free-throws/free-points game type
-- [ ] Single player free-throws/write off points game type
-- [ ] Double players free-throws/write off points game type
+- [x] Single player free-throws/write off points game type
+- [x] Double players free-throws/write off points game type
 - [ ] ...
 - [ ] [v.2.0 Release]
 - [ ] Classic Double players (501/701 and so) game types
