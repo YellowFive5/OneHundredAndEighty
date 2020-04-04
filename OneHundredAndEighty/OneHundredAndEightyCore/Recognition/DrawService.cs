@@ -161,10 +161,10 @@ namespace OneHundredAndEightyCore.Recognition
             DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, projectionCoefficent * 170, projectionGridColor, projectionGridThickness);
             for (var i = 0; i <= 360; i += 9)
             {
-                var segmentPoint1 = new PointF((float) (projectionCenterPoint.X + Math.Cos(0.314159 * i - 0.15708) * projectionCoefficent * 170),
-                                               (float) (projectionCenterPoint.Y + Math.Sin(0.314159 * i - 0.15708) * projectionCoefficent * 170));
-                var segmentPoint2 = new PointF((float) (projectionCenterPoint.X + Math.Cos(0.314159 * i - 0.15708) * projectionCoefficent * 17),
-                                               (float) (projectionCenterPoint.Y + Math.Sin(0.314159 * i - 0.15708) * projectionCoefficent * 17));
+                var segmentPoint1 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * projectionCoefficent * 170),
+                                               (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * projectionCoefficent * 170));
+                var segmentPoint2 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * projectionCoefficent * 17),
+                                               (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * projectionCoefficent * 17));
                 DrawLine(DartboardProjectionFrameBackground, segmentPoint1, segmentPoint2, projectionGridColor, projectionGridThickness);
             }
 
@@ -176,8 +176,7 @@ namespace OneHundredAndEightyCore.Recognition
                               6, 10, 15, 2, 17,
                               3, 19, 7, 16, 8
                           };
-            var startRadSector = -3.14159;
-            var radSectorStep = 0.314159;
+            var startRadSector = MeasureService.StartRadSector_11;
             var radSector = startRadSector;
             foreach (var sector in sectors)
             {
@@ -188,7 +187,7 @@ namespace OneHundredAndEightyCore.Recognition
                            projectionDigitsScale,
                            projectionDigitsColor,
                            projectionDigitsThickness);
-                radSector += radSectorStep;
+                radSector += MeasureService.SectorStepRad;
             }
 
             DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();

@@ -26,11 +26,12 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly int minContourArc;
         private readonly double camFovAngle;
 
-        private const double StartRadSector = -3.14159;
-        private const double SectorStepRad = 0.314159;
-        private const double SemiSectorStepRad = SectorStepRad / 2;
-        private const int DartboardDiameterInPixels = 1020;
-        private const int DartboardDiameterInCm = 34;
+        public static readonly double StartRadSector_11 = -3.14159;
+        public static readonly double StartRadSector_1114 = -2.9845105;
+        public static readonly double SectorStepRad = 0.314159;
+        public static readonly double SemiSectorStepRad = SectorStepRad / 2;
+        public static readonly int DartboardDiameterInPixels = 1020;
+        public static readonly int DartboardDiameterInCm = 34;
 
         public MeasureService(CamService camService)
         {
@@ -239,8 +240,8 @@ namespace OneHundredAndEightyCore.Recognition
 
             var calibratedCamSetupPoint = new PointF
                                           {
-                                              X = (int) (DrawService.projectionCenterPoint.X + Math.Cos(StartRadSector + multiplier * SemiSectorStepRad) * toCamPixels),
-                                              Y = (int) (DrawService.projectionCenterPoint.Y + Math.Sin(StartRadSector + multiplier * SemiSectorStepRad) * toCamPixels)
+                                              X = (int) (DrawService.projectionCenterPoint.X + Math.Cos(StartRadSector_11 + multiplier * SemiSectorStepRad) * toCamPixels),
+                                              Y = (int) (DrawService.projectionCenterPoint.Y + Math.Sin(StartRadSector_11 + multiplier * SemiSectorStepRad) * toCamPixels)
                                           };
             return calibratedCamSetupPoint;
         }

@@ -111,12 +111,11 @@ namespace OneHundredAndEightyCore.Recognition
             }
             else
             {
-                var startRadSector = -2.9845105;
-                var radSectorStep = 0.314159;
+                var startRadSector = MeasureService.StartRadSector_1114;
                 var radSector = startRadSector;
                 foreach (var proceedSector in sectors)
                 {
-                    if (angle >= radSector && angle < radSector + radSectorStep)
+                    if (angle >= radSector && angle < radSector + MeasureService.SectorStepRad)
                     {
                         sector = proceedSector;
                         break;
@@ -124,7 +123,7 @@ namespace OneHundredAndEightyCore.Recognition
 
                     sector = 11; // todo - works, but not looks pretty
 
-                    radSector += radSectorStep;
+                    radSector += MeasureService.SectorStepRad;
                 }
             }
 
