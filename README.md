@@ -3,7 +3,7 @@
 * Manual darts score calculator with some cool stuff...
   
 # OneHundredAndEightyCore
-* Known problems:
+* Known problems / bug reports:
   - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed in v2.1
 * Version [2.0 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v2.0)
 * Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
