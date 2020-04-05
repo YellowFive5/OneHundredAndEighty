@@ -14,7 +14,9 @@ namespace OneHundredAndEightyCore.Common
     public class DBService : IDisposable
     {
         private readonly SQLiteConnection connection;
-        private const string DatabaseName = "Database.db";
+
+        public const string DatabaseCopyName = "Database_old.db";
+        public const string DatabaseName = "Database.db";
 
         public DBService()
         {
@@ -219,6 +221,36 @@ namespace OneHundredAndEightyCore.Common
         {
             var query = $"UPDATE [{Table.Settings}] SET [{Column.Value}] = '{value}' WHERE [{Column.Name}] = '{name}'";
             ExecuteNonQueryInternal(query);
+        }
+
+        #endregion
+
+        #region Migrations
+
+        private void UpdateDbVersion(string version)
+        {
+            SettingsSetValue(SettingsType.DBVersion, version);
+        }
+
+        public void MigrateFrom2_0to2_1()
+        {
+            var renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam1ThresholdSlider}' " +
+                                 $"WHERE [{Column.Name}] = 'Cam1TresholdSlider' ";
+            ExecuteNonQueryInternal(renameSettings);
+
+            renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam2ThresholdSlider}' " +
+                             $"WHERE [{Column.Name}] = 'Cam2TresholdSlider'";
+            ExecuteNonQueryInternal(renameSettings);
+
+            renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam3ThresholdSlider}' " +
+                             $"WHERE [{Column.Name}] = 'Cam3TresholdSlider'";
+            ExecuteNonQueryInternal(renameSettings);
+
+            renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam4ThresholdSlider}' " +
+                             $"WHERE [{Column.Name}] = 'Cam4TresholdSlider'";
+            ExecuteNonQueryInternal(renameSettings);
+
+            UpdateDbVersion("2.1");
         }
 
         #endregion

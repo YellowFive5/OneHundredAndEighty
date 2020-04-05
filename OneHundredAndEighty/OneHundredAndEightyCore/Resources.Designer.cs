@@ -251,6 +251,16 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error DB migrating from [{0}] to [{1}]
+        ///Please, contact developer.
+        /// </summary>
+        public static string ErrorDbMigrationText {
+            get {
+                return ResourceManager.GetString("ErrorDbMigrationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Extraction sleep time.
         /// </summary>
         public static string ExtractionSleepTimeLabelText {
@@ -469,6 +479,15 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DB Successfully migrated from [{0}] to [{1}].
+        /// </summary>
+        public static string SuccessDbMigrationText {
+            get {
+                return ResourceManager.GetString("SuccessDbMigrationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Threshold sleep time between cams work in seconds. Default value is &apos;0.125&apos;.
         /// </summary>
         public static string ThresholdSleepTimeHelperText {
@@ -496,7 +515,8 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DB version and App version is different.
+        ///   Looks up a localized string similar to DB version [{0}] and App version [{1}] mistmatch. 
+        ///Would you like to migrate your DB to version {1} ?.
         /// </summary>
         public static string VersionsMismatchErrorText {
             get {

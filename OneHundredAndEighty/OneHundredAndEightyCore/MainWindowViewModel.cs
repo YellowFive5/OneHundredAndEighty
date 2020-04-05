@@ -3,8 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +26,7 @@ namespace OneHundredAndEightyCore
         private readonly MainWindow mainWindow;
         private readonly Logger logger;
         private readonly DBService dbService;
+        private VersionChecker versionChecker;
         private readonly ConfigService configService;
         private readonly DrawService drawService;
         private readonly ThrowService throwService;
@@ -37,7 +36,6 @@ namespace OneHundredAndEightyCore
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
 
-        private const double AppVersion = 2.0;
         public bool IsSettingsDirty { get; set; }
 
 
@@ -66,6 +64,7 @@ namespace OneHundredAndEightyCore
             this.mainWindow = mainWindow;
             logger = MainWindow.ServiceContainer.Resolve<Logger>();
             dbService = MainWindow.ServiceContainer.Resolve<DBService>();
+            versionChecker = MainWindow.ServiceContainer.Resolve<VersionChecker>();
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
             drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
             throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
@@ -74,22 +73,12 @@ namespace OneHundredAndEightyCore
             detectionService = MainWindow.ServiceContainer.Resolve<DetectionService>();
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
-            CheckVersion(AppVersion);
+            versionChecker.CheckVersions();
+
             LoadSettings();
             drawService.ProjectionPrepare();
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
             LoadPlayers();
-        }
-
-        private void CheckVersion(double appVersion)
-        {
-            var dbVersion = configService.Read<double>(SettingsType.DBVersion);
-            if (appVersion != dbVersion)
-            {
-                var errorText = Resources.ResourceManager.GetString("VersionsMismatchErrorText");
-                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
-                throw new Exception("DB version and App version is different");
-            }
         }
 
         private void LoadPlayers()
@@ -147,7 +136,9 @@ namespace OneHundredAndEightyCore
             var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
             if (!Validator.ValidateNewPlayerNameAndNickName(newPlayerName, newPlayerNickName))
             {
-                MessageBox.Show(Resources.NewPlayerEmptyDataErrorText, "Error", MessageBoxButton.OK);
+                MessageBox.Show(Resources.NewPlayerEmptyDataErrorText,
+                                "Error",
+                                MessageBoxButton.OK);
                 return;
             }
 
@@ -165,7 +156,9 @@ namespace OneHundredAndEightyCore
                 return;
             }
 
-            MessageBox.Show(string.Format(Resources.NewPlayerSuccessfullySavedText, newPlayer), "New player saved", MessageBoxButton.OK);
+            MessageBox.Show(string.Format(Resources.NewPlayerSuccessfullySavedText, newPlayer),
+                            "New player saved",
+                            MessageBoxButton.OK);
             mainWindow.NewPlayerNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
@@ -298,7 +291,7 @@ namespace OneHundredAndEightyCore
                 case "Cam1Grid":
                     mainWindow.Cam1StartButton.IsEnabled = !mainWindow.Cam1StartButton.IsEnabled;
                     mainWindow.Cam1StopButton.IsEnabled = !mainWindow.Cam1StopButton.IsEnabled;
-                    mainWindow.Cam1TresholdSlider.IsEnabled = !mainWindow.Cam1TresholdSlider.IsEnabled;
+                    mainWindow.Cam1ThresholdSlider.IsEnabled = !mainWindow.Cam1ThresholdSlider.IsEnabled;
                     mainWindow.Cam1SurfaceSlider.IsEnabled = !mainWindow.Cam1SurfaceSlider.IsEnabled;
                     mainWindow.Cam1SurfaceCenterSlider.IsEnabled = !mainWindow.Cam1SurfaceCenterSlider.IsEnabled;
                     mainWindow.Cam1RoiPosYSlider.IsEnabled = !mainWindow.Cam1RoiPosYSlider.IsEnabled;
@@ -307,7 +300,7 @@ namespace OneHundredAndEightyCore
                 case "Cam2Grid":
                     mainWindow.Cam2StartButton.IsEnabled = !mainWindow.Cam2StartButton.IsEnabled;
                     mainWindow.Cam2StopButton.IsEnabled = !mainWindow.Cam2StopButton.IsEnabled;
-                    mainWindow.Cam2TresholdSlider.IsEnabled = !mainWindow.Cam2TresholdSlider.IsEnabled;
+                    mainWindow.Cam2ThresholdSlider.IsEnabled = !mainWindow.Cam2ThresholdSlider.IsEnabled;
                     mainWindow.Cam2SurfaceSlider.IsEnabled = !mainWindow.Cam2SurfaceSlider.IsEnabled;
                     mainWindow.Cam2SurfaceCenterSlider.IsEnabled = !mainWindow.Cam2SurfaceCenterSlider.IsEnabled;
                     mainWindow.Cam2RoiPosYSlider.IsEnabled = !mainWindow.Cam2RoiPosYSlider.IsEnabled;
@@ -316,7 +309,7 @@ namespace OneHundredAndEightyCore
                 case "Cam3Grid":
                     mainWindow.Cam3StartButton.IsEnabled = !mainWindow.Cam3StartButton.IsEnabled;
                     mainWindow.Cam3StopButton.IsEnabled = !mainWindow.Cam3StopButton.IsEnabled;
-                    mainWindow.Cam3TresholdSlider.IsEnabled = !mainWindow.Cam3TresholdSlider.IsEnabled;
+                    mainWindow.Cam3ThresholdSlider.IsEnabled = !mainWindow.Cam3ThresholdSlider.IsEnabled;
                     mainWindow.Cam3SurfaceSlider.IsEnabled = !mainWindow.Cam3SurfaceSlider.IsEnabled;
                     mainWindow.Cam3SurfaceCenterSlider.IsEnabled = !mainWindow.Cam3SurfaceCenterSlider.IsEnabled;
                     mainWindow.Cam3RoiPosYSlider.IsEnabled = !mainWindow.Cam3RoiPosYSlider.IsEnabled;
@@ -325,7 +318,7 @@ namespace OneHundredAndEightyCore
                 case "Cam4Grid":
                     mainWindow.Cam4StartButton.IsEnabled = !mainWindow.Cam4StartButton.IsEnabled;
                     mainWindow.Cam4StopButton.IsEnabled = !mainWindow.Cam4StopButton.IsEnabled;
-                    mainWindow.Cam4TresholdSlider.IsEnabled = !mainWindow.Cam4TresholdSlider.IsEnabled;
+                    mainWindow.Cam4ThresholdSlider.IsEnabled = !mainWindow.Cam4ThresholdSlider.IsEnabled;
                     mainWindow.Cam4SurfaceSlider.IsEnabled = !mainWindow.Cam4SurfaceSlider.IsEnabled;
                     mainWindow.Cam4SurfaceCenterSlider.IsEnabled = !mainWindow.Cam4SurfaceCenterSlider.IsEnabled;
                     mainWindow.Cam4RoiPosYSlider.IsEnabled = !mainWindow.Cam4RoiPosYSlider.IsEnabled;
@@ -443,22 +436,22 @@ namespace OneHundredAndEightyCore
             mainWindow.Cam3CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam3CheckBox);
             mainWindow.Cam4CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam4CheckBox);
             mainWindow.WithDetectionCheckBox.IsChecked = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
-            mainWindow.Cam1TresholdSlider.Value = configService.Read<double>(SettingsType.Cam1TresholdSlider);
+            mainWindow.Cam1ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam1ThresholdSlider);
             mainWindow.Cam1SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam1SurfaceSlider);
             mainWindow.Cam1SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam1SurfaceCenterSlider);
             mainWindow.Cam1RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam1RoiPosYSlider);
             mainWindow.Cam1RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam1RoiHeightSlider);
-            mainWindow.Cam2TresholdSlider.Value = configService.Read<double>(SettingsType.Cam2TresholdSlider);
+            mainWindow.Cam2ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam2ThresholdSlider);
             mainWindow.Cam2SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam2SurfaceSlider);
             mainWindow.Cam2SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam2SurfaceCenterSlider);
             mainWindow.Cam2RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam2RoiPosYSlider);
             mainWindow.Cam2RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam2RoiHeightSlider);
-            mainWindow.Cam3TresholdSlider.Value = configService.Read<double>(SettingsType.Cam3TresholdSlider);
+            mainWindow.Cam3ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam3ThresholdSlider);
             mainWindow.Cam3SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam3SurfaceSlider);
             mainWindow.Cam3SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam3SurfaceCenterSlider);
             mainWindow.Cam3RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam3RoiPosYSlider);
             mainWindow.Cam3RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam3RoiHeightSlider);
-            mainWindow.Cam4TresholdSlider.Value = configService.Read<double>(SettingsType.Cam4TresholdSlider);
+            mainWindow.Cam4ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam4ThresholdSlider);
             mainWindow.Cam4SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam4SurfaceSlider);
             mainWindow.Cam4SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam4SurfaceCenterSlider);
             mainWindow.Cam4RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam4RoiPosYSlider);
@@ -514,22 +507,22 @@ namespace OneHundredAndEightyCore
                 configService.Write(SettingsType.Cam3CheckBox, mainWindow.Cam3CheckBox.IsChecked);
                 configService.Write(SettingsType.Cam4CheckBox, mainWindow.Cam4CheckBox.IsChecked);
                 configService.Write(SettingsType.WithDetectionCheckBox, mainWindow.WithDetectionCheckBox.IsChecked);
-                configService.Write(SettingsType.Cam1TresholdSlider, mainWindow.Cam1TresholdSlider.Value);
+                configService.Write(SettingsType.Cam1ThresholdSlider, mainWindow.Cam1ThresholdSlider.Value);
                 configService.Write(SettingsType.Cam1SurfaceSlider, mainWindow.Cam1SurfaceSlider.Value);
                 configService.Write(SettingsType.Cam1SurfaceCenterSlider, mainWindow.Cam1SurfaceCenterSlider.Value);
                 configService.Write(SettingsType.Cam1RoiPosYSlider, mainWindow.Cam1RoiPosYSlider.Value);
                 configService.Write(SettingsType.Cam1RoiHeightSlider, mainWindow.Cam1RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam2TresholdSlider, mainWindow.Cam2TresholdSlider.Value);
+                configService.Write(SettingsType.Cam2ThresholdSlider, mainWindow.Cam2ThresholdSlider.Value);
                 configService.Write(SettingsType.Cam2SurfaceSlider, mainWindow.Cam2SurfaceSlider.Value);
                 configService.Write(SettingsType.Cam2SurfaceCenterSlider, mainWindow.Cam2SurfaceCenterSlider.Value);
                 configService.Write(SettingsType.Cam2RoiPosYSlider, mainWindow.Cam2RoiPosYSlider.Value);
                 configService.Write(SettingsType.Cam2RoiHeightSlider, mainWindow.Cam2RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam3TresholdSlider, mainWindow.Cam3TresholdSlider.Value);
+                configService.Write(SettingsType.Cam3ThresholdSlider, mainWindow.Cam3ThresholdSlider.Value);
                 configService.Write(SettingsType.Cam3SurfaceSlider, mainWindow.Cam3SurfaceSlider.Value);
                 configService.Write(SettingsType.Cam3SurfaceCenterSlider, mainWindow.Cam3SurfaceCenterSlider.Value);
                 configService.Write(SettingsType.Cam3RoiPosYSlider, mainWindow.Cam3RoiPosYSlider.Value);
                 configService.Write(SettingsType.Cam3RoiHeightSlider, mainWindow.Cam3RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam4TresholdSlider, mainWindow.Cam4TresholdSlider.Value);
+                configService.Write(SettingsType.Cam4ThresholdSlider, mainWindow.Cam4ThresholdSlider.Value);
                 configService.Write(SettingsType.Cam4SurfaceSlider, mainWindow.Cam4SurfaceSlider.Value);
                 configService.Write(SettingsType.Cam4SurfaceCenterSlider, mainWindow.Cam4SurfaceCenterSlider.Value);
                 configService.Write(SettingsType.Cam4RoiPosYSlider, mainWindow.Cam4RoiPosYSlider.Value);

@@ -44,11 +44,14 @@ namespace OneHundredAndEightyCore
             var dbService = new DBService();
             cb.Register(r => dbService).AsSelf().SingleInstance();
 
-            var scoreBoardService = new ScoreBoardService();
-            cb.Register(r => scoreBoardService).AsSelf().SingleInstance();
-
             var configService = new ConfigService(logger, dbService);
             cb.Register(r => configService).AsSelf().SingleInstance();
+
+            var versionChecker = new VersionChecker(dbService, configService);
+            cb.Register(r => versionChecker).AsSelf().SingleInstance();
+
+            var scoreBoardService = new ScoreBoardService();
+            cb.Register(r => scoreBoardService).AsSelf().SingleInstance();
 
             var drawService = new DrawService(this, configService, logger);
             cb.Register(r => drawService).AsSelf().SingleInstance();

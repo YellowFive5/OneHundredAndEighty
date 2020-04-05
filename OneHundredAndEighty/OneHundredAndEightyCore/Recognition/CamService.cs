@@ -38,7 +38,7 @@ namespace OneHundredAndEightyCore.Recognition
         private PointF surfaceCenterPoint2;
         public PointF surfaceLeftPoint1;
         public PointF surfaceRightPoint1;
-        private double tresholdSlider;
+        private double thresholdSlider;
         public double roiPosYSlider;
         private double roiHeightSlider;
         private double surfaceSlider;
@@ -101,8 +101,6 @@ namespace OneHundredAndEightyCore.Recognition
                     break;
             }
 
-            surfacePoint1 = new PointF();
-            surfacePoint2 = new PointF();
             resolutionWidth = configService.Read<int>(SettingsType.ResolutionWidth);
             resolutionHeight = configService.Read<int>(SettingsType.ResolutionHeight);
             movesExtraction = configService.Read<int>(SettingsType.MovesExtraction);
@@ -136,7 +134,7 @@ namespace OneHundredAndEightyCore.Recognition
                 case "Cam1Grid":
                     mainWindow.Dispatcher.Invoke(() =>
                                                  {
-                                                     tresholdSlider = mainWindow.Cam1TresholdSlider.Value;
+                                                     thresholdSlider = mainWindow.Cam1ThresholdSlider.Value;
                                                      roiPosYSlider = mainWindow.Cam1RoiPosYSlider.Value;
                                                      roiHeightSlider = mainWindow.Cam1RoiHeightSlider.Value;
                                                      surfaceSlider = mainWindow.Cam1SurfaceSlider.Value;
@@ -146,7 +144,7 @@ namespace OneHundredAndEightyCore.Recognition
                 case "Cam2Grid":
                     mainWindow.Dispatcher.Invoke(() =>
                                                  {
-                                                     tresholdSlider = mainWindow.Cam2TresholdSlider.Value;
+                                                     thresholdSlider = mainWindow.Cam2ThresholdSlider.Value;
                                                      roiPosYSlider = mainWindow.Cam2RoiPosYSlider.Value;
                                                      roiHeightSlider = mainWindow.Cam2RoiHeightSlider.Value;
                                                      surfaceSlider = mainWindow.Cam2SurfaceSlider.Value;
@@ -156,7 +154,7 @@ namespace OneHundredAndEightyCore.Recognition
                 case "Cam3Grid":
                     mainWindow.Dispatcher.Invoke(() =>
                                                  {
-                                                     tresholdSlider = mainWindow.Cam3TresholdSlider.Value;
+                                                     thresholdSlider = mainWindow.Cam3ThresholdSlider.Value;
                                                      roiPosYSlider = mainWindow.Cam3RoiPosYSlider.Value;
                                                      roiHeightSlider = mainWindow.Cam3RoiHeightSlider.Value;
                                                      surfaceSlider = mainWindow.Cam3SurfaceSlider.Value;
@@ -166,7 +164,7 @@ namespace OneHundredAndEightyCore.Recognition
                 case "Cam4Grid":
                     mainWindow.Dispatcher.Invoke(() =>
                                                  {
-                                                     tresholdSlider = mainWindow.Cam4TresholdSlider.Value;
+                                                     thresholdSlider = mainWindow.Cam4ThresholdSlider.Value;
                                                      roiPosYSlider = mainWindow.Cam4RoiPosYSlider.Value;
                                                      roiHeightSlider = mainWindow.Cam4RoiHeightSlider.Value;
                                                      surfaceSlider = mainWindow.Cam4SurfaceSlider.Value;
@@ -222,7 +220,7 @@ namespace OneHundredAndEightyCore.Recognition
         {
             roiFrame.ROI = roiRectangle;
             roiFrame._SmoothGaussian(smoothGauss);
-            CvInvoke.Threshold(roiFrame, roiFrame, tresholdSlider, 255, ThresholdType.Binary);
+            CvInvoke.Threshold(roiFrame, roiFrame, thresholdSlider, 255, ThresholdType.Binary);
         }
 
         public void DoCapture(bool withRoiBackgroundRefresh = false)
