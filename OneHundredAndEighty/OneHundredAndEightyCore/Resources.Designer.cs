@@ -241,6 +241,15 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no &apos;{0}&apos; in root folder.
+        /// </summary>
+        public static string DbNotExistsErrorText {
+            get {
+                return ResourceManager.GetString("DbNotExistsErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap EmptyUserIcon {
@@ -515,12 +524,21 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DB version [{0}] and App version [{1}] mistmatch. 
-        ///Would you like to migrate your DB to version {1} ?.
+        ///   Looks up a localized string similar to [{0}] version App can&apos;t work with [{1}] version DB.
         /// </summary>
         public static string VersionsMismatchErrorText {
             get {
                 return ResourceManager.GetString("VersionsMismatchErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DB version [{0}] and App version [{1}] mistmatch. 
+        ///Would you like to migrate your DB to version {1} ?.
+        /// </summary>
+        public static string VersionsMismatchWarningQuestionText {
+            get {
+                return ResourceManager.GetString("VersionsMismatchWarningQuestionText", resourceCulture);
             }
         }
         

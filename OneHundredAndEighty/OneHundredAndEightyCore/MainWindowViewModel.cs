@@ -25,13 +25,14 @@ namespace OneHundredAndEightyCore
     {
         private readonly MainWindow mainWindow;
         private readonly Logger logger;
+        private readonly MessageBoxService messageBoxService;
         private readonly DBService dbService;
-        private VersionChecker versionChecker;
+        private readonly VersionChecker versionChecker;
         private readonly ConfigService configService;
         private readonly DrawService drawService;
         private readonly ThrowService throwService;
         private readonly DetectionService detectionService;
-        private ScoreBoardService scoreBoardService;
+        private readonly ScoreBoardService scoreBoardService;
         private readonly GameService gameService;
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
@@ -63,6 +64,7 @@ namespace OneHundredAndEightyCore
         {
             this.mainWindow = mainWindow;
             logger = MainWindow.ServiceContainer.Resolve<Logger>();
+            messageBoxService = MainWindow.ServiceContainer.Resolve<MessageBoxService>();
             dbService = MainWindow.ServiceContainer.Resolve<DBService>();
             versionChecker = MainWindow.ServiceContainer.Resolve<VersionChecker>();
             configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
@@ -74,7 +76,7 @@ namespace OneHundredAndEightyCore
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
             versionChecker.CheckVersions();
-
+            
             LoadSettings();
             drawService.ProjectionPrepare();
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
@@ -91,19 +93,19 @@ namespace OneHundredAndEightyCore
         {
             if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameControls))
             {
-                MessageBox.Show(Resources.NotImplementedYetErrorText, "Error", MessageBoxButton.OK);
+                messageBoxService.ShowError(Resources.NotImplementedYetErrorText);
                 return;
             }
 
             if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameControls))
             {
-                MessageBox.Show(Resources.NewGamePlayersNotSelectedErrorText, "Error", MessageBoxButton.OK);
+                messageBoxService.ShowError(Resources.NewGamePlayersNotSelectedErrorText);
                 return;
             }
 
             if (!Validator.ValidateStartNewClassicGamePoints(mainWindow.NewGameControls))
             {
-                MessageBox.Show(Resources.NewClassicGamePointsNotSelectedErrorText, "Error", MessageBoxButton.OK);
+                messageBoxService.ShowError(Resources.NewClassicGamePointsNotSelectedErrorText);
                 return;
             }
 
@@ -118,7 +120,7 @@ namespace OneHundredAndEightyCore
             {
                 CloseScoreBoard();
                 StopGame(GameResultType.Error);
-                MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
+                messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
             }
         }
 
@@ -136,9 +138,7 @@ namespace OneHundredAndEightyCore
             var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
             if (!Validator.ValidateNewPlayerNameAndNickName(newPlayerName, newPlayerNickName))
             {
-                MessageBox.Show(Resources.NewPlayerEmptyDataErrorText,
-                                "Error",
-                                MessageBoxButton.OK);
+                messageBoxService.ShowError(Resources.NewPlayerEmptyDataErrorText);
                 return;
             }
 
@@ -152,13 +152,12 @@ namespace OneHundredAndEightyCore
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK); // todo need to explain error
+                messageBoxService.ShowError(e.Message); // todo need to explain error
                 return;
             }
 
-            MessageBox.Show(string.Format(Resources.NewPlayerSuccessfullySavedText, newPlayer),
-                            "New player saved",
-                            MessageBoxButton.OK);
+            messageBoxService.ShowInfo(Resources.NewPlayerSuccessfullySavedText, newPlayer);
+
             mainWindow.NewPlayerNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
@@ -226,7 +225,7 @@ namespace OneHundredAndEightyCore
                 }
                 else
                 {
-                    MessageBox.Show(Resources.PlayerAvatarTooBigErrorText, "Error", MessageBoxButton.OK);
+                    messageBoxService.ShowError(Resources.PlayerAvatarTooBigErrorText);
                 }
             }
         }
@@ -235,7 +234,7 @@ namespace OneHundredAndEightyCore
 
         private void OnDetectionServiceErrorOccurred(Exception e)
         {
-            MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
+            messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
             StopGame(GameResultType.Error);
         }
 
@@ -266,7 +265,7 @@ namespace OneHundredAndEightyCore
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e.Message} \n {e.StackTrace}", "Error", MessageBoxButton.OK);
+                messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
                 StopCamSetupCapturing(gridName);
             }
         }

@@ -177,6 +177,9 @@
   <data name="ChoosePlayerAvatarText" xml:space="preserve">
     <value>Choose player avatar image</value>
   </data>
+  <data name="DbNotExistsErrorText" xml:space="preserve">
+    <value>There is no '{0}' in root folder</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="EmptyUserIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\EmptyUserIcon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -270,6 +273,9 @@ Please, contact developer</value>
     <value>Distance from camera to bull in cm</value>
   </data>
   <data name="VersionsMismatchErrorText" xml:space="preserve">
+    <value>[{0}] version App can't work with [{1}] version DB</value>
+  </data>
+  <data name="VersionsMismatchWarningQuestionText" xml:space="preserve">
     <value>DB version [{0}] and App version [{1}] mistmatch. 
 Would you like to migrate your DB to version {1} ?</value>
   </data>

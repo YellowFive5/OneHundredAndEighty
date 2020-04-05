@@ -3,7 +3,6 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.Windows;
 
 #endregion
 
@@ -13,34 +12,51 @@ namespace OneHundredAndEightyCore.Common
     {
         private readonly DBService dbService;
         private readonly ConfigService configService;
+        private readonly MessageBoxService messageBoxService;
 
         private const double AppVersion = 2.1;
         private double currentDbVersion;
 
-        public VersionChecker(DBService dbService, ConfigService configService)
+        public VersionChecker(DBService dbService,
+                              ConfigService configService,
+                              MessageBoxService messageBoxService)
         {
             this.dbService = dbService;
             this.configService = configService;
+            this.messageBoxService = messageBoxService;
         }
 
         public void CheckVersions()
         {
+            CheckDbExists();
+
             currentDbVersion = configService.Read<double>(SettingsType.DBVersion);
 
             if (AppVersion != currentDbVersion)
             {
-                var errorText = string.Format(Resources.VersionsMismatchErrorText,
-                                              currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                              AppVersion.ToString("F1", CultureInfo.InvariantCulture));
-                var answer = MessageBox.Show(errorText, "Warning", MessageBoxButton.YesNo);
-                if (answer == MessageBoxResult.Yes)
+                var answer = messageBoxService.AskWarningQuestion(Resources.VersionsMismatchWarningQuestionText,
+                                                                  currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
+                                                                  AppVersion.ToString("F1", CultureInfo.InvariantCulture));
+                if (answer)
                 {
                     DoMigrations();
                 }
                 else
                 {
+                    messageBoxService.ShowError(Resources.VersionsMismatchErrorText,
+                                                AppVersion.ToString("F1", CultureInfo.InvariantCulture),
+                                                currentDbVersion.ToString("F1", CultureInfo.InvariantCulture));
                     throw new Exception("DB version and App version is different");
                 }
+            }
+        }
+
+        private void CheckDbExists()
+        {
+            if (!File.Exists(DBService.DatabaseName))
+            {
+                messageBoxService.ShowError(Resources.DbNotExistsErrorText, DBService.DatabaseName);
+                throw new Exception("DB not exists in root folder");
             }
         }
 
@@ -56,6 +72,9 @@ namespace OneHundredAndEightyCore.Common
                         From2_0to2_1();
                         break;
                     default:
+                        messageBoxService.ShowError(Resources.ErrorDbMigrationText,
+                                                    currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
+                                                    AppVersion.ToString("F1", CultureInfo.InvariantCulture));
                         throw new Exception("DB migrating error");
                 }
             }
@@ -63,20 +82,18 @@ namespace OneHundredAndEightyCore.Common
             {
                 RevertDb();
 
-                var errorText = string.Format(Resources.ErrorDbMigrationText,
-                                              currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                              AppVersion.ToString("F1", CultureInfo.InvariantCulture));
-                MessageBox.Show(errorText, "Error", MessageBoxButton.OK);
+                messageBoxService.ShowError(Resources.ErrorDbMigrationText,
+                                            currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
+                                            AppVersion.ToString("F1", CultureInfo.InvariantCulture));
 
                 throw e;
             }
 
             DeleteCopyOfOldDb();
 
-            var successText = string.Format(Resources.SuccessDbMigrationText,
-                                            currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                            AppVersion.ToString("F1", CultureInfo.InvariantCulture));
-            MessageBox.Show(successText, "Success", MessageBoxButton.OK);
+            messageBoxService.ShowInfo(Resources.SuccessDbMigrationText,
+                                       currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
+                                       AppVersion.ToString("F1", CultureInfo.InvariantCulture));
         }
 
         #region Migrations

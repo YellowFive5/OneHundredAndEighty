@@ -41,13 +41,16 @@ namespace OneHundredAndEightyCore
 
             cb.Register(r => logger).AsSelf().SingleInstance();
 
+            var messageBoxService = new MessageBoxService();
+            cb.Register(r => messageBoxService).AsSelf().SingleInstance();
+
             var dbService = new DBService();
             cb.Register(r => dbService).AsSelf().SingleInstance();
 
             var configService = new ConfigService(logger, dbService);
             cb.Register(r => configService).AsSelf().SingleInstance();
 
-            var versionChecker = new VersionChecker(dbService, configService);
+            var versionChecker = new VersionChecker(dbService, configService, messageBoxService);
             cb.Register(r => versionChecker).AsSelf().SingleInstance();
 
             var scoreBoardService = new ScoreBoardService();
@@ -62,7 +65,7 @@ namespace OneHundredAndEightyCore
             var detectionService = new DetectionService(this, drawService, configService, throwService, logger);
             cb.Register(r => detectionService).AsSelf().SingleInstance();
 
-            var gameService = new GameService(this, scoreBoardService ,detectionService, configService, drawService, logger, dbService);
+            var gameService = new GameService(this, scoreBoardService, detectionService, configService, drawService, logger, dbService);
             cb.Register(r => gameService).AsSelf().SingleInstance();
 
             ServiceContainer = cb.Build();
