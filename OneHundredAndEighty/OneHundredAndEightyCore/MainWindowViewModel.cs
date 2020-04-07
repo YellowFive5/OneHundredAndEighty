@@ -403,7 +403,7 @@ namespace OneHundredAndEightyCore
 
             mainWindow.Left = configService.Read<double>(SettingsType.MainWindowPositionLeft);
             mainWindow.Top = configService.Read<double>(SettingsType.MainWindowPositionTop);
-            mainWindow.CamFovTextBox.Text = configService.Read<int>(SettingsType.CamFovAngle).ToString();
+            mainWindow.CamFovTextBox.Text = Converter.ToString(configService.Read<double>(SettingsType.CamFovAngle));
             mainWindow.CamResolutionHeightTextBox.Text = configService.Read<int>(SettingsType.ResolutionHeight).ToString();
             mainWindow.CamResolutionWidthTextBox.Text = configService.Read<int>(SettingsType.ResolutionWidth).ToString();
             mainWindow.MovesExtractionTextBox.Text = configService.Read<int>(SettingsType.MovesExtraction).ToString();
