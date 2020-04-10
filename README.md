@@ -35,3 +35,6 @@ All-in-one steel tip darts desktop app with:
 - [ ] ...
 
 P.S. - If you like this stuff and if you want you can **donate** me for some beer ;-) (click "**Sponsor**" button in the top of a page) 
+
+# Quick start guide
+... todo
