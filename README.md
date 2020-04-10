@@ -3,13 +3,13 @@
 * Manual darts score calculator with some cool stuff...
   
 # OneHundredAndEightyCore
-* Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
-* Known problems / bug reports:
-  - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed in v2.2
 * Version [2.0 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v2.0)
+* Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
 * Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
   - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly (with near 100% load ;-P )
-
+* Known problems / bug reports:
+  - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed in v2.2
+  
 ![180app2 0](https://user-images.githubusercontent.com/42347722/78453424-4bfaf300-769a-11ea-9ddf-bf09598b37e4.jpg)
 
 All-in-one steel tip darts desktop app with:
