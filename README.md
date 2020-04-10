@@ -20,6 +20,9 @@ All-in-one steel tip darts desktop app with:
 - [x] Double players free-throws/write off points game type
 - [x] [**v.2.0 Release**]
 - [x] Database version check with maigrating to new versions.
+- [ ] Some telemetry write
+- [ ] Full quick start guide
+- [ ] [**v.2.1 Release**]
 - [ ] Classic Double players (501/701 and so) game types
 - [ ] Cricket Double players game type
 - [ ] UI prettyfy
@@ -27,6 +30,7 @@ All-in-one steel tip darts desktop app with:
 - [ ] Player achieves
 - [ ] Training game types
 - [ ] ...
-- [ ] [**v.2.1 Release**]
+- [ ] [**v.2.2 Release**]
+- [ ] ...
 
 P.S. - If you like this stuff and if you want you can **donate** me for some beer ;-) (click "**Sponsor**" button in the top of a page) 
