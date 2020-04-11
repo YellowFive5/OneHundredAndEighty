@@ -21,8 +21,8 @@ All-in-one steel tip darts desktop app with:
 - [x] Double players free-throws/write off points game type
 
 ✅ [**v.2.0 Release**]
-- [x] Database version check with maigrating to new versions.
-- [ ] Some telemetry write
+- [x] Database version check with maigrating to new versions
+- [x] Some telemetry write
 - [ ] Full quick start guide
 
 ⭕ [**v.2.1 Release**]
@@ -34,7 +34,7 @@ All-in-one steel tip darts desktop app with:
 - [ ] Training game types
 - [ ] ...
 
-⭕[**v.2.2 Release**]
+⭕ [**v.2.2 Release**]
 - [ ] ...
 
 P.S. - If you like this stuff and if you want you can **donate** me for some beer 🍻 (click 💜"**Sponsor**" button in the top of a page) 
