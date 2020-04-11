@@ -10,6 +10,7 @@ using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
+using OneHundredAndEightyCore.Telemetry;
 using IContainer = Autofac.IContainer;
 
 #endregion
@@ -20,13 +21,13 @@ namespace OneHundredAndEightyCore
     {
         private readonly MainWindowViewModel viewModel;
         private readonly Logger logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        private readonly TelemetryWriter telemetryWriter = new TelemetryWriter();
         public static IContainer ServiceContainer { get; private set; }
 
         public MainWindow()
         {
-            logger.Info("\n");
-            logger.Info("App start");
-
+            logger.Info($"\n\nApp start");
+            telemetryWriter.WriteAppStart();
             InitializeComponent();
             RegisterContainer();
             viewModel = new MainWindowViewModel(this);
@@ -40,6 +41,8 @@ namespace OneHundredAndEightyCore
             var cb = new ContainerBuilder();
 
             cb.Register(r => logger).AsSelf().SingleInstance();
+
+            cb.Register(r => telemetryWriter).AsSelf().SingleInstance();
 
             var messageBoxService = new MessageBoxService();
             cb.Register(r => messageBoxService).AsSelf().SingleInstance();
