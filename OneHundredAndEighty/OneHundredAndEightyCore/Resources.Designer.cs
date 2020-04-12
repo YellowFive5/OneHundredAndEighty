@@ -61,6 +61,15 @@ namespace OneHundredAndEightyCore {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to v. 2.1.
+        /// </summary>
+        public static string AboutTabVersion {
+            get {
+                return ResourceManager.GetString("AboutTabVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cam 1 enabled.
         /// </summary>
         public static string Cam1EnabledCheckBoxText {

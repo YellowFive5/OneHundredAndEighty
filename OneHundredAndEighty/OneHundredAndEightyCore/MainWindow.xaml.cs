@@ -1,8 +1,10 @@
 ﻿#region Usings
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using Autofac;
 using NLog;
 using NLog.Web;
@@ -145,6 +147,22 @@ namespace OneHundredAndEightyCore
         private void NewGameTypeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             viewModel?.ToggleNewGameControlsVisibility();
+        }
+
+        private void OnHyperlinkNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            // so ugly because of https://github.com/dotnet/runtime/issues/28005
+
+            var psi = new ProcessStartInfo
+                      {
+                          FileName = "cmd",
+                          WindowStyle = ProcessWindowStyle.Hidden,
+                          UseShellExecute = false,
+                          CreateNoWindow = true,
+                          Arguments = $"/c start {e.Uri.AbsoluteUri}"
+                      };
+
+            Process.Start(psi);
         }
     }
 }

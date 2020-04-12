@@ -317,6 +317,24 @@
                         <TabItem Name="GeneralSetupTabItem"
                                  Header="{x:Static resx:Resources.GeneralSettingsTabName}">
                             <Grid>
+                                <TextBlock Margin="16,409,853,36"
+                                           FontFamily="Agency FB"
+                                           FontSize="16">
+                                    <Hyperlink
+                                        NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-"
+                                        RequestNavigate="OnHyperlinkNavigate">
+                                        <TextBlock Text="Quick start guide" />
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Margin="16,435,853,10"
+                                           FontFamily="Agency FB"
+                                           FontSize="16">
+                                    <Hyperlink
+                                        NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#3-app-setup"
+                                        RequestNavigate="OnHyperlinkNavigate">
+                                        <TextBlock Text="App setup" />
+                                    </Hyperlink>
+                                </TextBlock>
                                 <Button Name="CalibrateButton"
                                         Content="Calibrate X/Y"
                                         HorizontalAlignment="Left"
@@ -1777,6 +1795,70 @@
                             </Grid>
                         </TabItem>
                     </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem
+                Name="AboutTabItem"
+                Header="About">
+                <Grid>
+                    <Label
+                        Content="2020 OneHundredAndEighty"
+                        Margin="10,10,776,455"
+                        FontFamily="Agency FB"
+                        FontSize="16" />
+                    <Label
+                        Content="{x:Static resx:Resources.AboutTabVersion}"
+                        Margin="10,39,924,426"
+                        FontFamily="Agency FB"
+                        FontSize="16" />
+                    <TextBlock Margin="14,143,868,332"
+                               FontFamily="Agency FB"
+                               FontSize="16">
+                        <Hyperlink NavigateUri="https://github.com/YellowFive5"
+                                   RequestNavigate="OnHyperlinkNavigate">
+                            <TextBlock Text="My GitHub page" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="14,107,852,368"
+                               FontFamily="Agency FB"
+                               FontSize="16">
+                        <Hyperlink NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty"
+                                   RequestNavigate="OnHyperlinkNavigate">
+                            <TextBlock Text="Project GitHub page" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="14,180,854,295"
+                               FontFamily="Agency FB"
+                               FontSize="16">
+                        <Hyperlink NavigateUri="https://www.facebook.com/yellowfive"
+                                   RequestNavigate="OnHyperlinkNavigate">
+                            <TextBlock Text="My Facebook page" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="14,73,864,402"
+                               FontFamily="Agency FB"
+                               FontSize="16">
+                        <Hyperlink NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-"
+                                   RequestNavigate="OnHyperlinkNavigate">
+                            <TextBlock Text="Quick start guide" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="14,215,825,260"
+                               FontFamily="Agency FB"
+                               FontSize="16">
+                        <Hyperlink NavigateUri="https://www.facebook.com/groups/281778298914107"
+                                   RequestNavigate="OnHyperlinkNavigate">
+                            <TextBlock Text="Facebook community page" Width="133" Height="19" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock Margin="14,247,902,228"
+                               FontFamily="Agency FB"
+                               FontSize="16">
+                        <Hyperlink NavigateUri="https://www.paypal.me/yellowfive5"
+                                   RequestNavigate="OnHyperlinkNavigate">
+                            <TextBlock Text="💜 Donate" Width="81" Height="19" />
+                        </Hyperlink>
+                    </TextBlock>
                 </Grid>
             </TabItem>
         </TabControl>
