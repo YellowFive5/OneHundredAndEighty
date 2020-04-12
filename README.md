@@ -94,7 +94,7 @@ You are free to choose materials and instruments to build necessary darts cabine
 
 ![IMG_2259](https://user-images.githubusercontent.com/42347722/79052134-01025200-7c3d-11ea-8946-dbe92b3c8d0b.JPEG)
 
-## 3. App setup:
+## 3. App setup
 
 Now, when you build cabinet, you can setup remaining things in main app.
 
