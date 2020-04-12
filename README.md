@@ -121,10 +121,22 @@ Most of this values you don’t need to change, but if you want you can experime
 2. Set cams ID's (use CamCalibrator to find cam ID)
 3. Set cams setup sectors (9-5-1-4 is classics)
 
-![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063003-a3571f80-7ca7-11ea-915f-4337637942c0.jpg)
+![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063125-67708a00-7ca8-11ea-81da-fc6652e40a87.jpg)
 
 4. Set distance to cams in cm.
 5. Click "Calibrate" button - X/Y will be calculated
+
+Go to each cams tab
+
+![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063258-27f66d80-7ca9-11ea-90a9-b1187ada2bf5.png)
+
+1. Stick one dart in bull.
+2. Click "Start"
+3. Setup using sliders all like on image above. Red line surface, Center point, ROI region, Threshold. Also dont set ROI region close to surface. Use this image as ethalon.
+4. Click "Stop"
+5. Go to next cam
+6. Setup all cams this way
+7. All app setups complete
 
 ## 4. Database.db
 
