@@ -3,7 +3,7 @@
 * Manual darts score calculator with some cool stuff...
   
 # OneHundredAndEightyCore
-* Version [2.0 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v2.0)
+* Version [2.1 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)
 * Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
   - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly (with near 100% load ;-P )
@@ -23,9 +23,9 @@ All-in-one steel tip darts desktop app with:
 ✅ [**v.2.0 Release**]
 - [x] Database version check with maigrating to new versions
 - [x] Some telemetry write
-- [ ] Full quick start guide
+- [x] Full quick start guide
 
-⭕ [**v.2.1 Release**]
+✅ [**v.2.1 Release**]
 - [ ] Classic Double players (501/701 and so) game types
 - [ ] Cricket Double players game type
 - [ ] UI prettyfy
