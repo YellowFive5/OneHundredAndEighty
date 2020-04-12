@@ -115,7 +115,16 @@ Most of this values you don’t need to change, but if you want you can experime
 
 ### Cams setup
 
-todo
+![IMG_2259](https://user-images.githubusercontent.com/42347722/79062894-ac93bc80-7ca6-11ea-8736-e73ee95ef7eb.png)
+
+1. Set general values
+2. Set cams ID's (use CamCalibrator to find cam ID)
+3. Set cams setup sectors (9-5-1-4 is classics)
+
+![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063003-a3571f80-7ca7-11ea-915f-4337637942c0.jpg)
+
+4. Set distance to cams in cm.
+5. Click "Calibrate" button - X/Y will be calculated
 
 ## 4. Database.db
 
