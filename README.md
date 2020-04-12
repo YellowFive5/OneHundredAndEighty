@@ -70,9 +70,9 @@ Classic positions for cams setup:
 
 ![Untitled Diagram](https://user-images.githubusercontent.com/42347722/79052102-ac5ed700-7c3c-11ea-8d13-7ed0de6bfa70.jpg)
 
-Notice, that it can be situation, when all your connected cams will not be work together at same time. It happens because there are not enough power in 1 PC usb port for working 2+ cams at same time. You can see all 4 cams connected via Control Panel but they don't work under load simultaneously. To check this situation, you can use CamCalibrator. Just run it 4 times simultaneously and run in on all 4 cams. If not, all cams translate image - you need to reconnect cams different way.
+Notice, that it can be situation, when all your connected cams will not be work together at same time. It happens because there are not enough power in 1 PC usb port for working 2+ cams at same time. You can see all 4 cams connected via Control Panel but they don't work under load simultaneously. To check this situation, you can use [CamCalibrator](https://github.com/YellowFive5/DartboardRecognition/releases/tag/1.3). Just run it 4 times simultaneously and run in on all 4 cams. If not, all cams translate image - you need to reconnect cams different way.
   
-### CamCalibrator
+### [CamCalibrator](https://github.com/YellowFive5/DartboardRecognition/releases/tag/1.3)
 
 CamCalibrator is simple project to presetup camera when you fix it on stand. The idea is to stick dart into bull and run calibrator. You need to set camera like next screenshot. Blue line goes through dart, red line lies on dartboard surface. Then you fix camera tightly. Setup all your cameras this way.
 
@@ -94,7 +94,7 @@ You are free to choose materials and instruments to build necessary darts cabine
 
 ![IMG_2259](https://user-images.githubusercontent.com/42347722/79052134-01025200-7c3d-11ea-8946-dbe92b3c8d0b.JPEG)
 
-## 3. App setup:
+## 3. App setup
 
 Now, when you build cabinet, you can setup remaining things in main app.
 
@@ -115,7 +115,28 @@ Most of this values you don’t need to change, but if you want you can experime
 
 ### Cams setup
 
-todo
+![IMG_2259](https://user-images.githubusercontent.com/42347722/79062894-ac93bc80-7ca6-11ea-8736-e73ee95ef7eb.png)
+
+1. Set general values
+2. Set cams ID's (use [CamCalibrator](https://github.com/YellowFive5/DartboardRecognition/releases/tag/1.3) to find cam ID)
+3. Set cams setup sectors (9-5-1-4 is classics)
+
+![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063125-67708a00-7ca8-11ea-81da-fc6652e40a87.jpg)
+
+4. Set distance to cams in cm.
+5. Click "Calibrate" button - X/Y will be calculated
+
+Go to each cams tab
+
+![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063258-27f66d80-7ca9-11ea-90a9-b1187ada2bf5.png)
+
+1. Stick one dart in bull.
+2. Click "Start"
+3. Setup using sliders all like on image above. Red line surface, Center point, ROI region, Threshold. Also dont set ROI region close to surface. Use this image as ethalon.
+4. Click "Stop"
+5. Go to next cam
+6. Setup all cams this way
+7. All app setups complete
 
 ## 4. Database.db
 
