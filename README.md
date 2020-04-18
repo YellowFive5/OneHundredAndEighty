@@ -22,12 +22,12 @@ timeline ↓
 - [x] Single player free-throws/write off points game type
 - [x] Double players free-throws/write off points game type
 
-✅ [**v.2.0 Release**]
+✅ [[**v.2.0 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.0)]
 - [x] Database version check with maigrating to new versions
 - [x] Some telemetry write
 - [x] Full quick start guide
 
-✅ [**v.2.1 Release**]
+✅ [[**v.2.1 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)]
 
 - [ ] Classic game types
 - [ ] UI prettyfy
