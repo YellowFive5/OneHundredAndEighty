@@ -3,6 +3,7 @@
 * Manual darts score calculator with some cool stuff...
   
 # OneHundredAndEightyCore
+* All-in-one steel tip darts desktop app
 * Version [2.1 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)
 * Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
@@ -12,7 +13,8 @@
   
 ![180app2 0](https://user-images.githubusercontent.com/42347722/78453424-4bfaf300-769a-11ea-9ddf-bf09598b37e4.jpg)
 
-All-in-one steel tip darts desktop app with:
+## Release notes:
+timeline ↓
 - [x] Automatic throw detection using [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition)
 - [x] Database storage
 - [x] Single player free-throws/free-points game type
@@ -26,15 +28,25 @@ All-in-one steel tip darts desktop app with:
 - [x] Full quick start guide
 
 ✅ [**v.2.1 Release**]
-- [ ] Classic Double players (501/701 and so) game types
-- [ ] Cricket Double players game type
+
+- [ ] Classic game types
 - [ ] UI prettyfy
-- [ ] Player statistics browse
-- [ ] Player achieves
-- [ ] Training game types
-- [ ] ...
+- [ ] CamCalibrator itegration
 
 ⭕ [**v.2.2 Release**]
+- [ ] ...
+- **Unsorted todo's:**
+- [ ] Around the clock game type
+- [ ] Shanghai game type
+- [ ] Cricket game type
+- [ ] Killer game type
+- [ ] Training game types
+- [ ] Player statistics browse
+- [ ] Players statistics comparison
+- [ ] Leaderboards by statistic items
+- [ ] Player achieves
+- [ ] Detection performance improve
+- [ ] Detection accuracy improve
 - [ ] ...
 
 P.S. - If you like this stuff and if you want you can **donate** me for some beer 🍻 (click 💜"**Sponsor**" button in the top of a page) 
