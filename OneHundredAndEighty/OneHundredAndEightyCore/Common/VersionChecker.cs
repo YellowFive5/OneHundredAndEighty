@@ -14,7 +14,7 @@ namespace OneHundredAndEightyCore.Common
         private readonly ConfigService configService;
         private readonly MessageBoxService messageBoxService;
 
-        private const double AppVersion = 2.1;
+        private const double AppVersion = 2.2;
         private double currentDbVersion;
 
         public VersionChecker(DBService dbService,
@@ -70,6 +70,10 @@ namespace OneHundredAndEightyCore.Common
                 {
                     case 2.0:
                         From2_0to2_1();
+                        From2_1to2_2();
+                        break;
+                    case 2.1:
+                        From2_1to2_2();
                         break;
                     default:
                         messageBoxService.ShowError(Resources.ErrorDbMigrationText,
@@ -101,6 +105,11 @@ namespace OneHundredAndEightyCore.Common
         private void From2_0to2_1()
         {
             dbService.MigrateFrom2_0to2_1();
+        }
+
+        private void From2_1to2_2()
+        {
+            dbService.MigrateFrom2_1to2_2();
         }
 
         #endregion

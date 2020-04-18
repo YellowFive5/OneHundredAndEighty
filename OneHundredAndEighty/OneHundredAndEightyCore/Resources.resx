@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutTabVersion" xml:space="preserve">
-    <value>v. 2.1</value>
+    <value>v. 2.2</value>
   </data>
   <data name="Cam1EnabledCheckBoxText" xml:space="preserve">
     <value>Cam 1 enabled</value>
