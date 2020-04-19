@@ -9,6 +9,7 @@
         GameStatistic,
         Throws,
         Statistic,
-        _180
+        _180,
+        ThrowType
     }
 }

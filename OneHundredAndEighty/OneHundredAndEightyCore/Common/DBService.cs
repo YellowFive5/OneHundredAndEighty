@@ -279,6 +279,30 @@ namespace OneHundredAndEightyCore.Common
 
         public void MigrateFrom2_1to2_2()
         {
+            // ThrowTypeBugFix
+            var addTempThrowTypeForShuffle = $"INSERT INTO [{Table.ThrowType}] values (7, 'temp', 0)";
+            ExecuteNonQueryInternal(addTempThrowTypeForShuffle);
+
+            var tremblesToTemp = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 7 " +
+                               $"WHERE [{Column.Type}] = 4";
+            ExecuteNonQueryInternal(tremblesToTemp);
+            var zeroesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 4 " +
+                            $"WHERE [{Column.Type}] = 1";
+            ExecuteNonQueryInternal(zeroesFix);
+            var singlesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 1 " +
+                               $"WHERE [{Column.Type}] = 2";
+            ExecuteNonQueryInternal(singlesFix);
+            var doublesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 2 " +
+                               $"WHERE [{Column.Type}] = 3";
+            ExecuteNonQueryInternal(doublesFix);
+            var tremblesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 3 " +
+                               $"WHERE [{Column.Type}] = 7";
+            ExecuteNonQueryInternal(tremblesFix);
+
+            var deleteTempThrowTypeForShuffle = $"DELETE FROM [{Table.ThrowType}] WHERE [{Column.Id}] = 7";
+            ExecuteNonQueryInternal(deleteTempThrowTypeForShuffle);
+            // ThrowTypeBugFix
+
             UpdateDbVersion("2.2");
         }
 
