@@ -33,7 +33,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             {
                 Check180();
 
-                ClearThrows();
+                ClearPlayerOnThrowHand();
             }
             else
             {

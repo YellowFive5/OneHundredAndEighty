@@ -11,7 +11,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using OneHundredAndEightyCore.Game;
 using Image = System.Drawing.Image;
 
@@ -287,6 +286,11 @@ namespace OneHundredAndEightyCore.Common
         public static string ComboBoxSelectedContentToString(ComboBox combobox)
         {
             return (combobox.SelectedItem as ComboBoxItem)?.Content.ToString();
+        }
+
+        public static int ComboBoxSelectedContentToInt(ComboBox combobox)
+        {
+            return Convert.ToInt32((combobox.SelectedItem as ComboBoxItem)?.Content);
         }
 
         public static double ToDouble(string value)

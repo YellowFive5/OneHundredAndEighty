@@ -143,7 +143,7 @@
                        VerticalAlignment="Center" Width="503" />
             <Ellipse Name="ClassicWhoOnLegPoint"
                      HorizontalAlignment="Left"
-                     Height="10" Margin="460,122,0,0" Stroke="Black" VerticalAlignment="Top"
+                     Height="10" Margin="460,68,0,0" Stroke="Black" VerticalAlignment="Top"
                      Width="10">
                 <Ellipse.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -176,19 +176,19 @@
                 Name="ClassicsPlayer1Sets"
                 Content="0" HorizontalAlignment="Left" Margin="496,42,0,0" VerticalAlignment="Top" Height="53"
                 Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Left" Foreground="Black" />
+                HorizontalContentAlignment="Center" Foreground="Black" />
             <Label Name="ClassicsPlayer1Legs"
                    Content="0" HorizontalAlignment="Left" Margin="557,42,0,0" VerticalAlignment="Top" Height="53"
                    Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Left" Foreground="Black" />
+                   HorizontalContentAlignment="Center" Foreground="Black" />
             <Label Name="ClassicsPlayer2Legs"
                    Content="0" HorizontalAlignment="Left" Margin="557,100,0,0" VerticalAlignment="Top" Height="54"
                    Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Left" Foreground="Black" />
+                   HorizontalContentAlignment="Center" Foreground="Black" />
             <Label Name="ClassicsPlayer2Sets"
                    Content="0" HorizontalAlignment="Left" Margin="496,100,0,0" VerticalAlignment="Top" Height="54"
                    Width="30" FontFamily="Agency FB" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Left" Foreground="Black" />
+                   HorizontalContentAlignment="Center" Foreground="Black" />
             <Label Name="ClassicsSetsLabel"
                    Content="Sets" HorizontalAlignment="Left" Margin="488,7,0,0" VerticalAlignment="Top" Height="33"
                    FontFamily="Agency FB" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center"
@@ -206,15 +206,15 @@
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Width="208" Foreground="#FF727272" />
             <Label Name="ThrowNumberClassicLabel"
                    Margin="687,4,59,152"
-                   Content="⬇⬇⬇" 
-                   HorizontalContentAlignment="Left" 
+                   Content="⬇⬇⬇"
+                   HorizontalContentAlignment="Left"
                    FontSize="14" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
                 <Label.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-90"/>
-                        <TranslateTransform/>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="-90" />
+                        <TranslateTransform />
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
@@ -307,15 +307,15 @@
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Width="208" Foreground="#FF727272" />
             <Label Name="ThrowNumberSingleLabel"
                    Margin="690,4,56,151"
-                   Content="⬇⬇⬇" 
-                   HorizontalContentAlignment="Left" 
+                   Content="⬇⬇⬇"
+                   HorizontalContentAlignment="Left"
                    FontSize="14" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
                 <Label.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-90"/>
-                        <TranslateTransform/>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="-90" />
+                        <TranslateTransform />
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>

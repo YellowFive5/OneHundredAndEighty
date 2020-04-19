@@ -14,24 +14,30 @@ namespace OneHundredAndEightyCore.Game.Processors
     {
         protected readonly DBService dbService;
         protected readonly ScoreBoardService scoreBoard;
+        private readonly int legs;
+        private readonly int sets;
 
         protected ProcessorBase(Game game,
                                 List<Player> players,
                                 DBService dbService,
-                                ScoreBoardService scoreBoard)
+                                ScoreBoardService scoreBoard,
+                                int legs = 0,
+                                int sets = 0)
         {
             this.dbService = dbService;
             this.scoreBoard = scoreBoard;
+            this.legs = legs;
+            this.sets = sets;
 
             Game = game;
             Players = players;
             PlayerOnThrow = Players.First();
-            PlayerOnSet = Players.First();
+            PlayerOnLeg = Players.First();
         }
 
         protected List<Player> Players { get; }
         protected Player PlayerOnThrow { get; set; }
-        protected Player PlayerOnSet { get; set; }
+        protected Player PlayerOnLeg { get; set; }
         protected Game Game { get; }
 
         protected void Check180()
@@ -47,7 +53,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             return PlayerOnThrow.ThrowNumber == 3;
         }
 
-        protected void ClearThrows()
+        protected void ClearPlayerOnThrowHand()
         {
             PlayerOnThrow.HandThrows.Clear();
             PlayerOnThrow.ThrowNumber = 1;
@@ -57,8 +63,26 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected void TogglePlayerOnThrow()
         {
-            PlayerOnThrow = Players.First(p => p != PlayerOnThrow);
-            scoreBoard.WhoThrowsPointerSetOn(PlayerOnThrow);
+            PlayerOnThrow = Players.Count > 1
+                                ? Players.First(p => p != PlayerOnThrow)
+                                : PlayerOnThrow;
+            scoreBoard.OnThrowPointerSetOn(PlayerOnThrow);
+        }
+
+        protected bool IsGameOver(DetectedThrow thrw)
+        {
+            return IsSetOver(thrw) && PlayerOnThrow.SetsWon + 1 == sets;
+        }
+
+        protected bool IsSetOver(DetectedThrow thrw)
+        {
+            return IsLegOver(thrw) && PlayerOnThrow.LegsWon + 1 == legs;
+        }
+
+        protected bool IsLegOver(DetectedThrow thrw)
+        {
+            return PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
+                   (thrw.Type == ThrowType.Double || thrw.Type == ThrowType.Bulleye);
         }
 
         protected bool IsFault(DetectedThrow thrw)
@@ -68,10 +92,16 @@ namespace OneHundredAndEightyCore.Game.Processors
                    PlayerOnThrow.LegPoints - thrw.TotalPoints == 0;
         }
 
-        protected bool IsOut(DetectedThrow thrw)
+        protected void OnFault()
         {
-            return PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
-                   (thrw.Type == ThrowType.Double || thrw.Type == ThrowType.Bulleye);
+            PlayerOnThrow.LegPoints += PlayerOnThrow.HandPoints;
+            scoreBoard.SetPointsToClassic(PlayerOnThrow.LegPoints, PlayerOnThrow);
+
+            ClearPlayerOnThrowHand();
+
+            scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+
+            TogglePlayerOnThrow();
         }
 
         protected Throw ConvertAndSaveThrow(DetectedThrow thrw, ThrowResult throwResult)
@@ -90,8 +120,6 @@ namespace OneHundredAndEightyCore.Game.Processors
             return dbThrow;
         }
 
-        public virtual void OnThrow(DetectedThrow thrw)
-        {
-        }
+        public abstract void OnThrow(DetectedThrow thrw);
     }
 }

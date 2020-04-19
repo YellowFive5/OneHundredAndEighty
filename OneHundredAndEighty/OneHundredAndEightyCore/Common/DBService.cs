@@ -52,7 +52,9 @@ namespace OneHundredAndEightyCore.Common
             StatisticSaveNew(newGameId, players);
         }
 
-        public void GameEnd(Game.Game game, GameResultType gameResultType = GameResultType.NotDefined, Player winner = null)
+        public void GameEnd(Game.Game game,
+                            Player winner = null,
+                            GameResultType gameResultType = GameResultType.NotDefined)
         {
             GameSaveEndTimeStamp(game);
 
@@ -99,6 +101,28 @@ namespace OneHundredAndEightyCore.Common
 
             ExecuteNonQueryInternal(addLegsWonForPlayerQuery);
         }
+
+        public void StatisticUpdateAddSetsPlayedForPlayers(int gameId)
+        {
+            var addSetsPlayedForPlayersQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsPlayed}] = [{Column.SetsPlayed}] + 1 " +
+                                               $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
+                                               $"WHERE [{Column.Game}] = {gameId})";
+
+            ExecuteNonQueryInternal(addSetsPlayedForPlayersQuery);
+        }
+
+        public void StatisticUpdateAddSetsWonForPlayer(Player player, int gameId)
+        {
+            var addSetsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsWon}] = [{Column.SetsWon}] + 1 " +
+                                           $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
+                                           $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
+                                           $"ON [GS].[{Column.Game}] = {gameId} " +
+                                           $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
+                                           $"WHERE[{Column.Player}] = {player.Id})";
+
+            ExecuteNonQueryInternal(addSetsWonForPlayerQuery);
+        }
+
 
         private void StatisticUpdateAllPlayersSetGameResultAbortedOrError(int gameId, GameResultType gameResultType)
         {

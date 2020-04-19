@@ -21,8 +21,10 @@ namespace OneHundredAndEightyCore.Game
 
         #region Game
 
-        public int HandPoints { get; set; } = 0;
+        public int SetsWon { get; set; } = 0;
+        public int LegsWon { get; set; } = 0;
         public int LegPoints { get; set; } = 0;
+        public int HandPoints { get; set; } = 0;
         public int ThrowNumber { get; set; } = 1;
         public Stack<Throw> HandThrows { get; set; } = new Stack<Throw>();
 

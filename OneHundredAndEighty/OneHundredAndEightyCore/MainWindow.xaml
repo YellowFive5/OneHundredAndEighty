@@ -94,7 +94,7 @@
                                            Visibility="Hidden" />
                                     <ComboBox Name="NewGameSetsComboBox"
                                               HorizontalAlignment="Left"
-                                              Margin="390,16,0,0"
+                                              Margin="353,16,0,0"
                                               VerticalAlignment="Top"
                                               Width="60"
                                               Visibility="Hidden"
@@ -107,7 +107,7 @@
                                     </ComboBox>
                                     <ComboBox Name="NewGameLegsComboBox"
                                               HorizontalAlignment="Left"
-                                              Margin="488,16,0,0"
+                                              Margin="430,16,0,0"
                                               VerticalAlignment="Top"
                                               Width="56"
                                               Visibility="Hidden"
@@ -121,16 +121,16 @@
                                     <Label Name="NewGameSetsLabel"
                                            Content="Sets"
                                            HorizontalAlignment="Left"
-                                           Margin="450,14,0,0"
+                                           Margin="348,-9,0,0"
                                            VerticalAlignment="Top"
                                            Width="34"
                                            HorizontalContentAlignment="Left"
-                                           VerticalContentAlignment="Center" Height="26"
+                                           VerticalContentAlignment="Center" Height="25"
                                            Visibility="Hidden" />
                                     <Label Name="NewGameLegsLabel"
                                            Content="Legs"
                                            HorizontalAlignment="Left"
-                                           Margin="544,14,0,0"
+                                           Margin="424,-9,0,0"
                                            VerticalAlignment="Top"
                                            Width="34"
                                            HorizontalContentAlignment="Left"
@@ -153,11 +153,12 @@
                                     <Label x:Name="NewGamePointsLabel"
                                            Content="Points"
                                            HorizontalAlignment="Left"
-                                           Margin="341,14,0,0"
+                                           Margin="270,-9,0,0"
                                            VerticalAlignment="Top"
-                                           Width="44"
+                                           Width="49"
                                            HorizontalContentAlignment="Left"
-                                           VerticalContentAlignment="Center" Height="26"
+                                           VerticalContentAlignment="Center"
+                                           Height="25"
                                            Visibility="Visible" />
                                 </Grid>
                             </Grid>

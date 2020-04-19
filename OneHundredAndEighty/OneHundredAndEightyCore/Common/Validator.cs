@@ -67,12 +67,11 @@ namespace OneHundredAndEightyCore.Common
                 case GameType.FreeThrowsDouble501Points:
                 case GameType.FreeThrowsDouble701Points:
                 case GameType.FreeThrowsDouble1001Points:
-                    return true;
                 case GameType.Classic301Points:
                 case GameType.Classic501Points:
                 case GameType.Classic701Points:
                 case GameType.Classic1001Points:
-                    return false;
+                    return true;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

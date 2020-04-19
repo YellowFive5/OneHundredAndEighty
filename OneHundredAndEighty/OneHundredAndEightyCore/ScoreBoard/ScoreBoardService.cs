@@ -21,7 +21,10 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region Open/Close
 
-        public void OpenScoreBoard(GameTypeUi type, List<Player> players, string gameTypeString, int writeOffPoints = 0)
+        public void OpenScoreBoard(GameTypeUi type,
+                                   List<Player> players,
+                                   string gameTypeString,
+                                   int legPoints = 0)
         {
             scoreBoardWindow = new ScoreBoardWindow();
 
@@ -29,15 +32,15 @@ namespace OneHundredAndEightyCore.ScoreBoard
             {
                 case GameTypeUi.FreeThrowsSingle:
                     scoreBoardType = ScoreBoardType.FreeThrowsSingle;
-                    PreSetupForFreeThrowsSingle(players.First(), gameTypeString, writeOffPoints);
+                    PreSetupForFreeThrowsSingle(players.First(), gameTypeString, legPoints);
                     break;
                 case GameTypeUi.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
-                    PreSetupForFreeThrowsDouble(players, gameTypeString, writeOffPoints);
+                    PreSetupForFreeThrowsDouble(players, gameTypeString, legPoints);
                     break;
                 case GameTypeUi.Classic:
                     scoreBoardType = ScoreBoardType.Classic;
-                    PreSetupForClassics();
+                    PreSetupForClassics(players, gameTypeString, legPoints);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -55,16 +58,18 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region PreSetup
 
-        private void PreSetupForFreeThrowsSingle(Player player, string gameTypeString, int writeOffPoints)
+        private void PreSetupForFreeThrowsSingle(Player player, string gameTypeString, int legPoints)
         {
             scoreBoardWindow.ScoreBoardFreeThrowsSingleGrid.Visibility = Visibility.Visible;
             TextLabelContentChange(scoreBoardWindow.SingleGameTypeLabel, gameTypeString);
             scoreBoardWindow.SinglePlayerImage.Source = player.Avatar;
+
             TextLabelContentChange(scoreBoardWindow.SinglePlayerName, $"{player.Name} {player.NickName}");
-            TextLabelContentChange(scoreBoardWindow.SinglePoints, writeOffPoints.ToString());
+
+            SetPointsToSinglePlayer(legPoints);
         }
 
-        private void PreSetupForFreeThrowsDouble(List<Player> players, string gameTypeString, int writeOffPoints)
+        private void PreSetupForFreeThrowsDouble(List<Player> players, string gameTypeString, int legPoints)
         {
             TextLabelContentChange(scoreBoardWindow.ClassicsGameTypeLabel, gameTypeString);
 
@@ -82,15 +87,35 @@ namespace OneHundredAndEightyCore.ScoreBoard
             scoreBoardWindow.ClassicsPlayer2Legs.Visibility = Visibility.Hidden;
             scoreBoardWindow.ClassicsPlayer2Sets.Visibility = Visibility.Hidden;
             scoreBoardWindow.ClassicWhoOnLegPoint.Visibility = Visibility.Hidden;
-            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer1Points, writeOffPoints.ToString());
-            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer2Points, writeOffPoints.ToString());
 
-            WhoThrowsPointerRight();
+            SetPointsToClassic(legPoints, players.ElementAt(0));
+            SetPointsToClassic(legPoints, players.ElementAt(1));
+
+            OnThrowPointerMoveRight();
         }
 
-        private void PreSetupForClassics()
+        private void PreSetupForClassics(List<Player> players, string gameTypeString, int legPoints)
         {
+            TextLabelContentChange(scoreBoardWindow.ClassicsGameTypeLabel, gameTypeString);
+
+            scoreBoardWindow.ClassicsPlayer1Image.Source = players.ElementAt(0).Avatar;
+            scoreBoardWindow.ClassicsPlayer2Image.Source = players.ElementAt(1).Avatar;
+
+            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer1Name, $"{players.ElementAt(0).Name} {players.ElementAt(0).NickName}");
+            TextLabelContentChange(scoreBoardWindow.ClassicsPlayer2Name, $"{players.ElementAt(1).Name} {players.ElementAt(1).NickName}");
+
             scoreBoardWindow.ScoreBoardClassicGrid.Visibility = Visibility.Visible;
+
+            SetPointsToClassic(legPoints, players.ElementAt(0));
+            SetPointsToClassic(legPoints, players.ElementAt(1));
+
+            SetLegsWonToClassic(0, players.ElementAt(0));
+            SetLegsWonToClassic(0, players.ElementAt(1));
+
+            SetSetsWonToClassic(0, players.ElementAt(0));
+            SetSetsWonToClassic(0, players.ElementAt(1));
+
+            OnThrowPointerMoveRight();
         }
 
         #endregion
@@ -139,39 +164,137 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #endregion
 
-        private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
+        #region Legs
 
-        private void DigitLabelContentSet(ContentControl label, int number, bool set = false)
+        private OnPlayer legPointOnPlayer = OnPlayer._1;
+
+        public void LegPointSetOn(Player player)
         {
-            var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTarget(fadeIn, label);
-            sb.Children.Add(fadeIn);
-            sb.Begin();
-
-            if (set)
-            {
-                label.Content = number;
-            }
-            else
-            {
-                label.Content = int.Parse(label.Content.ToString())
-                                + number;
-            }
+            scoreBoardWindow.Dispatcher.Invoke(() =>
+                                               {
+                                                   if (IsForPlayerOne(player))
+                                                   {
+                                                       LegPointMoveTo(OnPlayer._1);
+                                                   }
+                                                   else if (IsForPlayerTwo(player))
+                                                   {
+                                                       LegPointMoveTo(OnPlayer._2);
+                                                   }
+                                               });
         }
 
-        private void TextLabelContentChange(ContentControl label, string text)
+        private void LegPointMoveTo(OnPlayer toPlayer)
         {
+            if (legPointOnPlayer == toPlayer)
+            {
+                return;
+            }
+
+            var verticalValue = toPlayer == OnPlayer._1
+                                    ? -57
+                                    : 57;
+
             var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+
+            var fadeOut = new DoubleAnimation
+                          {
+                              From = 1,
+                              To = 0,
+                              Duration = fadeTime
+                          };
+            Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
+            Storyboard.SetTarget(fadeOut, scoreBoardWindow.ClassicWhoOnLegPoint);
+
+            var vertical = new Thickness()
+                           {
+                               Left = scoreBoardWindow.ClassicWhoOnLegPoint.Margin.Left,
+                               Top = scoreBoardWindow.ClassicWhoOnLegPoint.Margin.Top + verticalValue,
+                               Right = scoreBoardWindow.ClassicWhoOnLegPoint.Margin.Right,
+                               Bottom = scoreBoardWindow.ClassicWhoOnLegPoint.Margin.Bottom - verticalValue
+                           };
+            var slideVertical = new ThicknessAnimation()
+                                {
+                                    From = scoreBoardWindow.ClassicWhoOnLegPoint.Margin,
+                                    To = vertical,
+                                    Duration = slideTime,
+                                    BeginTime = fadeTime
+                                };
+            Storyboard.SetTarget(slideVertical, scoreBoardWindow.ClassicWhoOnLegPoint);
+            Storyboard.SetTargetProperty(slideVertical, new PropertyPath(FrameworkElement.MarginProperty));
+
+            var fadeIn = new DoubleAnimation
+                         {
+                             From = 0, To = 1,
+                             Duration = fadeTime,
+                             BeginTime = fadeTime + slideTime
+                         };
             Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTarget(fadeIn, label);
+            Storyboard.SetTarget(fadeIn, scoreBoardWindow.ClassicWhoOnLegPoint);
+
+            sb.Children.Add(fadeOut);
+            sb.Children.Add(slideVertical);
             sb.Children.Add(fadeIn);
+
             sb.Begin();
 
-            label.Content = text;
+            legPointOnPlayer = toPlayer;
         }
+
+        public void AddLegsWonToClassic(Player player)
+        {
+            AddSetLegsWonToClassicInternal(1, player);
+        }
+
+        public void SetLegsWonToClassic(int legsToSet, Player player)
+        {
+            AddSetLegsWonToClassicInternal(legsToSet, player, true);
+        }
+
+        private void AddSetLegsWonToClassicInternal(int points, Player player, bool set = false)
+        {
+            scoreBoardWindow.Dispatcher.Invoke(() =>
+                                               {
+                                                   if (scoreBoardWindow.ClassicsPlayer1Name.Content.ToString() == $"{player.Name} {player.NickName}")
+                                                   {
+                                                       DigitLabelContentSet(scoreBoardWindow.ClassicsPlayer1Legs, points, set);
+                                                   }
+                                                   else if (scoreBoardWindow.ClassicsPlayer2Name.Content.ToString() == $"{player.Name} {player.NickName}")
+                                                   {
+                                                       DigitLabelContentSet(scoreBoardWindow.ClassicsPlayer2Legs, points, set);
+                                                   }
+                                               });
+        }
+
+        #endregion
+
+        #region Sets
+
+        public void AddSetsWonToClassic(Player player)
+        {
+            AddSetSetsWonToClassicInternal(1, player);
+        }
+
+        public void SetSetsWonToClassic(int setsToSet, Player player)
+        {
+            AddSetSetsWonToClassicInternal(setsToSet, player, true);
+        }
+
+        private void AddSetSetsWonToClassicInternal(int points, Player player, bool set = false)
+        {
+            scoreBoardWindow.Dispatcher.Invoke(() =>
+                                               {
+                                                   if (scoreBoardWindow.ClassicsPlayer1Name.Content.ToString() == $"{player.Name} {player.NickName}")
+                                                   {
+                                                       DigitLabelContentSet(scoreBoardWindow.ClassicsPlayer1Sets, points, set);
+                                                   }
+                                                   else if (scoreBoardWindow.ClassicsPlayer2Name.Content.ToString() == $"{player.Name} {player.NickName}")
+                                                   {
+                                                       DigitLabelContentSet(scoreBoardWindow.ClassicsPlayer2Sets, points, set);
+                                                   }
+                                               });
+        }
+
+        #endregion
 
         #region PointsHint
 
@@ -288,7 +411,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #endregion
 
-        #region WhoThrowsPointer
+        #region OnThrowPointer
 
         public void SetThrowNumber(int throwNumber)
         {
@@ -320,24 +443,24 @@ namespace OneHundredAndEightyCore.ScoreBoard
                                                });
         }
 
-        private OnPlayer onPlayer = OnPlayer._1;
+        private OnPlayer onThrowPointerOnPlayer = OnPlayer._1;
 
-        public void WhoThrowsPointerSetOn(Player player)
+        public void OnThrowPointerSetOn(Player player)
         {
             scoreBoardWindow.Dispatcher.Invoke(() =>
                                                {
                                                    if (IsForPlayerOne(player))
                                                    {
-                                                       WhoThrowsPointerMoveTo(OnPlayer._1);
+                                                       OnThrowPointerMoveTo(OnPlayer._1);
                                                    }
                                                    else if (IsForPlayerTwo(player))
                                                    {
-                                                       WhoThrowsPointerMoveTo(OnPlayer._2);
+                                                       OnThrowPointerMoveTo(OnPlayer._2);
                                                    }
                                                });
         }
 
-        private void WhoThrowsPointerRight()
+        private void OnThrowPointerMoveRight()
         {
             var sb = new Storyboard();
 
@@ -362,9 +485,9 @@ namespace OneHundredAndEightyCore.ScoreBoard
             sb.Begin();
         }
 
-        private void WhoThrowsPointerMoveTo(OnPlayer toPlayer)
+        private void OnThrowPointerMoveTo(OnPlayer toPlayer)
         {
-            if (onPlayer == toPlayer)
+            if (onThrowPointerOnPlayer == toPlayer)
             {
                 return;
             }
@@ -432,7 +555,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
             sb.Begin();
 
-            onPlayer = toPlayer;
+            onThrowPointerOnPlayer = toPlayer;
         }
 
         private const string DartSymbol = "⬇";
@@ -469,6 +592,40 @@ namespace OneHundredAndEightyCore.ScoreBoard
         }
 
         #endregion
+
+        private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
+
+        private void DigitLabelContentSet(ContentControl label, int number, bool set = false)
+        {
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
+            Storyboard.SetTarget(fadeIn, label);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+
+            if (set)
+            {
+                label.Content = number;
+            }
+            else
+            {
+                label.Content = int.Parse(label.Content.ToString())
+                                + number;
+            }
+        }
+
+        private void TextLabelContentChange(ContentControl label, string text)
+        {
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
+            Storyboard.SetTarget(fadeIn, label);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+
+            label.Content = text;
+        }
 
         private bool IsForPlayerOne(Player player)
         {

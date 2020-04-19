@@ -28,6 +28,8 @@
         Throw2,
         Throw3,
         LegsPlayed,
-        LegsWon
+        SetsPlayed,
+        LegsWon,
+        SetsWon
     }
 }

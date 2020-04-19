@@ -26,7 +26,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         public override void OnThrow(DetectedThrow thrw)
         {
-            if (IsOut(thrw))
+            if (IsLegOver(thrw))
             {
                 ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
 
@@ -40,7 +40,7 @@ namespace OneHundredAndEightyCore.Game.Processors
                     scoreBoard.CheckPointsHintFor(player);
                 }
 
-                ClearThrows();
+                ClearPlayerOnThrowHand();
 
                 TogglePlayerOnThrow();
                 return;
@@ -48,13 +48,9 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             if (IsFault(thrw))
             {
-                PlayerOnThrow.LegPoints += PlayerOnThrow.HandPoints;
-                scoreBoard.SetPointsToClassic(PlayerOnThrow.LegPoints, PlayerOnThrow);
                 ConvertAndSaveThrow(thrw, ThrowResult.Fault);
-                ClearThrows();
-                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
 
-                TogglePlayerOnThrow();
+                OnFault();
                 return;
             }
 
@@ -69,7 +65,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             if (IsHandOver())
             {
                 Check180();
-                ClearThrows();
+                ClearPlayerOnThrowHand();
                 scoreBoard.CheckPointsHintFor(PlayerOnThrow);
                 TogglePlayerOnThrow();
             }

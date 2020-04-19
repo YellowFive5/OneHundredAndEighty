@@ -57,6 +57,8 @@ namespace OneHundredAndEightyCore.Game
 
             var selectedGameTypeUi = Converter.NewGameControlsToGameTypeUi(mainWindow.NewGameControls);
             var selectedGameType = Converter.NewGameControlsToGameTypeGameService(mainWindow.NewGameControls);
+            var legs = Converter.ComboBoxSelectedContentToInt(mainWindow.NewGameLegsComboBox);
+            var sets = Converter.ComboBoxSelectedContentToInt(mainWindow.NewGameSetsComboBox);
 
             GameType = selectedGameType;
 
@@ -121,12 +123,20 @@ namespace OneHundredAndEightyCore.Game
                     scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, "Write off 1001", 1001);
                     break;
                 case GameType.Classic301Points:
+                    GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 301, legs, sets);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, $"First to {sets}", 301);
                     break;
                 case GameType.Classic501Points:
+                    GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 501, legs, sets);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, $"First to {sets}", 501);
                     break;
                 case GameType.Classic701Points:
+                    GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 701, legs, sets);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, $"First to {sets}", 701);
                     break;
                 case GameType.Classic1001Points:
+                    GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 1001, legs, sets);
+                    scoreBoardService.OpenScoreBoard(selectedGameTypeUi, players, $"First to {sets}", 1001);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -157,7 +167,7 @@ namespace OneHundredAndEightyCore.Game
             scoreBoardService.CloseScoreBoard();
             detectionService.StopDetection();
             drawService.ProjectionClear();
-            dbService.GameEnd(Game, type);
+            dbService.GameEnd(Game, gameResultType: type);
         }
 
         #endregion

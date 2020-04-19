@@ -26,7 +26,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         public override void OnThrow(DetectedThrow thrw)
         {
-            if (IsOut(thrw))
+            if (IsLegOver(thrw))
             {
                 PlayerOnThrow.LegPoints = writeOffPoints;
                 scoreBoard.SetPointsToSinglePlayer(writeOffPoints);
@@ -36,18 +36,16 @@ namespace OneHundredAndEightyCore.Game.Processors
                 dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
                 dbService.StatisticUpdateAddLegsWonForPlayer(PlayerOnThrow, Game.Id);
 
-                ClearThrows();
+                ClearPlayerOnThrowHand();
                 scoreBoard.CheckPointsHintFor(PlayerOnThrow);
                 return;
             }
 
             if (IsFault(thrw))
             {
-                PlayerOnThrow.LegPoints += PlayerOnThrow.HandPoints;
-                scoreBoard.SetPointsToSinglePlayer(PlayerOnThrow.LegPoints);
                 ConvertAndSaveThrow(thrw, ThrowResult.Fault);
-                ClearThrows();
-                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+
+                OnFault();
                 return;
             }
 
@@ -61,7 +59,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             if (IsHandOver())
             {
                 Check180();
-                ClearThrows();
+                ClearPlayerOnThrowHand();
             }
             else
             {
