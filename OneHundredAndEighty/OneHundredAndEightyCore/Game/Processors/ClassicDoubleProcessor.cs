@@ -39,9 +39,8 @@ namespace OneHundredAndEightyCore.Game.Processors
                 dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
                 dbService.StatisticUpdateAddSetsWonForPlayer(PlayerOnThrow, Game.Id);
 
-                dbService.GameEnd(Game, PlayerOnThrow);
-
-                // todo end game
+                InvokeEndMatch();
+                return;
             }
 
             if (IsSetOver(thrw))

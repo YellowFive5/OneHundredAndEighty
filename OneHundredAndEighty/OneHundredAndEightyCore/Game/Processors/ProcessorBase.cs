@@ -17,6 +17,9 @@ namespace OneHundredAndEightyCore.Game.Processors
         private readonly int legs;
         private readonly int sets;
 
+        public delegate void EndMatchDelegate(Game game, Player winner);
+        public event EndMatchDelegate OnMatchEnd;
+
         protected ProcessorBase(Game game,
                                 List<Player> players,
                                 DBService dbService,
@@ -118,6 +121,11 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             dbService.ThrowSaveNew(dbThrow);
             return dbThrow;
+        }
+
+        protected void InvokeEndMatch()
+        {
+            OnMatchEnd?.Invoke(Game, PlayerOnThrow);
         }
 
         public abstract void OnThrow(DetectedThrow thrw);

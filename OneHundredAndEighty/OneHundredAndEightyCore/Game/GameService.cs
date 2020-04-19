@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game.Processors;
@@ -147,12 +148,14 @@ namespace OneHundredAndEightyCore.Game
                          IsGameRun = true;
                          detectionService.OnThrowDetected += OnAnotherThrow;
                          detectionService.OnStatusChanged += OnDetectionServiceStatusChanged;
+                         GameProcessor.OnMatchEnd += OnMatchEnd;
                          while (IsGameRun)
                          {
                          }
 
                          detectionService.OnThrowDetected -= OnAnotherThrow;
                          detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
+                         GameProcessor.OnMatchEnd -= OnMatchEnd;
                      });
         }
 
@@ -168,6 +171,38 @@ namespace OneHundredAndEightyCore.Game
             detectionService.StopDetection();
             drawService.ProjectionClear();
             dbService.GameEnd(Game, gameResultType: type);
+        }
+
+        private void OnMatchEnd(Game game, Player winner)
+        {
+            if (!IsGameRun)
+            {
+                return;
+            }
+
+            IsGameRun = false;
+            scoreBoardService.CloseScoreBoard();
+            detectionService.StopDetection();
+            drawService.ProjectionClear();
+            dbService.GameEnd(Game, winner);
+
+            // todo
+            mainWindow.Dispatcher.Invoke(() =>
+                                         {
+                                             foreach (TabItem tabItem in mainWindow.MainTabControl.Items)
+                                             {
+                                                 tabItem.IsEnabled = !tabItem.IsEnabled;
+                                             }
+
+                                             mainWindow.StartGameButton.IsEnabled = !mainWindow.StartGameButton.IsEnabled;
+                                             mainWindow.StopGameButton.IsEnabled = !mainWindow.StopGameButton.IsEnabled;
+                                             mainWindow.NewGameTypeComboBox.IsEnabled = !mainWindow.NewGameTypeComboBox.IsEnabled;
+                                             mainWindow.NewGamePlayer1ComboBox.IsEnabled = !mainWindow.NewGamePlayer1ComboBox.IsEnabled;
+                                             mainWindow.NewGamePlayer2ComboBox.IsEnabled = !mainWindow.NewGamePlayer2ComboBox.IsEnabled;
+                                             mainWindow.NewGameSetsComboBox.IsEnabled = !mainWindow.NewGameSetsComboBox.IsEnabled;
+                                             mainWindow.NewGameLegsComboBox.IsEnabled = !mainWindow.NewGameLegsComboBox.IsEnabled;
+                                         });
+            //
         }
 
         #endregion

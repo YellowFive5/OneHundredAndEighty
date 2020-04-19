@@ -76,7 +76,7 @@ namespace OneHundredAndEightyCore
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
             versionChecker.CheckVersions();
-            
+
             LoadSettings();
             drawService.ProjectionPrepare();
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
@@ -119,17 +119,25 @@ namespace OneHundredAndEightyCore
             catch (Exception e)
             {
                 CloseScoreBoard();
-                StopGame(GameResultType.Error);
+                StopGameByError();
                 messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
             }
         }
 
-        public void StopGame(GameResultType type = GameResultType.NotDefined)
+        public void StopGameByButton()
         {
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
-            gameService.StopGame(type);
+            gameService.StopGame(GameResultType.Aborted);
+        }
+
+        public void StopGameByError()
+        {
+            ToggleMainTabItemsEnabled();
+            ToggleMatchControlsEnabled();
+
+            gameService.StopGame(GameResultType.Error);
         }
 
         public void SaveNewPlayer()
@@ -235,7 +243,7 @@ namespace OneHundredAndEightyCore
         private void OnDetectionServiceErrorOccurred(Exception e)
         {
             messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
-            StopGame(GameResultType.Error);
+            StopGameByError();
         }
 
         #endregion

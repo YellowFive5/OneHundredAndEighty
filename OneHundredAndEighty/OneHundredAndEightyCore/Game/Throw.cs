@@ -9,10 +9,10 @@ namespace OneHundredAndEightyCore.Game
 {
     public enum ThrowType
     {
-        Zero = 1,
-        Single,
+        Single = 1,
         Double,
         Tremble,
+        Zero,
         _25,
         Bulleye
     }

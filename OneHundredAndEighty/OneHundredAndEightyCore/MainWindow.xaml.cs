@@ -70,7 +70,7 @@ namespace OneHundredAndEightyCore
             var detectionService = new DetectionService(this, drawService, configService, throwService, logger);
             cb.Register(r => detectionService).AsSelf().SingleInstance();
 
-            var gameService = new GameService(this, scoreBoardService, detectionService, configService, drawService, logger, dbService);
+            var gameService = new GameService(this,scoreBoardService, detectionService, configService, drawService, logger, dbService);
             cb.Register(r => gameService).AsSelf().SingleInstance();
 
             ServiceContainer = cb.Build();
@@ -83,7 +83,7 @@ namespace OneHundredAndEightyCore
             logger.Debug("MainWindow on closing");
 
             viewModel.CloseScoreBoard();
-            viewModel.StopGame(GameResultType.Aborted);
+            viewModel.StopGameByButton();
             viewModel.SaveSettingsIfDirty();
         }
 
@@ -131,7 +131,7 @@ namespace OneHundredAndEightyCore
 
         private void StopGameButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.StopGame(GameResultType.Aborted);
+            viewModel.StopGameByButton();
         }
 
         private void OnSaveNewPlayerButtonClick(object sender, RoutedEventArgs e)

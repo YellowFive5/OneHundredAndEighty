@@ -51,7 +51,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         public void CloseScoreBoard()
         {
-            scoreBoardWindow?.Kill();
+            scoreBoardWindow?.Dispatcher.Invoke(() => { scoreBoardWindow?.Kill(); });
         }
 
         #endregion
