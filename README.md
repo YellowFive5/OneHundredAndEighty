@@ -29,7 +29,7 @@ timeline ↓
 
 ✅ [[**v.2.1 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)]
 
-- [ ] Classic game types
+- [x] Classic game types
 - [ ] UI prettyfy
 - [ ] CamCalibrator itegration
 
