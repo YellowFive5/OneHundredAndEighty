@@ -70,7 +70,7 @@ namespace OneHundredAndEightyCore
             var detectionService = new DetectionService(this, drawService, configService, throwService, logger);
             cb.Register(r => detectionService).AsSelf().SingleInstance();
 
-            var gameService = new GameService(this,scoreBoardService, detectionService, configService, drawService, logger, dbService);
+            var gameService = new GameService(this, scoreBoardService, detectionService, configService, drawService, logger, dbService);
             cb.Register(r => gameService).AsSelf().SingleInstance();
 
             ServiceContainer = cb.Build();

@@ -53,7 +53,7 @@ namespace OneHundredAndEightyCore.Game
             drawService.ProjectionClear();
             drawService.PointsHistoryBoxClear();
 
-            detectionService.PrepareAndTryCapture();
+            detectionService.PrepareCamsAndTryCapture();
             detectionService.RunDetection();
 
             var selectedGameTypeUi = Converter.NewGameControlsToGameTypeUi(mainWindow.NewGameControls);

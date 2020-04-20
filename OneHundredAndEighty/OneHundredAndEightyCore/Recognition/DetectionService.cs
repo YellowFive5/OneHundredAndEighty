@@ -59,16 +59,16 @@ namespace OneHundredAndEightyCore.Recognition
 
         public event StatusDelegate OnStatusChanged;
 
-        public void PrepareAndTryCapture()
+        public void PrepareCamsAndTryCapture()
         {
             cams = new List<CamService>();
-            var cam1Active = configService.Read<bool>(SettingsType.Cam1CheckBox);
-            var cam2Active = configService.Read<bool>(SettingsType.Cam2CheckBox);
-            var cam3Active = configService.Read<bool>(SettingsType.Cam3CheckBox);
-            var cam4Active = configService.Read<bool>(SettingsType.Cam4CheckBox);
+            var cam1Active = configService.Read<bool>(SettingsType.Cam1CheckBox) && !App.NoCams;
+            var cam2Active = configService.Read<bool>(SettingsType.Cam2CheckBox) && !App.NoCams;
+            var cam3Active = configService.Read<bool>(SettingsType.Cam3CheckBox) && !App.NoCams;
+            var cam4Active = configService.Read<bool>(SettingsType.Cam4CheckBox) && !App.NoCams;
             if (cam1Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name));
+                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name)); // todo extenstion method
             }
 
             if (cam2Active)
@@ -92,7 +92,7 @@ namespace OneHundredAndEightyCore.Recognition
             extractionSleepTime = configService.Read<double>(SettingsType.ExtractionSleepTime);
             thresholdSleepTime = configService.Read<double>(SettingsType.ThresholdSleepTime);
             moveDetectedSleepTime = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
-            withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
+            withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox) && !App.NoCams;
 
             foreach (var cam in cams)
             {

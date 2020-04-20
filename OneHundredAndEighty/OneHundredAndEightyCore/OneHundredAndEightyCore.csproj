@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
     <PackageReference Include="DeviceId" Version="4.5.0" />
     <PackageReference Include="DirectShowLib" Version="1.0.0" />
     <PackageReference Include="Emgu.CV" Version="4.1.0.3420" />
