@@ -13,6 +13,7 @@ using Autofac;
 using Microsoft.Win32;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Debug;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
@@ -34,6 +35,7 @@ namespace OneHundredAndEightyCore
         private readonly DetectionService detectionService;
         private readonly ScoreBoardService scoreBoardService;
         private readonly GameService gameService;
+        private readonly ManualThrowPanel manualThrowPanel;
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
 
@@ -73,6 +75,7 @@ namespace OneHundredAndEightyCore
             gameService = MainWindow.ServiceContainer.Resolve<GameService>();
             scoreBoardService = MainWindow.ServiceContainer.Resolve<ScoreBoardService>();
             detectionService = MainWindow.ServiceContainer.Resolve<DetectionService>();
+            manualThrowPanel = MainWindow.ServiceContainer.Resolve<ManualThrowPanel>();
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
             versionChecker.CheckVersions();
@@ -399,6 +402,11 @@ namespace OneHundredAndEightyCore
         public void CloseScoreBoard()
         {
             scoreBoardService.CloseScoreBoard();
+        }
+
+        public void CloseManualThrowPanel()
+        {
+            manualThrowPanel.Close();
         }
 
         #endregion

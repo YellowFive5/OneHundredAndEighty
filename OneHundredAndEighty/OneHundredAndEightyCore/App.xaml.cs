@@ -7,22 +7,27 @@ using CommandLine;
 
 namespace OneHundredAndEightyCore
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App
     {
         public static bool NoCams { get; private set; }
+        public static bool Panel { get; private set; }
 
-        private class Option
+        private class Options
         {
             [Option('n', "nocams", Required = false, HelpText = "Debug run with no cams and detection")]
             public bool NoCams { get; set; }
+
+            [Option('p', "panel", Required = false, HelpText = "Debug run with manual throw panel")]
+            public bool Panel { get; set; }
         }
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            Parser.Default.ParseArguments<Option>(e.Args).WithParsed<Option>(o => { NoCams = o.NoCams; });
+            Parser.Default.ParseArguments<Options>(e.Args).WithParsed<Options>(o =>
+                                                                               {
+                                                                                   NoCams = o.NoCams;
+                                                                                   Panel = o.Panel;
+                                                                               });
         }
     }
 }

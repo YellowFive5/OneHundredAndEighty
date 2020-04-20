@@ -182,6 +182,11 @@ namespace OneHundredAndEightyCore.Recognition
             cts?.Cancel();
         }
 
+        public void InvokeOnThrowDetected(DetectedThrow thrw)
+        {
+            OnThrowDetected?.Invoke(thrw);
+        }
+
         private void FindThrowOnRemainingCams(CamService succeededCam)
         {
             logger.Info($"Finding throws from remaining cams start. Succeeded cam: {succeededCam.camNumber}");
@@ -195,7 +200,7 @@ namespace OneHundredAndEightyCore.Recognition
             var thrw = throwService.GetThrow();
             if (thrw != null)
             {
-                OnThrowDetected?.Invoke(thrw);
+                InvokeOnThrowDetected(thrw);
             }
 
             logger.Info($"Finding throws from remaining cams end");

@@ -9,6 +9,7 @@ using Autofac;
 using NLog;
 using NLog.Web;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Debug;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.ScoreBoard;
@@ -70,6 +71,9 @@ namespace OneHundredAndEightyCore
             var detectionService = new DetectionService(this, drawService, configService, throwService, logger);
             cb.Register(r => detectionService).AsSelf().SingleInstance();
 
+            var manualThrowPanel = new ManualThrowPanel(logger, detectionService);
+            cb.Register(r => manualThrowPanel).AsSelf().SingleInstance();
+
             var gameService = new GameService(this, scoreBoardService, detectionService, configService, drawService, logger, dbService);
             cb.Register(r => gameService).AsSelf().SingleInstance();
 
@@ -85,6 +89,7 @@ namespace OneHundredAndEightyCore
             viewModel.CloseScoreBoard();
             viewModel.StopGameByButton();
             viewModel.SaveSettingsIfDirty();
+            viewModel.CloseManualThrowPanel();
         }
 
         private void OnTabSelectionChanged(object sender, SelectionChangedEventArgs e)
