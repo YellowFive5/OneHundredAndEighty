@@ -10,7 +10,7 @@ namespace OneHundredAndEightyCore
     public partial class App
     {
         public static bool NoCams { get; private set; }
-        public static bool Panel { get; private set; }
+        public static bool ThrowPanel { get; private set; }
 
         private class Options
         {
@@ -18,7 +18,7 @@ namespace OneHundredAndEightyCore
             public bool NoCams { get; set; }
 
             [Option('p', "panel", Required = false, HelpText = "Debug run with manual throw panel")]
-            public bool Panel { get; set; }
+            public bool ThrowPanel { get; set; }
         }
 
         private void App_OnStartup(object sender, StartupEventArgs e)
@@ -26,7 +26,7 @@ namespace OneHundredAndEightyCore
             Parser.Default.ParseArguments<Options>(e.Args).WithParsed<Options>(o =>
                                                                                {
                                                                                    NoCams = o.NoCams;
-                                                                                   Panel = o.Panel;
+                                                                                   ThrowPanel = o.ThrowPanel;
                                                                                });
         }
     }

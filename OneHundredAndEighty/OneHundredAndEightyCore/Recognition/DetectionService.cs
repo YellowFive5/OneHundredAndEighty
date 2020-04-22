@@ -66,9 +66,10 @@ namespace OneHundredAndEightyCore.Recognition
             var cam2Active = configService.Read<bool>(SettingsType.Cam2CheckBox) && !App.NoCams;
             var cam3Active = configService.Read<bool>(SettingsType.Cam3CheckBox) && !App.NoCams;
             var cam4Active = configService.Read<bool>(SettingsType.Cam4CheckBox) && !App.NoCams;
+
             if (cam1Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name)); // todo extenstion method
+                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name)); // todo extenstion method... or not
             }
 
             if (cam2Active)
