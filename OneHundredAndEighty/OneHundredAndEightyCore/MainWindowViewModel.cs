@@ -366,11 +366,11 @@ namespace OneHundredAndEightyCore
 
         public void ToggleNewGameControlsVisibility()
         {
-            var selectedGameType = Converter.NewGameControlsToGameTypeUi(mainWindow.NewGameControls);
+            var selectedGameType = Converter.NewGameControlsToGameType(mainWindow.NewGameControls);
 
             switch (selectedGameType)
             {
-                case GameTypeUi.FreeThrowsSingle:
+                case GameType.FreeThrowsSingle:
                     mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGamePlayer2Label.Visibility = Visibility.Hidden;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
@@ -378,7 +378,7 @@ namespace OneHundredAndEightyCore
                     mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
                     break;
-                case GameTypeUi.FreeThrowsDouble:
+                case GameType.FreeThrowsDouble:
                     mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
                     mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
@@ -386,7 +386,7 @@ namespace OneHundredAndEightyCore
                     mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
                     mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
                     break;
-                case GameTypeUi.Classic:
+                case GameType.Classic:
                     mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
                     mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
                     mainWindow.NewGameSetsComboBox.Visibility = Visibility.Visible;

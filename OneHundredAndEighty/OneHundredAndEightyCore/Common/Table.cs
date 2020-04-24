@@ -10,6 +10,7 @@
         Throws,
         Statistic,
         _180,
-        ThrowType
+        ThrowType,
+        GameType
     }
 }

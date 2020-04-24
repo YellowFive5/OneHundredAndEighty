@@ -108,90 +108,12 @@ namespace OneHundredAndEightyCore.Common
                        : Visibility.Visible;
         }
 
-        public static GameTypeUi NewGameControlsToGameTypeUi(Grid mainWindowNewGameControls)
+        public static GameType NewGameControlsToGameType(Grid mainWindowNewGameControls)
         {
-            var selectedGameType = Enum.Parse<GameTypeUi>((((ComboBox) mainWindowNewGameControls
-                                                                       .Children.OfType<FrameworkElement>()
-                                                                       .Single(e => e.Name == "NewGameTypeComboBox")).SelectedItem as ComboBoxItem)
-                                                          ?.Content.ToString());
-
-            switch (selectedGameType)
-            {
-                case GameTypeUi.FreeThrowsSingle:
-                    return GameTypeUi.FreeThrowsSingle;
-                case GameTypeUi.FreeThrowsDouble:
-                    return GameTypeUi.FreeThrowsDouble;
-                case GameTypeUi.Classic:
-                    return GameTypeUi.Classic;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        public static GameType NewGameControlsToGameTypeGameService(Grid mainWindowNewGameControls)
-        {
-            var selectedGameType = NewGameControlsToGameTypeUi(mainWindowNewGameControls);
-
-            var selectedGamePoints = (((ComboBox) mainWindowNewGameControls
-                                                  .Children.OfType<FrameworkElement>()
-                                                  .Single(e => e.Name == "NewGamePointsComboBox")).SelectedItem as ComboBoxItem)
-                                     ?.Content.ToString();
-
-            switch (selectedGameType)
-            {
-                case GameTypeUi.FreeThrowsSingle:
-                    switch (selectedGamePoints)
-                    {
-                        case "Free":
-                            return GameType.FreeThrowsSingleFreePoints;
-                        case "301":
-                            return GameType.FreeThrowsSingle301Points;
-                        case "501":
-                            return GameType.FreeThrowsSingle501Points;
-                        case "701":
-                            return GameType.FreeThrowsSingle701Points;
-                        case "1001":
-                            return GameType.FreeThrowsSingle1001Points;
-                    }
-
-                    break;
-
-                case GameTypeUi.FreeThrowsDouble:
-                    switch (selectedGamePoints)
-                    {
-                        case "Free":
-                            return GameType.FreeThrowsDoubleFreePoints;
-                        case "301":
-                            return GameType.FreeThrowsDouble301Points;
-                        case "501":
-                            return GameType.FreeThrowsDouble501Points;
-                        case "701":
-                            return GameType.FreeThrowsDouble701Points;
-                        case "1001":
-                            return GameType.FreeThrowsDouble1001Points;
-                    }
-
-                    break;
-
-                case GameTypeUi.Classic:
-                    switch (selectedGamePoints)
-                    {
-                        case "301":
-                            return GameType.Classic301Points;
-                        case "501":
-                            return GameType.Classic501Points;
-                        case "701":
-                            return GameType.Classic701Points;
-                        case "1001":
-                            return GameType.Classic1001Points;
-                    }
-
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            return GameType.FreeThrowsSingleFreePoints; // todo cant get here
+            return Enum.Parse<GameType>((((ComboBox) mainWindowNewGameControls
+                                                     .Children.OfType<FrameworkElement>()
+                                                     .Single(e => e.Name == "NewGameTypeComboBox")).SelectedItem as ComboBoxItem)
+                                        ?.Content.ToString());
         }
 
         public static int CamSetupSectorSettingValueToComboboxSelectedIndex(string camSetupSectorSettingValue)

@@ -284,24 +284,53 @@ namespace OneHundredAndEightyCore.Common
             ExecuteNonQueryInternal(addTempThrowTypeForShuffle);
 
             var tremblesToTemp = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 7 " +
-                               $"WHERE [{Column.Type}] = 4";
+                                 $"WHERE [{Column.Type}] = 4";
             ExecuteNonQueryInternal(tremblesToTemp);
             var zeroesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 4 " +
                             $"WHERE [{Column.Type}] = 1";
             ExecuteNonQueryInternal(zeroesFix);
             var singlesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 1 " +
-                               $"WHERE [{Column.Type}] = 2";
+                             $"WHERE [{Column.Type}] = 2";
             ExecuteNonQueryInternal(singlesFix);
             var doublesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 2 " +
-                               $"WHERE [{Column.Type}] = 3";
+                             $"WHERE [{Column.Type}] = 3";
             ExecuteNonQueryInternal(doublesFix);
             var tremblesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 3 " +
-                               $"WHERE [{Column.Type}] = 7";
+                              $"WHERE [{Column.Type}] = 7";
             ExecuteNonQueryInternal(tremblesFix);
 
             var deleteTempThrowTypeForShuffle = $"DELETE FROM [{Table.ThrowType}] WHERE [{Column.Id}] = 7";
             ExecuteNonQueryInternal(deleteTempThrowTypeForShuffle);
             // ThrowTypeBugFix
+
+            // GameTypes simplify
+            var toFreeThrowsSingle = $"UPDATE [{Table.Games}] SET [{Column.Type}] = 1 " +
+                                     $"WHERE [{Column.Type}] IN (1,2,3,4,5)";
+            ExecuteNonQueryInternal(toFreeThrowsSingle);
+
+            var toFreeThrowsDouble = $"UPDATE [{Table.Games}] SET [{Column.Type}] = 2 " +
+                                     $"WHERE [{Column.Type}] IN (6,7,8,9,10)";
+            ExecuteNonQueryInternal(toFreeThrowsDouble);
+
+            var toClassic = $"UPDATE [{Table.Games}] SET [{Column.Type}] = 3 " +
+                            $"WHERE [{Column.Type}] IN (11,12,13,14)";
+            ExecuteNonQueryInternal(toClassic);
+
+            var deleteTypes = $"DELETE FROM [{Table.GameType}] WHERE [{Column.Id}] > 3";
+            ExecuteNonQueryInternal(deleteTypes);
+
+            var renameFreeThrowsSingle = $"UPDATE [{Table.GameType}] SET [{Column.Type}] = 'FreeThrowsSingle' " +
+                                         $"WHERE [{Column.Id}] = 1";
+            ExecuteNonQueryInternal(renameFreeThrowsSingle);
+
+            var renameFreeThrowsDouble = $"UPDATE [{Table.GameType}] SET [{Column.Type}] = 'FreeThrowsDouble' " +
+                                         $"WHERE [{Column.Id}] = 2";
+            ExecuteNonQueryInternal(renameFreeThrowsDouble);
+
+            var renameClassic = $"UPDATE [{Table.GameType}] SET [{Column.Type}] = 'Classic' " +
+                                $"WHERE [{Column.Id}] = 3";
+            ExecuteNonQueryInternal(renameClassic);
+            // GameTypes simplify
 
             UpdateDbVersion("2.2");
         }

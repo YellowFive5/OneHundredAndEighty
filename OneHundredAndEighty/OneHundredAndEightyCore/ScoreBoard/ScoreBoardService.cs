@@ -21,7 +21,7 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
         #region Open/Close
 
-        public void OpenScoreBoard(GameTypeUi type,
+        public void OpenScoreBoard(GameType type,
                                    List<Player> players,
                                    string gameTypeString,
                                    int legPoints = 0)
@@ -30,15 +30,15 @@ namespace OneHundredAndEightyCore.ScoreBoard
 
             switch (type)
             {
-                case GameTypeUi.FreeThrowsSingle:
+                case GameType.FreeThrowsSingle:
                     scoreBoardType = ScoreBoardType.FreeThrowsSingle;
                     PreSetupForFreeThrowsSingle(players.First(), gameTypeString, legPoints);
                     break;
-                case GameTypeUi.FreeThrowsDouble:
+                case GameType.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
                     PreSetupForFreeThrowsDouble(players, gameTypeString, legPoints);
                     break;
-                case GameTypeUi.Classic:
+                case GameType.Classic:
                     scoreBoardType = ScoreBoardType.Classic;
                     PreSetupForClassics(players, gameTypeString, legPoints);
                     break;

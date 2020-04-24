@@ -16,7 +16,7 @@
     <Grid Margin="0,0,0,0" >
         <Image Name="DartboardImage" Margin="15,15,15,15"/>
 
-        <Ellipse Tag="0" x:Name="Zero" Margin="372,36,156,476" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
+        <Ellipse Tag="0" x:Name="Zero" Height="75" Width="75" Margin="379,37,146,472" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="25" x:Name="_25" Height="25" Width="25" Margin="298,268,276,291" Stroke="#FF8F00FF" StrokeThickness="2" Fill="#7F60FF00" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="50" x:Name="Bulleye" Height="25" Width="25" Margin="286,283,289,276" Stroke="#FF8F00FF" StrokeThickness="2" Fill="#7FFF009C" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
 
@@ -30,7 +30,7 @@
         <Ellipse Tag="16" x:Name="Tremble_16" Height="25" Width="25" Margin="187,352,388,207" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="7" x:Name="Tremble_7" Height="25" Width="25" Margin="214,383,361,176" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="19" x:Name="Tremble_19" Height="25" Width="25" Margin="250,399,325,160" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
-        <Ellipse Tag="3" x:Name="Tremble_3" Height="25" Width="25" Margin="288,403,288,156" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
+        <Ellipse Tag="3" x:Name="Tremble_3" Height="25" Width="25" Margin="288,403,287,156" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="17" x:Name="Tremble_17" Height="25" Width="25" Margin="326,399,249,160" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="2" x:Name="Tremble_2" Height="25" Width="25" Margin="362,379,213,180" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="15" x:Name="Tremble_15" Height="25" Width="25" Margin="388,352,187,207" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
@@ -72,8 +72,8 @@
         <Ellipse Tag="16" x:Name="Single_16" Height="25" Width="25" Margin="157,373,418,186" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="7" x:Name="Single_7" Height="25" Width="25" Margin="194,412,381,147" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="19" x:Name="Single_19" Height="25" Width="25" Margin="238,435,338,124" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
-        <Ellipse Tag="3" x:Name="Single_3" Height="25" Width="25" Margin="288,443,288,116" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
-        <Ellipse Tag="17" x:Name="Single_17" Height="25" Width="25" Margin="338,435,238,124" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
+        <Ellipse Tag="3" x:Name="Single_3" Height="25" Width="25" Margin="286,443,289,116" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
+        <Ellipse Tag="17" x:Name="Single_17" Height="25" Width="25" Margin="338,435,236,124" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="2" x:Name="Single_2" Height="25" Width="25" Margin="383,412,192,147" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="15" x:Name="Single_15" Height="25" Width="25" Margin="420,379,154,180" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
         <Ellipse Tag="10" x:Name="Single_10" Height="25" Width="25" Margin="444,331,131,228" Stroke="#FF8F00FF"  StrokeThickness="2" Fill="#7FFF00F2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"/>
