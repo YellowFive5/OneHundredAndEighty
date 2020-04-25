@@ -9,7 +9,7 @@
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
   - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly (with near 100% load ;-P )
 * 🐞  Known problems / bug reports:
-  - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed in v2.2
+  - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed someday
   
 ![180app2 0](https://user-images.githubusercontent.com/42347722/78453424-4bfaf300-769a-11ea-9ddf-bf09598b37e4.jpg)
 
@@ -29,13 +29,17 @@ timeline ↓
 
 ✅ [[**v.2.1 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)]
 
-- [x] Classic game types
+- [x] Classic game type
+- [ ] Runtime crossing debug mode
+- [ ] Throw manual correction
+- [ ] Throw undo
+- [ ] Manual hand end
 - [ ] UI prettyfy
-- [ ] CamCalibrator itegration
 
 ⭕ [**v.2.2 Release**]
 - [ ] ...
 - **Unsorted todo's:**
+- [ ] CamCalibrator itegration
 - [ ] Around the clock game type
 - [ ] Shanghai game type
 - [ ] Cricket game type
