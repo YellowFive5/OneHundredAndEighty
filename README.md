@@ -154,6 +154,10 @@ Go to each cams tab
 6. Setup all cams this way
 7. All app setups complete
 
+### Runtime crossing mode
+
+todo...
+
 ## 4. Database.db
 
 All setup values and all information about player, game or each throw stores in database.
