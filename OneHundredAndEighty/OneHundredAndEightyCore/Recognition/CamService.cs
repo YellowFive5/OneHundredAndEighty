@@ -19,14 +19,15 @@ namespace OneHundredAndEightyCore.Recognition
     public enum CamServiceWorkingMode
     {
         Setup,
-        Work
+        Crossing,
+        Detection
     }
 
     public class CamService
     {
         private readonly MainWindow mainWindow;
         private readonly string parentGridName;
-        private readonly CamServiceWorkingMode mode;
+        private readonly CamServiceWorkingMode workingMode;
         private readonly DrawService drawService;
         private readonly VideoCapture videoCapture;
         private readonly ConfigService configService;
@@ -62,9 +63,9 @@ namespace OneHundredAndEightyCore.Recognition
 
         public CamService(MainWindow mainWindow,
                           string parentGridName,
-                          CamServiceWorkingMode mode = CamServiceWorkingMode.Work)
+                          CamServiceWorkingMode workingMode)
         {
-            this.mode = mode;
+            this.workingMode = workingMode;
             this.mainWindow = mainWindow;
             this.parentGridName = parentGridName;
             logger = MainWindow.ServiceContainer.Resolve<Logger>();
@@ -124,6 +125,7 @@ namespace OneHundredAndEightyCore.Recognition
             {
                 throw new Exception($"Camera with specified id '{camId}' not found in connected camera devices for Camera#{camNumber}");
             }
+
             return index;
         }
 
@@ -230,7 +232,7 @@ namespace OneHundredAndEightyCore.Recognition
             GetSlidersData();
             DrawSetupLines();
 
-            if (withRoiBackgroundRefresh)
+            if (workingMode == CamServiceWorkingMode.Crossing || withRoiBackgroundRefresh)
             {
                 OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
                 RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
@@ -250,7 +252,7 @@ namespace OneHundredAndEightyCore.Recognition
             switch (parentGridName)
             {
                 case "Cam1Grid":
-                    switch (mode)
+                    switch (workingMode)
                     {
                         case CamServiceWorkingMode.Setup:
                             mainWindow.Dispatcher.Invoke(() =>
@@ -266,7 +268,8 @@ namespace OneHundredAndEightyCore.Recognition
                                                                                                      : new BitmapImage();
                                                          });
                             break;
-                        case CamServiceWorkingMode.Work:
+                        case CamServiceWorkingMode.Detection:
+                        case CamServiceWorkingMode.Crossing:
                             mainWindow.Dispatcher.Invoke(() =>
                                                          {
                                                              mainWindow.Cam1ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
@@ -284,7 +287,7 @@ namespace OneHundredAndEightyCore.Recognition
 
                     break;
                 case "Cam2Grid":
-                    switch (mode)
+                    switch (workingMode)
                     {
                         case CamServiceWorkingMode.Setup:
                             mainWindow.Dispatcher.Invoke(() =>
@@ -300,7 +303,8 @@ namespace OneHundredAndEightyCore.Recognition
                                                                                                      : new BitmapImage();
                                                          });
                             break;
-                        case CamServiceWorkingMode.Work:
+                        case CamServiceWorkingMode.Detection:
+                        case CamServiceWorkingMode.Crossing:
                             mainWindow.Dispatcher.Invoke(() =>
                                                          {
                                                              mainWindow.Cam2ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
@@ -318,7 +322,7 @@ namespace OneHundredAndEightyCore.Recognition
 
                     break;
                 case "Cam3Grid":
-                    switch (mode)
+                    switch (workingMode)
                     {
                         case CamServiceWorkingMode.Setup:
                             mainWindow.Dispatcher.Invoke(() =>
@@ -334,7 +338,8 @@ namespace OneHundredAndEightyCore.Recognition
                                                                                                      : new BitmapImage();
                                                          });
                             break;
-                        case CamServiceWorkingMode.Work:
+                        case CamServiceWorkingMode.Detection:
+                        case CamServiceWorkingMode.Crossing:
                             mainWindow.Dispatcher.Invoke(() =>
                                                          {
                                                              mainWindow.Cam3ImageBoxRecognitionTab.Source = LinedFrame?.Data != null
@@ -352,7 +357,7 @@ namespace OneHundredAndEightyCore.Recognition
 
                     break;
                 case "Cam4Grid":
-                    switch (mode)
+                    switch (workingMode)
                     {
                         case CamServiceWorkingMode.Setup:
                             mainWindow.Dispatcher.Invoke(() =>
@@ -368,7 +373,8 @@ namespace OneHundredAndEightyCore.Recognition
                                                                                                      : new BitmapImage();
                                                          });
                             break;
-                        case CamServiceWorkingMode.Work:
+                        case CamServiceWorkingMode.Detection:
+                        case CamServiceWorkingMode.Crossing:
                             mainWindow.Dispatcher.Invoke(() =>
                                                          {
                                                              mainWindow.Cam4ImageBoxRecognitionTab.Source = LinedFrame?.Data != null

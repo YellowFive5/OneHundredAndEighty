@@ -169,5 +169,15 @@ namespace OneHundredAndEightyCore
 
             Process.Start(psi);
         }
+
+        private void OnCrossingStartButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.StartCrossing();
+        }
+
+        private void OnCrossingStopButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.StopCrossing();
+        }
     }
 }

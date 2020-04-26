@@ -33,6 +33,7 @@ namespace OneHundredAndEightyCore.Recognition
         private double extractionSleepTime;
         private double thresholdSleepTime;
         private bool withDetection;
+        private CamServiceWorkingMode workingMode;
 
         public DetectionService(MainWindow mainWindow,
                                 DrawService drawService,
@@ -59,8 +60,9 @@ namespace OneHundredAndEightyCore.Recognition
 
         public event StatusDelegate OnStatusChanged;
 
-        public void PrepareCamsAndTryCapture()
+        public void PrepareCamsAndTryCapture(CamServiceWorkingMode workingMode = CamServiceWorkingMode.Detection)
         {
+            this.workingMode = workingMode;
             cams = new List<CamService>();
             var cam1Active = configService.Read<bool>(SettingsType.Cam1CheckBox) && !App.NoCams;
             var cam2Active = configService.Read<bool>(SettingsType.Cam2CheckBox) && !App.NoCams;
@@ -69,22 +71,22 @@ namespace OneHundredAndEightyCore.Recognition
 
             if (cam1Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name)); // todo extenstion method... or not
+                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name, workingMode)); // todo extenstion method... or not
             }
 
             if (cam2Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam2Grid.Name));
+                cams.Add(new CamService(mainWindow, mainWindow.Cam2Grid.Name, workingMode));
             }
 
             if (cam3Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam3Grid.Name));
+                cams.Add(new CamService(mainWindow, mainWindow.Cam3Grid.Name, workingMode));
             }
 
             if (cam4Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam4Grid.Name));
+                cams.Add(new CamService(mainWindow, mainWindow.Cam4Grid.Name, workingMode));
             }
 
             cts = new CancellationTokenSource();
@@ -119,15 +121,27 @@ namespace OneHundredAndEightyCore.Recognition
                                        {
                                            logger.Debug($"Cam_{cam.camNumber} detection start");
 
-                                           var response = withDetection
+                                           ResponseType response;
+                                           if (workingMode == CamServiceWorkingMode.Crossing)
+                                           {
+                                               response = ResponseType.Move;
+                                           }
+                                           else
+                                           {
+                                               response = withDetection
                                                               ? cam.DetectMove()
                                                               : ResponseType.Nothing;
+                                           }
 
                                            if (response == ResponseType.Move)
                                            {
                                                OnStatusChanged?.Invoke(DetectionServiceStatus.ProcessingThrow);
 
-                                               Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
+                                               if (workingMode != CamServiceWorkingMode.Crossing)
+                                               {
+                                                   Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
+                                               }
+
                                                response = cam.DetectThrow();
 
                                                if (response == ResponseType.Trow)

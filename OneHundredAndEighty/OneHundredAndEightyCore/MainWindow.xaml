@@ -193,6 +193,24 @@
                                          FontSize="10"
                                          VerticalContentAlignment="Bottom"
                                          VerticalScrollBarVisibility="Auto" />
+                                <Button Name="CrossingStartButton"
+                                        Content="Start"
+                                        Margin="10,430,884,10"
+                                        Click="OnCrossingStartButtonClick" />
+                                <Button Name="CrossingStopButton"
+                                        Content="Stop"
+                                        Margin="97,430,794,10"
+                                        Click="OnCrossingStopButtonClick" 
+                                        IsEnabled="False"/>
+                                <TextBlock Margin="48,400,834,41"
+                                           FontFamily="Agency FB"
+                                           FontSize="16">
+                                    <Hyperlink NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#runtime-crossing-mode"
+                                               RequestNavigate="OnHyperlinkNavigate">
+                                        <TextBlock Text="Runtime crossing" />
+                                    </Hyperlink>
+                                </TextBlock>
+
                             </Grid>
                         </TabItem>
                         <TabItem Name="CamsTabItem"

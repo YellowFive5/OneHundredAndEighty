@@ -289,6 +289,42 @@ namespace OneHundredAndEightyCore
 
         #endregion
 
+        #region RuntimeCrossing
+
+        public void StartCrossing()
+        {
+            ToggleMainTabItemsEnabled();
+            mainWindow.MatchTabItem.IsEnabled = !mainWindow.MatchTabItem.IsEnabled;
+            mainWindow.CrossingStopButton.IsEnabled = !mainWindow.CrossingStopButton.IsEnabled;
+
+            try
+            {
+                drawService.ProjectionClear();
+                drawService.PointsHistoryBoxClear();
+
+                detectionService.PrepareCamsAndTryCapture(CamServiceWorkingMode.Crossing);
+                detectionService.RunDetection();
+            }
+            catch (Exception e)
+            {
+                messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
+                StopCrossing();
+            }
+        }
+
+        public void StopCrossing()
+        {
+            detectionService.StopDetection();
+            drawService.ProjectionClear();
+
+            ToggleMainTabItemsEnabled();
+            mainWindow.MatchTabItem.IsEnabled = !mainWindow.MatchTabItem.IsEnabled;
+            mainWindow.CrossingStopButton.IsEnabled = !mainWindow.CrossingStopButton.IsEnabled;
+        }
+
+        #endregion
+
+
         #region Controls toggles
 
         private void ToggleCamSetupGridControlsEnabled(string gridName)
@@ -351,6 +387,8 @@ namespace OneHundredAndEightyCore
             {
                 tabItem.IsEnabled = !tabItem.IsEnabled;
             }
+
+            mainWindow.CrossingStartButton.IsEnabled = !mainWindow.CrossingStartButton.IsEnabled;
         }
 
         private void ToggleMatchControlsEnabled()
@@ -362,6 +400,7 @@ namespace OneHundredAndEightyCore
             mainWindow.NewGamePlayer2ComboBox.IsEnabled = !mainWindow.NewGamePlayer2ComboBox.IsEnabled;
             mainWindow.NewGameSetsComboBox.IsEnabled = !mainWindow.NewGameSetsComboBox.IsEnabled;
             mainWindow.NewGameLegsComboBox.IsEnabled = !mainWindow.NewGameLegsComboBox.IsEnabled;
+            mainWindow.NewGamePointsComboBox.IsEnabled = !mainWindow.NewGamePointsComboBox.IsEnabled;
         }
 
         public void ToggleNewGameControlsVisibility()

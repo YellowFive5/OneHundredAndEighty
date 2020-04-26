@@ -84,7 +84,6 @@ namespace OneHundredAndEightyCore.Game
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingle:
-
                     switch (legPoints)
                     {
                         case "Free":
@@ -110,6 +109,7 @@ namespace OneHundredAndEightyCore.Game
                     }
 
                     break;
+
                 case GameType.FreeThrowsDouble:
                     switch (legPoints)
                     {
@@ -136,6 +136,7 @@ namespace OneHundredAndEightyCore.Game
                     }
 
                     break;
+
                 case GameType.Classic:
                     switch (legPoints)
                     {
@@ -158,6 +159,7 @@ namespace OneHundredAndEightyCore.Game
                     }
 
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
