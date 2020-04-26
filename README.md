@@ -162,7 +162,7 @@ Check necessary cams and detection checkbox on Setup/General tab
 
 <img width="103" alt="2020-04-26 11_24_48-" src="https://user-images.githubusercontent.com/42347722/80302424-a75c6480-87b2-11ea-845e-33d93be919fe.png">
 
-Then on Match/Projection tab start runtime crossing mode. You can manualy stick dart in dartboard and see how detection works.
+On Match/Projection tab start runtime crossing mode. Then, with manual sticking dart in dartboard you can see how detection works and check accuracy of your setups.
 
 ## 4. Database.db
 
