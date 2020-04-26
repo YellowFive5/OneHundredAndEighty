@@ -30,7 +30,7 @@ timeline ↓
 ✅ [[**v.2.1 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)]
 
 - [x] Classic game type
-- [ ] Runtime crossing debug mode
+- [x] Runtime crossing debug mode
 - [ ] Throw manual correction
 - [ ] Throw undo
 - [ ] Manual hand end
