@@ -156,7 +156,13 @@ Go to each cams tab
 
 ### Runtime crossing mode
 
-todo...
+This mode can help you to check and fix all setups you have done.
+You can check detection process with all of cams, or combination of some (at least 2)
+Check necessary cams and detection checkbox on Setup/General tab
+
+<img width="103" alt="2020-04-26 11_24_48-" src="https://user-images.githubusercontent.com/42347722/80302424-a75c6480-87b2-11ea-845e-33d93be919fe.png">
+
+Then on Match/Projection tab start runtime crossing mode. You can manualy stick dart in dartboard and see how detection works.
 
 ## 4. Database.db
 
