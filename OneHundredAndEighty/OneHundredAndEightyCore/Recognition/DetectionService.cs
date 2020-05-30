@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Windows.Main;
 
 #endregion
 

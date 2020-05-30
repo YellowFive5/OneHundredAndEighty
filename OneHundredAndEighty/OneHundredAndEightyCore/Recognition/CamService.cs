@@ -11,6 +11,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Windows.Main;
 
 #endregion
 

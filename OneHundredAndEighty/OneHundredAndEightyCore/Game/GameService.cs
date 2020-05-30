@@ -8,6 +8,7 @@ using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game.Processors;
 using OneHundredAndEightyCore.Recognition;
+using OneHundredAndEightyCore.Windows.Main;
 using OneHundredAndEightyCore.Windows.ScoreBoard;
 
 #endregion

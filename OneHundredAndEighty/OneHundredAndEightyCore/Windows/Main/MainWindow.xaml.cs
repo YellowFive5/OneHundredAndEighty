@@ -18,7 +18,7 @@ using IContainer = Autofac.IContainer;
 
 #endregion
 
-namespace OneHundredAndEightyCore
+namespace OneHundredAndEightyCore.Windows.Main
 {
     public partial class MainWindow
     {

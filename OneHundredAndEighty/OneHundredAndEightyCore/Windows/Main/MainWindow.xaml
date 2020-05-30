@@ -1,17 +1,18 @@
-﻿<Window x:Class="OneHundredAndEightyCore.MainWindow"
+﻿<Window x:Class="OneHundredAndEightyCore.Windows.Main.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:resx="clr-namespace:OneHundredAndEightyCore"
         xmlns:local="clr-namespace:OneHundredAndEightyCore"
+        xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
         Height="562"
         Width="1000"
         Title="OneHundredAndEighty"
         ResizeMode="NoResize"
         Closing="OnClosing">
     <Window.DataContext>
-        <local:MainWindowViewModel />
+        <main:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />

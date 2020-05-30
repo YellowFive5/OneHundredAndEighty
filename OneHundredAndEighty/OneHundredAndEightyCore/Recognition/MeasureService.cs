@@ -9,6 +9,7 @@ using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Windows.Main;
 
 #endregion
 

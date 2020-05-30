@@ -25,7 +25,7 @@
     <Page Update="Windows\DebugPanel\ManualThrowPanelWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Windows\Main\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ScoreBoard\ScoreBoardWindow.xaml">

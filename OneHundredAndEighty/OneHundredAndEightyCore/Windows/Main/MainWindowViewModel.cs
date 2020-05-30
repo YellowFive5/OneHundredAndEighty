@@ -20,7 +20,7 @@ using OneHundredAndEightyCore.Windows.ScoreBoard;
 
 #endregion
 
-namespace OneHundredAndEightyCore
+namespace OneHundredAndEightyCore.Windows.Main
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
