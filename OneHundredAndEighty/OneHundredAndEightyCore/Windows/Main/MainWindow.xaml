@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:resx="clr-namespace:OneHundredAndEightyCore"
+        xmlns:resx="clr-namespace:OneHundredAndEightyCore.Resources"
         xmlns:local="clr-namespace:OneHundredAndEightyCore"
         xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
         Height="562"

@@ -182,13 +182,13 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Dartboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Dartboard.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Dartboard.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DbNotExistsErrorText" xml:space="preserve">
     <value>There is no '{0}' in root folder</value>
   </data>
   <data name="EmptyUserIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\EmptyUserIcon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>EmptyUserIcon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ErrorDbMigrationText" xml:space="preserve">
     <value>Error DB migrating from [{0}] to [{1}]
@@ -204,7 +204,7 @@ Please, contact developer</value>
     <value>General</value>
   </data>
   <data name="icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\icon2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>icon2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MainSettingsTabName" xml:space="preserve">
     <value>Setup</value>
@@ -264,7 +264,7 @@ Please, contact developer</value>
     <value>Smooth gaussian value</value>
   </data>
   <data name="Start_logo4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Start logo4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Start logo4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SuccessDbMigrationText" xml:space="preserve">
     <value>DB Successfully migrated from [{0}] to [{1}]</value>

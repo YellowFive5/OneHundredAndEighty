@@ -94,6 +94,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             viewModel.StopGameByButton();
             viewModel.SaveSettingsIfDirty();
             viewModel.CloseManualThrowPanel();
+            viewModel.CloseCamsDetectionBoard();
         }
 
         private void OnTabSelectionChanged(object sender, SelectionChangedEventArgs e)

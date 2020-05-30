@@ -24,7 +24,7 @@ namespace OneHundredAndEightyCore.Windows.DebugPanel
             if (App.ThrowPanel)
             {
                 manualThrowPanelWindow = new ManualThrowPanelWindow(this);
-                manualThrowPanelWindow.DartboardImage.Source = Converter.BitmapToBitmapImage(Resources.Dartboard);
+                manualThrowPanelWindow.DartboardImage.Source = Converter.BitmapToBitmapImage(Resources.Resources.Dartboard);
 
                 manualThrowPanelWindow.Show();
             }

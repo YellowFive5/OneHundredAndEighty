@@ -34,7 +34,7 @@ namespace OneHundredAndEightyCore.Common
 
             if (AppVersion != currentDbVersion)
             {
-                var answer = messageBoxService.AskWarningQuestion(Resources.VersionsMismatchWarningQuestionText,
+                var answer = messageBoxService.AskWarningQuestion(Resources.Resources.VersionsMismatchWarningQuestionText,
                                                                   currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
                                                                   AppVersion.ToString("F1", CultureInfo.InvariantCulture));
                 if (answer)
@@ -43,7 +43,7 @@ namespace OneHundredAndEightyCore.Common
                 }
                 else
                 {
-                    messageBoxService.ShowError(Resources.VersionsMismatchErrorText,
+                    messageBoxService.ShowError(Resources.Resources.VersionsMismatchErrorText,
                                                 AppVersion.ToString("F1", CultureInfo.InvariantCulture),
                                                 currentDbVersion.ToString("F1", CultureInfo.InvariantCulture));
                     throw new Exception("DB version and App version is different");
@@ -55,7 +55,7 @@ namespace OneHundredAndEightyCore.Common
         {
             if (!File.Exists(DBService.DatabaseName))
             {
-                messageBoxService.ShowError(Resources.DbNotExistsErrorText, DBService.DatabaseName);
+                messageBoxService.ShowError(Resources.Resources.DbNotExistsErrorText, DBService.DatabaseName);
                 throw new Exception("DB not exists in root folder");
             }
         }
@@ -76,7 +76,7 @@ namespace OneHundredAndEightyCore.Common
                         From2_1to2_2();
                         break;
                     default:
-                        messageBoxService.ShowError(Resources.ErrorDbMigrationText,
+                        messageBoxService.ShowError(Resources.Resources.ErrorDbMigrationText,
                                                     currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
                                                     AppVersion.ToString("F1", CultureInfo.InvariantCulture));
                         throw new Exception("DB migrating error");
@@ -86,7 +86,7 @@ namespace OneHundredAndEightyCore.Common
             {
                 RevertDb();
 
-                messageBoxService.ShowError(Resources.ErrorDbMigrationText,
+                messageBoxService.ShowError(Resources.Resources.ErrorDbMigrationText,
                                             currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
                                             AppVersion.ToString("F1", CultureInfo.InvariantCulture));
 
@@ -95,7 +95,7 @@ namespace OneHundredAndEightyCore.Common
 
             DeleteCopyOfOldDb();
 
-            messageBoxService.ShowInfo(Resources.SuccessDbMigrationText,
+            messageBoxService.ShowInfo(Resources.Resources.SuccessDbMigrationText,
                                        currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
                                        AppVersion.ToString("F1", CultureInfo.InvariantCulture));
         }

@@ -15,6 +15,7 @@ using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
+using OneHundredAndEightyCore.Windows.CamsDetection;
 using OneHundredAndEightyCore.Windows.DebugPanel;
 using OneHundredAndEightyCore.Windows.ScoreBoard;
 
@@ -36,6 +37,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         private readonly ScoreBoardService scoreBoardService;
         private readonly GameService gameService;
         private readonly ManualThrowPanel manualThrowPanel;
+        private readonly CamsDetectionBoard camsDetectionBoard;
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
 
@@ -76,13 +78,14 @@ namespace OneHundredAndEightyCore.Windows.Main
             scoreBoardService = MainWindow.ServiceContainer.Resolve<ScoreBoardService>();
             detectionService = MainWindow.ServiceContainer.Resolve<DetectionService>();
             manualThrowPanel = MainWindow.ServiceContainer.Resolve<ManualThrowPanel>();
+            camsDetectionBoard = MainWindow.ServiceContainer.Resolve<CamsDetectionBoard>();
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
             versionChecker.CheckVersions();
 
             LoadSettings();
             drawService.ProjectionPrepare();
-            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
+            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
             LoadPlayers();
         }
 
@@ -96,19 +99,19 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameControls))
             {
-                messageBoxService.ShowError(Resources.NotImplementedYetErrorText);
+                messageBoxService.ShowError(Resources.Resources.NotImplementedYetErrorText);
                 return;
             }
 
             if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameControls))
             {
-                messageBoxService.ShowError(Resources.NewGamePlayersNotSelectedErrorText);
+                messageBoxService.ShowError(Resources.Resources.NewGamePlayersNotSelectedErrorText);
                 return;
             }
 
             if (!Validator.ValidateStartNewClassicGamePoints(mainWindow.NewGameControls))
             {
-                messageBoxService.ShowError(Resources.NewClassicGamePointsNotSelectedErrorText);
+                messageBoxService.ShowError(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
                 return;
             }
 
@@ -149,7 +152,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
             if (!Validator.ValidateNewPlayerNameAndNickName(newPlayerName, newPlayerNickName))
             {
-                messageBoxService.ShowError(Resources.NewPlayerEmptyDataErrorText);
+                messageBoxService.ShowError(Resources.Resources.NewPlayerEmptyDataErrorText);
                 return;
             }
 
@@ -167,11 +170,11 @@ namespace OneHundredAndEightyCore.Windows.Main
                 return;
             }
 
-            messageBoxService.ShowInfo(Resources.NewPlayerSuccessfullySavedText, newPlayer);
+            messageBoxService.ShowInfo(Resources.Resources.NewPlayerSuccessfullySavedText, newPlayer);
 
             mainWindow.NewPlayerNameTextBox.Text = string.Empty;
             mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
-            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
+            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
 
             LoadPlayers();
         }
@@ -224,7 +227,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             var ofd = new OpenFileDialog
                       {
-                          Title = $"{Resources.ChoosePlayerAvatarText}",
+                          Title = $"{Resources.Resources.ChoosePlayerAvatarText}",
                           Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif"
                       };
             if (ofd.ShowDialog() == true)
@@ -236,7 +239,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 }
                 else
                 {
-                    messageBoxService.ShowError(Resources.PlayerAvatarTooBigErrorText);
+                    messageBoxService.ShowError(Resources.Resources.PlayerAvatarTooBigErrorText);
                 }
             }
         }
@@ -446,6 +449,11 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void CloseManualThrowPanel()
         {
             manualThrowPanel.Close();
+        }
+
+        public void CloseCamsDetectionBoard()
+        {
+            camsDetectionBoard.Close();
         }
 
         #endregion

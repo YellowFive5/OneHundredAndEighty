@@ -16,6 +16,13 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
             this.logger = logger;
 
             camsDetectionWindow = new CamsDetectionWindow(this);
+
+            camsDetectionWindow.Show();
+        }
+
+        public void Close()
+        {
+            camsDetectionWindow?.Close();
         }
     }
 }

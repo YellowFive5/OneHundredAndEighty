@@ -35,7 +35,7 @@ namespace OneHundredAndEightyCore.Game
             Id = id;
             Name = name;
             NickName = nickName;
-            Avatar = avatar ?? Converter.BitmapToBitmapImage(Resources.EmptyUserIcon);
+            Avatar = avatar ?? Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
         }
 
         public override string ToString()
