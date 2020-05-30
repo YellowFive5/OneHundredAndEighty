@@ -8,7 +8,7 @@ using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Debug
+namespace OneHundredAndEightyCore.Windows.DebugPanel
 {
     public class ManualThrowPanel
     {

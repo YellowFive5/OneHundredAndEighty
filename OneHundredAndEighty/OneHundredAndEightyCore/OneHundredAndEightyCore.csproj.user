@@ -9,7 +9,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Debug\ManualThrowPanelWindow.xaml.cs">
+    <Compile Update="Windows\DebugPanel\ManualThrowPanelWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ScoreBoard\ScoreBoardWindow.xaml.cs">
@@ -22,7 +22,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Debug\ManualThrowPanelWindow.xaml">
+    <Page Update="Windows\DebugPanel\ManualThrowPanelWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

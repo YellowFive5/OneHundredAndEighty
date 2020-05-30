@@ -9,10 +9,10 @@ using Autofac;
 using NLog;
 using NLog.Web;
 using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Debug;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Telemetry;
+using OneHundredAndEightyCore.Windows.DebugPanel;
 using OneHundredAndEightyCore.Windows.ScoreBoard;
 using IContainer = Autofac.IContainer;
 

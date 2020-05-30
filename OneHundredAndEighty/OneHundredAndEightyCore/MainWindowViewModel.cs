@@ -13,9 +13,9 @@ using Autofac;
 using Microsoft.Win32;
 using NLog;
 using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Debug;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
+using OneHundredAndEightyCore.Windows.DebugPanel;
 using OneHundredAndEightyCore.Windows.ScoreBoard;
 
 #endregion
