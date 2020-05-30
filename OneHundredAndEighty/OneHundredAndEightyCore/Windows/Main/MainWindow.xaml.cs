@@ -12,6 +12,7 @@ using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Telemetry;
+using OneHundredAndEightyCore.Windows.CamsDetection;
 using OneHundredAndEightyCore.Windows.DebugPanel;
 using OneHundredAndEightyCore.Windows.ScoreBoard;
 using IContainer = Autofac.IContainer;
@@ -70,6 +71,9 @@ namespace OneHundredAndEightyCore.Windows.Main
 
             var detectionService = new DetectionService(this, drawService, configService, throwService, logger);
             cb.Register(r => detectionService).AsSelf().SingleInstance();
+
+            var camsDetectionBoard = new CamsDetectionBoard(logger);
+            cb.Register(r => camsDetectionBoard).AsSelf().SingleInstance();
 
             var manualThrowPanel = new ManualThrowPanel(logger, detectionService);
             cb.Register(r => manualThrowPanel).AsSelf().SingleInstance();

@@ -9,10 +9,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Windows\DebugPanel\ManualThrowPanelWindow.xaml.cs">
+    <Compile Update="Windows\CamsDetection\CamsDetectionWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ScoreBoard\ScoreBoardWindow.xaml.cs">
+    <Compile Update="Windows\Debug\ManualThrowPanelWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Score\ScoreBoardWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -22,13 +25,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Windows\DebugPanel\ManualThrowPanelWindow.xaml">
+    <Page Update="Windows\CamsDetection\CamsDetectionWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Debug\ManualThrowPanelWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Main\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ScoreBoard\ScoreBoardWindow.xaml">
+    <Page Update="Windows\Score\ScoreBoardWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
