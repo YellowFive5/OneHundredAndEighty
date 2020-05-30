@@ -84,7 +84,6 @@ namespace OneHundredAndEightyCore.Windows.Main
             versionChecker.CheckVersions();
 
             LoadSettings();
-            drawService.ProjectionPrepare();
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
             LoadPlayers();
         }
@@ -120,11 +119,12 @@ namespace OneHundredAndEightyCore.Windows.Main
 
             try
             {
+                camsDetectionBoard.Open();
+                drawService.ProjectionPrepare();
                 gameService.StartGame();
             }
             catch (Exception e)
             {
-                CloseScoreBoard();
                 StopGameByError();
                 messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
             }
@@ -132,6 +132,8 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void StopGameByButton()
         {
+            CloseCamsDetectionBoard();
+
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
@@ -140,6 +142,9 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void StopGameByError()
         {
+            CloseScoreBoard();
+            CloseCamsDetectionBoard();
+
             ToggleMainTabItemsEnabled();
             ToggleMatchControlsEnabled();
 
@@ -297,11 +302,13 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void StartCrossing()
         {
             ToggleMainTabItemsEnabled();
-            mainWindow.MatchTabItem.IsEnabled = !mainWindow.MatchTabItem.IsEnabled;
             mainWindow.CrossingStopButton.IsEnabled = !mainWindow.CrossingStopButton.IsEnabled;
 
             try
             {
+                camsDetectionBoard.Open();
+
+                drawService.ProjectionPrepare();
                 drawService.ProjectionClear();
                 drawService.PointsHistoryBoxClear();
 
@@ -319,14 +326,13 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             detectionService.StopDetection();
             drawService.ProjectionClear();
+            CloseCamsDetectionBoard();
 
             ToggleMainTabItemsEnabled();
-            mainWindow.MatchTabItem.IsEnabled = !mainWindow.MatchTabItem.IsEnabled;
             mainWindow.CrossingStopButton.IsEnabled = !mainWindow.CrossingStopButton.IsEnabled;
         }
 
         #endregion
-
 
         #region Controls toggles
 
@@ -440,6 +446,10 @@ namespace OneHundredAndEightyCore.Windows.Main
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        #endregion
+
+        #region Closing windows
 
         public void CloseScoreBoard()
         {

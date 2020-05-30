@@ -1,7 +1,5 @@
 ﻿#region Usings
 
-using System.Windows;
-
 #endregion
 
 namespace OneHundredAndEightyCore.Windows.CamsDetection

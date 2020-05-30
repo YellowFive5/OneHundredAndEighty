@@ -63,7 +63,10 @@ namespace OneHundredAndEightyCore.Windows.Main
             var scoreBoardService = new ScoreBoardService();
             cb.Register(r => scoreBoardService).AsSelf().SingleInstance();
 
-            var drawService = new DrawService(this, configService, logger);
+            var camsDetectionBoard = new CamsDetectionBoard(logger);
+            cb.Register(r => camsDetectionBoard).AsSelf().SingleInstance();
+
+            var drawService = new DrawService(camsDetectionBoard, configService, logger);
             cb.Register(r => drawService).AsSelf().SingleInstance();
 
             var throwService = new ThrowService(drawService, logger);
@@ -71,9 +74,6 @@ namespace OneHundredAndEightyCore.Windows.Main
 
             var detectionService = new DetectionService(this, drawService, configService, throwService, logger);
             cb.Register(r => detectionService).AsSelf().SingleInstance();
-
-            var camsDetectionBoard = new CamsDetectionBoard(logger);
-            cb.Register(r => camsDetectionBoard).AsSelf().SingleInstance();
 
             var manualThrowPanel = new ManualThrowPanel(logger, detectionService);
             cb.Register(r => manualThrowPanel).AsSelf().SingleInstance();

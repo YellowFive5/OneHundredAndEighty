@@ -5,8 +5,182 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OneHundredAndEightyCore.Windows.CamsDetection"
         mc:Ignorable="d"
-        Title="CamsDetectionWindow" Height="450" Width="800">
+        Title="CamsDetectionWindow"
+        Height="1056"
+        Width="1944">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.74*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1"
+                BorderBrush="Black"
+                Grid.Row="0"
+                Grid.Column="0">
+            <Image x:Name="ProjectionImage"
+                   Stretch="Uniform" />
+        </Border>
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.16*" />
+                <RowDefinition Height="0.16*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam1Image"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam1RoiImage"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam1LastRoiImage"
+                       Stretch="Uniform" />
+            </Border>
+
+        </Grid>
+        <Grid
+            Grid.Row="0"
+            Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.16*" />
+                <RowDefinition Height="0.16*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam2Image"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam2RoiImage"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam2LastRoiImage"
+                       Stretch="Uniform" />
+            </Border>
+
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.16*" />
+                <RowDefinition Height="0.16*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam3Image"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam3RoiImage"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam3LastRoiImage"
+                       Stretch="Uniform" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1"
+              Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.16*" />
+                <RowDefinition Height="0.16*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam4Image"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam4RoiImage"
+                       Stretch="Uniform" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                BorderThickness="1"
+                BorderBrush="Black">
+                <Image x:Name="Cam4LastRoiImage"
+                       Stretch="Uniform" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="0.25*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="PointsHistoryBox"
+                     Grid.Row="0"
+                     TextWrapping="Wrap"
+                     IsReadOnly="True"
+                     FontSize="10"
+                     VerticalContentAlignment="Bottom"
+                     VerticalScrollBarVisibility="Auto" />
+            <TextBox x:Name="PointsBox"
+                     Grid.Row="2"
+                     TextWrapping="Wrap"
+                     IsReadOnly="True"
+                     FontWeight="Bold"
+                     FontSize="30" />
+        </Grid>
     </Grid>
 </Window>

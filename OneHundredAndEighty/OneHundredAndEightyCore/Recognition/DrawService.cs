@@ -11,7 +11,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using NLog;
 using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Windows.Main;
+using OneHundredAndEightyCore.Windows.CamsDetection;
 using Point = System.Drawing.Point;
 
 #endregion
@@ -20,7 +20,7 @@ namespace OneHundredAndEightyCore.Recognition
 {
     public class DrawService
     {
-        private readonly MainWindow mainWindow;
+        private readonly CamsDetectionBoard camsDetectionBoard;
         private readonly ConfigService configService;
         private readonly Logger logger;
 
@@ -57,9 +57,9 @@ namespace OneHundredAndEightyCore.Recognition
         private Image<Bgr, byte> DartboardProjectionFrameBackground { get; }
         private Image<Bgr, byte> DartboardProjectionWorkingFrame { get; set; }
 
-        public DrawService(MainWindow mainWindow, ConfigService configService, Logger logger)
+        public DrawService(CamsDetectionBoard camsDetectionBoard, ConfigService configService, Logger logger)
         {
-            this.mainWindow = mainWindow;
+            this.camsDetectionBoard = camsDetectionBoard;
             this.configService = configService;
             this.logger = logger;
             DartboardProjectionFrameBackground = new Image<Bgr, byte>(ProjectionFrameSide,
@@ -120,12 +120,7 @@ namespace OneHundredAndEightyCore.Recognition
 
         public void PrintThrow(DetectedThrow thrw)
         {
-            mainWindow.Dispatcher.Invoke(() =>
-                                         {
-                                             mainWindow.PointsBox.Text = thrw.ToString();
-                                             mainWindow.PointsHistoryBox.Text = $"{mainWindow.PointsHistoryBox.Text}\n{thrw}";
-                                             mainWindow.PointsHistoryBox.ScrollToEnd();
-                                         });
+            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.PrintThrow(thrw); });
         }
 
         public void ProjectionDrawThrow(PointF poi, bool exclusiveDraw = true)
@@ -137,7 +132,7 @@ namespace OneHundredAndEightyCore.Recognition
 
             DrawCircle(DartboardProjectionWorkingFrame, poi, PoiRadius, poiColor, PoiThickness);
 
-            mainWindow.Dispatcher.Invoke(() => { mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame); });
+            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionWorkingFrame)); });
         }
 
         public void ProjectionDrawLine(PointF point1, PointF point2, MCvScalar color, bool clearBeforeDraw = true)
@@ -149,7 +144,7 @@ namespace OneHundredAndEightyCore.Recognition
 
             DrawLine(DartboardProjectionWorkingFrame, point1, point2, color, PoiThickness);
 
-            mainWindow.Dispatcher.Invoke(() => { mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame); });
+            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionWorkingFrame)); });
         }
 
         public void ProjectionPrepare()
@@ -194,22 +189,22 @@ namespace OneHundredAndEightyCore.Recognition
 
             DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
 
-            mainWindow.Dispatcher.Invoke(() => { mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionWorkingFrame); });
+            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionWorkingFrame)); });
         }
 
         public void ProjectionClear()
         {
             DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
-            mainWindow.Dispatcher.Invoke(() =>
-                                         {
-                                             mainWindow.DartboardProjectionImageBox.Source = ToBitmap(DartboardProjectionFrameBackground);
-                                             mainWindow.PointsBox.Text = string.Empty;
-                                         });
+            camsDetectionBoard.dispatcher.Invoke(() =>
+                                                 {
+                                                     camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionFrameBackground));
+                                                     camsDetectionBoard.ClearPointsBox();
+                                                 });
         }
 
         public void PointsHistoryBoxClear()
         {
-            mainWindow.Dispatcher.Invoke(() => { mainWindow.PointsHistoryBox.Text = string.Empty; });
+            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.ClearHistoryPointsBox(); });
         }
 
         public BitmapImage ToBitmap(Image<Bgr, byte> image)
