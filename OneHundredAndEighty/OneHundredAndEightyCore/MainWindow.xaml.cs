@@ -12,8 +12,8 @@ using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Debug;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.ScoreBoard;
 using OneHundredAndEightyCore.Telemetry;
+using OneHundredAndEightyCore.Windows.ScoreBoard;
 using IContainer = Autofac.IContainer;
 
 #endregion

@@ -1,4 +1,4 @@
-﻿namespace OneHundredAndEightyCore.ScoreBoard
+﻿namespace OneHundredAndEightyCore.Windows.ScoreBoard
 {
     public enum OnPlayer
     {

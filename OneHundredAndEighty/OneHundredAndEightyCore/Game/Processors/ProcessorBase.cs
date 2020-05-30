@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.ScoreBoard;
+using OneHundredAndEightyCore.Windows.ScoreBoard;
 
 #endregion
 

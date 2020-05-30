@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 #endregion
 
-namespace OneHundredAndEightyCore.ScoreBoard
+namespace OneHundredAndEightyCore.Windows.ScoreBoard
 {
     public partial class ScoreBoardWindow
     {

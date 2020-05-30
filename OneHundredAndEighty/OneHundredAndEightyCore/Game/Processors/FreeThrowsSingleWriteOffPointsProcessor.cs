@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.ScoreBoard;
+using OneHundredAndEightyCore.Windows.ScoreBoard;
 
 #endregion
 

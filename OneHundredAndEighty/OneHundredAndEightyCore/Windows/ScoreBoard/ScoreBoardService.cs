@@ -12,7 +12,7 @@ using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
-namespace OneHundredAndEightyCore.ScoreBoard
+namespace OneHundredAndEightyCore.Windows.ScoreBoard
 {
     public class ScoreBoardService
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace OneHundredAndEightyCore.ScoreBoard
+namespace OneHundredAndEightyCore.Windows.ScoreBoard
 {
     public static class CheckOut
     {

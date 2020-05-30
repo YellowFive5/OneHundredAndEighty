@@ -16,7 +16,7 @@ using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Debug;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.ScoreBoard;
+using OneHundredAndEightyCore.Windows.ScoreBoard;
 
 #endregion
 
