@@ -21,6 +21,8 @@
         Cam4CheckBox,
         MainWindowPositionLeft,
         MainWindowPositionTop,
+        MainWindowHeight,
+        MainWindowWidth,
         Cam1Id,
         ToCam1Distance,
         Cam1X,

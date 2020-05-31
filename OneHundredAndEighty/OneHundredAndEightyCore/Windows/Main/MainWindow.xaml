@@ -4,10 +4,9 @@
         xmlns:resx="clr-namespace:OneHundredAndEightyCore.Resources"
         xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Height="562"
-        Width="1000"
+        Height="638"
+        Width="1197"
         Title="OneHundredAndEighty"
-        ResizeMode="NoResize"
         Closing="OnClosing">
     <Window.DataContext>
         <main:MainWindowViewModel />
@@ -17,6 +16,13 @@
             <Setter Property="Control.VerticalContentAlignment" Value="Center" />
             <Setter Property="Control.Width" Value="50" />
             <Setter Property="Control.HorizontalAlignment" Value="Left" />
+            <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
+        </Style>
+        <Style x:Key="SetupSliderStyle">
+            <Setter Property="Control.HorizontalAlignment" Value="Center" />
+            <Setter Property="Slider.Orientation" Value="Vertical" />
+            <Setter Property="Slider.Maximum" Value="1000" />
+            <Setter Property="Control.IsEnabled" Value="False" />
             <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
         </Style>
         <Style x:Key="LabelStyle">
@@ -75,8 +81,6 @@
     </Window.Resources>
     <Grid>
         <TabControl Name="MainTabControl"
-                    Height="522"
-                    Width="983"
                     SelectionChanged="OnTabSelectionChanged">
             <TabItem Name="GameTabItem"
                      Header="Game">
@@ -307,37 +311,37 @@
                      Header="{x:Static resx:Resources.MainSettingsTabName}">
                 <Grid>
                     <TabControl Name="SetupTabControl"
-                                Height="494"
-                                Width="978"
                                 SelectionChanged="OnTabSelectionChanged">
                         <TabItem Name="GeneralSetupTabItem"
                                  Header="{x:Static resx:Resources.GeneralSettingsTabName}">
                             <Grid ShowGridLines="False">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="10" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
@@ -358,6 +362,8 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="10" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock FontFamily="Agency FB"
@@ -693,916 +699,488 @@
                         </TabItem>
                         <TabItem Name="Cam1SetupTabItem"
                                  Header="{x:Static resx:Resources.Cam1SettingsTabName}">
-                            <Grid Name="Cam1Grid">
+                            <Grid Name="Cam1Grid" ShowGridLines="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="0.16*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <Slider x:Name="Cam1ThresholdSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="524,196,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="395"
-                                        Maximum="255"
-                                        Value="197"
-                                        RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="5"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam1RoiPosYSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="581,132,-1,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="392"
-                                        Maximum="1000"
-                                        Value="357"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="11"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam1RoiHeightSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="623,132,-41,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="390"
-                                        Maximum="1000"
-                                        Value="133"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="13"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam1SurfaceSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="499,131,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="7"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam1SurfaceCenterSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="539,132,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="9"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Image x:Name="Cam1ImageBox"
-                                       HorizontalAlignment="Left"
-                                       Height="342" Margin="8,6,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="1"
+                                       Grid.RowSpan="5"
+                                       Grid.Column="1" />
                                 <Image x:Name="Cam1ImageBoxRoi"
-                                       HorizontalAlignment="Left"
-                                       Height="52"
-                                       Margin="8,353,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
-                                <Image x:Name="Cam1ImageBoxRoiLastThrow"
-                                       HorizontalAlignment="Left"
-                                       Height="51"
-                                       Margin="8,407,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="7"
+                                       Grid.Column="1" />
                                 <Label Content="Threshold"
-                                       HorizontalAlignment="Left"
-                                       Margin="690,406,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="55"
+                                       Grid.Row="9"
+                                       Grid.Column="5"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image"
+                                       RenderTransformOrigin="0.5,0.5" />
                                 <Label Content="ROI Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="817,417,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="42"
+                                       Grid.Row="9"
+                                       Grid.Column="11"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI Y position">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI Y position" />
                                 <Label Content="ROI height"
-                                       HorizontalAlignment="Left"
-                                       Margin="849,410,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="65"
+                                       Grid.Row="9"
+                                       Grid.Column="13"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI height">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI height" />
                                 <Label Content="Surface Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="728,405,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="59"
+                                       Grid.Row="9"
+                                       Grid.Column="7"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface line of dartboard surface">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface line of dartboard surface" />
                                 <Label Content="Surface center"
-                                       HorizontalAlignment="Left"
-                                       Margin="754,413,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="84"
+                                       Grid.Row="9"
+                                       Grid.Column="9"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface center point. Stick dart into bull and set">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface center point. Stick dart into bull and set" />
                                 <Button Name="Cam1StartButton"
                                         Content="Start"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,6,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Width="50"
                                         Click="CamSetupStartButtonClick" />
                                 <Button Name="Cam1StopButton"
                                         Content="Stop"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,40,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Width="50"
                                         IsEnabled="False"
                                         Click="CamSetupStopButtonClick" />
                             </Grid>
                         </TabItem>
                         <TabItem Name="Cam2SetupTabItem"
                                  Header="{x:Static resx:Resources.Cam2SettingsTabName}">
-                            <Grid Name="Cam2Grid">
+                            <Grid Name="Cam2Grid" ShowGridLines="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="0.16*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <Slider x:Name="Cam2ThresholdSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="524,196,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="395"
-                                        Maximum="255"
-                                        Value="197"
-                                        RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="5"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam2RoiPosYSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="581,132,-1,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="392"
-                                        Maximum="1000"
-                                        Value="357"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="11"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam2RoiHeightSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="623,132,-41,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="390"
-                                        Maximum="1000"
-                                        Value="133"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="13"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam2SurfaceSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="499,131,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="7"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam2SurfaceCenterSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="539,132,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="9"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Image x:Name="Cam2ImageBox"
-                                       HorizontalAlignment="Left"
-                                       Height="342" Margin="8,6,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="1"
+                                       Grid.RowSpan="5"
+                                       Grid.Column="1" />
                                 <Image x:Name="Cam2ImageBoxRoi"
-                                       HorizontalAlignment="Left"
-                                       Height="52"
-                                       Margin="8,353,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
-                                <Image x:Name="Cam2ImageBoxRoiLastThrow"
-                                       HorizontalAlignment="Left"
-                                       Height="51"
-                                       Margin="8,407,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="7"
+                                       Grid.Column="1" />
                                 <Label Content="Threshold"
-                                       HorizontalAlignment="Left"
-                                       Margin="690,406,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="55"
+                                       Grid.Row="9"
+                                       Grid.Column="5"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image"
+                                       RenderTransformOrigin="0.5,0.5" />
                                 <Label Content="ROI Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="817,417,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="42"
+                                       Grid.Row="9"
+                                       Grid.Column="11"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI Y position">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI Y position" />
                                 <Label Content="ROI height"
-                                       HorizontalAlignment="Left"
-                                       Margin="849,410,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="65"
+                                       Grid.Row="9"
+                                       Grid.Column="13"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI height">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI height" />
                                 <Label Content="Surface Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="728,405,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="59"
+                                       Grid.Row="9"
+                                       Grid.Column="7"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface line of dartboard surface">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface line of dartboard surface" />
                                 <Label Content="Surface center"
-                                       HorizontalAlignment="Left"
-                                       Margin="754,413,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="84"
+                                       Grid.Row="9"
+                                       Grid.Column="9"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface center point. Stick dart into bull and set">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface center point. Stick dart into bull and set" />
                                 <Button Name="Cam2StartButton"
                                         Content="Start"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,6,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Width="50"
                                         Click="CamSetupStartButtonClick" />
                                 <Button Name="Cam2StopButton"
                                         Content="Stop"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,40,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Width="50"
                                         IsEnabled="False"
                                         Click="CamSetupStopButtonClick" />
                             </Grid>
                         </TabItem>
                         <TabItem Name="Cam3SetupTabItem"
                                  Header="{x:Static resx:Resources.Cam3SettingsTabName}">
-                            <Grid Name="Cam3Grid">
+                            <Grid Name="Cam3Grid" ShowGridLines="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="0.16*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <Slider x:Name="Cam3ThresholdSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="524,196,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="395"
-                                        Maximum="255"
-                                        Value="197"
-                                        RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="5"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam3RoiPosYSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="581,132,-1,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="392"
-                                        Maximum="1000"
-                                        Value="357"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="11"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam3RoiHeightSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="623,132,-41,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="390"
-                                        Maximum="1000"
-                                        Value="133"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="13"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam3SurfaceSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="499,131,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="7"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam3SurfaceCenterSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="539,132,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="9"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Image x:Name="Cam3ImageBox"
-                                       HorizontalAlignment="Left"
-                                       Height="342" Margin="8,6,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="1"
+                                       Grid.RowSpan="5"
+                                       Grid.Column="1" />
                                 <Image x:Name="Cam3ImageBoxRoi"
-                                       HorizontalAlignment="Left"
-                                       Height="52"
-                                       Margin="8,353,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
-                                <Image x:Name="Cam3ImageBoxRoiLastThrow"
-                                       HorizontalAlignment="Left"
-                                       Height="51"
-                                       Margin="8,407,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="7"
+                                       Grid.Column="1" />
                                 <Label Content="Threshold"
-                                       HorizontalAlignment="Left"
-                                       Margin="690,406,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="55"
+                                       Grid.Row="9"
+                                       Grid.Column="5"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image"
+                                       RenderTransformOrigin="0.5,0.5" />
                                 <Label Content="ROI Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="817,417,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="42"
+                                       Grid.Row="9"
+                                       Grid.Column="11"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI Y position">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI Y position" />
                                 <Label Content="ROI height"
-                                       HorizontalAlignment="Left"
-                                       Margin="849,410,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="65"
+                                       Grid.Row="9"
+                                       Grid.Column="13"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI height">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI height" />
                                 <Label Content="Surface Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="728,405,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="59"
+                                       Grid.Row="9"
+                                       Grid.Column="7"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface line of dartboard surface">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface line of dartboard surface" />
                                 <Label Content="Surface center"
-                                       HorizontalAlignment="Left"
-                                       Margin="754,413,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="84"
+                                       Grid.Row="9"
+                                       Grid.Column="9"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface center point. Stick dart into bull and set">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface center point. Stick dart into bull and set" />
                                 <Button Name="Cam3StartButton"
                                         Content="Start"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,6,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Width="50"
                                         Click="CamSetupStartButtonClick" />
                                 <Button Name="Cam3StopButton"
                                         Content="Stop"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,40,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Width="50"
                                         IsEnabled="False"
                                         Click="CamSetupStopButtonClick" />
                             </Grid>
                         </TabItem>
                         <TabItem Name="Cam4SetupTabItem"
                                  Header="{x:Static resx:Resources.Cam4SettingsTabName}">
-                            <Grid Name="Cam4Grid">
+                            <Grid Name="Cam4Grid" ShowGridLines="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="0.16*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <Slider x:Name="Cam4ThresholdSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="524,196,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="395"
-                                        Maximum="255"
-                                        Value="197"
-                                        RenderTransformOrigin="0.5,0.5"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="5"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam4RoiPosYSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="581,132,-1,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="392"
-                                        Maximum="1000"
-                                        Value="357"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="11"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam4RoiHeightSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="623,132,-41,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="390"
-                                        Maximum="1000"
-                                        Value="133"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="13"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam4SurfaceSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="499,131,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="7"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Slider x:Name="Cam4SurfaceCenterSlider"
-                                        HorizontalAlignment="Left"
-                                        Margin="539,132,0,0"
-                                        VerticalAlignment="Top"
-                                        RenderTransformOrigin="0.667,0.557"
-                                        Width="395"
-                                        Maximum="1000"
-                                        Value="536"
-                                        IsEnabled="False"
-                                        ValueChanged="SetSettingDirty">
-                                    <Slider.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-90" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Slider.RenderTransform>
-                                </Slider>
+                                        Grid.Row="1"
+                                        Grid.RowSpan="7"
+                                        Grid.Column="9"
+                                        Style="{StaticResource SetupSliderStyle}" />
                                 <Image x:Name="Cam4ImageBox"
-                                       HorizontalAlignment="Left"
-                                       Height="342" Margin="8,6,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="1"
+                                       Grid.RowSpan="5"
+                                       Grid.Column="1" />
                                 <Image x:Name="Cam4ImageBoxRoi"
-                                       HorizontalAlignment="Left"
-                                       Height="52"
-                                       Margin="8,353,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
-                                <Image x:Name="Cam4ImageBoxRoiLastThrow"
-                                       HorizontalAlignment="Left"
-                                       Height="51"
-                                       Margin="8,407,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="609" />
+                                       Grid.Row="7"
+                                       Grid.Column="1" />
                                 <Label Content="Threshold"
-                                       HorizontalAlignment="Left"
-                                       Margin="690,406,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="55"
+                                       Grid.Row="9"
+                                       Grid.Column="5"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#x0a;when you can see only white dart contour, without any light noise from sides of image"
+                                       RenderTransformOrigin="0.5,0.5" />
                                 <Label Content="ROI Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="817,417,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="42"
+                                       Grid.Row="9"
+                                       Grid.Column="11"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI Y position">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI Y position" />
                                 <Label Content="ROI height"
-                                       HorizontalAlignment="Left"
-                                       Margin="849,410,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="65"
+                                       Grid.Row="9"
+                                       Grid.Column="13"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="ROI height">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="ROI height" />
                                 <Label Content="Surface Y"
-                                       HorizontalAlignment="Left"
-                                       Margin="728,405,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="59"
+                                       Grid.Row="9"
+                                       Grid.Column="7"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface line of dartboard surface">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface line of dartboard surface" />
                                 <Label Content="Surface center"
-                                       HorizontalAlignment="Left"
-                                       Margin="754,413,0,0"
-                                       VerticalAlignment="Top"
-                                       Width="84"
+                                       Grid.Row="9"
+                                       Grid.Column="9"
+                                       HorizontalAlignment="Center"
                                        FontFamily="Agency FB"
                                        FontSize="14"
                                        FontWeight="Bold"
-                                       RenderTransformOrigin="0.594,0.181"
-                                       ToolTip="Surface center point. Stick dart into bull and set">
-                                    <Label.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform />
-                                            <SkewTransform />
-                                            <RotateTransform Angle="-45" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Label.RenderTransform>
-                                </Label>
+                                       ToolTip="Surface center point. Stick dart into bull and set" />
                                 <Button Name="Cam4StartButton"
                                         Content="Start"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,6,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Width="50"
                                         Click="CamSetupStartButtonClick" />
                                 <Button Name="Cam4StopButton"
                                         Content="Stop"
-                                        HorizontalAlignment="Left"
-                                        Margin="628,40,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="54"
-                                        Height="25"
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Width="50"
                                         IsEnabled="False"
                                         Click="CamSetupStopButtonClick" />
                             </Grid>

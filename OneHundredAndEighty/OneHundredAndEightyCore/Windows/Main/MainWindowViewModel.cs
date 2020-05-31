@@ -478,6 +478,8 @@ namespace OneHundredAndEightyCore.Windows.Main
 
             mainWindow.Left = configService.Read<double>(SettingsType.MainWindowPositionLeft);
             mainWindow.Top = configService.Read<double>(SettingsType.MainWindowPositionTop);
+            mainWindow.Height = configService.Read<double>(SettingsType.MainWindowHeight);
+            mainWindow.Width = configService.Read<double>(SettingsType.MainWindowWidth);
             mainWindow.CamFovTextBox.Text = Converter.ToString(configService.Read<double>(SettingsType.CamFovAngle));
             mainWindow.CamResolutionHeightTextBox.Text = configService.Read<int>(SettingsType.ResolutionHeight).ToString();
             mainWindow.CamResolutionWidthTextBox.Text = configService.Read<int>(SettingsType.ResolutionWidth).ToString();
@@ -547,6 +549,8 @@ namespace OneHundredAndEightyCore.Windows.Main
 
             configService.Write(SettingsType.MainWindowPositionLeft, mainWindow.Left);
             configService.Write(SettingsType.MainWindowPositionTop, mainWindow.Top);
+            configService.Write(SettingsType.MainWindowHeight, mainWindow.Height);
+            configService.Write(SettingsType.MainWindowWidth, mainWindow.Width);
 
             if (IsSettingsDirty)
             {

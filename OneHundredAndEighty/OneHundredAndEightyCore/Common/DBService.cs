@@ -345,6 +345,12 @@ namespace OneHundredAndEightyCore.Common
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
                            $"VALUES ('CamsDetectionWindowWidth',1944)";
             ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('MainWindowHeight',638)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('MainWindowWidth',1197)";
+            ExecuteNonQueryInternal(addParameter);
             // add some settings
 
             UpdateDbVersion("2.2");
