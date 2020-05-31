@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -108,11 +107,9 @@ namespace OneHundredAndEightyCore.Common
                        : Visibility.Visible;
         }
 
-        public static GameType NewGameControlsToGameType(Grid mainWindowNewGameControls)
+        public static GameType NewGameControlsToGameType(ComboBox newGameTypeComboBox)
         {
-            return Enum.Parse<GameType>((((ComboBox) mainWindowNewGameControls
-                                                     .Children.OfType<FrameworkElement>()
-                                                     .Single(e => e.Name == "NewGameTypeComboBox")).SelectedItem as ComboBoxItem)
+            return Enum.Parse<GameType>((newGameTypeComboBox.SelectedItem as ComboBoxItem)
                                         ?.Content.ToString());
         }
 

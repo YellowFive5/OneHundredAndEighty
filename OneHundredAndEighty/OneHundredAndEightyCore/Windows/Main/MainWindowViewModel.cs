@@ -96,19 +96,21 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void StartGame()
         {
-            if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameControls))
+            if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameTypeComboBox))
             {
                 messageBoxService.ShowError(Resources.Resources.NotImplementedYetErrorText);
                 return;
             }
 
-            if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameControls))
+            if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameTypeComboBox,
+                                                               mainWindow.NewGamePlayer1ComboBox,
+                                                               mainWindow.NewGamePlayer2ComboBox))
             {
                 messageBoxService.ShowError(Resources.Resources.NewGamePlayersNotSelectedErrorText);
                 return;
             }
 
-            if (!Validator.ValidateStartNewClassicGamePoints(mainWindow.NewGameControls))
+            if (!Validator.ValidateStartNewClassicGamePoints(mainWindow.NewGameTypeComboBox, mainWindow.NewGamePointsComboBox))
             {
                 messageBoxService.ShowError(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
                 return;
@@ -414,7 +416,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void ToggleNewGameControlsVisibility()
         {
-            var selectedGameType = Converter.NewGameControlsToGameType(mainWindow.NewGameControls);
+            var selectedGameType = Converter.NewGameControlsToGameType(mainWindow.NewGameTypeComboBox);
 
             switch (selectedGameType)
             {

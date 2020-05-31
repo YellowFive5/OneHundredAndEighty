@@ -1,8 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Game;
@@ -23,18 +21,14 @@ namespace OneHundredAndEightyCore.Common
             return image.PixelHeight <= 500 && image.PixelWidth <= 500;
         }
 
-        public static bool ValidateStartNewGamePlayersSelected(Grid mainWindowNewGameControls)
+        public static bool ValidateStartNewGamePlayersSelected(ComboBox newGameTypeComboBox,
+                                                               ComboBox newGamePlayer1ComboBox,
+                                                               ComboBox newGamePlayer2ComboBox)
         {
             bool valid;
-            var selectedGameType = Converter.NewGameControlsToGameType(mainWindowNewGameControls);
-            var selectedPlayer1 = ((ComboBox) mainWindowNewGameControls
-                                              .Children.OfType<FrameworkElement>()
-                                              .Single(e => e.Name == "NewGamePlayer1ComboBox"))
-                                  .SelectedItem as Player;
-            var selectedPlayer2 = ((ComboBox) mainWindowNewGameControls
-                                              .Children.OfType<FrameworkElement>()
-                                              .Single(e => e.Name == "NewGamePlayer2ComboBox"))
-                                  .SelectedItem as Player;
+            var selectedGameType = Converter.NewGameControlsToGameType(newGameTypeComboBox);
+            var selectedPlayer1 = newGamePlayer1ComboBox.SelectedItem as Player;
+            var selectedPlayer2 = newGamePlayer2ComboBox.SelectedItem as Player;
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingle:
@@ -52,9 +46,9 @@ namespace OneHundredAndEightyCore.Common
             return valid;
         }
 
-        public static bool ValidateImplementedGameTypes(Grid mainWindowNewGameControls)
+        public static bool ValidateImplementedGameTypes(ComboBox newGameTypeComboBox)
         {
-            var selectedGameType = Converter.NewGameControlsToGameType(mainWindowNewGameControls);
+            var selectedGameType = Converter.NewGameControlsToGameType(newGameTypeComboBox);
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingle:
@@ -66,13 +60,11 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        public static bool ValidateStartNewClassicGamePoints(Grid mainWindowNewGameControls)
+        public static bool ValidateStartNewClassicGamePoints(ComboBox newGameTypeComboBox,
+                                                             ComboBox newGamePointsComboBox)
         {
-            var selectedGameType = Converter.NewGameControlsToGameType(mainWindowNewGameControls);
-            var selectedGamePoints = (((ComboBox) mainWindowNewGameControls
-                                                  .Children.OfType<FrameworkElement>()
-                                                  .Single(e => e.Name == "NewGamePointsComboBox")).SelectedItem as ComboBoxItem)
-                                     ?.Content.ToString();
+            var selectedGameType = Converter.NewGameControlsToGameType(newGameTypeComboBox);
+            var selectedGamePoints = (newGamePointsComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingle:

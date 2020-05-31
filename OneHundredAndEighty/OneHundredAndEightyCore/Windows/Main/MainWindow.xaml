@@ -24,142 +24,145 @@
                     SelectionChanged="OnTabSelectionChanged">
             <TabItem Name="GameTabItem"
                      Header="Game">
-                <Grid>
-                    <Grid>
-                        <Grid Name="NewGameControls"
-                              Margin="10,39,362,261">
-                            <Label Content="Game type"
-                                   HorizontalAlignment="Left"
-                                   Margin="8,14,0,0"
-                                   VerticalAlignment="Top"
-                                   Width="92"
-                                   HorizontalContentAlignment="Right" />
-                            <ComboBox Name="NewGameTypeComboBox"
-                                      HorizontalAlignment="Left"
-                                      Margin="105,16,0,0"
-                                      VerticalAlignment="Top"
-                                      Width="155"
-                                      SelectedIndex="0"
-                                      SelectionChanged="NewGameTypeComboBox_OnSelectionChanged">
-                                <ComboBoxItem>FreeThrowsSingle</ComboBoxItem>
-                                <ComboBoxItem>FreeThrowsDouble</ComboBoxItem>
-                                <ComboBoxItem>Classic</ComboBoxItem>
-                            </ComboBox>
-                            <Label Content="Player"
-                                   HorizontalAlignment="Left"
-                                   Margin="8,51,0,0"
-                                   VerticalAlignment="Top"
-                                   Width="92"
-                                   HorizontalContentAlignment="Right" />
-                            <ComboBox Name="NewGamePlayer1ComboBox"
-                                      HorizontalAlignment="Left"
-                                      Margin="105,53,0,0"
-                                      VerticalAlignment="Top"
-                                      Width="155"
-                                      ItemsSource="{Binding Path=Players}" />
-                            <Button Name="StartGameButton"
-                                    Content="Start Game"
-                                    HorizontalAlignment="Left"
-                                    Margin="105,93,0,0"
-                                    VerticalAlignment="Top"
-                                    Width="155"
-                                    Height="25"
-                                    Click="StartGameButtonClick" />
-                            <Button Name="StopGameButton"
-                                    Content="Stop Game"
-                                    HorizontalAlignment="Left"
-                                    Margin="105,133,0,0"
-                                    VerticalAlignment="Top"
-                                    Width="155"
-                                    Height="25"
-                                    Click="StopGameButtonClick"
-                                    IsEnabled="False" />
-                            <ComboBox x:Name="NewGamePlayer2ComboBox"
-                                      HorizontalAlignment="Left"
-                                      Margin="276,53,0,0"
-                                      VerticalAlignment="Top"
-                                      Width="154"
-                                      ItemsSource="{Binding Players}"
-                                      Visibility="Hidden" />
-                            <Label Name="NewGamePlayer2Label"
-                                   Content="Player"
-                                   HorizontalAlignment="Left"
-                                   Margin="430,51,0,0"
-                                   VerticalAlignment="Top"
-                                   Width="70"
-                                   HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Center"
-                                   Visibility="Hidden" />
-                            <ComboBox Name="NewGameSetsComboBox"
-                                      HorizontalAlignment="Left"
-                                      Margin="353,16,0,0"
-                                      VerticalAlignment="Top"
-                                      Width="60"
-                                      Visibility="Hidden"
-                                      SelectedIndex="2">
-                                <ComboBoxItem>1</ComboBoxItem>
-                                <ComboBoxItem>3</ComboBoxItem>
-                                <ComboBoxItem>5</ComboBoxItem>
-                                <ComboBoxItem>7</ComboBoxItem>
-                                <ComboBoxItem>9</ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox Name="NewGameLegsComboBox"
-                                      HorizontalAlignment="Left"
-                                      Margin="430,16,0,0"
-                                      VerticalAlignment="Top"
-                                      Width="56"
-                                      Visibility="Hidden"
-                                      SelectedIndex="1">
-                                <ComboBoxItem>1</ComboBoxItem>
-                                <ComboBoxItem>3</ComboBoxItem>
-                                <ComboBoxItem>5</ComboBoxItem>
-                                <ComboBoxItem>7</ComboBoxItem>
-                                <ComboBoxItem>9</ComboBoxItem>
-                            </ComboBox>
-                            <Label Name="NewGameSetsLabel"
-                                   Content="Sets"
-                                   HorizontalAlignment="Left"
-                                   Margin="348,-9,0,0"
-                                   VerticalAlignment="Top"
-                                   Width="34"
-                                   HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Center" Height="25"
-                                   Visibility="Hidden" />
-                            <Label Name="NewGameLegsLabel"
-                                   Content="Legs"
-                                   HorizontalAlignment="Left"
-                                   Margin="424,-9,0,0"
-                                   VerticalAlignment="Top"
-                                   Width="34"
-                                   HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Center"
-                                   Height="26"
-                                   Visibility="Hidden" />
-                            <ComboBox x:Name="NewGamePointsComboBox"
-                                      HorizontalAlignment="Left"
-                                      Margin="276,16,0,0"
-                                      VerticalAlignment="Top"
-                                      Width="60"
-                                      Visibility="Visible"
-                                      SelectedIndex="2">
-                                <ComboBoxItem Content="Free" />
-                                <ComboBoxItem Content="301" />
-                                <ComboBoxItem Content="501" />
-                                <ComboBoxItem Content="701" />
-                                <ComboBoxItem Content="1001" />
-                            </ComboBox>
-                            <Label x:Name="NewGamePointsLabel"
-                                   Content="Points"
-                                   HorizontalAlignment="Left"
-                                   Margin="270,-9,0,0"
-                                   VerticalAlignment="Top"
-                                   Width="49"
-                                   HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Center"
-                                   Height="25"
-                                   Visibility="Visible" />
-                        </Grid>
-                    </Grid>
+                <Grid ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Game type"
+                           Grid.Row="3"
+                           Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <ComboBox Name="NewGameTypeComboBox"
+                              Grid.Row="3"
+                              Grid.Column="3"
+                              SelectedIndex="0"
+                              SelectionChanged="NewGameTypeComboBox_OnSelectionChanged"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Width="150"
+                              Height="25">
+                        <ComboBoxItem>FreeThrowsSingle</ComboBoxItem>
+                        <ComboBoxItem>FreeThrowsDouble</ComboBoxItem>
+                        <ComboBoxItem>Classic</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="Player"
+                           Grid.Row="5"
+                           Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                    <ComboBox Name="NewGamePlayer1ComboBox"
+                              Grid.Row="5"
+                              Grid.Column="3"
+                              ItemsSource="{Binding Path=Players}"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Width="150"
+                              Height="25" />
+                    <Button Name="StartGameButton"
+                            Content="Start Game"
+                            Grid.Row="7"
+                            Grid.Column="3"
+                            Click="StartGameButtonClick"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Width="150"
+                            Height="25" />
+                    <Button Name="StopGameButton"
+                            Content="Stop Game"
+                            Grid.Row="9"
+                            Grid.Column="3"
+                            Click="StopGameButtonClick"
+                            IsEnabled="False"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Width="150"
+                            Height="25" />
+                    <ComboBox x:Name="NewGamePlayer2ComboBox"
+                              Grid.Row="5"
+                              Grid.Column="5"
+                              Grid.ColumnSpan="3"
+                              ItemsSource="{Binding Players}"
+                              Visibility="Hidden" />
+                    <Label Name="NewGamePlayer2Label"
+                           Content="Player"
+                           Grid.Row="5"
+                           Grid.Column="9"
+                           Visibility="Hidden"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left" />
+                    <ComboBox Name="NewGameSetsComboBox"
+                              Grid.Row="3"
+                              Grid.Column="7"
+                              Visibility="Hidden"
+                              SelectedIndex="2"
+                              Width="60">
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                        <ComboBoxItem>7</ComboBoxItem>
+                        <ComboBoxItem>9</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Name="NewGameLegsComboBox"
+                              Grid.Row="3"
+                              Grid.Column="9"
+                              Visibility="Hidden"
+                              SelectedIndex="1"
+                              Width="60">
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                        <ComboBoxItem>7</ComboBoxItem>
+                        <ComboBoxItem>9</ComboBoxItem>
+                    </ComboBox>
+                    <Label Name="NewGameSetsLabel"
+                           Content="Sets"
+                           Grid.Row="1"
+                           Grid.Column="7"
+                           Visibility="Hidden" VerticalAlignment="Bottom" />
+                    <Label Name="NewGameLegsLabel"
+                           Content="Legs"
+                           Grid.Row="1"
+                           Grid.Column="9"
+                           Visibility="Hidden" VerticalAlignment="Bottom" />
+                    <ComboBox x:Name="NewGamePointsComboBox"
+                              Grid.Row="3"
+                              Grid.Column="5"
+                              SelectedIndex="2"
+                              Width="60">
+                        <ComboBoxItem Content="Free" />
+                        <ComboBoxItem Content="301" />
+                        <ComboBoxItem Content="501" />
+                        <ComboBoxItem Content="701" />
+                        <ComboBoxItem Content="1001" />
+                    </ComboBox>
+                    <Label x:Name="NewGamePointsLabel"
+                           Content="Points"
+                           Grid.Row="1"
+                           Grid.Column="5" VerticalAlignment="Bottom" />
                 </Grid>
             </TabItem>
             <TabItem Name="PlayersTabItem"
