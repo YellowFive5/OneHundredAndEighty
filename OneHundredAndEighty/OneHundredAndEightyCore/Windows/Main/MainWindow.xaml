@@ -1,11 +1,9 @@
 ﻿<Window x:Class="OneHundredAndEightyCore.Windows.Main.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:resx="clr-namespace:OneHundredAndEightyCore.Resources"
-        xmlns:local="clr-namespace:OneHundredAndEightyCore"
         xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Height="562"
         Width="1000"
         Title="OneHundredAndEighty"
@@ -15,7 +13,65 @@
         <main:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Style x:Key="TextBoxStyle">
+            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+            <Setter Property="Control.Width" Value="50" />
+            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+            <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
+        </Style>
+        <Style x:Key="LabelStyle">
+            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+            <Setter Property="Control.VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="SetupSectorsComboboxStyle" TargetType="ComboBox">
+            <Setter Property="ItemsSource">
+                <Setter.Value>
+                    <x:Array Type="sys:String">
+                        <sys:String>11</sys:String>
+                        <sys:String>11/14</sys:String>
+                        <sys:String>14</sys:String>
+                        <sys:String>14/9</sys:String>
+                        <sys:String>9</sys:String>
+                        <sys:String>9/12</sys:String>
+                        <sys:String>12</sys:String>
+                        <sys:String>12/5</sys:String>
+                        <sys:String>5</sys:String>
+                        <sys:String>5/20</sys:String>
+                        <sys:String>20</sys:String>
+                        <sys:String>20/1</sys:String>
+                        <sys:String>1</sys:String>
+                        <sys:String>1/18</sys:String>
+                        <sys:String>18</sys:String>
+                        <sys:String>18/4</sys:String>
+                        <sys:String>4</sys:String>
+                        <sys:String>4/13</sys:String>
+                        <sys:String>13</sys:String>
+                        <sys:String>13/6</sys:String>
+                        <sys:String>6</sys:String>
+                        <sys:String>6/10</sys:String>
+                        <sys:String>10</sys:String>
+                        <sys:String>10/15</sys:String>
+                        <sys:String>15</sys:String>
+                        <sys:String>15/2</sys:String>
+                        <sys:String>2</sys:String>
+                        <sys:String>2/17</sys:String>
+                        <sys:String>17</sys:String>
+                        <sys:String>17/3</sys:String>
+                        <sys:String>3</sys:String>
+                        <sys:String>3/19</sys:String>
+                        <sys:String>19</sys:String>
+                        <sys:String>19/7</sys:String>
+                        <sys:String>7</sys:String>
+                        <sys:String>7/16</sys:String>
+                        <sys:String>16</sys:String>
+                        <sys:String>16/8</sys:String>
+                        <sys:String>8</sys:String>
+                        <sys:String>8/11</sys:String>
+                    </x:Array>
+                </Setter.Value>
+            </Setter>
+            <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
+        </Style>
     </Window.Resources>
     <Grid>
         <TabControl Name="MainTabControl"
@@ -211,19 +267,72 @@
                                 SelectionChanged="OnTabSelectionChanged">
                         <TabItem Name="GeneralSetupTabItem"
                                  Header="{x:Static resx:Resources.GeneralSettingsTabName}">
-                            <Grid>
-                                <TextBlock Margin="16,409,853,36"
-                                           FontFamily="Agency FB"
-                                           FontSize="16">
+                            <Grid ShowGridLines="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontFamily="Agency FB"
+                                           FontSize="16"
+                                           Grid.Row="23"
+                                           Grid.Column="1"
+                                           Style="{StaticResource LabelStyle}"
+                                           Grid.ColumnSpan="3">
                                     <Hyperlink
                                         NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-"
                                         RequestNavigate="OnHyperlinkNavigate">
                                         <TextBlock Text="Quick start guide" />
                                     </Hyperlink>
                                 </TextBlock>
-                                <TextBlock Margin="16,435,853,10"
-                                           FontFamily="Agency FB"
-                                           FontSize="16">
+                                <TextBlock FontFamily="Agency FB"
+                                           FontSize="16"
+                                           Grid.Row="25"
+                                           Grid.Column="1"
+                                           Style="{StaticResource LabelStyle}"
+                                           Grid.ColumnSpan="3">
                                     <Hyperlink
                                         NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#3-app-setup"
                                         RequestNavigate="OnHyperlinkNavigate">
@@ -232,555 +341,301 @@
                                 </TextBlock>
                                 <Button Name="CalibrateButton"
                                         Content="Calibrate X/Y"
-                                        HorizontalAlignment="Left"
-                                        Margin="705,170,0,0"
-                                        VerticalAlignment="Top"
-                                        Width="148"
+                                        Grid.Row="11"
+                                        Grid.Column="13"
+                                        Grid.ColumnSpan="3"
                                         Click="CalibrateCamsSetupPointButtonClick"
                                         ToolTip="Calibrate Cam X/Y setup point on projection.&#x0a;Distance from Cam to bull must be setup" />
                                 <CheckBox x:Name="WithDetectionCheckBox"
                                           Content="{x:Static resx:Resources.WithDetectionCheckBoxText}"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Top"
-                                          IsChecked="True"
-                                          Margin="299,169,0,0"
+                                          Grid.Row="11"
+                                          Grid.Column="5"
+                                          Style="{StaticResource LabelStyle}"
                                           ToolTip="Enables detection process"
-                                          Width="121"
                                           Click="SetSettingDirty" />
                                 <CheckBox x:Name="Cam1CheckBox"
                                           Content="{x:Static resx:Resources.Cam1EnabledCheckBoxText}"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Top"
-                                          IsChecked="True"
-                                          Margin="299,49,0,0"
+                                          Grid.Row="3"
+                                          Grid.Column="5"
+                                          Style="{StaticResource LabelStyle}"
                                           ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                           Click="SetSettingDirty" />
                                 <CheckBox x:Name="Cam2CheckBox"
                                           Content="{x:Static resx:Resources.Cam2EnabledCheckBoxText}"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Top"
-                                          IsChecked="True"
-                                          Margin="299,79,0,0"
+                                          Grid.Row="5"
+                                          Grid.Column="5"
+                                          Style="{StaticResource LabelStyle}"
                                           ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                           Click="SetSettingDirty" />
                                 <CheckBox x:Name="Cam3CheckBox"
                                           Content="{x:Static resx:Resources.Cam3EnabledCheckBoxText}"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Top"
-                                          IsChecked="True"
-                                          Margin="299,111,0,0"
-                                          RenderTransformOrigin="0.527,0.533"
+                                          Grid.Row="7"
+                                          Grid.Column="5"
+                                          Style="{StaticResource LabelStyle}"
                                           ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                           Click="SetSettingDirty" />
                                 <CheckBox x:Name="Cam4CheckBox"
                                           Content="{x:Static resx:Resources.Cam4EnabledCheckBoxText}"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Top"
-                                          IsChecked="True"
-                                          Margin="299,140,0,0"
+                                          Grid.Row="9"
+                                          Grid.Column="5"
+                                          Style="{StaticResource LabelStyle}"
                                           ToolTip="{x:Static resx:Resources.CamCheckBoxHelperText}"
                                           Click="SetSettingDirty" />
                                 <Label Content="{x:Static resx:Resources.CamFovLabelText}"
-                                       Margin="84,16,743,427.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="1"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox Name="CamFovTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,16,893,427.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamFovHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="1"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.CamFovHelperText}" />
                                 <Label Content="{x:Static resx:Resources.CamResWLabelText}"
-                                       Margin="84,50,743,393.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="3"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox Name="CamResolutionWidthTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,50,893,393.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamResWHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="3"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.CamResWHelperText}" />
                                 <Label Content="{x:Static resx:Resources.CamResHLabelText}"
-                                       Margin="84,82,743,361.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="5"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="CamResolutionHeightTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,82,893,361.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamResHHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="5"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.CamResHHelperText}" />
                                 <TextBox x:Name="MinContourArcTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,307,893,136.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MinContourArcHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="19"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MinContourArcHelperText}" />
                                 <Label Content="{x:Static resx:Resources.MinContourArcLabelText}"
-                                       Margin="87,308,743,135.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="19"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="MovesExtractionTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,115,893,328.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesExtractionHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="7"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MovesExtractionHelperText}" />
                                 <Label Content="{x:Static resx:Resources.MovesExtractionLabelText}"
-                                       Margin="85,115,742,328.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="7"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="MovesDartTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,341,893,102.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesDartHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="21"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MovesDartHelperText}" />
                                 <Label Content="{x:Static resx:Resources.MovesDartLabelText}"
-                                       Margin="85,341,742,102.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="21"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="MovesNoiseTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,178,893,265.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesNoiseHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="11"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MovesNoiseHelperText}" />
                                 <Label Content="{x:Static resx:Resources.MovesNoiseLabelText}"
-                                       Margin="85,178,743,265.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="11"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="SmoothGaussTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="16,209,893,235.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.SmoothGausHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="13"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.SmoothGausHelperText}" />
                                 <Label Content="{x:Static resx:Resources.SmoothGausLabelText}"
-                                       Margin="85,209,743,235.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="13"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="MoveDetectedSleepTimeTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,146,893,297.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.MovesDetectedHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="9"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MovesDetectedHelperText}" />
                                 <Label Content="{x:Static resx:Resources.MovesDetectedLabelText}"
-                                       Margin="85,146,743,297.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="9"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="ExtractionSleepTimeTimeTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="16,275,893,168.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ExtrectionSleepTimeHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="17"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.ExtrectionSleepTimeHelperText}" />
                                 <Label Content="{x:Static resx:Resources.ExtractionSleepTimeLabelText}"
-                                       Margin="87,275,743,168.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="17"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="Cam1IdTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="422,44,460,398"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="3"
+                                         Grid.Column="7"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         Width="100"
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
                                 <TextBox x:Name="Cam1XTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="705,45,205,398"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="3"
+                                         Grid.Column="13"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
                                 <TextBox x:Name="Cam1YTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="788,45,119,398"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="3"
+                                         Grid.Column="15"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
                                 <TextBox x:Name="Cam2IdTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="422,73,460,367"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="5"
+                                         Grid.Column="7"
+                                         Width="100"
+                                         Style="{StaticResource TextBoxStyle}"
                                          ToolTip="{x:Static resx:Resources.CamIdHelperText}"
                                          TextChanged="SetSettingDirty" />
                                 <Label Content="X"
-                                       Margin="731,24,219,420"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" RenderTransformOrigin="0.5,0.5" />
+                                       Grid.Row="1"
+                                       Grid.Column="13"
+                                       HorizontalAlignment="Center" />
                                 <TextBox x:Name="Cam2XTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="705,76,205,367"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="5"
+                                         Grid.Column="13"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
                                 <TextBox x:Name="Cam2YTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="788,76,119,367"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="5"
+                                         Grid.Column="15"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
                                 <TextBox x:Name="Cam3IdTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="422,104,460,336"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="7"
+                                         Grid.Column="7"
+                                         Width="100"
+                                         Style="{StaticResource TextBoxStyle}"
                                          ToolTip="{x:Static resx:Resources.CamIdHelperText}"
                                          TextChanged="SetSettingDirty" />
                                 <TextBox x:Name="Cam3XTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="705,108,205,335"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="7"
+                                         Grid.Column="13"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
                                 <TextBox x:Name="Cam3YTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="788,108,119,335"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="7"
+                                         Grid.Column="15"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
                                 <Label Content="Y"
-                                       Margin="816,23,133,421"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="1"
+                                       Grid.Column="15"
+                                       HorizontalAlignment="Center" />
                                 <TextBox x:Name="Cam4IdTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="422,135,460,306"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="9"
+                                         Grid.Column="7"
+                                         Width="100"
+                                         Style="{StaticResource TextBoxStyle}"
                                          ToolTip="{x:Static resx:Resources.CamIdHelperText}"
                                          TextChanged="SetSettingDirty" />
                                 <Label Content="Id"
-                                       Margin="459,19,486,424"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="1"
+                                       Grid.Column="7"
+                                       HorizontalAlignment="Center" />
                                 <TextBox x:Name="Cam4XTextBox"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="705,136,205,306"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="9"
+                                         Grid.Column="13"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}" />
                                 <TextBox x:Name="Cam4YTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="788,137,119,306"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
+                                         Grid.Row="9"
+                                         Grid.Column="15"
+                                         Style="{StaticResource TextBoxStyle}"
                                          IsReadOnly="True"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}" />
                                 <TextBox x:Name="ThresholdSleepTimeTimeTextBox"
-                                         TextWrapping="Wrap"
-                                         Margin="16,241,893,202.4"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ThresholdSleepTimeHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="15"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.ThresholdSleepTimeHelperText}" />
                                 <Label Content="{x:Static resx:Resources.ThresholdSleepTimeLabelText}"
-                                       Margin="85,242,743,201.4"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
+                                       Grid.Row="15"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="ToCam4Distance"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="617,137,289,306"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="9"
+                                         Grid.Column="11"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
                                 <TextBox x:Name="ToCam3Distance"
-                                         TextWrapping="Wrap"
-                                         Margin="617,107,289,336"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="7"
+                                         Grid.Column="11"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
                                 <TextBox x:Name="ToCam2Distance"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="617,76,289,367"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="5"
+                                         Grid.Column="11"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
                                 <TextBox x:Name="ToCam1Distance"
-                                         Height="23"
-                                         TextWrapping="Wrap"
-                                         Margin="617,44,289,399"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         Grid.Row="3"
+                                         Grid.Column="11"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.ToCamHelperText}" />
                                 <Label Content="cm"
-                                       Margin="640,19,306,424"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
-                                <ComboBox
-                                    Name="Cam1SetupSector"
-                                    HorizontalAlignment="Left"
-                                    Margin="527,44,0,0"
-                                    VerticalAlignment="Top"
-                                    Width="72"
-                                    SelectedIndex="0" Height="24"
-                                    SelectionChanged="SetSettingDirty"
-                                    ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}">
-                                    <ComboBoxItem Content="11" />
-                                    <ComboBoxItem Content="11/14" />
-                                    <ComboBoxItem Content="14" />
-                                    <ComboBoxItem Content="14/9" />
-                                    <ComboBoxItem Content="9" />
-                                    <ComboBoxItem Content="9/12" />
-                                    <ComboBoxItem Content="12" />
-                                    <ComboBoxItem Content="12/5" />
-                                    <ComboBoxItem Content="5" />
-                                    <ComboBoxItem Content="5/20" />
-                                    <ComboBoxItem Content="20" />
-                                    <ComboBoxItem Content="20/1" />
-                                    <ComboBoxItem Content="1" />
-                                    <ComboBoxItem Content="1/18" />
-                                    <ComboBoxItem Content="18" />
-                                    <ComboBoxItem Content="18/4" />
-                                    <ComboBoxItem Content="4" />
-                                    <ComboBoxItem Content="4/13" />
-                                    <ComboBoxItem Content="13" />
-                                    <ComboBoxItem Content="13/6" />
-                                    <ComboBoxItem Content="6" />
-                                    <ComboBoxItem Content="6/10" />
-                                    <ComboBoxItem Content="10" />
-                                    <ComboBoxItem Content="10/15" />
-                                    <ComboBoxItem Content="15" />
-                                    <ComboBoxItem Content="15/2" />
-                                    <ComboBoxItem Content="2" />
-                                    <ComboBoxItem Content="2/17" />
-                                    <ComboBoxItem Content="17" />
-                                    <ComboBoxItem Content="17/3" />
-                                    <ComboBoxItem Content="3" />
-                                    <ComboBoxItem Content="3/19" />
-                                    <ComboBoxItem Content="19" />
-                                    <ComboBoxItem Content="19/7" />
-                                    <ComboBoxItem Content="7" />
-                                    <ComboBoxItem Content="7/16" />
-                                    <ComboBoxItem Content="16" />
-                                    <ComboBoxItem Content="16/8" />
-                                    <ComboBoxItem Content="8" />
-                                    <ComboBoxItem Content="8/11" />
-                                </ComboBox>
+                                       Grid.Row="1"
+                                       Grid.Column="11"
+                                       HorizontalAlignment="Center" />
+                                <ComboBox Name="Cam1SetupSector"
+                                          Grid.Row="3"
+                                          Grid.Column="9"
+                                          Style="{StaticResource SetupSectorsComboboxStyle}"
+                                          ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}" />
                                 <Label Content="Setup sector"
-                                       Margin="527,19,373,424"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalContentAlignment="Center"
-                                       Padding="0" />
-                                <ComboBox
-                                    x:Name="Cam2SetupSector"
-                                    HorizontalAlignment="Left"
-                                    Margin="527,75,0,0"
-                                    VerticalAlignment="Top"
-                                    Width="72"
-                                    SelectedIndex="0" Height="24"
-                                    SelectionChanged="SetSettingDirty"
-                                    ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}">
-                                    <ComboBoxItem Content="11" />
-                                    <ComboBoxItem Content="11/14" />
-                                    <ComboBoxItem Content="14" />
-                                    <ComboBoxItem Content="14/9" />
-                                    <ComboBoxItem Content="9" />
-                                    <ComboBoxItem Content="9/12" />
-                                    <ComboBoxItem Content="12" />
-                                    <ComboBoxItem Content="12/5" />
-                                    <ComboBoxItem Content="5" />
-                                    <ComboBoxItem Content="5/20" />
-                                    <ComboBoxItem Content="20" />
-                                    <ComboBoxItem Content="20/1" />
-                                    <ComboBoxItem Content="1" />
-                                    <ComboBoxItem Content="1/18" />
-                                    <ComboBoxItem Content="18" />
-                                    <ComboBoxItem Content="18/4" />
-                                    <ComboBoxItem Content="4" />
-                                    <ComboBoxItem Content="4/13" />
-                                    <ComboBoxItem Content="13" />
-                                    <ComboBoxItem Content="13/6" />
-                                    <ComboBoxItem Content="6" />
-                                    <ComboBoxItem Content="6/10" />
-                                    <ComboBoxItem Content="10" />
-                                    <ComboBoxItem Content="10/15" />
-                                    <ComboBoxItem Content="15" />
-                                    <ComboBoxItem Content="15/2" />
-                                    <ComboBoxItem Content="2" />
-                                    <ComboBoxItem Content="2/17" />
-                                    <ComboBoxItem Content="17" />
-                                    <ComboBoxItem Content="17/3" />
-                                    <ComboBoxItem Content="3" />
-                                    <ComboBoxItem Content="3/19" />
-                                    <ComboBoxItem Content="19" />
-                                    <ComboBoxItem Content="19/7" />
-                                    <ComboBoxItem Content="7" />
-                                    <ComboBoxItem Content="7/16" />
-                                    <ComboBoxItem Content="16" />
-                                    <ComboBoxItem Content="16/8" />
-                                    <ComboBoxItem Content="8" />
-                                    <ComboBoxItem Content="8/11" />
-                                </ComboBox>
-                                <ComboBox
-                                    x:Name="Cam3SetupSector"
-                                    HorizontalAlignment="Left"
-                                    Margin="527,106,0,0"
-                                    VerticalAlignment="Top"
-                                    Width="72"
-                                    SelectedIndex="0" Height="24"
-                                    SelectionChanged="SetSettingDirty"
-                                    ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}">
-                                    <ComboBoxItem Content="11" />
-                                    <ComboBoxItem Content="11/14" />
-                                    <ComboBoxItem Content="14" />
-                                    <ComboBoxItem Content="14/9" />
-                                    <ComboBoxItem Content="9" />
-                                    <ComboBoxItem Content="9/12" />
-                                    <ComboBoxItem Content="12" />
-                                    <ComboBoxItem Content="12/5" />
-                                    <ComboBoxItem Content="5" />
-                                    <ComboBoxItem Content="5/20" />
-                                    <ComboBoxItem Content="20" />
-                                    <ComboBoxItem Content="20/1" />
-                                    <ComboBoxItem Content="1" />
-                                    <ComboBoxItem Content="1/18" />
-                                    <ComboBoxItem Content="18" />
-                                    <ComboBoxItem Content="18/4" />
-                                    <ComboBoxItem Content="4" />
-                                    <ComboBoxItem Content="4/13" />
-                                    <ComboBoxItem Content="13" />
-                                    <ComboBoxItem Content="13/6" />
-                                    <ComboBoxItem Content="6" />
-                                    <ComboBoxItem Content="6/10" />
-                                    <ComboBoxItem Content="10" />
-                                    <ComboBoxItem Content="10/15" />
-                                    <ComboBoxItem Content="15" />
-                                    <ComboBoxItem Content="15/2" />
-                                    <ComboBoxItem Content="2" />
-                                    <ComboBoxItem Content="2/17" />
-                                    <ComboBoxItem Content="17" />
-                                    <ComboBoxItem Content="17/3" />
-                                    <ComboBoxItem Content="3" />
-                                    <ComboBoxItem Content="3/19" />
-                                    <ComboBoxItem Content="19" />
-                                    <ComboBoxItem Content="19/7" />
-                                    <ComboBoxItem Content="7" />
-                                    <ComboBoxItem Content="7/16" />
-                                    <ComboBoxItem Content="16" />
-                                    <ComboBoxItem Content="16/8" />
-                                    <ComboBoxItem Content="8" />
-                                    <ComboBoxItem Content="8/11" />
-                                </ComboBox>
-                                <ComboBox
-                                    x:Name="Cam4SetupSector"
-                                    HorizontalAlignment="Left"
-                                    Margin="527,136,0,0"
-                                    VerticalAlignment="Top"
-                                    Width="72"
-                                    SelectedIndex="0" Height="24"
-                                    SelectionChanged="SetSettingDirty"
-                                    ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}">
-                                    <ComboBoxItem Content="11" />
-                                    <ComboBoxItem Content="11/14" />
-                                    <ComboBoxItem Content="14" />
-                                    <ComboBoxItem Content="14/9" />
-                                    <ComboBoxItem Content="9" />
-                                    <ComboBoxItem Content="9/12" />
-                                    <ComboBoxItem Content="12" />
-                                    <ComboBoxItem Content="12/5" />
-                                    <ComboBoxItem Content="5" />
-                                    <ComboBoxItem Content="5/20" />
-                                    <ComboBoxItem Content="20" />
-                                    <ComboBoxItem Content="20/1" />
-                                    <ComboBoxItem Content="1" />
-                                    <ComboBoxItem Content="1/18" />
-                                    <ComboBoxItem Content="18" />
-                                    <ComboBoxItem Content="18/4" />
-                                    <ComboBoxItem Content="4" />
-                                    <ComboBoxItem Content="4/13" />
-                                    <ComboBoxItem Content="13" />
-                                    <ComboBoxItem Content="13/6" />
-                                    <ComboBoxItem Content="6" />
-                                    <ComboBoxItem Content="6/10" />
-                                    <ComboBoxItem Content="10" />
-                                    <ComboBoxItem Content="10/15" />
-                                    <ComboBoxItem Content="15" />
-                                    <ComboBoxItem Content="15/2" />
-                                    <ComboBoxItem Content="2" />
-                                    <ComboBoxItem Content="2/17" />
-                                    <ComboBoxItem Content="17" />
-                                    <ComboBoxItem Content="17/3" />
-                                    <ComboBoxItem Content="3" />
-                                    <ComboBoxItem Content="3/19" />
-                                    <ComboBoxItem Content="19" />
-                                    <ComboBoxItem Content="19/7" />
-                                    <ComboBoxItem Content="7" />
-                                    <ComboBoxItem Content="7/16" />
-                                    <ComboBoxItem Content="16" />
-                                    <ComboBoxItem Content="16/8" />
-                                    <ComboBoxItem Content="8" />
-                                    <ComboBoxItem Content="8/11" />
-                                </ComboBox>
+                                       Grid.Row="1"
+                                       Grid.Column="9"
+                                       HorizontalAlignment="Center" />
+                                <ComboBox x:Name="Cam2SetupSector"
+                                          Grid.Row="5"
+                                          Grid.Column="9"
+                                          Style="{StaticResource SetupSectorsComboboxStyle}"
+                                          ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}" />
+                                <ComboBox x:Name="Cam3SetupSector"
+                                          Grid.Row="7"
+                                          Grid.Column="9"
+                                          Style="{StaticResource SetupSectorsComboboxStyle}"
+                                          ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}" />
+                                <ComboBox x:Name="Cam4SetupSector"
+                                          Grid.Row="9"
+                                          Grid.Column="9"
+                                          Style="{StaticResource SetupSectorsComboboxStyle}"
+                                          ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}" />
                                 <Button Name="CrossingStartButton"
                                         Content="Start"
-                                        Margin="299,225,595,215"
+                                        Grid.Row="15"
+                                        Grid.Column="5"
                                         Click="OnCrossingStartButtonClick" />
                                 <Button Name="CrossingStopButton"
                                         Content="Stop"
-                                        Margin="386,225,505,215"
+                                        Grid.Row="15"
+                                        Grid.Column="7"
                                         Click="OnCrossingStopButtonClick"
                                         IsEnabled="False" />
-                                <TextBlock Margin="299,195,583,246"
+                                <TextBlock Grid.Row="13"
+                                           Grid.Column="5"
                                            FontFamily="Agency FB"
                                            FontSize="16">
                                     <Hyperlink
@@ -789,7 +644,6 @@
                                         <TextBlock Text="Runtime crossing" />
                                     </Hyperlink>
                                 </TextBlock>
-
                             </Grid>
                         </TabItem>
                         <TabItem Name="Cam1SetupTabItem"
