@@ -225,36 +225,81 @@
                      Header="Players">
                 <Grid>
                     <TabControl>
-                        <TabItem Name="PlayerStatisticsTabItem"
-                                 Header="Player statistics" />
                         <TabItem Name="NewPlayerTabItem"
                                  Header="New player">
-                            <Grid>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="28,25,0,0"
-                                       VerticalAlignment="Top" Height="27" Width="66" VerticalContentAlignment="Center"
-                                       HorizontalContentAlignment="Right" />
-                                <TextBox Name="NewPlayerNameTextBox" HorizontalAlignment="Left" Margin="102,25,0,0"
-                                         TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27"
+                            <Grid ShowGridLines="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Name"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" />
+                                <TextBox Name="NewPlayerNameTextBox"
+                                         Grid.Row="1"
+                                         Grid.Column="3"
+                                         Width="150"
                                          VerticalContentAlignment="Center" />
-                                <Label Content="Nickname" HorizontalAlignment="Left" Margin="28,57,0,0"
-                                       VerticalAlignment="Top" Height="27" Width="66" VerticalContentAlignment="Center"
-                                       HorizontalContentAlignment="Right" />
-                                <TextBox Name="NewPlayerNickNameTextBox" HorizontalAlignment="Left" Margin="102,57,0,0"
-                                         TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="27"
+                                <Label Content="Nickname"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" />
+                                <TextBox Name="NewPlayerNickNameTextBox"
+                                         Grid.Row="3"
+                                         Grid.Column="3"
+                                         Width="150"
                                          VerticalContentAlignment="Center" />
-                                <Button Content="Save" HorizontalAlignment="Left" Margin="227,24,0,0"
-                                        VerticalAlignment="Top" Height="60" Width="60" Background="#FF72DC61"
+                                <Button Content="Save"
+                                        Grid.Row="1"
+                                        Grid.Column="5"
+                                        Grid.RowSpan="3"
+                                        Width="65"
+                                        Background="#FF72DC61"
                                         Click="OnSaveNewPlayerButtonClick" />
-                                <Image Name="NewPlayerAvatar" HorizontalAlignment="Left" Height="119"
-                                       Margin="102,89,0,0" VerticalAlignment="Top" Width="119" />
-                                <Label Content="Avatar" HorizontalAlignment="Left" Margin="28,132,0,0"
-                                       VerticalAlignment="Top" Height="26" Width="66" VerticalContentAlignment="Center"
-                                       HorizontalContentAlignment="Right" />
-                                <Button Name="SelectAvatarImageButton" Content="Select image"
-                                        HorizontalAlignment="Left" Margin="102,213,0,0" VerticalAlignment="Top"
-                                        Height="20" Width="120" Click="SelectAvatarImageButton_OnClick" />
+                                <Image Name="NewPlayerAvatar"
+                                       Grid.Row="5"
+                                       Grid.Column="3"
+                                       Height="150"
+                                       Width="150" />
+                                <Label Content="Avatar"
+                                       Grid.Row="5"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" />
+                                <Button Name="SelectAvatarImageButton"
+                                        Content="Select image"
+                                        Grid.Row="7"
+                                        Grid.Column="3"
+                                        Width="150"
+                                        Click="SelectAvatarImageButton_OnClick" />
                             </Grid>
                         </TabItem>
+                        <TabItem Name="PlayerStatisticsTabItem"
+                                 Header="Player statistics" />
+
                     </TabControl>
                 </Grid>
             </TabItem>
@@ -1565,63 +1610,111 @@
                     </TabControl>
                 </Grid>
             </TabItem>
-            <TabItem
-                Name="AboutTabItem"
-                Header="About">
-                <Grid>
-                    <Label
-                        Content="2020 OneHundredAndEighty"
-                        Margin="10,10,776,455"
-                        FontFamily="Agency FB"
-                        FontSize="16" />
+            <TabItem Name="AboutTabItem"
+                     Header="About">
+                <Grid ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="2020 OneHundredAndEighty"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelStyle}"
+                           FontFamily="Agency FB"
+                           FontSize="16" />
                     <Label
                         Content="{x:Static resx:Resources.AboutTabVersion}"
-                        Margin="10,39,924,426"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Style="{StaticResource LabelStyle}"
                         FontFamily="Agency FB"
                         FontSize="16" />
-                    <TextBlock Margin="14,143,868,332"
-                               FontFamily="Agency FB"
-                               FontSize="16">
+                    <TextBlock
+                        Grid.Row="9"
+                        Grid.Column="1"
+                        Style="{StaticResource LabelStyle}"
+                        FontFamily="Agency FB"
+                        FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/YellowFive5"
                                    RequestNavigate="OnHyperlinkNavigate">
                             <TextBlock Text="My GitHub page" />
                         </Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="14,107,852,368"
-                               FontFamily="Agency FB"
-                               FontSize="16">
+                    <TextBlock
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Style="{StaticResource LabelStyle}"
+                        FontFamily="Agency FB"
+                        FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty"
                                    RequestNavigate="OnHyperlinkNavigate">
                             <TextBlock Text="Project GitHub page" />
                         </Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="14,180,854,295"
-                               FontFamily="Agency FB"
-                               FontSize="16">
+                    <TextBlock
+                        Grid.Row="11"
+                        Grid.Column="1"
+                        Style="{StaticResource LabelStyle}"
+                        FontFamily="Agency FB"
+                        FontSize="16">
                         <Hyperlink NavigateUri="https://www.facebook.com/yellowfive"
                                    RequestNavigate="OnHyperlinkNavigate">
                             <TextBlock Text="My Facebook page" />
                         </Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="14,73,864,402"
-                               FontFamily="Agency FB"
-                               FontSize="16">
+                    <TextBlock
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Style="{StaticResource LabelStyle}"
+                        FontFamily="Agency FB"
+                        FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-"
                                    RequestNavigate="OnHyperlinkNavigate">
                             <TextBlock Text="Quick start guide" />
                         </Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="14,215,825,260"
-                               FontFamily="Agency FB"
-                               FontSize="16">
+                    <TextBlock
+                        Grid.Row="13"
+                        Grid.Column="1"
+                        Style="{StaticResource LabelStyle}"
+                        FontFamily="Agency FB"
+                        FontSize="16">
                         <Hyperlink NavigateUri="https://www.facebook.com/groups/281778298914107"
                                    RequestNavigate="OnHyperlinkNavigate">
                             <TextBlock Text="Facebook community page" Width="133" Height="19" />
                         </Hyperlink>
                     </TextBlock>
-                    <TextBlock Margin="14,247,902,228"
-                               FontFamily="Agency FB"
-                               FontSize="16">
+                    <TextBlock
+                        Grid.Row="15"
+                        Grid.Column="1"
+                        Style="{StaticResource LabelStyle}"
+                        FontFamily="Agency FB"
+                        FontSize="16">
                         <Hyperlink NavigateUri="https://www.paypal.me/yellowfive5"
                                    RequestNavigate="OnHyperlinkNavigate">
                             <TextBlock Text="💜 Donate" Width="81" Height="19" />
