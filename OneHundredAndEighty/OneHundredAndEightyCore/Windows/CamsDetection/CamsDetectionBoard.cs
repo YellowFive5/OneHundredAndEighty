@@ -12,12 +12,14 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
 {
     public class CamsDetectionBoard
     {
+        private readonly ConfigService configService;
         private readonly Logger logger;
         private CamsDetectionWindow camsDetectionWindow;
         public System.Windows.Threading.Dispatcher dispatcher; // todo weird and temp
 
-        public CamsDetectionBoard(Logger logger)
+        public CamsDetectionBoard(ConfigService configService, Logger logger)
         {
+            this.configService = configService;
             this.logger = logger;
         }
 
@@ -75,6 +77,7 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         public void Open()
         {
             camsDetectionWindow = new CamsDetectionWindow(this);
+            LoadSettings();
             camsDetectionWindow.Show();
             dispatcher = camsDetectionWindow.Dispatcher;
         }
@@ -82,6 +85,22 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         public void Close()
         {
             camsDetectionWindow?.Close();
+        }
+
+        public void SaveSettings()
+        {
+            configService.Write(SettingsType.CamsDetectionWindowPositionLeft, camsDetectionWindow.Left);
+            configService.Write(SettingsType.CamsDetectionWindowPositionTop, camsDetectionWindow.Top);
+            configService.Write(SettingsType.CamsDetectionWindowHeight, camsDetectionWindow.Height);
+            configService.Write(SettingsType.CamsDetectionWindowWidth, camsDetectionWindow.Width);
+        }
+
+        private void LoadSettings()
+        {
+            camsDetectionWindow.Left = configService.Read<double>(SettingsType.CamsDetectionWindowPositionLeft);
+            camsDetectionWindow.Top = configService.Read<double>(SettingsType.CamsDetectionWindowPositionTop);
+            camsDetectionWindow.Height = configService.Read<double>(SettingsType.CamsDetectionWindowHeight);
+            camsDetectionWindow.Width = configService.Read<double>(SettingsType.CamsDetectionWindowWidth);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             var scoreBoardService = new ScoreBoardService();
             cb.Register(r => scoreBoardService).AsSelf().SingleInstance();
 
-            var camsDetectionBoard = new CamsDetectionBoard(logger);
+            var camsDetectionBoard = new CamsDetectionBoard(configService, logger);
             cb.Register(r => camsDetectionBoard).AsSelf().SingleInstance();
 
             var drawService = new DrawService(camsDetectionBoard, configService, logger);

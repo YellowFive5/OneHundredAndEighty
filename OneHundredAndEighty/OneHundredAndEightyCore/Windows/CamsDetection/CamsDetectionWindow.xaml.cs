@@ -2,6 +2,8 @@
 
 #endregion
 
+using System.ComponentModel;
+
 namespace OneHundredAndEightyCore.Windows.CamsDetection
 {
     public partial class CamsDetectionWindow
@@ -13,6 +15,11 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         {
             this.camsDetectionViewModel = camsDetectionViewModel;
             InitializeComponent();
+        }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            camsDetectionViewModel.SaveSettings();
         }
     }
 }

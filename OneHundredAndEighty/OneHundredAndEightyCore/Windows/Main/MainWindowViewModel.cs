@@ -543,10 +543,11 @@ namespace OneHundredAndEightyCore.Windows.Main
             logger.Debug("Save settings start");
             logger.Debug($"Is settings dirty: {IsSettingsDirty}");
 
+            configService.Write(SettingsType.MainWindowPositionLeft, mainWindow.Left);
+            configService.Write(SettingsType.MainWindowPositionTop, mainWindow.Top);
+
             if (IsSettingsDirty)
             {
-                configService.Write(SettingsType.MainWindowPositionLeft, mainWindow.Left);
-                configService.Write(SettingsType.MainWindowPositionTop, mainWindow.Top);
                 configService.Write(SettingsType.CamFovAngle, mainWindow.CamFovTextBox.Text);
                 configService.Write(SettingsType.ResolutionHeight, mainWindow.CamResolutionHeightTextBox.Text);
                 configService.Write(SettingsType.ResolutionWidth, mainWindow.CamResolutionWidthTextBox.Text);

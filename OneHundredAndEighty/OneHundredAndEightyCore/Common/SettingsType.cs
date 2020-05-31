@@ -60,6 +60,10 @@
         Cam4RoiHeightSlider,
         Cam4SurfaceSlider,
         Cam4SurfaceCenterSlider,
-        Cam4SetupSector
+        Cam4SetupSector,
+        CamsDetectionWindowPositionLeft,
+        CamsDetectionWindowPositionTop,
+        CamsDetectionWindowHeight,
+        CamsDetectionWindowWidth
     }
 }

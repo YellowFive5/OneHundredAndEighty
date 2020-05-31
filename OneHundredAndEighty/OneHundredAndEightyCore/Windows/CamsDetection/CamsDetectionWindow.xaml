@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="CamsDetectionWindow"
         Height="1056"
-        Width="1944">
+        Width="1944"
+        Closing="OnClosing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

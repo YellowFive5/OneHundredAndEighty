@@ -332,6 +332,21 @@ namespace OneHundredAndEightyCore.Common
             ExecuteNonQueryInternal(renameClassic);
             // GameTypes simplify
 
+            // add some settings
+            var addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                               $"VALUES ('CamsDetectionWindowPositionLeft',50)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('CamsDetectionWindowPositionTop',50)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('CamsDetectionWindowHeight',1056)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('CamsDetectionWindowWidth',1944)";
+            ExecuteNonQueryInternal(addParameter);
+            // add some settings
+
             UpdateDbVersion("2.2");
         }
 
