@@ -7,6 +7,7 @@
         Height="638"
         Width="1197"
         Title="OneHundredAndEighty"
+        ResizeMode="CanResizeWithGrip"
         Closing="OnClosing">
     <Window.DataContext>
         <main:MainWindowViewModel />
