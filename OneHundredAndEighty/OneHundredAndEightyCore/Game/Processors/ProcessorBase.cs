@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.Windows.ScoreBoard;
+using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
@@ -18,6 +18,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         private readonly int sets;
 
         public delegate void EndMatchDelegate(Game game, Player winner);
+
         public event EndMatchDelegate OnMatchEnd;
 
         protected ProcessorBase(Game game,
@@ -53,13 +54,13 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected bool IsHandOver()
         {
-            return PlayerOnThrow.ThrowNumber == 3;
+            return PlayerOnThrow.ThrowNumber == ThrowNumber.ThirdThrow;
         }
 
         protected void ClearPlayerOnThrowHand()
         {
             PlayerOnThrow.HandThrows.Clear();
-            PlayerOnThrow.ThrowNumber = 1;
+            PlayerOnThrow.ThrowNumber = ThrowNumber.FirstThrow;
             PlayerOnThrow.HandPoints = 0;
             scoreBoard.SetThrowNumber(PlayerOnThrow.ThrowNumber);
         }
@@ -98,7 +99,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected void OnFault()
         {
             PlayerOnThrow.LegPoints += PlayerOnThrow.HandPoints;
-            scoreBoard.SetPointsToClassic(PlayerOnThrow.LegPoints, PlayerOnThrow);
+            scoreBoard.SetPointsTo(PlayerOnThrow.LegPoints, PlayerOnThrow);
 
             ClearPlayerOnThrowHand();
 
@@ -114,7 +115,7 @@ namespace OneHundredAndEightyCore.Game.Processors
                                     thrw.Sector,
                                     thrw.Type,
                                     throwResult,
-                                    PlayerOnThrow.ThrowNumber,
+                                    (int) PlayerOnThrow.ThrowNumber,
                                     thrw.TotalPoints,
                                     thrw.Poi,
                                     thrw.ProjectionResolution);

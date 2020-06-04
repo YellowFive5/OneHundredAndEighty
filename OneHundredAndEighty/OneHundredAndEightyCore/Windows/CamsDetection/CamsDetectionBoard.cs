@@ -76,31 +76,32 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
 
         public void Open()
         {
-            camsDetectionWindow = new CamsDetectionWindow(this);
-            LoadSettings();
+            var windowSettings = new WindowSettings(configService.Read<double>(SettingsType.CamsDetectionWindowHeight),
+                                                    configService.Read<double>(SettingsType.CamsDetectionWindowWidth),
+                                                    configService.Read<double>(SettingsType.CamsDetectionWindowPositionLeft),
+                                                    configService.Read<double>(SettingsType.CamsDetectionWindowPositionTop));
+
+            camsDetectionWindow = new CamsDetectionWindow(windowSettings, this);
+
             camsDetectionWindow.Show();
             dispatcher = camsDetectionWindow.Dispatcher;
         }
 
         public void Close()
         {
-            camsDetectionWindow?.Close();
+            if (camsDetectionWindow != null)
+            {
+                SaveSettings();
+                camsDetectionWindow.Close();
+            }
         }
 
-        public void SaveSettings()
+        private void SaveSettings()
         {
             configService.Write(SettingsType.CamsDetectionWindowPositionLeft, camsDetectionWindow.Left);
             configService.Write(SettingsType.CamsDetectionWindowPositionTop, camsDetectionWindow.Top);
             configService.Write(SettingsType.CamsDetectionWindowHeight, camsDetectionWindow.Height);
             configService.Write(SettingsType.CamsDetectionWindowWidth, camsDetectionWindow.Width);
-        }
-
-        private void LoadSettings()
-        {
-            camsDetectionWindow.Left = configService.Read<double>(SettingsType.CamsDetectionWindowPositionLeft);
-            camsDetectionWindow.Top = configService.Read<double>(SettingsType.CamsDetectionWindowPositionTop);
-            camsDetectionWindow.Height = configService.Read<double>(SettingsType.CamsDetectionWindowHeight);
-            camsDetectionWindow.Width = configService.Read<double>(SettingsType.CamsDetectionWindowWidth);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace OneHundredAndEightyCore.Windows.ScoreBoard
+﻿namespace OneHundredAndEightyCore.Windows.Score
 {
     public enum ScoreBoardType
     {
-        Classic,
         FreeThrowsSingle,
-        FreeThrowsDouble
+        FreeThrowsDouble,
+        Classic,
     }
 }

@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.Windows.ScoreBoard;
+using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
@@ -23,7 +23,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
 
-            scoreBoard.AddPointsToClassic(thrw.TotalPoints, PlayerOnThrow);
+            scoreBoard.AddPointsTo(thrw.TotalPoints, PlayerOnThrow);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 

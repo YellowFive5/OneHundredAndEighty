@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
@@ -25,7 +26,7 @@ namespace OneHundredAndEightyCore.Game
         public int LegsWon { get; set; } = 0;
         public int LegPoints { get; set; } = 0;
         public int HandPoints { get; set; } = 0;
-        public int ThrowNumber { get; set; } = 1;
+        public ThrowNumber ThrowNumber { get; set; } = ThrowNumber.FirstThrow;
         public Stack<Throw> HandThrows { get; set; } = new Stack<Throw>();
 
         #endregion

@@ -351,6 +351,18 @@ namespace OneHundredAndEightyCore.Common
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
                            $"VALUES ('MainWindowWidth',1197)";
             ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsSingleScoreWindowPositionLeft',334)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsSingleScoreWindowPositionTop',1715)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsSingleScoreWindowHeight',739)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsSingleScoreWindowWidth',1034)";
+            ExecuteNonQueryInternal(addParameter);
             // add some settings
 
             UpdateDbVersion("2.2");

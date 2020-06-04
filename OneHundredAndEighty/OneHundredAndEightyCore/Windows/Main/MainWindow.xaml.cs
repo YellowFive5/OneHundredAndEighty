@@ -14,7 +14,7 @@ using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Telemetry;
 using OneHundredAndEightyCore.Windows.CamsDetection;
 using OneHundredAndEightyCore.Windows.DebugPanel;
-using OneHundredAndEightyCore.Windows.ScoreBoard;
+using OneHundredAndEightyCore.Windows.Score;
 using IContainer = Autofac.IContainer;
 
 #endregion
@@ -60,7 +60,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             var versionChecker = new VersionChecker(dbService, configService, messageBoxService);
             cb.Register(r => versionChecker).AsSelf().SingleInstance();
 
-            var scoreBoardService = new ScoreBoardService();
+            var scoreBoardService = new ScoreBoardService(logger, configService);
             cb.Register(r => scoreBoardService).AsSelf().SingleInstance();
 
             var camsDetectionBoard = new CamsDetectionBoard(configService, logger);

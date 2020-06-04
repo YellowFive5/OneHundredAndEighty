@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Windows.ScoreBoard
+namespace OneHundredAndEightyCore.Windows.Score
 {
     public partial class ScoreBoardWindow
     {
@@ -15,12 +15,12 @@ namespace OneHundredAndEightyCore.Windows.ScoreBoard
             InitializeComponent();
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+        private void OnClosing(object sender, CancelEventArgs e)
         {
             if (!NeedClose)
             {

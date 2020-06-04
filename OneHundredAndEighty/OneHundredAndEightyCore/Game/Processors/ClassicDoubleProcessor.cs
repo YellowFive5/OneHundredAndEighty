@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.Windows.ScoreBoard;
+using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
@@ -69,7 +69,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
             PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsToClassic(thrw.TotalPoints * -1, PlayerOnThrow);
+            scoreBoard.AddPointsTo(thrw.TotalPoints * -1, PlayerOnThrow);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
@@ -96,14 +96,14 @@ namespace OneHundredAndEightyCore.Game.Processors
             dbService.StatisticUpdateAddLegsWonForPlayer(PlayerOnThrow, Game.Id);
 
             PlayerOnThrow.LegsWon += 1;
-            scoreBoard.AddLegsWonToClassic(PlayerOnThrow);
+            scoreBoard.AddLegsWonTo(PlayerOnThrow);
 
             ClearPlayerOnThrowHand();
 
             foreach (var player in Players)
             {
                 player.LegPoints = legPoints;
-                scoreBoard.SetPointsToClassic(legPoints, player);
+                scoreBoard.SetPointsTo(legPoints, player);
                 scoreBoard.CheckPointsHintFor(player);
             }
 
@@ -119,16 +119,16 @@ namespace OneHundredAndEightyCore.Game.Processors
             dbService.StatisticUpdateAddSetsWonForPlayer(PlayerOnThrow, Game.Id);
 
             PlayerOnThrow.SetsWon += 1;
-            scoreBoard.AddSetsWonToClassic(PlayerOnThrow);
+            scoreBoard.AddSetsWonTo(PlayerOnThrow);
 
             ClearPlayerOnThrowHand();
 
             foreach (var player in Players)
             {
                 player.LegPoints = legPoints;
-                scoreBoard.SetPointsToClassic(legPoints, player);
+                scoreBoard.SetPointsTo(legPoints, player);
                 player.LegsWon = 0;
-                scoreBoard.SetLegsWonToClassic(0, player);
+                scoreBoard.SetLegsWonTo(0, player);
                 scoreBoard.CheckPointsHintFor(player);
             }
 

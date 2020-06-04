@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Windows.ScoreBoard
+namespace OneHundredAndEightyCore.Windows.Score
 {
     public static class CheckOut
     {
@@ -174,7 +174,7 @@ namespace OneHundredAndEightyCore.Windows.ScoreBoard
                                                                           [161] = $"T20{Space}T17{Space}Bull",
                                                                           [164] = $"T20{Space}T18{Space}Bull",
                                                                           [167] = $"T20{Space}T19{Space}Bull",
-                                                                          [170] = $"T20{Space}T20{Space}Bull",
+                                                                          [170] = $"T20{Space}T20{Space}Bull"
                                                                       };
 
         private static readonly SortedList<int, string> TwoThrows = new SortedList<int, string>()
@@ -308,11 +308,11 @@ namespace OneHundredAndEightyCore.Windows.ScoreBoard
                                                                        [50] = "Bull"
                                                                    };
 
-        public static string Get(int points, int throwNumber)
+        public static string Get(int points, ThrowNumber throwNumber)
         {
             switch (throwNumber)
             {
-                case 1:
+                case ThrowNumber.FirstThrow:
                     if (OneThrow.ContainsKey(points))
                     {
                         return OneThrow[points];
@@ -329,7 +329,7 @@ namespace OneHundredAndEightyCore.Windows.ScoreBoard
                     }
 
                     break;
-                case 2:
+                case ThrowNumber.SecondThrow:
                     if (OneThrow.ContainsKey(points))
                     {
                         return OneThrow[points];
@@ -341,7 +341,7 @@ namespace OneHundredAndEightyCore.Windows.ScoreBoard
                     }
 
                     break;
-                case 3:
+                case ThrowNumber.ThirdThrow:
                     if (OneThrow.ContainsKey(points))
                     {
                         return OneThrow[points];

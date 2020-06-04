@@ -66,6 +66,10 @@
         CamsDetectionWindowPositionLeft,
         CamsDetectionWindowPositionTop,
         CamsDetectionWindowHeight,
-        CamsDetectionWindowWidth
+        CamsDetectionWindowWidth,
+        FreeThrowsSingleScoreWindowPositionLeft,
+        FreeThrowsSingleScoreWindowPositionTop,
+        FreeThrowsSingleScoreWindowHeight,
+        FreeThrowsSingleScoreWindowWidth
     }
 }

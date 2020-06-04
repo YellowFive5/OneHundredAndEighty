@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.Windows.ScoreBoard;
+using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
@@ -29,7 +29,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             if (IsLegOver(thrw))
             {
                 PlayerOnThrow.LegPoints = writeOffPoints;
-                scoreBoard.SetPointsToSinglePlayer(writeOffPoints);
+                scoreBoard.SetPointsTo(writeOffPoints, PlayerOnThrow);
 
                 ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
 
@@ -51,7 +51,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
             PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsToSinglePlayer(thrw.TotalPoints * -1);
+            scoreBoard.AddPointsTo(thrw.TotalPoints * -1, PlayerOnThrow);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 

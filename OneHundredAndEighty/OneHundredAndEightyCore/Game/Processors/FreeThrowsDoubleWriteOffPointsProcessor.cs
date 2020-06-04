@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Recognition;
-using OneHundredAndEightyCore.Windows.ScoreBoard;
+using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
@@ -36,7 +36,7 @@ namespace OneHundredAndEightyCore.Game.Processors
                 foreach (var player in Players)
                 {
                     player.LegPoints = writeOffPoints;
-                    scoreBoard.SetPointsToClassic(writeOffPoints, player);
+                    scoreBoard.SetPointsTo(writeOffPoints, player);
                     scoreBoard.CheckPointsHintFor(player);
                 }
 
@@ -56,7 +56,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
             PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsToClassic(thrw.TotalPoints * -1, PlayerOnThrow);
+            scoreBoard.AddPointsTo(thrw.TotalPoints * -1, PlayerOnThrow);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
