@@ -33,6 +33,15 @@ namespace OneHundredAndEightyCore.Game.Processors
             this.legs = legs;
             this.sets = sets;
 
+            if (players.Count == 1) //  todo maybe do another way cuz ugly
+            {
+                players[0].Order = PlayerOrder.First;
+            }
+            else
+            {
+                players[1].Order = PlayerOrder.Second;
+            }
+
             Game = game;
             Players = players;
             PlayerOnThrow = Players.First();
@@ -99,7 +108,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected void OnFault()
         {
             PlayerOnThrow.LegPoints += PlayerOnThrow.HandPoints;
-            scoreBoard.SetPointsTo(PlayerOnThrow.LegPoints, PlayerOnThrow);
+            scoreBoard.SetPointsTo(PlayerOnThrow, PlayerOnThrow.LegPoints);
 
             ClearPlayerOnThrowHand();
 

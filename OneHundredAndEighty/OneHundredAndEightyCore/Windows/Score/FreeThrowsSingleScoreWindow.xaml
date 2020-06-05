@@ -115,7 +115,42 @@
                            Grid.Row="5"
                            Fill="Black" />
             </Grid>
-
+        </Grid>
+        <Grid Name="CheckoutGrid"
+              Grid.Row="1"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.05*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Stroke="Black"
+                       Grid.ColumnSpan="3">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform Angle="231.582" CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF440000" />
+                        <GradientStop Color="#FF9C0000" Offset="1" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Viewbox Grid.Column="1"
+                     HorizontalAlignment="Center">
+                <TextBlock Name="CheckoutText"
+                           TextWrapping="Wrap"
+                           Text="T20 T10 D15"
+                           Style="{StaticResource TextStyle}" />
+            </Viewbox>
         </Grid>
         <Grid Grid.Row="1"
               Grid.Column="1">
@@ -219,41 +254,6 @@
                 <TextBlock TextWrapping="Wrap"
                            Text="2020 OneHundredAndEighty"
                            Foreground="#FF727272"
-                           Style="{StaticResource TextStyle}" />
-            </Viewbox>
-        </Grid>
-        <Grid Grid.Row="1"
-              Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.05*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0.05*" />
-            </Grid.ColumnDefinitions>
-            <Rectangle Stroke="Black"
-                       Grid.ColumnSpan="3">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <LinearGradientBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
-                                <SkewTransform CenterY="0.5" CenterX="0.5" />
-                                <RotateTransform Angle="231.582" CenterY="0.5" CenterX="0.5" />
-                                <TranslateTransform />
-                            </TransformGroup>
-                        </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="#FF440000" />
-                        <GradientStop Color="#FF9C0000" Offset="1" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Viewbox Grid.Column="1"
-                     HorizontalAlignment="Left">
-                <TextBlock Name="CheckoutText"
-                           TextWrapping="Wrap"
-                           Text="T20   T10   D15"
                            Style="{StaticResource TextStyle}" />
             </Viewbox>
         </Grid>

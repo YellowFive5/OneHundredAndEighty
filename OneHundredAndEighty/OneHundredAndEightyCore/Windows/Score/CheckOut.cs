@@ -9,7 +9,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 {
     public static class CheckOut
     {
-        private static readonly string Space = "     ";
+        private static readonly string Space = " ";
 
         private static readonly SortedList<int, string> ThreeThrows = new SortedList<int, string>()
                                                                       {

@@ -12,6 +12,8 @@ namespace OneHundredAndEightyCore.Windows.Score
 {
     public partial class FreeThrowsSingleScoreWindow : ScoreWindowBase, IScoreWindow
     {
+        protected bool CheckoutShown;
+
         public FreeThrowsSingleScoreWindow(WindowSettings settings,
                                            Player player,
                                            string gameTypeString,
@@ -22,9 +24,15 @@ namespace OneHundredAndEightyCore.Windows.Score
             PlayerNameText.Text = $"{player.Name} {player.NickName}";
             GameTypeText.Text = gameTypeString;
             PointsText.Text = Converter.ToString(legPoints);
+            CheckoutGrid.Opacity = 0;
         }
 
         #region IScoreWindow
+
+        public new void Close()
+        {
+            base.Close();
+        }
 
         public void SetSemaphore(DetectionServiceStatus status)
         {
@@ -39,14 +47,40 @@ namespace OneHundredAndEightyCore.Windows.Score
                                 number);
         }
 
-        public void AddPointsTo(int pointsToAdd, Player player)
+        public void AddPointsTo(Player player, int pointsToAdd)
         {
             AddPoints(PointsText, pointsToAdd);
         }
 
-        public new void Close()
+        public void SetPointsTo(Player player, int pointsToSet)
         {
-            base.Close();
+            SetPoints(PointsText, pointsToSet);
+        }
+
+        public void CheckoutShowOrUpdateFor(Player player, string hint)
+        {
+            if (CheckoutShown)
+            {
+                CheckoutUpdate(CheckoutText,
+                               hint);
+            }
+            else
+            {
+                CheckoutShow(CheckoutGrid,
+                             CheckoutText,
+                             hint);
+                CheckoutShown = true;
+            }
+        }
+
+        public void CheckoutHideFor(Player player)
+        {
+            if (CheckoutShown)
+            {
+                CheckoutHide(CheckoutGrid,
+                             CheckoutText);
+                CheckoutShown = false;
+            }
         }
 
         #endregion

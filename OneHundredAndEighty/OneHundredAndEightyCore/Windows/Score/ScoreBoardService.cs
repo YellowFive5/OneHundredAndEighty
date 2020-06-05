@@ -106,19 +106,27 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         #endregion
 
-        public void SetPointsTo(int pointsToSet, Player player)
+        public void SetPointsTo(Player player, int pointsToSet)
         {
-            throw new NotImplementedException();
+            scoreBoardWindow.SetPointsTo(player, pointsToSet);
         }
 
-        public void AddPointsTo(int pointsToAdd, Player player)
+        public void AddPointsTo(Player player, int pointsToAdd)
         {
-            scoreBoardWindow.AddPointsTo(pointsToAdd, player);
+            scoreBoardWindow.AddPointsTo(player, pointsToAdd);
         }
 
         public void CheckPointsHintFor(Player player)
         {
-            throw new NotImplementedException();
+            var hint = CheckOut.Get(player.LegPoints, player.ThrowNumber);
+            if (hint != null)
+            {
+                scoreBoardWindow.CheckoutShowOrUpdateFor(player, hint);
+            }
+            else
+            {
+                scoreBoardWindow.CheckoutHideFor(player);
+            }
         }
 
         public void AddLegsWonTo(Player player)
@@ -126,7 +134,7 @@ namespace OneHundredAndEightyCore.Windows.Score
             throw new NotImplementedException();
         }
 
-        public void SetLegsWonTo(int legsToSet, Player player)
+        public void SetLegsWonTo(Player player, int legsToSet)
         {
             throw new NotImplementedException();
         }
@@ -153,7 +161,6 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void OnThrowPointerSetOn(Player player)
         {
-            throw new NotImplementedException();
         }
     }
 }

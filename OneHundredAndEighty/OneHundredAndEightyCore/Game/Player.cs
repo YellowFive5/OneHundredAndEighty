@@ -28,6 +28,7 @@ namespace OneHundredAndEightyCore.Game
         public int HandPoints { get; set; } = 0;
         public ThrowNumber ThrowNumber { get; set; } = ThrowNumber.FirstThrow;
         public Stack<Throw> HandThrows { get; set; } = new Stack<Throw>();
+        public PlayerOrder Order { get; set; }
 
         #endregion
 

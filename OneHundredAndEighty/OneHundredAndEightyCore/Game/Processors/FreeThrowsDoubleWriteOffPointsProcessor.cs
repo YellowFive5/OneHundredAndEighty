@@ -36,7 +36,7 @@ namespace OneHundredAndEightyCore.Game.Processors
                 foreach (var player in Players)
                 {
                     player.LegPoints = writeOffPoints;
-                    scoreBoard.SetPointsTo(writeOffPoints, player);
+                    scoreBoard.SetPointsTo(player, writeOffPoints);
                     scoreBoard.CheckPointsHintFor(player);
                 }
 
@@ -56,7 +56,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
             PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsTo(thrw.TotalPoints * -1, PlayerOnThrow);
+            scoreBoard.AddPointsTo(PlayerOnThrow, thrw.TotalPoints * -1);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 

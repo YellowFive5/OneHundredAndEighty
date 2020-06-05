@@ -29,7 +29,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             if (IsLegOver(thrw))
             {
                 PlayerOnThrow.LegPoints = writeOffPoints;
-                scoreBoard.SetPointsTo(writeOffPoints, PlayerOnThrow);
+                scoreBoard.SetPointsTo(PlayerOnThrow, writeOffPoints);
 
                 ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
 
@@ -51,7 +51,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
             PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsTo(thrw.TotalPoints * -1, PlayerOnThrow);
+            scoreBoard.AddPointsTo(PlayerOnThrow, thrw.TotalPoints * -1);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 

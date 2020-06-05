@@ -1,8 +1,8 @@
 ﻿namespace OneHundredAndEightyCore.Windows.Score
 {
-    public enum OnPlayer
+    public enum PlayerOrder
     {
-        _1,
-        _2
+        First,
+        Second
     }
 }

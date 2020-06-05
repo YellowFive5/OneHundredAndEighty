@@ -69,7 +69,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             PlayerOnThrow.HandPoints += thrw.TotalPoints;
             PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsTo(thrw.TotalPoints * -1, PlayerOnThrow);
+            scoreBoard.AddPointsTo(PlayerOnThrow, thrw.TotalPoints * -1);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
@@ -103,7 +103,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             foreach (var player in Players)
             {
                 player.LegPoints = legPoints;
-                scoreBoard.SetPointsTo(legPoints, player);
+                scoreBoard.SetPointsTo(player, legPoints);
                 scoreBoard.CheckPointsHintFor(player);
             }
 
@@ -126,9 +126,9 @@ namespace OneHundredAndEightyCore.Game.Processors
             foreach (var player in Players)
             {
                 player.LegPoints = legPoints;
-                scoreBoard.SetPointsTo(legPoints, player);
+                scoreBoard.SetPointsTo(player, legPoints);
                 player.LegsWon = 0;
-                scoreBoard.SetLegsWonTo(0, player);
+                scoreBoard.SetLegsWonTo(player, 0);
                 scoreBoard.CheckPointsHintFor(player);
             }
 

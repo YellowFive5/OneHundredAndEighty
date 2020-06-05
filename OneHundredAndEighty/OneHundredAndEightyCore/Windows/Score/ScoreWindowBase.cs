@@ -16,9 +16,8 @@ namespace OneHundredAndEightyCore.Windows.Score
 {
     public class ScoreWindowBase : Window
     {
-        protected bool pointsHintClassicsPlayer1Shown;
-        protected bool pointsHintSingleShown;
-        protected bool pointsHintClassicsPlayer2Shown;
+        protected bool pointsHintDoublePlayer1Shown;
+        protected bool pointsHintDoublePlayer2Shown;
         private readonly TimeSpan slideTime = TimeSpan.FromSeconds(0.25);
         private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
         private readonly SolidColorBrush redBrush = new SolidColorBrush(Colors.Red);
@@ -27,7 +26,7 @@ namespace OneHundredAndEightyCore.Windows.Score
         private readonly SolidColorBrush blackBrush = new SolidColorBrush(Colors.Black);
         private readonly SolidColorBrush transparentBrush = new SolidColorBrush() {Opacity = 0};
 
-        protected bool ForceClose { get; set; }
+        private bool ForceClose { get; set; }
 
         protected ScoreWindowBase(WindowSettings settings)
         {
@@ -37,16 +36,23 @@ namespace OneHundredAndEightyCore.Windows.Score
             Width = settings.Width;
         }
 
-        protected void AddPoints(TextBlock control, int pointsToAdd)
+        protected void OnMouseLeftButtonDown()
         {
-            var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeIn, control);
-            sb.Children.Add(fadeIn);
-            sb.Begin();
+            DragMove();
+        }
 
-            control.Text = Converter.ToString(int.Parse(control.Text) + pointsToAdd);
+        protected new void Close()
+        {
+            ForceClose = true;
+            base.Close();
+        }
+
+        protected void OnClosing(CancelEventArgs e)
+        {
+            if (!ForceClose)
+            {
+                e.Cancel = true;
+            }
         }
 
         protected void SetSemaphore(Ellipse control, DetectionServiceStatus status)
@@ -97,23 +103,69 @@ namespace OneHundredAndEightyCore.Windows.Score
             }
         }
 
-        protected new void Close()
+        protected void AddPoints(TextBlock control, int pointsToAdd)
         {
-            ForceClose = true;
-            base.Close();
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
+            Storyboard.SetTarget(fadeIn, control);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+
+            control.Text = Converter.ToString(int.Parse(control.Text) + pointsToAdd);
         }
 
-        protected void OnMouseLeftButtonDown()
+        protected void SetPoints(TextBlock control, int pointsToSet)
         {
-            DragMove();
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
+            Storyboard.SetTarget(fadeIn, control);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+
+            control.Text = Converter.ToString(pointsToSet);
         }
 
-        protected void OnClosing(CancelEventArgs e)
+        protected void CheckoutShow(Grid checkoutGrid,
+                                    TextBlock checkoutControl,
+                                    string hint)
         {
-            if (!ForceClose)
-            {
-                e.Cancel = true;
-            }
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
+            Storyboard.SetTarget(fadeIn, checkoutGrid);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+            CheckoutUpdate(checkoutControl,
+                           hint);
+        }
+
+        protected void CheckoutUpdate(TextBlock checkoutControl,
+                                      string hint)
+        {
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
+            Storyboard.SetTarget(fadeIn, checkoutControl);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+
+            checkoutControl.Text = hint;
+        }
+
+        protected void CheckoutHide(Grid checkoutGrid,
+                                    TextBlock checkoutControl)
+        {
+            var sb = new Storyboard();
+            var fadeOut = new DoubleAnimation {From = 1, To = 0, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeOut, new PropertyPath(OpacityProperty));
+            Storyboard.SetTarget(fadeOut, checkoutGrid);
+            sb.Children.Add(fadeOut);
+            sb.Begin();
+
+            CheckoutUpdate(checkoutControl,
+                           string.Empty);
         }
     }
 }
