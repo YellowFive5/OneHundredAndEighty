@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace OneHundredAndEightyCore.Windows.Score
 {
-    public partial class ScoreBoardWindow
+    public partial class ScoreBoardWindow // DELETE ALL AFTER ALL SCOREBOARD WINDOWS DONE
     {
         private bool NeedClose { get; set; }
         public ScoreBoardWindow()

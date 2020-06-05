@@ -13,10 +13,10 @@ namespace OneHundredAndEightyCore.Windows.Score
         double Top { get; }
         double Height { get; }
         double Width { get; }
+        void Show();
         void SetSemaphore(DetectionServiceStatus status);
         void SetThrowNumber(ThrowNumber number);
-        void Show();
-        void Close();
         void AddPointsTo(int pointsToAdd, Player player);
+        void Close();
     }
 }
