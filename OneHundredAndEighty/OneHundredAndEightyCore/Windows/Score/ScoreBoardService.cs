@@ -69,13 +69,14 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         private void SaveSettings()
         {
+            var windowSettings = scoreBoardWindow.GetWindowSettings();
             switch (scoreBoardType)
             {
                 case ScoreBoardType.FreeThrowsSingle:
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowHeight, scoreBoardWindow.Height);
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowWidth, scoreBoardWindow.Width);
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowPositionLeft, scoreBoardWindow.Left);
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowPositionTop, scoreBoardWindow.Top);
+                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowHeight, windowSettings.Height);
+                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowWidth, windowSettings.Width);
+                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowPositionLeft, windowSettings.PositionLeft);
+                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowPositionTop, windowSettings.PositionTop);
                     break;
                 case ScoreBoardType.FreeThrowsDouble:
                     throw new ArgumentOutOfRangeException();

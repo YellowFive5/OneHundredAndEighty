@@ -30,10 +30,10 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         protected ScoreWindowBase(WindowSettings settings)
         {
-            Left = settings.PositionLeft;
-            Top = settings.PositionTop;
             Height = settings.Height;
             Width = settings.Width;
+            Left = settings.PositionLeft;
+            Top = settings.PositionTop;
         }
 
         protected void OnMouseLeftButtonDown()
@@ -53,6 +53,11 @@ namespace OneHundredAndEightyCore.Windows.Score
             {
                 e.Cancel = true;
             }
+        }
+
+        public WindowSettings GetWindowSettings()
+        {
+            return new WindowSettings(Height, Width, Left, Top);
         }
 
         protected void SetSemaphore(Ellipse control, DetectionServiceStatus status)

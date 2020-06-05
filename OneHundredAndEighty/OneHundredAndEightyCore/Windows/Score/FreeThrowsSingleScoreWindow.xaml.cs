@@ -12,14 +12,16 @@ namespace OneHundredAndEightyCore.Windows.Score
 {
     public partial class FreeThrowsSingleScoreWindow : ScoreWindowBase, IScoreWindow
     {
-        protected bool CheckoutShown;
+        private bool checkoutShown;
 
         public FreeThrowsSingleScoreWindow(WindowSettings settings,
                                            Player player,
                                            string gameTypeString,
-                                           int legPoints) : base(settings)
+                                           int legPoints)
+            : base(settings)
         {
             InitializeComponent();
+
             PlayerAvatar.Source = player.Avatar;
             PlayerNameText.Text = $"{player.Name} {player.NickName}";
             GameTypeText.Text = gameTypeString;
@@ -59,7 +61,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void CheckoutShowOrUpdateFor(Player player, string hint)
         {
-            if (CheckoutShown)
+            if (checkoutShown)
             {
                 CheckoutUpdate(CheckoutText,
                                hint);
@@ -69,17 +71,17 @@ namespace OneHundredAndEightyCore.Windows.Score
                 CheckoutShow(CheckoutGrid,
                              CheckoutText,
                              hint);
-                CheckoutShown = true;
+                checkoutShown = true;
             }
         }
 
         public void CheckoutHideFor(Player player)
         {
-            if (CheckoutShown)
+            if (checkoutShown)
             {
                 CheckoutHide(CheckoutGrid,
                              CheckoutText);
-                CheckoutShown = false;
+                checkoutShown = false;
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 
@@ -9,12 +10,9 @@ namespace OneHundredAndEightyCore.Windows.Score
 {
     public interface IScoreWindow
     {
-        double Left { get; }
-        double Top { get; }
-        double Height { get; }
-        double Width { get; }
         void Show();
         void Close();
+        WindowSettings GetWindowSettings();
         void SetSemaphore(DetectionServiceStatus status);
         void SetThrowNumber(ThrowNumber number);
         void AddPointsTo(Player player, int pointsToAdd);

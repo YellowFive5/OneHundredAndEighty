@@ -11,9 +11,7 @@
                        WindowStyle="None"
                        Background="Transparent"
                        MouseLeftButtonDown="OnMouseLeftButtonDown"
-                       Closing="OnClosing"
-                       Height="406"
-                       Width="1959">
+                       Closing="OnClosing">
     <Window.Resources>
         <Style x:Key="TextStyle">
             <Setter Property="Control.FontFamily" Value="Agency FB" />
