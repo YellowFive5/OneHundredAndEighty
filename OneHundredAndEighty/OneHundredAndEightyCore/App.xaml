@@ -1,9 +1,76 @@
 ﻿<Application x:Class="OneHundredAndEightyCore.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              StartupUri="Windows/Main/MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
-         
+        <Style x:Key="ScoreWindowTextStyle">
+            <Setter Property="Control.FontFamily" Value="Agency FB" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="MainWindowTextBoxStyle">
+            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+            <Setter Property="Control.Width" Value="50" />
+            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+        </Style>
+        <Style x:Key="MainWindowSetupSliderStyle">
+            <Setter Property="Control.HorizontalAlignment" Value="Center" />
+            <Setter Property="Slider.Orientation" Value="Vertical" />
+            <Setter Property="Slider.Maximum" Value="1000" />
+            <Setter Property="Control.IsEnabled" Value="False" />
+        </Style>
+        <Style x:Key="MainWindowLabelStyle">
+            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+            <Setter Property="Control.VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox">
+            <Setter Property="ItemsSource">
+                <Setter.Value>
+                    <x:Array Type="system:String">
+                        <system:String>11</system:String>
+                        <system:String>11/14</system:String>
+                        <system:String>14</system:String>
+                        <system:String>14/9</system:String>
+                        <system:String>9</system:String>
+                        <system:String>9/12</system:String>
+                        <system:String>12</system:String>
+                        <system:String>12/5</system:String>
+                        <system:String>5</system:String>
+                        <system:String>5/20</system:String>
+                        <system:String>20</system:String>
+                        <system:String>20/1</system:String>
+                        <system:String>1</system:String>
+                        <system:String>1/18</system:String>
+                        <system:String>18</system:String>
+                        <system:String>18/4</system:String>
+                        <system:String>4</system:String>
+                        <system:String>4/13</system:String>
+                        <system:String>13</system:String>
+                        <system:String>13/6</system:String>
+                        <system:String>6</system:String>
+                        <system:String>6/10</system:String>
+                        <system:String>10</system:String>
+                        <system:String>10/15</system:String>
+                        <system:String>15</system:String>
+                        <system:String>15/2</system:String>
+                        <system:String>2</system:String>
+                        <system:String>2/17</system:String>
+                        <system:String>17</system:String>
+                        <system:String>17/3</system:String>
+                        <system:String>3</system:String>
+                        <system:String>3/19</system:String>
+                        <system:String>19</system:String>
+                        <system:String>19/7</system:String>
+                        <system:String>7</system:String>
+                        <system:String>7/16</system:String>
+                        <system:String>16</system:String>
+                        <system:String>16/8</system:String>
+                        <system:String>8</system:String>
+                        <system:String>8/11</system:String>
+                    </x:Array>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

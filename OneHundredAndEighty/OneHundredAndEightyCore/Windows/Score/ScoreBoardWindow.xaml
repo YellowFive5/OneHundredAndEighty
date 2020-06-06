@@ -16,7 +16,7 @@
     <Grid>
         <Grid Name="ScoreBoardClassicGrid"
               Margin="10,10,10,10"
-              Visibility="Hidden">
+              Visibility="Visible">
             <Grid Name="ClassicsWhoThrowsPointer"
                   Margin="660,41,60,98">
                 <Rectangle Stroke="Black" Margin="2,0,3,0">
@@ -226,7 +226,7 @@
 
         <Grid Name="ScoreBoardFreeThrowsSingleGrid"
               Margin="10,10,10,10"
-              Visibility="Visible">
+              Visibility="Hidden">
             <Grid Name="PointsHintSingle"
                   Margin="0,41,566,98">
                 <Rectangle Stroke="Black">

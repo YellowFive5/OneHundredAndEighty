@@ -16,7 +16,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public FreeThrowsSingleScoreWindow(WindowSettings settings,
                                            Player player,
-                                           string gameTypeString,
+                                           string gameType,
                                            int legPoints)
             : base(settings)
         {
@@ -24,7 +24,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
             PlayerAvatar.Source = player.Avatar;
             PlayerNameText.Text = $"{player.Name} {player.NickName}";
-            GameTypeText.Text = gameTypeString;
+            GameTypeText.Text = gameType;
             PointsText.Text = Converter.ToString(legPoints);
             CheckoutGrid.Opacity = 0;
         }

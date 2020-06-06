@@ -45,7 +45,10 @@ namespace OneHundredAndEightyCore.Windows.Score
                     break;
                 case GameType.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
-                    // scoreBoardWindow = new FreeThrowsDoubleScoreWindow();
+                    scoreBoardWindow = new FreeThrowsDoubleScoreWindow(windowSettings,
+                                                                       players,
+                                                                       gameTypeString,
+                                                                       legPoints);
                     break;
                 case GameType.Classic:
                     scoreBoardType = ScoreBoardType.Classic;

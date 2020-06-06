@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:resx="clr-namespace:OneHundredAndEightyCore.Resources"
         xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Height="638"
         Width="1197"
         Title="OneHundredAndEighty"
@@ -13,70 +12,15 @@
         <main:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <Style x:Key="TextBoxStyle">
-            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
-            <Setter Property="Control.Width" Value="50" />
-            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+        <Style x:Key="TextBoxStyle" BasedOn="{StaticResource MainWindowTextBoxStyle}">
             <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
         </Style>
-        <Style x:Key="SetupSliderStyle">
-            <Setter Property="Control.HorizontalAlignment" Value="Center" />
-            <Setter Property="Slider.Orientation" Value="Vertical" />
-            <Setter Property="Slider.Maximum" Value="1000" />
-            <Setter Property="Control.IsEnabled" Value="False" />
+        <Style x:Key="SetupSliderStyle" BasedOn="{StaticResource MainWindowSetupSliderStyle}">
             <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
         </Style>
-        <Style x:Key="LabelStyle">
-            <Setter Property="Control.HorizontalAlignment" Value="Left" />
-            <Setter Property="Control.VerticalAlignment" Value="Center" />
-        </Style>
-        <Style x:Key="SetupSectorsComboboxStyle" TargetType="ComboBox">
-            <Setter Property="ItemsSource">
-                <Setter.Value>
-                    <x:Array Type="sys:String">
-                        <sys:String>11</sys:String>
-                        <sys:String>11/14</sys:String>
-                        <sys:String>14</sys:String>
-                        <sys:String>14/9</sys:String>
-                        <sys:String>9</sys:String>
-                        <sys:String>9/12</sys:String>
-                        <sys:String>12</sys:String>
-                        <sys:String>12/5</sys:String>
-                        <sys:String>5</sys:String>
-                        <sys:String>5/20</sys:String>
-                        <sys:String>20</sys:String>
-                        <sys:String>20/1</sys:String>
-                        <sys:String>1</sys:String>
-                        <sys:String>1/18</sys:String>
-                        <sys:String>18</sys:String>
-                        <sys:String>18/4</sys:String>
-                        <sys:String>4</sys:String>
-                        <sys:String>4/13</sys:String>
-                        <sys:String>13</sys:String>
-                        <sys:String>13/6</sys:String>
-                        <sys:String>6</sys:String>
-                        <sys:String>6/10</sys:String>
-                        <sys:String>10</sys:String>
-                        <sys:String>10/15</sys:String>
-                        <sys:String>15</sys:String>
-                        <sys:String>15/2</sys:String>
-                        <sys:String>2</sys:String>
-                        <sys:String>2/17</sys:String>
-                        <sys:String>17</sys:String>
-                        <sys:String>17/3</sys:String>
-                        <sys:String>3</sys:String>
-                        <sys:String>3/19</sys:String>
-                        <sys:String>19</sys:String>
-                        <sys:String>19/7</sys:String>
-                        <sys:String>7</sys:String>
-                        <sys:String>7/16</sys:String>
-                        <sys:String>16</sys:String>
-                        <sys:String>16/8</sys:String>
-                        <sys:String>8</sys:String>
-                        <sys:String>8/11</sys:String>
-                    </x:Array>
-                </Setter.Value>
-            </Setter>
+        <Style x:Key="LabelStyle" BasedOn="{StaticResource MainWindowLabelStyle}" />
+        <Style x:Key="SetupSectorsComboboxStyle" TargetType="ComboBox"
+               BasedOn="{StaticResource MainWindowSetupSectorsComboboxStyle}">
             <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
         </Style>
     </Window.Resources>

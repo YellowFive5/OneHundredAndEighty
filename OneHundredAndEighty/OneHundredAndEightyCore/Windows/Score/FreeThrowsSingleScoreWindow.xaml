@@ -5,7 +5,6 @@
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                        xmlns:local="clr-namespace:OneHundredAndEightyCore.Windows.Score"
                        mc:Ignorable="d"
-                       Title="FreeThrowsSingleScoreWindow"
                        ResizeMode="CanResizeWithGrip"
                        AllowsTransparency="True"
                        WindowStyle="None"
@@ -13,10 +12,6 @@
                        MouseLeftButtonDown="OnMouseLeftButtonDown"
                        Closing="OnClosing">
     <Window.Resources>
-        <Style x:Key="TextStyle">
-            <Setter Property="Control.FontFamily" Value="Agency FB" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-        </Style>
     </Window.Resources>
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
@@ -60,7 +55,7 @@
                 <TextBlock Name="GameTypeText"
                            TextWrapping="Wrap"
                            Text="Free throws"
-                           Style="{StaticResource TextStyle}" />
+                           Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Grid Grid.Row="0"
                   Grid.Column="2"
@@ -147,7 +142,7 @@
                 <TextBlock Name="CheckoutText"
                            TextWrapping="Wrap"
                            Text="T20 T10 D15"
-                           Style="{StaticResource TextStyle}" />
+                           Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
         <Grid Grid.Row="1"
@@ -179,7 +174,7 @@
                 <TextBlock Name="PlayerNameText"
                            TextWrapping="Wrap"
                            Text="Mighty Mike"
-                           Style="{StaticResource TextStyle}" />
+                           Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Image Name="PlayerAvatar"
                    Grid.Column="3"
@@ -220,7 +215,7 @@
                 <TextBlock Name="PointsText"
                            TextWrapping="Wrap"
                            Text="501"
-                           Style="{StaticResource TextStyle}" />
+                           Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
         <Grid ShowGridLines="False"
@@ -252,7 +247,7 @@
                 <TextBlock TextWrapping="Wrap"
                            Text="2020 OneHundredAndEighty"
                            Foreground="#FF727272"
-                           Style="{StaticResource TextStyle}" />
+                           Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
     </Grid>
