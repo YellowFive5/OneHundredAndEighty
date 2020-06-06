@@ -5,10 +5,6 @@
              StartupUri="Windows/Main/MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
-        <Style x:Key="ScoreWindowTextStyle">
-            <Setter Property="Control.FontFamily" Value="Agency FB" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-        </Style>
         <Style x:Key="MainWindowTextBoxStyle">
             <Setter Property="Control.VerticalContentAlignment" Value="Center" />
             <Setter Property="Control.Width" Value="50" />
@@ -24,7 +20,8 @@
             <Setter Property="Control.HorizontalAlignment" Value="Left" />
             <Setter Property="Control.VerticalAlignment" Value="Center" />
         </Style>
-        <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox">
+        <Style x:Key="MainWindowSetupSectorsComboboxStyle"
+               TargetType="ComboBox">
             <Setter Property="ItemsSource">
                 <Setter.Value>
                     <x:Array Type="system:String">
@@ -72,5 +69,104 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="ScoreWindowTextStyle">
+            <Setter Property="Control.FontFamily" Value="Agency FB" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="ScoreWindowCheckoutRectangleStyle">
+            <Setter Property="Rectangle.Stroke" Value="Black" />
+            <Setter Property="Rectangle.Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform Angle="231.582" CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF440000" />
+                        <GradientStop Color="#FF9C0000" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScoreWindowThrowPointerRectangleStyle">
+            <Setter Property="Rectangle.Stroke" Value="Black" />
+            <Setter Property="Rectangle.Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform Angle="231.582" CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF440000" />
+                        <GradientStop Color="#FF9C0000" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScoreWindowPlayerRectangleStyle">
+            <Setter Property="Rectangle.Stroke" Value="Black" />
+            <Setter Property="Rectangle.Fill">
+                <Setter.Value>
+                    <LinearGradientBrush
+                        EndPoint="0.5,1"
+                        StartPoint="0.5,0">
+                        <GradientStop Color="#FFC2C2C2" />
+                        <GradientStop Color="#FF3C3C3C"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScoreWindowPointsRectangleStyle">
+            <Setter Property="Rectangle.Stroke" Value="Black" />
+            <Setter Property="Rectangle.Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform Angle="-56.514" CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF17FB00" />
+                        <GradientStop Color="#FF005805" Offset="0.983" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScoreWindowHeaderRectangleStyle">
+            <Setter Property="Rectangle.Stroke" Value="Black" />
+            <Setter Property="Rectangle.Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF5E5E5E" />
+                        <GradientStop Color="#FF343434" Offset="0.995" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScoreWindowFooterRectangleStyle">
+            <Setter Property="Rectangle.Stroke" Value="Black" />
+            <Setter Property="Rectangle.Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF141414" />
+                        <GradientStop Color="Black" Offset="0.993" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>

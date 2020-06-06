@@ -10,7 +10,9 @@
                        WindowStyle="None"
                        Background="Transparent"
                        MouseLeftButtonDown="OnMouseLeftButtonDown"
-                       Closing="OnClosing">
+                       Closing="OnClosing"
+                       d:DesignWidth="725.459"
+                       d:DesignHeight="151.074">
     <Window.Resources>
     </Window.Resources>
     <Grid ShowGridLines="False">
@@ -24,7 +26,9 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.7*" />
         </Grid.ColumnDefinitions>
-        <Grid ShowGridLines="False"
+
+        <Grid Name="HeaderGrid"
+              ShowGridLines="False"
               Grid.Row="0"
               Grid.Column="1"
               Grid.ColumnSpan="2">
@@ -41,14 +45,7 @@
             </Grid.ColumnDefinitions>
             <Rectangle Grid.RowSpan="3"
                        Grid.ColumnSpan="4"
-                       Stroke="Black">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF5E5E5E" />
-                        <GradientStop Color="#FF343434" Offset="0.995" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+                       Style="{StaticResource ScoreWindowHeaderRectangleStyle}" />
             <Viewbox Grid.Column="1"
                      Grid.Row="1"
                      HorizontalAlignment="Left">
@@ -109,6 +106,7 @@
                            Fill="Black" />
             </Grid>
         </Grid>
+
         <Grid Name="CheckoutGrid"
               Grid.Row="1"
               Grid.Column="0">
@@ -120,23 +118,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.05*" />
             </Grid.ColumnDefinitions>
-            <Rectangle Stroke="Black"
-                       Grid.ColumnSpan="3">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <LinearGradientBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
-                                <SkewTransform CenterY="0.5" CenterX="0.5" />
-                                <RotateTransform Angle="231.582" CenterY="0.5" CenterX="0.5" />
-                                <TranslateTransform />
-                            </TransformGroup>
-                        </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="#FF440000" />
-                        <GradientStop Color="#FF9C0000" Offset="1" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+            <Rectangle
+                Grid.ColumnSpan="3"
+                Style="{StaticResource ScoreWindowCheckoutRectangleStyle}" />
             <Viewbox Grid.Column="1"
                      HorizontalAlignment="Center">
                 <TextBlock Name="CheckoutText"
@@ -145,7 +129,8 @@
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
-        <Grid Grid.Row="1"
+        <Grid Name="NameGrid"
+              Grid.Row="1"
               Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -157,17 +142,7 @@
                 <ColumnDefinition Width="0.35*" />
             </Grid.ColumnDefinitions>
             <Rectangle Grid.ColumnSpan="4"
-                       Stroke="Black">
-                <Rectangle.Fill>
-                    <LinearGradientBrush
-                        EndPoint="0.5,1"
-                        StartPoint="0.5,0">
-                        <GradientStop Color="#FFC2C2C2" />
-                        <GradientStop Color="#FF3C3C3C"
-                                      Offset="1" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+                       Style="{StaticResource ScoreWindowPlayerRectangleStyle}" />
             <Viewbox Grid.Column="1"
                      Grid.Row="0"
                      HorizontalAlignment="Left">
@@ -182,7 +157,8 @@
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch" />
         </Grid>
-        <Grid Grid.Row="1"
+        <Grid Name="PointsGrid"
+              Grid.Row="1"
               Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -194,22 +170,7 @@
             <Rectangle Grid.Row="0"
                        Grid.Column="0"
                        Grid.ColumnSpan="2"
-                       Stroke="Black">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <LinearGradientBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
-                                <SkewTransform CenterY="0.5" CenterX="0.5" />
-                                <RotateTransform Angle="-56.514" CenterY="0.5" CenterX="0.5" />
-                                <TranslateTransform />
-                            </TransformGroup>
-                        </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="#FF17FB00" />
-                        <GradientStop Color="#FF005805" Offset="0.983" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+                       Style="{StaticResource ScoreWindowPointsRectangleStyle}" />
             <Viewbox Grid.Column="0"
                      HorizontalAlignment="Right">
                 <TextBlock Name="PointsText"
@@ -218,7 +179,9 @@
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
-        <Grid ShowGridLines="False"
+
+        <Grid Name="FooterGrid"
+              ShowGridLines="False"
               Grid.Row="2"
               Grid.Column="1"
               Grid.ColumnSpan="2">
@@ -233,14 +196,7 @@
             </Grid.ColumnDefinitions>
             <Rectangle Grid.ColumnSpan="2"
                        Grid.RowSpan="3"
-                       Stroke="Black">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF141414" />
-                        <GradientStop Color="Black" Offset="0.993" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+                       Style="{StaticResource ScoreWindowFooterRectangleStyle}" />
             <Viewbox Grid.Column="1"
                      Grid.Row="1"
                      HorizontalAlignment="Left">

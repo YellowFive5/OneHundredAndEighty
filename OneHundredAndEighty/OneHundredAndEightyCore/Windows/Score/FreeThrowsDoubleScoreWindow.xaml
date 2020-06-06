@@ -10,6 +10,324 @@
                        WindowStyle="None"
                        Background="Transparent"
                        MouseLeftButtonDown="OnMouseLeftButtonDown"
-                       Closing="OnClosing">
-    <Grid />
+                       Closing="OnClosing"
+                       d:DesignWidth="981.528"
+                       d:DesignHeight="263.227">
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.6*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="0.17*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="HeaderGrid"
+              ShowGridLines="False"
+              Grid.Row="0"
+              Grid.Column="1"
+              Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.3*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.09*" />
+                <ColumnDefinition Width="0.06*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.RowSpan="3"
+                       Grid.ColumnSpan="4"
+                       Style="{StaticResource ScoreWindowHeaderRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     HorizontalAlignment="Left">
+                <TextBlock Name="GameTypeText"
+                           TextWrapping="Wrap"
+                           Text="Free throws"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+            <Grid Grid.Row="0"
+                  Grid.Column="2"
+                  Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+                <Ellipse Name="DetectionStatusSemaphore"
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         Fill="#FF12AE00"
+                         Stroke="Black"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch" />
+            </Grid>
+            <Grid ShowGridLines="False"
+                  Grid.Row="0"
+                  Grid.RowSpan="3"
+                  Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.3*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Name="Throw1Rectangle"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           Fill="Black" />
+                <Rectangle Name="Throw2Rectangle"
+                           Grid.Column="0"
+                           Grid.Row="3"
+                           Fill="Black" />
+                <Rectangle Name="Throw3Rectangle"
+                           Grid.Column="0"
+                           Grid.Row="5"
+                           Fill="Black" />
+            </Grid>
+        </Grid>
+
+        <Grid Name="CheckoutGridPlayer1"
+              Grid.Row="1"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.05*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="3"
+                       Style="{StaticResource ScoreWindowCheckoutRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     HorizontalAlignment="Center">
+                <TextBlock Name="CheckoutTextPlayer1"
+                           TextWrapping="Wrap"
+                           Text="T20 T10 D15"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+        </Grid>
+        <Grid Name="NameGridPlayer1"
+              Grid.Row="1"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.35*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="4"
+                       Style="{StaticResource ScoreWindowPlayerRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     Grid.Row="0"
+                     HorizontalAlignment="Left">
+                <TextBlock Name="Player1NameText"
+                           TextWrapping="Wrap"
+                           Text="Mighty Mike"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+            <Image Name="Player1Avatar"
+                   Grid.Column="3"
+                   Grid.Row="0"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch" />
+        </Grid>
+        <Grid Name="PointsGridPlayer1"
+            Grid.Row="1"
+              Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.13*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource ScoreWindowPointsRectangleStyle}" />
+            <Viewbox Grid.Column="0"
+                     HorizontalAlignment="Right">
+                <TextBlock Name="PointsTextPlayer1"
+                           TextWrapping="Wrap"
+                           Text="501"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+        </Grid>
+        <Grid Name="ThrowPointerGridPlayer1"
+              Grid.Row="1"
+              Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.3*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.4*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle
+                Grid.ColumnSpan="3"
+                Grid.RowSpan="3"
+                Style="{StaticResource ScoreWindowThrowPointerRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     HorizontalAlignment="Right">
+                <TextBlock TextWrapping="Wrap"
+                           Text="◀"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+        </Grid>
+
+        <Grid Name="CheckoutGridPlayer2"
+              Grid.Row="2"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.05*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="3"
+                       Style="{StaticResource ScoreWindowCheckoutRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     HorizontalAlignment="Center">
+                <TextBlock Name="CheckoutTextPlayer2"
+                           TextWrapping="Wrap"
+                           Text="T20 T10 D15"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+        </Grid>
+        <Grid Name="NameGridPlayer2"
+              Grid.Row="2"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.35*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="4"
+                       Style="{StaticResource ScoreWindowPlayerRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     Grid.Row="0"
+                     HorizontalAlignment="Left">
+                <TextBlock Name="Player2NameText"
+                           TextWrapping="Wrap"
+                           Text="Mighty Mike"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+            <Image Name="Player2Avatar"
+                   Grid.Column="3"
+                   Grid.Row="0"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch" />
+        </Grid>
+        <Grid Name="PointsGridPlayer2"
+              Grid.Row="2"
+              Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.13*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource ScoreWindowPointsRectangleStyle}" />
+            <Viewbox Grid.Column="0"
+                     HorizontalAlignment="Right">
+                <TextBlock Name="PointsTextPlayer2"
+                           TextWrapping="Wrap"
+                           Text="501"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+        </Grid>
+        <Grid Name="ThrowPointerGridPlayer2"
+              Grid.Row="2"
+              Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.3*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.4*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle
+                Grid.ColumnSpan="3"
+                Grid.RowSpan="3"
+                Style="{StaticResource ScoreWindowThrowPointerRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     HorizontalAlignment="Right">
+                <TextBlock TextWrapping="Wrap"
+                           Text="◀"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+
+
+        </Grid>
+
+        <Grid Name="FooterGrid"
+              ShowGridLines="False"
+              Grid.Row="3"
+              Grid.Column="1"
+              Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.3*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.04*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="2"
+                       Grid.RowSpan="3"
+                       Style="{StaticResource ScoreWindowFooterRectangleStyle}" />
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     HorizontalAlignment="Left">
+                <TextBlock TextWrapping="Wrap"
+                           Text="2020 OneHundredAndEighty"
+                           Foreground="#FF727272"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
+        </Grid>
+    </Grid>
 </local:ScoreWindowBase>
