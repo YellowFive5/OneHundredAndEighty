@@ -17,6 +17,14 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         private CamsDetectionWindow camsDetectionWindow;
         public System.Windows.Threading.Dispatcher dispatcher; // todo weird and temp
 
+        public delegate void UndoThrowButtonDelegate();
+
+        public event UndoThrowButtonDelegate OnUndoThrowButtonPressed;
+
+        public delegate void CorrectThrowButtonDelegate();
+
+        public event CorrectThrowButtonDelegate OnCorrectThrowButtonPressed;
+
         public CamsDetectionBoard(ConfigService configService, Logger logger)
         {
             this.configService = configService;
@@ -102,6 +110,16 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
             configService.Write(SettingsType.CamsDetectionWindowPositionTop, camsDetectionWindow.Top);
             configService.Write(SettingsType.CamsDetectionWindowHeight, camsDetectionWindow.Height);
             configService.Write(SettingsType.CamsDetectionWindowWidth, camsDetectionWindow.Width);
+        }
+
+        public void FireThrowUndo()
+        {
+            OnUndoThrowButtonPressed?.Invoke();
+        }
+
+        public void FireThrowCorrect()
+        {
+            OnCorrectThrowButtonPressed?.Invoke();
         }
     }
 }

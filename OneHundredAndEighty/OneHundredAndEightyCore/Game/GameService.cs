@@ -8,6 +8,7 @@ using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game.Processors;
 using OneHundredAndEightyCore.Recognition;
+using OneHundredAndEightyCore.Windows.CamsDetection;
 using OneHundredAndEightyCore.Windows.Main;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -19,6 +20,7 @@ namespace OneHundredAndEightyCore.Game
     {
         private readonly MainWindow mainWindow;
         private readonly ScoreBoardService scoreBoardService;
+        private readonly CamsDetectionBoard camsDetectionBoard;
         private readonly DrawService drawService;
         private readonly DetectionService detectionService;
         private readonly ConfigService configService;
@@ -32,6 +34,7 @@ namespace OneHundredAndEightyCore.Game
 
         public GameService(MainWindow mainWindow,
                            ScoreBoardService scoreBoardService,
+                           CamsDetectionBoard camsDetectionBoard,
                            DetectionService detectionService,
                            ConfigService configService,
                            DrawService drawService,
@@ -40,6 +43,7 @@ namespace OneHundredAndEightyCore.Game
         {
             this.mainWindow = mainWindow;
             this.scoreBoardService = scoreBoardService;
+            this.camsDetectionBoard = camsDetectionBoard;
             this.detectionService = detectionService;
             this.configService = configService;
             this.drawService = drawService;
@@ -171,6 +175,9 @@ namespace OneHundredAndEightyCore.Game
                          detectionService.OnThrowDetected += OnAnotherThrow;
                          detectionService.OnStatusChanged += OnDetectionServiceStatusChanged;
                          GameProcessor.OnMatchEnd += OnMatchEnd;
+                         camsDetectionBoard.OnUndoThrowButtonPressed += OnThrowUndo;
+                         camsDetectionBoard.OnCorrectThrowButtonPressed += OnThrowCorrect;
+
                          while (IsGameRun)
                          {
                          }
@@ -178,6 +185,8 @@ namespace OneHundredAndEightyCore.Game
                          detectionService.OnThrowDetected -= OnAnotherThrow;
                          detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
                          GameProcessor.OnMatchEnd -= OnMatchEnd;
+                         camsDetectionBoard.OnUndoThrowButtonPressed -= OnThrowUndo;
+                         camsDetectionBoard.OnCorrectThrowButtonPressed -= OnThrowCorrect;
                      });
         }
 
@@ -237,6 +246,16 @@ namespace OneHundredAndEightyCore.Game
         private void OnDetectionServiceStatusChanged(DetectionServiceStatus status)
         {
             scoreBoardService.SetDetectionStatus(status);
+        }
+
+        private void OnThrowUndo()
+        {
+            // todo
+        }
+
+        private void OnThrowCorrect()
+        {
+            // todo
         }
     }
 }

@@ -78,7 +78,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             var manualThrowPanel = new ManualThrowPanel(logger, detectionService);
             cb.Register(r => manualThrowPanel).AsSelf().SingleInstance();
 
-            var gameService = new GameService(this, scoreBoardService, detectionService, configService, drawService, logger, dbService);
+            var gameService = new GameService(this, scoreBoardService, camsDetectionBoard, detectionService, configService, drawService, logger, dbService);
             cb.Register(r => gameService).AsSelf().SingleInstance();
 
             ServiceContainer = cb.Build();

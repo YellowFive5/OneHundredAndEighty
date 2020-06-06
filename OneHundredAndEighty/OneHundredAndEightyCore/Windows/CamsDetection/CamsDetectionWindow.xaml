@@ -20,16 +20,16 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="1"
-                BorderBrush="Black"
-                Grid.Row="0"
-                Grid.Column="0">
-            <Image x:Name="ProjectionImage"
-                   Stretch="Uniform" />
-        </Border>
-        <Grid
-            Grid.Row="0"
-            Grid.Column="1">
+        <Grid Grid.Row="0"
+              Grid.Column="0">
+            <Border BorderThickness="1"
+                    BorderBrush="Black">
+                <Image x:Name="ProjectionImage"
+                       Stretch="Uniform" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="0"
+              Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.16*" />
@@ -61,9 +61,8 @@
             </Border>
 
         </Grid>
-        <Grid
-            Grid.Row="0"
-            Grid.Column="2">
+        <Grid Grid.Row="0"
+              Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.16*" />
@@ -95,9 +94,8 @@
             </Border>
 
         </Grid>
-        <Grid
-            Grid.Row="1"
-            Grid.Column="1">
+        <Grid Grid.Row="1"
+              Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.16*" />
@@ -163,22 +161,37 @@
         <Grid Grid.Row="1"
               Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="10" />
                 <RowDefinition Height="0.25*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Button Grid.Row="0"
+                    Grid.Column="1"
+                    Content="Undo trow" 
+                    Click="UndoThrowButtonClick"/>
+            <Button Grid.Row="0"
+                    Grid.Column="2"
+                    Content="Correct throw" 
+                    Click="CorrectThrowButtonClick"/>
             <TextBox x:Name="PointsHistoryBox"
-                     Grid.Row="0"
+                     Grid.Row="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"
                      TextWrapping="Wrap"
                      IsReadOnly="True"
                      FontSize="10"
                      VerticalContentAlignment="Bottom"
                      VerticalScrollBarVisibility="Auto" />
             <TextBox x:Name="PointsBox"
-                     Grid.Row="2"
+                     Grid.Row="3"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"
                      TextWrapping="Wrap"
                      IsReadOnly="True"
                      FontWeight="Bold"

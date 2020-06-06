@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.ComponentModel;
+using System.Windows;
 using OneHundredAndEightyCore.Common;
 
 #endregion
@@ -36,6 +37,16 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         {
             ForceClose = true;
             base.Close();
+        }
+
+        private void UndoThrowButtonClick(object sender, RoutedEventArgs e)
+        {
+            camsDetectionViewModel.FireThrowUndo();
+        }
+
+        private void CorrectThrowButtonClick(object sender, RoutedEventArgs e)
+        {
+            camsDetectionViewModel.FireThrowCorrect();
         }
     }
 }

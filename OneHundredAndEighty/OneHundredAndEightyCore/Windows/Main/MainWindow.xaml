@@ -62,7 +62,9 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Game type"
                            Grid.Row="3"
-                           Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                           Grid.Column="1" 
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment="Center" />
                     <ComboBox Name="NewGameTypeComboBox"
                               Grid.Row="3"
                               Grid.Column="3"
@@ -167,7 +169,8 @@
                     <Label x:Name="NewGamePointsLabel"
                            Content="Points"
                            Grid.Row="1"
-                           Grid.Column="5" VerticalAlignment="Bottom" />
+                           Grid.Column="5" 
+                           VerticalAlignment="Bottom" />
                 </Grid>
             </TabItem>
             <TabItem Name="PlayersTabItem"
