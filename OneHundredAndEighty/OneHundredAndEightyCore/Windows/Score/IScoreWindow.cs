@@ -19,5 +19,10 @@ namespace OneHundredAndEightyCore.Windows.Score
         void SetPointsTo(Player player, int pointsToSet);
         void CheckoutShowOrUpdateFor(Player player, string hint);
         void CheckoutHideFor(Player player);
+        void ThrowPointerSetOn(Player player);
+        void AddLegsWonTo(Player player);
+        void SetLegsWonTo(Player player, int legsToSet);
+        void AddSetsWonTo(Player player);
+        void OnLegPointSetOn(Player player);
     }
 }

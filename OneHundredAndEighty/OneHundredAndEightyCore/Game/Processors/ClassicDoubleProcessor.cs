@@ -138,7 +138,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         private void TogglePlayerOnLegAndOnThrow()
         {
             PlayerOnLeg = Players.First(p => p != PlayerOnLeg);
-            scoreBoard.LegPointSetOn(PlayerOnLeg);
+            scoreBoard.OnLegPointSetOn(PlayerOnLeg);
             PlayerOnThrow = PlayerOnLeg;
             scoreBoard.OnThrowPointerSetOn(PlayerOnThrow);
         }

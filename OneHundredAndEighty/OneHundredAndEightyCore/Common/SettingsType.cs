@@ -19,10 +19,6 @@
         Cam2CheckBox,
         Cam3CheckBox,
         Cam4CheckBox,
-        MainWindowPositionLeft,
-        MainWindowPositionTop,
-        MainWindowHeight,
-        MainWindowWidth,
         Cam1Id,
         ToCam1Distance,
         Cam1X,
@@ -63,6 +59,12 @@
         Cam4SurfaceSlider,
         Cam4SurfaceCenterSlider,
         Cam4SetupSector,
+
+        // windows settings
+        MainWindowPositionLeft,
+        MainWindowPositionTop,
+        MainWindowHeight,
+        MainWindowWidth,
         CamsDetectionWindowPositionLeft,
         CamsDetectionWindowPositionTop,
         CamsDetectionWindowHeight,
@@ -70,6 +72,14 @@
         FreeThrowsSingleScoreWindowPositionLeft,
         FreeThrowsSingleScoreWindowPositionTop,
         FreeThrowsSingleScoreWindowHeight,
-        FreeThrowsSingleScoreWindowWidth
+        FreeThrowsSingleScoreWindowWidth,
+        FreeThrowsDoubleScoreWindowHeight,
+        FreeThrowsDoubleScoreWindowWidth,
+        FreeThrowsDoubleScoreWindowPositionLeft,
+        FreeThrowsDoubleScoreWindowPositionTop,
+        ClassicScoreWindowHeight,
+        ClassicScoreWindowWidth,
+        ClassicScoreWindowPositionLeft,
+        ClassicScoreWindowPositionTop
     }
 }

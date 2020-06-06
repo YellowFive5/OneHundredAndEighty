@@ -85,6 +85,31 @@ namespace OneHundredAndEightyCore.Windows.Score
             }
         }
 
+        public void ThrowPointerSetOn(Player player)
+        {
+            // not need in this window
+        }
+
+        public void AddLegsWonTo(Player player)
+        {
+            // not need in this window
+        }
+
+        public void SetLegsWonTo(Player player, int legsToSet)
+        {
+            // not need in this window
+        }
+
+        public void AddSetsWonTo(Player player)
+        {
+            // not need in this window
+        }
+
+        public void OnLegPointSetOn(Player player)
+        {
+            // not need in this window
+        }
+
         #endregion
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

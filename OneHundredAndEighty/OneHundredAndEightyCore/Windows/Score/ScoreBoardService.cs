@@ -32,27 +32,28 @@ namespace OneHundredAndEightyCore.Windows.Score
                                    string gameTypeString,
                                    int legPoints = 0)
         {
-            var windowSettings = LoadSettings();
-
             switch (type)
             {
                 case GameType.FreeThrowsSingle:
                     scoreBoardType = ScoreBoardType.FreeThrowsSingle;
-                    scoreBoardWindow = new FreeThrowsSingleScoreWindow(windowSettings,
+                    scoreBoardWindow = new FreeThrowsSingleScoreWindow(LoadSettings(),
                                                                        players.First(),
                                                                        gameTypeString,
                                                                        legPoints);
                     break;
                 case GameType.FreeThrowsDouble:
                     scoreBoardType = ScoreBoardType.FreeThrowsDouble;
-                    scoreBoardWindow = new FreeThrowsDoubleScoreWindow(windowSettings,
+                    scoreBoardWindow = new FreeThrowsDoubleScoreWindow(LoadSettings(),
                                                                        players,
                                                                        gameTypeString,
                                                                        legPoints);
                     break;
                 case GameType.Classic:
                     scoreBoardType = ScoreBoardType.Classic;
-                    // scoreBoardWindow = new ClassicScoreWindow();
+                    scoreBoardWindow = new ClassicScoreWindow(LoadSettings(),
+                                                              players,
+                                                              gameTypeString,
+                                                              legPoints);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -82,9 +83,17 @@ namespace OneHundredAndEightyCore.Windows.Score
                     configService.Write(SettingsType.FreeThrowsSingleScoreWindowPositionTop, windowSettings.PositionTop);
                     break;
                 case ScoreBoardType.FreeThrowsDouble:
-                    throw new ArgumentOutOfRangeException();
+                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowHeight, windowSettings.Height);
+                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowWidth, windowSettings.Width);
+                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowPositionLeft, windowSettings.PositionLeft);
+                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowPositionTop, windowSettings.PositionTop);
+                    break;
                 case ScoreBoardType.Classic:
-                    throw new ArgumentOutOfRangeException();
+                    configService.Write(SettingsType.ClassicScoreWindowHeight, windowSettings.Height);
+                    configService.Write(SettingsType.ClassicScoreWindowWidth, windowSettings.Width);
+                    configService.Write(SettingsType.ClassicScoreWindowPositionLeft, windowSettings.PositionLeft);
+                    configService.Write(SettingsType.ClassicScoreWindowPositionTop, windowSettings.PositionTop);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -100,15 +109,31 @@ namespace OneHundredAndEightyCore.Windows.Score
                                               configService.Read<double>(SettingsType.FreeThrowsSingleScoreWindowPositionLeft),
                                               configService.Read<double>(SettingsType.FreeThrowsSingleScoreWindowPositionTop));
                 case ScoreBoardType.FreeThrowsDouble:
-                    throw new ArgumentOutOfRangeException();
+                    return new WindowSettings(configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowHeight),
+                                              configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowWidth),
+                                              configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowPositionLeft),
+                                              configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowPositionTop));
                 case ScoreBoardType.Classic:
-                    throw new ArgumentOutOfRangeException();
+                    return new WindowSettings(configService.Read<double>(SettingsType.ClassicScoreWindowHeight),
+                                              configService.Read<double>(SettingsType.ClassicScoreWindowWidth),
+                                              configService.Read<double>(SettingsType.ClassicScoreWindowPositionLeft),
+                                              configService.Read<double>(SettingsType.ClassicScoreWindowPositionTop));
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
         #endregion
+
+        public void SetDetectionStatus(DetectionServiceStatus status)
+        {
+            scoreBoardWindow.SetSemaphore(status);
+        }
+
+        public void SetThrowNumber(ThrowNumber throwNumber)
+        {
+            scoreBoardWindow.SetThrowNumber(throwNumber);
+        }
 
         public void SetPointsTo(Player player, int pointsToSet)
         {
@@ -135,36 +160,27 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void AddLegsWonTo(Player player)
         {
-            throw new NotImplementedException();
+            scoreBoardWindow.AddLegsWonTo(player);
         }
 
         public void SetLegsWonTo(Player player, int legsToSet)
         {
-            throw new NotImplementedException();
+            scoreBoardWindow.SetLegsWonTo(player, legsToSet);
         }
 
         public void AddSetsWonTo(Player player)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SetDetectionStatus(DetectionServiceStatus status)
-        {
-            scoreBoardWindow.SetSemaphore(status);
-        }
-
-        public void SetThrowNumber(ThrowNumber throwNumber)
-        {
-            scoreBoardWindow.SetThrowNumber(throwNumber);
-        }
-
-        public void LegPointSetOn(Player player)
-        {
-            throw new NotImplementedException();
+            scoreBoardWindow.AddSetsWonTo(player);
         }
 
         public void OnThrowPointerSetOn(Player player)
         {
+            scoreBoardWindow.ThrowPointerSetOn(player);
+        }
+
+        public void OnLegPointSetOn(Player player)
+        {
+            scoreBoardWindow.OnLegPointSetOn(player);
         }
     }
 }

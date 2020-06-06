@@ -246,9 +246,6 @@
                                         Click="SelectAvatarImageButton_OnClick" />
                             </Grid>
                         </TabItem>
-                        <TabItem Name="PlayerStatisticsTabItem"
-                                 Header="Player statistics" />
-
                     </TabControl>
                 </Grid>
             </TabItem>

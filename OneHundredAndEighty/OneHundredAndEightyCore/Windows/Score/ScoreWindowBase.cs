@@ -16,9 +16,6 @@ namespace OneHundredAndEightyCore.Windows.Score
 {
     public class ScoreWindowBase : Window
     {
-        protected bool pointsHintDoublePlayer1Shown;
-        protected bool pointsHintDoublePlayer2Shown;
-        private readonly TimeSpan slideTime = TimeSpan.FromSeconds(0.25);
         private readonly TimeSpan fadeTime = TimeSpan.FromSeconds(0.5);
         private readonly SolidColorBrush redBrush = new SolidColorBrush(Colors.Red);
         private readonly SolidColorBrush yellowBrush = new SolidColorBrush(Colors.Yellow);
@@ -47,7 +44,7 @@ namespace OneHundredAndEightyCore.Windows.Score
             base.Close();
         }
 
-        protected void OnClosing(CancelEventArgs e)
+        protected new void OnClosing(CancelEventArgs e)
         {
             if (!ForceClose)
             {
@@ -110,25 +107,13 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         protected void AddPoints(TextBlock control, int pointsToAdd)
         {
-            var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeIn, control);
-            sb.Children.Add(fadeIn);
-            sb.Begin();
-
+            FadeIn(control);
             control.Text = Converter.ToString(int.Parse(control.Text) + pointsToAdd);
         }
 
         protected void SetPoints(TextBlock control, int pointsToSet)
         {
-            var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeIn, control);
-            sb.Children.Add(fadeIn);
-            sb.Begin();
-
+            FadeIn(control);
             control.Text = Converter.ToString(pointsToSet);
         }
 
@@ -136,12 +121,7 @@ namespace OneHundredAndEightyCore.Windows.Score
                                     TextBlock checkoutControl,
                                     string hint)
         {
-            var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeIn, checkoutGrid);
-            sb.Children.Add(fadeIn);
-            sb.Begin();
+            FadeIn(checkoutGrid);
             CheckoutUpdate(checkoutControl,
                            hint);
         }
@@ -149,28 +129,36 @@ namespace OneHundredAndEightyCore.Windows.Score
         protected void CheckoutUpdate(TextBlock checkoutControl,
                                       string hint)
         {
-            var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeIn, checkoutControl);
-            sb.Children.Add(fadeIn);
-            sb.Begin();
-
+            FadeIn(checkoutControl);
             checkoutControl.Text = hint;
         }
 
         protected void CheckoutHide(Grid checkoutGrid,
                                     TextBlock checkoutControl)
         {
+            FadeOut(checkoutGrid);
+            CheckoutUpdate(checkoutControl,
+                           string.Empty);
+        }
+
+        protected void FadeIn(FrameworkElement grid)
+        {
+            var sb = new Storyboard();
+            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
+            Storyboard.SetTarget(fadeIn, grid);
+            sb.Children.Add(fadeIn);
+            sb.Begin();
+        }
+
+        protected void FadeOut(FrameworkElement grid)
+        {
             var sb = new Storyboard();
             var fadeOut = new DoubleAnimation {From = 1, To = 0, Duration = fadeTime};
             Storyboard.SetTargetProperty(fadeOut, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeOut, checkoutGrid);
+            Storyboard.SetTarget(fadeOut, grid);
             sb.Children.Add(fadeOut);
             sb.Begin();
-
-            CheckoutUpdate(checkoutControl,
-                           string.Empty);
         }
     }
 }

@@ -12,16 +12,17 @@ using OneHundredAndEightyCore.Recognition;
 
 namespace OneHundredAndEightyCore.Windows.Score
 {
-    public partial class FreeThrowsDoubleScoreWindow : ScoreWindowBase, IScoreWindow
+    public partial class ClassicScoreWindow : ScoreWindowBase, IScoreWindow
     {
         private bool checkoutPlayer1Shown;
         private bool checkoutPlayer2Shown;
         private OnPlayer throwPointerOn;
+        private OnPlayer onLegPointOn;
 
-        public FreeThrowsDoubleScoreWindow(WindowSettings windowSettings,
-                                           List<Player> players,
-                                           string gameType,
-                                           int legPoints)
+        public ClassicScoreWindow(WindowSettings windowSettings,
+                                  List<Player> players,
+                                  string gameType,
+                                  int legPoints)
             : base(windowSettings)
         {
             InitializeComponent();
@@ -40,6 +41,8 @@ namespace OneHundredAndEightyCore.Windows.Score
             CheckoutGridPlayer2.Opacity = 0;
             throwPointerOn = OnPlayer.First;
             ThrowPointerGridPlayer2.Opacity = 0;
+            onLegPointOn = OnPlayer.First;
+            OnLegPointPlayer2.Opacity = 0;
         }
 
         #region IScoreWindow
@@ -187,22 +190,74 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void AddLegsWonTo(Player player)
         {
-            // not need in this window
+            switch (player.Order)
+            {
+                case PlayerOrder.First:
+                    AddPoints(LegsTextPlayer1, 1);
+                    break;
+                case PlayerOrder.Second:
+                    AddPoints(LegsTextPlayer2, 1);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void SetLegsWonTo(Player player, int legsToSet)
         {
-            // not need in this window
+            switch (player.Order)
+            {
+                case PlayerOrder.First:
+                    SetPoints(LegsTextPlayer1, legsToSet);
+                    break;
+                case PlayerOrder.Second:
+                    SetPoints(LegsTextPlayer2, legsToSet);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void AddSetsWonTo(Player player)
         {
-            // not need in this window
+            switch (player.Order)
+            {
+                case PlayerOrder.First:
+                    AddPoints(SetsTextPlayer1, 1);
+                    break;
+                case PlayerOrder.Second:
+                    AddPoints(SetsTextPlayer2, 1);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void OnLegPointSetOn(Player player)
         {
-            // not need in this window
+            switch (player.Order)
+            {
+                case PlayerOrder.First:
+                    if (onLegPointOn != OnPlayer.First)
+                    {
+                        FadeIn(OnLegPointPlayer1);
+                        FadeOut(OnLegPointPlayer2);
+                        onLegPointOn = OnPlayer.First;
+                    }
+
+                    break;
+                case PlayerOrder.Second:
+                    if (onLegPointOn != OnPlayer.Second)
+                    {
+                        FadeIn(OnLegPointPlayer2);
+                        FadeOut(OnLegPointPlayer1);
+                        onLegPointOn = OnPlayer.Second;
+                    }
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         #endregion

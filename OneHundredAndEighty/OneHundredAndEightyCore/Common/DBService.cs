@@ -352,16 +352,40 @@ namespace OneHundredAndEightyCore.Common
                            $"VALUES ('MainWindowWidth',1197)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowPositionLeft',334)";
+                           $"VALUES ('FreeThrowsSingleScoreWindowPositionLeft',1046)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowPositionTop',1715)";
+                           $"VALUES ('FreeThrowsSingleScoreWindowPositionTop',906)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowHeight',739)";
+                           $"VALUES ('FreeThrowsSingleScoreWindowHeight',293)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowWidth',1034)";
+                           $"VALUES ('FreeThrowsSingleScoreWindowWidth',1406)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsDoubleScoreWindowPositionLeft',1056)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsDoubleScoreWindowPositionTop',828)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsDoubleScoreWindowHeight',376)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('FreeThrowsDoubleScoreWindowWidth',1473)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('ClassicScoreWindowPositionLeft',1056)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('ClassicScoreWindowPositionTop',815)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('ClassicScoreWindowHeight',386)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('ClassicScoreWindowWidth',1472)";
             ExecuteNonQueryInternal(addParameter);
             // add some settings
 

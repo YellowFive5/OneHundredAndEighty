@@ -15,10 +15,10 @@
     <Compile Update="Windows\Debug\ManualThrowPanelWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\Score\FreeThrowsDoubleScoreWindow.xaml.cs">
+    <Compile Update="Windows\Score\ClassicScoreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\Score\ScoreBoardWindow.xaml.cs">
+    <Compile Update="Windows\Score\FreeThrowsDoubleScoreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -37,13 +37,13 @@
     <Page Update="Windows\Main\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Windows\Score\ClassicScoreWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Windows\Score\FreeThrowsDoubleScoreWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Score\FreeThrowsSingleScoreWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Windows\Score\ScoreBoardWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
