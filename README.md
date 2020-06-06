@@ -10,7 +10,7 @@
   
 # OneHundredAndEighty 
 * [Archived], not deleted bacause of history =)
-* Manual darts score calculator with some cool stuff...
+* Manual darts score calculator with some cool stuff... (old project)
   
 # OneHundredAndEightyCore
 * All-in-one steel tip darts desktop app
