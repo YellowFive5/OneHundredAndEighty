@@ -21,6 +21,7 @@ namespace OneHundredAndEightyCore.Recognition
     public enum CamServiceWorkingMode
     {
         Setup,
+        Check,
         Crossing,
         Detection
     }
@@ -84,25 +85,25 @@ namespace OneHundredAndEightyCore.Recognition
                     camNumber = 1;
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam1X),
                                             configService.Read<float>(SettingsType.Cam1Y));
-                    camIndex = GetCamIndex(SettingsType.Cam1Id);
+                    camIndex = GetCamIndexById(SettingsType.Cam1Id);
                     break;
                 case "Cam2Grid":
                     camNumber = 2;
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam2X),
                                             configService.Read<float>(SettingsType.Cam2Y));
-                    camIndex = GetCamIndex(SettingsType.Cam2Id);
+                    camIndex = GetCamIndexById(SettingsType.Cam2Id);
                     break;
                 case "Cam3Grid":
                     camNumber = 3;
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam3X),
                                             configService.Read<float>(SettingsType.Cam3Y));
-                    camIndex = GetCamIndex(SettingsType.Cam3Id);
+                    camIndex = GetCamIndexById(SettingsType.Cam3Id);
                     break;
                 case "Cam4Grid":
                     camNumber = 4;
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam4X),
                                             configService.Read<float>(SettingsType.Cam4Y));
-                    camIndex = GetCamIndex(SettingsType.Cam4Id);
+                    camIndex = GetCamIndexById(SettingsType.Cam4Id);
                     break;
             }
 
@@ -120,7 +121,7 @@ namespace OneHundredAndEightyCore.Recognition
             RefreshImageBoxes();
         }
 
-        private int GetCamIndex(SettingsType camIdSetting)
+        private int GetCamIndexById(SettingsType camIdSetting)
         {
             var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
             var camId = configService.Read<string>(camIdSetting);

@@ -62,9 +62,9 @@ namespace OneHundredAndEightyCore.Game
             detectionService.RunDetection();
 
             var selectedGameType = Converter.NewGameControlsToGameType(mainWindow.NewGameTypeComboBox);
-            var legs = Converter.ComboBoxSelectedContentToInt(mainWindow.NewGameLegsComboBox);
-            var sets = Converter.ComboBoxSelectedContentToInt(mainWindow.NewGameSetsComboBox);
-            var legPoints = Converter.ComboBoxSelectedContentToString(mainWindow.NewGamePointsComboBox);
+            var legs = Converter.ToInt(mainWindow.NewGameLegsComboBox.Text);
+            var sets = Converter.ToInt(mainWindow.NewGameSetsComboBox.Text);
+            var legPoints = mainWindow.NewGamePointsComboBox.Text;
 
             GameType = selectedGameType;
 

@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Game;
@@ -98,13 +97,6 @@ namespace OneHundredAndEightyCore.Common
             ms.Write(imageBytes, 0, imageBytes.Length);
             var image = Image.FromStream(ms, true);
             return image;
-        }
-
-        public static Visibility ControlVisibilityToggle(Visibility visibility)
-        {
-            return visibility == Visibility.Visible
-                       ? Visibility.Hidden
-                       : Visibility.Visible;
         }
 
         public static GameType NewGameControlsToGameType(ComboBox newGameTypeComboBox)
@@ -200,16 +192,6 @@ namespace OneHundredAndEightyCore.Common
                 default:
                     return -1;
             }
-        }
-
-        public static string ComboBoxSelectedContentToString(ComboBox combobox)
-        {
-            return (combobox.SelectedItem as ComboBoxItem)?.Content.ToString();
-        }
-
-        public static int ComboBoxSelectedContentToInt(ComboBox combobox)
-        {
-            return Convert.ToInt32((combobox.SelectedItem as ComboBoxItem)?.Content);
         }
 
         public static double ToDouble(string value)

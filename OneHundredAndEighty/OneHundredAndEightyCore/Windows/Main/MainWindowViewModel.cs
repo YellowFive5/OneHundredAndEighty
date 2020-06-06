@@ -3,13 +3,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Autofac;
+using DirectShowLib;
 using Microsoft.Win32;
 using NLog;
 using OneHundredAndEightyCore.Common;
@@ -86,6 +89,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             LoadSettings();
             mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
             LoadPlayers();
+            FindConnectedCams();
         }
 
         private void LoadPlayers()
@@ -188,10 +192,10 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void CalibrateCamsSetupPoints()
         {
-            var cam1SetupSector = Converter.ComboBoxSelectedContentToString(mainWindow.Cam1SetupSector);
-            var cam2SetupSector = Converter.ComboBoxSelectedContentToString(mainWindow.Cam2SetupSector);
-            var cam3SetupSector = Converter.ComboBoxSelectedContentToString(mainWindow.Cam3SetupSector);
-            var cam4SetupSector = Converter.ComboBoxSelectedContentToString(mainWindow.Cam4SetupSector);
+            var cam1SetupSector = mainWindow.Cam1SetupSector.Text;
+            var cam2SetupSector = mainWindow.Cam2SetupSector.Text;
+            var cam3SetupSector = mainWindow.Cam3SetupSector.Text;
+            var cam4SetupSector = mainWindow.Cam4SetupSector.Text;
 
             var toCam1CmDistance = Converter.ToDouble(mainWindow.ToCam1Distance.Text);
             var toCam2CmDistance = Converter.ToDouble(mainWindow.ToCam2Distance.Text);
@@ -224,10 +228,10 @@ namespace OneHundredAndEightyCore.Windows.Main
             configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
             configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
             configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
-            configService.Write(SettingsType.Cam1SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam1SetupSector));
-            configService.Write(SettingsType.Cam2SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam2SetupSector));
-            configService.Write(SettingsType.Cam3SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam3SetupSector));
-            configService.Write(SettingsType.Cam4SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam4SetupSector));
+            configService.Write(SettingsType.Cam1SetupSector, mainWindow.Cam1SetupSector.Text);
+            configService.Write(SettingsType.Cam2SetupSector, mainWindow.Cam2SetupSector.Text);
+            configService.Write(SettingsType.Cam3SetupSector, mainWindow.Cam3SetupSector.Text);
+            configService.Write(SettingsType.Cam4SetupSector, mainWindow.Cam4SetupSector.Text);
         }
 
         public void SelectAvatarImage()
@@ -303,6 +307,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void StartCrossing()
         {
+            SaveSettingsIfDirty();
             ToggleMainTabItemsEnabled();
             mainWindow.CrossingStopButton.IsEnabled = !mainWindow.CrossingStopButton.IsEnabled;
 
@@ -606,10 +611,10 @@ namespace OneHundredAndEightyCore.Windows.Main
                 configService.Write(SettingsType.Cam4SurfaceCenterSlider, mainWindow.Cam4SurfaceCenterSlider.Value);
                 configService.Write(SettingsType.Cam4RoiPosYSlider, mainWindow.Cam4RoiPosYSlider.Value);
                 configService.Write(SettingsType.Cam4RoiHeightSlider, mainWindow.Cam4RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam1SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam1SetupSector));
-                configService.Write(SettingsType.Cam2SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam2SetupSector));
-                configService.Write(SettingsType.Cam3SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam3SetupSector));
-                configService.Write(SettingsType.Cam4SetupSector, Converter.ComboBoxSelectedContentToString(mainWindow.Cam4SetupSector));
+                configService.Write(SettingsType.Cam1SetupSector, mainWindow.Cam1SetupSector.Text);
+                configService.Write(SettingsType.Cam2SetupSector, mainWindow.Cam2SetupSector.Text);
+                configService.Write(SettingsType.Cam3SetupSector, mainWindow.Cam3SetupSector.Text);
+                configService.Write(SettingsType.Cam4SetupSector, mainWindow.Cam4SetupSector.Text);
                 IsSettingsDirty = false;
             }
 
@@ -628,5 +633,38 @@ namespace OneHundredAndEightyCore.Windows.Main
         }
 
         #endregion
+
+        public void FindConnectedCams()
+        {
+            var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
+            var str = new StringBuilder();
+            for (var i = 0; i < allCams.Count; i++)
+            {
+                var cam = allCams[i];
+                var camId = cam.DevicePath.Substring(44, 10);
+                str.AppendLine($"[{cam.Name}]-[ID:'{camId}']");
+            }
+
+            mainWindow.CamsTextBox.Text = allCams.Count == 0
+                                              ? "No cameras found"
+                                              : str.ToString();
+        }
+
+        public void CheckCamsSimultaneousWork()
+        {
+            SaveSettingsIfDirty();
+            try
+            {
+                mainWindow.CheckCams.IsEnabled = false;
+                detectionService.PrepareCamsAndTryCapture(CamServiceWorkingMode.Check);
+                mainWindow.CamsTextBox.Text = "Checked cams simultaneous work: OK";
+                mainWindow.CheckCams.IsEnabled = true;
+            }
+            catch (Exception e)
+            {
+                mainWindow.CheckCams.IsEnabled = true;
+                mainWindow.CamsTextBox.Text = "Checked cams simultaneous work: ERROR";
+            }
+        }
     }
 }

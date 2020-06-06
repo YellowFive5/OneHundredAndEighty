@@ -65,10 +65,10 @@ namespace OneHundredAndEightyCore.Recognition
         {
             this.workingMode = workingMode;
             cams = new List<CamService>();
-            var cam1Active = configService.Read<bool>(SettingsType.Cam1CheckBox) && !App.NoCams;
-            var cam2Active = configService.Read<bool>(SettingsType.Cam2CheckBox) && !App.NoCams;
-            var cam3Active = configService.Read<bool>(SettingsType.Cam3CheckBox) && !App.NoCams;
-            var cam4Active = configService.Read<bool>(SettingsType.Cam4CheckBox) && !App.NoCams;
+            var cam1Active = mainWindow.Cam1CheckBox.IsChecked.Value && !App.NoCams;
+            var cam2Active = mainWindow.Cam2CheckBox.IsChecked.Value && !App.NoCams;
+            var cam3Active = mainWindow.Cam3CheckBox.IsChecked.Value && !App.NoCams;
+            var cam4Active = mainWindow.Cam4CheckBox.IsChecked.Value && !App.NoCams;
 
             if (cam1Active)
             {

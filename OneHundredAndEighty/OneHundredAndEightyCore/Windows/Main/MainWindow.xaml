@@ -21,12 +21,11 @@
         <Style x:Key="LabelStyle" BasedOn="{StaticResource MainWindowLabelStyle}" />
         <Style x:Key="SetupSectorsComboboxStyle" TargetType="ComboBox"
                BasedOn="{StaticResource MainWindowSetupSectorsComboboxStyle}">
-            <EventSetter Event="TextBox.TextChanged" Handler="SetSettingDirty" />
+            <EventSetter Event="ComboBox.SelectionChanged" Handler="SetSettingDirty" />
         </Style>
     </Window.Resources>
     <Grid>
-        <TabControl Name="MainTabControl"
-                    SelectionChanged="OnTabSelectionChanged">
+        <TabControl Name="MainTabControl">
             <TabItem Name="GameTabItem"
                      Header="Game">
                 <Grid ShowGridLines="False">
@@ -62,8 +61,8 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Game type"
                            Grid.Row="3"
-                           Grid.Column="1" 
-                           HorizontalAlignment="Right" 
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
                            VerticalAlignment="Center" />
                     <ComboBox Name="NewGameTypeComboBox"
                               Grid.Row="3"
@@ -169,7 +168,7 @@
                     <Label x:Name="NewGamePointsLabel"
                            Content="Points"
                            Grid.Row="1"
-                           Grid.Column="5" 
+                           Grid.Column="5"
                            VerticalAlignment="Bottom" />
                 </Grid>
             </TabItem>
@@ -492,8 +491,7 @@
                                          Grid.Column="7"
                                          Width="100"
                                          Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
                                 <Label Content="X"
                                        Grid.Row="1"
                                        Grid.Column="13"
@@ -517,8 +515,7 @@
                                          Grid.Column="7"
                                          Width="100"
                                          Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
                                 <TextBox x:Name="Cam3XTextBox"
                                          Grid.Row="7"
                                          Grid.Column="13"
@@ -542,8 +539,7 @@
                                          Grid.Column="7"
                                          Width="100"
                                          Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}"
-                                         TextChanged="SetSettingDirty" />
+                                         ToolTip="{x:Static resx:Resources.CamIdHelperText}" />
                                 <Label Content="Id"
                                        Grid.Row="1"
                                        Grid.Column="7"
@@ -619,19 +615,37 @@
                                           Grid.Column="9"
                                           Style="{StaticResource SetupSectorsComboboxStyle}"
                                           ToolTip="{x:Static resx:Resources.CamSetupSectorHelperText}" />
+                                <TextBox Name="CamsTextBox"
+                                         Grid.Row="13"
+                                         Grid.Column="5"
+                                         Grid.RowSpan="5"
+                                         Grid.ColumnSpan="3"
+                                         IsReadOnly="True" />
+                                <Button Name="FindCams"
+                                        Content="Find cams"
+                                        Grid.Row="13"
+                                        Grid.Column="9"
+                                        Click="OnFindCamsButtonClick" />
+                                <Button Name="CheckCams"
+                                        Content="Check"
+                                        Grid.Row="15"
+                                        Grid.Column="9"
+                                        Click="OnCheckCamsButtonClick" />
                                 <Button Name="CrossingStartButton"
                                         Content="Start"
-                                        Grid.Row="15"
+                                        Grid.Row="21"
                                         Grid.Column="5"
                                         Click="OnCrossingStartButtonClick" />
                                 <Button Name="CrossingStopButton"
                                         Content="Stop"
-                                        Grid.Row="15"
+                                        Grid.Row="21"
                                         Grid.Column="7"
                                         Click="OnCrossingStopButtonClick"
                                         IsEnabled="False" />
-                                <TextBlock Grid.Row="13"
+                                <TextBlock Grid.Row="19"
                                            Grid.Column="5"
+                                           Grid.ColumnSpan="3"
+                                           HorizontalAlignment="Center"
                                            FontFamily="Agency FB"
                                            FontSize="16">
                                     <Hyperlink

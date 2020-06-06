@@ -184,5 +184,15 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             viewModel.StopCrossing();
         }
+
+        private void OnFindCamsButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.FindConnectedCams();
+        }
+
+        private void OnCheckCamsButtonClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.CheckCamsSimultaneousWork();
+        }
     }
 }
