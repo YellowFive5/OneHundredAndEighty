@@ -42,6 +42,7 @@ timeline ↓
 - [x] Classic game type
 - [x] Runtime crossing debug mode
 - [x] Resizable windows with position save
+- [x] Cams checker
 - [ ] Throw manual correction
 - [ ] Throw undo
 - [ ] Manual hand end
