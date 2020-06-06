@@ -1,3 +1,13 @@
+## Contents
+* [OneHundredAndEightyCore](https://github.com/YellowFive5/OneHundredAndEighty#onehundredandeightycore)
+* [Release notes](https://github.com/YellowFive5/OneHundredAndEighty#release-notes)
+* [Quick start guide](https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-)
+  - [General advices](https://github.com/YellowFive5/OneHundredAndEighty#1-general-advices)
+  - [Some things to DIY](https://github.com/YellowFive5/OneHundredAndEighty#2-some-things-to-diy)
+  - [App setup](https://github.com/YellowFive5/OneHundredAndEighty#3-app-setup)
+  - [Database.db](https://github.com/YellowFive5/OneHundredAndEighty#4-databasedb)
+  - [Detection working process](https://github.com/YellowFive5/OneHundredAndEighty#5-detection-working-process)  
+  
 # OneHundredAndEighty 
 * [Archived], not deleted bacause of history =)
 * Manual darts score calculator with some cool stuff...
@@ -31,7 +41,7 @@ timeline ↓
 
 - [x] Classic game type
 - [x] Runtime crossing debug mode
-- [ ] Resizable windows with position save
+- [x] Resizable windows with position save
 - [ ] Throw manual correction
 - [ ] Throw undo
 - [ ] Manual hand end
