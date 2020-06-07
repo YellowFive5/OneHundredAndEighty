@@ -147,7 +147,7 @@ Most of this values you don’t need to change, but if you want you can experime
 
 ### Cams setup
 
-![IMG_2259](https://user-images.githubusercontent.com/42347722/79062894-ac93bc80-7ca6-11ea-8736-e73ee95ef7eb.png)
+<img width="586" alt="2020-06-07 11_56_37-Фотографии" src="https://user-images.githubusercontent.com/42347722/83964526-6332a880-a8b6-11ea-9580-62b4f9023a04.png">
 
 1. Set general values
 2. Set cams ID's (use 'Find cams' button to find cam ID)
