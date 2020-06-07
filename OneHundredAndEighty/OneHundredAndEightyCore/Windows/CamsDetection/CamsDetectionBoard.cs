@@ -67,14 +67,14 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
 
         public void PrintThrow(DetectedThrow thrw)
         {
-            camsDetectionWindow.PointsBox.Text = thrw.ToString();
+            camsDetectionWindow.PointsText.Text = thrw.ToString();
             camsDetectionWindow.PointsHistoryBox.Text = $"{camsDetectionWindow.PointsHistoryBox.Text}\n{thrw}";
             camsDetectionWindow.PointsHistoryBox.ScrollToEnd();
         }
 
         public void ClearPointsBox()
         {
-            camsDetectionWindow.PointsBox.Text = string.Empty;
+            camsDetectionWindow.PointsText.Text = string.Empty;
         }
 
         public void ClearHistoryPointsBox()

@@ -173,12 +173,14 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Row="0"
                     Grid.Column="1"
-                    Content="Undo trow" 
-                    Click="UndoThrowButtonClick"/>
+                    Content="Undo trow"
+                    Click="UndoThrowButtonClick"
+                    Visibility="Hidden"/>
             <Button Grid.Row="0"
                     Grid.Column="2"
-                    Content="Correct throw" 
-                    Click="CorrectThrowButtonClick"/>
+                    Content="Correct throw"
+                    Click="CorrectThrowButtonClick" 
+                    Visibility="Hidden"/>
             <TextBox x:Name="PointsHistoryBox"
                      Grid.Row="1"
                      Grid.Column="0"
@@ -188,14 +190,15 @@
                      FontSize="10"
                      VerticalContentAlignment="Bottom"
                      VerticalScrollBarVisibility="Auto" />
-            <TextBox x:Name="PointsBox"
-                     Grid.Row="3"
+            <Viewbox Grid.Row="3"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"
-                     TextWrapping="Wrap"
-                     IsReadOnly="True"
-                     FontWeight="Bold"
-                     FontSize="30" />
+                     HorizontalAlignment="Center">
+                <TextBlock Name="PointsText"
+                           TextWrapping="Wrap"
+                           Text="501"
+                           Style="{StaticResource ScoreWindowTextStyle}" />
+            </Viewbox>
         </Grid>
     </Grid>
 </Window>

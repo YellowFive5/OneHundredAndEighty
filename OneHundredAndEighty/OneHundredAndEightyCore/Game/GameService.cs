@@ -213,6 +213,7 @@ namespace OneHundredAndEightyCore.Game
 
             IsGameRun = false;
             scoreBoardService.CloseScoreBoard();
+            camsDetectionBoard.Close();
             detectionService.StopDetection();
             drawService.ProjectionClear();
             dbService.GameEnd(Game, winner);
