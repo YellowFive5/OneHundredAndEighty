@@ -9,7 +9,7 @@ namespace OneHundredAndEightyCore.Tests
     public class TestBase
     {
         [SetUp]
-        public void Setup()
+        protected virtual void Setup()
         {
         }
     }

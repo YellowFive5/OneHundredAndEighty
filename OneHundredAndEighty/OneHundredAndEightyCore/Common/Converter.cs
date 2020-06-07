@@ -32,11 +32,6 @@ namespace OneHundredAndEightyCore.Common
             return playersList;
         }
 
-        public static DateTime DateTimeFromString(string dateTimeStringFromDb)
-        {
-            return DateTime.Parse(dateTimeStringFromDb);
-        }
-
         public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
         {
             var ms = new MemoryStream();
