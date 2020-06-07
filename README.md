@@ -154,6 +154,7 @@ Most of this values you don’t need to change, but if you want you can experime
 <img width="260" alt="2020-06-07 10_34_14-" src="https://user-images.githubusercontent.com/42347722/83964279-a68c1780-a8b4-11ea-9ccc-fffbc26a61ff.png">
 
 Keep in mind one thing - when you plug off cams and plug it again, but in another usb - ID of cam will change. So, try to connect cams one way to not change setups every time.
+
 3. Set cams setup sectors (9-5-1-4 is classics)
 
 ![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063125-67708a00-7ca8-11ea-81da-fc6652e40a87.jpg)
