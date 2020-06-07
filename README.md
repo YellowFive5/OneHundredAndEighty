@@ -14,14 +14,16 @@
   
 # OneHundredAndEightyCore
 * All-in-one steel tip darts desktop app
-* Version [2.1 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)
+* Version [2.2 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)
 * Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
   - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly (with near 100% load ;-P )
 * 🐞  Known problems / bug reports:
   - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed someday
   
-![180app2 0](https://user-images.githubusercontent.com/42347722/78453424-4bfaf300-769a-11ea-9ddf-bf09598b37e4.jpg)
+<img width="1453" alt="2020-06-07 10_43_46-" src="https://user-images.githubusercontent.com/42347722/83963874-a2aac600-a8b1-11ea-8f36-37952bed37f1.png">
+<img width="1125" alt="2020-06-07 10_55_27-" src="https://user-images.githubusercontent.com/42347722/83963876-a50d2000-a8b1-11ea-9b25-eb9e79b0907f.png">
+
 
 ## Release notes:
 timeline ↓
@@ -43,12 +45,15 @@ timeline ↓
 - [x] Runtime crossing debug mode
 - [x] Resizable windows with position save
 - [x] Cams checker
+
+✅ [[**v.2.2 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)]
+
 - [ ] Throw manual correction
 - [ ] Throw undo
 - [ ] Manual hand end
 - [ ] UI prettyfy
 
-⭕ [**v.2.2 Release**]
+⭕ [**v.2.3 Release**]
 - [ ] ...
 - **Unsorted todo's:**
 - [ ] CamCalibrator itegration
@@ -98,17 +103,16 @@ Classic positions for cams setup:
 
 ![Untitled Diagram](https://user-images.githubusercontent.com/42347722/79052102-ac5ed700-7c3c-11ea-8d13-7ed0de6bfa70.jpg)
 
-Notice, that it can be situation, when all your connected cams will not be work together at same time. It happens because there are not enough power in 1 PC usb port for working 2+ cams at same time. You can see all 4 cams connected via Control Panel but they don't work under load simultaneously. To check this situation, you can use [CamCalibrator](https://github.com/YellowFive5/DartboardRecognition/releases/tag/1.3). Just run it 4 times simultaneously and run in on all 4 cams. If not, all cams translate image - you need to reconnect cams different way.
+Notice, that it can be situation, when all your connected cams will not be work together at same time. It happens because there are not enough power in 1 PC usb port for working 2+ cams at same time. You can see all 4 cams connected via Control Panel but they don't work under load simultaneously. To check this situation go to Setup tab, check cams, and hit 'Check' button
+<img width="243" alt="2020-06-07 10_34_45-" src="https://user-images.githubusercontent.com/42347722/83964244-52813300-a8b4-11ea-9372-5e1528478be5.png">
+
+When ERROR prints - you need to reconnect cams different way.
   
 ### [CamCalibrator](https://github.com/YellowFive5/DartboardRecognition/releases/tag/1.3)
 
 CamCalibrator is simple project to presetup camera when you fix it on stand. The idea is to stick dart into bull and run calibrator. You need to set camera like next screenshot. Blue line goes through dart, red line lies on dartboard surface. Then you fix camera tightly. Setup all your cameras this way.
 
-![Скриншот 2019-11-09 18 38 54](https://user-images.githubusercontent.com/42347722/79052109-bd0f4d00-7c3c-11ea-88f2-b65c852e4f68.png)
-
-All connected to PC cameras will be print in textbox. Each of camera have ID, which you can check this way. This ID's will be need for main app setup.
-
-Keep in mind one thing - when you plug off cams and plug it again, but in another usb - ID of cam will change. So, try to connect cams one way to not change setups every time.
+![Скриншот 2019-11-09 18 38 545](https://user-images.githubusercontent.com/42347722/83964355-1ac6bb00-a8b5-11ea-88ae-913abd658104.png)
 
 ## 2. Some things to DIY:
 
@@ -143,10 +147,14 @@ Most of this values you don’t need to change, but if you want you can experime
 
 ### Cams setup
 
-![IMG_2259](https://user-images.githubusercontent.com/42347722/79062894-ac93bc80-7ca6-11ea-8736-e73ee95ef7eb.png)
+<img width="586" alt="2020-06-07 11_56_37-Фотографии" src="https://user-images.githubusercontent.com/42347722/83964526-6332a880-a8b6-11ea-9580-62b4f9023a04.png">
 
 1. Set general values
-2. Set cams ID's (use [CamCalibrator](https://github.com/YellowFive5/DartboardRecognition/releases/tag/1.3) to find cam ID)
+2. Set cams ID's (use 'Find cams' button to find cam ID)
+<img width="260" alt="2020-06-07 10_34_14-" src="https://user-images.githubusercontent.com/42347722/83964279-a68c1780-a8b4-11ea-9ccc-fffbc26a61ff.png">
+
+Keep in mind one thing - when you plug off cams and plug it again, but in another usb - ID of cam will change. So, try to connect cams one way to not change setups every time.
+
 3. Set cams setup sectors (9-5-1-4 is classics)
 
 ![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063125-67708a00-7ca8-11ea-81da-fc6652e40a87.jpg)
