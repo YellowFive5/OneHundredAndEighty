@@ -19,3 +19,5 @@
 /OneHundredAndEighty/OneHundredAndEightyCore/kill180app.bat
 /OneHundredAndEighty/OneHundredAndEightyCore/OneHundredAndEightyCore.args.json
 /OneHundredAndEighty/OneHundredAndEightyCore/Properties/launchSettings.json
+/OneHundredAndEighty/OneHundredAndEightyCore.Tests/obj
+/OneHundredAndEighty/OneHundredAndEightyCore.Tests/bin/Debug/netcoreapp3.1

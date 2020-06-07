@@ -194,6 +194,11 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
+        public static string ToString(object value)
+        {
+            return Convert.ToString(value, CultureInfo.InvariantCulture);
+        }
+
         public static double ToDouble(string value)
         {
             return Convert.ToDouble(value, CultureInfo.InvariantCulture);
@@ -217,11 +222,6 @@ namespace OneHundredAndEightyCore.Common
         public static bool ToBool(string value)
         {
             return Convert.ToBoolean(value);
-        }
-
-        public static string ToString(object value)
-        {
-            return Convert.ToString(value, CultureInfo.InvariantCulture);
         }
     }
 }
