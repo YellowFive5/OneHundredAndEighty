@@ -50,6 +50,12 @@ namespace OneHundredAndEightyCore.Common
             return image;
         }
 
+        public static BitmapImage Base64ToBitmapImage(string base64String)
+        {
+            var image = (Bitmap) Base64ToImage(base64String);
+            return BitmapToBitmapImage(image);
+        }
+
         public static string BitmapImageToBase64(BitmapImage bitmapImage)
         {
             var image = BitmapImageToBitmap(bitmapImage);
@@ -69,12 +75,6 @@ namespace OneHundredAndEightyCore.Common
             }
 
             return null; // todo
-        }
-
-        private static BitmapImage Base64ToBitmapImage(string base64String)
-        {
-            var image = (Bitmap) Base64ToImage(base64String);
-            return BitmapToBitmapImage(image);
         }
 
         private static string ImageToBase64(Image image, ImageFormat format)
