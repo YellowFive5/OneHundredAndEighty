@@ -216,22 +216,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             mainWindow.Cam4XTextBox.Text = Converter.ToString(calibratedCam4SetupPoint.X);
             mainWindow.Cam4YTextBox.Text = Converter.ToString(calibratedCam4SetupPoint.Y);
 
-            configService.Write(SettingsType.Cam1X, calibratedCam1SetupPoint.X);
-            configService.Write(SettingsType.Cam1Y, calibratedCam1SetupPoint.Y);
-            configService.Write(SettingsType.Cam2X, calibratedCam2SetupPoint.X);
-            configService.Write(SettingsType.Cam2Y, calibratedCam2SetupPoint.Y);
-            configService.Write(SettingsType.Cam3X, calibratedCam3SetupPoint.X);
-            configService.Write(SettingsType.Cam3Y, calibratedCam3SetupPoint.Y);
-            configService.Write(SettingsType.Cam4X, calibratedCam4SetupPoint.X);
-            configService.Write(SettingsType.Cam4Y, calibratedCam4SetupPoint.Y);
-            configService.Write(SettingsType.ToCam1Distance, mainWindow.ToCam1Distance.Text);
-            configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
-            configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
-            configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
-            configService.Write(SettingsType.Cam1SetupSector, mainWindow.Cam1SetupSector.Text);
-            configService.Write(SettingsType.Cam2SetupSector, mainWindow.Cam2SetupSector.Text);
-            configService.Write(SettingsType.Cam3SetupSector, mainWindow.Cam3SetupSector.Text);
-            configService.Write(SettingsType.Cam4SetupSector, mainWindow.Cam4SetupSector.Text);
+            SaveSettingsIfDirty();
         }
 
         public void SelectAvatarImage()
