@@ -75,7 +75,7 @@ namespace OneHundredAndEightyCore.Windows.Score
                     throw new ArgumentOutOfRangeException(nameof(status), status, null);
             }
 
-            control.Fill = color;
+            DoWithDispatcher(() => { control.Fill = color; }, control);
         }
 
         protected void SetThrowNumber(Rectangle throw1Control,
@@ -86,19 +86,31 @@ namespace OneHundredAndEightyCore.Windows.Score
             switch (number)
             {
                 case ThrowNumber.FirstThrow:
-                    throw1Control.Fill = blackBrush;
-                    throw2Control.Fill = blackBrush;
-                    throw3Control.Fill = blackBrush;
+                    DoWithDispatcher(() =>
+                                     {
+                                         throw1Control.Fill = blackBrush;
+                                         throw2Control.Fill = blackBrush;
+                                         throw3Control.Fill = blackBrush;
+                                     },
+                                     throw1Control);
                     break;
                 case ThrowNumber.SecondThrow:
-                    throw1Control.Fill = transparentBrush;
-                    throw2Control.Fill = blackBrush;
-                    throw3Control.Fill = blackBrush;
+                    DoWithDispatcher(() =>
+                                     {
+                                         throw1Control.Fill = transparentBrush;
+                                         throw2Control.Fill = blackBrush;
+                                         throw3Control.Fill = blackBrush;
+                                     },
+                                     throw1Control);
                     break;
                 case ThrowNumber.ThirdThrow:
-                    throw1Control.Fill = transparentBrush;
-                    throw2Control.Fill = transparentBrush;
-                    throw3Control.Fill = blackBrush;
+                    DoWithDispatcher(() =>
+                                     {
+                                         throw1Control.Fill = transparentBrush;
+                                         throw2Control.Fill = transparentBrush;
+                                         throw3Control.Fill = blackBrush;
+                                     },
+                                     throw1Control);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(number), number, null);
@@ -108,13 +120,15 @@ namespace OneHundredAndEightyCore.Windows.Score
         protected void AddPoints(TextBlock control, int pointsToAdd)
         {
             FadeIn(control);
-            control.Text = Converter.ToString(int.Parse(control.Text) + pointsToAdd);
+            DoWithDispatcher(() => { control.Text = Converter.ToString(int.Parse(control.Text) + pointsToAdd); },
+                             control);
         }
 
         protected void SetPoints(TextBlock control, int pointsToSet)
         {
             FadeIn(control);
-            control.Text = Converter.ToString(pointsToSet);
+            DoWithDispatcher(() => { control.Text = Converter.ToString(pointsToSet); },
+                             control);
         }
 
         protected void CheckoutShow(Grid checkoutGrid,
@@ -130,7 +144,8 @@ namespace OneHundredAndEightyCore.Windows.Score
                                       string hint)
         {
             FadeIn(checkoutControl);
-            checkoutControl.Text = hint;
+            DoWithDispatcher(() => { checkoutControl.Text = hint; },
+                             checkoutControl);
         }
 
         protected void CheckoutHide(Grid checkoutGrid,
@@ -143,22 +158,35 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         protected void FadeIn(FrameworkElement grid)
         {
-            var sb = new Storyboard();
-            var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeIn, grid);
-            sb.Children.Add(fadeIn);
-            sb.Begin();
+            DoWithDispatcher(() =>
+                             {
+                                 var sb = new Storyboard();
+                                 var fadeIn = new DoubleAnimation {From = 0, To = 1, Duration = fadeTime};
+                                 Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
+                                 Storyboard.SetTarget(fadeIn, grid);
+                                 sb.Children.Add(fadeIn);
+                                 sb.Begin();
+                             },
+                             grid);
         }
 
         protected void FadeOut(FrameworkElement grid)
         {
-            var sb = new Storyboard();
-            var fadeOut = new DoubleAnimation {From = 1, To = 0, Duration = fadeTime};
-            Storyboard.SetTargetProperty(fadeOut, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(fadeOut, grid);
-            sb.Children.Add(fadeOut);
-            sb.Begin();
+            DoWithDispatcher(() =>
+                             {
+                                 var sb = new Storyboard();
+                                 var fadeOut = new DoubleAnimation {From = 1, To = 0, Duration = fadeTime};
+                                 Storyboard.SetTargetProperty(fadeOut, new PropertyPath(OpacityProperty));
+                                 Storyboard.SetTarget(fadeOut, grid);
+                                 sb.Children.Add(fadeOut);
+                                 sb.Begin();
+                             },
+                             grid);
+        }
+
+        private void DoWithDispatcher(Action action, FrameworkElement element)
+        {
+            element.Dispatcher.Invoke(action);
         }
     }
 }
