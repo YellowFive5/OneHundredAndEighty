@@ -14,14 +14,16 @@
   
 # OneHundredAndEightyCore
 * All-in-one steel tip darts desktop app
-* Version [2.1 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.1)
+* Version [2.2 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)
 * Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
   - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly (with near 100% load ;-P )
 * 🐞  Known problems / bug reports:
   - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed someday
   
-![180app2 0](https://user-images.githubusercontent.com/42347722/78453424-4bfaf300-769a-11ea-9ddf-bf09598b37e4.jpg)
+<img width="1453" alt="2020-06-07 10_43_46-" src="https://user-images.githubusercontent.com/42347722/83963874-a2aac600-a8b1-11ea-8f36-37952bed37f1.png">
+<img width="1125" alt="2020-06-07 10_55_27-" src="https://user-images.githubusercontent.com/42347722/83963876-a50d2000-a8b1-11ea-9b25-eb9e79b0907f.png">
+
 
 ## Release notes:
 timeline ↓
@@ -43,12 +45,15 @@ timeline ↓
 - [x] Runtime crossing debug mode
 - [x] Resizable windows with position save
 - [x] Cams checker
+
+✅ [[**v.2.2 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)]
+
 - [ ] Throw manual correction
 - [ ] Throw undo
 - [ ] Manual hand end
 - [ ] UI prettyfy
 
-⭕ [**v.2.2 Release**]
+⭕ [**v.2.3 Release**]
 - [ ] ...
 - **Unsorted todo's:**
 - [ ] CamCalibrator itegration
