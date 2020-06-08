@@ -11,7 +11,7 @@ using OneHundredAndEightyCore.Game;
 
 namespace OneHundredAndEightyCore.Common
 {
-    public class DBService : IDisposable
+    public class DBService : IDBService, IDisposable
     {
         private readonly SQLiteConnection connection;
 

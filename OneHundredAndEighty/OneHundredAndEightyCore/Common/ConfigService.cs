@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Globalization;
 using NLog;
 
 #endregion
@@ -12,9 +11,9 @@ namespace OneHundredAndEightyCore.Common
     {
         private readonly object locker;
         private readonly Logger logger;
-        private readonly DBService dbService;
+        private readonly IDBService dbService;
 
-        public ConfigService(Logger logger, DBService dbService)
+        public ConfigService(Logger logger, IDBService dbService)
         {
             this.logger = logger;
             this.dbService = dbService;
@@ -61,7 +60,7 @@ namespace OneHundredAndEightyCore.Common
                 }
                 else
                 {
-                    throw new Exception($"Not supported type for {nameof(Read)} method");
+                    throw new FormatException($"Not supported type for {nameof(Read)} method");
                 }
 
                 return (T) value;
