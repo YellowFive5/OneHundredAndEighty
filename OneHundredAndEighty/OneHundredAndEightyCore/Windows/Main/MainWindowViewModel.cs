@@ -100,21 +100,22 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void StartGame()
         {
-            if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameTypeComboBox))
+            if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameTypeComboBox.Text))
             {
                 messageBoxService.ShowError(Resources.Resources.NotImplementedYetErrorText);
                 return;
             }
 
-            if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameTypeComboBox,
-                                                               mainWindow.NewGamePlayer1ComboBox,
-                                                               mainWindow.NewGamePlayer2ComboBox))
+            if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameTypeComboBox.Text,
+                                                               mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player,
+                                                               mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player))
             {
                 messageBoxService.ShowError(Resources.Resources.NewGamePlayersNotSelectedErrorText);
                 return;
             }
 
-            if (!Validator.ValidateStartNewClassicGamePoints(mainWindow.NewGameTypeComboBox, mainWindow.NewGamePointsComboBox))
+            if (!Validator.ValidateStartNewClassicGame(mainWindow.NewGameTypeComboBox.Text,
+                                                             mainWindow.NewGamePointsComboBox.Text))
             {
                 messageBoxService.ShowError(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
                 return;
@@ -229,7 +230,8 @@ namespace OneHundredAndEightyCore.Windows.Main
             if (ofd.ShowDialog() == true)
             {
                 var image = new BitmapImage(new Uri(ofd.FileName));
-                if (Validator.ValidateNewPlayerAvatar(image))
+                if (Validator.ValidateNewPlayerAvatar(image.PixelHeight,
+                                                      image.PixelWidth))
                 {
                     mainWindow.NewPlayerAvatar.Source = image;
                 }
@@ -404,9 +406,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             mainWindow.NewGamePointsComboBox.IsEnabled = !mainWindow.NewGamePointsComboBox.IsEnabled;
         }
 
-        public void ToggleNewGameControlsVisibility()
+        public void ToggleNewGameControlsVisibility(string selection)
         {
-            var selectedGameType = Converter.NewGameControlsToGameType(mainWindow.NewGameTypeComboBox);
+            var selectedGameType = Enum.Parse<GameType>(selection);
 
             switch (selectedGameType)
             {

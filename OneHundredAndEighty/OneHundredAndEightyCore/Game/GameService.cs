@@ -61,7 +61,7 @@ namespace OneHundredAndEightyCore.Game
             detectionService.PrepareCamsAndTryCapture();
             detectionService.RunDetection();
 
-            var selectedGameType = Converter.NewGameControlsToGameType(mainWindow.NewGameTypeComboBox);
+            var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox.Text);
             var legs = Converter.ToInt(mainWindow.NewGameLegsComboBox.Text);
             var sets = Converter.ToInt(mainWindow.NewGameSetsComboBox.Text);
             var legPoints = mainWindow.NewGamePointsComboBox.Text;

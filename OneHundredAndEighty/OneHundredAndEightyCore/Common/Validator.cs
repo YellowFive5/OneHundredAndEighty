@@ -1,8 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Game;
 
 #endregion
@@ -16,19 +14,17 @@ namespace OneHundredAndEightyCore.Common
             return !string.IsNullOrWhiteSpace(newPlayerName) && !string.IsNullOrWhiteSpace(newPlayerNickName);
         }
 
-        public static bool ValidateNewPlayerAvatar(BitmapImage image)
+        public static bool ValidateNewPlayerAvatar(int imagePixelHeight, int imagePixelWidth)
         {
-            return image.PixelHeight <= 500 && image.PixelWidth <= 500;
+            return imagePixelHeight <= 1000 && imagePixelWidth <= 1000;
         }
 
-        public static bool ValidateStartNewGamePlayersSelected(ComboBox newGameTypeComboBox,
-                                                               ComboBox newGamePlayer1ComboBox,
-                                                               ComboBox newGamePlayer2ComboBox)
+        public static bool ValidateStartNewGamePlayersSelected(string newGameTypeString,
+                                                               Player selectedPlayer1,
+                                                               Player selectedPlayer2)
         {
             bool valid;
-            var selectedGameType = Converter.NewGameControlsToGameType(newGameTypeComboBox);
-            var selectedPlayer1 = newGamePlayer1ComboBox.SelectedItem as Player;
-            var selectedPlayer2 = newGamePlayer2ComboBox.SelectedItem as Player;
+            var selectedGameType = Enum.Parse<GameType>(newGameTypeString);
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingle:
@@ -46,9 +42,9 @@ namespace OneHundredAndEightyCore.Common
             return valid;
         }
 
-        public static bool ValidateImplementedGameTypes(ComboBox newGameTypeComboBox)
+        public static bool ValidateImplementedGameTypes(string newGameTypeString)
         {
-            var selectedGameType = Converter.NewGameControlsToGameType(newGameTypeComboBox);
+            var selectedGameType = Enum.Parse<GameType>(newGameTypeString);
             switch (selectedGameType)
             {
                 case GameType.FreeThrowsSingle:
@@ -60,20 +56,17 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        public static bool ValidateStartNewClassicGamePoints(ComboBox newGameTypeComboBox,
-                                                             ComboBox newGamePointsComboBox)
+        public static bool ValidateStartNewClassicGame(string newGameTypeString,
+                                                       string newGamePointsString)
         {
-            var selectedGameType = Converter.NewGameControlsToGameType(newGameTypeComboBox);
-            var selectedGamePoints = (newGamePointsComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            var selectedGameType = Enum.Parse<GameType>(newGameTypeString);
+            var selectedGamePoints = newGamePointsString;
             switch (selectedGameType)
             {
-                case GameType.FreeThrowsSingle:
-                case GameType.FreeThrowsDouble:
-                    return true;
                 case GameType.Classic:
                     return selectedGamePoints != "Free";
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    return true;
             }
         }
     }

@@ -255,7 +255,7 @@ Please, contact developer</value>
     <value>This functionality not implemented yet. Coming soon...</value>
   </data>
   <data name="PlayerAvatarTooBigErrorText" xml:space="preserve">
-    <value>Avatar image can not be more that 512x512 px.</value>
+    <value>Avatar image can not be more that 1000x1000 px.</value>
   </data>
   <data name="SmoothGausHelperText" xml:space="preserve">
     <value>Gaussian smooth of ROI image. Default value is '5'</value>

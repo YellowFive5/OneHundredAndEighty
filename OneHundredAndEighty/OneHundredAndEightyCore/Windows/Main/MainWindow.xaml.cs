@@ -156,7 +156,9 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private void NewGameTypeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            viewModel?.ToggleNewGameControlsVisibility();
+            viewModel?.ToggleNewGameControlsVisibility(((sender as ComboBox)
+                                                        ?.SelectedItem as ComboBoxItem)
+                                                       ?.Content.ToString());
         }
 
         private void OnHyperlinkNavigate(object sender, RequestNavigateEventArgs e)

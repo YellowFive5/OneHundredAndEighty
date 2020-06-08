@@ -470,7 +470,7 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Avatar image can not be more that 512x512 px..
+        ///   Looks up a localized string similar to Avatar image can not be more that 1000x1000 px..
         /// </summary>
         public static string PlayerAvatarTooBigErrorText {
             get {

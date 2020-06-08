@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Game;
 using Image = System.Drawing.Image;
@@ -92,12 +91,6 @@ namespace OneHundredAndEightyCore.Common
             ms.Write(imageBytes, 0, imageBytes.Length);
             var image = Image.FromStream(ms, true);
             return image;
-        }
-
-        public static GameType NewGameControlsToGameType(ComboBox newGameTypeComboBox)
-        {
-            return Enum.Parse<GameType>((newGameTypeComboBox.SelectedItem as ComboBoxItem)
-                                        ?.Content.ToString());
         }
 
         public static int CamSetupSectorSettingValueToComboboxSelectedIndex(string camSetupSectorSettingValue)
