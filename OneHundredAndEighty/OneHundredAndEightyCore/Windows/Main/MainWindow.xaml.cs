@@ -136,7 +136,10 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private void StartGameButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.StartGame();
+            viewModel.StartGame(NewGameTypeComboBox.Text,
+                                NewGamePointsComboBox.Text,
+                                NewGamePlayer1ComboBox.SelectedItem as Player,
+                                NewGamePlayer2ComboBox.SelectedItem as Player);
         }
 
         private void StopGameButtonClick(object sender, RoutedEventArgs e)

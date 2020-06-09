@@ -98,24 +98,24 @@ namespace OneHundredAndEightyCore.Windows.Main
             Players = Converter.PlayersFromTable(playersTable);
         }
 
-        public void StartGame()
+        public void StartGame(string newGameType, string newGamePoints, Player player1, Player player2)
         {
-            if (!Validator.ValidateImplementedGameTypes(mainWindow.NewGameTypeComboBox.Text))
+            if (!Validator.ValidateImplementedGameTypes(newGameType))
             {
                 messageBoxService.ShowError(Resources.Resources.NotImplementedYetErrorText);
                 return;
             }
 
-            if (!Validator.ValidateStartNewGamePlayersSelected(mainWindow.NewGameTypeComboBox.Text,
-                                                               mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player,
-                                                               mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player))
+            if (!Validator.ValidateStartNewGamePlayersSelected(newGameType,
+                                                               player1,
+                                                               player2))
             {
                 messageBoxService.ShowError(Resources.Resources.NewGamePlayersNotSelectedErrorText);
                 return;
             }
 
-            if (!Validator.ValidateStartNewClassicGame(mainWindow.NewGameTypeComboBox.Text,
-                                                             mainWindow.NewGamePointsComboBox.Text))
+            if (!Validator.ValidateStartNewClassicGame(newGameType,
+                                                       newGamePoints))
             {
                 messageBoxService.ShowError(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
                 return;
