@@ -158,10 +158,10 @@ namespace OneHundredAndEightyCore.Windows.Main
             gameService.StopGame(GameResultType.Error);
         }
 
-        public void SaveNewPlayer()
+        public void SaveNewPlayer(string newPlayerName,
+                                  string newPlayerNickName,
+                                  BitmapImage newPlayerAvatar)
         {
-            var newPlayerName = mainWindow.NewPlayerNameTextBox.Text;
-            var newPlayerNickName = mainWindow.NewPlayerNickNameTextBox.Text;
             if (!Validator.ValidateNewPlayerNameAndNickName(newPlayerName, newPlayerNickName))
             {
                 messageBoxService.ShowError(Resources.Resources.NewPlayerEmptyDataErrorText);
@@ -171,7 +171,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             var newPlayer = new Player(newPlayerName,
                                        newPlayerNickName,
                                        -1,
-                                       mainWindow.NewPlayerAvatar.Source as BitmapImage);
+                                       newPlayerAvatar);
             try
             {
                 dbService.PlayerSaveNew(newPlayer);
@@ -184,9 +184,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
             messageBoxService.ShowInfo(Resources.Resources.NewPlayerSuccessfullySavedText, newPlayer);
 
-            mainWindow.NewPlayerNameTextBox.Text = string.Empty;
-            mainWindow.NewPlayerNickNameTextBox.Text = string.Empty;
-            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
+            mainWindow.ClearNewPlayerControls();
 
             LoadPlayers();
         }

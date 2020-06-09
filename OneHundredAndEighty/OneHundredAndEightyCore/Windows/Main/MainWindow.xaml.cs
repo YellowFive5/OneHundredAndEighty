@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Autofac;
 using NLog;
@@ -149,7 +150,9 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private void OnSaveNewPlayerButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.SaveNewPlayer();
+            viewModel.SaveNewPlayer(NewPlayerNameTextBox.Text,
+                                    NewPlayerNickNameTextBox.Text,
+                                    NewPlayerAvatar.Source as BitmapImage);
         }
 
         private void SelectAvatarImageButton_OnClick(object sender, RoutedEventArgs e)
@@ -198,6 +201,13 @@ namespace OneHundredAndEightyCore.Windows.Main
         private void OnCheckCamsButtonClick(object sender, RoutedEventArgs e)
         {
             viewModel.CheckCamsSimultaneousWork();
+        }
+
+        public void ClearNewPlayerControls()
+        {
+            NewPlayerNameTextBox.Text = string.Empty;
+            NewPlayerNickNameTextBox.Text = string.Empty;
+            NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(OneHundredAndEightyCore.Resources.Resources.EmptyUserIcon);
         }
     }
 }
