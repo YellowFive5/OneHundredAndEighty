@@ -8,8 +8,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Autofac;
 using DirectShowLib;
@@ -87,16 +85,11 @@ namespace OneHundredAndEightyCore.Windows.Main
             versionChecker.CheckVersions();
 
             LoadSettings();
-            mainWindow.NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
             LoadPlayers();
             FindConnectedCams();
         }
 
-        private void LoadPlayers()
-        {
-            var playersTable = dbService.PlayersLoadAll();
-            Players = Converter.PlayersFromTable(playersTable);
-        }
+        #region Start\Stop game
 
         public void StartGame(string newGameType, string newGamePoints, Player player1, Player player2)
         {
@@ -121,8 +114,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 return;
             }
 
-            ToggleMainTabItemsEnabled();
-            ToggleMatchControlsEnabled();
+            ToggleControlsWhenStarStopGame();
 
             try
             {
@@ -141,8 +133,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             CloseCamsDetectionBoard();
 
-            ToggleMainTabItemsEnabled();
-            ToggleMatchControlsEnabled();
+            ToggleControlsWhenStarStopGame();
 
             gameService.StopGame(GameResultType.Aborted);
         }
@@ -152,11 +143,18 @@ namespace OneHundredAndEightyCore.Windows.Main
             CloseScoreBoard();
             CloseCamsDetectionBoard();
 
-            ToggleMainTabItemsEnabled();
-            ToggleMatchControlsEnabled();
+            ToggleControlsWhenStarStopGame();
 
             gameService.StopGame(GameResultType.Error);
         }
+
+        private void ToggleControlsWhenStarStopGame()
+        {
+            mainWindow.ToggleMainTabItemsEnabled();
+            mainWindow.ToggleMatchControlsEnabled();
+        }
+
+        #endregion
 
         public void SaveNewPlayer(string newPlayerName,
                                   string newPlayerNickName,
@@ -189,31 +187,34 @@ namespace OneHundredAndEightyCore.Windows.Main
             LoadPlayers();
         }
 
-        public void CalibrateCamsSetupPoints()
+        private void LoadPlayers()
         {
-            var cam1SetupSector = mainWindow.Cam1SetupSector.Text;
-            var cam2SetupSector = mainWindow.Cam2SetupSector.Text;
-            var cam3SetupSector = mainWindow.Cam3SetupSector.Text;
-            var cam4SetupSector = mainWindow.Cam4SetupSector.Text;
+            var playersTable = dbService.PlayersLoadAll();
+            Players = Converter.PlayersFromTable(playersTable);
+        }
 
-            var toCam1CmDistance = Converter.ToDouble(mainWindow.ToCam1Distance.Text);
-            var toCam2CmDistance = Converter.ToDouble(mainWindow.ToCam2Distance.Text);
-            var toCam3CmDistance = Converter.ToDouble(mainWindow.ToCam3Distance.Text);
-            var toCam4CmDistance = Converter.ToDouble(mainWindow.ToCam4Distance.Text);
-
-            var calibratedCam1SetupPoint = MeasureService.CalculateCamSetupPoint(toCam1CmDistance, cam1SetupSector);
-            var calibratedCam2SetupPoint = MeasureService.CalculateCamSetupPoint(toCam2CmDistance, cam2SetupSector);
-            var calibratedCam3SetupPoint = MeasureService.CalculateCamSetupPoint(toCam3CmDistance, cam3SetupSector);
-            var calibratedCam4SetupPoint = MeasureService.CalculateCamSetupPoint(toCam4CmDistance, cam4SetupSector);
-
-            mainWindow.Cam1XTextBox.Text = Converter.ToString(calibratedCam1SetupPoint.X);
-            mainWindow.Cam1YTextBox.Text = Converter.ToString(calibratedCam1SetupPoint.Y);
-            mainWindow.Cam2XTextBox.Text = Converter.ToString(calibratedCam2SetupPoint.X);
-            mainWindow.Cam2YTextBox.Text = Converter.ToString(calibratedCam2SetupPoint.Y);
-            mainWindow.Cam3XTextBox.Text = Converter.ToString(calibratedCam3SetupPoint.X);
-            mainWindow.Cam3YTextBox.Text = Converter.ToString(calibratedCam3SetupPoint.Y);
-            mainWindow.Cam4XTextBox.Text = Converter.ToString(calibratedCam4SetupPoint.X);
-            mainWindow.Cam4YTextBox.Text = Converter.ToString(calibratedCam4SetupPoint.Y);
+        public void CalibrateCamsSetupPoints(string cam1SetupSector,
+                                             string cam2SetupSector,
+                                             string cam3SetupSector,
+                                             string cam4SetupSector,
+                                             string toCam1Distance,
+                                             string toCam2Distance,
+                                             string toCam3Distance,
+                                             string toCam4Distance)
+        {
+            IsSettingsDirty = true;
+            var calibratedCam1SetupPoint = MeasureService.CalculateCamSetupPoint(Converter.ToDouble(toCam1Distance),
+                                                                                 cam1SetupSector);
+            var calibratedCam2SetupPoint = MeasureService.CalculateCamSetupPoint(Converter.ToDouble(toCam2Distance),
+                                                                                 cam2SetupSector);
+            var calibratedCam3SetupPoint = MeasureService.CalculateCamSetupPoint(Converter.ToDouble(toCam3Distance),
+                                                                                 cam3SetupSector);
+            var calibratedCam4SetupPoint = MeasureService.CalculateCamSetupPoint(Converter.ToDouble(toCam4Distance),
+                                                                                 cam4SetupSector);
+            mainWindow.SetCalibratedCamsControls(calibratedCam1SetupPoint,
+                                                 calibratedCam2SetupPoint,
+                                                 calibratedCam3SetupPoint,
+                                                 calibratedCam4SetupPoint);
 
             SaveSettingsIfDirty();
         }
@@ -231,7 +232,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (Validator.ValidateNewPlayerAvatar(image.PixelHeight,
                                                       image.PixelWidth))
                 {
-                    mainWindow.NewPlayerAvatar.Source = image;
+                    mainWindow.SetSelectedAvatar(image);
                 }
                 else
                 {
@@ -254,7 +255,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public async void StartCamSetupCapturing(string gridName)
         {
-            ToggleCamSetupGridControlsEnabled(gridName);
+            ToggleControlsWhenCamSetupCapturing(gridName);
             cts = new CancellationTokenSource();
             var cancelToken = cts.Token;
 
@@ -283,7 +284,14 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void StopCamSetupCapturing(string gridName)
         {
             cts?.Cancel();
-            ToggleCamSetupGridControlsEnabled(gridName);
+            ToggleControlsWhenCamSetupCapturing(gridName);
+        }
+
+        private void ToggleControlsWhenCamSetupCapturing(string gridName)
+        {
+            mainWindow.ToggleCamSetupGridControlsEnabled(gridName);
+            mainWindow.ToggleMainTabItemsEnabled();
+            mainWindow.ToggleSetupTabItemsEnabled();
         }
 
         #endregion
@@ -293,8 +301,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void StartCrossing()
         {
             SaveSettingsIfDirty();
-            ToggleMainTabItemsEnabled();
-            mainWindow.CrossingStopButton.IsEnabled = !mainWindow.CrossingStopButton.IsEnabled;
+            ToggleControlsWhenRuntimeCrossing();
 
             try
             {
@@ -320,123 +327,14 @@ namespace OneHundredAndEightyCore.Windows.Main
             drawService.ProjectionClear();
             CloseCamsDetectionBoard();
 
-            ToggleMainTabItemsEnabled();
-            mainWindow.CrossingStopButton.IsEnabled = !mainWindow.CrossingStopButton.IsEnabled;
+            ToggleControlsWhenRuntimeCrossing();
         }
 
-        #endregion
-
-        #region Controls toggles
-
-        private void ToggleCamSetupGridControlsEnabled(string gridName)
+        private void ToggleControlsWhenRuntimeCrossing()
         {
-            ToggleMainTabItemsEnabled();
-            ToggleSetupTabItemsEnabled();
-
-            switch (gridName)
-            {
-                case "Cam1Grid":
-                    mainWindow.Cam1StartButton.IsEnabled = !mainWindow.Cam1StartButton.IsEnabled;
-                    mainWindow.Cam1StopButton.IsEnabled = !mainWindow.Cam1StopButton.IsEnabled;
-                    mainWindow.Cam1ThresholdSlider.IsEnabled = !mainWindow.Cam1ThresholdSlider.IsEnabled;
-                    mainWindow.Cam1SurfaceSlider.IsEnabled = !mainWindow.Cam1SurfaceSlider.IsEnabled;
-                    mainWindow.Cam1SurfaceCenterSlider.IsEnabled = !mainWindow.Cam1SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam1RoiPosYSlider.IsEnabled = !mainWindow.Cam1RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam1RoiHeightSlider.IsEnabled = !mainWindow.Cam1RoiHeightSlider.IsEnabled;
-                    break;
-                case "Cam2Grid":
-                    mainWindow.Cam2StartButton.IsEnabled = !mainWindow.Cam2StartButton.IsEnabled;
-                    mainWindow.Cam2StopButton.IsEnabled = !mainWindow.Cam2StopButton.IsEnabled;
-                    mainWindow.Cam2ThresholdSlider.IsEnabled = !mainWindow.Cam2ThresholdSlider.IsEnabled;
-                    mainWindow.Cam2SurfaceSlider.IsEnabled = !mainWindow.Cam2SurfaceSlider.IsEnabled;
-                    mainWindow.Cam2SurfaceCenterSlider.IsEnabled = !mainWindow.Cam2SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam2RoiPosYSlider.IsEnabled = !mainWindow.Cam2RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam2RoiHeightSlider.IsEnabled = !mainWindow.Cam2RoiHeightSlider.IsEnabled;
-                    break;
-                case "Cam3Grid":
-                    mainWindow.Cam3StartButton.IsEnabled = !mainWindow.Cam3StartButton.IsEnabled;
-                    mainWindow.Cam3StopButton.IsEnabled = !mainWindow.Cam3StopButton.IsEnabled;
-                    mainWindow.Cam3ThresholdSlider.IsEnabled = !mainWindow.Cam3ThresholdSlider.IsEnabled;
-                    mainWindow.Cam3SurfaceSlider.IsEnabled = !mainWindow.Cam3SurfaceSlider.IsEnabled;
-                    mainWindow.Cam3SurfaceCenterSlider.IsEnabled = !mainWindow.Cam3SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam3RoiPosYSlider.IsEnabled = !mainWindow.Cam3RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam3RoiHeightSlider.IsEnabled = !mainWindow.Cam3RoiHeightSlider.IsEnabled;
-                    break;
-                case "Cam4Grid":
-                    mainWindow.Cam4StartButton.IsEnabled = !mainWindow.Cam4StartButton.IsEnabled;
-                    mainWindow.Cam4StopButton.IsEnabled = !mainWindow.Cam4StopButton.IsEnabled;
-                    mainWindow.Cam4ThresholdSlider.IsEnabled = !mainWindow.Cam4ThresholdSlider.IsEnabled;
-                    mainWindow.Cam4SurfaceSlider.IsEnabled = !mainWindow.Cam4SurfaceSlider.IsEnabled;
-                    mainWindow.Cam4SurfaceCenterSlider.IsEnabled = !mainWindow.Cam4SurfaceCenterSlider.IsEnabled;
-                    mainWindow.Cam4RoiPosYSlider.IsEnabled = !mainWindow.Cam4RoiPosYSlider.IsEnabled;
-                    mainWindow.Cam4RoiHeightSlider.IsEnabled = !mainWindow.Cam4RoiHeightSlider.IsEnabled;
-                    break;
-            }
-        }
-
-        private void ToggleSetupTabItemsEnabled()
-        {
-            foreach (TabItem tabItem in mainWindow.SetupTabControl.Items)
-            {
-                tabItem.IsEnabled = !tabItem.IsEnabled;
-            }
-        }
-
-        private void ToggleMainTabItemsEnabled()
-        {
-            foreach (TabItem tabItem in mainWindow.MainTabControl.Items)
-            {
-                tabItem.IsEnabled = !tabItem.IsEnabled;
-            }
-
-            mainWindow.CrossingStartButton.IsEnabled = !mainWindow.CrossingStartButton.IsEnabled;
-        }
-
-        private void ToggleMatchControlsEnabled()
-        {
-            mainWindow.StartGameButton.IsEnabled = !mainWindow.StartGameButton.IsEnabled;
-            mainWindow.StopGameButton.IsEnabled = !mainWindow.StopGameButton.IsEnabled;
-            mainWindow.NewGameTypeComboBox.IsEnabled = !mainWindow.NewGameTypeComboBox.IsEnabled;
-            mainWindow.NewGamePlayer1ComboBox.IsEnabled = !mainWindow.NewGamePlayer1ComboBox.IsEnabled;
-            mainWindow.NewGamePlayer2ComboBox.IsEnabled = !mainWindow.NewGamePlayer2ComboBox.IsEnabled;
-            mainWindow.NewGameSetsComboBox.IsEnabled = !mainWindow.NewGameSetsComboBox.IsEnabled;
-            mainWindow.NewGameLegsComboBox.IsEnabled = !mainWindow.NewGameLegsComboBox.IsEnabled;
-            mainWindow.NewGamePointsComboBox.IsEnabled = !mainWindow.NewGamePointsComboBox.IsEnabled;
-        }
-
-        public void ToggleNewGameControlsVisibility(string selection)
-        {
-            var selectedGameType = Enum.Parse<GameType>(selection);
-
-            switch (selectedGameType)
-            {
-                case GameType.FreeThrowsSingle:
-                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Hidden;
-                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Hidden;
-                    mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
-                    mainWindow.NewGameSetsLabel.Visibility = Visibility.Hidden;
-                    mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
-                    mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
-                    break;
-                case GameType.FreeThrowsDouble:
-                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
-                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
-                    mainWindow.NewGameSetsComboBox.Visibility = Visibility.Hidden;
-                    mainWindow.NewGameSetsLabel.Visibility = Visibility.Hidden;
-                    mainWindow.NewGameLegsComboBox.Visibility = Visibility.Hidden;
-                    mainWindow.NewGameLegsLabel.Visibility = Visibility.Hidden;
-                    break;
-                case GameType.Classic:
-                    mainWindow.NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
-                    mainWindow.NewGamePlayer2Label.Visibility = Visibility.Visible;
-                    mainWindow.NewGameSetsComboBox.Visibility = Visibility.Visible;
-                    mainWindow.NewGameSetsLabel.Visibility = Visibility.Visible;
-                    mainWindow.NewGameLegsComboBox.Visibility = Visibility.Visible;
-                    mainWindow.NewGameLegsLabel.Visibility = Visibility.Visible;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            mainWindow.ToggleMainTabItemsEnabled();
+            mainWindow.ToggleCrossingButtonsEnabled();
+            mainWindow.ToggleSetupTabItemsEnabled();
         }
 
         #endregion

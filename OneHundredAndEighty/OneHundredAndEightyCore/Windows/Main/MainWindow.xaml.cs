@@ -1,7 +1,9 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -28,6 +30,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         private readonly Logger logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         private readonly TelemetryWriter telemetryWriter = new TelemetryWriter();
         public static IContainer ServiceContainer { get; private set; }
+        private bool IsInitialized;
 
         public MainWindow()
         {
@@ -37,6 +40,8 @@ namespace OneHundredAndEightyCore.Windows.Main
             RegisterContainer();
             viewModel = new MainWindowViewModel(this);
             DataContext = viewModel;
+            NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(OneHundredAndEightyCore.Resources.Resources.EmptyUserIcon);
+            IsInitialized = true;
         }
 
         private void RegisterContainer()
@@ -105,8 +110,14 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)
         {
-            viewModel.IsSettingsDirty = true;
-            viewModel.CalibrateCamsSetupPoints();
+            viewModel.CalibrateCamsSetupPoints(Cam1SetupSector.Text,
+                                               Cam2SetupSector.Text,
+                                               Cam3SetupSector.Text,
+                                               Cam4SetupSector.Text,
+                                               ToCam1Distance.Text,
+                                               ToCam2Distance.Text,
+                                               ToCam3Distance.Text,
+                                               ToCam4Distance.Text);
         }
 
         private void CamSetupStartButtonClick(object sender, RoutedEventArgs e)
@@ -162,9 +173,12 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private void NewGameTypeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            viewModel?.ToggleNewGameControlsVisibility(((sender as ComboBox)
-                                                        ?.SelectedItem as ComboBoxItem)
-                                                       ?.Content.ToString());
+            if (IsInitialized)
+            {
+                ToggleNewGameControlsVisibility(((sender as ComboBox)
+                                                 ?.SelectedItem as ComboBoxItem)
+                                                ?.Content.ToString());
+            }
         }
 
         private void OnHyperlinkNavigate(object sender, RequestNavigateEventArgs e)
@@ -208,6 +222,138 @@ namespace OneHundredAndEightyCore.Windows.Main
             NewPlayerNameTextBox.Text = string.Empty;
             NewPlayerNickNameTextBox.Text = string.Empty;
             NewPlayerAvatar.Source = Converter.BitmapToBitmapImage(OneHundredAndEightyCore.Resources.Resources.EmptyUserIcon);
+        }
+
+        public void SetCalibratedCamsControls(PointF calibratedCam1SetupPoint,
+                                              PointF calibratedCam2SetupPoint,
+                                              PointF calibratedCam3SetupPoint,
+                                              PointF calibratedCam4SetupPoint)
+        {
+            Cam1XTextBox.Text = Converter.ToString(calibratedCam1SetupPoint.X);
+            Cam1YTextBox.Text = Converter.ToString(calibratedCam1SetupPoint.Y);
+            Cam2XTextBox.Text = Converter.ToString(calibratedCam2SetupPoint.X);
+            Cam2YTextBox.Text = Converter.ToString(calibratedCam2SetupPoint.Y);
+            Cam3XTextBox.Text = Converter.ToString(calibratedCam3SetupPoint.X);
+            Cam3YTextBox.Text = Converter.ToString(calibratedCam3SetupPoint.Y);
+            Cam4XTextBox.Text = Converter.ToString(calibratedCam4SetupPoint.X);
+            Cam4YTextBox.Text = Converter.ToString(calibratedCam4SetupPoint.Y);
+        }
+
+        public void SetSelectedAvatar(BitmapImage image)
+        {
+            NewPlayerAvatar.Source = image;
+        }
+
+        public void ToggleMainTabItemsEnabled()
+        {
+            foreach (TabItem tabItem in MainTabControl.Items)
+            {
+                tabItem.IsEnabled = !tabItem.IsEnabled;
+            }
+        }
+
+        public void ToggleMatchControlsEnabled()
+        {
+            StartGameButton.IsEnabled = !StartGameButton.IsEnabled;
+            StopGameButton.IsEnabled = !StopGameButton.IsEnabled;
+            NewGameTypeComboBox.IsEnabled = !NewGameTypeComboBox.IsEnabled;
+            NewGamePlayer1ComboBox.IsEnabled = !NewGamePlayer1ComboBox.IsEnabled;
+            NewGamePlayer2ComboBox.IsEnabled = !NewGamePlayer2ComboBox.IsEnabled;
+            NewGameSetsComboBox.IsEnabled = !NewGameSetsComboBox.IsEnabled;
+            NewGameLegsComboBox.IsEnabled = !NewGameLegsComboBox.IsEnabled;
+            NewGamePointsComboBox.IsEnabled = !NewGamePointsComboBox.IsEnabled;
+        }
+
+        public void ToggleSetupTabItemsEnabled()
+        {
+            foreach (TabItem tabItem in SetupTabControl.Items)
+            {
+                tabItem.IsEnabled = !tabItem.IsEnabled;
+            }
+        }
+
+        public void ToggleCamSetupGridControlsEnabled(string gridName)
+        {
+            switch (gridName)
+            {
+                case "Cam1Grid":
+                    Cam1StartButton.IsEnabled = !Cam1StartButton.IsEnabled;
+                    Cam1StopButton.IsEnabled = !Cam1StopButton.IsEnabled;
+                    Cam1ThresholdSlider.IsEnabled = !Cam1ThresholdSlider.IsEnabled;
+                    Cam1SurfaceSlider.IsEnabled = !Cam1SurfaceSlider.IsEnabled;
+                    Cam1SurfaceCenterSlider.IsEnabled = !Cam1SurfaceCenterSlider.IsEnabled;
+                    Cam1RoiPosYSlider.IsEnabled = !Cam1RoiPosYSlider.IsEnabled;
+                    Cam1RoiHeightSlider.IsEnabled = !Cam1RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam2Grid":
+                    Cam2StartButton.IsEnabled = !Cam2StartButton.IsEnabled;
+                    Cam2StopButton.IsEnabled = !Cam2StopButton.IsEnabled;
+                    Cam2ThresholdSlider.IsEnabled = !Cam2ThresholdSlider.IsEnabled;
+                    Cam2SurfaceSlider.IsEnabled = !Cam2SurfaceSlider.IsEnabled;
+                    Cam2SurfaceCenterSlider.IsEnabled = !Cam2SurfaceCenterSlider.IsEnabled;
+                    Cam2RoiPosYSlider.IsEnabled = !Cam2RoiPosYSlider.IsEnabled;
+                    Cam2RoiHeightSlider.IsEnabled = !Cam2RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam3Grid":
+                    Cam3StartButton.IsEnabled = !Cam3StartButton.IsEnabled;
+                    Cam3StopButton.IsEnabled = !Cam3StopButton.IsEnabled;
+                    Cam3ThresholdSlider.IsEnabled = !Cam3ThresholdSlider.IsEnabled;
+                    Cam3SurfaceSlider.IsEnabled = !Cam3SurfaceSlider.IsEnabled;
+                    Cam3SurfaceCenterSlider.IsEnabled = !Cam3SurfaceCenterSlider.IsEnabled;
+                    Cam3RoiPosYSlider.IsEnabled = !Cam3RoiPosYSlider.IsEnabled;
+                    Cam3RoiHeightSlider.IsEnabled = !Cam3RoiHeightSlider.IsEnabled;
+                    break;
+                case "Cam4Grid":
+                    Cam4StartButton.IsEnabled = !Cam4StartButton.IsEnabled;
+                    Cam4StopButton.IsEnabled = !Cam4StopButton.IsEnabled;
+                    Cam4ThresholdSlider.IsEnabled = !Cam4ThresholdSlider.IsEnabled;
+                    Cam4SurfaceSlider.IsEnabled = !Cam4SurfaceSlider.IsEnabled;
+                    Cam4SurfaceCenterSlider.IsEnabled = !Cam4SurfaceCenterSlider.IsEnabled;
+                    Cam4RoiPosYSlider.IsEnabled = !Cam4RoiPosYSlider.IsEnabled;
+                    Cam4RoiHeightSlider.IsEnabled = !Cam4RoiHeightSlider.IsEnabled;
+                    break;
+            }
+        }
+
+        private void ToggleNewGameControlsVisibility(string selection)
+        {
+            var selectedGameType = Enum.Parse<GameType>(selection);
+
+            switch (selectedGameType)
+            {
+                case GameType.FreeThrowsSingle:
+                    NewGamePlayer2ComboBox.Visibility = Visibility.Hidden;
+                    NewGamePlayer2Label.Visibility = Visibility.Hidden;
+                    NewGameSetsComboBox.Visibility = Visibility.Hidden;
+                    NewGameSetsLabel.Visibility = Visibility.Hidden;
+                    NewGameLegsComboBox.Visibility = Visibility.Hidden;
+                    NewGameLegsLabel.Visibility = Visibility.Hidden;
+                    break;
+                case GameType.FreeThrowsDouble:
+                    NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
+                    NewGamePlayer2Label.Visibility = Visibility.Visible;
+                    NewGameSetsComboBox.Visibility = Visibility.Hidden;
+                    NewGameSetsLabel.Visibility = Visibility.Hidden;
+                    NewGameLegsComboBox.Visibility = Visibility.Hidden;
+                    NewGameLegsLabel.Visibility = Visibility.Hidden;
+                    break;
+                case GameType.Classic:
+                    NewGamePlayer2ComboBox.Visibility = Visibility.Visible;
+                    NewGamePlayer2Label.Visibility = Visibility.Visible;
+                    NewGameSetsComboBox.Visibility = Visibility.Visible;
+                    NewGameSetsLabel.Visibility = Visibility.Visible;
+                    NewGameLegsComboBox.Visibility = Visibility.Visible;
+                    NewGameLegsLabel.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public void ToggleCrossingButtonsEnabled()
+        {
+            CrossingStopButton.IsEnabled = !CrossingStopButton.IsEnabled;
+            CrossingStartButton.IsEnabled = !CrossingStartButton.IsEnabled;
         }
     }
 }
