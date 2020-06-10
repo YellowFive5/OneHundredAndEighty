@@ -26,7 +26,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private readonly MainWindow mainWindow;
+        private readonly IMainWindow mainWindow;
         private readonly Logger logger;
         private readonly MessageBoxService messageBoxService;
         private readonly DBService dbService;
@@ -65,21 +65,21 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
         }
 
-        public MainWindowViewModel(MainWindow mainWindow)
+        public MainWindowViewModel(IMainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
-            logger = MainWindow.ServiceContainer.Resolve<Logger>();
-            messageBoxService = MainWindow.ServiceContainer.Resolve<MessageBoxService>();
-            dbService = MainWindow.ServiceContainer.Resolve<DBService>();
-            versionChecker = MainWindow.ServiceContainer.Resolve<VersionChecker>();
-            configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
-            drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
-            throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
-            gameService = MainWindow.ServiceContainer.Resolve<GameService>();
-            scoreBoardService = MainWindow.ServiceContainer.Resolve<ScoreBoardService>();
-            detectionService = MainWindow.ServiceContainer.Resolve<DetectionService>();
-            manualThrowPanel = MainWindow.ServiceContainer.Resolve<ManualThrowPanel>();
-            camsDetectionBoard = MainWindow.ServiceContainer.Resolve<CamsDetectionBoard>();
+            logger = mainWindow.ServiceContainer.Resolve<Logger>();
+            messageBoxService = mainWindow.ServiceContainer.Resolve<MessageBoxService>();
+            dbService = mainWindow.ServiceContainer.Resolve<DBService>();
+            versionChecker = mainWindow.ServiceContainer.Resolve<VersionChecker>();
+            configService = mainWindow.ServiceContainer.Resolve<ConfigService>();
+            drawService = mainWindow.ServiceContainer.Resolve<DrawService>();
+            throwService = mainWindow.ServiceContainer.Resolve<ThrowService>();
+            gameService = mainWindow.ServiceContainer.Resolve<GameService>();
+            scoreBoardService = mainWindow.ServiceContainer.Resolve<ScoreBoardService>();
+            detectionService = mainWindow.ServiceContainer.Resolve<DetectionService>();
+            manualThrowPanel = mainWindow.ServiceContainer.Resolve<ManualThrowPanel>();
+            camsDetectionBoard = mainWindow.ServiceContainer.Resolve<CamsDetectionBoard>();
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
 
             versionChecker.CheckVersions();
@@ -91,7 +91,10 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         #region Start\Stop game
 
-        public void StartGame(string newGameType, string newGamePoints, Player player1, Player player2)
+        public void StartGame(string newGameType,
+                              string newGamePoints,
+                              Player player1,
+                              Player player2)
         {
             if (!Validator.ValidateImplementedGameTypes(newGameType))
             {
@@ -253,9 +256,9 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         #region CamSetupCapturing
 
-        public async void StartCamSetupCapturing(string gridName)
+        public async void StartCamSetupCapturing(CamNumber camNumber)
         {
-            ToggleControlsWhenCamSetupCapturing(gridName);
+            ToggleControlsWhenCamSetupCapturing(camNumber);
             cts = new CancellationTokenSource();
             var cancelToken = cts.Token;
 
@@ -263,7 +266,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             {
                 await Task.Run(() =>
                                {
-                                   var cam = new CamService(mainWindow, gridName, CamServiceWorkingMode.Setup);
+                                   var cam = new CamService(mainWindow, camNumber, CamServiceWorkingMode.Setup);
                                    while (!cancelToken.IsCancellationRequested)
                                    {
                                        cam.DoCapture(true);
@@ -277,19 +280,19 @@ namespace OneHundredAndEightyCore.Windows.Main
             catch (Exception e)
             {
                 messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
-                StopCamSetupCapturing(gridName);
+                StopCamSetupCapturing(camNumber);
             }
         }
 
-        public void StopCamSetupCapturing(string gridName)
+        public void StopCamSetupCapturing(CamNumber camNumber)
         {
             cts?.Cancel();
-            ToggleControlsWhenCamSetupCapturing(gridName);
+            ToggleControlsWhenCamSetupCapturing(camNumber);
         }
 
-        private void ToggleControlsWhenCamSetupCapturing(string gridName)
+        private void ToggleControlsWhenCamSetupCapturing(CamNumber camNumber)
         {
-            mainWindow.ToggleCamSetupGridControlsEnabled(gridName);
+            mainWindow.ToggleCamSetupGridControlsEnabled(camNumber);
             mainWindow.ToggleMainTabItemsEnabled();
             mainWindow.ToggleSetupTabItemsEnabled();
         }
@@ -364,66 +367,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             logger.Debug("Load settings start");
 
-            mainWindow.Left = configService.Read<double>(SettingsType.MainWindowPositionLeft);
-            mainWindow.Top = configService.Read<double>(SettingsType.MainWindowPositionTop);
-            mainWindow.Height = configService.Read<double>(SettingsType.MainWindowHeight);
-            mainWindow.Width = configService.Read<double>(SettingsType.MainWindowWidth);
-            mainWindow.CamFovTextBox.Text = Converter.ToString(configService.Read<double>(SettingsType.CamFovAngle));
-            mainWindow.CamResolutionHeightTextBox.Text = configService.Read<int>(SettingsType.ResolutionHeight).ToString();
-            mainWindow.CamResolutionWidthTextBox.Text = configService.Read<int>(SettingsType.ResolutionWidth).ToString();
-            mainWindow.MovesExtractionTextBox.Text = configService.Read<int>(SettingsType.MovesExtraction).ToString();
-            mainWindow.MoveDetectedSleepTimeTextBox.Text = Converter.ToString(configService.Read<double>(SettingsType.MoveDetectedSleepTime));
-            mainWindow.MovesNoiseTextBox.Text = configService.Read<int>(SettingsType.MovesNoise).ToString();
-            mainWindow.SmoothGaussTextBox.Text = configService.Read<int>(SettingsType.SmoothGauss).ToString();
-            mainWindow.ThresholdSleepTimeTimeTextBox.Text = Converter.ToString(configService.Read<double>(SettingsType.ThresholdSleepTime));
-            mainWindow.ExtractionSleepTimeTimeTextBox.Text = Converter.ToString(configService.Read<double>(SettingsType.ExtractionSleepTime));
-            mainWindow.MinContourArcTextBox.Text = configService.Read<int>(SettingsType.MinContourArc).ToString();
-            mainWindow.MovesDartTextBox.Text = configService.Read<int>(SettingsType.MovesDart).ToString();
-            mainWindow.Cam1IdTextBox.Text = configService.Read<string>(SettingsType.Cam1Id);
-            mainWindow.Cam2IdTextBox.Text = configService.Read<string>(SettingsType.Cam2Id);
-            mainWindow.Cam3IdTextBox.Text = configService.Read<string>(SettingsType.Cam3Id);
-            mainWindow.Cam4IdTextBox.Text = configService.Read<string>(SettingsType.Cam4Id);
-            mainWindow.ToCam1Distance.Text = Converter.ToString(configService.Read<double>(SettingsType.ToCam1Distance));
-            mainWindow.ToCam2Distance.Text = Converter.ToString(configService.Read<double>(SettingsType.ToCam2Distance));
-            mainWindow.ToCam3Distance.Text = Converter.ToString(configService.Read<double>(SettingsType.ToCam3Distance));
-            mainWindow.ToCam4Distance.Text = Converter.ToString(configService.Read<double>(SettingsType.ToCam4Distance));
-            mainWindow.Cam1XTextBox.Text = configService.Read<int>(SettingsType.Cam1X).ToString();
-            mainWindow.Cam2XTextBox.Text = configService.Read<int>(SettingsType.Cam2X).ToString();
-            mainWindow.Cam3XTextBox.Text = configService.Read<int>(SettingsType.Cam3X).ToString();
-            mainWindow.Cam4XTextBox.Text = configService.Read<int>(SettingsType.Cam4X).ToString();
-            mainWindow.Cam1YTextBox.Text = configService.Read<int>(SettingsType.Cam1Y).ToString();
-            mainWindow.Cam2YTextBox.Text = configService.Read<int>(SettingsType.Cam2Y).ToString();
-            mainWindow.Cam3YTextBox.Text = configService.Read<int>(SettingsType.Cam3Y).ToString();
-            mainWindow.Cam4YTextBox.Text = configService.Read<int>(SettingsType.Cam4Y).ToString();
-            mainWindow.Cam1CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam1CheckBox);
-            mainWindow.Cam2CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam2CheckBox);
-            mainWindow.Cam3CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam3CheckBox);
-            mainWindow.Cam4CheckBox.IsChecked = configService.Read<bool>(SettingsType.Cam4CheckBox);
-            mainWindow.WithDetectionCheckBox.IsChecked = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
-            mainWindow.Cam1ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam1ThresholdSlider);
-            mainWindow.Cam1SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam1SurfaceSlider);
-            mainWindow.Cam1SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam1SurfaceCenterSlider);
-            mainWindow.Cam1RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam1RoiPosYSlider);
-            mainWindow.Cam1RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam1RoiHeightSlider);
-            mainWindow.Cam2ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam2ThresholdSlider);
-            mainWindow.Cam2SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam2SurfaceSlider);
-            mainWindow.Cam2SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam2SurfaceCenterSlider);
-            mainWindow.Cam2RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam2RoiPosYSlider);
-            mainWindow.Cam2RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam2RoiHeightSlider);
-            mainWindow.Cam3ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam3ThresholdSlider);
-            mainWindow.Cam3SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam3SurfaceSlider);
-            mainWindow.Cam3SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam3SurfaceCenterSlider);
-            mainWindow.Cam3RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam3RoiPosYSlider);
-            mainWindow.Cam3RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam3RoiHeightSlider);
-            mainWindow.Cam4ThresholdSlider.Value = configService.Read<double>(SettingsType.Cam4ThresholdSlider);
-            mainWindow.Cam4SurfaceSlider.Value = configService.Read<double>(SettingsType.Cam4SurfaceSlider);
-            mainWindow.Cam4SurfaceCenterSlider.Value = configService.Read<double>(SettingsType.Cam4SurfaceCenterSlider);
-            mainWindow.Cam4RoiPosYSlider.Value = configService.Read<double>(SettingsType.Cam4RoiPosYSlider);
-            mainWindow.Cam4RoiHeightSlider.Value = configService.Read<double>(SettingsType.Cam4RoiHeightSlider);
-            mainWindow.Cam1SetupSector.SelectedIndex = Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(configService.Read<string>(SettingsType.Cam1SetupSector));
-            mainWindow.Cam2SetupSector.SelectedIndex = Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(configService.Read<string>(SettingsType.Cam2SetupSector));
-            mainWindow.Cam3SetupSector.SelectedIndex = Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(configService.Read<string>(SettingsType.Cam3SetupSector));
-            mainWindow.Cam4SetupSector.SelectedIndex = Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(configService.Read<string>(SettingsType.Cam4SetupSector));
+            mainWindow.LoadAllData(configService);
 
             IsSettingsDirty = false;
 
@@ -435,69 +379,12 @@ namespace OneHundredAndEightyCore.Windows.Main
             logger.Debug("Save settings start");
             logger.Debug($"Is settings dirty: {IsSettingsDirty}");
 
-            configService.Write(SettingsType.MainWindowPositionLeft, mainWindow.Left);
-            configService.Write(SettingsType.MainWindowPositionTop, mainWindow.Top);
-            configService.Write(SettingsType.MainWindowHeight, mainWindow.Height);
-            configService.Write(SettingsType.MainWindowWidth, mainWindow.Width);
+            mainWindow.SavePosition(configService);
 
             if (IsSettingsDirty)
             {
-                configService.Write(SettingsType.CamFovAngle, mainWindow.CamFovTextBox.Text);
-                configService.Write(SettingsType.ResolutionHeight, mainWindow.CamResolutionHeightTextBox.Text);
-                configService.Write(SettingsType.ResolutionWidth, mainWindow.CamResolutionWidthTextBox.Text);
-                configService.Write(SettingsType.MovesExtraction, mainWindow.MovesExtractionTextBox.Text);
-                configService.Write(SettingsType.MoveDetectedSleepTime, mainWindow.MoveDetectedSleepTimeTextBox.Text);
-                configService.Write(SettingsType.MovesNoise, mainWindow.MovesNoiseTextBox.Text);
-                configService.Write(SettingsType.SmoothGauss, mainWindow.SmoothGaussTextBox.Text);
-                configService.Write(SettingsType.ThresholdSleepTime, mainWindow.ThresholdSleepTimeTimeTextBox.Text);
-                configService.Write(SettingsType.ExtractionSleepTime, mainWindow.ExtractionSleepTimeTimeTextBox.Text);
-                configService.Write(SettingsType.MinContourArc, mainWindow.MinContourArcTextBox.Text);
-                configService.Write(SettingsType.MovesDart, mainWindow.MovesDartTextBox.Text);
-                configService.Write(SettingsType.Cam1Id, mainWindow.Cam1IdTextBox.Text);
-                configService.Write(SettingsType.Cam2Id, mainWindow.Cam2IdTextBox.Text);
-                configService.Write(SettingsType.Cam3Id, mainWindow.Cam3IdTextBox.Text);
-                configService.Write(SettingsType.Cam4Id, mainWindow.Cam4IdTextBox.Text);
-                configService.Write(SettingsType.ToCam1Distance, mainWindow.ToCam1Distance.Text);
-                configService.Write(SettingsType.ToCam2Distance, mainWindow.ToCam2Distance.Text);
-                configService.Write(SettingsType.ToCam3Distance, mainWindow.ToCam3Distance.Text);
-                configService.Write(SettingsType.ToCam4Distance, mainWindow.ToCam4Distance.Text);
-                configService.Write(SettingsType.Cam1X, mainWindow.Cam1XTextBox.Text);
-                configService.Write(SettingsType.Cam2X, mainWindow.Cam2XTextBox.Text);
-                configService.Write(SettingsType.Cam3X, mainWindow.Cam3XTextBox.Text);
-                configService.Write(SettingsType.Cam4X, mainWindow.Cam4XTextBox.Text);
-                configService.Write(SettingsType.Cam1Y, mainWindow.Cam1YTextBox.Text);
-                configService.Write(SettingsType.Cam2Y, mainWindow.Cam2YTextBox.Text);
-                configService.Write(SettingsType.Cam3Y, mainWindow.Cam3YTextBox.Text);
-                configService.Write(SettingsType.Cam4Y, mainWindow.Cam4YTextBox.Text);
-                configService.Write(SettingsType.Cam1CheckBox, mainWindow.Cam1CheckBox.IsChecked);
-                configService.Write(SettingsType.Cam2CheckBox, mainWindow.Cam2CheckBox.IsChecked);
-                configService.Write(SettingsType.Cam3CheckBox, mainWindow.Cam3CheckBox.IsChecked);
-                configService.Write(SettingsType.Cam4CheckBox, mainWindow.Cam4CheckBox.IsChecked);
-                configService.Write(SettingsType.WithDetectionCheckBox, mainWindow.WithDetectionCheckBox.IsChecked);
-                configService.Write(SettingsType.Cam1ThresholdSlider, mainWindow.Cam1ThresholdSlider.Value);
-                configService.Write(SettingsType.Cam1SurfaceSlider, mainWindow.Cam1SurfaceSlider.Value);
-                configService.Write(SettingsType.Cam1SurfaceCenterSlider, mainWindow.Cam1SurfaceCenterSlider.Value);
-                configService.Write(SettingsType.Cam1RoiPosYSlider, mainWindow.Cam1RoiPosYSlider.Value);
-                configService.Write(SettingsType.Cam1RoiHeightSlider, mainWindow.Cam1RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam2ThresholdSlider, mainWindow.Cam2ThresholdSlider.Value);
-                configService.Write(SettingsType.Cam2SurfaceSlider, mainWindow.Cam2SurfaceSlider.Value);
-                configService.Write(SettingsType.Cam2SurfaceCenterSlider, mainWindow.Cam2SurfaceCenterSlider.Value);
-                configService.Write(SettingsType.Cam2RoiPosYSlider, mainWindow.Cam2RoiPosYSlider.Value);
-                configService.Write(SettingsType.Cam2RoiHeightSlider, mainWindow.Cam2RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam3ThresholdSlider, mainWindow.Cam3ThresholdSlider.Value);
-                configService.Write(SettingsType.Cam3SurfaceSlider, mainWindow.Cam3SurfaceSlider.Value);
-                configService.Write(SettingsType.Cam3SurfaceCenterSlider, mainWindow.Cam3SurfaceCenterSlider.Value);
-                configService.Write(SettingsType.Cam3RoiPosYSlider, mainWindow.Cam3RoiPosYSlider.Value);
-                configService.Write(SettingsType.Cam3RoiHeightSlider, mainWindow.Cam3RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam4ThresholdSlider, mainWindow.Cam4ThresholdSlider.Value);
-                configService.Write(SettingsType.Cam4SurfaceSlider, mainWindow.Cam4SurfaceSlider.Value);
-                configService.Write(SettingsType.Cam4SurfaceCenterSlider, mainWindow.Cam4SurfaceCenterSlider.Value);
-                configService.Write(SettingsType.Cam4RoiPosYSlider, mainWindow.Cam4RoiPosYSlider.Value);
-                configService.Write(SettingsType.Cam4RoiHeightSlider, mainWindow.Cam4RoiHeightSlider.Value);
-                configService.Write(SettingsType.Cam1SetupSector, mainWindow.Cam1SetupSector.Text);
-                configService.Write(SettingsType.Cam2SetupSector, mainWindow.Cam2SetupSector.Text);
-                configService.Write(SettingsType.Cam3SetupSector, mainWindow.Cam3SetupSector.Text);
-                configService.Write(SettingsType.Cam4SetupSector, mainWindow.Cam4SetupSector.Text);
+                mainWindow.SaveAllData(configService);
+
                 IsSettingsDirty = false;
             }
 
@@ -528,9 +415,11 @@ namespace OneHundredAndEightyCore.Windows.Main
                 str.AppendLine($"[{cam.Name}]-[ID:'{camId}']");
             }
 
-            mainWindow.CamsTextBox.Text = allCams.Count == 0
-                                              ? "No cameras found"
-                                              : str.ToString();
+            var text = allCams.Count == 0
+                           ? "No cameras found"
+                           : str.ToString();
+
+            mainWindow.SetConnectedCamsText(text);
         }
 
         public void CheckCamsSimultaneousWork()
@@ -538,15 +427,15 @@ namespace OneHundredAndEightyCore.Windows.Main
             SaveSettingsIfDirty();
             try
             {
-                mainWindow.CheckCams.IsEnabled = false;
+                mainWindow.ToggleConnectedCamsControls();
                 detectionService.PrepareCamsAndTryCapture(CamServiceWorkingMode.Check);
-                mainWindow.CamsTextBox.Text = "Checked cams simultaneous work: OK";
-                mainWindow.CheckCams.IsEnabled = true;
+                mainWindow.SetConnectedCamsText("Checked cams simultaneous work: OK");
+                mainWindow.ToggleConnectedCamsControls();
             }
             catch (Exception e)
             {
-                mainWindow.CheckCams.IsEnabled = true;
-                mainWindow.CamsTextBox.Text = "Checked cams simultaneous work: ERROR";
+                mainWindow.ToggleConnectedCamsControls();
+                mainWindow.SetConnectedCamsText("Checked cams simultaneous work: ERROR");
             }
         }
     }

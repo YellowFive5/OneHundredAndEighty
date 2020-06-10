@@ -28,8 +28,8 @@ namespace OneHundredAndEightyCore.Recognition
 
     public class CamService
     {
-        private readonly MainWindow mainWindow;
-        private readonly string parentGridName;
+        private readonly IMainWindow mainWindow;
+        public readonly CamNumber camNumber;
         private readonly CamServiceWorkingMode workingMode;
         private readonly DrawService drawService;
         private readonly VideoCapture videoCapture;
@@ -50,7 +50,6 @@ namespace OneHundredAndEightyCore.Recognition
         private double surfaceCenterSlider;
         public PointF setupPoint;
         public readonly double toBullAngle;
-        public readonly int camNumber;
         private Rectangle roiRectangle;
         private Image<Bgr, byte> OriginFrame { get; set; }
         private Image<Bgr, byte> LinedFrame { get; set; }
@@ -65,46 +64,44 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly int movesNoise;
         private readonly int smoothGauss;
 
-        public CamService(MainWindow mainWindow,
-                          string parentGridName,
+        public CamService(IMainWindow mainWindow,
+                          CamNumber camNumber,
                           CamServiceWorkingMode workingMode)
         {
             this.workingMode = workingMode;
             this.mainWindow = mainWindow;
-            this.parentGridName = parentGridName;
-            logger = MainWindow.ServiceContainer.Resolve<Logger>();
-            drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
-            configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
-            camsDetectionBoard = MainWindow.ServiceContainer.Resolve<CamsDetectionBoard>();
-            measureService = new MeasureService(this);
+            this.camNumber = camNumber;
+            logger = mainWindow.ServiceContainer.Resolve<Logger>();
+            drawService = mainWindow.ServiceContainer.Resolve<DrawService>();
+            configService = mainWindow.ServiceContainer.Resolve<ConfigService>();
+            camsDetectionBoard = mainWindow.ServiceContainer.Resolve<CamsDetectionBoard>();
+            measureService = new MeasureService(this, mainWindow); // todo not need mainWindow only because container
 
             var camIndex = -1;
-            switch (parentGridName)
+            switch (camNumber)
             {
-                case "Cam1Grid":
-                    camNumber = 1;
+                case CamNumber._1:
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam1X),
                                             configService.Read<float>(SettingsType.Cam1Y));
                     camIndex = GetCamIndexById(SettingsType.Cam1Id);
                     break;
-                case "Cam2Grid":
-                    camNumber = 2;
+                case CamNumber._2:
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam2X),
                                             configService.Read<float>(SettingsType.Cam2Y));
                     camIndex = GetCamIndexById(SettingsType.Cam2Id);
                     break;
-                case "Cam3Grid":
-                    camNumber = 3;
+                case CamNumber._3:
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam3X),
                                             configService.Read<float>(SettingsType.Cam3Y));
                     camIndex = GetCamIndexById(SettingsType.Cam3Id);
                     break;
-                case "Cam4Grid":
-                    camNumber = 4;
+                case CamNumber._4:
                     setupPoint = new PointF(configService.Read<float>(SettingsType.Cam4X),
                                             configService.Read<float>(SettingsType.Cam4Y));
                     camIndex = GetCamIndexById(SettingsType.Cam4Id);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
             }
 
             resolutionWidth = configService.Read<int>(SettingsType.ResolutionWidth);
@@ -136,49 +133,13 @@ namespace OneHundredAndEightyCore.Recognition
 
         private void GetSlidersData()
         {
-            switch (parentGridName)
-            {
-                case "Cam1Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     thresholdSlider = mainWindow.Cam1ThresholdSlider.Value;
-                                                     roiPosYSlider = mainWindow.Cam1RoiPosYSlider.Value;
-                                                     roiHeightSlider = mainWindow.Cam1RoiHeightSlider.Value;
-                                                     surfaceSlider = mainWindow.Cam1SurfaceSlider.Value;
-                                                     surfaceCenterSlider = mainWindow.Cam1SurfaceCenterSlider.Value;
-                                                 });
-                    break;
-                case "Cam2Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     thresholdSlider = mainWindow.Cam2ThresholdSlider.Value;
-                                                     roiPosYSlider = mainWindow.Cam2RoiPosYSlider.Value;
-                                                     roiHeightSlider = mainWindow.Cam2RoiHeightSlider.Value;
-                                                     surfaceSlider = mainWindow.Cam2SurfaceSlider.Value;
-                                                     surfaceCenterSlider = mainWindow.Cam2SurfaceCenterSlider.Value;
-                                                 });
-                    break;
-                case "Cam3Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     thresholdSlider = mainWindow.Cam3ThresholdSlider.Value;
-                                                     roiPosYSlider = mainWindow.Cam3RoiPosYSlider.Value;
-                                                     roiHeightSlider = mainWindow.Cam3RoiHeightSlider.Value;
-                                                     surfaceSlider = mainWindow.Cam3SurfaceSlider.Value;
-                                                     surfaceCenterSlider = mainWindow.Cam3SurfaceCenterSlider.Value;
-                                                 });
-                    break;
-                case "Cam4Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     thresholdSlider = mainWindow.Cam4ThresholdSlider.Value;
-                                                     roiPosYSlider = mainWindow.Cam4RoiPosYSlider.Value;
-                                                     roiHeightSlider = mainWindow.Cam4RoiHeightSlider.Value;
-                                                     surfaceSlider = mainWindow.Cam4SurfaceSlider.Value;
-                                                     surfaceCenterSlider = mainWindow.Cam4SurfaceCenterSlider.Value;
-                                                 });
-                    break;
-            }
+            var sliderData = mainWindow.GetCamsSetupSlidersData(camNumber);
+
+            thresholdSlider = sliderData.ElementAt(0);
+            roiPosYSlider = sliderData.ElementAt(1);
+            roiHeightSlider = sliderData.ElementAt(2);
+            surfaceSlider = sliderData.ElementAt(3);
+            surfaceCenterSlider = sliderData.ElementAt(4);
         }
 
         private void DrawSetupLines()
@@ -250,160 +211,48 @@ namespace OneHundredAndEightyCore.Recognition
             logger.Debug($"Doing capture for cam_{camNumber} end");
         }
 
-        public void RefreshImageBoxes() // todo delete spaghetti
+        public void RefreshImageBoxes(bool clear = false)
         {
             logger.Debug($"Refreshing imageboxes for cam_{camNumber} start");
 
-            switch (parentGridName)
+            switch (workingMode)
             {
-                case "Cam1Grid":
-                    switch (workingMode)
-                    {
-                        case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(() =>
+                case CamServiceWorkingMode.Setup:
+                    mainWindow.Dispatcher.Invoke(() =>
+                                                 {
+                                                     var image = LinedFrame?.Data != null && !clear
+                                                                     ? drawService.ToBitmap(LinedFrame)
+                                                                     : new BitmapImage();
+
+                                                     var roiImage = RoiFrame?.Data != null && !clear
+                                                                        ? drawService.ToBitmap(RoiFrame)
+                                                                        : new BitmapImage();
+
+                                                     mainWindow.SetCamImages(camNumber, image, roiImage);
+                                                 });
+                    break;
+                case CamServiceWorkingMode.Crossing:
+                case CamServiceWorkingMode.Detection:
+                    camsDetectionBoard.dispatcher.Invoke(() =>
                                                          {
-                                                             mainWindow.Cam1ImageBox.Source = LinedFrame?.Data != null
-                                                                                                  ? drawService.ToBitmap(LinedFrame)
-                                                                                                  : new BitmapImage();
-                                                             mainWindow.Cam1ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiFrame)
-                                                                                                     : new BitmapImage();
-                                                             mainWindow.Cam1ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                     : new BitmapImage();
-                                                         });
-                            break;
-                        case CamServiceWorkingMode.Detection:
-                        case CamServiceWorkingMode.Crossing:
-                            mainWindow.Dispatcher.Invoke(() =>
-                                                         {
-                                                             var image = LinedFrame?.Data != null
+                                                             var image = LinedFrame?.Data != null && !clear
                                                                              ? drawService.ToBitmap(LinedFrame)
                                                                              : new BitmapImage();
-                                                             var roiImage = RoiFrame?.Data != null
+
+                                                             var roiImage = RoiFrame?.Data != null && !clear
                                                                                 ? drawService.ToBitmap(RoiFrame)
                                                                                 : new BitmapImage();
-                                                             var lastRoiImage = RoiLastThrowFrame?.Data != null
+
+                                                             var lastRoiImage = RoiLastThrowFrame?.Data != null && !clear
                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
                                                                                     : new BitmapImage();
-
-                                                             camsDetectionBoard.SetCamImages(CamNumber._1, image, roiImage, lastRoiImage);
+                                                             camsDetectionBoard.SetCamImages(camNumber, image, roiImage, lastRoiImage);
                                                          });
-                            break;
-                    }
-
                     break;
-                case "Cam2Grid":
-                    switch (workingMode)
-                    {
-                        case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(() =>
-                                                         {
-                                                             mainWindow.Cam2ImageBox.Source = LinedFrame?.Data != null
-                                                                                                  ? drawService.ToBitmap(LinedFrame)
-                                                                                                  : new BitmapImage();
-                                                             mainWindow.Cam2ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiFrame)
-                                                                                                     : new BitmapImage();
-                                                             mainWindow.Cam2ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                     : new BitmapImage();
-                                                         });
-                            break;
-                        case CamServiceWorkingMode.Detection:
-                        case CamServiceWorkingMode.Crossing:
-                            mainWindow.Dispatcher.Invoke(() =>
-                                                         {
-                                                             var image = LinedFrame?.Data != null
-                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                             : new BitmapImage();
-                                                             var roiImage = RoiFrame?.Data != null
-                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                : new BitmapImage();
-                                                             var lastRoiImage = RoiLastThrowFrame?.Data != null
-                                                                                    ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                    : new BitmapImage();
-
-                                                             camsDetectionBoard.SetCamImages(CamNumber._2, image, roiImage, lastRoiImage);
-                                                         });
-                            break;
-                    }
-
+                case CamServiceWorkingMode.Check:
                     break;
-                case "Cam3Grid":
-                    switch (workingMode)
-                    {
-                        case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(() =>
-                                                         {
-                                                             mainWindow.Cam3ImageBox.Source = LinedFrame?.Data != null
-                                                                                                  ? drawService.ToBitmap(LinedFrame)
-                                                                                                  : new BitmapImage();
-                                                             mainWindow.Cam3ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiFrame)
-                                                                                                     : new BitmapImage();
-                                                             mainWindow.Cam3ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                     : new BitmapImage();
-                                                         });
-                            break;
-                        case CamServiceWorkingMode.Detection:
-                        case CamServiceWorkingMode.Crossing:
-                            mainWindow.Dispatcher.Invoke(() =>
-                                                         {
-                                                             var image = LinedFrame?.Data != null
-                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                             : new BitmapImage();
-                                                             var roiImage = RoiFrame?.Data != null
-                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                : new BitmapImage();
-                                                             var lastRoiImage = RoiLastThrowFrame?.Data != null
-                                                                                    ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                    : new BitmapImage();
-
-                                                             camsDetectionBoard.SetCamImages(CamNumber._3, image, roiImage, lastRoiImage);
-                                                         });
-                            break;
-                    }
-
-                    break;
-                case "Cam4Grid":
-                    switch (workingMode)
-                    {
-                        case CamServiceWorkingMode.Setup:
-                            mainWindow.Dispatcher.Invoke(() =>
-                                                         {
-                                                             mainWindow.Cam4ImageBox.Source = LinedFrame?.Data != null
-                                                                                                  ? drawService.ToBitmap(LinedFrame)
-                                                                                                  : new BitmapImage();
-                                                             mainWindow.Cam4ImageBoxRoi.Source = RoiFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiFrame)
-                                                                                                     : new BitmapImage();
-                                                             mainWindow.Cam4ImageBoxRoi.Source = RoiLastThrowFrame?.Data != null
-                                                                                                     ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                                     : new BitmapImage();
-                                                         });
-                            break;
-                        case CamServiceWorkingMode.Detection:
-                        case CamServiceWorkingMode.Crossing:
-                            mainWindow.Dispatcher.Invoke(() =>
-                                                         {
-                                                             var image = LinedFrame?.Data != null
-                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                             : new BitmapImage();
-                                                             var roiImage = RoiFrame?.Data != null
-                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                : new BitmapImage();
-                                                             var lastRoiImage = RoiLastThrowFrame?.Data != null
-                                                                                    ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                    : new BitmapImage();
-
-                                                             camsDetectionBoard.SetCamImages(CamNumber._4, image, roiImage, lastRoiImage);
-                                                         });
-                            break;
-                    }
-
-                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             logger.Debug($"Refreshing imageboxes for cam_{camNumber} end");
@@ -493,69 +342,7 @@ namespace OneHundredAndEightyCore.Recognition
 
         public void ClearImageBoxes()
         {
-            switch (parentGridName)
-            {
-                case "Cam1Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     if (workingMode == CamServiceWorkingMode.Setup)
-                                                     {
-                                                         mainWindow.Cam1ImageBox.Source = new BitmapImage();
-                                                         mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage();
-                                                         mainWindow.Cam1ImageBoxRoi.Source = new BitmapImage();
-                                                     }
-                                                     else
-                                                     {
-                                                         camsDetectionBoard.SetCamImages(CamNumber._1, new BitmapImage(), new BitmapImage(), new BitmapImage());
-                                                     }
-                                                 });
-                    break;
-                case "Cam2Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     if (workingMode == CamServiceWorkingMode.Setup)
-                                                     {
-                                                         mainWindow.Cam2ImageBox.Source = new BitmapImage();
-                                                         mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage();
-                                                         mainWindow.Cam2ImageBoxRoi.Source = new BitmapImage();
-                                                     }
-                                                     else
-                                                     {
-                                                         camsDetectionBoard.SetCamImages(CamNumber._2, new BitmapImage(), new BitmapImage(), new BitmapImage());
-                                                     }
-                                                 });
-                    break;
-                case "Cam3Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     if (workingMode == CamServiceWorkingMode.Setup)
-                                                     {
-                                                         mainWindow.Cam3ImageBox.Source = new BitmapImage();
-                                                         mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage();
-                                                         mainWindow.Cam3ImageBoxRoi.Source = new BitmapImage();
-                                                     }
-                                                     else
-                                                     {
-                                                         camsDetectionBoard.SetCamImages(CamNumber._3, new BitmapImage(), new BitmapImage(), new BitmapImage());
-                                                     }
-                                                 });
-                    break;
-                case "Cam4Grid":
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     if (workingMode == CamServiceWorkingMode.Setup)
-                                                     {
-                                                         mainWindow.Cam4ImageBox.Source = new BitmapImage();
-                                                         mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage();
-                                                         mainWindow.Cam4ImageBoxRoi.Source = new BitmapImage();
-                                                     }
-                                                     else
-                                                     {
-                                                         camsDetectionBoard.SetCamImages(CamNumber._4, new BitmapImage(), new BitmapImage(), new BitmapImage());
-                                                     }
-                                                 });
-                    break;
-            }
+            RefreshImageBoxes(true);
         }
 
         public void FindAndProcessDartContour()

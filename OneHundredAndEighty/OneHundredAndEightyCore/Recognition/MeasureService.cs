@@ -34,13 +34,13 @@ namespace OneHundredAndEightyCore.Recognition
         public const int DartboardDiameterInPixels = 1020;
         public const int DartboardDiameterInCm = 34;
 
-        public MeasureService(CamService camService)
+        public MeasureService(CamService camService, IMainWindow mainWindow) // todo not need mainWindow only because container
         {
             this.camService = camService;
-            logger = MainWindow.ServiceContainer.Resolve<Logger>();
-            drawService = MainWindow.ServiceContainer.Resolve<DrawService>();
-            throwService = MainWindow.ServiceContainer.Resolve<ThrowService>();
-            configService = MainWindow.ServiceContainer.Resolve<ConfigService>();
+            logger = mainWindow.ServiceContainer.Resolve<Logger>();
+            drawService = mainWindow.ServiceContainer.Resolve<DrawService>();
+            throwService = mainWindow.ServiceContainer.Resolve<ThrowService>();
+            configService = mainWindow.ServiceContainer.Resolve<ConfigService>();
             minContourArc = configService.Read<int>(SettingsType.MinContourArc);
             camFovAngle = configService.Read<double>(SettingsType.CamFovAngle);
         }

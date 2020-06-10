@@ -72,22 +72,22 @@ namespace OneHundredAndEightyCore.Recognition
 
             if (cam1Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam1Grid.Name, workingMode)); // todo extenstion method... or not
+                cams.Add(new CamService(mainWindow, CamNumber._1, workingMode)); // todo extenstion method... or not
             }
 
             if (cam2Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam2Grid.Name, workingMode));
+                cams.Add(new CamService(mainWindow, CamNumber._2, workingMode));
             }
 
             if (cam3Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam3Grid.Name, workingMode));
+                cams.Add(new CamService(mainWindow, CamNumber._3, workingMode));
             }
 
             if (cam4Active)
             {
-                cams.Add(new CamService(mainWindow, mainWindow.Cam4Grid.Name, workingMode));
+                cams.Add(new CamService(mainWindow, CamNumber._4, workingMode));
             }
 
             cts = new CancellationTokenSource();

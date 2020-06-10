@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Drawing;
+using OneHundredAndEightyCore.Common;
 
 #endregion
 
@@ -8,12 +9,12 @@ namespace OneHundredAndEightyCore.Recognition
 {
     public class Ray
     {
-        public int CamNumber { get; }
+        public CamNumber CamNumber { get; }
         public PointF CamPoint { get; }
         public PointF RayPoint { get; }
         public double ContourArc { get; }
 
-        public Ray(int camNumber, PointF camPoint, PointF rayPoint, double contourArc)
+        public Ray(CamNumber camNumber, PointF camPoint, PointF rayPoint, double contourArc)
         {
             CamNumber = camNumber;
             CamPoint = camPoint;

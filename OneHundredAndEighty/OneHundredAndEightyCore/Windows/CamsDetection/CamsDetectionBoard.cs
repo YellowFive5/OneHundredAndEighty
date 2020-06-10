@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Windows.Media.Imaging;
 using NLog;
 using OneHundredAndEightyCore.Common;
@@ -33,31 +32,7 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
 
         public void SetCamImages(CamNumber camNumber, BitmapImage image, BitmapImage roiImage, BitmapImage lastRoiImage)
         {
-            switch (camNumber)
-            {
-                case CamNumber._1:
-                    camsDetectionWindow.Cam1Image.Source = image;
-                    camsDetectionWindow.Cam1RoiImage.Source = roiImage;
-                    camsDetectionWindow.Cam1LastRoiImage.Source = lastRoiImage;
-                    break;
-                case CamNumber._2:
-                    camsDetectionWindow.Cam2Image.Source = image;
-                    camsDetectionWindow.Cam2RoiImage.Source = roiImage;
-                    camsDetectionWindow.Cam2LastRoiImage.Source = lastRoiImage;
-                    break;
-                case CamNumber._3:
-                    camsDetectionWindow.Cam3Image.Source = image;
-                    camsDetectionWindow.Cam3RoiImage.Source = roiImage;
-                    camsDetectionWindow.Cam3LastRoiImage.Source = lastRoiImage;
-                    break;
-                case CamNumber._4:
-                    camsDetectionWindow.Cam4Image.Source = image;
-                    camsDetectionWindow.Cam4RoiImage.Source = roiImage;
-                    camsDetectionWindow.Cam4LastRoiImage.Source = lastRoiImage;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
-            }
+            camsDetectionWindow.SetImages(camNumber, image, roiImage, lastRoiImage);
         }
 
         public void SetProjectionImage(BitmapImage image)

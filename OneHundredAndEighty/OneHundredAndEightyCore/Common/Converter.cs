@@ -211,5 +211,22 @@ namespace OneHundredAndEightyCore.Common
         {
             return Convert.ToBoolean(value);
         }
+
+        public static CamNumber GridNameToCamNumber(string gridName) //todo to tests
+        {
+            switch (gridName)
+            {
+                case "Cam1Grid":
+                    return CamNumber._1;
+                case "Cam2Grid":
+                    return CamNumber._2;
+                case "Cam3Grid":
+                    return CamNumber._3;
+                case "Cam4Grid":
+                    return CamNumber._4;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(GridNameToCamNumber), gridName, null);
+            }
+        }
     }
 }
