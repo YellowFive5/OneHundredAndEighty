@@ -18,7 +18,7 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly CamService camService;
         private readonly DrawService drawService;
         private readonly ThrowService throwService;
-        private readonly ConfigService configService;
+        private readonly IConfigService configService;
         private readonly Logger logger;
         private DartContour dartContour;
 
@@ -36,7 +36,7 @@ namespace OneHundredAndEightyCore.Recognition
                               Logger logger,
                               DrawService drawService,
                               ThrowService throwService,
-                              ConfigService configService)
+                              IConfigService configService)
         {
             this.camService = camService;
             this.logger = logger;

@@ -16,6 +16,7 @@
     Title="OneHundredAndEighty"
     ResizeMode="CanResizeWithGrip"
     Closing="OnClosing"
+    Loaded="OnLoaded"
     d:DesignWidth="981.721"
     d:DesignHeight="591.904">
     <Window.Resources>
@@ -680,7 +681,7 @@
                                          Grid.RowSpan="5"
                                          Grid.ColumnSpan="3"
                                          IsReadOnly="True"
-                                         Text="{Binding CheckCamsBoxText}" />
+                                         Text="{Binding CheckCamsBoxText, Mode=OneWay}" />
                                 <Button x:Name="FindCams"
                                         Content="Find cams"
                                         Grid.Row="13"

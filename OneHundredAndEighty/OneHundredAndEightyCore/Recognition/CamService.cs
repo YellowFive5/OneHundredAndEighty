@@ -31,7 +31,7 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly CamServiceWorkingMode workingMode;
         private readonly DrawService drawService;
         private readonly VideoCapture videoCapture;
-        private readonly ConfigService configService;
+        private readonly IConfigService configService;
         private readonly MeasureService measureService;
         private readonly CamsDetectionBoard camsDetectionBoard;
         private readonly ThrowService throwService;
@@ -67,7 +67,7 @@ namespace OneHundredAndEightyCore.Recognition
                           CamServiceWorkingMode workingMode,
                           Logger logger,
                           DrawService drawService,
-                          ConfigService configService,
+                          IConfigService configService,
                           CamsDetectionBoard camsDetectionBoard,
                           ThrowService throwService)
         {

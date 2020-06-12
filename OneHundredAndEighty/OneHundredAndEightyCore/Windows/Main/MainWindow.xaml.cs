@@ -72,9 +72,14 @@ namespace OneHundredAndEightyCore.Windows.Main
             DataContext = viewModel;
         }
 
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            viewModel.OnMainWindowLoaded();
+        }
+
         private void OnClosing(object sender, CancelEventArgs e)
         {
-            viewModel.OnClosing();
+            viewModel.OnMainWindowClosing();
         }
 
         private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)

@@ -28,14 +28,15 @@ namespace OneHundredAndEightyCore.Windows.Main
     {
         private readonly Logger logger;
         private readonly MessageBoxService messageBoxService;
-        private readonly DBService dbService;
+        private readonly IDBService dbService;
+        private readonly IVersionChecker versionChecker;
         private readonly ScoreBoardService scoreBoardService;
         private readonly CamsDetectionBoard camsDetectionBoard;
         private readonly DrawService drawService;
-        private readonly DetectionService detectionService;
+        private readonly IDetectionService detectionService;
         private readonly ManualThrowPanel manualThrowPanel;
         private readonly GameService gameService;
-        private readonly ConfigService configService;
+        private readonly IConfigService configService;
         private readonly ThrowService throwService;
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
@@ -44,13 +45,53 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         #region Window position
 
-        public double MainWindowPositionLeft { get; set; }
+        private double mainWindowPositionLeft;
 
-        public double MainWindowPositionTop { get; set; }
+        public double MainWindowPositionLeft
+        {
+            get => mainWindowPositionLeft;
+            set
+            {
+                mainWindowPositionLeft = value;
+                OnPropertyChanged(nameof(MainWindowPositionLeft));
+            }
+        }
 
-        public double MainWindowHeight { get; set; }
+        private double mainWindowPositionTop;
 
-        public double MainWindowWidth { get; set; }
+        public double MainWindowPositionTop
+        {
+            get => mainWindowPositionTop;
+            set
+            {
+                mainWindowPositionTop = value;
+                OnPropertyChanged(nameof(MainWindowPositionTop));
+            }
+        }
+
+        private double mainWindowHeight;
+
+        public double MainWindowHeight
+        {
+            get => mainWindowHeight;
+            set
+            {
+                mainWindowHeight = value;
+                OnPropertyChanged(nameof(MainWindowHeight));
+            }
+        }
+
+        private double mainWindowWidth;
+
+        public double MainWindowWidth
+        {
+            get => mainWindowWidth;
+            set
+            {
+                mainWindowWidth = value;
+                OnPropertyChanged(nameof(MainWindowWidth));
+            }
+        }
 
         #endregion
 
@@ -156,45 +197,305 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         #region CamsSetupSliders
 
-        public double Cam1ThresholdSliderValue { get; set; }
+        private double cam1ThresholdSliderValue;
 
-        public double Cam2ThresholdSliderValue { get; set; }
+        public double Cam1ThresholdSliderValue
+        {
+            get => cam1ThresholdSliderValue;
+            set
+            {
+                if (cam1ThresholdSliderValue != value)
+                {
+                    cam1ThresholdSliderValue = value;
+                    OnPropertyChanged(nameof(Cam1ThresholdSliderValue));
+                }
+            }
+        }
 
-        public double Cam3ThresholdSliderValue { get; set; }
+        private double cam2ThresholdSliderValue;
 
-        public double Cam4ThresholdSliderValue { get; set; }
+        public double Cam2ThresholdSliderValue
+        {
+            get => cam2ThresholdSliderValue;
+            set
+            {
+                if (cam2ThresholdSliderValue != value)
+                {
+                    cam2ThresholdSliderValue = value;
+                    OnPropertyChanged(nameof(Cam2ThresholdSliderValue));
+                }
+            }
+        }
 
-        public double Cam1SurfaceSliderValue { get; set; }
+        private double cam3ThresholdSliderValue;
 
-        public double Cam2SurfaceSliderValue { get; set; }
+        public double Cam3ThresholdSliderValue
+        {
+            get => cam3ThresholdSliderValue;
+            set
+            {
+                if (cam3ThresholdSliderValue != value)
+                {
+                    cam3ThresholdSliderValue = value;
+                    OnPropertyChanged(nameof(Cam3ThresholdSliderValue));
+                }
+            }
+        }
 
-        public double Cam3SurfaceSliderValue { get; set; }
+        private double cam4ThresholdSliderValue;
 
-        public double Cam4SurfaceSliderValue { get; set; }
+        public double Cam4ThresholdSliderValue
+        {
+            get => cam4ThresholdSliderValue;
+            set
+            {
+                if (cam4ThresholdSliderValue != value)
+                {
+                    cam4ThresholdSliderValue = value;
+                    OnPropertyChanged(nameof(Cam4ThresholdSliderValue));
+                }
+            }
+        }
 
-        public double Cam1SurfaceCenterSliderValue { get; set; }
+        private double cam1SurfaceSliderValue;
 
-        public double Cam2SurfaceCenterSliderValue { get; set; }
+        public double Cam1SurfaceSliderValue
+        {
+            get => cam1SurfaceSliderValue;
+            set
+            {
+                if (cam1SurfaceSliderValue != value)
+                {
+                    cam1SurfaceSliderValue = value;
+                    OnPropertyChanged(nameof(Cam1SurfaceSliderValue));
+                }
+            }
+        }
 
-        public double Cam3SurfaceCenterSliderValue { get; set; }
+        private double cam2SurfaceSliderValue;
 
-        public double Cam4SurfaceCenterSliderValue { get; set; }
+        public double Cam2SurfaceSliderValue
+        {
+            get => cam2SurfaceSliderValue;
+            set
+            {
+                if (cam2SurfaceSliderValue != value)
+                {
+                    cam2SurfaceSliderValue = value;
+                    OnPropertyChanged(nameof(Cam2SurfaceSliderValue));
+                }
+            }
+        }
 
-        public double Cam1RoiPosYSliderValue { get; set; }
+        private double cam3SurfaceSliderValue;
 
-        public double Cam2RoiPosYSliderValue { get; set; }
+        public double Cam3SurfaceSliderValue
+        {
+            get => cam3SurfaceSliderValue;
+            set
+            {
+                if (cam3SurfaceSliderValue != value)
+                {
+                    cam3SurfaceSliderValue = value;
+                    OnPropertyChanged(nameof(Cam3SurfaceSliderValue));
+                }
+            }
+        }
 
-        public double Cam3RoiPosYSliderValue { get; set; }
+        private double cam4SurfaceSliderValue;
 
-        public double Cam4RoiPosYSliderValue { get; set; }
+        public double Cam4SurfaceSliderValue
+        {
+            get => cam4SurfaceSliderValue;
+            set
+            {
+                if (cam4SurfaceSliderValue != value)
+                {
+                    cam4SurfaceSliderValue = value;
+                    OnPropertyChanged(nameof(Cam4SurfaceSliderValue));
+                }
+            }
+        }
 
-        public double Cam1RoiHeightSliderValue { get; set; }
+        private double cam1SurfaceCenterSliderValue;
 
-        public double Cam2RoiHeightSliderValue { get; set; }
+        public double Cam1SurfaceCenterSliderValue
+        {
+            get => cam1SurfaceCenterSliderValue;
+            set
+            {
+                if (cam1SurfaceCenterSliderValue != value)
+                {
+                    cam1SurfaceCenterSliderValue = value;
+                    OnPropertyChanged(nameof(Cam1SurfaceCenterSliderValue));
+                }
+            }
+        }
 
-        public double Cam3RoiHeightSliderValue { get; set; }
+        private double cam2SurfaceCenterSliderValue;
 
-        public double Cam4RoiHeightSliderValue { get; set; }
+        public double Cam2SurfaceCenterSliderValue
+        {
+            get => cam2SurfaceCenterSliderValue;
+            set
+            {
+                if (cam2SurfaceCenterSliderValue != value)
+                {
+                    cam2SurfaceCenterSliderValue = value;
+                    OnPropertyChanged(nameof(Cam2SurfaceCenterSliderValue));
+                }
+            }
+        }
+
+        private double cam3SurfaceCenterSliderValue;
+
+        public double Cam3SurfaceCenterSliderValue
+        {
+            get => cam3SurfaceCenterSliderValue;
+            set
+            {
+                if (cam3SurfaceCenterSliderValue != value)
+                {
+                    cam3SurfaceCenterSliderValue = value;
+                    OnPropertyChanged(nameof(Cam3SurfaceCenterSliderValue));
+                }
+            }
+        }
+
+        private double cam4SurfaceCenterSliderValue;
+
+        public double Cam4SurfaceCenterSliderValue
+        {
+            get => cam4SurfaceCenterSliderValue;
+            set
+            {
+                if (cam4SurfaceCenterSliderValue != value)
+                {
+                    cam4SurfaceCenterSliderValue = value;
+                    OnPropertyChanged(nameof(Cam4SurfaceCenterSliderValue));
+                }
+            }
+        }
+
+        private double cam1RoiPosYSliderValue;
+
+        public double Cam1RoiPosYSliderValue
+        {
+            get => cam1RoiPosYSliderValue;
+            set
+            {
+                if (cam1RoiPosYSliderValue != value)
+                {
+                    cam1RoiPosYSliderValue = value;
+                    OnPropertyChanged(nameof(Cam1RoiPosYSliderValue));
+                }
+            }
+        }
+
+        private double cam2RoiPosYSliderValue;
+
+        public double Cam2RoiPosYSliderValue
+        {
+            get => cam2RoiPosYSliderValue;
+            set
+            {
+                if (cam2RoiPosYSliderValue != value)
+                {
+                    cam2RoiPosYSliderValue = value;
+                    OnPropertyChanged(nameof(Cam2RoiPosYSliderValue));
+                }
+            }
+        }
+
+        private double cam3RoiPosYSliderValue;
+
+        public double Cam3RoiPosYSliderValue
+        {
+            get => cam3RoiPosYSliderValue;
+            set
+            {
+                if (cam3RoiPosYSliderValue != value)
+                {
+                    cam3RoiPosYSliderValue = value;
+                    OnPropertyChanged(nameof(Cam3RoiPosYSliderValue));
+                }
+            }
+        }
+
+        private double cam4RoiPosYSliderValue;
+
+        public double Cam4RoiPosYSliderValue
+        {
+            get => cam4RoiPosYSliderValue;
+            set
+            {
+                if (cam4RoiPosYSliderValue != value)
+                {
+                    cam4RoiPosYSliderValue = value;
+                    OnPropertyChanged(nameof(Cam4RoiPosYSliderValue));
+                }
+            }
+        }
+
+        private double cam1RoiHeightSliderValue;
+
+        public double Cam1RoiHeightSliderValue
+        {
+            get => cam1RoiHeightSliderValue;
+            set
+            {
+                if (cam1RoiHeightSliderValue != value)
+                {
+                    cam1RoiHeightSliderValue = value;
+                    OnPropertyChanged(nameof(Cam1RoiHeightSliderValue));
+                }
+            }
+        }
+
+        private double cam2RoiHeightSliderValue;
+
+        public double Cam2RoiHeightSliderValue
+        {
+            get => cam2RoiHeightSliderValue;
+            set
+            {
+                if (cam2RoiHeightSliderValue != value)
+                {
+                    cam2RoiHeightSliderValue = value;
+                    OnPropertyChanged(nameof(Cam2RoiHeightSliderValue));
+                }
+            }
+        }
+
+        private double cam3RoiHeightSliderValue;
+
+        public double Cam3RoiHeightSliderValue
+        {
+            get => cam3RoiHeightSliderValue;
+            set
+            {
+                if (cam3RoiHeightSliderValue != value)
+                {
+                    cam3RoiHeightSliderValue = value;
+                    OnPropertyChanged(nameof(Cam3RoiHeightSliderValue));
+                }
+            }
+        }
+
+        private double cam4RoiHeightSliderValue;
+
+        public double Cam4RoiHeightSliderValue
+        {
+            get => cam4RoiHeightSliderValue;
+            set
+            {
+                if (cam4RoiHeightSliderValue != value)
+                {
+                    cam4RoiHeightSliderValue = value;
+                    OnPropertyChanged(nameof(Cam4RoiHeightSliderValue));
+                }
+            }
+        }
 
         #endregion
 
@@ -210,10 +511,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam1Enabled != value)
                 {
                     cam1Enabled = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam1CheckBox, Cam1Enabled);
-                    }
+                    OnPropertyChanged(nameof(Cam1Enabled));
+                    configService.Write(SettingsType.Cam1CheckBox, Cam1Enabled);
                 }
             }
         }
@@ -228,10 +527,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam2Enabled != value)
                 {
                     cam2Enabled = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam2CheckBox, Cam2Enabled);
-                    }
+                    OnPropertyChanged(nameof(cam2Enabled));
+                    configService.Write(SettingsType.Cam2CheckBox, Cam2Enabled);
                 }
             }
         }
@@ -246,10 +543,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam3Enabled != value)
                 {
                     cam3Enabled = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam3CheckBox, Cam3Enabled);
-                    }
+                    OnPropertyChanged(nameof(cam3Enabled));
+                    configService.Write(SettingsType.Cam3CheckBox, Cam3Enabled);
                 }
             }
         }
@@ -264,10 +559,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam4Enabled != value)
                 {
                     cam4Enabled = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam4CheckBox, Cam4Enabled);
-                    }
+                    OnPropertyChanged(nameof(Cam4Enabled));
+                    configService.Write(SettingsType.Cam4CheckBox, Cam4Enabled);
                 }
             }
         }
@@ -282,10 +575,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (detectionEnabled != value)
                 {
                     detectionEnabled = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.WithDetectionCheckBox, DetectionEnabled);
-                    }
+                    OnPropertyChanged(nameof(DetectionEnabled));
+                    configService.Write(SettingsType.WithDetectionCheckBox, DetectionEnabled);
                 }
             }
         }
@@ -300,10 +591,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam1Id != value)
                 {
                     cam1Id = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam1Id, Cam1Id);
-                    }
+                    OnPropertyChanged(nameof(Cam1Id));
+                    configService.Write(SettingsType.Cam1Id, Cam1Id);
                 }
             }
         }
@@ -318,10 +607,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam2Id != value)
                 {
                     cam2Id = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam2Id, Cam2Id);
-                    }
+                    OnPropertyChanged(nameof(Cam2Id));
+                    configService.Write(SettingsType.Cam2Id, Cam2Id);
                 }
             }
         }
@@ -336,10 +623,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam3Id != value)
                 {
                     cam3Id = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam3Id, Cam3Id);
-                    }
+                    OnPropertyChanged(nameof(Cam3Id));
+                    configService.Write(SettingsType.Cam3Id, Cam3Id);
                 }
             }
         }
@@ -354,10 +639,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam4Id != value)
                 {
                     cam4Id = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam4Id, Cam4Id);
-                    }
+                    OnPropertyChanged(nameof(Cam4Id));
+                    configService.Write(SettingsType.Cam4Id, Cam4Id);
                 }
             }
         }
@@ -372,10 +655,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (camsFovAngle != value)
                 {
                     camsFovAngle = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.CamFovAngle, CamsFovAngle);
-                    }
+                    OnPropertyChanged(nameof(CamsFovAngle));
+                    configService.Write(SettingsType.CamFovAngle, CamsFovAngle);
                 }
             }
         }
@@ -390,10 +671,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (camsResolutionHeight != value)
                 {
                     camsResolutionHeight = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ResolutionHeight, CamsResolutionHeight);
-                    }
+                    OnPropertyChanged(nameof(CamsResolutionHeight));
+                    configService.Write(SettingsType.ResolutionHeight, CamsResolutionHeight);
                 }
             }
         }
@@ -408,10 +687,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (camsResolutionWidth != value)
                 {
                     camsResolutionWidth = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ResolutionWidth, CamsResolutionWidth);
-                    }
+                    OnPropertyChanged(nameof(CamsResolutionWidth));
+                    configService.Write(SettingsType.ResolutionWidth, CamsResolutionWidth);
                 }
             }
         }
@@ -426,10 +703,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (movesExtractionValue != value)
                 {
                     movesExtractionValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.MovesExtraction, MovesExtractionValue);
-                    }
+                    OnPropertyChanged(nameof(MovesExtractionValue));
+                    configService.Write(SettingsType.MovesExtraction, MovesExtractionValue);
                 }
             }
         }
@@ -444,10 +719,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (movesDetectedSleepTimeValue != value)
                 {
                     movesDetectedSleepTimeValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.MoveDetectedSleepTime, MovesDetectedSleepTimeValue);
-                    }
+                    OnPropertyChanged(nameof(MovesDetectedSleepTimeValue));
+                    configService.Write(SettingsType.MoveDetectedSleepTime, MovesDetectedSleepTimeValue);
                 }
             }
         }
@@ -462,10 +735,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (movesNoiseValue != value)
                 {
                     movesNoiseValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.MovesNoise, MovesNoiseValue);
-                    }
+                    OnPropertyChanged(nameof(MovesNoiseValue));
+                    configService.Write(SettingsType.MovesNoise, MovesNoiseValue);
                 }
             }
         }
@@ -480,10 +751,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (smoothGaussValue != value)
                 {
                     smoothGaussValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.SmoothGauss, SmoothGaussValue);
-                    }
+                    OnPropertyChanged(nameof(SmoothGaussValue));
+                    configService.Write(SettingsType.SmoothGauss, SmoothGaussValue);
                 }
             }
         }
@@ -498,10 +767,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (thresholdSleepTimeValue != value)
                 {
                     thresholdSleepTimeValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ThresholdSleepTime, ThresholdSleepTimeValue);
-                    }
+                    OnPropertyChanged(nameof(ThresholdSleepTimeValue));
+                    configService.Write(SettingsType.ThresholdSleepTime, ThresholdSleepTimeValue);
                 }
             }
         }
@@ -516,10 +783,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (extractionSleepTimeValue != value)
                 {
                     extractionSleepTimeValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ExtractionSleepTime, ExtractionSleepTimeValue);
-                    }
+                    OnPropertyChanged(nameof(ExtractionSleepTimeValue));
+                    configService.Write(SettingsType.ExtractionSleepTime, ExtractionSleepTimeValue);
                 }
             }
         }
@@ -534,10 +799,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (minContourArcValue != value)
                 {
                     minContourArcValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.MinContourArc, MinContourArcValue);
-                    }
+                    OnPropertyChanged(nameof(MinContourArcValue));
+                    configService.Write(SettingsType.MinContourArc, MinContourArcValue);
                 }
             }
         }
@@ -552,10 +815,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (movesDartValue != value)
                 {
                     movesDartValue = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.MovesDart, MovesDartValue);
-                    }
+                    OnPropertyChanged(nameof(MovesDartValue));
+                    configService.Write(SettingsType.MovesDart, MovesDartValue);
                 }
             }
         }
@@ -570,10 +831,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (toCam1Distance != value)
                 {
                     toCam1Distance = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ToCam1Distance, ToCam1Distance);
-                    }
+                    OnPropertyChanged(nameof(ToCam1Distance));
+                    configService.Write(SettingsType.ToCam1Distance, ToCam1Distance);
                 }
             }
         }
@@ -588,10 +847,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (toCam2Distance != value)
                 {
                     toCam2Distance = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ToCam2Distance, ToCam2Distance);
-                    }
+                    OnPropertyChanged(nameof(ToCam2Distance));
+                    configService.Write(SettingsType.ToCam2Distance, ToCam2Distance);
                 }
             }
         }
@@ -606,10 +863,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (toCam3Distance != value)
                 {
                     toCam3Distance = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ToCam3Distance, ToCam3Distance);
-                    }
+                    OnPropertyChanged(nameof(ToCam3Distance));
+                    configService.Write(SettingsType.ToCam3Distance, ToCam3Distance);
                 }
             }
         }
@@ -624,10 +879,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (toCam4Distance != value)
                 {
                     toCam4Distance = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.ToCam4Distance, ToCam4Distance);
-                    }
+                    OnPropertyChanged(nameof(ToCam4Distance));
+                    configService.Write(SettingsType.ToCam4Distance, ToCam4Distance);
                 }
             }
         }
@@ -738,10 +991,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam1SetupSector != value)
                 {
                     cam1SetupSector = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam1SetupSector, cam1SetupSector);
-                    }
+                    OnPropertyChanged(nameof(Cam1SetupSector));
+                    configService.Write(SettingsType.Cam1SetupSector, cam1SetupSector);
                 }
             }
         }
@@ -756,10 +1007,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam2SetupSector != value)
                 {
                     cam2SetupSector = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam2SetupSector, cam2SetupSector);
-                    }
+                    OnPropertyChanged(nameof(Cam2SetupSector));
+                    configService.Write(SettingsType.Cam2SetupSector, cam2SetupSector);
                 }
             }
         }
@@ -774,10 +1023,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam3SetupSector != value)
                 {
                     cam3SetupSector = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam3SetupSector, cam3SetupSector);
-                    }
+                    OnPropertyChanged(nameof(Cam3SetupSector));
+                    configService.Write(SettingsType.Cam3SetupSector, cam3SetupSector);
                 }
             }
         }
@@ -792,10 +1039,8 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam4SetupSector != value)
                 {
                     cam4SetupSector = value;
-                    if (IsSettingsLoaded)
-                    {
-                        configService.Write(SettingsType.Cam4SetupSector, cam4SetupSector);
-                    }
+                    OnPropertyChanged(nameof(Cam4SetupSector));
+                    configService.Write(SettingsType.Cam4SetupSector, cam4SetupSector);
                 }
             }
         }
@@ -805,7 +1050,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public string CheckCamsBoxText
         {
             get => checkCamsBoxText;
-            set
+            private set
             {
                 checkCamsBoxText = value;
                 OnPropertyChanged(nameof(CheckCamsBoxText));
@@ -821,7 +1066,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public List<Player> Players
         {
             get => players;
-            set
+            private set
             {
                 players = value;
                 OnPropertyChanged(nameof(Players));
@@ -837,14 +1082,17 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => newGameType;
             set
             {
-                newGameType = value;
-
-                IsNewGameForSingle = NewGameType == GameType.FreeThrowsSingle;
-                OnPropertyChanged(nameof(IsNewGameForSingle));
-                IsNewGameForPair = NewGameType != GameType.FreeThrowsSingle;
-                OnPropertyChanged(nameof(IsNewGameForPair));
-                IsNewGameIsClassic = NewGameType == GameType.Classic;
-                OnPropertyChanged(nameof(IsNewGameIsClassic));
+                if (newGameType != value)
+                {
+                    newGameType = value;
+                    OnPropertyChanged(nameof(NewGameType));
+                    IsNewGameForSingle = NewGameType == GameType.FreeThrowsSingle;
+                    OnPropertyChanged(nameof(IsNewGameForSingle));
+                    IsNewGameForPair = NewGameType != GameType.FreeThrowsSingle;
+                    OnPropertyChanged(nameof(IsNewGameForPair));
+                    IsNewGameIsClassic = NewGameType == GameType.Classic;
+                    OnPropertyChanged(nameof(IsNewGameIsClassic));
+                }
             }
         }
 
@@ -854,9 +1102,50 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public bool IsNewGameIsClassic { get; set; }
 
-        public GamePoints NewGamePoints { get; set; }
-        public int NewGameSets { get; set; }
-        public int NewGameLegs { get; set; }
+        private GamePoints newGamePoints;
+
+        public GamePoints NewGamePoints
+        {
+            get => newGamePoints;
+            set
+            {
+                if (newGamePoints != value)
+                {
+                    newGamePoints = value;
+                    OnPropertyChanged(nameof(NewGamePoints));
+                }
+            }
+        }
+
+        private int newGameSets;
+
+        public int NewGameSets
+        {
+            get => newGameSets;
+            set
+            {
+                if (newGameSets != value)
+                {
+                    newGameSets = value;
+                    OnPropertyChanged(nameof(NewGameSets));
+                }
+            }
+        }
+
+        private int newGameLegs;
+
+        public int NewGameLegs
+        {
+            get => newGameLegs;
+            set
+            {
+                if (newGameLegs != value)
+                {
+                    newGameLegs = value;
+                    OnPropertyChanged(nameof(NewGameLegs));
+                }
+            }
+        }
 
         #endregion
 
@@ -972,20 +1261,21 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public MainWindowViewModel(Logger logger,
                                    MessageBoxService messageBoxService,
-                                   DBService dbService,
-                                   VersionChecker versionChecker,
+                                   IDBService dbService,
+                                   IVersionChecker versionChecker,
                                    ScoreBoardService scoreBoardService,
                                    CamsDetectionBoard camsDetectionBoard,
                                    DrawService drawService,
-                                   DetectionService detectionService,
+                                   IDetectionService detectionService,
                                    ManualThrowPanel manualThrowPanel,
                                    GameService gameService,
-                                   ConfigService configService,
+                                   IConfigService configService,
                                    ThrowService throwService)
         {
             this.logger = logger;
             this.messageBoxService = messageBoxService;
             this.dbService = dbService;
+            this.versionChecker = versionChecker;
             this.scoreBoardService = scoreBoardService;
             this.camsDetectionBoard = camsDetectionBoard;
             this.drawService = drawService;
@@ -994,28 +1284,43 @@ namespace OneHundredAndEightyCore.Windows.Main
             this.gameService = gameService;
             this.configService = configService;
             this.throwService = throwService;
+        }
 
-            detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
+        public const int DefaultNewGameSetsValue = 5;
+        public const int DefaultNewGameLegsValue = 3;
+        public const GameType DefaultNewGameType = GameType.Classic;
+        public const GamePoints DefaultNewGamePoints = GamePoints._501;
+
+        public void OnMainWindowLoaded()
+        {
             versionChecker.CheckVersions();
-
             LoadSettings();
             LoadPlayers();
             FindConnectedCams();
+            detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
+        }
+
+        public void OnMainWindowClosing()
+        {
+            SaveWindowPositionSettings();
+            StopGameByButton();
+            scoreBoardService.CloseScoreBoard();
+            manualThrowPanel.Close();
+            camsDetectionBoard.Close();
         }
 
         #region Settings
-
-        private bool IsSettingsLoaded { get; set; }
 
         private void LoadSettings()
         {
             NewPlayerAvatar = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
             IsMainTabsEnabled = true;
             IsSetupTabsEnabled = true;
-            NewGameSets = 3;
-            NewGameLegs = 3;
-            NewGameType = GameType.Classic;
-            NewGamePoints = GamePoints._501;
+
+            NewGameSets = DefaultNewGameSetsValue;
+            NewGameLegs = DefaultNewGameLegsValue;
+            NewGameType = DefaultNewGameType;
+            NewGamePoints = DefaultNewGamePoints;
 
             MainWindowHeight = configService.Read<double>(SettingsType.MainWindowHeight);
             MainWindowWidth = configService.Read<double>(SettingsType.MainWindowWidth);
@@ -1080,8 +1385,6 @@ namespace OneHundredAndEightyCore.Windows.Main
             Cam2SetupSector = configService.Read<string>(SettingsType.Cam2SetupSector);
             Cam3SetupSector = configService.Read<string>(SettingsType.Cam3SetupSector);
             Cam4SetupSector = configService.Read<string>(SettingsType.Cam4SetupSector);
-
-            IsSettingsLoaded = true;
         }
 
         private void SaveWindowPositionSettings()
@@ -1510,20 +1813,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void FindConnectedCams()
         {
-            var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
-            var str = new StringBuilder();
-            for (var i = 0; i < allCams.Count; i++)
-            {
-                var cam = allCams[i];
-                var camId = cam.DevicePath.Substring(44, 10);
-                str.AppendLine($"[{cam.Name}]-[ID:'{camId}']");
-            }
-
-            var text = allCams.Count == 0
-                           ? "No cameras found"
-                           : str.ToString();
-
-            CheckCamsBoxText = text;
+            CheckCamsBoxText = detectionService.FindConnectedCams();
         }
 
         public void CheckCamsSimultaneousWork()
@@ -1562,14 +1852,5 @@ namespace OneHundredAndEightyCore.Windows.Main
         }
 
         #endregion
-
-        public void OnClosing()
-        {
-            SaveWindowPositionSettings();
-            StopGameByButton();
-            scoreBoardService.CloseScoreBoard();
-            manualThrowPanel.Close();
-            camsDetectionBoard.Close();
-        }
     }
 }

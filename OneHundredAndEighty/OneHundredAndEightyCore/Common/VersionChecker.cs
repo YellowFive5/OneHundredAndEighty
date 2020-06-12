@@ -8,7 +8,7 @@ using System.IO;
 
 namespace OneHundredAndEightyCore.Common
 {
-    public class VersionChecker
+    public class VersionChecker : IVersionChecker
     {
         private readonly DBService dbService;
         private readonly ConfigService configService;

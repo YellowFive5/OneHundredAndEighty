@@ -3,8 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DirectShowLib;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Windows.CamsDetection;
@@ -20,7 +22,7 @@ namespace OneHundredAndEightyCore.Recognition
         DartsExtraction
     }
 
-    public class DetectionService
+    public class DetectionService : IDetectionService
     {
         private readonly DrawService drawService;
         private readonly ConfigService configService;
@@ -173,6 +175,22 @@ namespace OneHundredAndEightyCore.Recognition
         public void StopDetection()
         {
             cts?.Cancel();
+        }
+
+        public string FindConnectedCams()
+        {
+            var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
+            var str = new StringBuilder();
+            for (var i = 0; i < allCams.Count; i++)
+            {
+                var cam = allCams[i];
+                var camId = cam.DevicePath.Substring(44, 10);
+                str.AppendLine($"[{cam.Name}]-[ID:'{camId}']");
+            }
+
+            return allCams.Count == 0
+                       ? "No cameras found"
+                       : str.ToString();
         }
 
         public void InvokeOnThrowDetected(DetectedThrow thrw)

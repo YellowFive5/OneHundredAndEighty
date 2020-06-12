@@ -7,7 +7,7 @@ using NLog;
 
 namespace OneHundredAndEightyCore.Common
 {
-    public class ConfigService
+    public class ConfigService : IConfigService
     {
         private readonly object locker;
         private readonly Logger logger;
