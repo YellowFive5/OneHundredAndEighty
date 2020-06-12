@@ -21,6 +21,7 @@ namespace OneHundredAndEightyCore
             public bool ThrowPanel { get; set; }
         }
 
+
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             Parser.Default.ParseArguments<Options>(e.Args).WithParsed<Options>(o =>
@@ -29,5 +30,6 @@ namespace OneHundredAndEightyCore
                                                                                    ThrowPanel = o.ThrowPanel;
                                                                                });
         }
+        
     }
 }

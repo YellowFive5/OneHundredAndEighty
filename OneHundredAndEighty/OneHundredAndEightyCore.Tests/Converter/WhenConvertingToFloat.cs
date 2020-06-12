@@ -26,7 +26,7 @@ namespace OneHundredAndEightyCore.Tests.Converter
 
         [TestCase("trash_!")]
         [TestCase("True")]
-        public void ErrorOccuresWhenInputValueNotCorrect(string inputValue)
+        public void ErrorOccuredWhenInputValueNotCorrect(string inputValue)
         {
             Action act = () => { Common.Converter.ToFloat(inputValue); };
 

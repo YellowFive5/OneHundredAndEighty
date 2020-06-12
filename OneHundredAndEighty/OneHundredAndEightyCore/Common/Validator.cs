@@ -19,13 +19,12 @@ namespace OneHundredAndEightyCore.Common
             return imagePixelHeight <= 1000 && imagePixelWidth <= 1000;
         }
 
-        public static bool ValidateStartNewGamePlayersSelected(string newGameTypeString,
+        public static bool ValidateStartNewGamePlayersSelected(GameType newGameType,
                                                                Player selectedPlayer1,
                                                                Player selectedPlayer2)
         {
             bool valid;
-            var selectedGameType = Enum.Parse<GameType>(newGameTypeString);
-            switch (selectedGameType)
+            switch (newGameType)
             {
                 case GameType.FreeThrowsSingle:
                     valid = selectedPlayer1 != null;
@@ -42,10 +41,9 @@ namespace OneHundredAndEightyCore.Common
             return valid;
         }
 
-        public static bool ValidateImplementedGameTypes(string newGameTypeString)
+        public static bool ValidateImplementedGameTypes(GameType newGameType)
         {
-            var selectedGameType = Enum.Parse<GameType>(newGameTypeString);
-            switch (selectedGameType)
+            switch (newGameType)
             {
                 case GameType.FreeThrowsSingle:
                 case GameType.FreeThrowsDouble:
@@ -56,15 +54,13 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        public static bool ValidateStartNewClassicGame(string newGameTypeString,
-                                                       string newGamePointsString)
+        public static bool ValidateStartNewClassicGame(GameType newGameType,
+                                                       GamePoints newGamePoints)
         {
-            var selectedGameType = Enum.Parse<GameType>(newGameTypeString);
-            var selectedGamePoints = newGamePointsString;
-            switch (selectedGameType)
+            switch (newGameType)
             {
                 case GameType.Classic:
-                    return selectedGamePoints != "Free";
+                    return newGamePoints != GamePoints.Free;
                 default:
                     return true;
             }

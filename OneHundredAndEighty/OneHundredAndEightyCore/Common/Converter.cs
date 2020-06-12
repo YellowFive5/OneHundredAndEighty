@@ -178,7 +178,7 @@ namespace OneHundredAndEightyCore.Common
                 case "8/11":
                     return 39;
                 default:
-                    return -1;
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -212,7 +212,7 @@ namespace OneHundredAndEightyCore.Common
             return Convert.ToBoolean(value);
         }
 
-        public static CamNumber GridNameToCamNumber(string gridName) //todo to tests
+        public static CamNumber GridNameToCamNumber(string gridName)
         {
             switch (gridName)
             {

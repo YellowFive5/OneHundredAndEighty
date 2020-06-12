@@ -1,5 +1,7 @@
 ﻿#region Usings
 
+using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 #endregion
@@ -48,12 +50,19 @@ namespace OneHundredAndEightyCore.Tests.Converter
         [TestCase("16/8", ExpectedResult = 37)]
         [TestCase("8", ExpectedResult = 38)]
         [TestCase("8/11", ExpectedResult = 39)]
-        [TestCase("trash", ExpectedResult = -1)]
         public int ConvertsWhenInputValueCorrect(string camSetupSectorSettingValue)
         {
             var convertedValue = Common.Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(camSetupSectorSettingValue);
 
             return convertedValue;
+        }
+
+        [Test]
+        public void ErrorOccuredWhenInputValueNotCorrect()
+        {
+            Action act = () => { Common.Converter.CamSetupSectorSettingValueToComboboxSelectedIndex("SomeTrash"); };
+
+            act.Should().Throw<ArgumentOutOfRangeException>();
         }
     }
 }

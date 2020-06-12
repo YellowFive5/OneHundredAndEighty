@@ -69,6 +69,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="MainWindowLegsSetsComboboxStyle"
+               TargetType="ComboBox">
+            <Setter Property="ItemsSource">
+                <Setter.Value>
+                    <x:Array Type="system:Int32">
+                        <system:Int32>1</system:Int32>
+                        <system:Int32>3</system:Int32>
+                        <system:Int32>5</system:Int32>
+                        <system:Int32>7</system:Int32>
+                        <system:Int32>9</system:Int32>
+                    </x:Array>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style x:Key="ScoreWindowTextStyle">
             <Setter Property="Control.FontFamily" Value="Agency FB" />

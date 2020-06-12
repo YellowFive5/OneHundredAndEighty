@@ -2,14 +2,12 @@
 
 using System;
 using System.Drawing;
-using Autofac;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using NLog;
 using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Windows.Main;
 
 #endregion
 
@@ -34,13 +32,17 @@ namespace OneHundredAndEightyCore.Recognition
         public const int DartboardDiameterInPixels = 1020;
         public const int DartboardDiameterInCm = 34;
 
-        public MeasureService(CamService camService, IMainWindow mainWindow) // todo not need mainWindow only because container
+        public MeasureService(CamService camService,
+                              Logger logger,
+                              DrawService drawService,
+                              ThrowService throwService,
+                              ConfigService configService)
         {
             this.camService = camService;
-            logger = mainWindow.ServiceContainer.Resolve<Logger>();
-            drawService = mainWindow.ServiceContainer.Resolve<DrawService>();
-            throwService = mainWindow.ServiceContainer.Resolve<ThrowService>();
-            configService = mainWindow.ServiceContainer.Resolve<ConfigService>();
+            this.logger = logger;
+            this.drawService = drawService;
+            this.throwService = throwService;
+            this.configService = configService;
             minContourArc = configService.Read<int>(SettingsType.MinContourArc);
             camFovAngle = configService.Read<double>(SettingsType.CamFovAngle);
         }

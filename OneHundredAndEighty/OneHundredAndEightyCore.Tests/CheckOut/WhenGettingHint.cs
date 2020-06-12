@@ -498,7 +498,7 @@ namespace OneHundredAndEightyCore.Tests.CheckOut
         public string HintGetsCorrectly(int points, ThrowNumber number)
 
         {
-            var hint = Windows.Score.CheckOut.Get(points, number);
+            var hint = OneHundredAndEightyCore.Windows.Score.CheckOut.Get(points, number);
             return hint;
         }
     }

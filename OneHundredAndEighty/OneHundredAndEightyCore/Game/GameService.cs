@@ -2,14 +2,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game.Processors;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.CamsDetection;
-using OneHundredAndEightyCore.Windows.Main;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
@@ -18,7 +15,6 @@ namespace OneHundredAndEightyCore.Game
 {
     public class GameService
     {
-        private readonly MainWindow mainWindow;
         private readonly ScoreBoardService scoreBoardService;
         private readonly CamsDetectionBoard camsDetectionBoard;
         private readonly DrawService drawService;
@@ -26,14 +22,12 @@ namespace OneHundredAndEightyCore.Game
         private readonly ConfigService configService;
         private readonly Logger logger;
         private readonly DBService dbService;
-
         private bool IsGameRun { get; set; }
         private GameType GameType { get; set; }
         private IGameProcessor GameProcessor { get; set; }
         private Game Game { get; set; }
 
-        public GameService(MainWindow mainWindow,
-                           ScoreBoardService scoreBoardService,
+        public GameService(ScoreBoardService scoreBoardService,
                            CamsDetectionBoard camsDetectionBoard,
                            DetectionService detectionService,
                            ConfigService configService,
@@ -41,7 +35,6 @@ namespace OneHundredAndEightyCore.Game
                            Logger logger,
                            DBService dbService)
         {
-            this.mainWindow = mainWindow;
             this.scoreBoardService = scoreBoardService;
             this.camsDetectionBoard = camsDetectionBoard;
             this.detectionService = detectionService;
@@ -53,113 +46,106 @@ namespace OneHundredAndEightyCore.Game
 
         #region Start/Stop
 
-        public void StartGame()
+        public void StartGame(List<CamService> cams,
+                              Player player1,
+                              Player player2,
+                              GameType gameType,
+                              GamePoints gamePoints,
+                              int gameSets,
+                              int gameLegs)
         {
             drawService.ProjectionClear();
             drawService.PointsHistoryBoxClear();
 
-            detectionService.PrepareCamsAndTryCapture();
+            detectionService.PrepareCamsAndTryCapture(cams, CamServiceWorkingMode.Detection);
             detectionService.RunDetection();
 
-            var selectedGameType = Enum.Parse<GameType>(mainWindow.NewGameTypeComboBox.Text);
-            var legs = Converter.ToInt(mainWindow.NewGameLegsComboBox.Text);
-            var sets = Converter.ToInt(mainWindow.NewGameSetsComboBox.Text);
-            var legPoints = mainWindow.NewGamePointsComboBox.Text;
-
-            GameType = selectedGameType;
-
-            var selectedPlayer1 = mainWindow.NewGamePlayer1ComboBox.SelectedItem as Player;
-            var selectedPlayer2 = mainWindow.NewGamePlayer2ComboBox.SelectedItem as Player;
+            GameType = gameType;
 
             var players = new List<Player>();
-            if (selectedPlayer1 != null)
-            {
-                players.Add(selectedPlayer1);
-            }
+            players.AddIfNotNull(player1);
+            players.AddIfNotNull(player2);
 
-            if (selectedPlayer2 != null)
-            {
-                players.Add(selectedPlayer2);
-            }
-
-            Game = new Game(selectedGameType);
+            Game = new Game(gameType);
 
             dbService.GameSaveNew(Game, players);
 
-            switch (selectedGameType)
+            switch (gameType)
             {
                 case GameType.FreeThrowsSingle:
-                    switch (legPoints)
+                    switch (gamePoints)
                     {
-                        case "Free":
+                        case GamePoints.Free:
                             GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, players, dbService, scoreBoardService);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Free throws");
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Free throws");
                             break;
-                        case "301":
+                        case GamePoints._301:
                             GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 301);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 301", 301);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 301", 301);
                             break;
-                        case "501":
+                        case GamePoints._501:
                             GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 501);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 501", 501);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 501", 501);
                             break;
-                        case "701":
+                        case GamePoints._701:
                             GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 701);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 701", 701);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 701", 701);
                             break;
-                        case "1001":
+                        case GamePoints._1001:
                             GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 1001);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 1001", 1001);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 1001", 1001);
                             break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(gamePoints), gamePoints, null);
                     }
 
                     break;
 
                 case GameType.FreeThrowsDouble:
-                    switch (legPoints)
+                    switch (gamePoints)
                     {
-                        case "Free":
+                        case GamePoints.Free:
                             GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, players, dbService, scoreBoardService);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Free throws");
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Free throws");
                             break;
-                        case "301":
+                        case GamePoints._301:
                             GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 301);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 301", 301);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 301", 301);
                             break;
-                        case "501":
+                        case GamePoints._501:
                             GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 501);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 501", 501);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 501", 501);
                             break;
-                        case "701":
+                        case GamePoints._701:
                             GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 701);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 701", 701);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 701", 701);
                             break;
-                        case "1001":
+                        case GamePoints._1001:
                             GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 1001);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, "Write off 1001", 1001);
+                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 1001", 1001);
                             break;
                     }
 
                     break;
 
                 case GameType.Classic:
-                    switch (legPoints)
+                    switch (gamePoints)
                     {
-                        case "301":
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 301, legs, sets);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, $"First to {sets}", 301);
+                        case GamePoints._301:
+                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 301, gameLegs, gameSets);
+                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 301);
                             break;
-                        case "501":
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 501, legs, sets);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, $"First to {sets}", 501);
+                        case GamePoints._501:
+                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 501, gameLegs, gameSets);
+                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 501);
                             break;
-                        case "701":
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 701, legs, sets);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, $"First to {sets}", 701);
+                        case GamePoints._701:
+                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 701, gameLegs, gameSets);
+                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 701);
                             break;
-                        case "1001":
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 1001, legs, sets);
-                            scoreBoardService.OpenScoreBoard(selectedGameType, players, $"First to {sets}", 1001);
+                        case GamePoints._1001:
+                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 1001, gameLegs, gameSets);
+                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 1001);
                             break;
                     }
 
@@ -169,25 +155,11 @@ namespace OneHundredAndEightyCore.Game
                     throw new ArgumentOutOfRangeException();
             }
 
-            Task.Run(() =>
-                     {
-                         IsGameRun = true;
-                         detectionService.OnThrowDetected += OnAnotherThrow;
-                         detectionService.OnStatusChanged += OnDetectionServiceStatusChanged;
-                         GameProcessor.OnMatchEnd += OnMatchEnd;
-                         camsDetectionBoard.OnUndoThrowButtonPressed += OnThrowUndo;
-                         camsDetectionBoard.OnCorrectThrowButtonPressed += OnThrowCorrect;
-
-                         while (IsGameRun)
-                         {
-                         }
-
-                         detectionService.OnThrowDetected -= OnAnotherThrow;
-                         detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
-                         GameProcessor.OnMatchEnd -= OnMatchEnd;
-                         camsDetectionBoard.OnUndoThrowButtonPressed -= OnThrowUndo;
-                         camsDetectionBoard.OnCorrectThrowButtonPressed -= OnThrowCorrect;
-                     });
+            detectionService.OnThrowDetected += OnAnotherThrow;
+            detectionService.OnStatusChanged += OnDetectionServiceStatusChanged;
+            GameProcessor.OnMatchEnd += OnMatchEnd;
+            camsDetectionBoard.OnUndoThrowButtonPressed += OnThrowUndo;
+            camsDetectionBoard.OnCorrectThrowButtonPressed += OnThrowCorrect;
         }
 
         public void StopGame(GameResultType type)
@@ -198,10 +170,17 @@ namespace OneHundredAndEightyCore.Game
             }
 
             IsGameRun = false;
+
             scoreBoardService.CloseScoreBoard();
             detectionService.StopDetection();
             drawService.ProjectionClear();
             dbService.GameEnd(Game, gameResultType: type);
+
+            detectionService.OnThrowDetected -= OnAnotherThrow;
+            detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
+            GameProcessor.OnMatchEnd -= OnMatchEnd;
+            camsDetectionBoard.OnUndoThrowButtonPressed -= OnThrowUndo;
+            camsDetectionBoard.OnCorrectThrowButtonPressed -= OnThrowCorrect;
         }
 
         private void OnMatchEnd(Game game, Player winner)
@@ -212,29 +191,15 @@ namespace OneHundredAndEightyCore.Game
             }
 
             IsGameRun = false;
+
             scoreBoardService.CloseScoreBoard();
-            camsDetectionBoard.Close();
             detectionService.StopDetection();
             drawService.ProjectionClear();
+            camsDetectionBoard.Close();
             dbService.GameEnd(Game, winner);
 
-            // todo
-            mainWindow.Dispatcher.Invoke(() =>
-                                         {
-                                             foreach (TabItem tabItem in mainWindow.MainTabControl.Items)
-                                             {
-                                                 tabItem.IsEnabled = !tabItem.IsEnabled;
-                                             }
-
-                                             mainWindow.StartGameButton.IsEnabled = !mainWindow.StartGameButton.IsEnabled;
-                                             mainWindow.StopGameButton.IsEnabled = !mainWindow.StopGameButton.IsEnabled;
-                                             mainWindow.NewGameTypeComboBox.IsEnabled = !mainWindow.NewGameTypeComboBox.IsEnabled;
-                                             mainWindow.NewGamePlayer1ComboBox.IsEnabled = !mainWindow.NewGamePlayer1ComboBox.IsEnabled;
-                                             mainWindow.NewGamePlayer2ComboBox.IsEnabled = !mainWindow.NewGamePlayer2ComboBox.IsEnabled;
-                                             mainWindow.NewGameSetsComboBox.IsEnabled = !mainWindow.NewGameSetsComboBox.IsEnabled;
-                                             mainWindow.NewGameLegsComboBox.IsEnabled = !mainWindow.NewGameLegsComboBox.IsEnabled;
-                                         });
-            //
+            // mainWindow.ToggleMainTabItemsEnabled();
+            // mainWindow.ToggleMatchControlsEnabled();
         }
 
         #endregion

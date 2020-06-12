@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NLog;
 using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Windows.Main;
+using OneHundredAndEightyCore.Windows.CamsDetection;
 
 #endregion
 
@@ -22,11 +22,12 @@ namespace OneHundredAndEightyCore.Recognition
 
     public class DetectionService
     {
-        private readonly MainWindow mainWindow;
         private readonly DrawService drawService;
         private readonly ConfigService configService;
         private readonly ThrowService throwService;
         private readonly Logger logger;
+        private readonly CamsDetectionBoard camsDetectionBoard;
+
         private List<CamService> cams;
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
@@ -36,17 +37,17 @@ namespace OneHundredAndEightyCore.Recognition
         private bool withDetection;
         private CamServiceWorkingMode workingMode;
 
-        public DetectionService(MainWindow mainWindow,
-                                DrawService drawService,
+        public DetectionService(DrawService drawService,
                                 ConfigService configService,
                                 ThrowService throwService,
-                                Logger logger)
+                                Logger logger,
+                                CamsDetectionBoard camsDetectionBoard)
         {
-            this.mainWindow = mainWindow;
             this.drawService = drawService;
             this.configService = configService;
             this.throwService = throwService;
             this.logger = logger;
+            this.camsDetectionBoard = camsDetectionBoard;
         }
 
         public delegate void ThrowDetectedDelegate(DetectedThrow thrw);
@@ -61,34 +62,10 @@ namespace OneHundredAndEightyCore.Recognition
 
         public event StatusDelegate OnStatusChanged;
 
-        public void PrepareCamsAndTryCapture(CamServiceWorkingMode workingMode = CamServiceWorkingMode.Detection)
+        public void PrepareCamsAndTryCapture(List<CamService> camsList, CamServiceWorkingMode workingMode)
         {
             this.workingMode = workingMode;
-            cams = new List<CamService>();
-            var cam1Active = mainWindow.Cam1CheckBox.IsChecked.Value && !App.NoCams;
-            var cam2Active = mainWindow.Cam2CheckBox.IsChecked.Value && !App.NoCams;
-            var cam3Active = mainWindow.Cam3CheckBox.IsChecked.Value && !App.NoCams;
-            var cam4Active = mainWindow.Cam4CheckBox.IsChecked.Value && !App.NoCams;
-
-            if (cam1Active)
-            {
-                cams.Add(new CamService(mainWindow, CamNumber._1, workingMode)); // todo extenstion method... or not
-            }
-
-            if (cam2Active)
-            {
-                cams.Add(new CamService(mainWindow, CamNumber._2, workingMode));
-            }
-
-            if (cam3Active)
-            {
-                cams.Add(new CamService(mainWindow, CamNumber._3, workingMode));
-            }
-
-            if (cam4Active)
-            {
-                cams.Add(new CamService(mainWindow, CamNumber._4, workingMode));
-            }
+            cams = camsList;
 
             cts = new CancellationTokenSource();
             cancelToken = cts.Token;
@@ -180,7 +157,7 @@ namespace OneHundredAndEightyCore.Recognition
                                    cams.ForEach(c =>
                                                 {
                                                     c.Dispose();
-                                                    c.ClearImageBoxes();
+                                                    // c.ClearImageBoxes();
                                                 });
 
                                    logger.Info($"Detection for {cams.Count} cams end. Cancellation requested");

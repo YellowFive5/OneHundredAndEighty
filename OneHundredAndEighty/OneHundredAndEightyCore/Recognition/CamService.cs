@@ -1,10 +1,10 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Media.Imaging;
-using Autofac;
 using DirectShowLib;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
@@ -12,7 +12,6 @@ using Emgu.CV.Structure;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Windows.CamsDetection;
-using OneHundredAndEightyCore.Windows.Main;
 
 #endregion
 
@@ -28,7 +27,6 @@ namespace OneHundredAndEightyCore.Recognition
 
     public class CamService
     {
-        private readonly IMainWindow mainWindow;
         public readonly CamNumber camNumber;
         private readonly CamServiceWorkingMode workingMode;
         private readonly DrawService drawService;
@@ -36,6 +34,7 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly ConfigService configService;
         private readonly MeasureService measureService;
         private readonly CamsDetectionBoard camsDetectionBoard;
+        private readonly ThrowService throwService;
         private readonly Logger logger;
         public PointF surfacePoint1;
         public PointF surfacePoint2;
@@ -64,18 +63,22 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly int movesNoise;
         private readonly int smoothGauss;
 
-        public CamService(IMainWindow mainWindow,
-                          CamNumber camNumber,
-                          CamServiceWorkingMode workingMode)
+        public CamService(CamNumber camNumber,
+                          CamServiceWorkingMode workingMode,
+                          Logger logger,
+                          DrawService drawService,
+                          ConfigService configService,
+                          CamsDetectionBoard camsDetectionBoard,
+                          ThrowService throwService)
         {
             this.workingMode = workingMode;
-            this.mainWindow = mainWindow;
+            this.logger = logger;
+            this.drawService = drawService;
+            this.configService = configService;
+            this.camsDetectionBoard = camsDetectionBoard;
+            this.throwService = throwService;
+            measureService = new MeasureService(this, logger, drawService, throwService, configService);
             this.camNumber = camNumber;
-            logger = mainWindow.ServiceContainer.Resolve<Logger>();
-            drawService = mainWindow.ServiceContainer.Resolve<DrawService>();
-            configService = mainWindow.ServiceContainer.Resolve<ConfigService>();
-            camsDetectionBoard = mainWindow.ServiceContainer.Resolve<CamsDetectionBoard>();
-            measureService = new MeasureService(this, mainWindow); // todo not need mainWindow only because container
 
             var camIndex = -1;
             switch (camNumber)
@@ -114,8 +117,6 @@ namespace OneHundredAndEightyCore.Recognition
             videoCapture = new VideoCapture(camIndex, VideoCapture.API.DShow);
             videoCapture.SetCaptureProperty(CapProp.FrameWidth, resolutionWidth);
             videoCapture.SetCaptureProperty(CapProp.FrameHeight, resolutionHeight);
-            GetSlidersData();
-            RefreshImageBoxes();
         }
 
         private int GetCamIndexById(SettingsType camIdSetting)
@@ -131,22 +132,9 @@ namespace OneHundredAndEightyCore.Recognition
             return index;
         }
 
-        private void GetSlidersData()
-        {
-            var sliderData = mainWindow.GetCamsSetupSlidersData(camNumber);
-
-            thresholdSlider = sliderData.ElementAt(0);
-            roiPosYSlider = sliderData.ElementAt(1);
-            roiHeightSlider = sliderData.ElementAt(2);
-            surfaceSlider = sliderData.ElementAt(3);
-            surfaceCenterSlider = sliderData.ElementAt(4);
-        }
-
         private void DrawSetupLines()
         {
-            OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
             LinedFrame = OriginFrame.Clone();
-
             roiRectangle = new Rectangle(0,
                                          (int) roiPosYSlider,
                                          resolutionWidth,
@@ -193,9 +181,7 @@ namespace OneHundredAndEightyCore.Recognition
 
         public void DoCapture(bool withRoiBackgroundRefresh = false)
         {
-            logger.Debug($"Doing capture for cam_{camNumber} start. RoiBackgroundRefresh = {withRoiBackgroundRefresh}");
-
-            GetSlidersData();
+            // GetSlidersData();
             DrawSetupLines();
 
             if (workingMode == CamServiceWorkingMode.Crossing || withRoiBackgroundRefresh)
@@ -205,57 +191,45 @@ namespace OneHundredAndEightyCore.Recognition
                 ThresholdRoi(RoiFrame);
                 RoiFrameBackground = RoiFrame.Clone();
                 RoiLastThrowFrame = RoiFrame.Clone();
-                RefreshImageBoxes();
+                GetImage();
             }
 
             logger.Debug($"Doing capture for cam_{camNumber} end");
         }
 
-        public void RefreshImageBoxes(bool clear = false)
+        public void DoSetupCapture(List<double> sliderData)
         {
-            logger.Debug($"Refreshing imageboxes for cam_{camNumber} start");
+            thresholdSlider = sliderData.ElementAt(0);
+            surfaceSlider = sliderData.ElementAt(1);
+            surfaceCenterSlider = sliderData.ElementAt(2);
+            roiPosYSlider = sliderData.ElementAt(3);
+            roiHeightSlider = sliderData.ElementAt(4);
 
-            switch (workingMode)
-            {
-                case CamServiceWorkingMode.Setup:
-                    mainWindow.Dispatcher.Invoke(() =>
-                                                 {
-                                                     var image = LinedFrame?.Data != null && !clear
-                                                                     ? drawService.ToBitmap(LinedFrame)
-                                                                     : new BitmapImage();
+            OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
+            DrawSetupLines();
+            RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
+            ThresholdRoi(RoiFrame);
+        }
 
-                                                     var roiImage = RoiFrame?.Data != null && !clear
-                                                                        ? drawService.ToBitmap(RoiFrame)
-                                                                        : new BitmapImage();
+        public BitmapImage GetImage()
+        {
+            return LinedFrame?.Data != null
+                       ? drawService.ToBitmap(LinedFrame)
+                       : new BitmapImage();
+        }
 
-                                                     mainWindow.SetCamImages(camNumber, image, roiImage);
-                                                 });
-                    break;
-                case CamServiceWorkingMode.Crossing:
-                case CamServiceWorkingMode.Detection:
-                    camsDetectionBoard.dispatcher.Invoke(() =>
-                                                         {
-                                                             var image = LinedFrame?.Data != null && !clear
-                                                                             ? drawService.ToBitmap(LinedFrame)
-                                                                             : new BitmapImage();
+        public BitmapImage GetRoiImage()
+        {
+            return RoiFrame?.Data != null
+                       ? drawService.ToBitmap(RoiFrame)
+                       : new BitmapImage();
+        }
 
-                                                             var roiImage = RoiFrame?.Data != null && !clear
-                                                                                ? drawService.ToBitmap(RoiFrame)
-                                                                                : new BitmapImage();
-
-                                                             var lastRoiImage = RoiLastThrowFrame?.Data != null && !clear
-                                                                                    ? drawService.ToBitmap(RoiLastThrowFrame)
-                                                                                    : new BitmapImage();
-                                                             camsDetectionBoard.SetCamImages(camNumber, image, roiImage, lastRoiImage);
-                                                         });
-                    break;
-                case CamServiceWorkingMode.Check:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            logger.Debug($"Refreshing imageboxes for cam_{camNumber} end");
+        public BitmapImage GetLastRoiImage()
+        {
+            return RoiLastThrowFrame?.Data != null
+                       ? drawService.ToBitmap(RoiLastThrowFrame)
+                       : new BitmapImage();
         }
 
         public ResponseType DetectMove()
@@ -324,7 +298,7 @@ namespace OneHundredAndEightyCore.Recognition
             RoiFrameBackground = RoiFrame.Clone();
             RoiLastThrowFrame = diffImage.Clone();
             DoCapture();
-            RefreshImageBoxes();
+            GetImage();
 
             logger.Debug($"Refreshing images for cam_{camNumber} end");
         }
@@ -338,11 +312,6 @@ namespace OneHundredAndEightyCore.Recognition
             var diffImage = RoiFrameBackground.AbsDiff(newImage);
             logger.Debug($"Capture and diff for cam_{camNumber} end");
             return diffImage;
-        }
-
-        public void ClearImageBoxes()
-        {
-            RefreshImageBoxes(true);
         }
 
         public void FindAndProcessDartContour()

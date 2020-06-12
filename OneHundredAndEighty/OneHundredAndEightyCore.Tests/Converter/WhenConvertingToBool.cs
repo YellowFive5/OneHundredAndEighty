@@ -22,7 +22,7 @@ namespace OneHundredAndEightyCore.Tests.Converter
         }
 
         [Test]
-        public void ErrorOccuresWhenInputValueNotCorrect()
+        public void ErrorOccuredWhenInputValueNotCorrect()
         {
             Action act = () => { Common.Converter.ToBool("trash_!"); };
 

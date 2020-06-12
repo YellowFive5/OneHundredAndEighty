@@ -1,9 +1,18 @@
-﻿namespace OneHundredAndEightyCore.Game
+﻿#region Usings
+
+using System.ComponentModel;
+
+#endregion
+
+namespace OneHundredAndEightyCore.Game
 {
     public enum GameType
     {
+        [Description(nameof(FreeThrowsSingle))]
         FreeThrowsSingle = 1,
+
+        [Description(nameof(FreeThrowsDouble))]
         FreeThrowsDouble,
-        Classic
+        [Description(nameof(Classic))] Classic
     }
 }

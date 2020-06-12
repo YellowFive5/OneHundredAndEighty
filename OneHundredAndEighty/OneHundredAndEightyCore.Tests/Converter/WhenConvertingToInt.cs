@@ -24,7 +24,7 @@ namespace OneHundredAndEightyCore.Tests.Converter
         [TestCase("9,7")]
         [TestCase("trash_!")]
         [TestCase("True")]
-        public void ErrorOccuresWhenInputValueNotCorrect(string inputValue)
+        public void ErrorOccuredWhenInputValueNotCorrect(string inputValue)
         {
             Action act = () => { Common.Converter.ToInt(inputValue); };
 

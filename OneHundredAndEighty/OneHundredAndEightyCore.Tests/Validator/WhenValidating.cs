@@ -54,9 +54,8 @@ namespace OneHundredAndEightyCore.Tests.Validator
         public void StartNewGamePlayersSelectedIsValidForFreeThrowsSingleGameTypeWhenPlayerSelected()
         {
             var player = new Player("Does not matter", "Does not matter");
-            var gameType = GameType.FreeThrowsSingle.ToString();
 
-            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(gameType, player, null);
+            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(GameType.FreeThrowsSingle, player, null);
 
             isValid.Should().BeTrue();
         }
@@ -64,9 +63,7 @@ namespace OneHundredAndEightyCore.Tests.Validator
         [Test]
         public void StartNewGamePlayersSelectedIsNotValidForFreeThrowsSingleGameTypeWhenPlayerNotSelected()
         {
-            var gameType = GameType.FreeThrowsSingle.ToString();
-
-            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(gameType, null, null);
+            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(GameType.FreeThrowsSingle, null, null);
 
             isValid.Should().BeFalse();
         }
@@ -77,9 +74,8 @@ namespace OneHundredAndEightyCore.Tests.Validator
         {
             var player1 = new Player("Does not matter", "Does not matter");
             var player2 = new Player("Does not matter too", "Does not matter too");
-            var gameType = type.ToString();
 
-            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(gameType, player1, player2);
+            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(type, player1, player2);
 
             isValid.Should().BeTrue();
         }
@@ -88,9 +84,7 @@ namespace OneHundredAndEightyCore.Tests.Validator
         [TestCase(GameType.Classic)]
         public void StartNewGamePlayersSelectedIsNotValidWhenPlayersNotSelected(GameType type)
         {
-            var gameType = type.ToString();
-
-            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(gameType, null, null);
+            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(type, null, null);
 
             isValid.Should().BeFalse();
         }
@@ -100,9 +94,8 @@ namespace OneHundredAndEightyCore.Tests.Validator
         public void StartNewGamePlayersSelectedIsNotValidWhenFirstPlayerNotSelected(GameType type)
         {
             var player2 = new Player("Does not matter too", "Does not matter too");
-            var gameType = type.ToString();
 
-            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(gameType, null, player2);
+            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(type, null, player2);
 
             isValid.Should().BeFalse();
         }
@@ -112,9 +105,8 @@ namespace OneHundredAndEightyCore.Tests.Validator
         public void StartNewGamePlayersSelectedIsNotValidWhenSecondPlayerNotSelected(GameType type)
         {
             var player1 = new Player("Does not matter too", "Does not matter too");
-            var gameType = type.ToString();
 
-            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(gameType, player1, null);
+            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(type, player1, null);
 
             isValid.Should().BeFalse();
         }
@@ -124,9 +116,8 @@ namespace OneHundredAndEightyCore.Tests.Validator
         public void StartNewGamePlayersSelectedIsNotValidWhenPlayersAreTheSame(GameType type)
         {
             var player = new Player("Does not matter", "Does not matter");
-            var gameType = type.ToString();
 
-            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(gameType, player, player);
+            var isValid = Common.Validator.ValidateStartNewGamePlayersSelected(type, player, player);
 
             isValid.Should().BeFalse();
         }
@@ -134,18 +125,18 @@ namespace OneHundredAndEightyCore.Tests.Validator
         [Test]
         public void ImplementedGameTypesValidatesCorrectly([Values] GameType type)
         {
-            var isValid = Common.Validator.ValidateImplementedGameTypes(type.ToString());
+            var isValid = Common.Validator.ValidateImplementedGameTypes(type);
 
             isValid.Should().BeTrue();
         }
 
-        [TestCase(GameType.FreeThrowsSingle, "501", ExpectedResult = true)]
-        [TestCase(GameType.Classic, "501", ExpectedResult = true)]
-        [TestCase(GameType.FreeThrowsSingle, "Free", ExpectedResult = true)]
-        [TestCase(GameType.Classic, "Free", ExpectedResult = false)]
-        public bool StartNewClassicGameValidatesCorrectly(GameType type, string pointsString)
+        [TestCase(GameType.FreeThrowsSingle, GamePoints._501, ExpectedResult = true)]
+        [TestCase(GameType.Classic, GamePoints._501, ExpectedResult = true)]
+        [TestCase(GameType.FreeThrowsSingle, GamePoints.Free, ExpectedResult = true)]
+        [TestCase(GameType.Classic, GamePoints.Free, ExpectedResult = false)]
+        public bool StartNewClassicGameValidatesCorrectly(GameType type, GamePoints points)
         {
-            var isValid = Common.Validator.ValidateStartNewClassicGame(type.ToString(), pointsString);
+            var isValid = Common.Validator.ValidateStartNewClassicGame(type, points);
 
             return isValid;
         }

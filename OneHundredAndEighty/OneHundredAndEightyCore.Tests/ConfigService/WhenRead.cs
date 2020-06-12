@@ -77,7 +77,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
         }
 
         [Test]
-        public void ErrorOccuresWhenNotSupportedTypePassed()
+        public void ErrorOccuredWhenNotSupportedTypePassed()
         {
             Action act = () => { configService.Read<byte>(SettingsType.Cam1Id); };
 
