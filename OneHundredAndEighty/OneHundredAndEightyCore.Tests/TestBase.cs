@@ -25,6 +25,9 @@ namespace OneHundredAndEightyCore.Tests
         [SetUp]
         protected virtual void Setup()
         {
+            dbService = new Mock<IDBService>();
+            dbService.Setup(x => x.SettingsSetValue(It.IsAny<SettingsType>(),
+                                                    It.IsAny<string>()));
             PlayersDataTableFromDb = new DataTable();
             PlayersDataTableFromDb.Columns.Add(Column.Id.ToString(), typeof(int));
             PlayersDataTableFromDb.Columns.Add(Column.Name.ToString(), typeof(string));
@@ -37,7 +40,11 @@ namespace OneHundredAndEightyCore.Tests
             versionChecker = new Mock<IVersionChecker>();
             versionChecker.SetupAllProperties();
 
-            detectionService= new Mock<IDetectionService>();
+            configService = new Mock<IConfigService>();
+            configService.Setup(x => x.Write(It.IsAny<SettingsType>(),
+                                             It.IsAny<object>()));
+
+            detectionService = new Mock<IDetectionService>();
         }
     }
 }

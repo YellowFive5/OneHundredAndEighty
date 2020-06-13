@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using Moq;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Common;
 
@@ -14,9 +13,6 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
         {
             base.Setup();
 
-            dbService = new Mock<IDBService>();
-            dbService.Setup(x => x.SettingsSetValue(It.IsAny<SettingsType>(),
-                                                    It.IsAny<string>()));
             configService = new Common.ConfigService(logger.Object,
                                                      dbService.Object);
         }

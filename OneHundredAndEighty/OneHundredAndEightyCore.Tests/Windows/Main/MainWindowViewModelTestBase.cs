@@ -13,6 +13,19 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         protected override void Setup()
         {
             base.Setup();
+
+            viewModel = new MainWindowViewModel(logger.Object,
+                                                null,
+                                                dbService.Object,
+                                                versionChecker.Object,
+                                                null,
+                                                null,
+                                                null,
+                                                detectionService.Object,
+                                                null,
+                                                null,
+                                                configService.Object,
+                                                null);
         }
     }
 }

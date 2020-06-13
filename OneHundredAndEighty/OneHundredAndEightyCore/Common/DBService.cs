@@ -392,6 +392,11 @@ namespace OneHundredAndEightyCore.Common
             UpdateDbVersion("2.2");
         }
 
+        public void MigrateFrom2_2to2_3()
+        {
+            UpdateDbVersion("2.3");
+        }
+
         #endregion
 
         #region Low level internals

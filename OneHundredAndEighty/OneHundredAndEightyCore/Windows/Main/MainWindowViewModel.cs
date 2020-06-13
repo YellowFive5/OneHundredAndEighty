@@ -3,14 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using DirectShowLib;
 using Microsoft.Win32;
 using NLog;
 using OneHundredAndEightyCore.Common;
@@ -114,7 +111,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public BitmapImage Cam2Image
         {
             get => cam2Image;
-            private set
+            set
             {
                 cam2Image = value;
                 OnPropertyChanged(nameof(Cam2Image));
@@ -126,7 +123,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public BitmapImage Cam3Image
         {
             get => cam3Image;
-            private set
+            set
             {
                 cam3Image = value;
                 OnPropertyChanged(nameof(Cam3Image));
@@ -138,7 +135,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public BitmapImage Cam4Image
         {
             get => cam4Image;
-            private set
+            set
             {
                 cam4Image = value;
                 OnPropertyChanged(nameof(Cam4Image));
@@ -150,7 +147,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public BitmapImage Cam1RoiImage
         {
             get => cam1RoiImage;
-            private set
+            set
             {
                 cam1RoiImage = value;
                 OnPropertyChanged(nameof(Cam1RoiImage));
@@ -162,7 +159,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public BitmapImage Cam2RoiImage
         {
             get => cam2RoiImage;
-            private set
+            set
             {
                 cam2RoiImage = value;
                 OnPropertyChanged(nameof(Cam2RoiImage));
@@ -174,7 +171,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public BitmapImage Cam3RoiImage
         {
             get => cam3RoiImage;
-            private set
+            set
             {
                 cam3RoiImage = value;
                 OnPropertyChanged(nameof(Cam3RoiImage));
@@ -186,7 +183,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public BitmapImage Cam4RoiImage
         {
             get => cam4RoiImage;
-            private set
+            set
             {
                 cam4RoiImage = value;
                 OnPropertyChanged(nameof(Cam4RoiImage));
@@ -527,7 +524,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam2Enabled != value)
                 {
                     cam2Enabled = value;
-                    OnPropertyChanged(nameof(cam2Enabled));
+                    OnPropertyChanged(nameof(Cam2Enabled));
                     configService.Write(SettingsType.Cam2CheckBox, Cam2Enabled);
                 }
             }
@@ -543,7 +540,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 if (cam3Enabled != value)
                 {
                     cam3Enabled = value;
-                    OnPropertyChanged(nameof(cam3Enabled));
+                    OnPropertyChanged(nameof(Cam3Enabled));
                     configService.Write(SettingsType.Cam3CheckBox, Cam3Enabled);
                 }
             }
@@ -1050,7 +1047,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public string CheckCamsBoxText
         {
             get => checkCamsBoxText;
-            private set
+            set
             {
                 checkCamsBoxText = value;
                 OnPropertyChanged(nameof(CheckCamsBoxText));
@@ -1066,7 +1063,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public List<Player> Players
         {
             get => players;
-            private set
+            set
             {
                 players = value;
                 OnPropertyChanged(nameof(Players));

@@ -16,7 +16,6 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
         {
             base.Setup();
 
-            dbService = new Mock<IDBService>();
             dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.Cam1ThresholdSlider))).Returns("1.2");
             dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.Cam1SurfaceCenterSlider))).Returns("6.232");
             dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.Cam1RoiHeightSlider))).Returns("445.2326656");

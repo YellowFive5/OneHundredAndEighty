@@ -61,7 +61,7 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to v. 2.2.
+        ///   Looks up a localized string similar to v. 2.3.
         /// </summary>
         public static string AboutTabVersion {
             get {
