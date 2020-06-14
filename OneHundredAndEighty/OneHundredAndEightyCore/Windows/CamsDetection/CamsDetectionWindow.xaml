@@ -4,12 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OneHundredAndEightyCore.Windows.CamsDetection"
+        xmlns:camsdetection="clr-namespace:OneHundredAndEightyCore.Windows.CamsDetection"
         mc:Ignorable="d"
         Title="OneHundredAndEighty"
-        Height="1056"
-        Width="1944"
+        Height="{Binding WindowHeight, Mode=TwoWay}"
+        Width="{Binding WindowWidth, Mode=TwoWay}"
+        Left="{Binding WindowPositionLeft, Mode=TwoWay}"
+        Top="{Binding WindowPositionTop, Mode=TwoWay}"
         ResizeMode="CanResizeWithGrip"
-        Closing="OnClosing">
+        Closing="OnClosing"
+        Loaded="OnLoaded"
+        d:DesignWidth="1705.517"
+        d:DesignHeight="1025.063">
+    <Window.DataContext>
+        <camsdetection:CamsDetectionBoard />
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -25,7 +34,8 @@
             <Border BorderThickness="1"
                     BorderBrush="Black">
                 <Image x:Name="ProjectionImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding ProjectionImage, IsAsync=True}" />
             </Border>
         </Grid>
         <Grid Grid.Row="0"
@@ -43,21 +53,24 @@
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam1Image"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam1Image, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="1"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam1RoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam1RoiImage, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="2"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam1LastRoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam1LastRoiImage, IsAsync=True}" />
             </Border>
 
         </Grid>
@@ -76,21 +89,24 @@
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam2Image"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam2Image, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="1"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam2RoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam2RoiImage, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="2"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam2LastRoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam2LastRoiImage, IsAsync=True}" />
             </Border>
 
         </Grid>
@@ -109,21 +125,24 @@
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam3Image"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam3Image, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="1"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam3RoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam3RoiImage, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="2"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam3LastRoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam3LastRoiImage, IsAsync=True}" />
             </Border>
         </Grid>
         <Grid Grid.Row="1"
@@ -141,21 +160,24 @@
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam4Image"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam4Image, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="1"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam4RoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam4RoiImage, IsAsync=True}" />
             </Border>
             <Border
                 Grid.Row="2"
                 BorderThickness="1"
                 BorderBrush="Black">
                 <Image x:Name="Cam4LastRoiImage"
-                       Stretch="Uniform" />
+                       Stretch="Uniform"
+                       Source="{Binding Cam4LastRoiImage, IsAsync=True}" />
             </Border>
         </Grid>
         <Grid Grid.Row="1"
@@ -175,12 +197,12 @@
                     Grid.Column="1"
                     Content="Undo trow"
                     Click="UndoThrowButtonClick"
-                    Visibility="Hidden"/>
+                    Visibility="Hidden" />
             <Button Grid.Row="0"
                     Grid.Column="2"
                     Content="Correct throw"
-                    Click="CorrectThrowButtonClick" 
-                    Visibility="Hidden"/>
+                    Click="CorrectThrowButtonClick"
+                    Visibility="Hidden" />
             <TextBox x:Name="PointsHistoryBox"
                      Grid.Row="1"
                      Grid.Column="0"
@@ -189,15 +211,16 @@
                      IsReadOnly="True"
                      FontSize="10"
                      VerticalContentAlignment="Bottom"
-                     VerticalScrollBarVisibility="Auto" />
+                     VerticalScrollBarVisibility="Auto"
+                     Text="{Binding ThrowsHistoryText}" />
             <Viewbox Grid.Row="3"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"
                      HorizontalAlignment="Center">
                 <TextBlock Name="PointsText"
                            TextWrapping="Wrap"
-                           Text="501"
-                           Style="{StaticResource ScoreWindowTextStyle}" />
+                           Style="{StaticResource ScoreWindowTextStyle}"
+                           Text="{Binding ThrowText}" />
             </Viewbox>
         </Grid>
     </Grid>

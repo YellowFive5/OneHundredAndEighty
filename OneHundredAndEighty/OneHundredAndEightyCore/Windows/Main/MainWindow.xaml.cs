@@ -46,14 +46,14 @@ namespace OneHundredAndEightyCore.Windows.Main
             telemetryWriter.WriteAppStart();
             messageBoxService = new MessageBoxService();
             dbService = new DBService();
-            configService = new ConfigService(logger, dbService);
-            versionChecker = new VersionChecker(dbService, configService, messageBoxService);
-            scoreBoardService = new ScoreBoardService(logger, configService);
-            camsDetectionBoard = new CamsDetectionBoard(configService, logger);
             drawService = new DrawService(logger);
             throwService = new ThrowService(logger);
-            detectionService = new DetectionService(drawService, configService, throwService, logger, camsDetectionBoard);
+            configService = new ConfigService(logger, dbService);
+            scoreBoardService = new ScoreBoardService(logger, configService);
             manualThrowPanel = new ManualThrowPanel(logger, detectionService);
+            camsDetectionBoard = new CamsDetectionBoard(configService, logger, drawService);
+            versionChecker = new VersionChecker(dbService, configService, messageBoxService);
+            detectionService = new DetectionService(drawService, configService, throwService, logger, camsDetectionBoard);
             gameService = new GameService(scoreBoardService, camsDetectionBoard, detectionService, logger, dbService);
 
             InitializeComponent();
