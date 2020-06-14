@@ -3,15 +3,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Media.Imaging;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using NLog;
 using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Windows.CamsDetection;
 using Point = System.Drawing.Point;
 
 #endregion
@@ -20,8 +19,6 @@ namespace OneHundredAndEightyCore.Recognition
 {
     public class DrawService
     {
-        private readonly CamsDetectionBoard camsDetectionBoard;
-        private readonly ConfigService configService;
         private readonly Logger logger;
 
         public Bgr camRoiRectColor = new Bgr(Color.LawnGreen);
@@ -52,117 +49,52 @@ namespace OneHundredAndEightyCore.Recognition
         private const double ProjectionDigitsScale = 2;
         private const int ProjectionDigitsThickness = 2;
         public const int ProjectionCoefficient = 3;
-        public static PointF projectionCenterPoint;
 
-        private Image<Bgr, byte> DartboardProjectionFrameBackground { get; }
-        private Image<Bgr, byte> DartboardProjectionWorkingFrame { get; set; }
-
-        public DrawService(CamsDetectionBoard camsDetectionBoard, ConfigService configService, Logger logger)
+        public DrawService(Logger logger)
         {
-            this.camsDetectionBoard = camsDetectionBoard;
-            this.configService = configService;
             this.logger = logger;
-            DartboardProjectionFrameBackground = new Image<Bgr, byte>(ProjectionFrameSide,
-                                                                      ProjectionFrameSide);
-            projectionCenterPoint = new PointF((float) DartboardProjectionFrameBackground.Width / 2,
-                                               (float) DartboardProjectionFrameBackground.Height / 2);
         }
 
-        public void DrawLine(Image<Bgr, byte> image,
-                             PointF point1,
-                             PointF point2,
-                             MCvScalar color,
-                             int thickness)
+        public Image<Bgr, byte> ProjectionDrawThrow(Image<Bgr, byte> projectionImage,
+                                                    PointF poi)
         {
-            CvInvoke.Line(image,
-                          new Point((int) point1.X, (int) point1.Y),
-                          new Point((int) point2.X, (int) point2.Y),
-                          color,
-                          thickness);
+            DrawCircle(projectionImage, poi, PoiRadius, poiColor, PoiThickness);
+
+            return projectionImage;
         }
 
-        public void DrawRectangle(Image<Bgr, byte> image,
-                                  Rectangle rectangle,
-                                  MCvScalar color,
-                                  int thickness)
+        public Image<Bgr, byte> ProjectionDrawLine(Image<Bgr, byte> projectionImage,
+                                                   PointF point1,
+                                                   PointF point2,
+                                                   MCvScalar color)
         {
-            CvInvoke.Rectangle(image, rectangle, color, thickness);
+            DrawLine(projectionImage, point1, point2, color, PoiThickness);
+
+            return projectionImage;
         }
 
-        public void DrawCircle(Image<Bgr, byte> image,
-                               PointF centerpoint,
-                               int radius,
-                               MCvScalar color,
-                               int thickness)
+        public BitmapImage ProjectionPrepare()
         {
-            CvInvoke.Circle(image,
-                            new Point((int) centerpoint.X, (int) centerpoint.Y),
-                            radius,
-                            color,
-                            thickness);
-        }
+            var projectionImage = new Image<Bgr, byte>(ProjectionFrameSide,
+                                                       ProjectionFrameSide);
 
-        public void DrawString(Image<Bgr, byte> image,
-                               string text,
-                               int pointX,
-                               int pointY,
-                               double scale,
-                               Bgr color,
-                               int thickness)
-        {
-            image.Draw(text,
-                       new Point(pointX, pointY),
-                       FontFace.HersheySimplex,
-                       scale,
-                       color,
-                       thickness);
-        }
+            var projectionCenterPoint = new PointF((float) projectionImage.Width / 2,
+                                                   (float) projectionImage.Height / 2);
 
-        public void PrintThrow(DetectedThrow thrw)
-        {
-            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.PrintThrow(thrw); });
-        }
-
-        public void ProjectionDrawThrow(PointF poi, bool exclusiveDraw = true)
-        {
-            if (exclusiveDraw)
-            {
-                DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
-            }
-
-            DrawCircle(DartboardProjectionWorkingFrame, poi, PoiRadius, poiColor, PoiThickness);
-
-            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionWorkingFrame)); });
-        }
-
-        public void ProjectionDrawLine(PointF point1, PointF point2, MCvScalar color, bool clearBeforeDraw = true)
-        {
-            if (clearBeforeDraw)
-            {
-                DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
-            }
-
-            DrawLine(DartboardProjectionWorkingFrame, point1, point2, color, PoiThickness);
-
-            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionWorkingFrame)); });
-        }
-
-        public void ProjectionPrepare()
-        {
             // Draw dartboard projection
-            DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, ProjectionCoefficient * 7, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, ProjectionCoefficient * 17, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, ProjectionCoefficient * 95, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, ProjectionCoefficient * 105, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, ProjectionCoefficient * 160, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(DartboardProjectionFrameBackground, projectionCenterPoint, ProjectionCoefficient * 170, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 7, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 17, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 95, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 105, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 160, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 170, projectionGridColor, ProjectionGridThickness);
             for (var i = 0; i <= 360; i += 9)
             {
                 var segmentPoint1 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 170),
                                                (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 170));
                 var segmentPoint2 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 17),
                                                (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 17));
-                DrawLine(DartboardProjectionFrameBackground, segmentPoint1, segmentPoint2, projectionGridColor, ProjectionGridThickness);
+                DrawLine(projectionImage, segmentPoint1, segmentPoint2, projectionGridColor, ProjectionGridThickness);
             }
 
             // Draw digits
@@ -177,7 +109,7 @@ namespace OneHundredAndEightyCore.Recognition
             var radSector = startRadSector;
             foreach (var sector in sectors)
             {
-                DrawString(DartboardProjectionFrameBackground,
+                DrawString(projectionImage,
                            sector.ToString(),
                            (int) (projectionCenterPoint.X - 40 + Math.Cos(radSector) * ProjectionCoefficient * 190),
                            (int) (projectionCenterPoint.Y + 20 + Math.Sin(radSector) * ProjectionCoefficient * 190),
@@ -187,54 +119,99 @@ namespace OneHundredAndEightyCore.Recognition
                 radSector += MeasureService.SectorStepRad;
             }
 
-            DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
-
-            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionWorkingFrame)); });
+            return Converter.EmguImageToBitmapImage(projectionImage);
         }
 
-        public void ProjectionClear()
+        public Image<Bgr, byte> DrawSetupLines(Image<Bgr, byte> image,
+                                               List<double> sliderData)
         {
-            DartboardProjectionWorkingFrame = DartboardProjectionFrameBackground.Clone();
-            camsDetectionBoard.dispatcher.Invoke(() =>
-                                                 {
-                                                     camsDetectionBoard.SetProjectionImage(ToBitmap(DartboardProjectionFrameBackground));
-                                                     camsDetectionBoard.ClearPointsBox();
-                                                 });
+            var surfaceSlider = sliderData.ElementAt(1);
+            var surfaceCenterSlider = sliderData.ElementAt(2);
+            var roiPosYSlider = sliderData.ElementAt(3);
+            var roiHeightSlider = sliderData.ElementAt(4);
+            var resolutionWidth = sliderData.ElementAt(5);
+
+            var roiRectangle = new Rectangle(0,
+                                             (int) roiPosYSlider,
+                                             (int) resolutionWidth,
+                                             (int) roiHeightSlider);
+
+            DrawRectangle(image,
+                          roiRectangle,
+                          camRoiRectColor.MCvScalar,
+                          CamRoiRectThickness);
+
+            var surfacePoint1 = new PointF(0, (float) surfaceSlider);
+            var surfacePoint2 = new PointF((int) resolutionWidth,
+                                           (float) surfaceSlider);
+            DrawLine(image,
+                     surfacePoint1,
+                     surfacePoint2,
+                     camSurfaceLineColor.MCvScalar,
+                     CamSurfaceLineThickness);
+
+            var surfaceCenterPoint1 = new PointF((float) surfaceCenterSlider,
+                                                 (float) surfaceSlider);
+
+            var surfaceCenterPoint2 = new PointF(surfaceCenterPoint1.X,
+                                                 surfaceCenterPoint1.Y - 50);
+            DrawLine(image,
+                     surfaceCenterPoint1,
+                     surfaceCenterPoint2,
+                     camSurfaceLineColor.MCvScalar,
+                     CamSurfaceLineThickness);
+
+            return image;
         }
 
-        public void PointsHistoryBoxClear()
+        private void DrawLine(Image<Bgr, byte> image,
+                              PointF point1,
+                              PointF point2,
+                              MCvScalar color,
+                              int thickness)
         {
-            camsDetectionBoard.dispatcher.Invoke(() => { camsDetectionBoard.ClearHistoryPointsBox(); });
+            CvInvoke.Line(image,
+                          new Point((int) point1.X, (int) point1.Y),
+                          new Point((int) point2.X, (int) point2.Y),
+                          color,
+                          thickness);
         }
 
-        public BitmapImage ToBitmap(Image<Bgr, byte> image)
+        private void DrawRectangle(Image<Bgr, byte> image,
+                                   Rectangle rectangle,
+                                   MCvScalar color,
+                                   int thickness)
         {
-            var imageToSave = new BitmapImage();
+            CvInvoke.Rectangle(image, rectangle, color, thickness);
+        }
 
-            using (var stream = new MemoryStream())
-            {
-                image.Bitmap.Save(stream, ImageFormat.Bmp);
-                imageToSave.BeginInit();
-                imageToSave.StreamSource = new MemoryStream(stream.ToArray());
-                imageToSave.EndInit();
-            }
-
-            return imageToSave;
-        } // todo something happened with IImage interface
-
-        public BitmapImage ToBitmap(Image<Gray, byte> image)
+        private void DrawCircle(Image<Bgr, byte> image,
+                                PointF centerpoint,
+                                int radius,
+                                MCvScalar color,
+                                int thickness)
         {
-            var imageToSave = new BitmapImage();
+            CvInvoke.Circle(image,
+                            new Point((int) centerpoint.X, (int) centerpoint.Y),
+                            radius,
+                            color,
+                            thickness);
+        }
 
-            using (var stream = new MemoryStream())
-            {
-                image.Bitmap.Save(stream, ImageFormat.Bmp);
-                imageToSave.BeginInit();
-                imageToSave.StreamSource = new MemoryStream(stream.ToArray());
-                imageToSave.EndInit();
-            }
-
-            return imageToSave;
+        private void DrawString(Image<Bgr, byte> image,
+                                string text,
+                                int pointX,
+                                int pointY,
+                                double scale,
+                                Bgr color,
+                                int thickness)
+        {
+            image.Draw(text,
+                       new Point(pointX, pointY),
+                       FontFace.HersheySimplex,
+                       scale,
+                       color,
+                       thickness);
         }
 
         public void SaveToFile(BitmapSource image, string path = null)

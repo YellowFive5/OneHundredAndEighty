@@ -22,6 +22,14 @@ namespace OneHundredAndEightyCore.Recognition
         DartsExtraction
     }
 
+    public enum DetectionServiceWorkingMode
+    {
+        Setup,
+        Check,
+        Crossing,
+        Detection
+    }
+
     public class DetectionService : IDetectionService
     {
         private readonly DrawService drawService;
@@ -37,7 +45,7 @@ namespace OneHundredAndEightyCore.Recognition
         private double extractionSleepTime;
         private double thresholdSleepTime;
         private bool withDetection;
-        private CamServiceWorkingMode workingMode;
+        private DetectionServiceWorkingMode workingMode;
 
         public DetectionService(DrawService drawService,
                                 ConfigService configService,
@@ -64,11 +72,19 @@ namespace OneHundredAndEightyCore.Recognition
 
         public event StatusDelegate OnStatusChanged;
 
-        public void PrepareCamsAndTryCapture(List<CamService> camsList, CamServiceWorkingMode workingMode)
+        public void CheckCamsAndTryCapture(List<CamService> camsList)
         {
-            this.workingMode = workingMode;
-            cams = camsList;
+            foreach (var cam in camsList)
+            {
+                cam.TryQueryFrame();
+            }
+        }
 
+        public async void RunDetection(List<CamService> camsList,
+                                       DetectionServiceWorkingMode workingMode)
+        {
+            cams = camsList;
+            this.workingMode = workingMode;
             cts = new CancellationTokenSource();
             cancelToken = cts.Token;
 
@@ -77,14 +93,6 @@ namespace OneHundredAndEightyCore.Recognition
             moveDetectedSleepTime = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
             withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox) && !App.NoCams;
 
-            foreach (var cam in cams)
-            {
-                cam.TryQueryFrame();
-            }
-        }
-
-        public async void RunDetection()
-        {
             try
             {
                 await Task.Run(() =>
@@ -93,7 +101,7 @@ namespace OneHundredAndEightyCore.Recognition
 
                                    Thread.CurrentThread.Name = $"Recognition_workerThread";
 
-                                   cams.ForEach(c => c.DoCapture(true));
+                                   cams.ForEach(c => c.DoCaptures());
 
                                    while (!cancelToken.IsCancellationRequested)
                                    {
@@ -102,7 +110,7 @@ namespace OneHundredAndEightyCore.Recognition
                                            logger.Debug($"Cam_{cam.camNumber} detection start");
 
                                            ResponseType response;
-                                           if (workingMode == CamServiceWorkingMode.Crossing)
+                                           if (workingMode == DetectionServiceWorkingMode.Crossing)
                                            {
                                                response = ResponseType.Move;
                                            }
@@ -117,7 +125,7 @@ namespace OneHundredAndEightyCore.Recognition
                                            {
                                                OnStatusChanged?.Invoke(DetectionServiceStatus.ProcessingThrow);
 
-                                               if (workingMode != CamServiceWorkingMode.Crossing)
+                                               if (workingMode != DetectionServiceWorkingMode.Crossing)
                                                {
                                                    Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
                                                }
@@ -141,8 +149,8 @@ namespace OneHundredAndEightyCore.Recognition
                                                    OnStatusChanged?.Invoke(DetectionServiceStatus.DartsExtraction);
                                                    Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
 
-                                                   drawService.ProjectionClear();
-                                                   cams.ForEach(c => c.DoCapture(true));
+                                                   // drawService.ProjectionClear();
+                                                   cams.ForEach(c => c.DoCaptures());
 
                                                    logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Extraction}'. Cycle break");
                                                    OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
@@ -177,27 +185,6 @@ namespace OneHundredAndEightyCore.Recognition
             cts?.Cancel();
         }
 
-        public string FindConnectedCams()
-        {
-            var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
-            var str = new StringBuilder();
-            for (var i = 0; i < allCams.Count; i++)
-            {
-                var cam = allCams[i];
-                var camId = cam.DevicePath.Substring(44, 10);
-                str.AppendLine($"[{cam.Name}]-[ID:'{camId}']");
-            }
-
-            return allCams.Count == 0
-                       ? "No cameras found"
-                       : str.ToString();
-        }
-
-        public void InvokeOnThrowDetected(DetectedThrow thrw)
-        {
-            OnThrowDetected?.Invoke(thrw);
-        }
-
         private void FindThrowOnRemainingCams(CamService succeededCam)
         {
             logger.Info($"Finding throws from remaining cams start. Succeeded cam: {succeededCam.camNumber}");
@@ -215,6 +202,27 @@ namespace OneHundredAndEightyCore.Recognition
             }
 
             logger.Info($"Finding throws from remaining cams end");
+        }
+
+        public void InvokeOnThrowDetected(DetectedThrow thrw)
+        {
+            OnThrowDetected?.Invoke(thrw);
+        }
+
+        public string FindConnectedCams()
+        {
+            var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
+            var str = new StringBuilder();
+            for (var i = 0; i < allCams.Count; i++)
+            {
+                var cam = allCams[i];
+                var camId = cam.DevicePath.Substring(44, 10);
+                str.AppendLine($"[{cam.Name}]-[ID:'{camId}']");
+            }
+
+            return allCams.Count == 0
+                       ? "No cameras found"
+                       : str.ToString();
         }
     }
 }

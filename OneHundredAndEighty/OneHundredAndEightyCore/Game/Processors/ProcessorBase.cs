@@ -17,7 +17,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         private readonly int legs;
         private readonly int sets;
 
-        public delegate void EndMatchDelegate(Game game, Player winner);
+        public delegate void EndMatchDelegate(Player winner);
 
         public event EndMatchDelegate OnMatchEnd;
 
@@ -135,7 +135,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected void InvokeEndMatch()
         {
-            OnMatchEnd?.Invoke(Game, PlayerOnThrow);
+            OnMatchEnd?.Invoke(PlayerOnThrow);
         }
 
         public abstract void OnThrow(DetectedThrow thrw);

@@ -15,53 +15,40 @@ namespace OneHundredAndEightyCore.Game
 {
     public class GameService
     {
+        private readonly Logger logger;
         private readonly ScoreBoardService scoreBoardService;
         private readonly CamsDetectionBoard camsDetectionBoard;
-        private readonly DrawService drawService;
         private readonly DetectionService detectionService;
-        private readonly ConfigService configService;
-        private readonly Logger logger;
         private readonly DBService dbService;
-        private bool IsGameRun { get; set; }
-        private GameType GameType { get; set; }
         private IGameProcessor GameProcessor { get; set; }
         private Game Game { get; set; }
+
+        public delegate void EndMatchDelegate();
+
+        public event EndMatchDelegate OnGameEnd;
 
         public GameService(ScoreBoardService scoreBoardService,
                            CamsDetectionBoard camsDetectionBoard,
                            DetectionService detectionService,
-                           ConfigService configService,
-                           DrawService drawService,
                            Logger logger,
                            DBService dbService)
         {
+            this.logger = logger;
             this.scoreBoardService = scoreBoardService;
             this.camsDetectionBoard = camsDetectionBoard;
             this.detectionService = detectionService;
-            this.configService = configService;
-            this.drawService = drawService;
-            this.logger = logger;
             this.dbService = dbService;
         }
 
         #region Start/Stop
 
-        public void StartGame(List<CamService> cams,
-                              Player player1,
+        public void StartGame(Player player1,
                               Player player2,
                               GameType gameType,
                               GamePoints gamePoints,
                               int gameSets,
                               int gameLegs)
         {
-            drawService.ProjectionClear();
-            drawService.PointsHistoryBoxClear();
-
-            detectionService.PrepareCamsAndTryCapture(cams, CamServiceWorkingMode.Detection);
-            detectionService.RunDetection();
-
-            GameType = gameType;
-
             var players = new List<Player>();
             players.AddIfNotNull(player1);
             players.AddIfNotNull(player2);
@@ -164,42 +151,29 @@ namespace OneHundredAndEightyCore.Game
 
         public void StopGame(GameResultType type)
         {
-            if (!IsGameRun)
+            if (Game != null)
             {
-                return;
+                dbService.GameEnd(Game, gameResultType: type);
+                StopGameInternal();
             }
+        }
 
-            IsGameRun = false;
+        private void OnMatchEnd(Player winner)
+        {
+            dbService.GameEnd(Game, winner);
+            OnGameEnd?.Invoke();
 
-            scoreBoardService.CloseScoreBoard();
-            detectionService.StopDetection();
-            drawService.ProjectionClear();
-            dbService.GameEnd(Game, gameResultType: type);
+            StopGameInternal();
+        }
 
+        private void StopGameInternal()
+        {
+            Game = null;
             detectionService.OnThrowDetected -= OnAnotherThrow;
             detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
             GameProcessor.OnMatchEnd -= OnMatchEnd;
             camsDetectionBoard.OnUndoThrowButtonPressed -= OnThrowUndo;
             camsDetectionBoard.OnCorrectThrowButtonPressed -= OnThrowCorrect;
-        }
-
-        private void OnMatchEnd(Game game, Player winner)
-        {
-            if (!IsGameRun)
-            {
-                return;
-            }
-
-            IsGameRun = false;
-
-            scoreBoardService.CloseScoreBoard();
-            detectionService.StopDetection();
-            drawService.ProjectionClear();
-            camsDetectionBoard.Close();
-            dbService.GameEnd(Game, winner);
-
-            // mainWindow.ToggleMainTabItemsEnabled();
-            // mainWindow.ToggleMatchControlsEnabled();
         }
 
         #endregion

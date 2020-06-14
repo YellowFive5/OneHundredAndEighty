@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1496,10 +1497,12 @@ namespace OneHundredAndEightyCore.Windows.Main
             try
             {
                 camsDetectionBoard.Open();
-                drawService.ProjectionPrepare();
 
-                var cams = PrepareCamsServices(CamServiceWorkingMode.Crossing);
-                gameService.StartGame(cams, NewGamePlayer1, NewGamePlayer2, NewGameType, NewGamePoints, NewGameSets, NewGameLegs);
+                var cams = CreateCamsServices();
+                detectionService.CheckCamsAndTryCapture(cams);
+                detectionService.RunDetection(cams, DetectionServiceWorkingMode.Detection);
+                gameService.OnGameEnd += StopGameInternal;
+                gameService.StartGame(NewGamePlayer1, NewGamePlayer2, NewGameType, NewGamePoints, NewGameSets, NewGameLegs);
             }
             catch (Exception e)
             {
@@ -1510,24 +1513,24 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void StopGameByButton()
         {
-            scoreBoardService.CloseScoreBoard();
-            camsDetectionBoard.Close();
-
-            IsMainTabsEnabled = true;
-            IsGameRunning = false;
-
             gameService.StopGame(GameResultType.Aborted);
+            StopGameInternal();
         }
 
         private void StopGameByError()
         {
+            gameService.StopGame(GameResultType.Error);
+            StopGameInternal();
+        }
+
+        private void StopGameInternal()
+        {
+            gameService.OnGameEnd -= StopGameInternal;
             scoreBoardService.CloseScoreBoard();
             camsDetectionBoard.Close();
-
+            detectionService.StopDetection();
             IsMainTabsEnabled = true;
             IsGameRunning = false;
-
-            gameService.StopGame(GameResultType.Error);
         }
 
         #endregion
@@ -1611,15 +1614,14 @@ namespace OneHundredAndEightyCore.Windows.Main
                 await Task.Run(() =>
                                {
                                    var cam = new CamService(camNumber,
-                                                            CamServiceWorkingMode.Setup,
                                                             logger,
                                                             drawService,
                                                             configService,
-                                                            camsDetectionBoard,
                                                             throwService);
                                    while (!cancelToken.IsCancellationRequested)
                                    {
-                                       cam.DoSetupCapture(GetCamsSetupSlidersData(camNumber));
+                                       var setupSlidersData = GetCamsSetupSlidersData(camNumber);
+                                       cam.DoSetupCaptures(setupSlidersData);
                                        Application.Current.Dispatcher.Invoke(() => { RefreshImages(camNumber, cam.GetImage(), cam.GetRoiImage()); });
                                    }
 
@@ -1637,47 +1639,55 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private List<double> GetCamsSetupSlidersData(CamNumber camNumber)
         {
+            List<double> slidersData;
             switch (camNumber)
             {
                 case CamNumber._1:
-                    return new List<double>
-                           {
-                               Cam1ThresholdSliderValue,
-                               Cam1SurfaceSliderValue,
-                               Cam1SurfaceCenterSliderValue,
-                               Cam1RoiPosYSliderValue,
-                               Cam1RoiHeightSliderValue
-                           };
+                    slidersData = new List<double>
+                                  {
+                                      Cam1ThresholdSliderValue,
+                                      Cam1SurfaceSliderValue,
+                                      Cam1SurfaceCenterSliderValue,
+                                      Cam1RoiPosYSliderValue,
+                                      Cam1RoiHeightSliderValue
+                                  };
+                    break;
                 case CamNumber._2:
-                    return new List<double>
-                           {
-                               Cam2ThresholdSliderValue,
-                               Cam2SurfaceSliderValue,
-                               Cam2SurfaceCenterSliderValue,
-                               Cam2RoiPosYSliderValue,
-                               Cam2RoiHeightSliderValue
-                           };
+                    slidersData = new List<double>
+                                  {
+                                      Cam2ThresholdSliderValue,
+                                      Cam2SurfaceSliderValue,
+                                      Cam2SurfaceCenterSliderValue,
+                                      Cam2RoiPosYSliderValue,
+                                      Cam2RoiHeightSliderValue
+                                  };
+                    break;
                 case CamNumber._3:
-                    return new List<double>
-                           {
-                               Cam3ThresholdSliderValue,
-                               Cam3SurfaceSliderValue,
-                               Cam3SurfaceCenterSliderValue,
-                               Cam3RoiPosYSliderValue,
-                               Cam3RoiHeightSliderValue
-                           };
+                    slidersData = new List<double>
+                                  {
+                                      Cam3ThresholdSliderValue,
+                                      Cam3SurfaceSliderValue,
+                                      Cam3SurfaceCenterSliderValue,
+                                      Cam3RoiPosYSliderValue,
+                                      Cam3RoiHeightSliderValue
+                                  };
+                    break;
                 case CamNumber._4:
-                    return new List<double>
-                           {
-                               Cam4ThresholdSliderValue,
-                               Cam4SurfaceSliderValue,
-                               Cam4SurfaceCenterSliderValue,
-                               Cam4RoiPosYSliderValue,
-                               Cam4RoiHeightSliderValue
-                           };
+                    slidersData = new List<double>
+                                  {
+                                      Cam4ThresholdSliderValue,
+                                      Cam4SurfaceSliderValue,
+                                      Cam4SurfaceCenterSliderValue,
+                                      Cam4RoiPosYSliderValue,
+                                      Cam4RoiHeightSliderValue
+                                  };
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
             }
+
+            slidersData.Add(CamsResolutionWidth);
+            return slidersData;
         }
 
         private void RefreshImages(CamNumber camNumber, BitmapImage image, BitmapImage roiImage)
@@ -1724,14 +1734,10 @@ namespace OneHundredAndEightyCore.Windows.Main
             {
                 camsDetectionBoard.Open();
 
-                drawService.ProjectionPrepare();
-                drawService.ProjectionClear();
-                drawService.PointsHistoryBoxClear();
+                var cams = CreateCamsServices();
+                detectionService.CheckCamsAndTryCapture(cams);
 
-                var cams = PrepareCamsServices(CamServiceWorkingMode.Crossing);
-                detectionService.PrepareCamsAndTryCapture(cams, CamServiceWorkingMode.Crossing);
-
-                detectionService.RunDetection();
+                detectionService.RunDetection(cams, DetectionServiceWorkingMode.Crossing);
             }
             catch (Exception e)
             {
@@ -1743,13 +1749,13 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void StopCrossing()
         {
             detectionService.StopDetection();
-            drawService.ProjectionClear();
+            // drawService.ProjectionClear();
             camsDetectionBoard.Close();
 
             IsRuntimeCrossingRunning = false;
         }
 
-        private List<CamService> PrepareCamsServices(CamServiceWorkingMode mode)
+        private List<CamService> CreateCamsServices()
         {
             var cams = new List<CamService>();
             var cam1Active = Cam1Enabled && !App.NoCams;
@@ -1760,44 +1766,36 @@ namespace OneHundredAndEightyCore.Windows.Main
             if (cam1Active)
             {
                 cams.Add(new CamService(CamNumber._1,
-                                        mode,
                                         logger,
                                         drawService,
                                         configService,
-                                        camsDetectionBoard,
                                         throwService));
             }
 
             if (cam2Active)
             {
                 cams.Add(new CamService(CamNumber._2,
-                                        mode,
                                         logger,
                                         drawService,
                                         configService,
-                                        camsDetectionBoard,
                                         throwService));
             }
 
             if (cam3Active)
             {
                 cams.Add(new CamService(CamNumber._3,
-                                        mode,
                                         logger,
                                         drawService,
                                         configService,
-                                        camsDetectionBoard,
                                         throwService));
             }
 
             if (cam4Active)
             {
                 cams.Add(new CamService(CamNumber._4,
-                                        mode,
                                         logger,
                                         drawService,
                                         configService,
-                                        camsDetectionBoard,
                                         throwService));
             }
 
@@ -1817,8 +1815,8 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             try
             {
-                var cams = PrepareCamsServices(CamServiceWorkingMode.Check);
-                detectionService.PrepareCamsAndTryCapture(cams, CamServiceWorkingMode.Check);
+                var cams = CreateCamsServices();
+                detectionService.CheckCamsAndTryCapture(cams);
                 CheckCamsBoxText = "Checked cams simultaneous work: OK";
             }
             catch (Exception e)

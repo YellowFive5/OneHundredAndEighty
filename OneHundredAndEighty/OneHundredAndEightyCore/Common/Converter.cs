@@ -8,6 +8,8 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Windows.Media.Imaging;
+using Emgu.CV;
+using Emgu.CV.Structure;
 using OneHundredAndEightyCore.Game;
 using Image = System.Drawing.Image;
 
@@ -91,6 +93,21 @@ namespace OneHundredAndEightyCore.Common
             ms.Write(imageBytes, 0, imageBytes.Length);
             var image = Image.FromStream(ms, true);
             return image;
+        }
+
+        public static BitmapImage EmguImageToBitmapImage(IImage image)
+        {
+            var imageToSave = new BitmapImage();
+
+            using (var stream = new MemoryStream())
+            {
+                image.Bitmap.Save(stream, ImageFormat.Bmp);
+                imageToSave.BeginInit();
+                imageToSave.StreamSource = new MemoryStream(stream.ToArray());
+                imageToSave.EndInit();
+            }
+
+            return imageToSave;
         }
 
         public static int CamSetupSectorSettingValueToComboboxSelectedIndex(string camSetupSectorSettingValue)

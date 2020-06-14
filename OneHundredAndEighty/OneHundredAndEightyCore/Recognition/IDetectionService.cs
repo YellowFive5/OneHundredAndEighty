@@ -9,8 +9,8 @@ namespace OneHundredAndEightyCore.Recognition
     public interface IDetectionService
     {
         string FindConnectedCams();
-        void PrepareCamsAndTryCapture(List<CamService> camsList, CamServiceWorkingMode workingMode);
-        void RunDetection();
+        void CheckCamsAndTryCapture(List<CamService> camsList);
+        void RunDetection(List<CamService> camsList,DetectionServiceWorkingMode workingMode);
         void StopDetection();
 
         public event DetectionService.ExceptionOccurredDelegate OnErrorOccurred;

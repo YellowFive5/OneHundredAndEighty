@@ -3,7 +3,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Emgu.CV.Structure;
 using NLog;
 using OneHundredAndEightyCore.Game;
 
@@ -13,14 +12,12 @@ namespace OneHundredAndEightyCore.Recognition
 {
     public class ThrowService
     {
-        private readonly DrawService drawService;
         private readonly Logger logger;
         private readonly List<Ray> rays;
 
-        public ThrowService(DrawService drawService, Logger logger)
+        public ThrowService(Logger logger)
         {
             this.logger = logger;
-            this.drawService = drawService;
             rays = new List<Ray>();
         }
 
@@ -56,12 +53,6 @@ namespace OneHundredAndEightyCore.Recognition
 
             var thrw = PrepareThrowData(poi);
 
-            drawService.ProjectionDrawLine(firstBestRay.CamPoint, firstBestRay.RayPoint, new Bgr(Color.Aqua).MCvScalar, true);
-            drawService.ProjectionDrawLine(secondBestRay.CamPoint, secondBestRay.RayPoint, new Bgr(Color.Aqua).MCvScalar, false);
-            drawService.ProjectionDrawThrow(poi, false);
-            drawService.PrintThrow(thrw);
-
-
             logger.Info($"Throw:{thrw}");
             logger.Debug($"Calculate throw end.");
             return thrw;
@@ -76,8 +67,10 @@ namespace OneHundredAndEightyCore.Recognition
                               10, 15, 2, 17, 3,
                               19, 7, 16, 8, 11
                           };
-            var angle = MeasureService.FindAngle(DrawService.projectionCenterPoint, poi);
-            var distance = MeasureService.FindDistance(DrawService.projectionCenterPoint, poi);
+            var projectionCenterPoint = new PointF((float) DrawService.ProjectionFrameSide / 2,
+                                                   (float) DrawService.ProjectionFrameSide / 2);
+            var angle = MeasureService.FindAngle(projectionCenterPoint, poi);
+            var distance = MeasureService.FindDistance(projectionCenterPoint, poi);
             var sector = 0;
             var type = ThrowType.Single;
 

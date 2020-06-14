@@ -56,7 +56,9 @@ namespace OneHundredAndEightyCore.Common
                             Player winner = null,
                             GameResultType gameResultType = GameResultType.NotDefined)
         {
-            GameSaveEndTimeStamp(game);
+            var gameEndTimestampQuery = $"UPDATE [{Table.Games}] SET [{Column.EndTimestamp}] = '{DateTime.Now}' " +
+                                        $"WHERE [Id] = {game.Id}";
+            ExecuteNonQueryInternal(gameEndTimestampQuery);
 
             if (gameResultType == GameResultType.Aborted ||
                 gameResultType == GameResultType.Error)
@@ -67,14 +69,6 @@ namespace OneHundredAndEightyCore.Common
             {
                 StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(game.Id, winner.Id);
             }
-        }
-
-        private void GameSaveEndTimeStamp(Game.Game game)
-        {
-            game.SetEndTimeStamp();
-            var gameEndTimestampQuery = $"UPDATE [{Table.Games}] SET [{Column.EndTimestamp}] = '{game.EndTimeStamp}' " +
-                                        $"WHERE [Id] = {game.Id}";
-            ExecuteNonQueryInternal(gameEndTimestampQuery);
         }
 
         #endregion
