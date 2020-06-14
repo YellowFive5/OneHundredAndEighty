@@ -99,8 +99,6 @@ namespace OneHundredAndEightyCore.Recognition
                                {
                                    OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
 
-                                   Thread.CurrentThread.Name = $"Recognition_workerThread";
-
                                    cams.ForEach(c => c.DoCaptures());
 
                                    while (!cancelToken.IsCancellationRequested)

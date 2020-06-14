@@ -227,18 +227,6 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
             }
         }
 
-        private BitmapImage projectionBackgroundImage;
-
-        public BitmapImage ProjectionBackgroundImage
-        {
-            get => projectionBackgroundImage;
-            set
-            {
-                projectionBackgroundImage = value;
-                OnPropertyChanged(nameof(ProjectionBackgroundImage));
-            }
-        }
-
         private BitmapImage projectionImage;
 
         public BitmapImage ProjectionImage
@@ -295,7 +283,6 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         public void Open()
         {
             camsDetectionWindow = new CamsDetectionWindow(this);
-            ProjectionBackgroundImage = drawService.ProjectionPrepare();
             ClearProjectionImage();
             camsDetectionWindow.Show();
         }
@@ -361,7 +348,7 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
 
         public void ClearProjectionImage()
         {
-            ProjectionImage = ProjectionBackgroundImage;
+            ProjectionImage = Converter.EmguImageToBitmapImage(drawService.ProjectionBackgroundImage);
         }
 
         public void PrintThrow(DetectedThrow thrw)

@@ -50,10 +50,10 @@ namespace OneHundredAndEightyCore.Windows.Main
             throwService = new ThrowService(logger);
             configService = new ConfigService(logger, dbService);
             scoreBoardService = new ScoreBoardService(logger, configService);
-            manualThrowPanel = new ManualThrowPanel(logger, detectionService);
             camsDetectionBoard = new CamsDetectionBoard(configService, logger, drawService);
             versionChecker = new VersionChecker(dbService, configService, messageBoxService);
             detectionService = new DetectionService(drawService, configService, throwService, logger, camsDetectionBoard);
+            manualThrowPanel = new ManualThrowPanel(logger, detectionService);
             gameService = new GameService(scoreBoardService, camsDetectionBoard, detectionService, logger, dbService);
 
             InitializeComponent();

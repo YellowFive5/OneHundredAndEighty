@@ -10,7 +10,6 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using NLog;
-using OneHundredAndEightyCore.Common;
 using Point = System.Drawing.Point;
 
 #endregion
@@ -42,6 +41,7 @@ namespace OneHundredAndEightyCore.Recognition
         private readonly MCvScalar poiColor = new Bgr(Color.MediumVioletRed).MCvScalar;
         private readonly Bgr projectionDigitsColor = new Bgr(Color.White);
 
+        public Image<Bgr, byte> ProjectionBackgroundImage { get; private set; }
         public const int ProjectionFrameSide = 1300;
         private const int PoiRadius = 6;
         private const int PoiThickness = 6;
@@ -53,6 +53,54 @@ namespace OneHundredAndEightyCore.Recognition
         public DrawService(Logger logger)
         {
             this.logger = logger;
+            ProjectionPrepare();
+        }
+
+        private void ProjectionPrepare()
+        {
+            ProjectionBackgroundImage = new Image<Bgr, byte>(ProjectionFrameSide,
+                                                             ProjectionFrameSide);
+
+            var projectionCenterPoint = new PointF((float) ProjectionBackgroundImage.Width / 2,
+                                                   (float) ProjectionBackgroundImage.Height / 2);
+
+            // Draw dartboard projection
+            DrawCircle(ProjectionBackgroundImage, projectionCenterPoint, ProjectionCoefficient * 7, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(ProjectionBackgroundImage, projectionCenterPoint, ProjectionCoefficient * 17, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(ProjectionBackgroundImage, projectionCenterPoint, ProjectionCoefficient * 95, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(ProjectionBackgroundImage, projectionCenterPoint, ProjectionCoefficient * 105, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(ProjectionBackgroundImage, projectionCenterPoint, ProjectionCoefficient * 160, projectionGridColor, ProjectionGridThickness);
+            DrawCircle(ProjectionBackgroundImage, projectionCenterPoint, ProjectionCoefficient * 170, projectionGridColor, ProjectionGridThickness);
+            for (var i = 0; i <= 360; i += 9)
+            {
+                var segmentPoint1 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 170),
+                                               (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 170));
+                var segmentPoint2 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 17),
+                                               (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 17));
+                DrawLine(ProjectionBackgroundImage, segmentPoint1, segmentPoint2, projectionGridColor, ProjectionGridThickness);
+            }
+
+            // Draw digits
+            var sectors = new List<int>()
+                          {
+                              11, 14, 9, 12, 5,
+                              20, 1, 18, 4, 13,
+                              6, 10, 15, 2, 17,
+                              3, 19, 7, 16, 8
+                          };
+            var startRadSector = MeasureService.StartRadSector_11;
+            var radSector = startRadSector;
+            foreach (var sector in sectors)
+            {
+                DrawString(ProjectionBackgroundImage,
+                           sector.ToString(),
+                           (int) (projectionCenterPoint.X - 40 + Math.Cos(radSector) * ProjectionCoefficient * 190),
+                           (int) (projectionCenterPoint.Y + 20 + Math.Sin(radSector) * ProjectionCoefficient * 190),
+                           ProjectionDigitsScale,
+                           projectionDigitsColor,
+                           ProjectionDigitsThickness);
+                radSector += MeasureService.SectorStepRad;
+            }
         }
 
         public Image<Bgr, byte> ProjectionDrawThrow(Image<Bgr, byte> projectionImage,
@@ -71,55 +119,6 @@ namespace OneHundredAndEightyCore.Recognition
             DrawLine(projectionImage, point1, point2, color, PoiThickness);
 
             return projectionImage;
-        }
-
-        public BitmapImage ProjectionPrepare()
-        {
-            var projectionImage = new Image<Bgr, byte>(ProjectionFrameSide,
-                                                       ProjectionFrameSide);
-
-            var projectionCenterPoint = new PointF((float) projectionImage.Width / 2,
-                                                   (float) projectionImage.Height / 2);
-
-            // Draw dartboard projection
-            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 7, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 17, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 95, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 105, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 160, projectionGridColor, ProjectionGridThickness);
-            DrawCircle(projectionImage, projectionCenterPoint, ProjectionCoefficient * 170, projectionGridColor, ProjectionGridThickness);
-            for (var i = 0; i <= 360; i += 9)
-            {
-                var segmentPoint1 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 170),
-                                               (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 170));
-                var segmentPoint2 = new PointF((float) (projectionCenterPoint.X + Math.Cos(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 17),
-                                               (float) (projectionCenterPoint.Y + Math.Sin(MeasureService.SectorStepRad * i - MeasureService.SemiSectorStepRad) * ProjectionCoefficient * 17));
-                DrawLine(projectionImage, segmentPoint1, segmentPoint2, projectionGridColor, ProjectionGridThickness);
-            }
-
-            // Draw digits
-            var sectors = new List<int>()
-                          {
-                              11, 14, 9, 12, 5,
-                              20, 1, 18, 4, 13,
-                              6, 10, 15, 2, 17,
-                              3, 19, 7, 16, 8
-                          };
-            var startRadSector = MeasureService.StartRadSector_11;
-            var radSector = startRadSector;
-            foreach (var sector in sectors)
-            {
-                DrawString(projectionImage,
-                           sector.ToString(),
-                           (int) (projectionCenterPoint.X - 40 + Math.Cos(radSector) * ProjectionCoefficient * 190),
-                           (int) (projectionCenterPoint.Y + 20 + Math.Sin(radSector) * ProjectionCoefficient * 190),
-                           ProjectionDigitsScale,
-                           projectionDigitsColor,
-                           ProjectionDigitsThickness);
-                radSector += MeasureService.SectorStepRad;
-            }
-
-            return Converter.EmguImageToBitmapImage(projectionImage);
         }
 
         public Image<Bgr, byte> DrawSetupLines(Image<Bgr, byte> image,

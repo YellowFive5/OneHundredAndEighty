@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1470,24 +1469,8 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void StartGame()
         {
-            if (!Validator.ValidateImplementedGameTypes(NewGameType))
+            if (!ValidateGameStart())
             {
-                messageBoxService.ShowError(Resources.Resources.NotImplementedYetErrorText);
-                return;
-            }
-
-            if (!Validator.ValidateStartNewGamePlayersSelected(NewGameType,
-                                                               NewGamePlayer1,
-                                                               NewGamePlayer2))
-            {
-                messageBoxService.ShowError(Resources.Resources.NewGamePlayersNotSelectedErrorText);
-                return;
-            }
-
-            if (!Validator.ValidateStartNewClassicGame(NewGameType,
-                                                       NewGamePoints))
-            {
-                messageBoxService.ShowError(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
                 return;
             }
 
@@ -1509,6 +1492,32 @@ namespace OneHundredAndEightyCore.Windows.Main
                 StopGameByError();
                 messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
             }
+        }
+
+        private bool ValidateGameStart()
+        {
+            if (!Validator.ValidateImplementedGameTypes(NewGameType))
+            {
+                messageBoxService.ShowError(Resources.Resources.NotImplementedYetErrorText);
+                return false;
+            }
+
+            if (!Validator.ValidateStartNewGamePlayersSelected(NewGameType,
+                                                               NewGamePlayer1,
+                                                               NewGamePlayer2))
+            {
+                messageBoxService.ShowError(Resources.Resources.NewGamePlayersNotSelectedErrorText);
+                return false;
+            }
+
+            if (!Validator.ValidateStartNewClassicGame(NewGameType,
+                                                       NewGamePoints))
+            {
+                messageBoxService.ShowError(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
+                return false;
+            }
+
+            return true;
         }
 
         public void StopGameByButton()
