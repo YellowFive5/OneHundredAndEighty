@@ -479,6 +479,15 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2020 OneHundredAndEighty.
+        /// </summary>
+        public static string ScoreboardFooterText {
+            get {
+                return ResourceManager.GetString("ScoreboardFooterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gaussian smooth of ROI image. Default value is &apos;5&apos;.
         /// </summary>
         public static string SmoothGausHelperText {

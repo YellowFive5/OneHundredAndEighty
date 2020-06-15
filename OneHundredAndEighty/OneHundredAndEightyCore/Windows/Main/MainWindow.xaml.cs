@@ -49,7 +49,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             drawService = new DrawService(logger);
             throwService = new ThrowService(logger);
             configService = new ConfigService(logger, dbService);
-            scoreBoardService = new ScoreBoardService(logger, configService);
+            scoreBoardService = new ScoreBoardService(logger, configService, drawService);
             camsDetectionBoard = new CamsDetectionBoard(configService, logger, drawService);
             versionChecker = new VersionChecker(dbService, configService, messageBoxService);
             detectionService = new DetectionService(drawService, configService, throwService, logger, camsDetectionBoard);

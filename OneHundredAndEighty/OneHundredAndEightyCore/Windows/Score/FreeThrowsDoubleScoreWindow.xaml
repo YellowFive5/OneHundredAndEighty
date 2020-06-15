@@ -1,18 +1,30 @@
-﻿<local:ScoreWindowBase x:Class="OneHundredAndEightyCore.Windows.Score.FreeThrowsDoubleScoreWindow"
-                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                       xmlns:local="clr-namespace:OneHundredAndEightyCore.Windows.Score"
-                       mc:Ignorable="d"
-                       ResizeMode="CanResizeWithGrip"
-                       AllowsTransparency="True"
-                       WindowStyle="None"
-                       Background="Transparent"
-                       MouseLeftButtonDown="OnMouseLeftButtonDown"
-                       Closing="OnClosing"
-                       d:DesignWidth="981.528"
-                       d:DesignHeight="263.227">
+﻿<Window x:Class="OneHundredAndEightyCore.Windows.Score.FreeThrowsDoubleScoreWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:score="clr-namespace:OneHundredAndEightyCore.Windows.Score"
+        xmlns:resx="clr-namespace:OneHundredAndEightyCore.Resources"
+        mc:Ignorable="d"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="Transparent"
+        MouseLeftButtonDown="OnMouseLeftButtonDown"
+        Height="{Binding WindowHeight, Mode=TwoWay}"
+        Width="{Binding WindowWidth, Mode=TwoWay}"
+        Left="{Binding WindowPositionLeft, Mode=TwoWay}"
+        Top="{Binding WindowPositionTop, Mode=TwoWay}"
+        Loaded="OnLoaded"
+        Closing="OnClosing"
+        d:DesignWidth="981.528"
+        d:DesignHeight="263.227">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </Window.Resources>
+    <Window.DataContext>
+        <score:ScoreBoardService />
+    </Window.DataContext>
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.6*" />
@@ -51,7 +63,7 @@
                      HorizontalAlignment="Left">
                 <TextBlock Name="GameTypeText"
                            TextWrapping="Wrap"
-                           Text="Free throws"
+                           Text="{Binding HeaderString}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Grid Grid.Row="0"
@@ -70,7 +82,7 @@
                 <Ellipse Name="DetectionStatusSemaphore"
                          Grid.Row="1"
                          Grid.Column="1"
-                         Fill="#FF12AE00"
+                         Fill="{Binding DetectionStatusLight}"
                          Stroke="Black"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch" />
@@ -95,21 +107,22 @@
                 <Rectangle Name="Throw1Rectangle"
                            Grid.Column="0"
                            Grid.Row="1"
-                           Fill="Black" />
+                           Fill="{Binding Throw1Brush}" />
                 <Rectangle Name="Throw2Rectangle"
                            Grid.Column="0"
                            Grid.Row="3"
-                           Fill="Black" />
+                           Fill="{Binding Throw2Brush}" />
                 <Rectangle Name="Throw3Rectangle"
                            Grid.Column="0"
                            Grid.Row="5"
-                           Fill="Black" />
+                           Fill="{Binding Throw3Brush}" />
             </Grid>
         </Grid>
 
         <Grid Name="CheckoutGridPlayer1"
               Grid.Row="1"
-              Grid.Column="0">
+              Grid.Column="0"
+              Visibility="{Binding Player1HintShown, Converter={StaticResource BoolToVisibility}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -124,7 +137,7 @@
                      HorizontalAlignment="Center">
                 <TextBlock Name="CheckoutTextPlayer1"
                            TextWrapping="Wrap"
-                           Text="T20 T10 D15"
+                           Text="{Binding Player1Hint}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
@@ -147,17 +160,18 @@
                      HorizontalAlignment="Left">
                 <TextBlock Name="Player1NameText"
                            TextWrapping="Wrap"
-                           Text="Mighty Mike"
+                           Text="{Binding Player1Name}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Image Name="Player1Avatar"
                    Grid.Column="3"
                    Grid.Row="0"
                    HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch" />
+                   VerticalAlignment="Stretch"
+                   Source="{Binding Player1Avatar, IsAsync=True}" />
         </Grid>
         <Grid Name="PointsGridPlayer1"
-            Grid.Row="1"
+              Grid.Row="1"
               Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -174,13 +188,14 @@
                      HorizontalAlignment="Right">
                 <TextBlock Name="PointsTextPlayer1"
                            TextWrapping="Wrap"
-                           Text="501"
+                           Text="{Binding Player1Points}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
         <Grid Name="ThrowPointerGridPlayer1"
               Grid.Row="1"
-              Grid.Column="3">
+              Grid.Column="3"
+              Visibility="{Binding Player1OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*" />
                 <RowDefinition Height="*" />
@@ -206,7 +221,8 @@
 
         <Grid Name="CheckoutGridPlayer2"
               Grid.Row="2"
-              Grid.Column="0">
+              Grid.Column="0"
+              Visibility="{Binding Player2HintShown, Converter={StaticResource BoolToVisibility}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -221,7 +237,7 @@
                      HorizontalAlignment="Center">
                 <TextBlock Name="CheckoutTextPlayer2"
                            TextWrapping="Wrap"
-                           Text="T20 T10 D15"
+                           Text="{Binding Player2Hint}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
@@ -244,14 +260,15 @@
                      HorizontalAlignment="Left">
                 <TextBlock Name="Player2NameText"
                            TextWrapping="Wrap"
-                           Text="Mighty Mike"
+                           Text="{Binding Player2Name}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Image Name="Player2Avatar"
                    Grid.Column="3"
                    Grid.Row="0"
                    HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch" />
+                   VerticalAlignment="Stretch"
+                   Source="{Binding Player2Avatar, IsAsync=True}" />
         </Grid>
         <Grid Name="PointsGridPlayer2"
               Grid.Row="2"
@@ -271,13 +288,14 @@
                      HorizontalAlignment="Right">
                 <TextBlock Name="PointsTextPlayer2"
                            TextWrapping="Wrap"
-                           Text="501"
+                           Text="{Binding Player2Points}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
         <Grid Name="ThrowPointerGridPlayer2"
               Grid.Row="2"
-              Grid.Column="3">
+              Grid.Column="3"
+              Visibility="{Binding Player2OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*" />
                 <RowDefinition Height="*" />
@@ -324,10 +342,10 @@
                      Grid.Row="1"
                      HorizontalAlignment="Left">
                 <TextBlock TextWrapping="Wrap"
-                           Text="2020 OneHundredAndEighty"
+                           Text="{x:Static resx:Resources.ScoreboardFooterText}"
                            Foreground="#FF727272"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
     </Grid>
-</local:ScoreWindowBase>
+</Window>

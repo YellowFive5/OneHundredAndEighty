@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using NLog;
+using Color = System.Drawing.Color;
 using Point = System.Drawing.Point;
 
 #endregion
@@ -40,6 +42,12 @@ namespace OneHundredAndEightyCore.Recognition
         public int projectionRayThickness = 2;
         private readonly MCvScalar poiColor = new Bgr(Color.MediumVioletRed).MCvScalar;
         private readonly Bgr projectionDigitsColor = new Bgr(Color.White);
+
+        public readonly SolidColorBrush redBrush = new SolidColorBrush(Colors.Red);
+        public readonly SolidColorBrush yellowBrush = new SolidColorBrush(Colors.Yellow);
+        public readonly SolidColorBrush greenBrush = new SolidColorBrush(Colors.ForestGreen);
+        public readonly SolidColorBrush blackBrush = new SolidColorBrush(Colors.Black);
+        public readonly SolidColorBrush transparentBrush = new SolidColorBrush() {Opacity = 0};
 
         public Image<Bgr, byte> ProjectionBackgroundImage { get; private set; }
         public const int ProjectionFrameSide = 1300;

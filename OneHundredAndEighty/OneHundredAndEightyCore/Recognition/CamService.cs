@@ -19,12 +19,12 @@ namespace OneHundredAndEightyCore.Recognition
 {
     public class CamService
     {
-        public readonly CamNumber camNumber;
+        private readonly Logger logger;
         private readonly DrawService drawService;
         private readonly VideoCapture videoCapture;
         private readonly IConfigService configService;
+        public readonly CamNumber camNumber;
         private readonly ThrowService throwService;
-        private readonly Logger logger;
         private Image<Bgr, byte> OriginFrame { get; set; }
         private Image<Bgr, byte> LinedFrame { get; set; }
         private Image<Gray, byte> RoiFrame { get; set; }
