@@ -78,13 +78,13 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         [Test]
         public void Cam1ImageSetsAndChangeFired()
         {
-            var oldValue = viewModel.Cam1Image;
+            var oldValue = viewModel.CamImage;
 
-            viewModel.Cam1Image = new BitmapImage();
-            var newValue = viewModel.Cam1Image;
+            viewModel.CamImage = new BitmapImage();
+            var newValue = viewModel.CamImage;
 
             newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1Image));
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.CamImage));
         }
 
         [Test]
@@ -126,13 +126,13 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         [Test]
         public void Cam1RoiImageSetsAndChangeFired()
         {
-            var oldValue = viewModel.Cam1RoiImage;
+            var oldValue = viewModel.CamRoiImage;
 
-            viewModel.Cam1RoiImage = new BitmapImage();
-            var newValue = viewModel.Cam1RoiImage;
+            viewModel.CamRoiImage = new BitmapImage();
+            var newValue = viewModel.CamRoiImage;
 
             newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1RoiImage));
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.CamRoiImage));
         }
 
         [Test]

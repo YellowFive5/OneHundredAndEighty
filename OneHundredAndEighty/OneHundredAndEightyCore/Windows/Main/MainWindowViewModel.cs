@@ -94,99 +94,27 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         #region Images
 
-        private BitmapImage cam1Image;
+        private BitmapImage camImage;
 
-        public BitmapImage Cam1Image
+        public BitmapImage CamImage
         {
-            get => cam1Image;
+            get => camImage;
             set
             {
-                cam1Image = value;
-                OnPropertyChanged(nameof(Cam1Image));
+                camImage = value;
+                OnPropertyChanged(nameof(CamImage));
             }
         }
 
-        private BitmapImage cam2Image;
+        private BitmapImage camRoiImage;
 
-        public BitmapImage Cam2Image
+        public BitmapImage CamRoiImage
         {
-            get => cam2Image;
+            get => camRoiImage;
             set
             {
-                cam2Image = value;
-                OnPropertyChanged(nameof(Cam2Image));
-            }
-        }
-
-        private BitmapImage cam3Image;
-
-        public BitmapImage Cam3Image
-        {
-            get => cam3Image;
-            set
-            {
-                cam3Image = value;
-                OnPropertyChanged(nameof(Cam3Image));
-            }
-        }
-
-        private BitmapImage cam4Image;
-
-        public BitmapImage Cam4Image
-        {
-            get => cam4Image;
-            set
-            {
-                cam4Image = value;
-                OnPropertyChanged(nameof(Cam4Image));
-            }
-        }
-
-        private BitmapImage cam1RoiImage;
-
-        public BitmapImage Cam1RoiImage
-        {
-            get => cam1RoiImage;
-            set
-            {
-                cam1RoiImage = value;
-                OnPropertyChanged(nameof(Cam1RoiImage));
-            }
-        }
-
-        private BitmapImage cam2RoiImage;
-
-        public BitmapImage Cam2RoiImage
-        {
-            get => cam2RoiImage;
-            set
-            {
-                cam2RoiImage = value;
-                OnPropertyChanged(nameof(Cam2RoiImage));
-            }
-        }
-
-        private BitmapImage cam3RoiImage;
-
-        public BitmapImage Cam3RoiImage
-        {
-            get => cam3RoiImage;
-            set
-            {
-                cam3RoiImage = value;
-                OnPropertyChanged(nameof(Cam3RoiImage));
-            }
-        }
-
-        private BitmapImage cam4RoiImage;
-
-        public BitmapImage Cam4RoiImage
-        {
-            get => cam4RoiImage;
-            set
-            {
-                cam4RoiImage = value;
-                OnPropertyChanged(nameof(Cam4RoiImage));
+                camRoiImage = value;
+                OnPropertyChanged(nameof(CamRoiImage));
             }
         }
 
@@ -201,11 +129,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1ThresholdSliderValue;
             set
             {
-                if (cam1ThresholdSliderValue != value)
-                {
-                    cam1ThresholdSliderValue = value;
-                    OnPropertyChanged(nameof(Cam1ThresholdSliderValue));
-                }
+                cam1ThresholdSliderValue = value;
+                configService.Cam1ThresholdSliderValue = value;
+                OnPropertyChanged(nameof(Cam1ThresholdSliderValue));
             }
         }
 
@@ -216,11 +142,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2ThresholdSliderValue;
             set
             {
-                if (cam2ThresholdSliderValue != value)
-                {
-                    cam2ThresholdSliderValue = value;
-                    OnPropertyChanged(nameof(Cam2ThresholdSliderValue));
-                }
+                cam2ThresholdSliderValue = value;
+                configService.Cam2ThresholdSliderValue = value;
+                OnPropertyChanged(nameof(Cam2ThresholdSliderValue));
             }
         }
 
@@ -231,11 +155,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3ThresholdSliderValue;
             set
             {
-                if (cam3ThresholdSliderValue != value)
-                {
-                    cam3ThresholdSliderValue = value;
-                    OnPropertyChanged(nameof(Cam3ThresholdSliderValue));
-                }
+                cam3ThresholdSliderValue = value;
+                configService.Cam3ThresholdSliderValue = value;
+                OnPropertyChanged(nameof(Cam3ThresholdSliderValue));
             }
         }
 
@@ -246,11 +168,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4ThresholdSliderValue;
             set
             {
-                if (cam4ThresholdSliderValue != value)
-                {
-                    cam4ThresholdSliderValue = value;
-                    OnPropertyChanged(nameof(Cam4ThresholdSliderValue));
-                }
+                cam4ThresholdSliderValue = value;
+                configService.Cam4ThresholdSliderValue = value;
+                OnPropertyChanged(nameof(Cam4ThresholdSliderValue));
             }
         }
 
@@ -261,11 +181,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1SurfaceSliderValue;
             set
             {
-                if (cam1SurfaceSliderValue != value)
-                {
-                    cam1SurfaceSliderValue = value;
-                    OnPropertyChanged(nameof(Cam1SurfaceSliderValue));
-                }
+                cam1SurfaceSliderValue = value;
+                configService.Cam1SurfaceSliderValue = value;
+                OnPropertyChanged(nameof(Cam1SurfaceSliderValue));
             }
         }
 
@@ -276,11 +194,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2SurfaceSliderValue;
             set
             {
-                if (cam2SurfaceSliderValue != value)
-                {
-                    cam2SurfaceSliderValue = value;
-                    OnPropertyChanged(nameof(Cam2SurfaceSliderValue));
-                }
+                cam2SurfaceSliderValue = value;
+                configService.Cam2SurfaceSliderValue = value;
+                OnPropertyChanged(nameof(Cam2SurfaceSliderValue));
             }
         }
 
@@ -291,11 +207,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3SurfaceSliderValue;
             set
             {
-                if (cam3SurfaceSliderValue != value)
-                {
-                    cam3SurfaceSliderValue = value;
-                    OnPropertyChanged(nameof(Cam3SurfaceSliderValue));
-                }
+                cam3SurfaceSliderValue = value;
+                configService.Cam3SurfaceSliderValue = value;
+                OnPropertyChanged(nameof(Cam3SurfaceSliderValue));
             }
         }
 
@@ -306,11 +220,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4SurfaceSliderValue;
             set
             {
-                if (cam4SurfaceSliderValue != value)
-                {
-                    cam4SurfaceSliderValue = value;
-                    OnPropertyChanged(nameof(Cam4SurfaceSliderValue));
-                }
+                cam4SurfaceSliderValue = value;
+                configService.Cam4SurfaceSliderValue = value;
+                OnPropertyChanged(nameof(Cam4SurfaceSliderValue));
             }
         }
 
@@ -321,11 +233,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1SurfaceCenterSliderValue;
             set
             {
-                if (cam1SurfaceCenterSliderValue != value)
-                {
-                    cam1SurfaceCenterSliderValue = value;
-                    OnPropertyChanged(nameof(Cam1SurfaceCenterSliderValue));
-                }
+                cam1SurfaceCenterSliderValue = value;
+                configService.Cam1SurfaceCenterSliderValue = value;
+                OnPropertyChanged(nameof(Cam1SurfaceCenterSliderValue));
             }
         }
 
@@ -336,11 +246,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2SurfaceCenterSliderValue;
             set
             {
-                if (cam2SurfaceCenterSliderValue != value)
-                {
-                    cam2SurfaceCenterSliderValue = value;
-                    OnPropertyChanged(nameof(Cam2SurfaceCenterSliderValue));
-                }
+                cam2SurfaceCenterSliderValue = value;
+                configService.Cam2SurfaceCenterSliderValue = value;
+                OnPropertyChanged(nameof(Cam2SurfaceCenterSliderValue));
             }
         }
 
@@ -351,11 +259,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3SurfaceCenterSliderValue;
             set
             {
-                if (cam3SurfaceCenterSliderValue != value)
-                {
-                    cam3SurfaceCenterSliderValue = value;
-                    OnPropertyChanged(nameof(Cam3SurfaceCenterSliderValue));
-                }
+                cam3SurfaceCenterSliderValue = value;
+                configService.Cam3SurfaceCenterSliderValue = value;
+                OnPropertyChanged(nameof(Cam3SurfaceCenterSliderValue));
             }
         }
 
@@ -366,11 +272,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4SurfaceCenterSliderValue;
             set
             {
-                if (cam4SurfaceCenterSliderValue != value)
-                {
-                    cam4SurfaceCenterSliderValue = value;
-                    OnPropertyChanged(nameof(Cam4SurfaceCenterSliderValue));
-                }
+                cam4SurfaceCenterSliderValue = value;
+                configService.Cam4SurfaceCenterSliderValue = value;
+                OnPropertyChanged(nameof(Cam4SurfaceCenterSliderValue));
             }
         }
 
@@ -381,11 +285,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1RoiPosYSliderValue;
             set
             {
-                if (cam1RoiPosYSliderValue != value)
-                {
-                    cam1RoiPosYSliderValue = value;
-                    OnPropertyChanged(nameof(Cam1RoiPosYSliderValue));
-                }
+                cam1RoiPosYSliderValue = value;
+                configService.Cam1RoiPosYSliderValue = value;
+                OnPropertyChanged(nameof(Cam1RoiPosYSliderValue));
             }
         }
 
@@ -396,11 +298,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2RoiPosYSliderValue;
             set
             {
-                if (cam2RoiPosYSliderValue != value)
-                {
-                    cam2RoiPosYSliderValue = value;
-                    OnPropertyChanged(nameof(Cam2RoiPosYSliderValue));
-                }
+                cam2RoiPosYSliderValue = value;
+                configService.Cam2RoiPosYSliderValue = value;
+                OnPropertyChanged(nameof(Cam2RoiPosYSliderValue));
             }
         }
 
@@ -411,11 +311,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3RoiPosYSliderValue;
             set
             {
-                if (cam3RoiPosYSliderValue != value)
-                {
-                    cam3RoiPosYSliderValue = value;
-                    OnPropertyChanged(nameof(Cam3RoiPosYSliderValue));
-                }
+                cam3RoiPosYSliderValue = value;
+                configService.Cam3RoiPosYSliderValue = value;
+                OnPropertyChanged(nameof(Cam3RoiPosYSliderValue));
             }
         }
 
@@ -426,11 +324,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4RoiPosYSliderValue;
             set
             {
-                if (cam4RoiPosYSliderValue != value)
-                {
-                    cam4RoiPosYSliderValue = value;
-                    OnPropertyChanged(nameof(Cam4RoiPosYSliderValue));
-                }
+                cam4RoiPosYSliderValue = value;
+                configService.Cam4RoiPosYSliderValue = value;
+                OnPropertyChanged(nameof(Cam4RoiPosYSliderValue));
             }
         }
 
@@ -441,11 +337,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1RoiHeightSliderValue;
             set
             {
-                if (cam1RoiHeightSliderValue != value)
-                {
-                    cam1RoiHeightSliderValue = value;
-                    OnPropertyChanged(nameof(Cam1RoiHeightSliderValue));
-                }
+                cam1RoiHeightSliderValue = value;
+                configService.Cam1RoiHeightSliderValue = value;
+                OnPropertyChanged(nameof(Cam1RoiHeightSliderValue));
             }
         }
 
@@ -456,11 +350,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2RoiHeightSliderValue;
             set
             {
-                if (cam2RoiHeightSliderValue != value)
-                {
-                    cam2RoiHeightSliderValue = value;
-                    OnPropertyChanged(nameof(Cam2RoiHeightSliderValue));
-                }
+                cam2RoiHeightSliderValue = value;
+                configService.Cam2RoiHeightSliderValue = value;
+                OnPropertyChanged(nameof(Cam2RoiHeightSliderValue));
             }
         }
 
@@ -471,11 +363,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3RoiHeightSliderValue;
             set
             {
-                if (cam3RoiHeightSliderValue != value)
-                {
-                    cam3RoiHeightSliderValue = value;
-                    OnPropertyChanged(nameof(Cam3RoiHeightSliderValue));
-                }
+                cam3RoiHeightSliderValue = value;
+                configService.Cam3RoiHeightSliderValue = value;
+                OnPropertyChanged(nameof(Cam3RoiHeightSliderValue));
             }
         }
 
@@ -486,11 +376,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4RoiHeightSliderValue;
             set
             {
-                if (cam4RoiHeightSliderValue != value)
-                {
-                    cam4RoiHeightSliderValue = value;
-                    OnPropertyChanged(nameof(Cam4RoiHeightSliderValue));
-                }
+                cam4RoiHeightSliderValue = value;
+                configService.Cam4RoiHeightSliderValue = value;
+                OnPropertyChanged(nameof(Cam4RoiHeightSliderValue));
             }
         }
 
@@ -505,12 +393,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1Enabled;
             set
             {
-                if (cam1Enabled != value)
-                {
-                    cam1Enabled = value;
-                    OnPropertyChanged(nameof(Cam1Enabled));
-                    configService.Write(SettingsType.Cam1CheckBox, Cam1Enabled);
-                }
+                cam1Enabled = value;
+                configService.Cam1Enabled = value;
+                OnPropertyChanged(nameof(Cam1Enabled));
             }
         }
 
@@ -521,12 +406,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2Enabled;
             set
             {
-                if (cam2Enabled != value)
-                {
-                    cam2Enabled = value;
-                    OnPropertyChanged(nameof(Cam2Enabled));
-                    configService.Write(SettingsType.Cam2CheckBox, Cam2Enabled);
-                }
+                cam2Enabled = value;
+                configService.Cam2Enabled = value;
+                OnPropertyChanged(nameof(Cam2Enabled));
             }
         }
 
@@ -537,12 +419,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3Enabled;
             set
             {
-                if (cam3Enabled != value)
-                {
-                    cam3Enabled = value;
-                    OnPropertyChanged(nameof(Cam3Enabled));
-                    configService.Write(SettingsType.Cam3CheckBox, Cam3Enabled);
-                }
+                cam3Enabled = value;
+                configService.Cam3Enabled = value;
+                OnPropertyChanged(nameof(Cam3Enabled));
             }
         }
 
@@ -553,12 +432,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4Enabled;
             set
             {
-                if (cam4Enabled != value)
-                {
-                    cam4Enabled = value;
-                    OnPropertyChanged(nameof(Cam4Enabled));
-                    configService.Write(SettingsType.Cam4CheckBox, Cam4Enabled);
-                }
+                cam4Enabled = value;
+                configService.Cam4Enabled = value;
+                OnPropertyChanged(nameof(Cam4Enabled));
             }
         }
 
@@ -569,12 +445,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => detectionEnabled;
             set
             {
-                if (detectionEnabled != value)
-                {
-                    detectionEnabled = value;
-                    OnPropertyChanged(nameof(DetectionEnabled));
-                    configService.Write(SettingsType.WithDetectionCheckBox, DetectionEnabled);
-                }
+                detectionEnabled = value;
+                configService.DetectionEnabled = value;
+                OnPropertyChanged(nameof(DetectionEnabled));
             }
         }
 
@@ -585,12 +458,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1Id;
             set
             {
-                if (cam1Id != value)
-                {
-                    cam1Id = value;
-                    OnPropertyChanged(nameof(Cam1Id));
-                    configService.Write(SettingsType.Cam1Id, Cam1Id);
-                }
+                configService.Cam1Id = value;
+                cam1Id = value;
+                OnPropertyChanged(nameof(Cam1Id));
             }
         }
 
@@ -601,12 +471,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2Id;
             set
             {
-                if (cam2Id != value)
-                {
-                    cam2Id = value;
-                    OnPropertyChanged(nameof(Cam2Id));
-                    configService.Write(SettingsType.Cam2Id, Cam2Id);
-                }
+                configService.Cam2Id = value;
+                cam2Id = value;
+                OnPropertyChanged(nameof(Cam2Id));
             }
         }
 
@@ -617,12 +484,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3Id;
             set
             {
-                if (cam3Id != value)
-                {
-                    cam3Id = value;
-                    OnPropertyChanged(nameof(Cam3Id));
-                    configService.Write(SettingsType.Cam3Id, Cam3Id);
-                }
+                configService.Cam3Id = value;
+                cam3Id = value;
+                OnPropertyChanged(nameof(Cam3Id));
             }
         }
 
@@ -633,12 +497,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4Id;
             set
             {
-                if (cam4Id != value)
-                {
-                    cam4Id = value;
-                    OnPropertyChanged(nameof(Cam4Id));
-                    configService.Write(SettingsType.Cam4Id, Cam4Id);
-                }
+                configService.Cam4Id = value;
+                cam4Id = value;
+                OnPropertyChanged(nameof(Cam4Id));
             }
         }
 
@@ -649,12 +510,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => camsFovAngle;
             set
             {
-                if (camsFovAngle != value)
-                {
-                    camsFovAngle = value;
-                    OnPropertyChanged(nameof(CamsFovAngle));
-                    configService.Write(SettingsType.CamFovAngle, CamsFovAngle);
-                }
+                camsFovAngle = value;
+                configService.CamsFovAngle = value;
+                OnPropertyChanged(nameof(CamsFovAngle));
             }
         }
 
@@ -665,12 +523,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => camsResolutionHeight;
             set
             {
-                if (camsResolutionHeight != value)
-                {
-                    camsResolutionHeight = value;
-                    OnPropertyChanged(nameof(CamsResolutionHeight));
-                    configService.Write(SettingsType.ResolutionHeight, CamsResolutionHeight);
-                }
+                camsResolutionHeight = value;
+                configService.CamResolutionHeight = value;
+                OnPropertyChanged(nameof(CamsResolutionHeight));
             }
         }
 
@@ -681,12 +536,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => camsResolutionWidth;
             set
             {
-                if (camsResolutionWidth != value)
-                {
-                    camsResolutionWidth = value;
-                    OnPropertyChanged(nameof(CamsResolutionWidth));
-                    configService.Write(SettingsType.ResolutionWidth, CamsResolutionWidth);
-                }
+                camsResolutionWidth = value;
+                configService.CamResolutionWidth = value;
+                OnPropertyChanged(nameof(CamsResolutionWidth));
             }
         }
 
@@ -697,12 +549,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => movesExtractionValue;
             set
             {
-                if (movesExtractionValue != value)
-                {
-                    movesExtractionValue = value;
-                    OnPropertyChanged(nameof(MovesExtractionValue));
-                    configService.Write(SettingsType.MovesExtraction, MovesExtractionValue);
-                }
+                movesExtractionValue = value;
+                configService.MovesExtractionValue = value;
+                OnPropertyChanged(nameof(MovesExtractionValue));
             }
         }
 
@@ -713,12 +562,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => movesDetectedSleepTimeValue;
             set
             {
-                if (movesDetectedSleepTimeValue != value)
-                {
-                    movesDetectedSleepTimeValue = value;
-                    OnPropertyChanged(nameof(MovesDetectedSleepTimeValue));
-                    configService.Write(SettingsType.MoveDetectedSleepTime, MovesDetectedSleepTimeValue);
-                }
+                movesDetectedSleepTimeValue = value;
+                configService.MoveDetectedSleepTimeValue = value;
+                OnPropertyChanged(nameof(MovesDetectedSleepTimeValue));
             }
         }
 
@@ -729,12 +575,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => movesNoiseValue;
             set
             {
-                if (movesNoiseValue != value)
-                {
-                    movesNoiseValue = value;
-                    OnPropertyChanged(nameof(MovesNoiseValue));
-                    configService.Write(SettingsType.MovesNoise, MovesNoiseValue);
-                }
+                movesNoiseValue = value;
+                configService.MovesNoiseValue = value;
+                OnPropertyChanged(nameof(MovesNoiseValue));
             }
         }
 
@@ -745,12 +588,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => smoothGaussValue;
             set
             {
-                if (smoothGaussValue != value)
-                {
-                    smoothGaussValue = value;
-                    OnPropertyChanged(nameof(SmoothGaussValue));
-                    configService.Write(SettingsType.SmoothGauss, SmoothGaussValue);
-                }
+                smoothGaussValue = value;
+                configService.SmoothGaussValue = value;
+                OnPropertyChanged(nameof(SmoothGaussValue));
             }
         }
 
@@ -761,12 +601,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => thresholdSleepTimeValue;
             set
             {
-                if (thresholdSleepTimeValue != value)
-                {
-                    thresholdSleepTimeValue = value;
-                    OnPropertyChanged(nameof(ThresholdSleepTimeValue));
-                    configService.Write(SettingsType.ThresholdSleepTime, ThresholdSleepTimeValue);
-                }
+                thresholdSleepTimeValue = value;
+                configService.ThresholdSleepTimeValue = value;
+                OnPropertyChanged(nameof(ThresholdSleepTimeValue));
             }
         }
 
@@ -777,12 +614,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => extractionSleepTimeValue;
             set
             {
-                if (extractionSleepTimeValue != value)
-                {
-                    extractionSleepTimeValue = value;
-                    OnPropertyChanged(nameof(ExtractionSleepTimeValue));
-                    configService.Write(SettingsType.ExtractionSleepTime, ExtractionSleepTimeValue);
-                }
+                extractionSleepTimeValue = value;
+                configService.ExtractionSleepTimeValue = value;
+                OnPropertyChanged(nameof(ExtractionSleepTimeValue));
             }
         }
 
@@ -793,12 +627,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => minContourArcValue;
             set
             {
-                if (minContourArcValue != value)
-                {
-                    minContourArcValue = value;
-                    OnPropertyChanged(nameof(MinContourArcValue));
-                    configService.Write(SettingsType.MinContourArc, MinContourArcValue);
-                }
+                minContourArcValue = value;
+                configService.MinContourArcValue = value;
+                OnPropertyChanged(nameof(MinContourArcValue));
             }
         }
 
@@ -809,12 +640,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => movesDartValue;
             set
             {
-                if (movesDartValue != value)
-                {
-                    movesDartValue = value;
-                    OnPropertyChanged(nameof(MovesDartValue));
-                    configService.Write(SettingsType.MovesDart, MovesDartValue);
-                }
+                movesDartValue = value;
+                configService.MovesDartValue = value;
+                OnPropertyChanged(nameof(MovesDartValue));
             }
         }
 
@@ -825,12 +653,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => toCam1Distance;
             set
             {
-                if (toCam1Distance != value)
-                {
-                    toCam1Distance = value;
-                    OnPropertyChanged(nameof(ToCam1Distance));
-                    configService.Write(SettingsType.ToCam1Distance, ToCam1Distance);
-                }
+                toCam1Distance = value;
+                configService.ToCam1Distance = value;
+                OnPropertyChanged(nameof(ToCam1Distance));
             }
         }
 
@@ -841,12 +666,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => toCam2Distance;
             set
             {
-                if (toCam2Distance != value)
-                {
-                    toCam2Distance = value;
-                    OnPropertyChanged(nameof(ToCam2Distance));
-                    configService.Write(SettingsType.ToCam2Distance, ToCam2Distance);
-                }
+                toCam2Distance = value;
+                configService.ToCam2Distance = value;
+                OnPropertyChanged(nameof(ToCam2Distance));
             }
         }
 
@@ -857,12 +679,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => toCam3Distance;
             set
             {
-                if (toCam3Distance != value)
-                {
-                    toCam3Distance = value;
-                    OnPropertyChanged(nameof(ToCam3Distance));
-                    configService.Write(SettingsType.ToCam3Distance, ToCam3Distance);
-                }
+                toCam3Distance = value;
+                configService.ToCam3Distance = value;
+                OnPropertyChanged(nameof(ToCam3Distance));
             }
         }
 
@@ -873,12 +692,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => toCam4Distance;
             set
             {
-                if (toCam4Distance != value)
-                {
-                    toCam4Distance = value;
-                    OnPropertyChanged(nameof(ToCam4Distance));
-                    configService.Write(SettingsType.ToCam4Distance, ToCam4Distance);
-                }
+                toCam4Distance = value;
+                configService.ToCam4Distance = value;
+                OnPropertyChanged(nameof(ToCam4Distance));
             }
         }
 
@@ -890,6 +706,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam1SetupXValue = value;
+                configService.Cam1XValue = value;
                 OnPropertyChanged(nameof(Cam1SetupXValue));
             }
         }
@@ -902,6 +719,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam1SetupYValue = value;
+                configService.Cam1YValue = value;
                 OnPropertyChanged(nameof(Cam1SetupYValue));
             }
         }
@@ -914,6 +732,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam2SetupXValue = value;
+                configService.Cam2XValue = value;
                 OnPropertyChanged(nameof(Cam2SetupXValue));
             }
         }
@@ -926,6 +745,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam2SetupYValue = value;
+                configService.Cam2YValue = value;
                 OnPropertyChanged(nameof(Cam2SetupYValue));
             }
         }
@@ -938,6 +758,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam3SetupXValue = value;
+                configService.Cam3XValue = value;
                 OnPropertyChanged(nameof(Cam3SetupXValue));
             }
         }
@@ -950,6 +771,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam3SetupYValue = value;
+                configService.Cam3YValue = value;
                 OnPropertyChanged(nameof(Cam3SetupYValue));
             }
         }
@@ -962,6 +784,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam4SetupXValue = value;
+                configService.Cam4XValue = value;
                 OnPropertyChanged(nameof(Cam4SetupXValue));
             }
         }
@@ -974,6 +797,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 cam4SetupYValue = value;
+                configService.Cam4YValue = value;
                 OnPropertyChanged(nameof(Cam4SetupYValue));
             }
         }
@@ -985,12 +809,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam1SetupSector;
             set
             {
-                if (cam1SetupSector != value)
-                {
-                    cam1SetupSector = value;
-                    OnPropertyChanged(nameof(Cam1SetupSector));
-                    configService.Write(SettingsType.Cam1SetupSector, cam1SetupSector);
-                }
+                cam1SetupSector = value;
+                configService.Cam1SetupSector = value;
+                OnPropertyChanged(nameof(Cam1SetupSector));
             }
         }
 
@@ -1001,12 +822,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam2SetupSector;
             set
             {
-                if (cam2SetupSector != value)
-                {
-                    cam2SetupSector = value;
-                    OnPropertyChanged(nameof(Cam2SetupSector));
-                    configService.Write(SettingsType.Cam2SetupSector, cam2SetupSector);
-                }
+                cam2SetupSector = value;
+                configService.Cam2SetupSector = value;
+                OnPropertyChanged(nameof(Cam2SetupSector));
             }
         }
 
@@ -1017,12 +835,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam3SetupSector;
             set
             {
-                if (cam3SetupSector != value)
-                {
-                    cam3SetupSector = value;
-                    OnPropertyChanged(nameof(Cam3SetupSector));
-                    configService.Write(SettingsType.Cam3SetupSector, cam3SetupSector);
-                }
+                cam3SetupSector = value;
+                configService.Cam3SetupSector = value;
+                OnPropertyChanged(nameof(Cam3SetupSector));
             }
         }
 
@@ -1033,12 +848,9 @@ namespace OneHundredAndEightyCore.Windows.Main
             get => cam4SetupSector;
             set
             {
-                if (cam4SetupSector != value)
-                {
-                    cam4SetupSector = value;
-                    OnPropertyChanged(nameof(Cam4SetupSector));
-                    configService.Write(SettingsType.Cam4SetupSector, cam4SetupSector);
-                }
+                cam4SetupSector = value;
+                configService.Cam4SetupSector = value;
+                OnPropertyChanged(nameof(Cam4SetupSector));
             }
         }
 
@@ -1299,11 +1111,17 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void OnMainWindowClosing()
         {
-            SaveWindowPositionSettings();
             StopGameByButton();
             scoreBoardService.CloseScoreBoard();
             manualThrowPanel.Close();
             camsDetectionBoard.Close();
+
+            configService.MainWindowWidth = MainWindowWidth;
+            configService.MainWindowHeight = MainWindowHeight;
+            configService.MainWindowPositionLeft = MainWindowPositionLeft;
+            configService.MainWindowPositionTop = MainWindowPositionTop;
+
+            configService.SaveSettings();
         }
 
         #region Settings
@@ -1319,114 +1137,69 @@ namespace OneHundredAndEightyCore.Windows.Main
             NewGameType = DefaultNewGameType;
             NewGamePoints = DefaultNewGamePoints;
 
-            MainWindowHeight = configService.Read<double>(SettingsType.MainWindowHeight);
-            MainWindowWidth = configService.Read<double>(SettingsType.MainWindowWidth);
-            MainWindowPositionLeft = configService.Read<double>(SettingsType.MainWindowPositionLeft);
-            MainWindowPositionTop = configService.Read<double>(SettingsType.MainWindowPositionTop);
+            MainWindowHeight = configService.MainWindowHeight;
+            MainWindowWidth = configService.MainWindowWidth;
+            MainWindowPositionLeft = configService.MainWindowPositionLeft;
+            MainWindowPositionTop = configService.MainWindowPositionTop;
 
-            Cam1ThresholdSliderValue = configService.Read<double>(SettingsType.Cam1ThresholdSlider);
-            Cam2ThresholdSliderValue = configService.Read<double>(SettingsType.Cam2ThresholdSlider);
-            Cam3ThresholdSliderValue = configService.Read<double>(SettingsType.Cam3ThresholdSlider);
-            Cam4ThresholdSliderValue = configService.Read<double>(SettingsType.Cam4ThresholdSlider);
-            Cam1SurfaceSliderValue = configService.Read<double>(SettingsType.Cam1SurfaceSlider);
-            Cam2SurfaceSliderValue = configService.Read<double>(SettingsType.Cam2SurfaceSlider);
-            Cam3SurfaceSliderValue = configService.Read<double>(SettingsType.Cam3SurfaceSlider);
-            Cam4SurfaceSliderValue = configService.Read<double>(SettingsType.Cam4SurfaceSlider);
-            Cam1SurfaceCenterSliderValue = configService.Read<double>(SettingsType.Cam1SurfaceCenterSlider);
-            Cam2SurfaceCenterSliderValue = configService.Read<double>(SettingsType.Cam2SurfaceCenterSlider);
-            Cam3SurfaceCenterSliderValue = configService.Read<double>(SettingsType.Cam3SurfaceCenterSlider);
-            Cam4SurfaceCenterSliderValue = configService.Read<double>(SettingsType.Cam4SurfaceCenterSlider);
-            Cam1RoiPosYSliderValue = configService.Read<double>(SettingsType.Cam1RoiPosYSlider);
-            Cam2RoiPosYSliderValue = configService.Read<double>(SettingsType.Cam2RoiPosYSlider);
-            Cam3RoiPosYSliderValue = configService.Read<double>(SettingsType.Cam3RoiPosYSlider);
-            Cam4RoiPosYSliderValue = configService.Read<double>(SettingsType.Cam4RoiPosYSlider);
-            Cam1RoiHeightSliderValue = configService.Read<double>(SettingsType.Cam1RoiHeightSlider);
-            Cam2RoiHeightSliderValue = configService.Read<double>(SettingsType.Cam2RoiHeightSlider);
-            Cam3RoiHeightSliderValue = configService.Read<double>(SettingsType.Cam3RoiHeightSlider);
-            Cam4RoiHeightSliderValue = configService.Read<double>(SettingsType.Cam4RoiHeightSlider);
+            Cam1ThresholdSliderValue = configService.Cam1ThresholdSliderValue;
+            Cam2ThresholdSliderValue = configService.Cam2ThresholdSliderValue;
+            Cam3ThresholdSliderValue = configService.Cam3ThresholdSliderValue;
+            Cam4ThresholdSliderValue = configService.Cam4ThresholdSliderValue;
+            Cam1SurfaceSliderValue = configService.Cam1SurfaceSliderValue;
+            Cam2SurfaceSliderValue = configService.Cam2SurfaceSliderValue;
+            Cam3SurfaceSliderValue = configService.Cam3SurfaceSliderValue;
+            Cam4SurfaceSliderValue = configService.Cam4SurfaceSliderValue;
+            Cam1SurfaceCenterSliderValue = configService.Cam1SurfaceCenterSliderValue;
+            Cam2SurfaceCenterSliderValue = configService.Cam2SurfaceCenterSliderValue;
+            Cam3SurfaceCenterSliderValue = configService.Cam3SurfaceCenterSliderValue;
+            Cam4SurfaceCenterSliderValue = configService.Cam4SurfaceCenterSliderValue;
+            Cam1RoiPosYSliderValue = configService.Cam1RoiPosYSliderValue;
+            Cam2RoiPosYSliderValue = configService.Cam2RoiPosYSliderValue;
+            Cam3RoiPosYSliderValue = configService.Cam3RoiPosYSliderValue;
+            Cam4RoiPosYSliderValue = configService.Cam4RoiPosYSliderValue;
+            Cam1RoiHeightSliderValue = configService.Cam1RoiHeightSliderValue;
+            Cam2RoiHeightSliderValue = configService.Cam2RoiHeightSliderValue;
+            Cam3RoiHeightSliderValue = configService.Cam3RoiHeightSliderValue;
+            Cam4RoiHeightSliderValue = configService.Cam4RoiHeightSliderValue;
 
-            Cam1Enabled = configService.Read<bool>(SettingsType.Cam1CheckBox);
-            Cam2Enabled = configService.Read<bool>(SettingsType.Cam2CheckBox);
-            Cam3Enabled = configService.Read<bool>(SettingsType.Cam3CheckBox);
-            Cam4Enabled = configService.Read<bool>(SettingsType.Cam4CheckBox);
-            DetectionEnabled = configService.Read<bool>(SettingsType.WithDetectionCheckBox);
-            Cam1Id = configService.Read<string>(SettingsType.Cam1Id);
-            Cam2Id = configService.Read<string>(SettingsType.Cam2Id);
-            Cam3Id = configService.Read<string>(SettingsType.Cam3Id);
-            Cam4Id = configService.Read<string>(SettingsType.Cam4Id);
-            CamsFovAngle = configService.Read<double>(SettingsType.CamFovAngle);
-            CamsResolutionWidth = configService.Read<int>(SettingsType.ResolutionWidth);
-            CamsResolutionHeight = configService.Read<int>(SettingsType.ResolutionHeight);
-            MovesExtractionValue = configService.Read<int>(SettingsType.MovesExtraction);
-            MovesDetectedSleepTimeValue = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
-            MovesNoiseValue = configService.Read<int>(SettingsType.MovesNoise);
-            SmoothGaussValue = configService.Read<int>(SettingsType.SmoothGauss);
-            ThresholdSleepTimeValue = configService.Read<double>(SettingsType.ThresholdSleepTime);
-            ExtractionSleepTimeValue = configService.Read<double>(SettingsType.ExtractionSleepTime);
-            MinContourArcValue = configService.Read<int>(SettingsType.MinContourArc);
-            MovesDartValue = configService.Read<int>(SettingsType.MovesDart);
-            ToCam1Distance = configService.Read<double>(SettingsType.ToCam1Distance);
-            ToCam2Distance = configService.Read<double>(SettingsType.ToCam2Distance);
-            ToCam3Distance = configService.Read<double>(SettingsType.ToCam3Distance);
-            ToCam4Distance = configService.Read<double>(SettingsType.ToCam4Distance);
-            Cam1SetupXValue = configService.Read<int>(SettingsType.Cam1X);
-            Cam1SetupYValue = configService.Read<int>(SettingsType.Cam1Y);
-            Cam2SetupXValue = configService.Read<int>(SettingsType.Cam2X);
-            Cam2SetupYValue = configService.Read<int>(SettingsType.Cam2Y);
-            Cam3SetupXValue = configService.Read<int>(SettingsType.Cam3X);
-            Cam3SetupYValue = configService.Read<int>(SettingsType.Cam3Y);
-            Cam4SetupXValue = configService.Read<int>(SettingsType.Cam4X);
-            Cam4SetupYValue = configService.Read<int>(SettingsType.Cam4Y);
+            Cam1Enabled = configService.Cam1Enabled;
+            Cam2Enabled = configService.Cam2Enabled;
+            Cam3Enabled = configService.Cam3Enabled;
+            Cam4Enabled = configService.Cam4Enabled;
+            DetectionEnabled = configService.DetectionEnabled;
+            Cam1Id = configService.Cam1Id;
+            Cam2Id = configService.Cam2Id;
+            Cam3Id = configService.Cam3Id;
+            Cam4Id = configService.Cam4Id;
+            CamsFovAngle = configService.CamsFovAngle;
+            CamsResolutionWidth = configService.CamResolutionWidth;
+            CamsResolutionHeight = configService.CamResolutionHeight;
+            MovesExtractionValue = configService.MovesExtractionValue;
+            MovesDetectedSleepTimeValue = configService.MoveDetectedSleepTimeValue;
+            MovesNoiseValue = configService.MovesNoiseValue;
+            SmoothGaussValue = configService.SmoothGaussValue;
+            ThresholdSleepTimeValue = configService.ThresholdSleepTimeValue;
+            ExtractionSleepTimeValue = configService.ExtractionSleepTimeValue;
+            MinContourArcValue = configService.MinContourArcValue;
+            MovesDartValue = configService.MovesDartValue;
+            ToCam1Distance = configService.ToCam1Distance;
+            ToCam2Distance = configService.ToCam2Distance;
+            ToCam3Distance = configService.ToCam3Distance;
+            ToCam4Distance = configService.ToCam4Distance;
+            Cam1SetupXValue = configService.Cam1XValue;
+            Cam1SetupYValue = configService.Cam1YValue;
+            Cam2SetupXValue = configService.Cam2XValue;
+            Cam2SetupYValue = configService.Cam2YValue;
+            Cam3SetupXValue = configService.Cam3XValue;
+            Cam3SetupYValue = configService.Cam3YValue;
+            Cam4SetupXValue = configService.Cam4XValue;
+            Cam4SetupYValue = configService.Cam4YValue;
 
-            Cam1SetupSector = configService.Read<string>(SettingsType.Cam1SetupSector);
-            Cam2SetupSector = configService.Read<string>(SettingsType.Cam2SetupSector);
-            Cam3SetupSector = configService.Read<string>(SettingsType.Cam3SetupSector);
-            Cam4SetupSector = configService.Read<string>(SettingsType.Cam4SetupSector);
-        }
-
-        private void SaveWindowPositionSettings()
-        {
-            configService.Write(SettingsType.MainWindowHeight, MainWindowHeight);
-            configService.Write(SettingsType.MainWindowWidth, MainWindowWidth);
-            configService.Write(SettingsType.MainWindowPositionLeft, MainWindowPositionLeft);
-            configService.Write(SettingsType.MainWindowPositionTop, MainWindowPositionTop);
-        }
-
-        private void SaveCamsSetupSlidersSettings(CamNumber camNumber)
-        {
-            switch (camNumber)
-            {
-                case CamNumber._1:
-                    configService.Write(SettingsType.Cam1ThresholdSlider, Cam1ThresholdSliderValue);
-                    configService.Write(SettingsType.Cam1SurfaceSlider, Cam1SurfaceSliderValue);
-                    configService.Write(SettingsType.Cam1SurfaceCenterSlider, Cam1SurfaceCenterSliderValue);
-                    configService.Write(SettingsType.Cam1RoiPosYSlider, Cam1RoiPosYSliderValue);
-                    configService.Write(SettingsType.Cam1RoiHeightSlider, Cam1RoiHeightSliderValue);
-                    break;
-                case CamNumber._2:
-                    configService.Write(SettingsType.Cam2ThresholdSlider, Cam2ThresholdSliderValue);
-                    configService.Write(SettingsType.Cam2SurfaceSlider, Cam2SurfaceSliderValue);
-                    configService.Write(SettingsType.Cam2SurfaceCenterSlider, Cam2SurfaceCenterSliderValue);
-                    configService.Write(SettingsType.Cam2RoiPosYSlider, Cam2RoiPosYSliderValue);
-                    configService.Write(SettingsType.Cam2RoiHeightSlider, Cam2RoiHeightSliderValue);
-                    break;
-                case CamNumber._3:
-                    configService.Write(SettingsType.Cam3ThresholdSlider, Cam3ThresholdSliderValue);
-                    configService.Write(SettingsType.Cam3SurfaceSlider, Cam3SurfaceSliderValue);
-                    configService.Write(SettingsType.Cam3SurfaceCenterSlider, Cam3SurfaceCenterSliderValue);
-                    configService.Write(SettingsType.Cam3RoiPosYSlider, Cam3RoiPosYSliderValue);
-                    configService.Write(SettingsType.Cam3RoiHeightSlider, Cam3RoiHeightSliderValue);
-                    break;
-                case CamNumber._4:
-                    configService.Write(SettingsType.Cam4ThresholdSlider, Cam4ThresholdSliderValue);
-                    configService.Write(SettingsType.Cam4SurfaceSlider, Cam4SurfaceSliderValue);
-                    configService.Write(SettingsType.Cam4SurfaceCenterSlider, Cam4SurfaceCenterSliderValue);
-                    configService.Write(SettingsType.Cam4RoiPosYSlider, Cam4RoiPosYSliderValue);
-                    configService.Write(SettingsType.Cam4RoiHeightSlider, Cam4RoiHeightSliderValue);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
-            }
+            Cam1SetupSector = configService.Cam1SetupSector;
+            Cam2SetupSector = configService.Cam2SetupSector;
+            Cam3SetupSector = configService.Cam3SetupSector;
+            Cam4SetupSector = configService.Cam4SetupSector;
         }
 
         public void CalibrateCamsSetupPoints()
@@ -1447,20 +1220,6 @@ namespace OneHundredAndEightyCore.Windows.Main
             Cam3SetupYValue = (int) calibratedCam3SetupPoint.Y;
             Cam4SetupXValue = (int) calibratedCam4SetupPoint.X;
             Cam4SetupYValue = (int) calibratedCam4SetupPoint.Y;
-
-            SaveCalibratedCamsPositions();
-        }
-
-        private void SaveCalibratedCamsPositions()
-        {
-            configService.Write(SettingsType.Cam1X, Cam1SetupXValue);
-            configService.Write(SettingsType.Cam1Y, Cam1SetupYValue);
-            configService.Write(SettingsType.Cam2X, Cam2SetupXValue);
-            configService.Write(SettingsType.Cam2Y, Cam2SetupYValue);
-            configService.Write(SettingsType.Cam3X, Cam3SetupXValue);
-            configService.Write(SettingsType.Cam3Y, Cam3SetupYValue);
-            configService.Write(SettingsType.Cam4X, Cam4SetupXValue);
-            configService.Write(SettingsType.Cam4Y, Cam4SetupYValue);
         }
 
         #endregion
@@ -1631,12 +1390,19 @@ namespace OneHundredAndEightyCore.Windows.Main
                                    {
                                        var setupSlidersData = GetCamsSetupSlidersData(camNumber);
                                        cam.DoSetupCaptures(setupSlidersData);
-                                       Application.Current.Dispatcher.Invoke(() => { RefreshImages(camNumber, cam.GetImage(), cam.GetRoiImage()); });
+                                       Application.Current.Dispatcher.Invoke(() =>
+                                                                             {
+                                                                                 CamImage = cam.GetImage();
+                                                                                 CamRoiImage = cam.GetRoiImage();
+                                                                             });
                                    }
 
-                                   Application.Current.Dispatcher.Invoke(() => { RefreshImages(camNumber, new BitmapImage(), new BitmapImage()); });
+                                   Application.Current.Dispatcher.Invoke(() =>
+                                                                         {
+                                                                             CamImage = new BitmapImage();
+                                                                             CamRoiImage = new BitmapImage();
+                                                                         });
                                    cam.Dispose();
-                                   SaveCamsSetupSlidersSettings(camNumber);
                                });
             }
             catch (Exception e)
@@ -1697,31 +1463,6 @@ namespace OneHundredAndEightyCore.Windows.Main
 
             slidersData.Add(CamsResolutionWidth);
             return slidersData;
-        }
-
-        private void RefreshImages(CamNumber camNumber, BitmapImage image, BitmapImage roiImage)
-        {
-            switch (camNumber)
-            {
-                case CamNumber._1:
-                    Cam1Image = image;
-                    Cam1RoiImage = roiImage;
-                    break;
-                case CamNumber._2:
-                    Cam2Image = image;
-                    Cam2RoiImage = roiImage;
-                    break;
-                case CamNumber._3:
-                    Cam3Image = image;
-                    Cam3RoiImage = roiImage;
-                    break;
-                case CamNumber._4:
-                    Cam4Image = image;
-                    Cam4RoiImage = roiImage;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
-            }
         }
 
         public void StopCamSetupCapturing()

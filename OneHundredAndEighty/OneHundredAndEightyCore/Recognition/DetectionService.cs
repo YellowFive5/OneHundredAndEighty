@@ -88,10 +88,10 @@ namespace OneHundredAndEightyCore.Recognition
             cts = new CancellationTokenSource();
             cancelToken = cts.Token;
 
-            extractionSleepTime = configService.Read<double>(SettingsType.ExtractionSleepTime);
-            thresholdSleepTime = configService.Read<double>(SettingsType.ThresholdSleepTime);
-            moveDetectedSleepTime = configService.Read<double>(SettingsType.MoveDetectedSleepTime);
-            withDetection = configService.Read<bool>(SettingsType.WithDetectionCheckBox) && !App.NoCams;
+            extractionSleepTime = configService.ExtractionSleepTimeValue;
+            thresholdSleepTime = configService.ThresholdSleepTimeValue;
+            moveDetectedSleepTime = configService.MoveDetectedSleepTimeValue;
+            withDetection = configService.DetectionEnabled && !App.NoCams;
 
             try
             {

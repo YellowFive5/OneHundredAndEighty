@@ -20,7 +20,7 @@ namespace OneHundredAndEightyCore.Windows.Score
     public class ScoreBoardService : INotifyPropertyChanged
     {
         private readonly Logger logger;
-        private readonly ConfigService configService;
+        private readonly IConfigService configService;
         private readonly DrawService drawService;
         private Window scoreBoardWindow;
         private GameType gameType;
@@ -29,7 +29,7 @@ namespace OneHundredAndEightyCore.Windows.Score
         {
         }
 
-        public ScoreBoardService(Logger logger, ConfigService configService, DrawService drawService)
+        public ScoreBoardService(Logger logger, IConfigService configService, DrawService drawService)
         {
             this.logger = logger;
             this.configService = configService;
@@ -372,37 +372,6 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public bool ForceClose { get; private set; }
 
-        public void CloseScoreBoard()
-        {
-            switch (gameType)
-            {
-                case GameType.FreeThrowsSingle:
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowHeight, WindowHeight);
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowWidth, WindowWidth);
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowPositionLeft, WindowPositionLeft);
-                    configService.Write(SettingsType.FreeThrowsSingleScoreWindowPositionTop, WindowPositionTop);
-                    break;
-                case GameType.FreeThrowsDouble:
-                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowHeight, WindowHeight);
-                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowWidth, WindowWidth);
-                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowPositionLeft, WindowPositionLeft);
-                    configService.Write(SettingsType.FreeThrowsDoubleScoreWindowPositionTop, WindowPositionTop);
-                    break;
-                case GameType.Classic:
-                    configService.Write(SettingsType.ClassicScoreWindowHeight, WindowHeight);
-                    configService.Write(SettingsType.ClassicScoreWindowWidth, WindowWidth);
-                    configService.Write(SettingsType.ClassicScoreWindowPositionLeft, WindowPositionLeft);
-                    configService.Write(SettingsType.ClassicScoreWindowPositionTop, WindowPositionTop);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            ForceClose = true;
-            scoreBoardWindow?.Close();
-            ForceClose = false;
-        }
-
         public void OpenScoreBoard(GameType gameType,
                                    List<Player> players,
                                    string gameTypeString,
@@ -467,26 +436,63 @@ namespace OneHundredAndEightyCore.Windows.Score
             switch (gameType)
             {
                 case GameType.FreeThrowsSingle:
-                    WindowHeight = configService.Read<double>(SettingsType.FreeThrowsSingleScoreWindowHeight);
-                    WindowWidth = configService.Read<double>(SettingsType.FreeThrowsSingleScoreWindowWidth);
-                    WindowPositionLeft = configService.Read<double>(SettingsType.FreeThrowsSingleScoreWindowPositionLeft);
-                    WindowPositionTop = configService.Read<double>(SettingsType.FreeThrowsSingleScoreWindowPositionTop);
+                    WindowHeight = configService.FreeThrowsSingleScoreWindowHeight;
+                    WindowWidth = configService.FreeThrowsSingleScoreWindowWidth;
+                    WindowPositionLeft = configService.FreeThrowsSingleScoreWindowPositionLeft;
+                    WindowPositionTop = configService.FreeThrowsSingleScoreWindowPositionTop;
                     break;
                 case GameType.FreeThrowsDouble:
-                    WindowHeight = configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowHeight);
-                    WindowWidth = configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowWidth);
-                    WindowPositionLeft = configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowPositionLeft);
-                    WindowPositionTop = configService.Read<double>(SettingsType.FreeThrowsDoubleScoreWindowPositionTop);
+                    WindowHeight = configService.FreeThrowsDoubleScoreWindowHeight;
+                    WindowWidth = configService.FreeThrowsDoubleScoreWindowWidth;
+                    WindowPositionLeft = configService.FreeThrowsDoubleScoreWindowPositionLeft;
+                    WindowPositionTop = configService.FreeThrowsDoubleScoreWindowPositionTop;
                     break;
                 case GameType.Classic:
-                    WindowHeight = configService.Read<double>(SettingsType.ClassicScoreWindowHeight);
-                    WindowWidth = configService.Read<double>(SettingsType.ClassicScoreWindowWidth);
-                    WindowPositionLeft = configService.Read<double>(SettingsType.ClassicScoreWindowPositionLeft);
-                    WindowPositionTop = configService.Read<double>(SettingsType.ClassicScoreWindowPositionTop);
+                    WindowHeight = configService.ClassicScoreWindowHeight;
+                    WindowWidth = configService.ClassicScoreWindowWidth;
+                    WindowPositionLeft = configService.ClassicScoreWindowPositionLeft;
+                    WindowPositionTop = configService.ClassicScoreWindowPositionTop;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public void CloseScoreBoard()
+        {
+            if (scoreBoardWindow == null)
+            {
+                return;
+            }
+
+            switch (gameType)
+            {
+                case GameType.FreeThrowsSingle:
+                    configService.FreeThrowsSingleScoreWindowHeight = WindowHeight;
+                    configService.FreeThrowsSingleScoreWindowWidth = WindowWidth;
+                    configService.FreeThrowsSingleScoreWindowPositionLeft = WindowPositionLeft;
+                    configService.FreeThrowsSingleScoreWindowPositionTop = WindowPositionTop;
+                    break;
+                case GameType.FreeThrowsDouble:
+                    configService.FreeThrowsDoubleScoreWindowHeight = WindowHeight;
+                    configService.FreeThrowsDoubleScoreWindowWidth = WindowWidth;
+                    configService.FreeThrowsDoubleScoreWindowPositionLeft = WindowPositionLeft;
+                    configService.FreeThrowsDoubleScoreWindowPositionTop = WindowPositionTop;
+                    break;
+                case GameType.Classic:
+                    configService.ClassicScoreWindowHeight = WindowHeight;
+                    configService.ClassicScoreWindowWidth = WindowWidth;
+                    configService.ClassicScoreWindowPositionLeft = WindowPositionLeft;
+                    configService.ClassicScoreWindowPositionTop = WindowPositionTop;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            ForceClose = true;
+            scoreBoardWindow?.Close();
+            scoreBoardWindow = null;
+            ForceClose = false;
         }
 
         #endregion
@@ -496,13 +502,13 @@ namespace OneHundredAndEightyCore.Windows.Score
             switch (status)
             {
                 case DetectionServiceStatus.WaitingThrow:
-                    DetectionStatusLight = new SolidColorBrush(Colors.ForestGreen);
+                    DetectionStatusLight = drawService.greenBrush;
                     break;
                 case DetectionServiceStatus.ProcessingThrow:
-                    DetectionStatusLight = new SolidColorBrush(Colors.Red);
+                    DetectionStatusLight = drawService.redBrush;
                     break;
                 case DetectionServiceStatus.DartsExtraction:
-                    DetectionStatusLight = new SolidColorBrush(Colors.Yellow);
+                    DetectionStatusLight = drawService.yellowBrush;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(status), status, null);
@@ -511,25 +517,22 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void SetThrowNumber(ThrowNumber throwNumber)
         {
-            var blackBrush = new SolidColorBrush(Colors.Black);
-            var transparentBrush = new SolidColorBrush() {Opacity = 0};
-
             switch (throwNumber)
             {
                 case ThrowNumber.FirstThrow:
-                    Throw1Brush = blackBrush;
-                    Throw2Brush = blackBrush;
-                    Throw3Brush = blackBrush;
+                    Throw1Brush = drawService.blackBrush;
+                    Throw2Brush = drawService.blackBrush;
+                    Throw3Brush = drawService.blackBrush;
                     break;
                 case ThrowNumber.SecondThrow:
-                    Throw1Brush = transparentBrush;
-                    Throw2Brush = blackBrush;
-                    Throw3Brush = blackBrush;
+                    Throw1Brush = drawService.transparentBrush;
+                    Throw2Brush = drawService.blackBrush;
+                    Throw3Brush = drawService.blackBrush;
                     break;
                 case ThrowNumber.ThirdThrow:
-                    Throw1Brush = transparentBrush;
-                    Throw2Brush = transparentBrush;
-                    Throw3Brush = blackBrush;
+                    Throw1Brush = drawService.transparentBrush;
+                    Throw2Brush = drawService.transparentBrush;
+                    Throw3Brush = drawService.blackBrush;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(throwNumber), throwNumber, null);

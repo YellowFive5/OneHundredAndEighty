@@ -794,11 +794,11 @@
                                        Grid.Row="1"
                                        Grid.RowSpan="5"
                                        Grid.Column="1"
-                                       Source="{Binding Cam1Image, IsAsync=True}" />
+                                       Source="{Binding CamImage, IsAsync=True}" />
                                 <Image x:Name="Cam1ImageBoxRoi"
                                        Grid.Row="7"
                                        Grid.Column="1"
-                                       Source="{Binding Cam1RoiImage, IsAsync=True}" />
+                                       Source="{Binding CamRoiImage, IsAsync=True}" />
                                 <Label Content="Threshold"
                                        Grid.Row="9"
                                        Grid.Column="5"
@@ -930,11 +930,11 @@
                                        Grid.Row="1"
                                        Grid.RowSpan="5"
                                        Grid.Column="1"
-                                       Source="{Binding Cam2Image, IsAsync=True}" />
+                                       Source="{Binding CamImage, IsAsync=True}" />
                                 <Image x:Name="Cam2ImageBoxRoi"
                                        Grid.Row="7"
                                        Grid.Column="1"
-                                       Source="{Binding Cam2RoiImage, IsAsync=True}" />
+                                       Source="{Binding CamRoiImage, IsAsync=True}" />
                                 <Label Content="Threshold"
                                        Grid.Row="9"
                                        Grid.Column="5"
@@ -1066,11 +1066,11 @@
                                        Grid.Row="1"
                                        Grid.RowSpan="5"
                                        Grid.Column="1"
-                                       Source="{Binding Cam3Image, IsAsync=True}" />
+                                       Source="{Binding CamImage, IsAsync=True}" />
                                 <Image x:Name="Cam3ImageBoxRoi"
                                        Grid.Row="7"
                                        Grid.Column="1"
-                                       Source="{Binding Cam3RoiImage, IsAsync=True}" />
+                                       Source="{Binding CamRoiImage, IsAsync=True}" />
                                 <Label Content="Threshold"
                                        Grid.Row="9"
                                        Grid.Column="5"
@@ -1202,11 +1202,11 @@
                                        Grid.Row="1"
                                        Grid.RowSpan="5"
                                        Grid.Column="1"
-                                       Source="{Binding Cam4Image, IsAsync=True}" />
+                                       Source="{Binding CamImage, IsAsync=True}" />
                                 <Image x:Name="Cam4ImageBoxRoi"
                                        Grid.Row="7"
                                        Grid.Column="1"
-                                       Source="{Binding Cam4RoiImage, IsAsync=True}" />
+                                       Source="{Binding CamRoiImage, IsAsync=True}" />
                                 <Label Content="Threshold"
                                        Grid.Row="9"
                                        Grid.Column="5"

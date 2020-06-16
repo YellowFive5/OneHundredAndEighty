@@ -11,14 +11,14 @@ namespace OneHundredAndEightyCore.Common
     public class VersionChecker : IVersionChecker
     {
         private readonly DBService dbService;
-        private readonly ConfigService configService;
+        private readonly IConfigService configService;
         private readonly MessageBoxService messageBoxService;
 
         private const double AppVersion = 2.3;
         private double currentDbVersion;
 
         public VersionChecker(DBService dbService,
-                              ConfigService configService,
+                              IConfigService configService,
                               MessageBoxService messageBoxService)
         {
             this.dbService = dbService;
@@ -30,7 +30,7 @@ namespace OneHundredAndEightyCore.Common
         {
             CheckDbExists();
 
-            currentDbVersion = configService.Read<double>(SettingsType.DBVersion);
+            currentDbVersion = configService.DbVersion;
 
             if (AppVersion != currentDbVersion)
             {

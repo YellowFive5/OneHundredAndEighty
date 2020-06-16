@@ -14,12 +14,15 @@ namespace OneHundredAndEightyCore.Common
     public class DBService : IDBService, IDisposable
     {
         private readonly SQLiteConnection connection;
+        private readonly object locker;
 
         public const string DatabaseCopyName = "Database_old.db";
+
         public const string DatabaseName = "Database.db";
 
         public DBService()
         {
+            locker = new object();
             connection = new SQLiteConnection($"Data Source={DatabaseName}; Pooling=true;");
         }
 
@@ -400,9 +403,12 @@ namespace OneHundredAndEightyCore.Common
             var cmd = new SQLiteCommand(query) {Connection = connection};
             try
             {
-                connection.Open();
-                var result = cmd.ExecuteScalar();
-                return result;
+                lock (locker)
+                {
+                    connection.Open();
+                    var result = cmd.ExecuteScalar();
+                    return result;
+                }
             }
             catch (Exception e)
             {
@@ -420,8 +426,11 @@ namespace OneHundredAndEightyCore.Common
             var cmd = new SQLiteCommand(query) {Connection = connection};
             try
             {
-                connection.Open();
-                cmd.ExecuteNonQuery();
+                lock (locker)
+                {
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
             }
             catch (Exception e)
             {
@@ -440,11 +449,14 @@ namespace OneHundredAndEightyCore.Common
 
             try
             {
-                connection.Open();
-                var dataReader = cmd.ExecuteReader();
-                var dataTable = new DataTable();
-                dataTable.Load(dataReader);
-                return dataTable;
+                lock (locker)
+                {
+                    connection.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    var dataTable = new DataTable();
+                    dataTable.Load(dataReader);
+                    return dataTable;
+                }
             }
             catch (Exception e)
             {

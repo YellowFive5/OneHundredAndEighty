@@ -66,59 +66,59 @@ namespace OneHundredAndEightyCore.Recognition
             switch (camNumber)
             {
                 case CamNumber._1:
-                    camIndex = GetCamIndexById(SettingsType.Cam1Id);
-                    thresholdSlider = configService.Read<double>(SettingsType.Cam1ThresholdSlider);
-                    roiPosYSlider = configService.Read<double>(SettingsType.Cam1RoiPosYSlider);
-                    roiHeightSlider = configService.Read<double>(SettingsType.Cam1RoiHeightSlider);
-                    surfaceSlider = configService.Read<double>(SettingsType.Cam1SurfaceSlider);
-                    surfaceCenterSlider = configService.Read<double>(SettingsType.Cam1SurfaceCenterSlider);
-                    camSetupPoint = new PointF(configService.Read<float>(SettingsType.Cam1X),
-                                               configService.Read<float>(SettingsType.Cam1Y));
+                    camIndex = GetCamIndexById(configService.Cam1Id);
+                    thresholdSlider = configService.Cam1ThresholdSliderValue;
+                    roiPosYSlider = configService.Cam1RoiPosYSliderValue;
+                    roiHeightSlider = configService.Cam1RoiHeightSliderValue;
+                    surfaceSlider = configService.Cam1SurfaceSliderValue;
+                    surfaceCenterSlider = configService.Cam1SurfaceCenterSliderValue;
+                    camSetupPoint = new PointF(configService.Cam1XValue,
+                                               configService.Cam1YValue);
                     break;
                 case CamNumber._2:
-                    camIndex = GetCamIndexById(SettingsType.Cam2Id);
-                    thresholdSlider = configService.Read<double>(SettingsType.Cam2ThresholdSlider);
-                    roiPosYSlider = configService.Read<double>(SettingsType.Cam2RoiPosYSlider);
-                    roiHeightSlider = configService.Read<double>(SettingsType.Cam2RoiHeightSlider);
-                    surfaceSlider = configService.Read<double>(SettingsType.Cam2SurfaceSlider);
-                    surfaceCenterSlider = configService.Read<double>(SettingsType.Cam2SurfaceCenterSlider);
-                    camSetupPoint = new PointF(configService.Read<float>(SettingsType.Cam2X),
-                                               configService.Read<float>(SettingsType.Cam2Y));
+                    camIndex = GetCamIndexById(configService.Cam2Id);
+                    thresholdSlider = configService.Cam2ThresholdSliderValue;
+                    roiPosYSlider = configService.Cam2RoiPosYSliderValue;
+                    roiHeightSlider = configService.Cam2RoiHeightSliderValue;
+                    surfaceSlider = configService.Cam2SurfaceSliderValue;
+                    surfaceCenterSlider = configService.Cam2SurfaceCenterSliderValue;
+                    camSetupPoint = new PointF(configService.Cam2XValue,
+                                               configService.Cam2YValue);
                     break;
                 case CamNumber._3:
-                    camIndex = GetCamIndexById(SettingsType.Cam3Id);
-                    thresholdSlider = configService.Read<double>(SettingsType.Cam3ThresholdSlider);
-                    roiPosYSlider = configService.Read<double>(SettingsType.Cam3RoiPosYSlider);
-                    roiHeightSlider = configService.Read<double>(SettingsType.Cam3RoiHeightSlider);
-                    surfaceSlider = configService.Read<double>(SettingsType.Cam3SurfaceSlider);
-                    surfaceCenterSlider = configService.Read<double>(SettingsType.Cam3SurfaceCenterSlider);
-                    camSetupPoint = new PointF(configService.Read<float>(SettingsType.Cam3X),
-                                               configService.Read<float>(SettingsType.Cam3Y));
+                    camIndex = GetCamIndexById(configService.Cam3Id);
+                    thresholdSlider = configService.Cam3ThresholdSliderValue;
+                    roiPosYSlider = configService.Cam3RoiPosYSliderValue;
+                    roiHeightSlider = configService.Cam3RoiHeightSliderValue;
+                    surfaceSlider = configService.Cam3SurfaceSliderValue;
+                    surfaceCenterSlider = configService.Cam3SurfaceCenterSliderValue;
+                    camSetupPoint = new PointF(configService.Cam3XValue,
+                                               configService.Cam3YValue);
 
                     break;
                 case CamNumber._4:
-                    camIndex = GetCamIndexById(SettingsType.Cam4Id);
-                    thresholdSlider = configService.Read<double>(SettingsType.Cam4ThresholdSlider);
-                    roiPosYSlider = configService.Read<double>(SettingsType.Cam4RoiPosYSlider);
-                    roiHeightSlider = configService.Read<double>(SettingsType.Cam4RoiHeightSlider);
-                    surfaceSlider = configService.Read<double>(SettingsType.Cam4SurfaceSlider);
-                    surfaceCenterSlider = configService.Read<double>(SettingsType.Cam4SurfaceCenterSlider);
-                    camSetupPoint = new PointF(configService.Read<float>(SettingsType.Cam4X),
-                                               configService.Read<float>(SettingsType.Cam4Y));
+                    camIndex = GetCamIndexById(configService.Cam4Id);
+                    thresholdSlider = configService.Cam4ThresholdSliderValue;
+                    roiPosYSlider = configService.Cam4RoiPosYSliderValue;
+                    roiHeightSlider = configService.Cam4RoiHeightSliderValue;
+                    surfaceSlider = configService.Cam4SurfaceSliderValue;
+                    surfaceCenterSlider = configService.Cam4SurfaceCenterSliderValue;
+                    camSetupPoint = new PointF(configService.Cam4XValue,
+                                               configService.Cam4YValue);
 
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
             }
 
-            resolutionWidth = configService.Read<int>(SettingsType.ResolutionWidth);
-            resolutionHeight = configService.Read<int>(SettingsType.ResolutionHeight);
-            movesExtraction = configService.Read<int>(SettingsType.MovesExtraction);
-            movesDart = configService.Read<int>(SettingsType.MovesDart);
-            movesNoise = configService.Read<int>(SettingsType.MovesNoise);
-            smoothGauss = configService.Read<int>(SettingsType.SmoothGauss);
-            minContourArc = configService.Read<int>(SettingsType.MinContourArc);
-            camFovAngle = configService.Read<double>(SettingsType.CamFovAngle);
+            resolutionWidth = configService.CamResolutionWidth;
+            resolutionHeight = configService.CamResolutionHeight;
+            movesExtraction = configService.MovesExtractionValue;
+            movesDart = configService.MovesDartValue;
+            movesNoise = configService.MovesNoiseValue;
+            smoothGauss = configService.SmoothGaussValue;
+            minContourArc = configService.MinContourArcValue;
+            camFovAngle = configService.CamsFovAngle;
             videoCapture = new VideoCapture(camIndex, VideoCapture.API.DShow);
             videoCapture.SetCaptureProperty(CapProp.FrameWidth, resolutionWidth);
             videoCapture.SetCaptureProperty(CapProp.FrameHeight, resolutionHeight);
@@ -131,10 +131,9 @@ namespace OneHundredAndEightyCore.Recognition
             toBullAngle = MeasureService.FindAngle(camSetupPoint, projectionCenterPoint);
         }
 
-        private int GetCamIndexById(SettingsType camIdSetting)
+        private int GetCamIndexById(string camId)
         {
             var allCams = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice).ToList();
-            var camId = configService.Read<string>(camIdSetting);
             var index = allCams.FindIndex(x => x.DevicePath.Contains(camId));
             if (index == -1)
             {

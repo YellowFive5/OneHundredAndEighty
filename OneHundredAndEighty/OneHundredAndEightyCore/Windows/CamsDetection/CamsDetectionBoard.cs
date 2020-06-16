@@ -291,22 +291,28 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
 
         public void Close()
         {
-            configService.Write(SettingsType.CamsDetectionWindowPositionLeft, WindowPositionLeft);
-            configService.Write(SettingsType.CamsDetectionWindowPositionTop, WindowPositionTop);
-            configService.Write(SettingsType.CamsDetectionWindowHeight, WindowHeight);
-            configService.Write(SettingsType.CamsDetectionWindowWidth, WindowWidth);
+            if (camsDetectionWindow == null)
+            {
+                return;
+            }
+
+            configService.CamsDetectionWindowPositionLeft = WindowPositionLeft;
+            configService.CamsDetectionWindowPositionTop = WindowPositionTop;
+            configService.CamsDetectionWindowHeight = WindowHeight;
+            configService.CamsDetectionWindowWidth = WindowWidth;
 
             ForceClose = true;
             camsDetectionWindow?.Close();
+            camsDetectionWindow = null;
             ForceClose = false;
         }
 
         public void OnWindowLoaded()
         {
-            WindowHeight = configService.Read<double>(SettingsType.CamsDetectionWindowHeight);
-            WindowWidth = configService.Read<double>(SettingsType.CamsDetectionWindowWidth);
-            WindowPositionLeft = configService.Read<double>(SettingsType.CamsDetectionWindowPositionLeft);
-            WindowPositionTop = configService.Read<double>(SettingsType.CamsDetectionWindowPositionTop);
+            WindowHeight = configService.CamsDetectionWindowHeight;
+            WindowWidth = configService.CamsDetectionWindowWidth;
+            WindowPositionLeft = configService.CamsDetectionWindowPositionLeft;
+            WindowPositionTop = configService.CamsDetectionWindowPositionTop;
         }
 
         public void SetCamImages(CamNumber camNumber,
