@@ -41,8 +41,7 @@ namespace OneHundredAndEightyCore.Tests
             versionChecker.SetupAllProperties();
 
             configService = new Mock<IConfigService>();
-            configService.Setup(x => x.Write(It.IsAny<SettingsType>(),
-                                             It.IsAny<object>()));
+            configService.SetupAllProperties();
 
             detectionService = new Mock<IDetectionService>();
         }

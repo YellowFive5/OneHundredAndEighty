@@ -521,14 +521,14 @@
                                          Style="{StaticResource TextBoxStyle}"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}"
-                                         Text="{Binding Cam1SetupXValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam1XSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="Cam1YTextBox"
                                          Grid.Row="3"
                                          Grid.Column="15"
                                          Style="{StaticResource TextBoxStyle}"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}"
-                                         Text="{Binding Cam1SetupYValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam1YSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="Cam2IdTextBox"
                                          Grid.Row="5"
                                          Grid.Column="7"
@@ -546,14 +546,14 @@
                                          Style="{StaticResource TextBoxStyle}"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}"
-                                         Text="{Binding Cam2SetupXValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam2XSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="Cam2YTextBox"
                                          Grid.Row="5"
                                          Grid.Column="15"
                                          Style="{StaticResource TextBoxStyle}"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}"
-                                         Text="{Binding Cam2SetupYValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam2YSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="Cam3IdTextBox"
                                          Grid.Row="7"
                                          Grid.Column="7"
@@ -567,14 +567,14 @@
                                          Style="{StaticResource TextBoxStyle}"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}"
-                                         Text="{Binding Cam3SetupXValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam3XSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="Cam3YTextBox"
                                          Grid.Row="7"
                                          Grid.Column="15"
                                          Style="{StaticResource TextBoxStyle}"
                                          IsEnabled="False"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}"
-                                         Text="{Binding Cam3SetupYValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam3YSetupValue, Mode=TwoWay}" />
                                 <Label Content="Y"
                                        Grid.Row="1"
                                        Grid.Column="15"
@@ -596,14 +596,14 @@
                                          IsEnabled="False"
                                          Style="{StaticResource TextBoxStyle}"
                                          ToolTip="{x:Static resx:Resources.CamXSetupPointHelperText}"
-                                         Text="{Binding Cam4SetupXValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam4XSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="Cam4YTextBox"
                                          Grid.Row="9"
                                          Grid.Column="15"
                                          IsEnabled="False"
                                          Style="{StaticResource TextBoxStyle}"
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}"
-                                         Text="{Binding Cam4SetupYValue, Mode=TwoWay}" />
+                                         Text="{Binding Cam4YSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="ThresholdSleepTimeTimeTextBox"
                                          Grid.Row="15"
                                          Grid.Column="1"

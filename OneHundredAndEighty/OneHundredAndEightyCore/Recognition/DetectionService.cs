@@ -90,7 +90,7 @@ namespace OneHundredAndEightyCore.Recognition
 
             extractionSleepTime = configService.ExtractionSleepTimeValue;
             thresholdSleepTime = configService.ThresholdSleepTimeValue;
-            moveDetectedSleepTime = configService.MoveDetectedSleepTimeValue;
+            moveDetectedSleepTime = configService.MovesDetectedSleepTimeValue;
             withDetection = configService.DetectionEnabled && !App.NoCams;
 
             try

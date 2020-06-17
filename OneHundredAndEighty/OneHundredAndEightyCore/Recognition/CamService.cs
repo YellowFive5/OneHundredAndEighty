@@ -72,8 +72,8 @@ namespace OneHundredAndEightyCore.Recognition
                     roiHeightSlider = configService.Cam1RoiHeightSliderValue;
                     surfaceSlider = configService.Cam1SurfaceSliderValue;
                     surfaceCenterSlider = configService.Cam1SurfaceCenterSliderValue;
-                    camSetupPoint = new PointF(configService.Cam1XValue,
-                                               configService.Cam1YValue);
+                    camSetupPoint = new PointF(configService.Cam1XSetupValue,
+                                               configService.Cam1YSetupValue);
                     break;
                 case CamNumber._2:
                     camIndex = GetCamIndexById(configService.Cam2Id);
@@ -82,8 +82,8 @@ namespace OneHundredAndEightyCore.Recognition
                     roiHeightSlider = configService.Cam2RoiHeightSliderValue;
                     surfaceSlider = configService.Cam2SurfaceSliderValue;
                     surfaceCenterSlider = configService.Cam2SurfaceCenterSliderValue;
-                    camSetupPoint = new PointF(configService.Cam2XValue,
-                                               configService.Cam2YValue);
+                    camSetupPoint = new PointF(configService.Cam2XSetupValue,
+                                               configService.Cam2YSetupValue);
                     break;
                 case CamNumber._3:
                     camIndex = GetCamIndexById(configService.Cam3Id);
@@ -92,8 +92,8 @@ namespace OneHundredAndEightyCore.Recognition
                     roiHeightSlider = configService.Cam3RoiHeightSliderValue;
                     surfaceSlider = configService.Cam3SurfaceSliderValue;
                     surfaceCenterSlider = configService.Cam3SurfaceCenterSliderValue;
-                    camSetupPoint = new PointF(configService.Cam3XValue,
-                                               configService.Cam3YValue);
+                    camSetupPoint = new PointF(configService.Cam3XSetupValue,
+                                               configService.Cam3YSetupValue);
 
                     break;
                 case CamNumber._4:
@@ -103,16 +103,16 @@ namespace OneHundredAndEightyCore.Recognition
                     roiHeightSlider = configService.Cam4RoiHeightSliderValue;
                     surfaceSlider = configService.Cam4SurfaceSliderValue;
                     surfaceCenterSlider = configService.Cam4SurfaceCenterSliderValue;
-                    camSetupPoint = new PointF(configService.Cam4XValue,
-                                               configService.Cam4YValue);
+                    camSetupPoint = new PointF(configService.Cam4XSetupValue,
+                                               configService.Cam4YSetupValue);
 
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
             }
 
-            resolutionWidth = configService.CamResolutionWidth;
-            resolutionHeight = configService.CamResolutionHeight;
+            resolutionWidth = configService.CamsResolutionWidth;
+            resolutionHeight = configService.CamsResolutionHeight;
             movesExtraction = configService.MovesExtractionValue;
             movesDart = configService.MovesDartValue;
             movesNoise = configService.MovesNoiseValue;

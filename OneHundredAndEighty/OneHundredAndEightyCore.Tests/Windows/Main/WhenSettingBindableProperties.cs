@@ -3,11 +3,8 @@
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using FluentAssertions;
-using Moq;
 using NUnit.Framework;
-using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
-using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
@@ -76,7 +73,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         }
 
         [Test]
-        public void Cam1ImageSetsAndChangeFired()
+        public void CamImageSetsAndChangeFired()
         {
             var oldValue = viewModel.CamImage;
 
@@ -88,43 +85,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         }
 
         [Test]
-        public void Cam2ImageSetsAndChangeFired()
-        {
-            var oldValue = viewModel.Cam2Image;
-
-            viewModel.Cam2Image = new BitmapImage();
-            var newValue = viewModel.Cam2Image;
-
-            newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2Image));
-        }
-
-        [Test]
-        public void Cam3ImageSetsAndChangeFired()
-        {
-            var oldValue = viewModel.Cam3Image;
-
-            viewModel.Cam3Image = new BitmapImage();
-            var newValue = viewModel.Cam3Image;
-
-            newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3Image));
-        }
-
-        [Test]
-        public void Cam4ImageSetsAndChangeFired()
-        {
-            var oldValue = viewModel.Cam4Image;
-
-            viewModel.Cam4Image = new BitmapImage();
-            var newValue = viewModel.Cam4Image;
-
-            newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4Image));
-        }
-
-        [Test]
-        public void Cam1RoiImageSetsAndChangeFired()
+        public void CamRoiImageSetsAndChangeFired()
         {
             var oldValue = viewModel.CamRoiImage;
 
@@ -136,45 +97,10 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         }
 
         [Test]
-        public void Cam2RoiImageSetsAndChangeFired()
-        {
-            var oldValue = viewModel.Cam2RoiImage;
-
-            viewModel.Cam2RoiImage = new BitmapImage();
-            var newValue = viewModel.Cam2RoiImage;
-
-            newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2RoiImage));
-        }
-
-        [Test]
-        public void Cam3RoiImageSetsAndChangeFired()
-        {
-            var oldValue = viewModel.Cam3RoiImage;
-
-            viewModel.Cam3RoiImage = new BitmapImage();
-            var newValue = viewModel.Cam3RoiImage;
-
-            newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3RoiImage));
-        }
-
-        [Test]
-        public void Cam4RoiImageSetsAndChangeFired()
-        {
-            var oldValue = viewModel.Cam4RoiImage;
-
-            viewModel.Cam4RoiImage = new BitmapImage();
-            var newValue = viewModel.Cam4RoiImage;
-
-            newValue.Should().NotBe(oldValue);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4RoiImage));
-        }
-
-        [Test]
-        public void Cam1ThresholdSliderValueSetsAndChangeFired()
+        public void Cam1ThresholdSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1ThresholdSliderValue;
+            configService.Object.Cam1ThresholdSliderValue = oldValue;
 
             viewModel.Cam1ThresholdSliderValue = 555.05;
             var newValue = viewModel.Cam1ThresholdSliderValue;
@@ -182,12 +108,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1ThresholdSliderValue));
+            configService.Object.Cam1ThresholdSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2ThresholdSliderValueSetsAndChangeFired()
+        public void Cam2ThresholdSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2ThresholdSliderValue;
+            configService.Object.Cam2ThresholdSliderValue = oldValue;
 
             viewModel.Cam2ThresholdSliderValue = 555.05;
             var newValue = viewModel.Cam2ThresholdSliderValue;
@@ -195,12 +123,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2ThresholdSliderValue));
+            configService.Object.Cam2ThresholdSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3ThresholdSliderValueSetsAndChangeFired()
+        public void Cam3ThresholdSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3ThresholdSliderValue;
+            configService.Object.Cam3ThresholdSliderValue = oldValue;
 
             viewModel.Cam3ThresholdSliderValue = 555.05;
             var newValue = viewModel.Cam3ThresholdSliderValue;
@@ -208,12 +138,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3ThresholdSliderValue));
+            configService.Object.Cam3ThresholdSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4ThresholdSliderValueSetsAndChangeFired()
+        public void Cam4ThresholdSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4ThresholdSliderValue;
+            configService.Object.Cam4ThresholdSliderValue = oldValue;
 
             viewModel.Cam4ThresholdSliderValue = 555.05;
             var newValue = viewModel.Cam4ThresholdSliderValue;
@@ -221,12 +153,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4ThresholdSliderValue));
+            configService.Object.Cam4ThresholdSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1SurfaceSliderValueSetsAndChangeFired()
+        public void Cam1SurfaceSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1SurfaceSliderValue;
+            configService.Object.Cam1SurfaceSliderValue = oldValue;
 
             viewModel.Cam1SurfaceSliderValue = 555.05;
             var newValue = viewModel.Cam1SurfaceSliderValue;
@@ -234,12 +168,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1SurfaceSliderValue));
+            configService.Object.Cam1SurfaceSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2SurfaceSliderValueSetsAndChangeFired()
+        public void Cam2SurfaceSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2SurfaceSliderValue;
+            configService.Object.Cam2SurfaceSliderValue = oldValue;
 
             viewModel.Cam2SurfaceSliderValue = 555.05;
             var newValue = viewModel.Cam2SurfaceSliderValue;
@@ -247,12 +183,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2SurfaceSliderValue));
+            configService.Object.Cam2SurfaceSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3SurfaceSliderValueSetsAndChangeFired()
+        public void Cam3SurfaceSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3SurfaceSliderValue;
+            configService.Object.Cam3SurfaceSliderValue = oldValue;
 
             viewModel.Cam3SurfaceSliderValue = 555.05;
             var newValue = viewModel.Cam3SurfaceSliderValue;
@@ -260,12 +198,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3SurfaceSliderValue));
+            configService.Object.Cam3SurfaceSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4SurfaceSliderValueSetsAndChangeFired()
+        public void Cam4SurfaceSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4SurfaceSliderValue;
+            configService.Object.Cam4SurfaceSliderValue = oldValue;
 
             viewModel.Cam4SurfaceSliderValue = 555.05;
             var newValue = viewModel.Cam4SurfaceSliderValue;
@@ -273,12 +213,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4SurfaceSliderValue));
+            configService.Object.Cam4SurfaceSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1SurfaceCenterSliderValueSetsAndChangeFired()
+        public void Cam1SurfaceCenterSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1SurfaceCenterSliderValue;
+            configService.Object.Cam1SurfaceCenterSliderValue = oldValue;
 
             viewModel.Cam1SurfaceCenterSliderValue = 555.05;
             var newValue = viewModel.Cam1SurfaceCenterSliderValue;
@@ -286,12 +228,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1SurfaceCenterSliderValue));
+            configService.Object.Cam1SurfaceCenterSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2SurfaceCenterSliderValueSetsAndChangeFired()
+        public void Cam2SurfaceCenterSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2SurfaceCenterSliderValue;
+            configService.Object.Cam2SurfaceCenterSliderValue = oldValue;
 
             viewModel.Cam2SurfaceCenterSliderValue = 555.05;
             var newValue = viewModel.Cam2SurfaceCenterSliderValue;
@@ -299,12 +243,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2SurfaceCenterSliderValue));
+            configService.Object.Cam2SurfaceCenterSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3SurfaceCenterSliderValueSetsAndChangeFired()
+        public void Cam3SurfaceCenterSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3SurfaceCenterSliderValue;
+            configService.Object.Cam3SurfaceCenterSliderValue = oldValue;
 
             viewModel.Cam3SurfaceCenterSliderValue = 555.05;
             var newValue = viewModel.Cam3SurfaceCenterSliderValue;
@@ -312,12 +258,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3SurfaceCenterSliderValue));
+            configService.Object.Cam3SurfaceCenterSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4SurfaceCenterSliderValueSetsAndChangeFired()
+        public void Cam4SurfaceCenterSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4SurfaceCenterSliderValue;
+            configService.Object.Cam4SurfaceCenterSliderValue = oldValue;
 
             viewModel.Cam4SurfaceCenterSliderValue = 555.05;
             var newValue = viewModel.Cam4SurfaceCenterSliderValue;
@@ -325,12 +273,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4SurfaceCenterSliderValue));
+            configService.Object.Cam4SurfaceCenterSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1RoiPosYSliderValueSetsAndChangeFired()
+        public void Cam1RoiPosYSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1RoiPosYSliderValue;
+            configService.Object.Cam1RoiPosYSliderValue = oldValue;
 
             viewModel.Cam1RoiPosYSliderValue = 555.05;
             var newValue = viewModel.Cam1RoiPosYSliderValue;
@@ -338,12 +288,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1RoiPosYSliderValue));
+            configService.Object.Cam1RoiPosYSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2RoiPosYSliderValueSetsAndChangeFired()
+        public void Cam2RoiPosYSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2RoiPosYSliderValue;
+            configService.Object.Cam2RoiPosYSliderValue = oldValue;
 
             viewModel.Cam2RoiPosYSliderValue = 555.05;
             var newValue = viewModel.Cam2RoiPosYSliderValue;
@@ -351,12 +303,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2RoiPosYSliderValue));
+            configService.Object.Cam2RoiPosYSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3RoiPosYSliderValueSetsAndChangeFired()
+        public void Cam3RoiPosYSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3RoiPosYSliderValue;
+            configService.Object.Cam3RoiPosYSliderValue = oldValue;
 
             viewModel.Cam3RoiPosYSliderValue = 555.05;
             var newValue = viewModel.Cam3RoiPosYSliderValue;
@@ -364,12 +318,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3RoiPosYSliderValue));
+            configService.Object.Cam3RoiPosYSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4RoiPosYSliderValueSetsAndChangeFired()
+        public void Cam4RoiPosYSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4RoiPosYSliderValue;
+            configService.Object.Cam4RoiPosYSliderValue = oldValue;
 
             viewModel.Cam4RoiPosYSliderValue = 555.05;
             var newValue = viewModel.Cam4RoiPosYSliderValue;
@@ -377,12 +333,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4RoiPosYSliderValue));
+            configService.Object.Cam4RoiPosYSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1RoiHeightSliderValueSetsAndChangeFired()
+        public void Cam1RoiHeightSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1RoiHeightSliderValue;
+            configService.Object.Cam1RoiHeightSliderValue = oldValue;
 
             viewModel.Cam1RoiHeightSliderValue = 555.05;
             var newValue = viewModel.Cam1RoiHeightSliderValue;
@@ -390,12 +348,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1RoiHeightSliderValue));
+            configService.Object.Cam1RoiHeightSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2RoiHeightSliderValueSetsAndChangeFired()
+        public void Cam2RoiHeightSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2RoiHeightSliderValue;
+            configService.Object.Cam2RoiHeightSliderValue = oldValue;
 
             viewModel.Cam2RoiHeightSliderValue = 555.05;
             var newValue = viewModel.Cam2RoiHeightSliderValue;
@@ -403,12 +363,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2RoiHeightSliderValue));
+            configService.Object.Cam2RoiHeightSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3RoiHeightSliderValueSetsAndChangeFired()
+        public void Cam3RoiHeightSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3RoiHeightSliderValue;
+            configService.Object.Cam3RoiHeightSliderValue = oldValue;
 
             viewModel.Cam3RoiHeightSliderValue = 555.05;
             var newValue = viewModel.Cam3RoiHeightSliderValue;
@@ -416,12 +378,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3RoiHeightSliderValue));
+            configService.Object.Cam3RoiHeightSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4RoiHeightSliderValueSetsAndChangeFired()
+        public void Cam4RoiHeightSliderValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4RoiHeightSliderValue;
+            configService.Object.Cam4RoiHeightSliderValue = oldValue;
 
             viewModel.Cam4RoiHeightSliderValue = 555.05;
             var newValue = viewModel.Cam4RoiHeightSliderValue;
@@ -429,12 +393,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4RoiHeightSliderValue));
+            configService.Object.Cam4RoiHeightSliderValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1EnabledValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void Cam1EnabledSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1Enabled;
+            configService.Object.Cam1Enabled = oldValue;
 
             viewModel.Cam1Enabled = true;
             var newValue = viewModel.Cam1Enabled;
@@ -442,29 +408,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             oldValue.Should().BeFalse();
             newValue.Should().BeTrue();
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1Enabled));
-            configService.Verify(w => w.Write(SettingsType.Cam1CheckBox, true), Times.Once);
+            configService.Object.Cam1Enabled.Should().BeTrue();
         }
 
         [Test]
-        public void Cam1EnabledValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam1Enabled;
-
-            viewModel.Cam1Enabled = oldValue;
-            var newValue = viewModel.Cam1Enabled;
-
-            oldValue.Should().BeFalse();
-            newValue.Should().BeFalse();
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam2EnabledValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void Cam2EnabledSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2Enabled;
+            configService.Object.Cam2Enabled = oldValue;
 
             viewModel.Cam2Enabled = true;
             var newValue = viewModel.Cam2Enabled;
@@ -472,29 +423,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             oldValue.Should().BeFalse();
             newValue.Should().BeTrue();
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2Enabled));
-            configService.Verify(w => w.Write(SettingsType.Cam2CheckBox, true), Times.Once);
+            configService.Object.Cam2Enabled.Should().BeTrue();
         }
 
         [Test]
-        public void Cam2EnabledValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam2Enabled;
-
-            viewModel.Cam2Enabled = oldValue;
-            var newValue = viewModel.Cam2Enabled;
-
-            oldValue.Should().BeFalse();
-            newValue.Should().BeFalse();
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam3EnabledValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void Cam3EnabledSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3Enabled;
+            configService.Object.Cam3Enabled = oldValue;
 
             viewModel.Cam3Enabled = true;
             var newValue = viewModel.Cam3Enabled;
@@ -502,29 +438,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             oldValue.Should().BeFalse();
             newValue.Should().BeTrue();
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3Enabled));
-            configService.Verify(w => w.Write(SettingsType.Cam3CheckBox, true), Times.Once);
+            configService.Object.Cam3Enabled.Should().BeTrue();
         }
 
         [Test]
-        public void Cam3EnabledValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam3Enabled;
-
-            viewModel.Cam3Enabled = oldValue;
-            var newValue = viewModel.Cam3Enabled;
-
-            oldValue.Should().BeFalse();
-            newValue.Should().BeFalse();
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam4EnabledValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void Cam4EnabledSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4Enabled;
+            configService.Object.Cam4Enabled = oldValue;
 
             viewModel.Cam4Enabled = true;
             var newValue = viewModel.Cam4Enabled;
@@ -532,29 +453,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             oldValue.Should().BeFalse();
             newValue.Should().BeTrue();
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4Enabled));
-            configService.Verify(w => w.Write(SettingsType.Cam4CheckBox, true), Times.Once);
+            configService.Object.Cam4Enabled.Should().BeTrue();
         }
 
         [Test]
-        public void Cam4EnabledValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam4Enabled;
-
-            viewModel.Cam4Enabled = oldValue;
-            var newValue = viewModel.Cam4Enabled;
-
-            oldValue.Should().BeFalse();
-            newValue.Should().BeFalse();
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void DetectionEnabledValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void DetectionEnabledSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.DetectionEnabled;
+            configService.Object.DetectionEnabled = oldValue;
 
             viewModel.DetectionEnabled = true;
             var newValue = viewModel.DetectionEnabled;
@@ -562,261 +468,134 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             oldValue.Should().BeFalse();
             newValue.Should().BeTrue();
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.DetectionEnabled));
-            configService.Verify(w => w.Write(SettingsType.WithDetectionCheckBox, true), Times.Once);
+            configService.Object.DetectionEnabled.Should().BeTrue();
         }
 
         [Test]
-        public void DetectionEnabledValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.DetectionEnabled;
-
-            viewModel.DetectionEnabled = oldValue;
-            var newValue = viewModel.DetectionEnabled;
-
-            oldValue.Should().BeFalse();
-            newValue.Should().BeFalse();
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam1IdValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void Cam1IdSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1Id;
+            configService.Object.Cam1Id = oldValue;
 
-            viewModel.Cam1Id = "23fer45";
+            viewModel.Cam1Id = "2dr4e45";
             var newValue = viewModel.Cam1Id;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("23fer45");
+            newValue.Should().Be("2dr4e45");
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1Id));
-            configService.Verify(w => w.Write(SettingsType.Cam1Id, "23fer45"), Times.Once);
+            configService.Object.Cam1Id.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1IdValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam1Id;
-
-            viewModel.Cam1Id = oldValue;
-            var newValue = viewModel.Cam1Id;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam2IdValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void Cam2IdSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2Id;
+            configService.Object.Cam2Id = oldValue;
 
-            viewModel.Cam2Id = "23fer45";
+            viewModel.Cam2Id = "2dr4e45";
             var newValue = viewModel.Cam2Id;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("23fer45");
+            newValue.Should().Be("2dr4e45");
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2Id));
-            configService.Verify(w => w.Write(SettingsType.Cam2Id, "23fer45"), Times.Once);
+            configService.Object.Cam2Id.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2IdValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam2Id;
-
-            viewModel.Cam2Id = oldValue;
-            var newValue = viewModel.Cam2Id;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam3IdValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void Cam3IdSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3Id;
+            configService.Object.Cam3Id = oldValue;
 
-            viewModel.Cam3Id = "23fer45";
+            viewModel.Cam3Id = "2dr4e45";
             var newValue = viewModel.Cam3Id;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("23fer45");
+            newValue.Should().Be("2dr4e45");
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3Id));
-            configService.Verify(w => w.Write(SettingsType.Cam3Id, "23fer45"), Times.Once);
+            configService.Object.Cam3Id.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3IdValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam3Id;
-
-            viewModel.Cam3Id = oldValue;
-            var newValue = viewModel.Cam3Id;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam4IdValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
-        {
-            var oldValue = viewModel.Cam3Id;
-
-            viewModel.Cam4Id = "23fer45";
-            var newValue = viewModel.Cam4Id;
-
-            newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("23fer45");
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4Id));
-            configService.Verify(w => w.Write(SettingsType.Cam4Id, "23fer45"), Times.Once);
-        }
-
-        [Test]
-        public void Cam4IdValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
+        public void Cam4IdSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4Id;
+            configService.Object.Cam4Id = oldValue;
 
-            viewModel.Cam4Id = oldValue;
+            viewModel.Cam4Id = "2dr4e45";
             var newValue = viewModel.Cam4Id;
 
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
+            newValue.Should().NotBe(oldValue);
+            newValue.Should().Be("2dr4e45");
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4Id));
+            configService.Object.Cam4Id.Should().Be(newValue);
         }
 
         [Test]
-        public void CamsFovAngleValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void CamsFovAngleSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.CamsFovAngle;
+            configService.Object.CamsFovAngle = oldValue;
 
-            viewModel.CamsFovAngle = 155.25;
+            viewModel.CamsFovAngle = 555.05;
             var newValue = viewModel.CamsFovAngle;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(155.25);
+            newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.CamsFovAngle));
-            configService.Verify(w => w.Write(SettingsType.CamFovAngle, 155.25), Times.Once);
+            configService.Object.CamsFovAngle.Should().Be(newValue);
         }
 
         [Test]
-        public void CamsFovAngleValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.CamsFovAngle;
-
-            viewModel.CamsFovAngle = oldValue;
-            var newValue = viewModel.CamsFovAngle;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void CamsResolutionHeightValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void CamsResolutionHeightSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.CamsResolutionHeight;
+            configService.Object.CamsResolutionHeight = oldValue;
 
-            viewModel.CamsResolutionHeight = 1028;
+            viewModel.CamsResolutionHeight = 1920;
             var newValue = viewModel.CamsResolutionHeight;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(1028);
+            newValue.Should().Be(1920);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.CamsResolutionHeight));
-            configService.Verify(w => w.Write(SettingsType.ResolutionHeight, 1028), Times.Once);
+            configService.Object.CamsResolutionHeight.Should().Be(newValue);
         }
 
         [Test]
-        public void CamsResolutionHeightValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.CamsResolutionHeight;
-
-            viewModel.CamsResolutionHeight = oldValue;
-            var newValue = viewModel.CamsResolutionHeight;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void CamsResolutionWidthValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void CamsResolutionWidthSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.CamsResolutionWidth;
+            configService.Object.CamsResolutionWidth = oldValue;
 
-            viewModel.CamsResolutionWidth = 768;
+            viewModel.CamsResolutionWidth = 1920;
             var newValue = viewModel.CamsResolutionWidth;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(768);
+            newValue.Should().Be(1920);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.CamsResolutionWidth));
-            configService.Verify(w => w.Write(SettingsType.ResolutionWidth, 768), Times.Once);
+            configService.Object.CamsResolutionWidth.Should().Be(newValue);
         }
 
         [Test]
-        public void CamsResolutionWidthValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.CamsResolutionWidth;
-
-            viewModel.CamsResolutionWidth = oldValue;
-            var newValue = viewModel.CamsResolutionWidth;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void MovesExtractionValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void MovesExtractionValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.MovesExtractionValue;
+            configService.Object.MovesExtractionValue = oldValue;
 
-            viewModel.MovesExtractionValue = 1000;
+            viewModel.MovesExtractionValue = 500;
             var newValue = viewModel.MovesExtractionValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(1000);
+            newValue.Should().Be(500);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesExtractionValue));
-            configService.Verify(w => w.Write(SettingsType.MovesExtraction, 1000), Times.Once);
+            configService.Object.MovesExtractionValue.Should().Be(newValue);
         }
 
         [Test]
-        public void MovesExtractionValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.MovesExtractionValue;
-
-            viewModel.MovesExtractionValue = oldValue;
-            var newValue = viewModel.MovesExtractionValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void MovesDetectedSleepTimeValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void MovesDetectedSleepTimeValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.MovesDetectedSleepTimeValue;
+            configService.Object.MovesDetectedSleepTimeValue = oldValue;
 
             viewModel.MovesDetectedSleepTimeValue = 0.25;
             var newValue = viewModel.MovesDetectedSleepTimeValue;
@@ -824,57 +603,29 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(0.25);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesDetectedSleepTimeValue));
-            configService.Verify(w => w.Write(SettingsType.MoveDetectedSleepTime, 0.25), Times.Once);
+            configService.Object.MovesDetectedSleepTimeValue.Should().Be(newValue);
         }
 
         [Test]
-        public void MovesDetectedSleepTimeValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.MovesDetectedSleepTimeValue;
-
-            viewModel.MovesDetectedSleepTimeValue = oldValue;
-            var newValue = viewModel.MovesDetectedSleepTimeValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void MovesNoiseValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void MovesNoiseValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.MovesNoiseValue;
+            configService.Object.MovesNoiseValue = oldValue;
 
-            viewModel.MovesNoiseValue = 2500;
+            viewModel.MovesNoiseValue = 200;
             var newValue = viewModel.MovesNoiseValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(2500);
+            newValue.Should().Be(200);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesNoiseValue));
-            configService.Verify(w => w.Write(SettingsType.MovesNoise, 2500), Times.Once);
+            configService.Object.MovesNoiseValue.Should().Be(newValue);
         }
 
         [Test]
-        public void MovesNoiseValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.MovesNoiseValue;
-
-            viewModel.MovesNoiseValue = oldValue;
-            var newValue = viewModel.MovesNoiseValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void SmoothGaussValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void SmoothGaussValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.SmoothGaussValue;
+            configService.Object.SmoothGaussValue = oldValue;
 
             viewModel.SmoothGaussValue = 5;
             var newValue = viewModel.SmoothGaussValue;
@@ -882,115 +633,59 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(5);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.SmoothGaussValue));
-            configService.Verify(w => w.Write(SettingsType.SmoothGauss, 5), Times.Once);
+            configService.Object.SmoothGaussValue.Should().Be(newValue);
         }
 
         [Test]
-        public void SmoothGaussValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.SmoothGaussValue;
-
-            viewModel.SmoothGaussValue = oldValue;
-            var newValue = viewModel.SmoothGaussValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void ThresholdSleepTimeValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void ThresholdSleepTimeValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.ThresholdSleepTimeValue;
+            configService.Object.ThresholdSleepTimeValue = oldValue;
 
-            viewModel.ThresholdSleepTimeValue = 0.5;
+            viewModel.ThresholdSleepTimeValue = 555.05;
             var newValue = viewModel.ThresholdSleepTimeValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(0.5);
+            newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.ThresholdSleepTimeValue));
-            configService.Verify(w => w.Write(SettingsType.ThresholdSleepTime, 0.5), Times.Once);
+            configService.Object.ThresholdSleepTimeValue.Should().Be(newValue);
         }
 
         [Test]
-        public void ThresholdSleepTimeValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.ThresholdSleepTimeValue;
-
-            viewModel.ThresholdSleepTimeValue = oldValue;
-            var newValue = viewModel.ThresholdSleepTimeValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void ExtractionSleepTimeValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void ExtractionSleepTimeValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.ExtractionSleepTimeValue;
+            configService.Object.ExtractionSleepTimeValue = oldValue;
 
-            viewModel.ExtractionSleepTimeValue = 0.56;
+            viewModel.ExtractionSleepTimeValue = 555.05;
             var newValue = viewModel.ExtractionSleepTimeValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(0.56);
+            newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.ExtractionSleepTimeValue));
-            configService.Verify(w => w.Write(SettingsType.ExtractionSleepTime, 0.56), Times.Once);
+            configService.Object.ExtractionSleepTimeValue.Should().Be(newValue);
         }
 
         [Test]
-        public void ExtractionSleepTimeValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.ExtractionSleepTimeValue;
-
-            viewModel.ExtractionSleepTimeValue = oldValue;
-            var newValue = viewModel.ExtractionSleepTimeValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void MinContourArcValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void MinContourArcValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.MinContourArcValue;
+            configService.Object.MinContourArcValue = oldValue;
 
-            viewModel.MinContourArcValue = 700;
+            viewModel.MinContourArcValue = 500;
             var newValue = viewModel.MinContourArcValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(700);
+            newValue.Should().Be(500);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MinContourArcValue));
-            configService.Verify(w => w.Write(SettingsType.MinContourArc, 700), Times.Once);
+            configService.Object.MinContourArcValue.Should().Be(newValue);
         }
 
         [Test]
-        public void MinContourArcValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.MinContourArcValue;
-
-            viewModel.MinContourArcValue = oldValue;
-            var newValue = viewModel.MinContourArcValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void MovesDartValueSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void MovesDartValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.MovesDartValue;
+            configService.Object.MovesDartValue = oldValue;
 
             viewModel.MovesDartValue = 500;
             var newValue = viewModel.MovesDartValue;
@@ -998,294 +693,247 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(500);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesDartValue));
-            configService.Verify(w => w.Write(SettingsType.MovesDart, 500), Times.Once);
+            configService.Object.MovesDartValue.Should().Be(newValue);
         }
 
         [Test]
-        public void MovesDartValueNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.MovesDartValue;
-
-            viewModel.MovesDartValue = oldValue;
-            var newValue = viewModel.MovesDartValue;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void ToCam1DistanceSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void ToCam1DistanceSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.ToCam1Distance;
+            configService.Object.ToCam1Distance = oldValue;
 
-            viewModel.ToCam1Distance = 35.5;
+            viewModel.ToCam1Distance = 33.5;
             var newValue = viewModel.ToCam1Distance;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(35.5);
+            newValue.Should().Be(33.5);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.ToCam1Distance));
-            configService.Verify(w => w.Write(SettingsType.ToCam1Distance, 35.5), Times.Once);
+            configService.Object.ToCam1Distance.Should().Be(newValue);
         }
 
         [Test]
-        public void ToCam1DistanceNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.ToCam1Distance;
-
-            viewModel.ToCam1Distance = oldValue;
-            var newValue = viewModel.ToCam1Distance;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void ToCam2DistanceSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void ToCam2DistanceSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.ToCam2Distance;
+            configService.Object.ToCam2Distance = oldValue;
 
-            viewModel.ToCam2Distance = 35.5;
+            viewModel.ToCam2Distance = 33.5;
             var newValue = viewModel.ToCam2Distance;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(35.5);
+            newValue.Should().Be(33.5);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.ToCam2Distance));
-            configService.Verify(w => w.Write(SettingsType.ToCam2Distance, 35.5), Times.Once);
+            configService.Object.ToCam2Distance.Should().Be(newValue);
         }
 
         [Test]
-        public void ToCam2DistanceNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.ToCam2Distance;
-
-            viewModel.ToCam2Distance = oldValue;
-            var newValue = viewModel.ToCam2Distance;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void ToCam3DistanceSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void ToCam3DistanceSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.ToCam3Distance;
+            configService.Object.ToCam3Distance = oldValue;
 
-            viewModel.ToCam3Distance = 35.5;
+            viewModel.ToCam3Distance = 33.5;
             var newValue = viewModel.ToCam3Distance;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(35.5);
+            newValue.Should().Be(33.5);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.ToCam3Distance));
-            configService.Verify(w => w.Write(SettingsType.ToCam3Distance, 35.5), Times.Once);
+            configService.Object.ToCam3Distance.Should().Be(newValue);
         }
 
         [Test]
-        public void ToCam3DistanceNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
-        {
-            var oldValue = viewModel.ToCam3Distance;
-
-            viewModel.ToCam3Distance = oldValue;
-            var newValue = viewModel.ToCam3Distance;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void ToCam4DistanceSetsAndChangeFiredAndSettingSavedWhenNewValueNotEqualsOldValue()
+        public void ToCam4DistanceSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.ToCam4Distance;
+            configService.Object.ToCam4Distance = oldValue;
 
-            viewModel.ToCam4Distance = 35.5;
+            viewModel.ToCam4Distance = 33.5;
             var newValue = viewModel.ToCam4Distance;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(35.5);
+            newValue.Should().Be(33.5);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.ToCam4Distance));
-            configService.Verify(w => w.Write(SettingsType.ToCam4Distance, 35.5), Times.Once);
+            configService.Object.ToCam4Distance.Should().Be(newValue);
         }
 
         [Test]
-        public void ToCam4DistanceNotSetsAndNotChangeFiredAndSettingNotSavedWhenNewValueEqualsOldValue()
+        public void Cam1XSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.ToCam4Distance;
+            var oldValue = viewModel.Cam1XSetupValue;
+            configService.Object.Cam1XSetupValue = oldValue;
 
-            viewModel.ToCam4Distance = oldValue;
-            var newValue = viewModel.ToCam4Distance;
-
-            newValue.Should().Be(oldValue);
-            tester.ChangesInvokes.Should().BeEmpty();
-            configService.Verify(w => w.Write(It.IsAny<SettingsType>(),
-                                              It.IsAny<object>()),
-                                 Times.Never);
-        }
-
-        [Test]
-        public void Cam1SetupXValueSetsAndChangeFired()
-        {
-            var oldValue = viewModel.Cam1SetupXValue;
-
-            viewModel.Cam1SetupXValue = 89;
-            var newValue = viewModel.Cam1SetupXValue;
+            viewModel.Cam1XSetupValue = 589;
+            var newValue = viewModel.Cam1XSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1SetupXValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1XSetupValue));
+            configService.Object.Cam1XSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1SetupYValueSetsAndChangeFired()
+        public void Cam1YSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.Cam1SetupYValue;
+            var oldValue = viewModel.Cam1YSetupValue;
+            configService.Object.Cam1YSetupValue = oldValue;
 
-            viewModel.Cam1SetupYValue = 89;
-            var newValue = viewModel.Cam1SetupYValue;
+            viewModel.Cam1YSetupValue = 589;
+            var newValue = viewModel.Cam1YSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1SetupYValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1YSetupValue));
+            configService.Object.Cam1YSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2SetupXValueSetsAndChangeFired()
+        public void Cam2XSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.Cam2SetupXValue;
+            var oldValue = viewModel.Cam2XSetupValue;
+            configService.Object.Cam2XSetupValue = oldValue;
 
-            viewModel.Cam2SetupXValue = 89;
-            var newValue = viewModel.Cam2SetupXValue;
+            viewModel.Cam2XSetupValue = 589;
+            var newValue = viewModel.Cam2XSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2SetupXValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2XSetupValue));
+            configService.Object.Cam2XSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2SetupYValueSetsAndChangeFired()
+        public void Cam2YSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.Cam2SetupXValue;
+            var oldValue = viewModel.Cam2YSetupValue;
+            configService.Object.Cam2YSetupValue = oldValue;
 
-            viewModel.Cam2SetupYValue = 89;
-            var newValue = viewModel.Cam2SetupYValue;
+            viewModel.Cam2YSetupValue = 589;
+            var newValue = viewModel.Cam2YSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2SetupYValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2YSetupValue));
+            configService.Object.Cam2YSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3SetupXValueSetsAndChangeFired()
+        public void Cam3XSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.Cam3SetupXValue;
+            var oldValue = viewModel.Cam3XSetupValue;
+            configService.Object.Cam3XSetupValue = oldValue;
 
-            viewModel.Cam3SetupXValue = 89;
-            var newValue = viewModel.Cam3SetupXValue;
+            viewModel.Cam3XSetupValue = 589;
+            var newValue = viewModel.Cam3XSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3SetupXValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3XSetupValue));
+            configService.Object.Cam3XSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3SetupYValueSetsAndChangeFired()
+        public void Cam3YSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.Cam3SetupYValue;
+            var oldValue = viewModel.Cam3YSetupValue;
+            configService.Object.Cam3YSetupValue = oldValue;
 
-            viewModel.Cam3SetupYValue = 89;
-            var newValue = viewModel.Cam3SetupYValue;
+            viewModel.Cam3YSetupValue = 589;
+            var newValue = viewModel.Cam3YSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3SetupYValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3YSetupValue));
+            configService.Object.Cam3YSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4SetupXValueSetsAndChangeFired()
+        public void Cam4XSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.Cam4SetupXValue;
+            var oldValue = viewModel.Cam4XSetupValue;
+            configService.Object.Cam4XSetupValue = oldValue;
 
-            viewModel.Cam4SetupXValue = 89;
-            var newValue = viewModel.Cam4SetupXValue;
+            viewModel.Cam4XSetupValue = 589;
+            var newValue = viewModel.Cam4XSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4SetupXValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4XSetupValue));
+            configService.Object.Cam4XSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4SetupYValueSetsAndChangeFired()
+        public void Cam4YSetupValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.Cam4SetupYValue;
+            var oldValue = viewModel.Cam4YSetupValue;
+            configService.Object.Cam4YSetupValue = oldValue;
 
-            viewModel.Cam4SetupYValue = 89;
-            var newValue = viewModel.Cam4SetupYValue;
+            viewModel.Cam4YSetupValue = 589;
+            var newValue = viewModel.Cam4YSetupValue;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(89);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4SetupYValue));
+            newValue.Should().Be(589);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4YSetupValue));
+            configService.Object.Cam4YSetupValue.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam1SetupSectorSetsAndChangeFired()
+        public void Cam1SetupSectorSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam1SetupSector;
+            configService.Object.Cam1SetupSector = oldValue;
 
-            viewModel.Cam1SetupSector = "5/20";
+            viewModel.Cam1SetupSector = "18/4";
             var newValue = viewModel.Cam1SetupSector;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("5/20");
+            newValue.Should().Be("18/4");
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam1SetupSector));
+            configService.Object.Cam1SetupSector.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam2SetupSectorSetsAndChangeFired()
+        public void Cam2SetupSectorSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam2SetupSector;
+            configService.Object.Cam2SetupSector = oldValue;
 
-            viewModel.Cam2SetupSector = "5/20";
+            viewModel.Cam2SetupSector = "18/4";
             var newValue = viewModel.Cam2SetupSector;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("5/20");
+            newValue.Should().Be("18/4");
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam2SetupSector));
+            configService.Object.Cam2SetupSector.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam3SetupSectorSetsAndChangeFired()
+        public void Cam3SetupSectorSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam3SetupSector;
+            configService.Object.Cam3SetupSector = oldValue;
 
-            viewModel.Cam3SetupSector = "5/20";
+            viewModel.Cam3SetupSector = "18/4";
             var newValue = viewModel.Cam3SetupSector;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("5/20");
+            newValue.Should().Be("18/4");
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam3SetupSector));
+            configService.Object.Cam3SetupSector.Should().Be(newValue);
         }
 
         [Test]
-        public void Cam4SetupSectorSetsAndChangeFired()
+        public void Cam4SetupSectorSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.Cam4SetupSector;
+            configService.Object.Cam4SetupSector = oldValue;
 
-            viewModel.Cam4SetupSector = "5/20";
+            viewModel.Cam4SetupSector = "18/4";
             var newValue = viewModel.Cam4SetupSector;
 
             newValue.Should().NotBe(oldValue);
-            newValue.Should().Be("5/20");
+            newValue.Should().Be("18/4");
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.Cam4SetupSector));
+            configService.Object.Cam4SetupSector.Should().Be(newValue);
         }
 
         [Test]

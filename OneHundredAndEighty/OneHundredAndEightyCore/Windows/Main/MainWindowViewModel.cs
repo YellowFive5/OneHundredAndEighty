@@ -524,7 +524,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 camsResolutionHeight = value;
-                configService.CamResolutionHeight = value;
+                configService.CamsResolutionHeight = value;
                 OnPropertyChanged(nameof(CamsResolutionHeight));
             }
         }
@@ -537,7 +537,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 camsResolutionWidth = value;
-                configService.CamResolutionWidth = value;
+                configService.CamsResolutionWidth = value;
                 OnPropertyChanged(nameof(CamsResolutionWidth));
             }
         }
@@ -563,7 +563,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             set
             {
                 movesDetectedSleepTimeValue = value;
-                configService.MoveDetectedSleepTimeValue = value;
+                configService.MovesDetectedSleepTimeValue = value;
                 OnPropertyChanged(nameof(MovesDetectedSleepTimeValue));
             }
         }
@@ -698,107 +698,107 @@ namespace OneHundredAndEightyCore.Windows.Main
             }
         }
 
-        private int cam1SetupXValue;
+        private int cam1XSetupValue;
 
-        public int Cam1SetupXValue
+        public int Cam1XSetupValue
         {
-            get => cam1SetupXValue;
+            get => cam1XSetupValue;
             set
             {
-                cam1SetupXValue = value;
-                configService.Cam1XValue = value;
-                OnPropertyChanged(nameof(Cam1SetupXValue));
+                cam1XSetupValue = value;
+                configService.Cam1XSetupValue = value;
+                OnPropertyChanged(nameof(Cam1XSetupValue));
             }
         }
 
-        private int cam1SetupYValue;
+        private int cam1YSetupValue;
 
-        public int Cam1SetupYValue
+        public int Cam1YSetupValue
         {
-            get => cam1SetupYValue;
+            get => cam1YSetupValue;
             set
             {
-                cam1SetupYValue = value;
-                configService.Cam1YValue = value;
-                OnPropertyChanged(nameof(Cam1SetupYValue));
+                cam1YSetupValue = value;
+                configService.Cam1YSetupValue = value;
+                OnPropertyChanged(nameof(Cam1YSetupValue));
             }
         }
 
-        private int cam2SetupXValue;
+        private int cam2XSetupValue;
 
-        public int Cam2SetupXValue
+        public int Cam2XSetupValue
         {
-            get => cam2SetupXValue;
+            get => cam2XSetupValue;
             set
             {
-                cam2SetupXValue = value;
-                configService.Cam2XValue = value;
-                OnPropertyChanged(nameof(Cam2SetupXValue));
+                cam2XSetupValue = value;
+                configService.Cam2XSetupValue = value;
+                OnPropertyChanged(nameof(Cam2XSetupValue));
             }
         }
 
-        private int cam2SetupYValue;
+        private int cam2YSetupValue;
 
-        public int Cam2SetupYValue
+        public int Cam2YSetupValue
         {
-            get => cam2SetupYValue;
+            get => cam2YSetupValue;
             set
             {
-                cam2SetupYValue = value;
-                configService.Cam2YValue = value;
-                OnPropertyChanged(nameof(Cam2SetupYValue));
+                cam2YSetupValue = value;
+                configService.Cam2YSetupValue = value;
+                OnPropertyChanged(nameof(Cam2YSetupValue));
             }
         }
 
-        private int cam3SetupXValue;
+        private int cam3XSetupValue;
 
-        public int Cam3SetupXValue
+        public int Cam3XSetupValue
         {
-            get => cam3SetupXValue;
+            get => cam3XSetupValue;
             set
             {
-                cam3SetupXValue = value;
-                configService.Cam3XValue = value;
-                OnPropertyChanged(nameof(Cam3SetupXValue));
+                cam3XSetupValue = value;
+                configService.Cam3XSetupValue = value;
+                OnPropertyChanged(nameof(Cam3XSetupValue));
             }
         }
 
-        private int cam3SetupYValue;
+        private int cam3YSetupValue;
 
-        public int Cam3SetupYValue
+        public int Cam3YSetupValue
         {
-            get => cam3SetupYValue;
+            get => cam3YSetupValue;
             set
             {
-                cam3SetupYValue = value;
-                configService.Cam3YValue = value;
-                OnPropertyChanged(nameof(Cam3SetupYValue));
+                cam3YSetupValue = value;
+                configService.Cam3YSetupValue = value;
+                OnPropertyChanged(nameof(Cam3YSetupValue));
             }
         }
 
-        private int cam4SetupXValue;
+        private int cam4XSetupValue;
 
-        public int Cam4SetupXValue
+        public int Cam4XSetupValue
         {
-            get => cam4SetupXValue;
+            get => cam4XSetupValue;
             set
             {
-                cam4SetupXValue = value;
-                configService.Cam4XValue = value;
-                OnPropertyChanged(nameof(Cam4SetupXValue));
+                cam4XSetupValue = value;
+                configService.Cam4XSetupValue = value;
+                OnPropertyChanged(nameof(Cam4XSetupValue));
             }
         }
 
-        private int cam4SetupYValue;
+        private int cam4YSetupValue;
 
-        public int Cam4SetupYValue
+        public int Cam4YSetupValue
         {
-            get => cam4SetupYValue;
+            get => cam4YSetupValue;
             set
             {
-                cam4SetupYValue = value;
-                configService.Cam4YValue = value;
-                OnPropertyChanged(nameof(Cam4SetupYValue));
+                cam4YSetupValue = value;
+                configService.Cam4YSetupValue = value;
+                OnPropertyChanged(nameof(Cam4YSetupValue));
             }
         }
 
@@ -1173,10 +1173,10 @@ namespace OneHundredAndEightyCore.Windows.Main
             Cam3Id = configService.Cam3Id;
             Cam4Id = configService.Cam4Id;
             CamsFovAngle = configService.CamsFovAngle;
-            CamsResolutionWidth = configService.CamResolutionWidth;
-            CamsResolutionHeight = configService.CamResolutionHeight;
+            CamsResolutionWidth = configService.CamsResolutionWidth;
+            CamsResolutionHeight = configService.CamsResolutionHeight;
             MovesExtractionValue = configService.MovesExtractionValue;
-            MovesDetectedSleepTimeValue = configService.MoveDetectedSleepTimeValue;
+            MovesDetectedSleepTimeValue = configService.MovesDetectedSleepTimeValue;
             MovesNoiseValue = configService.MovesNoiseValue;
             SmoothGaussValue = configService.SmoothGaussValue;
             ThresholdSleepTimeValue = configService.ThresholdSleepTimeValue;
@@ -1187,14 +1187,14 @@ namespace OneHundredAndEightyCore.Windows.Main
             ToCam2Distance = configService.ToCam2Distance;
             ToCam3Distance = configService.ToCam3Distance;
             ToCam4Distance = configService.ToCam4Distance;
-            Cam1SetupXValue = configService.Cam1XValue;
-            Cam1SetupYValue = configService.Cam1YValue;
-            Cam2SetupXValue = configService.Cam2XValue;
-            Cam2SetupYValue = configService.Cam2YValue;
-            Cam3SetupXValue = configService.Cam3XValue;
-            Cam3SetupYValue = configService.Cam3YValue;
-            Cam4SetupXValue = configService.Cam4XValue;
-            Cam4SetupYValue = configService.Cam4YValue;
+            Cam1XSetupValue = configService.Cam1XSetupValue;
+            Cam1YSetupValue = configService.Cam1YSetupValue;
+            Cam2XSetupValue = configService.Cam2XSetupValue;
+            Cam2YSetupValue = configService.Cam2YSetupValue;
+            Cam3XSetupValue = configService.Cam3XSetupValue;
+            Cam3YSetupValue = configService.Cam3YSetupValue;
+            Cam4XSetupValue = configService.Cam4XSetupValue;
+            Cam4YSetupValue = configService.Cam4YSetupValue;
 
             Cam1SetupSector = configService.Cam1SetupSector;
             Cam2SetupSector = configService.Cam2SetupSector;
@@ -1212,14 +1212,14 @@ namespace OneHundredAndEightyCore.Windows.Main
                                                                                  Cam3SetupSector);
             var calibratedCam4SetupPoint = MeasureService.CalculateCamSetupPoint(ToCam4Distance,
                                                                                  Cam4SetupSector);
-            Cam1SetupXValue = (int) calibratedCam1SetupPoint.X;
-            Cam1SetupYValue = (int) calibratedCam1SetupPoint.Y;
-            Cam2SetupXValue = (int) calibratedCam2SetupPoint.X;
-            Cam2SetupYValue = (int) calibratedCam2SetupPoint.Y;
-            Cam3SetupXValue = (int) calibratedCam3SetupPoint.X;
-            Cam3SetupYValue = (int) calibratedCam3SetupPoint.Y;
-            Cam4SetupXValue = (int) calibratedCam4SetupPoint.X;
-            Cam4SetupYValue = (int) calibratedCam4SetupPoint.Y;
+            Cam1XSetupValue = (int) calibratedCam1SetupPoint.X;
+            Cam1YSetupValue = (int) calibratedCam1SetupPoint.Y;
+            Cam2XSetupValue = (int) calibratedCam2SetupPoint.X;
+            Cam2YSetupValue = (int) calibratedCam2SetupPoint.Y;
+            Cam3XSetupValue = (int) calibratedCam3SetupPoint.X;
+            Cam3YSetupValue = (int) calibratedCam3SetupPoint.Y;
+            Cam4XSetupValue = (int) calibratedCam4SetupPoint.X;
+            Cam4YSetupValue = (int) calibratedCam4SetupPoint.Y;
         }
 
         #endregion

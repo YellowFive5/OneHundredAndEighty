@@ -17,7 +17,7 @@ namespace OneHundredAndEightyCore.Common
             this.dbService = dbService;
         }
 
-        public double DbVersion { get; set; }
+        public double DbVersion { get; private set; }
         public double Cam1ThresholdSliderValue { get; set; }
         public double Cam2ThresholdSliderValue { get; set; }
         public double Cam3ThresholdSliderValue { get; set; }
@@ -38,16 +38,16 @@ namespace OneHundredAndEightyCore.Common
         public double Cam2SurfaceCenterSliderValue { get; set; }
         public double Cam3SurfaceCenterSliderValue { get; set; }
         public double Cam4SurfaceCenterSliderValue { get; set; }
-        public int Cam1XValue { get; set; }
-        public int Cam2XValue { get; set; }
-        public int Cam3XValue { get; set; }
-        public int Cam4XValue { get; set; }
-        public int Cam1YValue { get; set; }
-        public int Cam2YValue { get; set; }
-        public int Cam3YValue { get; set; }
-        public int Cam4YValue { get; set; }
-        public int CamResolutionWidth { get; set; }
-        public int CamResolutionHeight { get; set; }
+        public int Cam1XSetupValue { get; set; }
+        public int Cam2XSetupValue { get; set; }
+        public int Cam3XSetupValue { get; set; }
+        public int Cam4XSetupValue { get; set; }
+        public int Cam1YSetupValue { get; set; }
+        public int Cam2YSetupValue { get; set; }
+        public int Cam3YSetupValue { get; set; }
+        public int Cam4YSetupValue { get; set; }
+        public int CamsResolutionWidth { get; set; }
+        public int CamsResolutionHeight { get; set; }
         public int MovesExtractionValue { get; set; }
         public int MovesDartValue { get; set; }
         public int MovesNoiseValue { get; set; }
@@ -60,7 +60,7 @@ namespace OneHundredAndEightyCore.Common
         public string Cam4Id { get; set; }
         public double ExtractionSleepTimeValue { get; set; }
         public double ThresholdSleepTimeValue { get; set; }
-        public double MoveDetectedSleepTimeValue { get; set; }
+        public double MovesDetectedSleepTimeValue { get; set; }
         public bool DetectionEnabled { get; set; }
         public double CamsDetectionWindowPositionLeft { get; set; }
         public double CamsDetectionWindowPositionTop { get; set; }
@@ -122,16 +122,16 @@ namespace OneHundredAndEightyCore.Common
             Cam2SurfaceCenterSliderValue = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.Cam2SurfaceCenterSlider));
             Cam3SurfaceCenterSliderValue = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.Cam3SurfaceCenterSlider));
             Cam4SurfaceCenterSliderValue = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.Cam4SurfaceCenterSlider));
-            Cam1XValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam1X));
-            Cam2XValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam2X));
-            Cam3XValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam3X));
-            Cam4XValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam4X));
-            Cam1YValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam1Y));
-            Cam2YValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam2Y));
-            Cam3YValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam3Y));
-            Cam4YValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam4Y));
-            CamResolutionWidth = Converter.ToInt(dbService.SettingsGetValue(SettingsType.ResolutionWidth));
-            CamResolutionHeight = Converter.ToInt(dbService.SettingsGetValue(SettingsType.ResolutionHeight));
+            Cam1XSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam1X));
+            Cam2XSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam2X));
+            Cam3XSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam3X));
+            Cam4XSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam4X));
+            Cam1YSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam1Y));
+            Cam2YSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam2Y));
+            Cam3YSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam3Y));
+            Cam4YSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam4Y));
+            CamsResolutionWidth = Converter.ToInt(dbService.SettingsGetValue(SettingsType.ResolutionWidth));
+            CamsResolutionHeight = Converter.ToInt(dbService.SettingsGetValue(SettingsType.ResolutionHeight));
             MovesExtractionValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MovesExtraction));
             MovesDartValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MovesDart));
             MovesNoiseValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MovesNoise));
@@ -144,7 +144,7 @@ namespace OneHundredAndEightyCore.Common
             Cam4Id = Converter.ToString(dbService.SettingsGetValue(SettingsType.Cam4Id));
             ExtractionSleepTimeValue = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.ExtractionSleepTime));
             ThresholdSleepTimeValue = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.ThresholdSleepTime));
-            MoveDetectedSleepTimeValue = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.MoveDetectedSleepTime));
+            MovesDetectedSleepTimeValue = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.MoveDetectedSleepTime));
             DetectionEnabled = Converter.ToBool(dbService.SettingsGetValue(SettingsType.WithDetectionCheckBox));
             CamsDetectionWindowPositionLeft = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.CamsDetectionWindowPositionLeft));
             CamsDetectionWindowPositionTop = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.CamsDetectionWindowPositionTop));
@@ -174,6 +174,8 @@ namespace OneHundredAndEightyCore.Common
             ClassicScoreWindowPositionTop = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.ClassicScoreWindowPositionTop));
             ClassicScoreWindowHeight = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.ClassicScoreWindowHeight));
             ClassicScoreWindowWidth = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.ClassicScoreWindowWidth));
+
+            // add tests when add new item
         }
 
         public void SaveSettings()
@@ -202,16 +204,16 @@ namespace OneHundredAndEightyCore.Common
             dbService.SettingsSetValue(SettingsType.Cam2SurfaceCenterSlider, Converter.ToString(Cam2SurfaceCenterSliderValue));
             dbService.SettingsSetValue(SettingsType.Cam3SurfaceCenterSlider, Converter.ToString(Cam3SurfaceCenterSliderValue));
             dbService.SettingsSetValue(SettingsType.Cam4SurfaceCenterSlider, Converter.ToString(Cam4SurfaceCenterSliderValue));
-            dbService.SettingsSetValue(SettingsType.Cam1X, Converter.ToString(Cam1XValue));
-            dbService.SettingsSetValue(SettingsType.Cam2X, Converter.ToString(Cam2XValue));
-            dbService.SettingsSetValue(SettingsType.Cam3X, Converter.ToString(Cam3XValue));
-            dbService.SettingsSetValue(SettingsType.Cam4X, Converter.ToString(Cam4XValue));
-            dbService.SettingsSetValue(SettingsType.Cam1Y, Converter.ToString(Cam1YValue));
-            dbService.SettingsSetValue(SettingsType.Cam2Y, Converter.ToString(Cam2YValue));
-            dbService.SettingsSetValue(SettingsType.Cam3Y, Converter.ToString(Cam3YValue));
-            dbService.SettingsSetValue(SettingsType.Cam4Y, Converter.ToString(Cam4YValue));
-            dbService.SettingsSetValue(SettingsType.ResolutionWidth, Converter.ToString(CamResolutionWidth));
-            dbService.SettingsSetValue(SettingsType.ResolutionHeight, Converter.ToString(CamResolutionHeight));
+            dbService.SettingsSetValue(SettingsType.Cam1X, Converter.ToString(Cam1XSetupValue));
+            dbService.SettingsSetValue(SettingsType.Cam2X, Converter.ToString(Cam2XSetupValue));
+            dbService.SettingsSetValue(SettingsType.Cam3X, Converter.ToString(Cam3XSetupValue));
+            dbService.SettingsSetValue(SettingsType.Cam4X, Converter.ToString(Cam4XSetupValue));
+            dbService.SettingsSetValue(SettingsType.Cam1Y, Converter.ToString(Cam1YSetupValue));
+            dbService.SettingsSetValue(SettingsType.Cam2Y, Converter.ToString(Cam2YSetupValue));
+            dbService.SettingsSetValue(SettingsType.Cam3Y, Converter.ToString(Cam3YSetupValue));
+            dbService.SettingsSetValue(SettingsType.Cam4Y, Converter.ToString(Cam4YSetupValue));
+            dbService.SettingsSetValue(SettingsType.ResolutionWidth, Converter.ToString(CamsResolutionWidth));
+            dbService.SettingsSetValue(SettingsType.ResolutionHeight, Converter.ToString(CamsResolutionHeight));
             dbService.SettingsSetValue(SettingsType.MovesExtraction, Converter.ToString(MovesExtractionValue));
             dbService.SettingsSetValue(SettingsType.MovesDart, Converter.ToString(MovesDartValue));
             dbService.SettingsSetValue(SettingsType.MovesNoise, Converter.ToString(MovesNoiseValue));
@@ -224,7 +226,7 @@ namespace OneHundredAndEightyCore.Common
             dbService.SettingsSetValue(SettingsType.Cam4Id, Converter.ToString(Cam4Id));
             dbService.SettingsSetValue(SettingsType.ExtractionSleepTime, Converter.ToString(ExtractionSleepTimeValue));
             dbService.SettingsSetValue(SettingsType.ThresholdSleepTime, Converter.ToString(ThresholdSleepTimeValue));
-            dbService.SettingsSetValue(SettingsType.MoveDetectedSleepTime, Converter.ToString(MoveDetectedSleepTimeValue));
+            dbService.SettingsSetValue(SettingsType.MoveDetectedSleepTime, Converter.ToString(MovesDetectedSleepTimeValue));
             dbService.SettingsSetValue(SettingsType.WithDetectionCheckBox, Converter.ToString(DetectionEnabled));
             dbService.SettingsSetValue(SettingsType.CamsDetectionWindowPositionLeft, Converter.ToString(CamsDetectionWindowPositionLeft));
             dbService.SettingsSetValue(SettingsType.CamsDetectionWindowPositionTop, Converter.ToString(CamsDetectionWindowPositionTop));
@@ -254,6 +256,8 @@ namespace OneHundredAndEightyCore.Common
             dbService.SettingsSetValue(SettingsType.ClassicScoreWindowPositionTop, Converter.ToString(ClassicScoreWindowPositionTop));
             dbService.SettingsSetValue(SettingsType.ClassicScoreWindowHeight, Converter.ToString(ClassicScoreWindowHeight));
             dbService.SettingsSetValue(SettingsType.ClassicScoreWindowWidth, Converter.ToString(ClassicScoreWindowWidth));
+
+            // add tests when add new item
         }
     }
 }

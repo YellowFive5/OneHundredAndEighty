@@ -4,7 +4,7 @@
     {
         void SaveSettings();
         void LoadSettings();
-        double DbVersion { get; set; }
+        double DbVersion { get; }
         double Cam1ThresholdSliderValue { get; set; }
         double Cam2ThresholdSliderValue { get; set; }
         double Cam3ThresholdSliderValue { get; set; }
@@ -25,16 +25,16 @@
         double Cam2SurfaceCenterSliderValue { get; set; }
         double Cam3SurfaceCenterSliderValue { get; set; }
         double Cam4SurfaceCenterSliderValue { get; set; }
-        int Cam1XValue { get; set; }
-        int Cam2XValue { get; set; }
-        int Cam3XValue { get; set; }
-        int Cam4XValue { get; set; }
-        int Cam1YValue { get; set; }
-        int Cam2YValue { get; set; }
-        int Cam3YValue { get; set; }
-        int Cam4YValue { get; set; }
-        int CamResolutionWidth { get; set; }
-        int CamResolutionHeight { get; set; }
+        int Cam1XSetupValue { get; set; }
+        int Cam2XSetupValue { get; set; }
+        int Cam3XSetupValue { get; set; }
+        int Cam4XSetupValue { get; set; }
+        int Cam1YSetupValue { get; set; }
+        int Cam2YSetupValue { get; set; }
+        int Cam3YSetupValue { get; set; }
+        int Cam4YSetupValue { get; set; }
+        int CamsResolutionWidth { get; set; }
+        int CamsResolutionHeight { get; set; }
         int MovesExtractionValue { get; set; }
         int MovesDartValue { get; set; }
         int MovesNoiseValue { get; set; }
@@ -47,7 +47,7 @@
         string Cam4Id { get; set; }
         double ExtractionSleepTimeValue { get; set; }
         double ThresholdSleepTimeValue { get; set; }
-        double MoveDetectedSleepTimeValue { get; set; }
+        double MovesDetectedSleepTimeValue { get; set; }
         bool DetectionEnabled { get; set; }
         double CamsDetectionWindowPositionLeft { get; set; }
         double CamsDetectionWindowPositionTop { get; set; }

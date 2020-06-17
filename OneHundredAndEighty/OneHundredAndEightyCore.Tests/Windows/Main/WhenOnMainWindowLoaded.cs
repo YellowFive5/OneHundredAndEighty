@@ -26,6 +26,22 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             detectionService.SetupAdd(m => m.OnErrorOccurred += e => { });
         }
 
+        private MainWindowViewModel CreateViewModel(IConfigService configService)
+        {
+            return new MainWindowViewModel(logger.Object,
+                                           null,
+                                           dbService.Object,
+                                           versionChecker.Object,
+                                           null,
+                                           null,
+                                           null,
+                                           detectionService.Object,
+                                           null,
+                                           null,
+                                           configService,
+                                           null);
+        }
+
         [Test]
         public void VersionIsChecked()
         {
@@ -107,7 +123,8 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         [Test]
         public void MainWindowHeightSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.MainWindowHeight))).Returns(1555.55);
+            configService.Object.MainWindowHeight = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
             viewModel.MainWindowHeight = 0.999;
 
             viewModel.OnMainWindowLoaded();
@@ -118,404 +135,407 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         [Test]
         public void MainWindowWidthSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.MainWindowWidth))).Returns(755.88);
+            configService.Object.MainWindowWidth = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
             viewModel.MainWindowWidth = 0.999;
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.MainWindowWidth.Should().Be(755.88);
-        }
-
-        [Test]
-        public void MainWindowPositionTopSets()
-        {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.MainWindowPositionTop))).Returns(99.99);
-            viewModel.MainWindowPositionTop = 0.999;
-
-            viewModel.OnMainWindowLoaded();
-
-            viewModel.MainWindowPositionTop.Should().Be(99.99);
+            viewModel.MainWindowWidth.Should().Be(1555.55);
         }
 
         [Test]
         public void MainWindowPositionLeftSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.MainWindowPositionLeft))).Returns(133.03);
+            configService.Object.MainWindowPositionLeft = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
             viewModel.MainWindowPositionLeft = 0.999;
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.MainWindowPositionLeft.Should().Be(133.03);
+            viewModel.MainWindowPositionLeft.Should().Be(1555.55);
+        }
+
+        [Test]
+        public void MainWindowPositionTopSets()
+        {
+            configService.Object.MainWindowPositionTop = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
+            viewModel.MainWindowPositionTop = 0.999;
+
+            viewModel.OnMainWindowLoaded();
+
+            viewModel.MainWindowPositionTop.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam1ThresholdSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam1ThresholdSlider))).Returns(77.88);
-            viewModel.Cam1ThresholdSliderValue = 0.999;
+            configService.Object.Cam1ThresholdSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1ThresholdSliderValue.Should().Be(77.88);
+            viewModel.Cam1ThresholdSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam2ThresholdSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam2ThresholdSlider))).Returns(14.88);
-            viewModel.Cam2ThresholdSliderValue = 0.999;
+            configService.Object.Cam2ThresholdSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2ThresholdSliderValue.Should().Be(14.88);
+            viewModel.Cam2ThresholdSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam3ThresholdSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam3ThresholdSlider))).Returns(78.89);
-            viewModel.Cam3ThresholdSliderValue = 0.999;
+            configService.Object.Cam3ThresholdSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3ThresholdSliderValue.Should().Be(78.89);
+            viewModel.Cam3ThresholdSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam4ThresholdSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam4ThresholdSlider))).Returns(44.11);
-            viewModel.Cam4ThresholdSliderValue = 0.999;
+            configService.Object.Cam4ThresholdSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4ThresholdSliderValue.Should().Be(44.11);
+            viewModel.Cam4ThresholdSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam1SurfaceSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam1SurfaceSlider))).Returns(100.11);
-            viewModel.Cam1SurfaceSliderValue = 0.999;
+            configService.Object.Cam1SurfaceSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1SurfaceSliderValue.Should().Be(100.11);
+            viewModel.Cam1SurfaceSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam2SurfaceSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam2SurfaceSlider))).Returns(222.11);
-            viewModel.Cam2SurfaceSliderValue = 0.999;
+            configService.Object.Cam2SurfaceSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2SurfaceSliderValue.Should().Be(222.11);
+            viewModel.Cam2SurfaceSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam3SurfaceSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam3SurfaceSlider))).Returns(333.11);
-            viewModel.Cam3SurfaceSliderValue = 0.999;
+            configService.Object.Cam3SurfaceSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3SurfaceSliderValue.Should().Be(333.11);
+            viewModel.Cam3SurfaceSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam4SurfaceSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam4SurfaceSlider))).Returns(444.11);
-            viewModel.Cam4SurfaceSliderValue = 0.999;
+            configService.Object.Cam4SurfaceSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4SurfaceSliderValue.Should().Be(444.11);
+            viewModel.Cam4SurfaceSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam1SurfaceCenterSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam1SurfaceCenterSlider))).Returns(101.11);
-            viewModel.Cam1SurfaceCenterSliderValue = 0.999;
+            configService.Object.Cam1SurfaceCenterSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1SurfaceCenterSliderValue.Should().Be(101.11);
+            viewModel.Cam1SurfaceCenterSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam2SurfaceCenterSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam2SurfaceCenterSlider))).Returns(102.11);
-            viewModel.Cam2SurfaceCenterSliderValue = 0.999;
+            configService.Object.Cam2SurfaceCenterSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2SurfaceCenterSliderValue.Should().Be(102.11);
+            viewModel.Cam2SurfaceCenterSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam3SurfaceCenterSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam3SurfaceCenterSlider))).Returns(103.11);
-            viewModel.Cam3SurfaceCenterSliderValue = 0.999;
+            configService.Object.Cam3SurfaceCenterSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3SurfaceCenterSliderValue.Should().Be(103.11);
+            viewModel.Cam3SurfaceCenterSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam4SurfaceCenterSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam4SurfaceCenterSlider))).Returns(104.11);
-            viewModel.Cam4SurfaceCenterSliderValue = 0.999;
+            configService.Object.Cam4SurfaceCenterSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4SurfaceCenterSliderValue.Should().Be(104.11);
+            viewModel.Cam4SurfaceCenterSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam1RoiPosYSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam1RoiPosYSlider))).Returns(10.88);
-            viewModel.Cam1RoiPosYSliderValue = 0.999;
+            configService.Object.Cam1RoiPosYSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1RoiPosYSliderValue.Should().Be(10.88);
+            viewModel.Cam1RoiPosYSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam2RoiPosYSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam2RoiPosYSlider))).Returns(20.88);
-            viewModel.Cam2RoiPosYSliderValue = 0.999;
+            configService.Object.Cam2RoiPosYSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2RoiPosYSliderValue.Should().Be(20.88);
+            viewModel.Cam2RoiPosYSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam3RoiPosYSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam3RoiPosYSlider))).Returns(30.88);
-            viewModel.Cam3RoiPosYSliderValue = 0.999;
+            configService.Object.Cam3RoiPosYSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3RoiPosYSliderValue.Should().Be(30.88);
+            viewModel.Cam3RoiPosYSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam4RoiPosYSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam4RoiPosYSlider))).Returns(40.88);
-            viewModel.Cam4RoiPosYSliderValue = 0.999;
+            configService.Object.Cam4RoiPosYSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4RoiPosYSliderValue.Should().Be(40.88);
+            viewModel.Cam4RoiPosYSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam1RoiHeightSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam1RoiHeightSlider))).Returns(11.11);
-            viewModel.Cam1RoiHeightSliderValue = 0.999;
+            configService.Object.Cam1RoiHeightSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1RoiHeightSliderValue.Should().Be(11.11);
+            viewModel.Cam1RoiHeightSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam2RoiHeightSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam2RoiHeightSlider))).Returns(21.11);
-            viewModel.Cam2RoiHeightSliderValue = 0.999;
+            configService.Object.Cam2RoiHeightSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2RoiHeightSliderValue.Should().Be(21.11);
+            viewModel.Cam2RoiHeightSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam3RoiHeightSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam3RoiHeightSlider))).Returns(31.11);
-            viewModel.Cam3RoiHeightSliderValue = 0.999;
+            configService.Object.Cam3RoiHeightSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3RoiHeightSliderValue.Should().Be(31.11);
+            viewModel.Cam3RoiHeightSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam4RoiHeightSliderValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.Cam4RoiHeightSlider))).Returns(41.11);
-            viewModel.Cam4RoiHeightSliderValue = 0.999;
+            configService.Object.Cam4RoiHeightSliderValue = 1555.55;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4RoiHeightSliderValue.Should().Be(41.11);
+            viewModel.Cam4RoiHeightSliderValue.Should().Be(1555.55);
         }
 
         [Test]
         public void Cam1EnabledSets()
         {
-            configService.Setup(x => x.Read<bool>(It.Is<SettingsType>(s => s == SettingsType.Cam1CheckBox))).Returns(true);
-            viewModel.Cam1Enabled = false;
+            configService.Object.Cam1Enabled = true;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1Enabled.Should().Be(true);
+            viewModel.Cam1Enabled.Should().BeTrue();
         }
 
         [Test]
         public void Cam2EnabledSets()
         {
-            configService.Setup(x => x.Read<bool>(It.Is<SettingsType>(s => s == SettingsType.Cam2CheckBox))).Returns(true);
-            viewModel.Cam2Enabled = false;
+            configService.Object.Cam2Enabled = true;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2Enabled.Should().Be(true);
+            viewModel.Cam2Enabled.Should().BeTrue();
         }
 
         [Test]
         public void Cam3EnabledSets()
         {
-            configService.Setup(x => x.Read<bool>(It.Is<SettingsType>(s => s == SettingsType.Cam3CheckBox))).Returns(true);
-            viewModel.Cam3Enabled = false;
+            configService.Object.Cam3Enabled = true;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3Enabled.Should().Be(true);
+            viewModel.Cam3Enabled.Should().BeTrue();
         }
 
         [Test]
         public void Cam4EnabledSets()
         {
-            configService.Setup(x => x.Read<bool>(It.Is<SettingsType>(s => s == SettingsType.Cam4CheckBox))).Returns(true);
-            viewModel.Cam4Enabled = false;
+            configService.Object.Cam4Enabled = true;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4Enabled.Should().Be(true);
+            viewModel.Cam4Enabled.Should().BeTrue();
         }
 
         [Test]
         public void DetectionEnabledSets()
         {
-            configService.Setup(x => x.Read<bool>(It.Is<SettingsType>(s => s == SettingsType.WithDetectionCheckBox))).Returns(true);
-            viewModel.DetectionEnabled = false;
+            configService.Object.DetectionEnabled = true;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.DetectionEnabled.Should().Be(true);
+            viewModel.DetectionEnabled.Should().BeTrue();
         }
 
         [Test]
         public void Cam1IdSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam1Id))).Returns("13G343");
-            viewModel.Cam1Id = "trash";
+            configService.Object.Cam1Id = "34rre5";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1Id.Should().Be("13G343");
+            viewModel.Cam1Id.Should().Be("34rre5");
         }
 
         [Test]
         public void Cam2IdSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam2Id))).Returns("7644bf");
-            viewModel.Cam2Id = "trash";
+            configService.Object.Cam2Id = "34rre5";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2Id.Should().Be("7644bf");
+            viewModel.Cam2Id.Should().Be("34rre5");
         }
 
         [Test]
         public void Cam3IdSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam3Id))).Returns("8uty67");
-            viewModel.Cam3Id = "trash";
+            configService.Object.Cam3Id = "34rre5";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3Id.Should().Be("8uty67");
+            viewModel.Cam3Id.Should().Be("34rre5");
         }
 
         [Test]
         public void Cam4IdSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam4Id))).Returns("we32dg");
-            viewModel.Cam4Id = "trash";
+            configService.Object.Cam4Id = "34rre5";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4Id.Should().Be("we32dg");
+            viewModel.Cam4Id.Should().Be("34rre5");
         }
 
         [Test]
         public void CamsFovAngleSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.CamFovAngle))).Returns(75.8);
-            viewModel.CamsFovAngle = 0.01;
+            configService.Object.CamsFovAngle = 75.5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.CamsFovAngle.Should().Be(75.8);
+            viewModel.CamsFovAngle.Should().Be(75.5);
         }
 
         [Test]
         public void CamsResolutionWidthSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.ResolutionWidth))).Returns(1280);
-            viewModel.CamsResolutionWidth = 0;
+            configService.Object.CamsResolutionWidth = 1920;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.CamsResolutionWidth.Should().Be(1280);
+            viewModel.CamsResolutionWidth.Should().Be(1920);
         }
 
         [Test]
         public void CamsResolutionHeightSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.ResolutionHeight))).Returns(768);
-            viewModel.CamsResolutionHeight = 0;
+            configService.Object.CamsResolutionHeight = 1028;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.CamsResolutionHeight.Should().Be(768);
+            viewModel.CamsResolutionHeight.Should().Be(1028);
         }
 
         [Test]
         public void MovesExtractionValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.MovesExtraction))).Returns(5000);
-            viewModel.MovesExtractionValue = 0;
+            configService.Object.MovesExtractionValue = 500;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.MovesExtractionValue.Should().Be(5000);
+            viewModel.MovesExtractionValue.Should().Be(500);
         }
 
         [Test]
         public void MovesDetectedSleepTimeValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.MoveDetectedSleepTime))).Returns(0.25);
-            viewModel.MovesDetectedSleepTimeValue = 0;
+            configService.Object.MovesDetectedSleepTimeValue = 0.25;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
@@ -525,19 +545,19 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         [Test]
         public void MovesNoiseValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.MovesNoise))).Returns(1500);
-            viewModel.MovesNoiseValue = 0;
+            configService.Object.MovesNoiseValue = 200;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.MovesNoiseValue.Should().Be(1500);
+            viewModel.MovesNoiseValue.Should().Be(200);
         }
 
         [Test]
         public void SmoothGaussValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.SmoothGauss))).Returns(5);
-            viewModel.SmoothGaussValue = 0;
+            configService.Object.SmoothGaussValue = 5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
@@ -547,74 +567,74 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         [Test]
         public void ThresholdSleepTimeValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.ThresholdSleepTime))).Returns(0.55);
-            viewModel.ThresholdSleepTimeValue = 0;
+            configService.Object.ThresholdSleepTimeValue = 5.5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.ThresholdSleepTimeValue.Should().Be(0.55);
+            viewModel.ThresholdSleepTimeValue.Should().Be(5.5);
         }
 
         [Test]
         public void ExtractionSleepTimeValueSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.ExtractionSleepTime))).Returns(0.88);
-            viewModel.ExtractionSleepTimeValue = 0;
+            configService.Object.ExtractionSleepTimeValue = 8.5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.ExtractionSleepTimeValue.Should().Be(0.88);
+            viewModel.ExtractionSleepTimeValue.Should().Be(8.5);
         }
 
         [Test]
         public void MinContourArcValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.MinContourArc))).Returns(500);
-            viewModel.MinContourArcValue = 0;
+            configService.Object.MinContourArcValue = 100;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.MinContourArcValue.Should().Be(500);
+            viewModel.MinContourArcValue.Should().Be(100);
         }
 
         [Test]
         public void MovesDartValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.MovesDart))).Returns(700);
-            viewModel.MovesDartValue = 0;
+            configService.Object.MovesDartValue = 300;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.MovesDartValue.Should().Be(700);
+            viewModel.MovesDartValue.Should().Be(300);
         }
 
         [Test]
         public void ToCam1DistanceSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.ToCam1Distance))).Returns(15.5);
-            viewModel.ToCam1Distance = 0;
+            configService.Object.ToCam1Distance = 35.5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.ToCam1Distance.Should().Be(15.5);
+            viewModel.ToCam1Distance.Should().Be(35.5);
         }
 
         [Test]
         public void ToCam2DistanceSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.ToCam2Distance))).Returns(25.5);
-            viewModel.ToCam2Distance = 0;
+            configService.Object.ToCam2Distance = 35.5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.ToCam2Distance.Should().Be(25.5);
+            viewModel.ToCam2Distance.Should().Be(35.5);
         }
 
         [Test]
         public void ToCam3DistanceSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.ToCam3Distance))).Returns(35.5);
-            viewModel.ToCam3Distance = 0;
+            configService.Object.ToCam3Distance = 35.5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
@@ -624,144 +644,144 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         [Test]
         public void ToCam4DistanceSets()
         {
-            configService.Setup(x => x.Read<double>(It.Is<SettingsType>(s => s == SettingsType.ToCam4Distance))).Returns(45.5);
-            viewModel.ToCam4Distance = 0;
+            configService.Object.ToCam4Distance = 35.5;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.ToCam4Distance.Should().Be(45.5);
+            viewModel.ToCam4Distance.Should().Be(35.5);
         }
 
         [Test]
-        public void Cam1SetupXValueSets()
+        public void Cam1XSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam1X))).Returns(100);
-            viewModel.Cam1SetupXValue = 0;
+            configService.Object.Cam1XSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1SetupXValue.Should().Be(100);
+            viewModel.Cam1XSetupValue.Should().Be(579);
         }
 
         [Test]
-        public void Cam1SetupYValueSets()
+        public void Cam1YSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam1Y))).Returns(101);
-            viewModel.Cam1SetupYValue = 0;
+            configService.Object.Cam1YSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1SetupYValue.Should().Be(101);
+            viewModel.Cam1YSetupValue.Should().Be(579);
         }
 
         [Test]
-        public void Cam2SetupXValueSets()
+        public void Cam2XSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam2X))).Returns(200);
-            viewModel.Cam2SetupXValue = 0;
+            configService.Object.Cam2XSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2SetupXValue.Should().Be(200);
+            viewModel.Cam2XSetupValue.Should().Be(579);
         }
 
         [Test]
-        public void Cam2SetupYValueSets()
+        public void Cam2YSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam2Y))).Returns(201);
-            viewModel.Cam2SetupYValue = 0;
+            configService.Object.Cam2YSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2SetupYValue.Should().Be(201);
+            viewModel.Cam2YSetupValue.Should().Be(579);
         }
 
         [Test]
-        public void Cam3SetupXValueSets()
+        public void Cam3XSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam3X))).Returns(300);
-            viewModel.Cam3SetupXValue = 0;
+            configService.Object.Cam3XSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3SetupXValue.Should().Be(300);
+            viewModel.Cam3XSetupValue.Should().Be(579);
         }
 
         [Test]
-        public void Cam3SetupYValueSets()
+        public void Cam3YSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam3Y))).Returns(301);
-            viewModel.Cam3SetupYValue = 0;
+            configService.Object.Cam3YSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3SetupYValue.Should().Be(301);
+            viewModel.Cam3YSetupValue.Should().Be(579);
         }
 
         [Test]
-        public void Cam4SetupXValueSets()
+        public void Cam4XSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam4X))).Returns(400);
-            viewModel.Cam4SetupXValue = 0;
+            configService.Object.Cam4XSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4SetupXValue.Should().Be(400);
+            viewModel.Cam4XSetupValue.Should().Be(579);
         }
 
         [Test]
-        public void Cam4SetupYValueSets()
+        public void Cam4YSetupValueSets()
         {
-            configService.Setup(x => x.Read<int>(It.Is<SettingsType>(s => s == SettingsType.Cam4Y))).Returns(401);
-            viewModel.Cam4SetupYValue = 0;
+            configService.Object.Cam4YSetupValue = 579;
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4SetupYValue.Should().Be(401);
+            viewModel.Cam4YSetupValue.Should().Be(579);
         }
 
         [Test]
         public void Cam1SetupSectorSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam1SetupSector))).Returns("5/20");
-            viewModel.Cam1SetupSector = "trash";
+            configService.Object.Cam1SetupSector = "20/1";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam1SetupSector.Should().Be("5/20");
+            viewModel.Cam1SetupSector.Should().Be("20/1");
         }
 
         [Test]
         public void Cam2SetupSectorSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam2SetupSector))).Returns("17/3");
-            viewModel.Cam2SetupSector = "trash";
+            configService.Object.Cam2SetupSector = "20/1";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam2SetupSector.Should().Be("17/3");
+            viewModel.Cam2SetupSector.Should().Be("20/1");
         }
 
         [Test]
         public void Cam3SetupSectorSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam3SetupSector))).Returns("3/19");
-            viewModel.Cam3SetupSector = "trash";
+            configService.Object.Cam3SetupSector = "20/1";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam3SetupSector.Should().Be("3/19");
+            viewModel.Cam3SetupSector.Should().Be("20/1");
         }
 
         [Test]
         public void Cam4SetupSectorSets()
         {
-            configService.Setup(x => x.Read<string>(It.Is<SettingsType>(s => s == SettingsType.Cam4SetupSector))).Returns("16/8");
-            viewModel.Cam4SetupSector = "trash";
+            configService.Object.Cam4SetupSector = "20/1";
+            viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.Cam4SetupSector.Should().Be("16/8");
+            viewModel.Cam4SetupSector.Should().Be("20/1");
         }
 
         [Test]
