@@ -173,28 +173,72 @@ namespace OneHundredAndEightyCore.Recognition
             }
         }
 
-        public void DoSetupCaptures(List<double> slidersData)
+        public void DoSetupCaptures()
         {
-            var thresholdSlider = slidersData.ElementAt(0);
-            var roiPosYSlider = slidersData.ElementAt(3);
-            var roiHeightSlider = slidersData.ElementAt(4);
-            var resolutionWidth = slidersData.ElementAt(5);
-            var roiRectangle = new Rectangle(0,
-                                             (int) roiPosYSlider,
-                                             (int) resolutionWidth,
-                                             (int) roiHeightSlider);
+            double thresholdSliderTemp;
+            double surfaceSliderTemp;
+            double surfaceCenterSliderTemp;
+            double roiPosYSliderTemp;
+            double roiHeightSliderTemp;
+
+            switch (camNumber)
+            {
+                case CamNumber._1:
+                    thresholdSliderTemp = configService.Cam1ThresholdSliderValue;
+                    surfaceSliderTemp = configService.Cam1SurfaceSliderValue;
+                    surfaceCenterSliderTemp = configService.Cam1SurfaceCenterSliderValue;
+                    roiPosYSliderTemp = configService.Cam1RoiPosYSliderValue;
+                    roiHeightSliderTemp = configService.Cam1RoiHeightSliderValue;
+                    break;
+                case CamNumber._2:
+                    thresholdSliderTemp = configService.Cam2ThresholdSliderValue;
+                    surfaceSliderTemp = configService.Cam2SurfaceSliderValue;
+                    surfaceCenterSliderTemp = configService.Cam2SurfaceCenterSliderValue;
+                    roiPosYSliderTemp = configService.Cam2RoiPosYSliderValue;
+                    roiHeightSliderTemp = configService.Cam2RoiHeightSliderValue;
+                    break;
+                case CamNumber._3:
+                    thresholdSliderTemp = configService.Cam3ThresholdSliderValue;
+                    surfaceSliderTemp = configService.Cam3SurfaceSliderValue;
+                    surfaceCenterSliderTemp = configService.Cam3SurfaceCenterSliderValue;
+                    roiPosYSliderTemp = configService.Cam3RoiPosYSliderValue;
+                    roiHeightSliderTemp = configService.Cam3RoiHeightSliderValue;
+                    break;
+                case CamNumber._4:
+                    thresholdSliderTemp = configService.Cam4ThresholdSliderValue;
+                    surfaceSliderTemp = configService.Cam4SurfaceSliderValue;
+                    surfaceCenterSliderTemp = configService.Cam4SurfaceCenterSliderValue;
+                    roiPosYSliderTemp = configService.Cam4RoiPosYSliderValue;
+                    roiHeightSliderTemp = configService.Cam4RoiHeightSliderValue;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            var roiRectangleTemp = new Rectangle(0,
+                                                 (int) roiPosYSliderTemp,
+                                                 resolutionWidth,
+                                                 (int) roiHeightSliderTemp);
+            var slidersData = new List<double>
+                              {
+                                  surfaceSliderTemp,
+                                  surfaceCenterSliderTemp,
+                                  roiPosYSliderTemp,
+                                  roiHeightSliderTemp,
+                                  resolutionWidth
+                              };
 
             OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
             LinedFrame = drawService.DrawSetupLines(OriginFrame.Clone(), slidersData);
             RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
-            RoiFrame.ROI = roiRectangle;
+            RoiFrame.ROI = roiRectangleTemp;
             RoiFrame._SmoothGaussian(smoothGauss);
-            CvInvoke.Threshold(RoiFrame, RoiFrame, thresholdSlider, 255, ThresholdType.Binary);
+            CvInvoke.Threshold(RoiFrame, RoiFrame, thresholdSliderTemp, 255, ThresholdType.Binary);
         }
 
         public void DoCaptures()
         {
-            var slidersData = new List<double>()
+            var slidersData = new List<double>
                               {
                                   surfaceSlider,
                                   surfaceCenterSlider,

@@ -131,13 +131,13 @@ namespace OneHundredAndEightyCore.Common
         }
 
         public Image<Bgr, byte> DrawSetupLines(Image<Bgr, byte> image,
-                                               List<double> sliderData)
+                                               List<double> slidersData)
         {
-            var surfaceSlider = sliderData.ElementAt(1);
-            var surfaceCenterSlider = sliderData.ElementAt(2);
-            var roiPosYSlider = sliderData.ElementAt(3);
-            var roiHeightSlider = sliderData.ElementAt(4);
-            var resolutionWidth = sliderData.ElementAt(5);
+            var surfaceSlider = slidersData.ElementAt(0);
+            var surfaceCenterSlider = slidersData.ElementAt(1);
+            var roiPosYSlider = slidersData.ElementAt(2);
+            var roiHeightSlider = slidersData.ElementAt(3);
+            var resolutionWidth = slidersData.ElementAt(4);
 
             var roiRectangle = new Rectangle(0,
                                              (int) roiPosYSlider,

@@ -1388,8 +1388,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                                                             throwService);
                                    while (!cancelToken.IsCancellationRequested)
                                    {
-                                       var setupSlidersData = GetCamsSetupSlidersData(camNumber);
-                                       cam.DoSetupCaptures(setupSlidersData);
+                                       cam.DoSetupCaptures();
                                        Application.Current.Dispatcher.Invoke(() =>
                                                                              {
                                                                                  CamImage = cam.GetImage();
@@ -1410,59 +1409,6 @@ namespace OneHundredAndEightyCore.Windows.Main
                 messageBoxService.ShowError($"{e.Message} \n {e.StackTrace}");
                 StopCamSetupCapturing();
             }
-        }
-
-        private List<double> GetCamsSetupSlidersData(CamNumber camNumber)
-        {
-            List<double> slidersData;
-            switch (camNumber)
-            {
-                case CamNumber._1:
-                    slidersData = new List<double>
-                                  {
-                                      Cam1ThresholdSliderValue,
-                                      Cam1SurfaceSliderValue,
-                                      Cam1SurfaceCenterSliderValue,
-                                      Cam1RoiPosYSliderValue,
-                                      Cam1RoiHeightSliderValue
-                                  };
-                    break;
-                case CamNumber._2:
-                    slidersData = new List<double>
-                                  {
-                                      Cam2ThresholdSliderValue,
-                                      Cam2SurfaceSliderValue,
-                                      Cam2SurfaceCenterSliderValue,
-                                      Cam2RoiPosYSliderValue,
-                                      Cam2RoiHeightSliderValue
-                                  };
-                    break;
-                case CamNumber._3:
-                    slidersData = new List<double>
-                                  {
-                                      Cam3ThresholdSliderValue,
-                                      Cam3SurfaceSliderValue,
-                                      Cam3SurfaceCenterSliderValue,
-                                      Cam3RoiPosYSliderValue,
-                                      Cam3RoiHeightSliderValue
-                                  };
-                    break;
-                case CamNumber._4:
-                    slidersData = new List<double>
-                                  {
-                                      Cam4ThresholdSliderValue,
-                                      Cam4SurfaceSliderValue,
-                                      Cam4SurfaceCenterSliderValue,
-                                      Cam4RoiPosYSliderValue,
-                                      Cam4RoiHeightSliderValue
-                                  };
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(camNumber), camNumber, null);
-            }
-
-            slidersData.Add(CamsResolutionWidth);
-            return slidersData;
         }
 
         public void StopCamSetupCapturing()
