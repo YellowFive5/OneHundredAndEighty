@@ -11,12 +11,13 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using NLog;
+using OneHundredAndEightyCore.Recognition;
 using Color = System.Drawing.Color;
 using Point = System.Drawing.Point;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Recognition
+namespace OneHundredAndEightyCore.Common
 {
     public class DrawService
     {

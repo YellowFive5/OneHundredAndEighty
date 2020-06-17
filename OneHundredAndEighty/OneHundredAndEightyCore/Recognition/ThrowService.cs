@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using NLog;
+using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Game;
 
 #endregion
