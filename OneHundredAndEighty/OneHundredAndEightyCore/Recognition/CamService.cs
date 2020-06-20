@@ -31,7 +31,6 @@ namespace OneHundredAndEightyCore.Recognition
         private Image<Gray, byte> RoiFrameBackground { get; set; }
         private Image<Gray, byte> RoiLastThrowFrame { get; set; }
 
-        private DartContour dartContour;
         private readonly PointF camSetupPoint;
 
         private readonly int resolutionWidth;
@@ -265,14 +264,11 @@ namespace OneHundredAndEightyCore.Recognition
             var diffImage = CaptureAndDiff();
             var moves = diffImage.CountNonzero()[0];
 
-            logger.Debug($"Moves is '{moves}'");
-
             if (moves > movesNoise)
             {
                 response = ResponseType.Move;
             }
 
-            logger.Debug($"Response is '{response}'");
             return response;
         }
 
@@ -281,7 +277,6 @@ namespace OneHundredAndEightyCore.Recognition
             var response = ResponseType.Nothing;
             var diffImage = CaptureAndDiff();
             var moves = diffImage.CountNonzero()[0];
-            logger.Debug($"Moves is '{moves}'");
             var extractProcess = moves > movesExtraction;
             var throwDetected = !extractProcess && moves > movesDart;
 
@@ -300,56 +295,44 @@ namespace OneHundredAndEightyCore.Recognition
                 response = ResponseType.Extraction;
             }
 
-            logger.Debug($"Response is '{response}'");
             return response;
         }
 
         public void FindThrow()
         {
-            logger.Debug($"Find throw for cam_{camNumber} start");
-
             OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
             RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
             // ThresholdRoi(RoiFrame);
             var diffImage = CaptureAndDiff();
             RefreshImages(diffImage);
-
-            logger.Debug($"Find throw for cam_{camNumber} end");
         }
 
         private void RefreshImages(Image<Gray, byte> diffImage)
         {
-            logger.Debug($"Refreshing images for cam_{camNumber} start");
-
             RoiFrameBackground = RoiFrame.Clone();
             RoiLastThrowFrame = diffImage.Clone();
             DoCaptures();
             // GetImage();
-
-            logger.Debug($"Refreshing images for cam_{camNumber} end");
         }
 
         private Image<Gray, byte> CaptureAndDiff()
         {
-            logger.Debug($"Capture and diff for cam_{camNumber} start");
-
             var newImage = videoCapture.QueryFrame().ToImage<Gray, byte>().Not();
             // ThresholdRoi(newImage);
             var diffImage = RoiFrameBackground.AbsDiff(newImage);
-            logger.Debug($"Capture and diff for cam_{camNumber} end");
             return diffImage;
         }
 
         public void FindAndProcessDartContour()
         {
-            var found = FindDartContour(RoiLastThrowFrame);
-            if (found)
+            var dartContour = TryFindDartContour(RoiLastThrowFrame);
+            if (dartContour != null)
             {
-                ProcessDartContour();
+                ProcessDartContour(dartContour);
             }
         }
 
-        private bool FindDartContour(Image<Gray, byte> roiLastThrowFrame)
+        private DartContour TryFindDartContour(Image<Gray, byte> roiLastThrowFrame)
         {
             var allContours = new VectorOfVectorOfPoint();
             var matHierarсhy = new Mat();
@@ -374,17 +357,16 @@ namespace OneHundredAndEightyCore.Recognition
                 }
             }
 
-            var found = contourArс > 0;
-
-            if (found)
+            DartContour dartContour = null;
+            if (contourArс > 0)
             {
                 dartContour = new DartContour(contour, contourArс);
             }
 
-            return found;
+            return dartContour;
         }
 
-        private void ProcessDartContour()
+        private void ProcessDartContour(DartContour dartContour)
         {
             // Moments and centerpoint
             // var contourMoments = CvInvoke.Moments(processedContour);

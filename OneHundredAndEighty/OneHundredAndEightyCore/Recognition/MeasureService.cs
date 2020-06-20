@@ -84,16 +84,13 @@ namespace OneHundredAndEightyCore.Recognition
         public static PointF CalculateCamSetupPoint(double toCamCmDistance, string camSetupSector)
         {
             var toCamPixels = DartboardDiameterInPixels * toCamCmDistance / DartboardDiameterInCm;
-            var multiplier = Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(camSetupSector); // todo because useful
+            var multiplier = Converter.CamSetupSectorSettingValueToComboboxSelectedIndex(camSetupSector); // todo weird but useful
 
             var projectionCenterPoint = new PointF((float) DrawService.ProjectionFrameSide / 2,
                                                    (float) DrawService.ProjectionFrameSide / 2);
 
-            var calibratedCamSetupPoint = new PointF
-                                          {
-                                              X = (int) (projectionCenterPoint.X + Math.Cos(StartRadSector_11 + multiplier * SemiSectorStepRad) * toCamPixels),
-                                              Y = (int) (projectionCenterPoint.Y + Math.Sin(StartRadSector_11 + multiplier * SemiSectorStepRad) * toCamPixels)
-                                          };
+            var calibratedCamSetupPoint = new PointF((int) (projectionCenterPoint.X + Math.Cos(StartRadSector_11 + multiplier * SemiSectorStepRad) * toCamPixels),
+                                                     (int) (projectionCenterPoint.Y + Math.Sin(StartRadSector_11 + multiplier * SemiSectorStepRad) * toCamPixels));
             return calibratedCamSetupPoint;
         }
     }

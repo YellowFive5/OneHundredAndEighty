@@ -22,25 +22,27 @@ namespace OneHundredAndEightyCore.Recognition
             rays = new List<Ray>();
         }
 
+        public void SaveRay(Ray ray)
+        {
+            rays.Add(ray);
+        }
+
+        public void ClearRays()
+        {
+            rays.Clear();
+        }
+
         public DetectedThrow GetThrow()
         {
-            logger.Debug($"Calculate throw start");
-
             if (rays.Count < 2)
             {
-                logger.Debug($"Rays count < 2. Calculate throw end.");
-
                 rays.Clear();
                 return null;
             }
 
-            rays.ForEach(r => logger.Info($"Ray:'{r}'"));
-
             var firstBestRay = rays.OrderByDescending(i => i.ContourArc).ElementAt(0);
             var secondBestRay = rays.OrderByDescending(i => i.ContourArc).ElementAt(1);
             rays.Clear();
-
-            logger.Info($"Best rays:'{firstBestRay}' and '{secondBestRay}'");
 
             var poi = MeasureService.FindLinesIntersection(firstBestRay.CamPoint,
                                                            firstBestRay.RayPoint,
@@ -48,14 +50,11 @@ namespace OneHundredAndEightyCore.Recognition
                                                            secondBestRay.RayPoint);
             if (float.IsNaN(poi.X) || float.IsNaN(poi.Y))
             {
-                logger.Info($"Corrupted poi. Abort");
                 return null;
             }
 
             var thrw = PrepareThrowData(poi);
 
-            logger.Info($"Throw:{thrw}");
-            logger.Debug($"Calculate throw end.");
             return thrw;
         }
 
@@ -122,11 +121,6 @@ namespace OneHundredAndEightyCore.Recognition
             }
 
             return new DetectedThrow(poi, sector, type, DrawService.ProjectionFrameSide);
-        }
-
-        public void SaveRay(Ray ray)
-        {
-            rays.Add(ray);
         }
     }
 }

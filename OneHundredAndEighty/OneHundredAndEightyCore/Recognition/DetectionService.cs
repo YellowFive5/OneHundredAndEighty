@@ -105,8 +105,6 @@ namespace OneHundredAndEightyCore.Recognition
                                    {
                                        foreach (var cam in cams)
                                        {
-                                           logger.Debug($"Cam_{cam.camNumber} detection start");
-
                                            ResponseType response;
                                            if (workingMode == DetectionServiceWorkingMode.Crossing)
                                            {
@@ -136,45 +134,36 @@ namespace OneHundredAndEightyCore.Recognition
 
                                                    FindThrowOnRemainingCams(cam);
 
-                                                   logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Trow}'. Cycle break");
-
                                                    OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
                                                    break;
                                                }
-
                                                if (response == ResponseType.Extraction)
                                                {
                                                    OnStatusChanged?.Invoke(DetectionServiceStatus.DartsExtraction);
                                                    Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
-
+                                                   
                                                    // drawService.ProjectionClear();
                                                    cams.ForEach(c => c.DoCaptures());
 
-                                                   logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Extraction}'. Cycle break");
                                                    OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
                                                    break;
                                                }
                                            }
 
                                            Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
-
-                                           logger.Debug($"Cam_{cam.camNumber} detection end with response type '{ResponseType.Nothing}'");
                                        }
                                    }
-
-                                   cams.ForEach(c =>
-                                                {
-                                                    c.Dispose();
-                                                    // c.ClearImageBoxes();
-                                                });
-
-                                   logger.Info($"Detection for {cams.Count} cams end. Cancellation requested");
                                });
             }
             catch (Exception e)
             {
                 OnErrorOccurred?.Invoke(e);
-                StopDetection();
+            }
+            finally
+            {
+                cts?.Cancel();
+                throwService.ClearRays();
+                cams.ForEach(c => { c.Dispose(); });
             }
         }
 
@@ -185,8 +174,6 @@ namespace OneHundredAndEightyCore.Recognition
 
         private void FindThrowOnRemainingCams(CamService succeededCam)
         {
-            logger.Info($"Finding throws from remaining cams start. Succeeded cam: {succeededCam.camNumber}");
-
             foreach (var cam in cams.Where(cam => cam != succeededCam))
             {
                 cam.FindThrow();
@@ -198,8 +185,6 @@ namespace OneHundredAndEightyCore.Recognition
             {
                 InvokeOnThrowDetected(thrw);
             }
-
-            logger.Info($"Finding throws from remaining cams end");
         }
 
         public void InvokeOnThrowDetected(DetectedThrow thrw)

@@ -391,6 +391,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void MigrateFrom2_2to2_3()
         {
+
             UpdateDbVersion("2.3");
         }
 
