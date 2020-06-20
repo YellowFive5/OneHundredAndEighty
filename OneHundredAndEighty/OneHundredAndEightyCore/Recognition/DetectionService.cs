@@ -101,58 +101,15 @@ namespace OneHundredAndEightyCore.Recognition
                                {
                                    OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
 
-                                   cams.ForEach(c => c.DoCaptures());
+                                   cams.ForEach(c => c.DoDetectionCaptures());
 
                                    while (!cancelToken.IsCancellationRequested)
                                    {
+                                       Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
+
                                        foreach (var cam in cams)
                                        {
-                                           ResponseType response;
-                                           if (workingMode == DetectionServiceWorkingMode.Crossing)
-                                           {
-                                               response = ResponseType.Move;
-                                           }
-                                           else
-                                           {
-                                               response = withDetection
-                                                              ? cam.DetectMove()
-                                                              : ResponseType.Nothing;
-                                           }
-
-                                           if (response == ResponseType.Move)
-                                           {
-                                               OnStatusChanged?.Invoke(DetectionServiceStatus.ProcessingThrow);
-
-                                               if (workingMode != DetectionServiceWorkingMode.Crossing)
-                                               {
-                                                   Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
-                                               }
-
-                                               response = cam.DetectThrow();
-
-                                               if (response == ResponseType.Trow)
-                                               {
-                                                   cam.FindAndProcessDartContour();
-
-                                                   FindThrowOnRemainingCams(cam);
-
-                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
-                                                   break;
-                                               }
-                                               if (response == ResponseType.Extraction)
-                                               {
-                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.DartsExtraction);
-                                                   Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
-                                                   
-                                                   // drawService.ProjectionClear();
-                                                   cams.ForEach(c => c.DoCaptures());
-
-                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
-                                                   break;
-                                               }
-                                           }
-
-                                           Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
+                                           // todo new logic
                                        }
                                    }
                                });
@@ -178,7 +135,7 @@ namespace OneHundredAndEightyCore.Recognition
         {
             foreach (var cam in cams.Where(cam => cam != succeededCam))
             {
-                cam.FindThrow();
+                // cam.FindThrow();
                 cam.FindAndProcessDartContour();
             }
 

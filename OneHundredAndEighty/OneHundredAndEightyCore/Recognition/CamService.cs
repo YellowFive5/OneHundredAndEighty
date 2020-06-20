@@ -31,7 +31,7 @@ namespace OneHundredAndEightyCore.Recognition
         private Image<Bgr, byte> LinedFrame { get; set; }
         private Image<Gray, byte> RoiFrame { get; set; }
         private Image<Gray, byte> RoiFrameBackground { get; set; }
-        private Image<Gray, byte> RoiLastThrowFrame { get; set; }
+        private Image<Gray, byte> ThrowExtractedRoiFrame { get; set; }
 
         private readonly PointF camSetupPoint;
 
@@ -158,10 +158,10 @@ namespace OneHundredAndEightyCore.Recognition
                        : new BitmapImage();
         }
 
-        public BitmapImage GetLastRoiImage()
+        public BitmapImage GetThrowExtractedRoiFrameImage()
         {
-            return RoiLastThrowFrame?.Data != null
-                       ? Converter.EmguImageToBitmapImage(RoiLastThrowFrame)
+            return ThrowExtractedRoiFrame?.Data != null
+                       ? Converter.EmguImageToBitmapImage(ThrowExtractedRoiFrame)
                        : new BitmapImage();
         }
 
@@ -216,28 +216,20 @@ namespace OneHundredAndEightyCore.Recognition
                     throw new ArgumentOutOfRangeException();
             }
 
-            var roiRectangleTemp = new Rectangle(0,
-                                                 (int) roiPosYSliderTemp,
-                                                 resolutionWidth,
-                                                 (int) roiHeightSliderTemp);
             var slidersData = new List<double>
                               {
                                   surfaceSliderTemp,
                                   surfaceCenterSliderTemp,
                                   roiPosYSliderTemp,
                                   roiHeightSliderTemp,
-                                  resolutionWidth
+                                  resolutionWidth,
+                                  thresholdSliderTemp
                               };
 
-            OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
-            LinedFrame = drawService.DrawSetupLines(OriginFrame.Clone(), slidersData);
-            RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
-            RoiFrame.ROI = roiRectangleTemp;
-            RoiFrame._SmoothGaussian(smoothGauss);
-            CvInvoke.Threshold(RoiFrame, RoiFrame, thresholdSliderTemp, 255, ThresholdType.Binary);
+            DoCapturesInternal(slidersData);
         }
 
-        public void DoCaptures()
+        public void DoDetectionCaptures()
         {
             var slidersData = new List<double>
                               {
@@ -245,100 +237,58 @@ namespace OneHundredAndEightyCore.Recognition
                                   surfaceCenterSlider,
                                   roiPosYSlider,
                                   roiHeightSlider,
-                                  resolutionWidth
+                                  resolutionWidth,
+                                  thresholdSlider
                               };
+
+            DoCapturesInternal(slidersData);
+
+            // RoiFrameBackground = RoiFrame.Clone();
+            // RoiLastThrowFrame = RoiFrame.Clone();
+        }
+
+        private void DoCapturesInternal(List<double> slidersData)
+        {
+            var roiRectangleTemp = new Rectangle(0,
+                                                 (int) slidersData.ElementAt(2),
+                                                 (int) slidersData.ElementAt(4),
+                                                 (int) slidersData.ElementAt(3));
 
             OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
             LinedFrame = drawService.DrawSetupLines(OriginFrame.Clone(), slidersData);
             RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
-            RoiFrame.ROI = roiRectangle;
+            RoiFrame.ROI = roiRectangleTemp;
             RoiFrame._SmoothGaussian(smoothGauss);
-            CvInvoke.Threshold(RoiFrame, RoiFrame, thresholdSlider, 255, ThresholdType.Binary);
 
+            CvInvoke.Threshold(RoiFrame, RoiFrame, slidersData.ElementAt(5), 255, ThresholdType.Binary);
+        }
+
+        public int FindMoves()
+        {
+            var diffImage = RoiFrameBackground?.AbsDiff(RoiFrame);
+            ThrowExtractedRoiFrame = diffImage?.Clone();
+            diffImage?.Dispose();
             RoiFrameBackground = RoiFrame.Clone();
-            RoiLastThrowFrame = RoiFrame.Clone();
-        }
 
-        public ResponseType DetectMove()
-        {
-            var response = ResponseType.Nothing;
+            var moves = ThrowExtractedRoiFrame?.CountNonzero()[0];
 
-            var diffImage = CaptureAndDiff();
-            var moves = diffImage.CountNonzero()[0];
-
-            if (moves > movesNoise)
-            {
-                response = ResponseType.Move;
-            }
-
-            return response;
-        }
-
-        public ResponseType DetectThrow()
-        {
-            var response = ResponseType.Nothing;
-            var diffImage = CaptureAndDiff();
-            var moves = diffImage.CountNonzero()[0];
-            var extractProcess = moves > movesExtraction;
-            var throwDetected = !extractProcess && moves > movesDart;
-
-            if (throwDetected)
-            {
-                OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
-                RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
-                // ThresholdRoi(RoiFrame);
-                RefreshImages(diffImage);
-
-                response = ResponseType.Trow;
-            }
-
-            if (extractProcess)
-            {
-                response = ResponseType.Extraction;
-            }
-
-            return response;
-        }
-
-        public void FindThrow()
-        {
-            OriginFrame = videoCapture.QueryFrame().ToImage<Bgr, byte>();
-            RoiFrame = OriginFrame.Clone().Convert<Gray, byte>().Not();
-            // ThresholdRoi(RoiFrame);
-            var diffImage = CaptureAndDiff();
-            RefreshImages(diffImage);
-        }
-
-        private void RefreshImages(Image<Gray, byte> diffImage)
-        {
-            RoiFrameBackground = RoiFrame.Clone();
-            RoiLastThrowFrame = diffImage.Clone();
-            DoCaptures();
-            // GetImage();
-        }
-
-        private Image<Gray, byte> CaptureAndDiff()
-        {
-            var newImage = videoCapture.QueryFrame().ToImage<Gray, byte>().Not();
-            // ThresholdRoi(newImage);
-            var diffImage = RoiFrameBackground.AbsDiff(newImage);
-            return diffImage;
+            return moves ?? 0;
         }
 
         public void FindAndProcessDartContour()
         {
-            var dartContour = TryFindDartContour(RoiLastThrowFrame);
+            var dartContour = TryFindDartContour();
             if (dartContour != null)
             {
                 ProcessDartContour(dartContour);
             }
         }
 
-        private DartContour TryFindDartContour(Image<Gray, byte> roiLastThrowFrame)
+        private DartContour TryFindDartContour()
         {
             var allContours = new VectorOfVectorOfPoint();
             var matHierarсhy = new Mat();
-            CvInvoke.FindContours(roiLastThrowFrame,
+            CvInvoke.FindContours(ThrowExtractedRoiFrame,
                                   allContours,
                                   matHierarсhy,
                                   RetrType.External,
