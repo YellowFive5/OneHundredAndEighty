@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -13,7 +14,7 @@ namespace OneHundredAndEightyCore.Game.Processors
     {
         private readonly int writeOffPoints;
 
-        public FreeThrowsDoubleWriteOffPointsProcessor(Game game,
+        public FreeThrowsDoubleWriteOffPointsProcessor(Domain.Game game,
                                                        List<Player> players,
                                                        DBService dbService,
                                                        ScoreBoardService scoreBoard,

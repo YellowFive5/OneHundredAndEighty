@@ -1,6 +1,8 @@
 ﻿#region Usings
 
 using NLog;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 
 #endregion
 

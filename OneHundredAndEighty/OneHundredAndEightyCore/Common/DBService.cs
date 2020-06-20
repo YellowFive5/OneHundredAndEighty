@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Globalization;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game;
 
 #endregion
@@ -43,7 +45,7 @@ namespace OneHundredAndEightyCore.Common
 
         #region Game
 
-        public void GameSaveNew(Game.Game game, List<Player> players)
+        public void GameSaveNew(Domain.Game game, List<Player> players)
         {
             var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartTimestamp},{Column.EndTimestamp},{Column.Type})" +
                                $" VALUES ('{game.StartTimeStamp}','','{(int) game.Type}')";
@@ -55,7 +57,7 @@ namespace OneHundredAndEightyCore.Common
             StatisticSaveNew(newGameId, players);
         }
 
-        public void GameEnd(Game.Game game,
+        public void GameEnd(Domain.Game game,
                             Player winner = null,
                             GameResultType gameResultType = GameResultType.NotDefined)
         {
@@ -221,7 +223,7 @@ namespace OneHundredAndEightyCore.Common
 
         #region _180
 
-        public void _180SaveNew(Game.Game game, Player player)
+        public void _180SaveNew(Domain.Game game, Player player)
         {
             var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw3},{Column.Throw2},{Column.Throw1}, {Column.Timestamp})" +
                               $" VALUES ('{player.Id}','{game.Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{DateTime.Now}')";

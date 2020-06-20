@@ -4,7 +4,7 @@ using Emgu.CV.Util;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Recognition
+namespace OneHundredAndEightyCore.Domain
 {
     public class DartContour
     {

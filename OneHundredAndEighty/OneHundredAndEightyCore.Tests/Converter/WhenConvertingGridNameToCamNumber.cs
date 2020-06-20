@@ -4,6 +4,8 @@ using System;
 using FluentAssertions;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 
 #endregion
 

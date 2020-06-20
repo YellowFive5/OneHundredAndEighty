@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -14,7 +15,7 @@ namespace OneHundredAndEightyCore.Game.Processors
     {
         private readonly int legPoints;
 
-        public ClassicDoubleProcessor(Game game,
+        public ClassicDoubleProcessor(Domain.Game game,
                                       List<Player> players,
                                       DBService dbService,
                                       ScoreBoardService scoreBoard,

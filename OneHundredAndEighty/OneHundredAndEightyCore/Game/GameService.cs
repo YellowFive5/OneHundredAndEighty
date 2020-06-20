@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game.Processors;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.CamsDetection;
@@ -21,7 +23,7 @@ namespace OneHundredAndEightyCore.Game
         private readonly DetectionService detectionService;
         private readonly DBService dbService;
         private IGameProcessor GameProcessor { get; set; }
-        private Game Game { get; set; }
+        private Domain.Game Game { get; set; }
 
         public delegate void EndMatchDelegate();
 
@@ -53,7 +55,7 @@ namespace OneHundredAndEightyCore.Game
             players.AddIfNotNull(player1);
             players.AddIfNotNull(player2);
 
-            Game = new Game(gameType);
+            Game = new Domain.Game(gameType);
 
             dbService.GameSaveNew(Game, players);
 

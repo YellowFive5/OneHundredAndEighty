@@ -1,10 +1,12 @@
 ﻿#region Usings
 
 using System;
+using OneHundredAndEightyCore.Enums;
+using OneHundredAndEightyCore.Game;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Game
+namespace OneHundredAndEightyCore.Domain
 {
     public class Game
     {

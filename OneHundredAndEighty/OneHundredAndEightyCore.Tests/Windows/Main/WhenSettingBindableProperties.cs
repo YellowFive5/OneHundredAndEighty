@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using FluentAssertions;
 using NUnit.Framework;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game;
 
 #endregion

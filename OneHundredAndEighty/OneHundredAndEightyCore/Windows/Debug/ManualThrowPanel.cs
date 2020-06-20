@@ -3,6 +3,7 @@
 using System.Drawing;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 

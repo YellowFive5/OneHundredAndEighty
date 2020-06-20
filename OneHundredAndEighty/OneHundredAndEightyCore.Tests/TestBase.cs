@@ -5,6 +5,8 @@ using Moq;
 using NLog;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Recognition;
 
 #endregion

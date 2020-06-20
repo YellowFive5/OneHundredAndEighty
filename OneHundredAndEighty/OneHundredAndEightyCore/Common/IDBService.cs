@@ -1,6 +1,8 @@
 ﻿#region Usings
 
 using System.Data;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game;
 
 #endregion

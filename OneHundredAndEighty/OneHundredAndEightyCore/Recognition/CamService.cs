@@ -12,6 +12,8 @@ using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 
 #endregion
 

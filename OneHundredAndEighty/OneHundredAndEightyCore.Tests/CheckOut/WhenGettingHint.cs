@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using NUnit.Framework;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion

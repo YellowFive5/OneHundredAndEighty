@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Game;
 
 #endregion

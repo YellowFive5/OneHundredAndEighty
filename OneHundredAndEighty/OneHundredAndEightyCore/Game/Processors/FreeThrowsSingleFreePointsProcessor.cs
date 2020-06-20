@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -11,7 +12,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class FreeThrowsSingleFreePointsProcessor : ProcessorBase
     {
-        public FreeThrowsSingleFreePointsProcessor(Game game,
+        public FreeThrowsSingleFreePointsProcessor(Domain.Game game,
                                                    List<Player> players,
                                                    DBService dbService,
                                                    ScoreBoardService scoreBoard)

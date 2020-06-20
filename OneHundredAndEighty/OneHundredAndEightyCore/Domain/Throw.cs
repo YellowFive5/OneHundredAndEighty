@@ -5,7 +5,7 @@ using System.Drawing;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Game
+namespace OneHundredAndEightyCore.Domain
 {
     public enum ThrowType
     {
@@ -30,7 +30,7 @@ namespace OneHundredAndEightyCore.Game
     {
         public int Id { get; private set; }
         public Player Player { get; }
-        public Game Game { get; }
+        public Domain.Game Game { get; }
         public int Sector { get; }
         public ThrowType Type { get; }
         public ThrowResult Result { get; }
@@ -40,7 +40,7 @@ namespace OneHundredAndEightyCore.Game
         public int ProjectionResolution { get; }
         public DateTime TimeStamp { get; }
 
-        public Throw(Player player, Game game, int sector, ThrowType type, ThrowResult result,
+        public Throw(Player player, Domain.Game game, int sector, ThrowType type, ThrowResult result,
                      int number, int points, PointF poi, int projectionResolution, int id = -1)
         {
             Id = id;

@@ -2,11 +2,10 @@
 
 using System;
 using System.Drawing;
-using OneHundredAndEightyCore.Game;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Recognition
+namespace OneHundredAndEightyCore.Domain
 {
     public class DetectedThrow
     {

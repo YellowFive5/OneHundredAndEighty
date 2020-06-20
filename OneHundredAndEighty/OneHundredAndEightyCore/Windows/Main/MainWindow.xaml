@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    xmlns:enums="clr-namespace:OneHundredAndEightyCore.Enums"
     mc:Ignorable="d"
     x:Class="OneHundredAndEightyCore.Windows.Main.MainWindow"
     Height="{Binding MainWindowHeight, Mode=TwoWay}"
@@ -29,13 +30,13 @@
         <ObjectDataProvider x:Key="GameTypeEnum" MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="game:GameType" />
+                <x:Type TypeName="enums:GameType" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
         <ObjectDataProvider x:Key="GamePointsEnum" MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="game:GamePoints" />
+                <x:Type TypeName="enums:GamePoints" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />

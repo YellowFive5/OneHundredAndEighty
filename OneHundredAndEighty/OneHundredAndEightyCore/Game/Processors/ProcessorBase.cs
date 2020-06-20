@@ -3,6 +3,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -21,7 +23,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         public event EndMatchDelegate OnMatchEnd;
 
-        protected ProcessorBase(Game game,
+        protected ProcessorBase(Domain.Game game,
                                 List<Player> players,
                                 DBService dbService,
                                 ScoreBoardService scoreBoard,
@@ -51,7 +53,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected List<Player> Players { get; }
         protected Player PlayerOnThrow { get; set; }
         protected Player PlayerOnLeg { get; set; }
-        protected Game Game { get; }
+        protected Domain.Game Game { get; }
 
         protected void Check180()
         {

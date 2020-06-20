@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Recognition;
 
 #endregion

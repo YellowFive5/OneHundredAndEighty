@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Game
+namespace OneHundredAndEightyCore.Enums
 {
     public enum GameType
     {

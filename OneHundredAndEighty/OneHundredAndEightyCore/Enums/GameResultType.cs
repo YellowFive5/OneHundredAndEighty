@@ -1,4 +1,4 @@
-﻿namespace OneHundredAndEightyCore.Game
+﻿namespace OneHundredAndEightyCore.Enums
 {
     public enum GameResultType
     {

@@ -1,11 +1,11 @@
 ﻿#region Usings
 
 using System.Drawing;
-using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Enums;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Recognition
+namespace OneHundredAndEightyCore.Domain
 {
     public class Ray
     {

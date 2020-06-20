@@ -4,6 +4,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.Main;

@@ -3,11 +3,12 @@
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Game
+namespace OneHundredAndEightyCore.Domain
 {
     public class Player
     {

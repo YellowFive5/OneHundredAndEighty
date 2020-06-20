@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using DirectShowLib;
 using NLog;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Windows.CamsDetection;
 
 #endregion

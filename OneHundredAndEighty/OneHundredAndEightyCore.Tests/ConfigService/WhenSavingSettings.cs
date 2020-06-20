@@ -3,6 +3,8 @@
 using Moq;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Common;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 
 #endregion
 

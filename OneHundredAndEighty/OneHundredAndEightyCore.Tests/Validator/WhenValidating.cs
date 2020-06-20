@@ -3,6 +3,8 @@
 using System;
 using FluentAssertions;
 using NUnit.Framework;
+using OneHundredAndEightyCore.Domain;
+using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game;
 
 #endregion

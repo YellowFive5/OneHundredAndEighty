@@ -1,4 +1,4 @@
-﻿namespace OneHundredAndEightyCore.Recognition
+﻿namespace OneHundredAndEightyCore.Enums
 {
     public enum ResponseType
     {

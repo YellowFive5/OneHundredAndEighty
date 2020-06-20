@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Recognition;
 
 #endregion
