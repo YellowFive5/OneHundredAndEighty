@@ -1,6 +1,6 @@
 ﻿namespace OneHundredAndEightyCore.Enums
 {
-    public enum ResponseType
+    public enum MovesDetectionResult
     {
         Nothing,
         Move,

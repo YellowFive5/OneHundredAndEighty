@@ -6,7 +6,6 @@ using System.Linq;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
-using OneHundredAndEightyCore.Game;
 
 #endregion
 
@@ -25,7 +24,7 @@ namespace OneHundredAndEightyCore.Recognition
 
         public void SaveRay(Ray ray)
         {
-            rays.Add(ray);
+            rays.AddIfNotNull(ray);
         }
 
         public void ClearRays()

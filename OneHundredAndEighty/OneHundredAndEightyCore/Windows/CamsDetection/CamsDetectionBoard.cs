@@ -8,7 +8,6 @@ using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
@@ -285,7 +284,9 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         public void Open()
         {
             camsDetectionWindow = new CamsDetectionWindow(this);
-            ClearProjectionImage();
+            ClearImages();
+            ClearHistoryPointsBox();
+            ClearPointsBox();
             camsDetectionWindow.Show();
         }
 
@@ -354,9 +355,21 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
             ProjectionImage = image;
         }
 
-        public void ClearProjectionImage()
+        public void ClearImages()
         {
             ProjectionImage = Converter.EmguImageToBitmapImage(drawService.ProjectionBackgroundImage);
+            Cam1Image = new BitmapImage();
+            Cam1RoiImage = new BitmapImage();
+            Cam1LastRoiImage = new BitmapImage();
+            Cam2Image = new BitmapImage();
+            Cam2RoiImage = new BitmapImage();
+            Cam2LastRoiImage = new BitmapImage();
+            Cam3Image = new BitmapImage();
+            Cam3RoiImage = new BitmapImage();
+            Cam3LastRoiImage = new BitmapImage();
+            Cam4Image = new BitmapImage();
+            Cam4RoiImage = new BitmapImage();
+            Cam4LastRoiImage = new BitmapImage();
         }
 
         public void PrintThrow(DetectedThrow thrw)

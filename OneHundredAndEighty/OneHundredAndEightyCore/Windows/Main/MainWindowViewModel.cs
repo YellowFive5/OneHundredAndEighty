@@ -1384,8 +1384,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                                    var cam = new CamService(camNumber,
                                                             logger,
                                                             drawService,
-                                                            configService,
-                                                            throwService);
+                                                            configService);
                                    while (!cancelToken.IsCancellationRequested)
                                    {
                                        cam.DoSetupCaptures();
@@ -1464,8 +1463,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 cams.Add(new CamService(CamNumber._1,
                                         logger,
                                         drawService,
-                                        configService,
-                                        throwService));
+                                        configService));
             }
 
             if (cam2Active)
@@ -1473,8 +1471,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 cams.Add(new CamService(CamNumber._2,
                                         logger,
                                         drawService,
-                                        configService,
-                                        throwService));
+                                        configService));
             }
 
             if (cam3Active)
@@ -1482,8 +1479,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 cams.Add(new CamService(CamNumber._3,
                                         logger,
                                         drawService,
-                                        configService,
-                                        throwService));
+                                        configService));
             }
 
             if (cam4Active)
@@ -1491,8 +1487,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 cams.Add(new CamService(CamNumber._4,
                                         logger,
                                         drawService,
-                                        configService,
-                                        throwService));
+                                        configService));
             }
 
             return cams;
