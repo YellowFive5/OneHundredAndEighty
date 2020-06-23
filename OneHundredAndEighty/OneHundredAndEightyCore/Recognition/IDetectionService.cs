@@ -10,9 +10,10 @@ namespace OneHundredAndEightyCore.Recognition
     {
         string FindConnectedCams();
         void CheckCamsAndTryCapture(List<CamService> camsList);
-        void RunDetection(List<CamService> camsList,DetectionServiceWorkingMode workingMode);
+        void RunDetection(List<CamService> camsList, DetectionServiceWorkingMode workingMode);
         void StopDetection();
+        string FindContourOnRoiFrame(CamService cam);
 
-        public event DetectionService.ExceptionOccurredDelegate OnErrorOccurred;
+        event DetectionService.ExceptionOccurredDelegate OnErrorOccurred;
     }
 }

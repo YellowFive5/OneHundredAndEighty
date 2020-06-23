@@ -242,33 +242,33 @@ namespace OneHundredAndEightyCore.Recognition
             CvInvoke.Threshold(RoiFrame, RoiFrame, slidersData.ElementAt(5), 255, ThresholdType.Binary);
         }
 
-        public void PreviousRoiUpdate()
+        public void PreviousRoiFrameUpdateFromRoiFrame()
         {
             RoiPreviousFrame = RoiFrame.Clone();
         }
 
-        public void ExtractFromRoi()
-        {
-            var diffImage = RoiPreviousFrame?.AbsDiff(RoiFrame);
-            ThrowExtractedRoiFrame = diffImage?.Clone();
-            diffImage?.Dispose();
-        }
-
-        public void PreviousRoiToBlackBlank()
+        public void PreviousRoiFrameUpdateBlackBlank()
         {
             var image = RoiFrame.Clone();
             image.SetValue(new Bgr(Color.Black).MCvScalar);
             RoiPreviousFrame = image;
         }
 
-        public void ThrowExtractedRoiFrameToBlackBlank()
+        public void ThrowExtractedRoiFrameExtractFromRoiPreviousFrame()
+        {
+            var diffImage = RoiPreviousFrame?.AbsDiff(RoiFrame);
+            ThrowExtractedRoiFrame = diffImage?.Clone();
+            diffImage?.Dispose();
+        }
+
+        public void ThrowExtractedRoiFrameUpdateBlackBlank()
         {
             var image = RoiFrame.Clone();
             image.SetValue(new Bgr(Color.Black).MCvScalar);
             ThrowExtractedRoiFrame = image;
         }
 
-        public void RoiToBlackBlank()
+        public void RoiFrameUpdateBlackBlank()
         {
             var image = RoiFrame.Clone();
             image.SetValue(new Bgr(Color.Black).MCvScalar);

@@ -868,6 +868,18 @@ namespace OneHundredAndEightyCore.Windows.Main
             }
         }
 
+        private string contoursBoxText;
+
+        public string ContoursBoxText
+        {
+            get => contoursBoxText;
+            set
+            {
+                contoursBoxText = value;
+                OnPropertyChanged(nameof(ContoursBoxText));
+            }
+        }
+
         #endregion
 
         #region Game tab
@@ -1392,6 +1404,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                                                                              {
                                                                                  CamImage = cam.GetImage();
                                                                                  CamRoiImage = cam.GetRoiImage();
+                                                                                 ContoursBoxText = detectionService.FindContourOnRoiFrame(cam);
                                                                              });
                                    }
 
@@ -1399,6 +1412,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                                                                          {
                                                                              CamImage = new BitmapImage();
                                                                              CamRoiImage = new BitmapImage();
+                                                                             ContoursBoxText = string.Empty;
                                                                          });
                                    cam.Dispose();
                                });

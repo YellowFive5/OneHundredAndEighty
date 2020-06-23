@@ -3,7 +3,7 @@
     public enum MovesDetectionResult
     {
         Nothing,
-        Move,
+        Throw,
         Extraction
     }
 }

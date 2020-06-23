@@ -742,7 +742,7 @@
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="10" />
@@ -845,16 +845,19 @@
                                         Content="Start"
                                         Grid.Row="1"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStartButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
                                 <Button x:Name="Cam1StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStopButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning}" />
+                                <TextBox Grid.Row="5"
+                                         Grid.Column="3"
+                                         Grid.RowSpan="3"
+                                         IsReadOnly="True"
+                                         Text="{Binding ContoursBoxText, Mode=OneWay}" />
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="Cam2SetupTabItem"
@@ -878,7 +881,7 @@
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="10" />
@@ -981,16 +984,21 @@
                                         Content="Start"
                                         Grid.Row="1"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStartButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
                                 <Button x:Name="Cam2StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStopButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning}" />
+                                <TextBox Grid.Row="5"
+                                         Grid.Column="3"
+                                         Grid.RowSpan="3"
+                                         IsReadOnly="True"
+                                         Text="{Binding ContoursBoxText, Mode=OneWay}" />
+
+
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="Cam3SetupTabItem"
@@ -1014,7 +1022,7 @@
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="10" />
@@ -1117,16 +1125,24 @@
                                         Content="Start"
                                         Grid.Row="1"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStartButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
                                 <Button x:Name="Cam3StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStopButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning}" />
+                                <TextBox Grid.Row="5"
+                                         Grid.Column="3"
+                                         Grid.RowSpan="3"
+                                         IsReadOnly="True"
+                                         Text="{Binding ContoursBoxText, Mode=OneWay}" />
+                                <TextBox Grid.Row="5"
+                                         Grid.Column="3"
+                                         Grid.RowSpan="3"
+                                         IsReadOnly="True"
+                                         Text="{Binding ContoursBoxText, Mode=OneWay}" />
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="Cam4SetupTabItem"
@@ -1150,7 +1166,7 @@
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="60" />
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="10" />
@@ -1253,16 +1269,19 @@
                                         Content="Start"
                                         Grid.Row="1"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStartButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
                                 <Button x:Name="Cam4StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
-                                        Width="50"
                                         Click="CamSetupStopButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning}" />
+                                <TextBox Grid.Row="5"
+                                         Grid.Column="3"
+                                         Grid.RowSpan="3"
+                                         IsReadOnly="True"
+                                         Text="{Binding ContoursBoxText, Mode=OneWay}" />
                             </Grid>
                         </TabItem>
                     </TabControl>

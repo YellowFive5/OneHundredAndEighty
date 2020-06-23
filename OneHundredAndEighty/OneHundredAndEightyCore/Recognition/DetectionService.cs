@@ -113,8 +113,8 @@ namespace OneHundredAndEightyCore.Recognition
                                    cams.ForEach(c =>
                                                 {
                                                     c.DoDetectionCaptures();
-                                                    c.PreviousRoiUpdate();
-                                                    c.ThrowExtractedRoiFrameToBlackBlank();
+                                                    c.PreviousRoiFrameUpdateFromRoiFrame();
+                                                    c.ThrowExtractedRoiFrameUpdateBlackBlank();
                                                 });
 
                                    while (!cancelToken.IsCancellationRequested)
@@ -122,76 +122,66 @@ namespace OneHundredAndEightyCore.Recognition
                                        foreach (var cam in cams)
                                        {
                                            cam.DoDetectionCaptures();
-                                           var result = FindMoves(cam);
+                                           cam.ThrowExtractedRoiFrameExtractFromRoiPreviousFrame();
 
-                                           if (result == MovesDetectionResult.Move)
+                                           var result = DetectMoves(cam);
+
+                                           if (result == MovesDetectionResult.Nothing)
+                                           {
+                                               await Task.Delay(TimeSpan.FromSeconds(thresholdSleepTime));
+                                               continue;
+                                           }
+
+                                           if (result == MovesDetectionResult.Extraction)
+                                           {
+                                               OnStatusChanged?.Invoke(DetectionServiceStatus.DartsExtraction);
+
+                                               await Task.Delay(TimeSpan.FromSeconds(extractionSleepTime));
+
+                                               foreach (var camToRefresh in cams)
+                                               {
+                                                   camToRefresh.DoDetectionCaptures();
+                                                   camToRefresh.RoiFrameUpdateBlackBlank();
+                                                   camToRefresh.PreviousRoiFrameUpdateBlackBlank();
+                                                   camToRefresh.ThrowExtractedRoiFrameUpdateBlackBlank();
+                                                   Application.Current.Dispatcher.Invoke(() =>
+                                                                                         {
+                                                                                             camsDetectionBoard.SetCamImages(camToRefresh.camNumber,
+                                                                                                                             camToRefresh.GetImage(),
+                                                                                                                             camToRefresh.GetRoiImage(),
+                                                                                                                             camToRefresh.GetThrowExtractedRoiFrameImage());
+                                                                                         });
+                                               }
+
+                                               OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
+                                               continue;
+                                           }
+
+                                           if (result == MovesDetectionResult.Throw)
                                            {
                                                OnStatusChanged?.Invoke(DetectionServiceStatus.ProcessingThrow);
 
                                                await Task.Delay(TimeSpan.FromSeconds(moveDetectedSleepTime));
 
-                                               cam.DoDetectionCaptures();
-                                               result = FindMoves(cam);
-
-                                               if (result == MovesDetectionResult.Extraction)
+                                               foreach (var camWithThrow in cams)
                                                {
-                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.DartsExtraction);
-
-                                                   await Task.Delay(TimeSpan.FromSeconds(extractionSleepTime));
-
-                                                   foreach (var camToRefresh in cams)
-                                                   {
-                                                       camToRefresh.DoDetectionCaptures();
-                                                       camToRefresh.RoiToBlackBlank();
-                                                       camToRefresh.PreviousRoiToBlackBlank();
-                                                       camToRefresh.ThrowExtractedRoiFrameToBlackBlank();
-                                                       Application.Current.Dispatcher.Invoke(() =>
-                                                                                             {
-                                                                                                 camsDetectionBoard.SetCamImages(camToRefresh.camNumber,
-                                                                                                                                 camToRefresh.GetImage(),
-                                                                                                                                 camToRefresh.GetRoiImage(),
-                                                                                                                                 camToRefresh.GetThrowExtractedRoiFrameImage());
-                                                                                             });
-                                                   }
-
-                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
-                                                   break;
-                                               }
-
-                                               cam.ExtractFromRoi();
-                                               FindAndProcessDartContour(cam);
-                                               cam.PreviousRoiUpdate();
-                                               Application.Current.Dispatcher.Invoke(() =>
-                                                                                     {
-                                                                                         camsDetectionBoard.SetCamImages(cam.camNumber,
-                                                                                                                         cam.GetImage(),
-                                                                                                                         cam.GetRoiImage(),
-                                                                                                                         cam.GetThrowExtractedRoiFrameImage());
-                                                                                     });
-
-                                               foreach (var anotherCam in cams.Where(c => c != cam))
-                                               {
-                                                   anotherCam.DoDetectionCaptures();
-                                                   anotherCam.ExtractFromRoi();
-                                                   FindAndProcessDartContour(anotherCam);
-                                                   anotherCam.PreviousRoiUpdate();
+                                                   camWithThrow.DoDetectionCaptures();
+                                                   camWithThrow.ThrowExtractedRoiFrameExtractFromRoiPreviousFrame();
+                                                   FindAndProcessDartContour(camWithThrow);
+                                                   camWithThrow.PreviousRoiFrameUpdateFromRoiFrame();
                                                    Application.Current.Dispatcher.Invoke(() =>
                                                                                          {
-                                                                                             camsDetectionBoard.SetCamImages(anotherCam.camNumber,
-                                                                                                                             anotherCam.GetImage(),
-                                                                                                                             anotherCam.GetRoiImage(),
-                                                                                                                             anotherCam.GetThrowExtractedRoiFrameImage());
+                                                                                             camsDetectionBoard.SetCamImages(camWithThrow.camNumber,
+                                                                                                                             camWithThrow.GetImage(),
+                                                                                                                             camWithThrow.GetRoiImage(),
+                                                                                                                             camWithThrow.GetThrowExtractedRoiFrameImage());
                                                                                          });
                                                }
 
                                                var thrw = throwService.GetThrow();
                                                InvokeOnThrowDetected(thrw);
-
                                                OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
-                                               break;
                                            }
-
-                                           await Task.Delay(TimeSpan.FromSeconds(thresholdSleepTime));
                                        }
                                    }
                                });
@@ -215,20 +205,92 @@ namespace OneHundredAndEightyCore.Recognition
 
         #region Internal detection mechanism
 
-        private MovesDetectionResult FindMoves(CamService cam)
+        private MovesDetectionResult DetectMoves(CamService cam)
         {
-            var diffImage = cam.RoiPreviousFrame?.AbsDiff(cam.RoiFrame);
-            var moves = diffImage?.CountNonzero()[0];
-            diffImage?.Dispose();
+            var maxDartContourArc = 265; // todo move to settings
+            var maxDartContourArea = 3300;
+            var minDartContourArc = 105;
+            var minDartContourArea = 336;
+            var maxDartContourWidth = 44;
+            var minDartContourWidth = 8;
 
-            if (moves >= movesExtraction)
+            var allContours = new VectorOfVectorOfPoint();
+            CvInvoke.FindContours(cam.ThrowExtractedRoiFrame,
+                                  allContours,
+                                  new Mat(),
+                                  RetrType.External,
+                                  ChainApproxMethod.ChainApproxNone);
+
+            if (allContours.Size == 0)
             {
-                return MovesDetectionResult.Extraction;
+                return MovesDetectionResult.Nothing;
             }
 
-            if (moves >= movesNoise)
+            var contourWithMaxArc = new VectorOfPoint();
+            var contourWithMaxArea = new VectorOfPoint();
+            var contourWithMaxWidth = new VectorOfPoint();
+
+            var maxArс = 0.0;
+            var maxArea = 0.0;
+            var maxWidth = 0.0;
+
+            for (var i = 0; i < allContours.Size; i++)
             {
-                return MovesDetectionResult.Move;
+                var tempContour = allContours[i];
+
+                var tempContourArс = CvInvoke.ArcLength(tempContour, true);
+                if (tempContourArс > maxArс)
+                {
+                    maxArс = tempContourArс;
+                    contourWithMaxArc = tempContour;
+                }
+
+                var tempContourArea = CvInvoke.ContourArea(tempContour);
+                if (tempContourArea > maxArea)
+                {
+                    maxArea = tempContourArea;
+                    contourWithMaxArea = tempContour;
+                }
+
+                var rect = CvInvoke.MinAreaRect(tempContour);
+                var box = CvInvoke.BoxPoints(rect);
+                var contourBoxPoint1 = new PointF(box[0].X, (float) cam.roiPosYSlider + box[0].Y);
+                var contourBoxPoint2 = new PointF(box[1].X, (float) cam.roiPosYSlider + box[1].Y);
+                var contourBoxPoint4 = new PointF(box[3].X, (float) cam.roiPosYSlider + box[3].Y);
+                var side1 = MeasureService.FindDistance(contourBoxPoint1, contourBoxPoint2);
+                var side2 = MeasureService.FindDistance(contourBoxPoint4, contourBoxPoint1);
+                var tempContourWidth = side1 < side2
+                                           ? side1
+                                           : side2;
+                if (tempContourWidth > maxWidth)
+                {
+                    maxWidth = tempContourWidth;
+                    contourWithMaxWidth = tempContour;
+                }
+            }
+
+            if (maxArс >= minDartContourArc &&
+                maxArс <= maxDartContourArc &&
+                maxArea >= minDartContourArea &&
+                maxArea <= maxDartContourArea &&
+                maxWidth >= minDartContourWidth &&
+                maxWidth <= maxDartContourWidth &&
+                contourWithMaxArc.Equals(contourWithMaxArea) &&
+                contourWithMaxArea.Equals(contourWithMaxWidth) &&
+                contourWithMaxWidth.Equals(contourWithMaxArc)
+            )
+            {
+                return MovesDetectionResult.Throw;
+            }
+
+            if (maxArс > maxDartContourArc ||
+                maxArea > maxDartContourArea ||
+                maxWidth > maxDartContourWidth ||
+                contourWithMaxArc.Equals(contourWithMaxArea) ||
+                contourWithMaxArea.Equals(contourWithMaxWidth) ||
+                contourWithMaxWidth.Equals(contourWithMaxArc))
+            {
+                return MovesDetectionResult.Extraction;
             }
 
             return MovesDetectionResult.Nothing;
@@ -263,8 +325,7 @@ namespace OneHundredAndEightyCore.Recognition
             {
                 var tempContour = allContours[i];
                 var tempContourArс = CvInvoke.ArcLength(tempContour, true);
-                if (tempContourArс > minContourArc &&
-                    tempContourArс > contourArс)
+                if (tempContourArс > contourArс)
                 {
                     contourArс = tempContourArс;
                     contour = tempContour;
@@ -395,6 +456,57 @@ namespace OneHundredAndEightyCore.Recognition
             return allCams.Count == 0
                        ? "No cameras found"
                        : str.ToString();
+        }
+
+        public string FindContourOnRoiFrame(CamService cam)
+        {
+            var allContours = new VectorOfVectorOfPoint();
+            CvInvoke.FindContours(cam.RoiFrame,
+                                  allContours,
+                                  new Mat(),
+                                  RetrType.External,
+                                  ChainApproxMethod.ChainApproxNone);
+
+            var contour = new VectorOfPoint();
+            var contourArс = 0.0;
+            var contourArea = 0.0;
+            var contourWidth = 0.0;
+
+            for (var i = 0; i < allContours.Size; i++)
+            {
+                var tempContour = allContours[i];
+                var tempContourArс = CvInvoke.ArcLength(tempContour, true);
+                if (tempContourArс > contourArс)
+                {
+                    contour = tempContour;
+                    contourArс = tempContourArс;
+                }
+            }
+
+            if (contourArс > 0)
+            {
+                contourArea = CvInvoke.ContourArea(contour);
+                var rect = CvInvoke.MinAreaRect(contour);
+                var box = CvInvoke.BoxPoints(rect);
+                var contourBoxPoint1 = new PointF(box[0].X, (float) cam.roiPosYSlider + box[0].Y);
+                var contourBoxPoint2 = new PointF(box[1].X, (float) cam.roiPosYSlider + box[1].Y);
+                var contourBoxPoint4 = new PointF(box[3].X, (float) cam.roiPosYSlider + box[3].Y);
+                var side1 = MeasureService.FindDistance(contourBoxPoint1, contourBoxPoint2);
+                var side2 = MeasureService.FindDistance(contourBoxPoint4, contourBoxPoint1);
+
+                contourWidth = side1 < side2
+                                   ? side1
+                                   : side2;
+            }
+
+            return Converter.ToString($"Contour\n" +
+                                      $"Arc:\n" +
+                                      $"{(int) contourArс}\n" +
+                                      $"Area:\n" +
+                                      $"{(int) contourArea}\n" +
+                                      $"Width:\n" +
+                                      $"{(int) contourWidth}\n"
+                                     );
         }
     }
 }
