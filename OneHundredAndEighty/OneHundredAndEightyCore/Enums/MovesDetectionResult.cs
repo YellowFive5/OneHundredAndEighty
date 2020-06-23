@@ -4,7 +4,6 @@
     {
         Nothing,
         Move,
-        Trow,
         Extraction
     }
 }

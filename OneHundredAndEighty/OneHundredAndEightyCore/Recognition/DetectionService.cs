@@ -51,7 +51,6 @@ namespace OneHundredAndEightyCore.Recognition
         private DetectionServiceWorkingMode workingMode;
 
         private int movesExtraction;
-        private int movesDart;
         private int movesNoise;
         private int minContourArc;
 
@@ -102,20 +101,20 @@ namespace OneHundredAndEightyCore.Recognition
             var withDetection = configService.DetectionEnabled && !App.NoCams;
 
             movesExtraction = configService.MovesExtractionValue;
-            movesDart = configService.MovesDartValue;
             movesNoise = configService.MovesNoiseValue;
             minContourArc = configService.MinContourArcValue;
 
             try
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
                                {
                                    OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
 
                                    cams.ForEach(c =>
                                                 {
                                                     c.DoDetectionCaptures();
-                                                    c.RoiToPreviousRoi();
+                                                    c.PreviousRoiUpdate();
+                                                    c.ThrowExtractedRoiFrameToBlackBlank();
                                                 });
 
                                    while (!cancelToken.IsCancellationRequested)
@@ -125,12 +124,11 @@ namespace OneHundredAndEightyCore.Recognition
                                            cam.DoDetectionCaptures();
                                            var result = FindMoves(cam);
 
-                                           if (result == MovesDetectionResult.Move ||
-                                               result == MovesDetectionResult.Trow)
+                                           if (result == MovesDetectionResult.Move)
                                            {
                                                OnStatusChanged?.Invoke(DetectionServiceStatus.ProcessingThrow);
 
-                                               Thread.Sleep(TimeSpan.FromSeconds(moveDetectedSleepTime));
+                                               await Task.Delay(TimeSpan.FromSeconds(moveDetectedSleepTime));
 
                                                cam.DoDetectionCaptures();
                                                result = FindMoves(cam);
@@ -138,11 +136,15 @@ namespace OneHundredAndEightyCore.Recognition
                                                if (result == MovesDetectionResult.Extraction)
                                                {
                                                    OnStatusChanged?.Invoke(DetectionServiceStatus.DartsExtraction);
+
+                                                   await Task.Delay(TimeSpan.FromSeconds(extractionSleepTime));
+
                                                    foreach (var camToRefresh in cams)
                                                    {
                                                        camToRefresh.DoDetectionCaptures();
-                                                       camToRefresh.RoiToPreviousRoi();
-                                                       camToRefresh.RoiToThrowExtractedRoiFrame();
+                                                       camToRefresh.RoiToBlackBlank();
+                                                       camToRefresh.PreviousRoiToBlackBlank();
+                                                       camToRefresh.ThrowExtractedRoiFrameToBlackBlank();
                                                        Application.Current.Dispatcher.Invoke(() =>
                                                                                              {
                                                                                                  camsDetectionBoard.SetCamImages(camToRefresh.camNumber,
@@ -152,49 +154,44 @@ namespace OneHundredAndEightyCore.Recognition
                                                                                              });
                                                    }
 
-                                                   Thread.Sleep(TimeSpan.FromSeconds(extractionSleepTime));
-
                                                    OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
                                                    break;
                                                }
 
-                                               if (result == MovesDetectionResult.Trow)
+                                               cam.ExtractFromRoi();
+                                               FindAndProcessDartContour(cam);
+                                               cam.PreviousRoiUpdate();
+                                               Application.Current.Dispatcher.Invoke(() =>
+                                                                                     {
+                                                                                         camsDetectionBoard.SetCamImages(cam.camNumber,
+                                                                                                                         cam.GetImage(),
+                                                                                                                         cam.GetRoiImage(),
+                                                                                                                         cam.GetThrowExtractedRoiFrameImage());
+                                                                                     });
+
+                                               foreach (var anotherCam in cams.Where(c => c != cam))
                                                {
-                                                   cam.ExtractFromRoi();
-                                                   FindAndProcessDartContour(cam);
+                                                   anotherCam.DoDetectionCaptures();
+                                                   anotherCam.ExtractFromRoi();
+                                                   FindAndProcessDartContour(anotherCam);
+                                                   anotherCam.PreviousRoiUpdate();
                                                    Application.Current.Dispatcher.Invoke(() =>
                                                                                          {
-                                                                                             camsDetectionBoard.SetCamImages(cam.camNumber,
-                                                                                                                             cam.GetImage(),
-                                                                                                                             cam.GetRoiImage(),
-                                                                                                                             cam.GetThrowExtractedRoiFrameImage());
+                                                                                             camsDetectionBoard.SetCamImages(anotherCam.camNumber,
+                                                                                                                             anotherCam.GetImage(),
+                                                                                                                             anotherCam.GetRoiImage(),
+                                                                                                                             anotherCam.GetThrowExtractedRoiFrameImage());
                                                                                          });
-                                                   cam.RoiToPreviousRoi();
-
-                                                   foreach (var anotherCam in cams.Where(c => c != cam))
-                                                   {
-                                                       anotherCam.DoDetectionCaptures();
-                                                       anotherCam.ExtractFromRoi();
-                                                       FindAndProcessDartContour(anotherCam);
-                                                       Application.Current.Dispatcher.Invoke(() =>
-                                                                                             {
-                                                                                                 camsDetectionBoard.SetCamImages(anotherCam.camNumber,
-                                                                                                                                 anotherCam.GetImage(),
-                                                                                                                                 anotherCam.GetRoiImage(),
-                                                                                                                                 anotherCam.GetThrowExtractedRoiFrameImage());
-                                                                                             });
-                                                       anotherCam.RoiToPreviousRoi();
-                                                   }
-
-                                                   var thrw = throwService.GetThrow();
-                                                   InvokeOnThrowDetected(thrw);
-
-                                                   OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
-                                                   break;
                                                }
+
+                                               var thrw = throwService.GetThrow();
+                                               InvokeOnThrowDetected(thrw);
+
+                                               OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
+                                               break;
                                            }
 
-                                           Thread.Sleep(TimeSpan.FromSeconds(thresholdSleepTime));
+                                           await Task.Delay(TimeSpan.FromSeconds(thresholdSleepTime));
                                        }
                                    }
                                });
@@ -227,11 +224,6 @@ namespace OneHundredAndEightyCore.Recognition
             if (moves >= movesExtraction)
             {
                 return MovesDetectionResult.Extraction;
-            }
-
-            if (moves >= movesDart)
-            {
-                return MovesDetectionResult.Trow;
             }
 
             if (moves >= movesNoise)
