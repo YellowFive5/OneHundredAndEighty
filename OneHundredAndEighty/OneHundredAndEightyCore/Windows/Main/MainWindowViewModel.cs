@@ -1143,6 +1143,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void OnMainWindowLoaded()
         {
             versionChecker.CheckVersions();
+            configService.LoadSettings();
             LoadSettings();
             LoadPlayers();
             FindConnectedCams();

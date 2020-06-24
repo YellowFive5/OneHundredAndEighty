@@ -4,7 +4,6 @@
     {
         void SaveSettings();
         void LoadSettings();
-        double DbVersion { get; }
         double Cam1ThresholdSliderValue { get; set; }
         double Cam2ThresholdSliderValue { get; set; }
         double Cam3ThresholdSliderValue { get; set; }

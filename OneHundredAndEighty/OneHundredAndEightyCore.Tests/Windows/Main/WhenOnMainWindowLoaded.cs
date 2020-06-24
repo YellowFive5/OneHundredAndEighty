@@ -5,7 +5,6 @@ using Moq;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.Main;
 
@@ -49,6 +48,14 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             viewModel.OnMainWindowLoaded();
 
             versionChecker.Verify(v => v.CheckVersions(), Times.Once);
+        }
+
+        [Test]
+        public void SettingsLoadedForConfigService()
+        {
+            viewModel.OnMainWindowLoaded();
+
+            configService.Verify(v => v.LoadSettings(), Times.Once);
         }
 
         [Test]

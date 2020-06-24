@@ -12,22 +12,12 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
     public class WhenLoadingSettings : ConfigServiceTestBase
     {
         [Test]
-        public void All_79_ConfigItemsLoaded()
+        public void All_78_ConfigItemsLoaded()
         {
             configService.LoadSettings();
 
             dbService.Verify(m => m.SettingsGetValue(It.IsAny<SettingsType>()),
-                             Times.Exactly(79));
-        }
-
-        [Test]
-        public void DbVersionLoaded()
-        {
-            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.DBVersion))).Returns("2.2");
-
-            configService.LoadSettings();
-
-            configService.DbVersion.Should().Be(2.2);
+                             Times.Exactly(78));
         }
 
         [Test]

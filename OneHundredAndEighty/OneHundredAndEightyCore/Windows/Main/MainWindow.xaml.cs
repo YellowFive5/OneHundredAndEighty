@@ -49,7 +49,6 @@ namespace OneHundredAndEightyCore.Windows.Main
             drawService = new DrawService(logger);
             throwService = new ThrowService(logger);
             configService = new ConfigService(logger, dbService);
-            configService.LoadSettings();
             scoreBoardService = new ScoreBoardService(logger, configService, drawService);
             camsDetectionBoard = new CamsDetectionBoard(configService, logger, drawService);
             versionChecker = new VersionChecker(dbService, configService, messageBoxService);

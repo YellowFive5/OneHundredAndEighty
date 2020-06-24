@@ -18,7 +18,6 @@ namespace OneHundredAndEightyCore.Common
             this.dbService = dbService;
         }
 
-        public double DbVersion { get; private set; }
         public double Cam1ThresholdSliderValue { get; set; }
         public double Cam2ThresholdSliderValue { get; set; }
         public double Cam3ThresholdSliderValue { get; set; }
@@ -100,7 +99,6 @@ namespace OneHundredAndEightyCore.Common
 
         public void LoadSettings()
         {
-            DbVersion = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.DBVersion));
             MainWindowPositionLeft = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.MainWindowPositionLeft));
             MainWindowPositionTop = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.MainWindowPositionTop));
             MainWindowHeight = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.MainWindowHeight));

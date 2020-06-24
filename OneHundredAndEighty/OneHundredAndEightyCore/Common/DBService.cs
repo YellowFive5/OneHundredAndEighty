@@ -7,7 +7,6 @@ using System.Data.SQLite;
 using System.Globalization;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Game;
 
 #endregion
 
@@ -19,7 +18,6 @@ namespace OneHundredAndEightyCore.Common
         private readonly object locker;
 
         public const string DatabaseCopyName = "Database_old.db";
-
         public const string DatabaseName = "Database.db";
 
         public DBService()
@@ -393,6 +391,28 @@ namespace OneHundredAndEightyCore.Common
 
         public void MigrateFrom2_2to2_3()
         {
+            var deleteParameter = $"DELETE FROM [{Table.Settings}] WHERE [{Column.Name}] = 'MovesExtraction'";
+            ExecuteNonQueryInternal(deleteParameter);
+            deleteParameter = $"DELETE FROM [{Table.Settings}] WHERE [{Column.Name}] = 'MovesDart'";
+            ExecuteNonQueryInternal(deleteParameter);
+            deleteParameter = $"DELETE FROM [{Table.Settings}] WHERE [{Column.Name}] = 'MovesNoise'";
+            ExecuteNonQueryInternal(deleteParameter);
+
+            var addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                               $"VALUES ('MaxContourArc',265)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('MinContourArea',336)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('MaxContourArea',3300)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('MinContourWidth',8)";
+            ExecuteNonQueryInternal(addParameter);
+            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+                           $"VALUES ('MaxContourWidth',44)";
+            ExecuteNonQueryInternal(addParameter);
 
             UpdateDbVersion("2.3");
         }

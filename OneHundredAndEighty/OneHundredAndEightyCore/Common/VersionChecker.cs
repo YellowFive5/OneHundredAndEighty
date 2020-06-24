@@ -3,6 +3,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using OneHundredAndEightyCore.Enums;
 
 #endregion
 
@@ -30,7 +31,7 @@ namespace OneHundredAndEightyCore.Common
         {
             CheckDbExists();
 
-            currentDbVersion = configService.DbVersion;
+            currentDbVersion = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.DBVersion));
 
             if (AppVersion != currentDbVersion)
             {
