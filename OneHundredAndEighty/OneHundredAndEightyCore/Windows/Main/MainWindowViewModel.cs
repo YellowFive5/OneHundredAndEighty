@@ -1470,10 +1470,10 @@ namespace OneHundredAndEightyCore.Windows.Main
             IsRuntimeCrossingRunning = true;
             try
             {
-                camsDetectionBoard.Open();
-
                 var cams = CreateCamsServices();
                 detectionService.CheckCamsAndTryCapture(cams);
+
+                camsDetectionBoard.Open();
 
                 detectionService.RunDetection(cams, DetectionServiceWorkingMode.Crossing);
             }
@@ -1487,7 +1487,6 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void StopCrossing()
         {
             detectionService.StopDetection();
-            // drawService.ProjectionClear();
             camsDetectionBoard.Close();
 
             IsRuntimeCrossingRunning = false;

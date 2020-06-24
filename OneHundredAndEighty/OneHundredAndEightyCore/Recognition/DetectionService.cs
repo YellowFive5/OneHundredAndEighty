@@ -31,8 +31,6 @@ namespace OneHundredAndEightyCore.Recognition
 
     public enum DetectionServiceWorkingMode
     {
-        Setup,
-        Check,
         Crossing,
         Detection
     }
@@ -49,6 +47,7 @@ namespace OneHundredAndEightyCore.Recognition
         private CancellationTokenSource cts;
         private CancellationToken cancelToken;
         private DetectionServiceWorkingMode workingMode;
+        private bool detectionEnabled;
 
         public DetectionService(DrawService drawService,
                                 ConfigService configService,
@@ -84,17 +83,17 @@ namespace OneHundredAndEightyCore.Recognition
         }
 
         public async void RunDetection(List<CamService> camsList,
-                                       DetectionServiceWorkingMode workingMode)
+                                       DetectionServiceWorkingMode mode)
         {
             cams = camsList;
-            this.workingMode = workingMode;
+            workingMode = mode;
             cts = new CancellationTokenSource();
             cancelToken = cts.Token;
 
             var extractionSleepTime = configService.ExtractionSleepTimeValue;
             var thresholdSleepTime = configService.ThresholdSleepTimeValue;
             var moveDetectedSleepTime = configService.MovesDetectedSleepTimeValue;
-            var withDetection = configService.DetectionEnabled && !App.NoCams;
+            detectionEnabled = configService.DetectionEnabled && !App.NoCams;
 
             try
             {
@@ -220,7 +219,7 @@ namespace OneHundredAndEightyCore.Recognition
                                   RetrType.External,
                                   ChainApproxMethod.ChainApproxNone);
 
-            if (allContours.Size == 0)
+            if (!detectionEnabled || allContours.Size == 0)
             {
                 return MovesDetectionResult.Nothing;
             }
@@ -268,7 +267,8 @@ namespace OneHundredAndEightyCore.Recognition
                 }
             }
 
-            if (maxArс >= minDartContourArc &&
+            if (workingMode == DetectionServiceWorkingMode.Crossing ||
+                maxArс >= minDartContourArc &&
                 maxArс <= maxDartContourArc &&
                 maxArea >= minDartContourArea &&
                 maxArea <= maxDartContourArea &&
@@ -305,8 +305,12 @@ namespace OneHundredAndEightyCore.Recognition
 
         private DartContour TryFindDartContour(CamService cam)
         {
+            var frame = workingMode == DetectionServiceWorkingMode.Detection
+                            ? cam.ThrowExtractedRoiFrame
+                            : cam.RoiFrame;
+
             var allContours = new VectorOfVectorOfPoint();
-            CvInvoke.FindContours(cam.ThrowExtractedRoiFrame,
+            CvInvoke.FindContours(frame,
                                   allContours,
                                   new Mat(),
                                   RetrType.External,
