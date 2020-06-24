@@ -350,12 +350,26 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
             }
         }
 
-        public void SetProjectionImage(BitmapImage image)
+        public void ClearProjectionImage()
         {
-            ProjectionImage = image;
+            ProjectionImage = Converter.EmguImageToBitmapImage(drawService.ProjectionBackgroundImage);
         }
 
-        public void ClearImages()
+        public void DrawRay(Ray ray)
+        {
+            var imageWithRay = drawService.ProjectionDrawLine(ray);
+            ProjectionImage = Converter.EmguImageToBitmapImage(imageWithRay);
+        }
+
+        public void PrintAndDrawThrow(DetectedThrow thrw)
+        {
+            ThrowText = thrw.ToString();
+            ThrowsHistoryText = $"{ThrowsHistoryText}\n{thrw}";
+            var imageWithThrowAndRays = drawService.ProjectionDrawThrow(thrw);
+            ProjectionImage = Converter.EmguImageToBitmapImage(imageWithThrowAndRays);
+        }
+
+        private void ClearImages()
         {
             ProjectionImage = Converter.EmguImageToBitmapImage(drawService.ProjectionBackgroundImage);
             Cam1Image = new BitmapImage();
@@ -372,18 +386,12 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
             Cam4LastRoiImage = new BitmapImage();
         }
 
-        public void PrintThrow(DetectedThrow thrw)
-        {
-            ThrowText = thrw.ToString();
-            ThrowsHistoryText = $"{ThrowsHistoryText}\n{thrw}";
-        }
-
         public void ClearPointsBox()
         {
             ThrowText = string.Empty;
         }
 
-        public void ClearHistoryPointsBox()
+        private void ClearHistoryPointsBox()
         {
             ThrowsHistoryText = string.Empty;
         }

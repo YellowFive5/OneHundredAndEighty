@@ -11,6 +11,7 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using NLog;
+using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Recognition;
 using Color = System.Drawing.Color;
 using Point = System.Drawing.Point;
@@ -23,26 +24,17 @@ namespace OneHundredAndEightyCore.Common
     {
         private readonly Logger logger;
 
-        public Bgr camRoiRectColor = new Bgr(Color.LawnGreen);
-        public const int CamRoiRectThickness = 5;
-        public Bgr camSurfaceLineColor = new Bgr(Color.Red);
-        public const int CamSurfaceLineThickness = 5;
-        public MCvScalar camContourRectColor = new Bgr(Color.Blue).MCvScalar;
-        public int camContourRectThickness = 5;
-        public MCvScalar camSpikeLineColor = new Bgr(Color.White).MCvScalar;
-        public int camSpikeLineThickness = 4;
-        public MCvScalar projectionPoiColor = new Bgr(Color.Yellow).MCvScalar;
-        public int projectionPoiRadius = 6;
-        public int projectionPoiThickness = 6;
-        public MCvScalar camContourColor = new Bgr(Color.Violet).MCvScalar;
-        public int camContourThickness = 2;
+        private readonly Bgr camRoiRectColor = new Bgr(Color.LawnGreen);
+        private readonly int camRoiRectThickness = 5;
+        private readonly Bgr camSurfaceLineColor = new Bgr(Color.Red);
+        private readonly int camSurfaceLineThickness = 5;
+
         private readonly MCvScalar projectionGridColor = new Bgr(Color.DarkGray).MCvScalar;
-        public MCvScalar projectionSurfaceLineColor = new Bgr(Color.Red).MCvScalar;
-        public int projectionSurfaceLineThickness = 2;
-        private readonly MCvScalar projectionRayColor = new Bgr(Color.DeepSkyBlue).MCvScalar;
-        public int projectionRayThickness = 2;
-        private readonly MCvScalar poiColor = new Bgr(Color.MediumVioletRed).MCvScalar;
         private readonly Bgr projectionDigitsColor = new Bgr(Color.White);
+
+        private readonly MCvScalar projectionRayColor = new Bgr(Color.DeepSkyBlue).MCvScalar;
+        private readonly MCvScalar projectionThrowRayColor = new Bgr(Color.Blue).MCvScalar;
+        private readonly MCvScalar poiColor = new Bgr(Color.MediumVioletRed).MCvScalar;
 
         public readonly SolidColorBrush redBrush = new SolidColorBrush(Colors.Red);
         public readonly SolidColorBrush yellowBrush = new SolidColorBrush(Colors.Yellow);
@@ -112,22 +104,20 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        public Image<Bgr, byte> ProjectionDrawThrow(Image<Bgr, byte> projectionImage,
-                                                    PointF poi)
+        public Image<Bgr, byte> ProjectionDrawThrow(DetectedThrow thrw)
         {
-            DrawCircle(projectionImage, poi, PoiRadius, poiColor, PoiThickness);
-
-            return projectionImage;
+            var image = ProjectionBackgroundImage.Clone();
+            DrawLine(image, thrw.FirstRay.RayPoint, thrw.FirstRay.CamPoint, projectionThrowRayColor, PoiThickness);
+            DrawLine(image, thrw.SecondRay.RayPoint, thrw.SecondRay.CamPoint, projectionThrowRayColor, PoiThickness);
+            DrawCircle(image, thrw.Poi, PoiRadius, poiColor, PoiThickness);
+            return image;
         }
 
-        public Image<Bgr, byte> ProjectionDrawLine(Image<Bgr, byte> projectionImage,
-                                                   PointF point1,
-                                                   PointF point2,
-                                                   MCvScalar color)
+        public Image<Bgr, byte> ProjectionDrawLine(Ray ray)
         {
-            DrawLine(projectionImage, point1, point2, color, PoiThickness);
-
-            return projectionImage;
+            var image = ProjectionBackgroundImage.Clone();
+            DrawLine(image, ray.CamPoint, ray.RayPoint, projectionRayColor, PoiThickness);
+            return image;
         }
 
         public Image<Bgr, byte> DrawSetupLines(Image<Bgr, byte> image,
@@ -147,7 +137,7 @@ namespace OneHundredAndEightyCore.Common
             DrawRectangle(image,
                           roiRectangle,
                           camRoiRectColor.MCvScalar,
-                          CamRoiRectThickness);
+                          camRoiRectThickness);
 
             var surfacePoint1 = new PointF(0, (float) surfaceSlider);
             var surfacePoint2 = new PointF((int) resolutionWidth,
@@ -156,7 +146,7 @@ namespace OneHundredAndEightyCore.Common
                      surfacePoint1,
                      surfacePoint2,
                      camSurfaceLineColor.MCvScalar,
-                     CamSurfaceLineThickness);
+                     camSurfaceLineThickness);
 
             var surfaceCenterPoint1 = new PointF((float) surfaceCenterSlider,
                                                  (float) surfaceSlider);
@@ -167,7 +157,7 @@ namespace OneHundredAndEightyCore.Common
                      surfaceCenterPoint1,
                      surfaceCenterPoint2,
                      camSurfaceLineColor.MCvScalar,
-                     CamSurfaceLineThickness);
+                     camSurfaceLineThickness);
 
             return image;
         }

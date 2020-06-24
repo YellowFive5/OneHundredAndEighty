@@ -6,7 +6,7 @@ using OneHundredAndEightyCore.Common;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Windows.DebugPanel
+namespace OneHundredAndEightyCore.Windows.Debug
 {
     public partial class ManualThrowPanelWindow
     {

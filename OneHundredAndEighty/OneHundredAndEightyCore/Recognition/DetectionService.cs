@@ -153,6 +153,12 @@ namespace OneHundredAndEightyCore.Recognition
                                                                                          });
                                                }
 
+                                               Application.Current.Dispatcher.Invoke(() =>
+                                                                                     {
+                                                                                         camsDetectionBoard.ClearProjectionImage();
+                                                                                         camsDetectionBoard.ClearPointsBox();
+                                                                                     });
+
                                                OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
                                                continue;
                                            }
@@ -298,15 +304,13 @@ namespace OneHundredAndEightyCore.Recognition
 
         private void FindAndProcessDartContour(CamService cam)
         {
-            Ray toDartRay = null;
-
             var dartContour = TryFindDartContour(cam);
             if (dartContour != null)
             {
-                toDartRay = ProcessDartContour(cam, dartContour);
+                var toDartRay = ProcessDartContour(cam, dartContour);
+                throwService.SaveRay(toDartRay);
+                Application.Current.Dispatcher.Invoke(() => { camsDetectionBoard.DrawRay(toDartRay); });
             }
-
-            throwService.SaveRay(toDartRay);
         }
 
         private DartContour TryFindDartContour(CamService cam)
@@ -433,12 +437,16 @@ namespace OneHundredAndEightyCore.Recognition
 
         #endregion
 
-        public void InvokeOnThrowDetected(DetectedThrow thrw)
+        public void InvokeOnThrowDetected(DetectedThrow thrw, bool debug = false)
         {
             if (thrw != null)
             {
                 OnThrowDetected?.Invoke(thrw);
-                camsDetectionBoard.PrintThrow(thrw);
+
+                if (!debug)
+                {
+                    Application.Current.Dispatcher.Invoke(() => { camsDetectionBoard.PrintAndDrawThrow(thrw); });
+                }
             }
         }
 

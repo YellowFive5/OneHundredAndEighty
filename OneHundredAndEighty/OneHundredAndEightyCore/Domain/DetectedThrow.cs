@@ -9,6 +9,8 @@ namespace OneHundredAndEightyCore.Domain
 {
     public class DetectedThrow
     {
+        public Ray FirstRay { get; }
+        public Ray SecondRay { get; }
         public PointF Poi { get; }
         public ThrowType Type { get; }
         public int TotalPoints { get; }
@@ -16,8 +18,10 @@ namespace OneHundredAndEightyCore.Domain
         public int Multiplier { get; }
         public int ProjectionResolution { get; }
 
-        public DetectedThrow(PointF poi, int sector, ThrowType type, int projectionSide)
+        public DetectedThrow(PointF poi, Ray firstRay, Ray secondRay, int sector, ThrowType type, int projectionSide)
         {
+            FirstRay = firstRay;
+            SecondRay = secondRay;
             ProjectionResolution = projectionSide;
             Poi = poi;
             Sector = sector;

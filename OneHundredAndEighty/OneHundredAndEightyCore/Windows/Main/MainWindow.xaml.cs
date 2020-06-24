@@ -14,7 +14,7 @@ using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Telemetry;
 using OneHundredAndEightyCore.Windows.CamsDetection;
-using OneHundredAndEightyCore.Windows.DebugPanel;
+using OneHundredAndEightyCore.Windows.Debug;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion

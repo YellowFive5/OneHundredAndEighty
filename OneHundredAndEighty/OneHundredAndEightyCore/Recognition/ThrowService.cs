@@ -24,7 +24,7 @@ namespace OneHundredAndEightyCore.Recognition
 
         public void SaveRay(Ray ray)
         {
-            rays.AddIfNotNull(ray);
+            rays.Add(ray);
         }
 
         public void ClearRays()
@@ -53,12 +53,12 @@ namespace OneHundredAndEightyCore.Recognition
                 return null;
             }
 
-            var thrw = PrepareThrowData(poi);
+            var thrw = PrepareThrowData(poi, firstBestRay, secondBestRay);
 
             return thrw;
         }
 
-        private DetectedThrow PrepareThrowData(PointF poi)
+        private DetectedThrow PrepareThrowData(PointF poi, Ray firstRay, Ray secondRay)
         {
             var sectors = new List<int>()
                           {
@@ -120,7 +120,7 @@ namespace OneHundredAndEightyCore.Recognition
                 }
             }
 
-            return new DetectedThrow(poi, sector, type, DrawService.ProjectionFrameSide);
+            return new DetectedThrow(poi, firstRay, secondRay, sector, type, DrawService.ProjectionFrameSide);
         }
     }
 }

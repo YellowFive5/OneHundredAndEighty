@@ -16,7 +16,7 @@ using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.CamsDetection;
-using OneHundredAndEightyCore.Windows.DebugPanel;
+using OneHundredAndEightyCore.Windows.Debug;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion

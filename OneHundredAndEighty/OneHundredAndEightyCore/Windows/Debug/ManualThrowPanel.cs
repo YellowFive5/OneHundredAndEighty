@@ -4,12 +4,11 @@ using System.Drawing;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
-using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Windows.DebugPanel
+namespace OneHundredAndEightyCore.Windows.Debug
 {
     public class ManualThrowPanel
     {
@@ -68,9 +67,12 @@ namespace OneHundredAndEightyCore.Windows.DebugPanel
             }
 
             detectionService.InvokeOnThrowDetected(new DetectedThrow(point,
+                                                                     null,
+                                                                     null,
                                                                      sector,
                                                                      type,
-                                                                     side));
+                                                                     side),
+                                                   true);
         }
     }
 }
