@@ -2,8 +2,6 @@
 
 using Moq;
 using NUnit.Framework;
-using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
 
 #endregion
@@ -13,12 +11,12 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
     public class WhenSavingSettings : ConfigServiceTestBase
     {
         [Test]
-        public void _76_ConfigItemsLoaded()
+        public void _78_ConfigItemsLoaded()
         {
             configService.SaveSettings();
 
             dbService.Verify(m => m.SettingsSetValue(It.IsAny<SettingsType>(), It.IsAny<string>()),
-                             Times.Exactly(76));
+                             Times.Exactly(78));
         }
 
         [Test]
@@ -464,45 +462,6 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
         }
 
         [Test]
-        public void DbServiceMethodCallsWithMovesExtractionValue()
-        {
-            var settingsType = SettingsType.MovesExtraction;
-            var value = 200;
-            configService.MovesExtractionValue = value;
-
-            configService.SaveSettings();
-
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
-                                                     Common.Converter.ToString(value)));
-        }
-
-        [Test]
-        public void DbServiceMethodCallsWithMovesDartValue()
-        {
-            var settingsType = SettingsType.MovesDart;
-            var value = 200;
-            configService.MovesDartValue = value;
-
-            configService.SaveSettings();
-
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
-                                                     Common.Converter.ToString(value)));
-        }
-
-        [Test]
-        public void DbServiceMethodCallsWithMovesNoiseValue()
-        {
-            var settingsType = SettingsType.MovesNoise;
-            var value = 200;
-            configService.MovesNoiseValue = value;
-
-            configService.SaveSettings();
-
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
-                                                     Common.Converter.ToString(value)));
-        }
-
-        [Test]
         public void DbServiceMethodCallsWithSmoothGaussValue()
         {
             var settingsType = SettingsType.SmoothGauss;
@@ -521,6 +480,71 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
             var settingsType = SettingsType.MinContourArc;
             var value = 200;
             configService.MinContourArcValue = value;
+
+            configService.SaveSettings();
+
+            dbService.Verify(m => m.SettingsSetValue(settingsType,
+                                                     Common.Converter.ToString(value)));
+        }
+
+        [Test]
+        public void DbServiceMethodCallsWithMaxContourArcValue()
+        {
+            var settingsType = SettingsType.MaxContourArc;
+            var value = 200;
+            configService.MaxContourArcValue = value;
+
+            configService.SaveSettings();
+
+            dbService.Verify(m => m.SettingsSetValue(settingsType,
+                                                     Common.Converter.ToString(value)));
+        }
+
+        [Test]
+        public void DbServiceMethodCallsWithMaxContourAreaValue()
+        {
+            var settingsType = SettingsType.MaxContourArea;
+            var value = 200;
+            configService.MaxContourAreaValue = value;
+
+            configService.SaveSettings();
+
+            dbService.Verify(m => m.SettingsSetValue(settingsType,
+                                                     Common.Converter.ToString(value)));
+        }
+
+        [Test]
+        public void DbServiceMethodCallsWithMinContourAreaValue()
+        {
+            var settingsType = SettingsType.MinContourArea;
+            var value = 200;
+            configService.MinContourAreaValue = value;
+
+            configService.SaveSettings();
+
+            dbService.Verify(m => m.SettingsSetValue(settingsType,
+                                                     Common.Converter.ToString(value)));
+        }
+
+        [Test]
+        public void DbServiceMethodCallsWithMaxContourWidthValue()
+        {
+            var settingsType = SettingsType.MaxContourWidth;
+            var value = 200;
+            configService.MaxContourWidthValue = value;
+
+            configService.SaveSettings();
+
+            dbService.Verify(m => m.SettingsSetValue(settingsType,
+                                                     Common.Converter.ToString(value)));
+        }
+
+        [Test]
+        public void DbServiceMethodCallsWithMinContourWidthValue()
+        {
+            var settingsType = SettingsType.MinContourWidth;
+            var value = 200;
+            configService.MinContourWidthValue = value;
 
             configService.SaveSettings();
 

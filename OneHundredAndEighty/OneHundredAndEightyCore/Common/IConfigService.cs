@@ -35,9 +35,6 @@
         int Cam4YSetupValue { get; set; }
         int CamsResolutionWidth { get; set; }
         int CamsResolutionHeight { get; set; }
-        int MovesExtractionValue { get; set; }
-        int MovesDartValue { get; set; }
-        int MovesNoiseValue { get; set; }
         int SmoothGaussValue { get; set; }
         int MinContourArcValue { get; set; }
         double CamsFovAngle { get; set; }
@@ -81,5 +78,10 @@
         double ClassicScoreWindowPositionTop { get; set; }
         double ClassicScoreWindowHeight { get; set; }
         double ClassicScoreWindowWidth { get; set; }
+        int MaxContourArcValue { get; set; }
+        int MinContourAreaValue { get; set; }
+        int MaxContourAreaValue { get; set; }
+        int MinContourWidthValue { get; set; }
+        int MaxContourWidthValue { get; set; }
     }
 }

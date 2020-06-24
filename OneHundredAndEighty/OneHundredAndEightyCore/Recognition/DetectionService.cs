@@ -50,9 +50,12 @@ namespace OneHundredAndEightyCore.Recognition
         private CancellationToken cancelToken;
         private DetectionServiceWorkingMode workingMode;
 
-        private int movesExtraction;
-        private int movesNoise;
         private int minContourArc;
+        private int maxContourArc;
+        private int minContourArea;
+        private int maxContourArea;
+        private int minContourWidth;
+        private int maxContourWidth;
 
         public DetectionService(DrawService drawService,
                                 ConfigService configService,
@@ -100,9 +103,12 @@ namespace OneHundredAndEightyCore.Recognition
             var moveDetectedSleepTime = configService.MovesDetectedSleepTimeValue;
             var withDetection = configService.DetectionEnabled && !App.NoCams;
 
-            movesExtraction = configService.MovesExtractionValue;
-            movesNoise = configService.MovesNoiseValue;
             minContourArc = configService.MinContourArcValue;
+            maxContourArc = configService.MaxContourArcValue;
+            minContourArea = configService.MinContourAreaValue;
+            maxContourArea = configService.MaxContourAreaValue;
+            minContourWidth = configService.MinContourWidthValue;
+            maxContourWidth = configService.MaxContourWidthValue;
 
             try
             {
@@ -213,12 +219,13 @@ namespace OneHundredAndEightyCore.Recognition
 
         private MovesDetectionResult DetectMoves(CamService cam)
         {
-            var maxDartContourArc = 265; // todo move to settings
-            var maxDartContourArea = 3300;
-            var minDartContourArc = 105;
-            var minDartContourArea = 336;
-            var maxDartContourWidth = 44;
-            var minDartContourWidth = 8;
+            var maxDartContourArc = maxContourArc * 1.5;
+            var maxDartContourArea = maxContourArea * 1.5;
+            var maxDartContourWidth = maxContourWidth * 1.5;
+
+            var minDartContourArc = minContourArc;
+            var minDartContourArea = minContourArea;
+            var minDartContourWidth = minContourWidth;
 
             var allContours = new VectorOfVectorOfPoint();
             CvInvoke.FindContours(cam.ThrowExtractedRoiFrame,

@@ -7,9 +7,11 @@
         ResolutionWidth,
         ResolutionHeight,
         MinContourArc,
-        MovesExtraction,
-        MovesDart,
-        MovesNoise,
+        MaxContourArc,
+        MinContourArea,
+        MaxContourArea,
+        MinContourWidth,
+        MaxContourWidth,
         SmoothGauss,
         MoveDetectedSleepTime,
         ExtractionSleepTime,
@@ -80,6 +82,6 @@
         ClassicScoreWindowHeight,
         ClassicScoreWindowWidth,
         ClassicScoreWindowPositionLeft,
-        ClassicScoreWindowPositionTop
+        ClassicScoreWindowPositionTop,
     }
 }

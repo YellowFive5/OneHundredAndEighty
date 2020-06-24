@@ -332,7 +332,7 @@
                                 <TextBlock FontFamily="Agency FB"
                                            FontSize="16"
                                            Grid.Row="23"
-                                           Grid.Column="1"
+                                           Grid.Column="5"
                                            Style="{StaticResource LabelStyle}"
                                            Grid.ColumnSpan="3">
                                     <Hyperlink
@@ -346,7 +346,7 @@
                                 <TextBlock FontFamily="Agency FB"
                                            FontSize="16"
                                            Grid.Row="25"
-                                           Grid.Column="1"
+                                           Grid.Column="5"
                                            Style="{StaticResource LabelStyle}"
                                            Grid.ColumnSpan="3">
                                     <Hyperlink
@@ -433,47 +433,69 @@
                                          PreviewTextInput="IntValidation"
                                          Text="{Binding CamsResolutionHeight, Mode=TwoWay}" />
                                 <TextBox x:Name="MinContourArcTextBox"
-                                         Grid.Row="19"
+                                         Grid.Row="15"
                                          Grid.Column="1"
                                          Style="{StaticResource TextBoxStyle}"
                                          ToolTip="{x:Static resx:Resources.MinContourArcHelperText}"
                                          PreviewTextInput="IntValidation"
                                          Text="{Binding MinContourArcValue, Mode=TwoWay}" />
                                 <Label Content="{x:Static resx:Resources.MinContourArcLabelText}"
+                                       Grid.Row="15"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
+                                <TextBox x:Name="MaxContourArcTextBox"
+                                         Grid.Row="17"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MaxContourArcHelperText}"
+                                         PreviewTextInput="IntValidation"
+                                         Text="{Binding MaxContourArcValue, Mode=TwoWay}" />
+                                <Label Content="{x:Static resx:Resources.MaxContourArcLabelText}"
+                                       Grid.Row="17"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
+                                <TextBox x:Name="MinContourAreaTextBox"
+                                         Grid.Row="19"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MinContourAreaHelperText}"
+                                         PreviewTextInput="IntValidation"
+                                         Text="{Binding MinContourAreaValue, Mode=TwoWay}" />
+                                <Label Content="{x:Static resx:Resources.MinContourAreaLabelText}"
                                        Grid.Row="19"
                                        Grid.Column="3"
                                        Style="{StaticResource LabelStyle}" />
-                                <TextBox x:Name="MovesExtractionTextBox"
-                                         Grid.Row="7"
-                                         Grid.Column="1"
-                                         Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.MovesExtractionHelperText}"
-                                         PreviewTextInput="IntValidation"
-                                         Text="{Binding MovesExtractionValue, Mode=TwoWay}" />
-                                <Label Content="{x:Static resx:Resources.MovesExtractionLabelText}"
-                                       Grid.Row="7"
-                                       Grid.Column="3"
-                                       Style="{StaticResource LabelStyle}" />
-                                <TextBox x:Name="MovesDartTextBox"
+                                <TextBox x:Name="MaxContourAreaTextBox"
                                          Grid.Row="21"
                                          Grid.Column="1"
                                          Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.MovesDartHelperText}"
+                                         ToolTip="{x:Static resx:Resources.MaxContourAreaHelperText}"
                                          PreviewTextInput="IntValidation"
-                                         Text="{Binding MovesDartValue, Mode=TwoWay}" />
-                                <Label Content="{x:Static resx:Resources.MovesDartLabelText}"
+                                         Text="{Binding MaxContourAreaValue, Mode=TwoWay}" />
+                                <Label Content="{x:Static resx:Resources.MaxContourAreaLabelText}"
                                        Grid.Row="21"
                                        Grid.Column="3"
                                        Style="{StaticResource LabelStyle}" />
-                                <TextBox x:Name="MovesNoiseTextBox"
-                                         Grid.Row="11"
+                                <TextBox x:Name="MinContourWidthTextBox"
+                                         Grid.Row="23"
                                          Grid.Column="1"
                                          Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.MovesNoiseHelperText}"
+                                         ToolTip="{x:Static resx:Resources.MinContourWidthHelperText}"
                                          PreviewTextInput="IntValidation"
-                                         Text="{Binding MovesNoiseValue, Mode=TwoWay}" />
-                                <Label Content="{x:Static resx:Resources.MovesNoiseLabelText}"
-                                       Grid.Row="11"
+                                         Text="{Binding MinContourWidthValue, Mode=TwoWay}" />
+                                <Label Content="{x:Static resx:Resources.MinContourWidthLabelText}"
+                                       Grid.Row="23"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LabelStyle}" />
+                                <TextBox x:Name="MaxContourWidthTextBox"
+                                         Grid.Row="25"
+                                         Grid.Column="1"
+                                         Style="{StaticResource TextBoxStyle}"
+                                         ToolTip="{x:Static resx:Resources.MaxContourWidthHelperText}"
+                                         PreviewTextInput="IntValidation"
+                                         Text="{Binding MaxContourWidthValue, Mode=TwoWay}" />
+                                <Label Content="{x:Static resx:Resources.MaxContourWidthLabelText}"
+                                       Grid.Row="25"
                                        Grid.Column="3"
                                        Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="SmoothGaussTextBox"
@@ -488,25 +510,25 @@
                                        Grid.Column="3"
                                        Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="MoveDetectedSleepTimeTextBox"
-                                         Grid.Row="9"
+                                         Grid.Row="7"
                                          Grid.Column="1"
                                          Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.MovesDetectedHelperText}"
+                                         ToolTip="{x:Static resx:Resources.MovesDetectedTimeHelperText}"
                                          PreviewTextInput="DoubleValidation"
                                          Text="{Binding MovesDetectedSleepTimeValue, Mode=TwoWay}" />
-                                <Label Content="{x:Static resx:Resources.MovesDetectedLabelText}"
-                                       Grid.Row="9"
+                                <Label Content="{x:Static resx:Resources.MovesDetectedTimeLabelText}"
+                                       Grid.Row="7"
                                        Grid.Column="3"
                                        Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="ExtractionSleepTimeTimeTextBox"
-                                         Grid.Row="17"
+                                         Grid.Row="11"
                                          Grid.Column="1"
                                          Style="{StaticResource TextBoxStyle}"
-                                         ToolTip="{x:Static resx:Resources.ExtrectionSleepTimeHelperText}"
+                                         ToolTip="{x:Static resx:Resources.ExtractionSleepTimeHelperText}"
                                          PreviewTextInput="DoubleValidation"
                                          Text="{Binding ExtractionSleepTimeValue, Mode=TwoWay}" />
                                 <Label Content="{x:Static resx:Resources.ExtractionSleepTimeLabelText}"
-                                       Grid.Row="17"
+                                       Grid.Row="11"
                                        Grid.Column="3"
                                        Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="Cam1IdTextBox"
@@ -606,14 +628,14 @@
                                          ToolTip="{x:Static resx:Resources.CamYSetupPointHelperText}"
                                          Text="{Binding Cam4YSetupValue, Mode=TwoWay}" />
                                 <TextBox x:Name="ThresholdSleepTimeTimeTextBox"
-                                         Grid.Row="15"
+                                         Grid.Row="9"
                                          Grid.Column="1"
                                          Style="{StaticResource TextBoxStyle}"
                                          ToolTip="{x:Static resx:Resources.ThresholdSleepTimeHelperText}"
                                          PreviewTextInput="DoubleValidation"
                                          Text="{Binding ThresholdSleepTimeValue, Mode=TwoWay}" />
                                 <Label Content="{x:Static resx:Resources.ThresholdSleepTimeLabelText}"
-                                       Grid.Row="15"
+                                       Grid.Row="9"
                                        Grid.Column="3"
                                        Style="{StaticResource LabelStyle}" />
                                 <TextBox x:Name="ToCam4Distance"

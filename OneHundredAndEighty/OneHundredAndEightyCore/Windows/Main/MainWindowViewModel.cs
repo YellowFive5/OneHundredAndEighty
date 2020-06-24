@@ -544,18 +544,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             }
         }
 
-        private int movesExtractionValue;
-
-        public int MovesExtractionValue
-        {
-            get => movesExtractionValue;
-            set
-            {
-                movesExtractionValue = value;
-                configService.MovesExtractionValue = value;
-                OnPropertyChanged(nameof(MovesExtractionValue));
-            }
-        }
+        private int smoothGaussValue;
 
         private double movesDetectedSleepTimeValue;
 
@@ -569,21 +558,6 @@ namespace OneHundredAndEightyCore.Windows.Main
                 OnPropertyChanged(nameof(MovesDetectedSleepTimeValue));
             }
         }
-
-        private int movesNoiseValue;
-
-        public int MovesNoiseValue
-        {
-            get => movesNoiseValue;
-            set
-            {
-                movesNoiseValue = value;
-                configService.MovesNoiseValue = value;
-                OnPropertyChanged(nameof(MovesNoiseValue));
-            }
-        }
-
-        private int smoothGaussValue;
 
         public int SmoothGaussValue
         {
@@ -635,16 +609,68 @@ namespace OneHundredAndEightyCore.Windows.Main
             }
         }
 
-        private int movesDartValue;
+        private int maxContourArcValue;
 
-        public int MovesDartValue
+        public int MaxContourArcValue
         {
-            get => movesDartValue;
+            get => maxContourArcValue;
             set
             {
-                movesDartValue = value;
-                configService.MovesDartValue = value;
-                OnPropertyChanged(nameof(MovesDartValue));
+                maxContourArcValue = value;
+                configService.MaxContourArcValue = value;
+                OnPropertyChanged(nameof(MaxContourArcValue));
+            }
+        }
+
+        private int minContourAreaValue;
+
+        public int MinContourAreaValue
+        {
+            get => minContourAreaValue;
+            set
+            {
+                minContourAreaValue = value;
+                configService.MinContourAreaValue = value;
+                OnPropertyChanged(nameof(MinContourAreaValue));
+            }
+        }
+
+        private int maxContourAreaValue;
+
+        public int MaxContourAreaValue
+        {
+            get => maxContourAreaValue;
+            set
+            {
+                maxContourAreaValue = value;
+                configService.MaxContourAreaValue = value;
+                OnPropertyChanged(nameof(MaxContourAreaValue));
+            }
+        }
+
+        private int minContourWidthValue;
+
+        public int MinContourWidthValue
+        {
+            get => minContourWidthValue;
+            set
+            {
+                minContourWidthValue = value;
+                configService.MinContourWidthValue = value;
+                OnPropertyChanged(nameof(MinContourWidthValue));
+            }
+        }
+
+        private int maxContourWidthValue;
+
+        public int MaxContourWidthValue
+        {
+            get => maxContourWidthValue;
+            set
+            {
+                maxContourWidthValue = value;
+                configService.MaxContourWidthValue = value;
+                OnPropertyChanged(nameof(MaxContourWidthValue));
             }
         }
 
@@ -1186,14 +1212,16 @@ namespace OneHundredAndEightyCore.Windows.Main
             CamsFovAngle = configService.CamsFovAngle;
             CamsResolutionWidth = configService.CamsResolutionWidth;
             CamsResolutionHeight = configService.CamsResolutionHeight;
-            MovesExtractionValue = configService.MovesExtractionValue;
             MovesDetectedSleepTimeValue = configService.MovesDetectedSleepTimeValue;
-            MovesNoiseValue = configService.MovesNoiseValue;
             SmoothGaussValue = configService.SmoothGaussValue;
             ThresholdSleepTimeValue = configService.ThresholdSleepTimeValue;
             ExtractionSleepTimeValue = configService.ExtractionSleepTimeValue;
             MinContourArcValue = configService.MinContourArcValue;
-            MovesDartValue = configService.MovesDartValue;
+            MaxContourArcValue = configService.MaxContourArcValue;
+            MinContourAreaValue = configService.MinContourAreaValue;
+            MaxContourAreaValue = configService.MaxContourAreaValue;
+            MinContourWidthValue = configService.MinContourWidthValue;
+            MaxContourWidthValue = configService.MaxContourWidthValue;
             ToCam1Distance = configService.ToCam1Distance;
             ToCam2Distance = configService.ToCam2Distance;
             ToCam3Distance = configService.ToCam3Distance;

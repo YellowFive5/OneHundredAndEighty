@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using NLog;
-using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
 
 #endregion
@@ -50,11 +49,13 @@ namespace OneHundredAndEightyCore.Common
         public int Cam4YSetupValue { get; set; }
         public int CamsResolutionWidth { get; set; }
         public int CamsResolutionHeight { get; set; }
-        public int MovesExtractionValue { get; set; }
-        public int MovesDartValue { get; set; }
-        public int MovesNoiseValue { get; set; }
         public int SmoothGaussValue { get; set; }
         public int MinContourArcValue { get; set; }
+        public int MaxContourArcValue { get; set; }
+        public int MinContourAreaValue { get; set; }
+        public int MaxContourAreaValue { get; set; }
+        public int MinContourWidthValue { get; set; }
+        public int MaxContourWidthValue { get; set; }
         public double CamsFovAngle { get; set; }
         public string Cam1Id { get; set; }
         public string Cam2Id { get; set; }
@@ -134,11 +135,13 @@ namespace OneHundredAndEightyCore.Common
             Cam4YSetupValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.Cam4Y));
             CamsResolutionWidth = Converter.ToInt(dbService.SettingsGetValue(SettingsType.ResolutionWidth));
             CamsResolutionHeight = Converter.ToInt(dbService.SettingsGetValue(SettingsType.ResolutionHeight));
-            MovesExtractionValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MovesExtraction));
-            MovesDartValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MovesDart));
-            MovesNoiseValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MovesNoise));
             SmoothGaussValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.SmoothGauss));
             MinContourArcValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MinContourArc));
+            MaxContourArcValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MaxContourArc));
+            MinContourAreaValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MinContourArea));
+            MaxContourAreaValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MaxContourArea));
+            MinContourWidthValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MinContourWidth));
+            MaxContourWidthValue = Converter.ToInt(dbService.SettingsGetValue(SettingsType.MaxContourWidth));
             CamsFovAngle = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.CamFovAngle));
             Cam1Id = Converter.ToString(dbService.SettingsGetValue(SettingsType.Cam1Id));
             Cam2Id = Converter.ToString(dbService.SettingsGetValue(SettingsType.Cam2Id));
@@ -216,11 +219,13 @@ namespace OneHundredAndEightyCore.Common
             dbService.SettingsSetValue(SettingsType.Cam4Y, Converter.ToString(Cam4YSetupValue));
             dbService.SettingsSetValue(SettingsType.ResolutionWidth, Converter.ToString(CamsResolutionWidth));
             dbService.SettingsSetValue(SettingsType.ResolutionHeight, Converter.ToString(CamsResolutionHeight));
-            dbService.SettingsSetValue(SettingsType.MovesExtraction, Converter.ToString(MovesExtractionValue));
-            dbService.SettingsSetValue(SettingsType.MovesDart, Converter.ToString(MovesDartValue));
-            dbService.SettingsSetValue(SettingsType.MovesNoise, Converter.ToString(MovesNoiseValue));
             dbService.SettingsSetValue(SettingsType.SmoothGauss, Converter.ToString(SmoothGaussValue));
             dbService.SettingsSetValue(SettingsType.MinContourArc, Converter.ToString(MinContourArcValue));
+            dbService.SettingsSetValue(SettingsType.MaxContourArc, Converter.ToString(MaxContourArcValue));
+            dbService.SettingsSetValue(SettingsType.MinContourArea, Converter.ToString(MinContourAreaValue));
+            dbService.SettingsSetValue(SettingsType.MaxContourArea, Converter.ToString(MaxContourAreaValue));
+            dbService.SettingsSetValue(SettingsType.MinContourWidth, Converter.ToString(MinContourWidthValue));
+            dbService.SettingsSetValue(SettingsType.MaxContourWidth, Converter.ToString(MaxContourWidthValue));
             dbService.SettingsSetValue(SettingsType.CamFovAngle, Converter.ToString(CamsFovAngle));
             dbService.SettingsSetValue(SettingsType.Cam1Id, Converter.ToString(Cam1Id));
             dbService.SettingsSetValue(SettingsType.Cam2Id, Converter.ToString(Cam2Id));

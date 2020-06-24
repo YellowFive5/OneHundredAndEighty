@@ -289,20 +289,20 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Threshold sleep time in seconds for darts extraction from dartboard process. Default value is &apos;4&apos;.
+        /// </summary>
+        public static string ExtractionSleepTimeHelperText {
+            get {
+                return ResourceManager.GetString("ExtractionSleepTimeHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Extraction sleep time.
         /// </summary>
         public static string ExtractionSleepTimeLabelText {
             get {
                 return ResourceManager.GetString("ExtractionSleepTimeLabelText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Threshold sleep time in seconds for darts extraction from dartboard process. Default value is &apos;4&apos;.
-        /// </summary>
-        public static string ExtrectionSleepTimeHelperText {
-            get {
-                return ResourceManager.GetString("ExtrectionSleepTimeHelperText", resourceCulture);
             }
         }
         
@@ -335,7 +335,61 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimal dart contour arc on image to be detected. Default value is &apos;105&apos;.
+        ///   Looks up a localized string similar to Maximal dart contour arc on ROI image to be detected. Default value is &apos;265&apos;.
+        /// </summary>
+        public static string MaxContourArcHelperText {
+            get {
+                return ResourceManager.GetString("MaxContourArcHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximal contour arc.
+        /// </summary>
+        public static string MaxContourArcLabelText {
+            get {
+                return ResourceManager.GetString("MaxContourArcLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximal dart contour area on ROI image to be detected. Default value is &apos;3300&apos;.
+        /// </summary>
+        public static string MaxContourAreaHelperText {
+            get {
+                return ResourceManager.GetString("MaxContourAreaHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximal contour area.
+        /// </summary>
+        public static string MaxContourAreaLabelText {
+            get {
+                return ResourceManager.GetString("MaxContourAreaLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximal dart contour width on ROI image to be detected. Default value is &apos;44&apos;.
+        /// </summary>
+        public static string MaxContourWidthHelperText {
+            get {
+                return ResourceManager.GetString("MaxContourWidthHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximal contour width.
+        /// </summary>
+        public static string MaxContourWidthLabelText {
+            get {
+                return ResourceManager.GetString("MaxContourWidthLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal dart contour arc on ROI image to be detected. Default value is &apos;105&apos;.
         /// </summary>
         public static string MinContourArcHelperText {
             get {
@@ -353,74 +407,56 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value of moves, indicating that another throw is done. Default value is &apos;600&apos;.
+        ///   Looks up a localized string similar to Minimal dart contour area on ROI image to be detected. Default value is &apos;336&apos;.
         /// </summary>
-        public static string MovesDartHelperText {
+        public static string MinContourAreaHelperText {
             get {
-                return ResourceManager.GetString("MovesDartHelperText", resourceCulture);
+                return ResourceManager.GetString("MinContourAreaHelperText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moves dart value.
+        ///   Looks up a localized string similar to Minimal contour area.
         /// </summary>
-        public static string MovesDartLabelText {
+        public static string MinContourAreaLabelText {
             get {
-                return ResourceManager.GetString("MovesDartLabelText", resourceCulture);
+                return ResourceManager.GetString("MinContourAreaLabelText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to After move detected threshold sleep time in seconds. Default value is &apos;0.25&apos;.
+        ///   Looks up a localized string similar to Minimal dart contour width on ROI image to be detected. Default value is &apos;8&apos;.
         /// </summary>
-        public static string MovesDetectedHelperText {
+        public static string MinContourWidthHelperText {
             get {
-                return ResourceManager.GetString("MovesDetectedHelperText", resourceCulture);
+                return ResourceManager.GetString("MinContourWidthHelperText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal contour width.
+        /// </summary>
+        public static string MinContourWidthLabelText {
+            get {
+                return ResourceManager.GetString("MinContourWidthLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After move detected threshold sleep time in seconds. Default value is 0.25.
+        /// </summary>
+        public static string MovesDetectedTimeHelperText {
+            get {
+                return ResourceManager.GetString("MovesDetectedTimeHelperText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Move detected sleep time.
         /// </summary>
-        public static string MovesDetectedLabelText {
+        public static string MovesDetectedTimeLabelText {
             get {
-                return ResourceManager.GetString("MovesDetectedLabelText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value of moves, indicating that you extract darts from dartboard after throws. Default value is &apos;8000&apos;.
-        /// </summary>
-        public static string MovesExtractionHelperText {
-            get {
-                return ResourceManager.GetString("MovesExtractionHelperText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Moves extraction value.
-        /// </summary>
-        public static string MovesExtractionLabelText {
-            get {
-                return ResourceManager.GetString("MovesExtractionLabelText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value of noise moves. Default value is &apos;150&apos;.
-        /// </summary>
-        public static string MovesNoiseHelperText {
-            get {
-                return ResourceManager.GetString("MovesNoiseHelperText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Moves noise value.
-        /// </summary>
-        public static string MovesNoiseLabelText {
-            get {
-                return ResourceManager.GetString("MovesNoiseLabelText", resourceCulture);
+                return ResourceManager.GetString("MovesDetectedTimeLabelText", resourceCulture);
             }
         }
         

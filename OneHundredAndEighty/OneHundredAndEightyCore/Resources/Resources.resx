@@ -194,11 +194,11 @@
     <value>Error DB migrating from [{0}] to [{1}]
 Please, contact developer</value>
   </data>
+  <data name="ExtractionSleepTimeHelperText" xml:space="preserve">
+    <value>Threshold sleep time in seconds for darts extraction from dartboard process. Default value is '4'</value>
+  </data>
   <data name="ExtractionSleepTimeLabelText" xml:space="preserve">
     <value>Extraction sleep time</value>
-  </data>
-  <data name="ExtrectionSleepTimeHelperText" xml:space="preserve">
-    <value>Threshold sleep time in seconds for darts extraction from dartboard process. Default value is '4'</value>
   </data>
   <data name="GeneralSettingsTabName" xml:space="preserve">
     <value>General</value>
@@ -209,35 +209,47 @@ Please, contact developer</value>
   <data name="MainSettingsTabName" xml:space="preserve">
     <value>Setup</value>
   </data>
+  <data name="MaxContourArcHelperText" xml:space="preserve">
+    <value>Maximal dart contour arc on ROI image to be detected. Default value is '265'</value>
+  </data>
+  <data name="MaxContourArcLabelText" xml:space="preserve">
+    <value>Maximal contour arc</value>
+  </data>
+  <data name="MaxContourAreaHelperText" xml:space="preserve">
+    <value>Maximal dart contour area on ROI image to be detected. Default value is '3300'</value>
+  </data>
+  <data name="MaxContourAreaLabelText" xml:space="preserve">
+    <value>Maximal contour area</value>
+  </data>
+  <data name="MaxContourWidthHelperText" xml:space="preserve">
+    <value>Maximal dart contour width on ROI image to be detected. Default value is '44'</value>
+  </data>
+  <data name="MaxContourWidthLabelText" xml:space="preserve">
+    <value>Maximal contour width</value>
+  </data>
   <data name="MinContourArcHelperText" xml:space="preserve">
-    <value>Minimal dart contour arc on image to be detected. Default value is '105'</value>
+    <value>Minimal dart contour arc on ROI image to be detected. Default value is '105'</value>
   </data>
   <data name="MinContourArcLabelText" xml:space="preserve">
     <value>Minimal contour arc</value>
   </data>
-  <data name="MovesDartHelperText" xml:space="preserve">
-    <value>Value of moves, indicating that another throw is done. Default value is '600'</value>
+  <data name="MinContourAreaHelperText" xml:space="preserve">
+    <value>Minimal dart contour area on ROI image to be detected. Default value is '336'</value>
   </data>
-  <data name="MovesDartLabelText" xml:space="preserve">
-    <value>Moves dart value</value>
+  <data name="MinContourAreaLabelText" xml:space="preserve">
+    <value>Minimal contour area</value>
   </data>
-  <data name="MovesDetectedHelperText" xml:space="preserve">
-    <value>After move detected threshold sleep time in seconds. Default value is '0.25'</value>
+  <data name="MinContourWidthHelperText" xml:space="preserve">
+    <value>Minimal dart contour width on ROI image to be detected. Default value is '8'</value>
   </data>
-  <data name="MovesDetectedLabelText" xml:space="preserve">
+  <data name="MinContourWidthLabelText" xml:space="preserve">
+    <value>Minimal contour width</value>
+  </data>
+  <data name="MovesDetectedTimeHelperText" xml:space="preserve">
+    <value>After move detected threshold sleep time in seconds. Default value is 0.25</value>
+  </data>
+  <data name="MovesDetectedTimeLabelText" xml:space="preserve">
     <value>Move detected sleep time</value>
-  </data>
-  <data name="MovesExtractionHelperText" xml:space="preserve">
-    <value>Value of moves, indicating that you extract darts from dartboard after throws. Default value is '8000'</value>
-  </data>
-  <data name="MovesExtractionLabelText" xml:space="preserve">
-    <value>Moves extraction value</value>
-  </data>
-  <data name="MovesNoiseHelperText" xml:space="preserve">
-    <value>Value of noise moves. Default value is '150'</value>
-  </data>
-  <data name="MovesNoiseLabelText" xml:space="preserve">
-    <value>Moves noise value</value>
   </data>
   <data name="NewClassicGamePointsNotSelectedErrorText" xml:space="preserve">
     <value>Points for classic game type can't be 'Free'</value>

@@ -579,21 +579,6 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         }
 
         [Test]
-        public void MovesExtractionValueSetsAndChangeFiredAndConfigItemSaved()
-        {
-            var oldValue = viewModel.MovesExtractionValue;
-            configService.Object.MovesExtractionValue = oldValue;
-
-            viewModel.MovesExtractionValue = 500;
-            var newValue = viewModel.MovesExtractionValue;
-
-            newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(500);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesExtractionValue));
-            configService.Object.MovesExtractionValue.Should().Be(newValue);
-        }
-
-        [Test]
         public void MovesDetectedSleepTimeValueSetsAndChangeFiredAndConfigItemSaved()
         {
             var oldValue = viewModel.MovesDetectedSleepTimeValue;
@@ -606,21 +591,6 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             newValue.Should().Be(0.25);
             tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesDetectedSleepTimeValue));
             configService.Object.MovesDetectedSleepTimeValue.Should().Be(newValue);
-        }
-
-        [Test]
-        public void MovesNoiseValueSetsAndChangeFiredAndConfigItemSaved()
-        {
-            var oldValue = viewModel.MovesNoiseValue;
-            configService.Object.MovesNoiseValue = oldValue;
-
-            viewModel.MovesNoiseValue = 200;
-            var newValue = viewModel.MovesNoiseValue;
-
-            newValue.Should().NotBe(oldValue);
-            newValue.Should().Be(200);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesNoiseValue));
-            configService.Object.MovesNoiseValue.Should().Be(newValue);
         }
 
         [Test]
@@ -684,18 +654,78 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         }
 
         [Test]
-        public void MovesDartValueSetsAndChangeFiredAndConfigItemSaved()
+        public void MaxContourArcValueSetsAndChangeFiredAndConfigItemSaved()
         {
-            var oldValue = viewModel.MovesDartValue;
-            configService.Object.MovesDartValue = oldValue;
+            var oldValue = viewModel.MaxContourArcValue;
+            configService.Object.MaxContourArcValue = oldValue;
 
-            viewModel.MovesDartValue = 500;
-            var newValue = viewModel.MovesDartValue;
+            viewModel.MaxContourArcValue = 500;
+            var newValue = viewModel.MaxContourArcValue;
 
             newValue.Should().NotBe(oldValue);
             newValue.Should().Be(500);
-            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MovesDartValue));
-            configService.Object.MovesDartValue.Should().Be(newValue);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MaxContourArcValue));
+            configService.Object.MaxContourArcValue.Should().Be(newValue);
+        }
+
+        [Test]
+        public void MaxContourAreaValueSetsAndChangeFiredAndConfigItemSaved()
+        {
+            var oldValue = viewModel.MaxContourAreaValue;
+            configService.Object.MaxContourAreaValue = oldValue;
+
+            viewModel.MaxContourAreaValue = 500;
+            var newValue = viewModel.MaxContourAreaValue;
+
+            newValue.Should().NotBe(oldValue);
+            newValue.Should().Be(500);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MaxContourAreaValue));
+            configService.Object.MaxContourAreaValue.Should().Be(newValue);
+        }
+
+        [Test]
+        public void MinContourAreaValueSetsAndChangeFiredAndConfigItemSaved()
+        {
+            var oldValue = viewModel.MinContourAreaValue;
+            configService.Object.MinContourAreaValue = oldValue;
+
+            viewModel.MinContourAreaValue = 500;
+            var newValue = viewModel.MinContourAreaValue;
+
+            newValue.Should().NotBe(oldValue);
+            newValue.Should().Be(500);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MinContourAreaValue));
+            configService.Object.MinContourAreaValue.Should().Be(newValue);
+        }
+
+        [Test]
+        public void MinContourWidthValueSetsAndChangeFiredAndConfigItemSaved()
+        {
+            var oldValue = viewModel.MinContourWidthValue;
+            configService.Object.MinContourWidthValue = oldValue;
+
+            viewModel.MinContourWidthValue = 500;
+            var newValue = viewModel.MinContourWidthValue;
+
+            newValue.Should().NotBe(oldValue);
+            newValue.Should().Be(500);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MinContourWidthValue));
+            configService.Object.MinContourWidthValue.Should().Be(newValue);
+        }
+
+        [Test]
+        public void MaxContourWidthValueSetsAndChangeFiredAndConfigItemSaved()
+        {
+            var oldValue = viewModel.MaxContourWidthValue;
+            configService.Object.MaxContourWidthValue = oldValue;
+
+            viewModel.MaxContourWidthValue = 500;
+            var newValue = viewModel.MaxContourWidthValue;
+
+            newValue.Should().NotBe(oldValue);
+            newValue.Should().Be(500);
+            tester.AssertOnPropertyChangedInvoke(0, nameof(viewModel.MaxContourWidthValue));
+            configService.Object.MaxContourWidthValue.Should().Be(newValue);
         }
 
         [Test]

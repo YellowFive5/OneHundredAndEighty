@@ -3,8 +3,6 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using OneHundredAndEightyCore.Common;
-using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
 
 #endregion
@@ -14,12 +12,12 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
     public class WhenLoadingSettings : ConfigServiceTestBase
     {
         [Test]
-        public void All_77_ConfigItemsLoaded()
+        public void All_79_ConfigItemsLoaded()
         {
             configService.LoadSettings();
 
             dbService.Verify(m => m.SettingsGetValue(It.IsAny<SettingsType>()),
-                             Times.Exactly(77));
+                             Times.Exactly(79));
         }
 
         [Test]
@@ -407,39 +405,6 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
         }
 
         [Test]
-        public void MovesExtractionValueLoaded()
-        {
-            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MovesExtraction))).Returns("200");
-            configService.MovesExtractionValue = 1;
-
-            configService.LoadSettings();
-
-            configService.MovesExtractionValue.Should().Be(200);
-        }
-
-        [Test]
-        public void MovesDartValueLoaded()
-        {
-            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MovesDart))).Returns("200");
-            configService.MovesDartValue = 1;
-
-            configService.LoadSettings();
-
-            configService.MovesDartValue.Should().Be(200);
-        }
-
-        [Test]
-        public void MovesNoiseValueLoaded()
-        {
-            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MovesNoise))).Returns("200");
-            configService.MovesNoiseValue = 1;
-
-            configService.LoadSettings();
-
-            configService.MovesNoiseValue.Should().Be(200);
-        }
-
-        [Test]
         public void SmoothGaussValueLoaded()
         {
             dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.SmoothGauss))).Returns("5");
@@ -459,6 +424,61 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
             configService.LoadSettings();
 
             configService.MinContourArcValue.Should().Be(150);
+        }
+
+        [Test]
+        public void MaxContourArcValueLoaded()
+        {
+            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MaxContourArc))).Returns("150");
+            configService.MaxContourArcValue = 1;
+
+            configService.LoadSettings();
+
+            configService.MaxContourArcValue.Should().Be(150);
+        }
+
+        [Test]
+        public void MaxContourAreaValueLoaded()
+        {
+            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MaxContourArea))).Returns("150");
+            configService.MaxContourAreaValue = 1;
+
+            configService.LoadSettings();
+
+            configService.MaxContourAreaValue.Should().Be(150);
+        }
+
+        [Test]
+        public void MinContourAreaValueLoaded()
+        {
+            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MinContourArea))).Returns("150");
+            configService.MinContourAreaValue = 1;
+
+            configService.LoadSettings();
+
+            configService.MinContourAreaValue.Should().Be(150);
+        }
+
+        [Test]
+        public void MaxContourWidthValueLoaded()
+        {
+            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MaxContourWidth))).Returns("150");
+            configService.MaxContourWidthValue = 1;
+
+            configService.LoadSettings();
+
+            configService.MaxContourWidthValue.Should().Be(150);
+        }
+
+        [Test]
+        public void MinContourWidthValueLoaded()
+        {
+            dbService.Setup(x => x.SettingsGetValue(It.Is<SettingsType>(s => s == SettingsType.MinContourWidth))).Returns("150");
+            configService.MinContourWidthValue = 1;
+
+            configService.LoadSettings();
+
+            configService.MinContourWidthValue.Should().Be(150);
         }
 
         [Test]

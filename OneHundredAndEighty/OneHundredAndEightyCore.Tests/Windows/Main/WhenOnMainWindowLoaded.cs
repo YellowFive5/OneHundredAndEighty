@@ -521,16 +521,6 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             viewModel.CamsResolutionHeight.Should().Be(1028);
         }
 
-        [Test]
-        public void MovesExtractionValueSets()
-        {
-            configService.Object.MovesExtractionValue = 500;
-            viewModel = CreateViewModel(configService.Object);
-
-            viewModel.OnMainWindowLoaded();
-
-            viewModel.MovesExtractionValue.Should().Be(500);
-        }
 
         [Test]
         public void MovesDetectedSleepTimeValueSets()
@@ -541,17 +531,6 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
             viewModel.OnMainWindowLoaded();
 
             viewModel.MovesDetectedSleepTimeValue.Should().Be(0.25);
-        }
-
-        [Test]
-        public void MovesNoiseValueSets()
-        {
-            configService.Object.MovesNoiseValue = 200;
-            viewModel = CreateViewModel(configService.Object);
-
-            viewModel.OnMainWindowLoaded();
-
-            viewModel.MovesNoiseValue.Should().Be(200);
         }
 
         [Test]
@@ -599,14 +578,58 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
         }
 
         [Test]
-        public void MovesDartValueSets()
+        public void MaxContourArcValueSets()
         {
-            configService.Object.MovesDartValue = 300;
+            configService.Object.MaxContourArcValue = 100;
             viewModel = CreateViewModel(configService.Object);
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.MovesDartValue.Should().Be(300);
+            viewModel.MaxContourArcValue.Should().Be(100);
+        }
+
+        [Test]
+        public void MaxContourAreaValueSets()
+        {
+            configService.Object.MaxContourAreaValue = 100;
+            viewModel = CreateViewModel(configService.Object);
+
+            viewModel.OnMainWindowLoaded();
+
+            viewModel.MaxContourAreaValue.Should().Be(100);
+        }
+
+        [Test]
+        public void MinContourAreaValueSets()
+        {
+            configService.Object.MinContourAreaValue = 100;
+            viewModel = CreateViewModel(configService.Object);
+
+            viewModel.OnMainWindowLoaded();
+
+            viewModel.MinContourAreaValue.Should().Be(100);
+        }
+
+        [Test]
+        public void MinContourWidthValueSets()
+        {
+            configService.Object.MinContourWidthValue = 100;
+            viewModel = CreateViewModel(configService.Object);
+
+            viewModel.OnMainWindowLoaded();
+
+            viewModel.MinContourWidthValue.Should().Be(100);
+        }
+
+        [Test]
+        public void MaxContourWidthValueSets()
+        {
+            configService.Object.MaxContourWidthValue = 100;
+            viewModel = CreateViewModel(configService.Object);
+
+            viewModel.OnMainWindowLoaded();
+
+            viewModel.MaxContourWidthValue.Should().Be(100);
         }
 
         [Test]
