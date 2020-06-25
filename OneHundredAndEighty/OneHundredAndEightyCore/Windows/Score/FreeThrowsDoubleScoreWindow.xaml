@@ -137,7 +137,7 @@
                      HorizontalAlignment="Center">
                 <TextBlock Name="CheckoutTextPlayer1"
                            TextWrapping="Wrap"
-                           Text="{Binding Player1Hint}"
+                           Text="{Binding Player1Hint, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
@@ -237,7 +237,7 @@
                      HorizontalAlignment="Center">
                 <TextBlock Name="CheckoutTextPlayer2"
                            TextWrapping="Wrap"
-                           Text="{Binding Player2Hint}"
+                           Text="{Binding Player2Hint, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
