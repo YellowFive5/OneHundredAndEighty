@@ -237,21 +237,21 @@
                      HorizontalAlignment="Center">
                 <TextBlock Name="LegsTextPlayer1"
                            TextWrapping="Wrap"
-                           Text="{Binding Player1Legs}"
+                           Text="{Binding Player1Legs, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Viewbox Grid.Column="0"
                      HorizontalAlignment="Center">
                 <TextBlock Name="SetsTextPlayer1"
                            TextWrapping="Wrap"
-                           Text="{Binding Player1Sets}"
+                           Text="{Binding Player1Sets, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Viewbox Grid.Column="2"
                      HorizontalAlignment="Right">
                 <TextBlock Name="PointsTextPlayer1"
                            TextWrapping="Wrap"
-                           Text="{Binding Player1Points}"
+                           Text="{Binding Player1Points, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
@@ -383,21 +383,21 @@
                      HorizontalAlignment="Center">
                 <TextBlock Name="LegsTextPlayer2"
                            TextWrapping="Wrap"
-                           Text="{Binding Player2Legs}"
+                           Text="{Binding Player2Legs, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Viewbox Grid.Column="0"
                      HorizontalAlignment="Center">
                 <TextBlock Name="SetsTextPlayer2"
                            TextWrapping="Wrap"
-                           Text="{Binding Player2Sets}"
+                           Text="{Binding Player2Sets, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
             <Viewbox Grid.Column="2"
                      HorizontalAlignment="Right">
                 <TextBlock Name="PointsTextPlayer2"
                            TextWrapping="Wrap"
-                           Text="{Binding Player2Points}"
+                           Text="{Binding Player2Points, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>

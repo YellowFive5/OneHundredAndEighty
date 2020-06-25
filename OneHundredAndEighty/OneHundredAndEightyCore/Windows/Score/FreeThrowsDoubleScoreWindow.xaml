@@ -188,7 +188,7 @@
                      HorizontalAlignment="Right">
                 <TextBlock Name="PointsTextPlayer1"
                            TextWrapping="Wrap"
-                           Text="{Binding Player1Points}"
+                           Text="{Binding Player1Points, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>
@@ -288,7 +288,7 @@
                      HorizontalAlignment="Right">
                 <TextBlock Name="PointsTextPlayer2"
                            TextWrapping="Wrap"
-                           Text="{Binding Player2Points}"
+                           Text="{Binding Player2Points, NotifyOnTargetUpdated=True}"
                            Style="{StaticResource ScoreWindowTextStyle}" />
             </Viewbox>
         </Grid>

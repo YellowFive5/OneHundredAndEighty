@@ -87,6 +87,19 @@
         <Style x:Key="ScoreWindowTextStyle">
             <Setter Property="Control.FontFamily" Value="Agency FB" />
             <Setter Property="Control.FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="1" To="0" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0" To="1"
+                                             Duration="0:0:0.8" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="ScoreWindowCheckoutRectangleStyle">
             <Setter Property="Rectangle.Stroke" Value="Black" />

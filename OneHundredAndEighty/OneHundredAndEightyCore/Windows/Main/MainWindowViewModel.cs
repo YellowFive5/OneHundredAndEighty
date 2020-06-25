@@ -1153,6 +1153,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public void OnMainWindowClosing()
         {
             StopGameByButton();
+            manualThrowPanel.Close();
 
             configService.MainWindowWidth = MainWindowWidth;
             configService.MainWindowHeight = MainWindowHeight;
@@ -1334,7 +1335,6 @@ namespace OneHundredAndEightyCore.Windows.Main
         private void StopGameInternal()
         {
             gameService.OnGameEnd -= StopGameInternal;
-            manualThrowPanel.Close();
             scoreBoardService.CloseScoreBoard();
             camsDetectionBoard.Close();
             detectionService.StopDetection();
