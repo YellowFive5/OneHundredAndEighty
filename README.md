@@ -17,13 +17,10 @@
 * Version [2.2 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)
 * Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
-  - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly (with near 100% load ;-P )
-* 🐞  Known problems / bug reports:
-  - When you start new game, make sure there are no darts in dartboard, because if you will start a new game and go to extract darts from dartboard - detection process brokes =( - will be fixed someday
+  - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly
   
 <img width="1453" alt="2020-06-07 10_43_46-" src="https://user-images.githubusercontent.com/42347722/83963874-a2aac600-a8b1-11ea-8f36-37952bed37f1.png">
 <img width="1125" alt="2020-06-07 10_55_27-" src="https://user-images.githubusercontent.com/42347722/83963876-a50d2000-a8b1-11ea-9b25-eb9e79b0907f.png">
-
 
 ## Release notes:
 timeline ↓
@@ -48,6 +45,7 @@ timeline ↓
 
 ✅ [[**v.2.2 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)]
 
+- [x] Big technical and architecture improvements of code
 - [ ] Throw manual correction
 - [ ] Throw undo
 - [ ] Manual hand end
@@ -78,7 +76,7 @@ If you decided to build and run this stuff - you need some required things:
 1. **Classic dartboard**
 2. **PC**
    
-   Please keep in mind, that all of this stuff is still under heavy development now. Problems of performance and optimization stays not on first place for me now. So, I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly (with near 100% load)
+   Please keep in mind, that all of this stuff is still under heavy development now. Problems of performance and optimization stays not on first place for me now. So, I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly
 3. **Cams**
 ![cams](https://user-images.githubusercontent.com/42347722/79052015-3bb7ba80-7c3c-11ea-88a4-70306da8e7c3.JPEG)
 
