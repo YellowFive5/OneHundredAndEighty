@@ -40,8 +40,8 @@ namespace OneHundredAndEightyCore.Recognition
                 return null;
             }
 
-            var firstBestRay = rays.OrderByDescending(i => i.ContourArc).ElementAt(0);
-            var secondBestRay = rays.OrderByDescending(i => i.ContourArc).ElementAt(1);
+            var firstBestRay = rays.OrderByDescending(i => i.ContourArea).ElementAt(0);
+            var secondBestRay = rays.OrderByDescending(i => i.ContourArea).ElementAt(1);
             rays.Clear();
 
             var poi = MeasureService.FindLinesIntersection(firstBestRay.CamPoint,

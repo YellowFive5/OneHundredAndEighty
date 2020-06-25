@@ -285,7 +285,7 @@ Please, contact developer</value>
     <value>DB Successfully migrated from [{0}] to [{1}]</value>
   </data>
   <data name="ThresholdSleepTimeHelperText" xml:space="preserve">
-    <value>Threshold sleep time between cams work in seconds. Default value is '0.125'</value>
+    <value>Threshold sleep time between cams work in seconds. Default value is '0.25'</value>
   </data>
   <data name="ThresholdSleepTimeLabelText" xml:space="preserve">
     <value>Threshold sleep time</value>

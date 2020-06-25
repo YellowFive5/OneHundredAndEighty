@@ -561,7 +561,7 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Threshold sleep time between cams work in seconds. Default value is &apos;0.125&apos;.
+        ///   Looks up a localized string similar to Threshold sleep time between cams work in seconds. Default value is &apos;0.25&apos;.
         /// </summary>
         public static string ThresholdSleepTimeHelperText {
             get {

@@ -317,23 +317,23 @@ namespace OneHundredAndEightyCore.Recognition
                                   ChainApproxMethod.ChainApproxNone);
 
             var contour = new VectorOfPoint();
-            var contourArс = 0.0;
+            var contourArea = 0.0;
 
             for (var i = 0; i < allContours.Size; i++)
             {
                 var tempContour = allContours[i];
-                var tempContourArс = CvInvoke.ArcLength(tempContour, true);
-                if (tempContourArс > contourArс)
+                var tempContourArea = CvInvoke.ContourArea(tempContour);
+                if (tempContourArea > contourArea)
                 {
-                    contourArс = tempContourArс;
+                    contourArea = tempContourArea;
                     contour = tempContour;
                 }
             }
 
             DartContour dartContour = null;
-            if (contourArс > 0)
+            if (contourArea > 0)
             {
-                dartContour = new DartContour(contour, contourArс);
+                dartContour = new DartContour(contour, contourArea);
             }
 
             return dartContour;
@@ -414,11 +414,8 @@ namespace OneHundredAndEightyCore.Recognition
                 poiCamCenterAngle *= -1;
             }
 
-            var projectionPoi = new PointF
-                                {
-                                    X = (float) (cam.camSetupPoint.X + Math.Cos(cam.toBullAngle + poiCamCenterAngle) * 2000),
-                                    Y = (float) (cam.camSetupPoint.Y + Math.Sin(cam.toBullAngle + poiCamCenterAngle) * 2000)
-                                };
+            var projectionPoi = new PointF((float) (cam.camSetupPoint.X + Math.Cos(cam.toBullAngle + poiCamCenterAngle) * 2000),
+                                           (float) (cam.camSetupPoint.Y + Math.Sin(cam.toBullAngle + poiCamCenterAngle) * 2000));
 
             // Draw line from cam through projection POI
             var rayPoint = projectionPoi;
@@ -426,7 +423,7 @@ namespace OneHundredAndEightyCore.Recognition
             rayPoint.X = (float) (cam.camSetupPoint.X + Math.Cos(angle) * 2000);
             rayPoint.Y = (float) (cam.camSetupPoint.Y + Math.Sin(angle) * 2000);
 
-            return new Ray(cam.camNumber, cam.camSetupPoint, rayPoint, dartContour.Arc);
+            return new Ray(cam.camNumber, cam.camSetupPoint, rayPoint, dartContour.Area);
         }
 
         #endregion
