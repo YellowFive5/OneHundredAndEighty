@@ -79,18 +79,16 @@
             <Image Source="/Resources/MainWindow/MinimizeIcon.png" />
         </Grid>
         <TabControl x:Name="MainTabControl"
-                    Background="{x:Null}"
                     TabStripPlacement="Left"
                     Grid.Row="1"
                     Grid.ColumnSpan="4"
-                    BorderBrush="{x:Null}"
-                    Foreground="{x:Null}">
+                    Style="{StaticResource MainWindowTabControlStyle}">
             <TabItem x:Name="GameTabItem"
                      IsEnabled="{Binding IsMainTabsEnabled}"
                      Style="{StaticResource MainWindowTabItemStyle}">
                 <TabItem.Header>
                     <StackPanel>
-                        <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/GameIcon.png" />
+                        <Image Source="/Resources/MainWindow/TabItemIcons/GameIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid ShowGridLines="False">
@@ -235,19 +233,16 @@
                      Style="{StaticResource MainWindowTabItemStyle}">
                 <TabItem.Header>
                     <StackPanel>
-                        <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/PlayerIcon.png" />
+                        <Image Source="/Resources/MainWindow/TabItemIcons/PlayerIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TabControl Background="{x:Null}"
-                                BorderBrush="{x:Null}"
-                                Foreground="{x:Null}">
+                    <TabControl Style="{StaticResource MainWindowTabControlStyle}">
                         <TabItem x:Name="NewPlayerTabItem"
-                                 Style="{StaticResource MainWindowTabItemStyle}">
+                                 Style="{StaticResource MainWindowSubTabItemStyle}">
                             <TabItem.Header>
                                 <StackPanel>
-                                    <Image Height="30" Width="30"
-                                           Source="/Resources/MainWindow/TabItemIcons/AddNewPlayerIcon.png" />
+                                    <Image Source="/Resources/MainWindow/TabItemIcons/AddNewPlayerIcon.png" />
                                 </StackPanel>
                             </TabItem.Header>
                             <Grid ShowGridLines="False">
@@ -331,21 +326,18 @@
                      Style="{StaticResource MainWindowTabItemStyle}">
                 <TabItem.Header>
                     <StackPanel>
-                        <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/SettingsIcon.png" />
+                        <Image Source="/Resources/MainWindow/TabItemIcons/SettingsIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
                     <TabControl x:Name="SetupTabControl"
-                                Background="{x:Null}"
-                                BorderBrush="{x:Null}"
-                                Foreground="{x:Null}">
+                                Style="{StaticResource MainWindowTabControlStyle}">
                         <TabItem x:Name="GeneralSetupTabItem"
                                  IsEnabled="{Binding IsSetupTabsEnabled}"
-                                 Style="{StaticResource MainWindowTabItemStyle}">
+                                 Style="{StaticResource MainWindowSubTabItemStyle}">
                             <TabItem.Header>
                                 <StackPanel>
-                                    <Image Height="30" Width="30"
-                                           Source="/Resources/MainWindow/TabItemIcons/GeneralSettingsIcon.png" />
+                                    <Image Source="/Resources/MainWindow/TabItemIcons/GeneralSettingsIcon.png" />
                                 </StackPanel>
                             </TabItem.Header>
                             <Grid ShowGridLines="False">
@@ -816,11 +808,10 @@
                         </TabItem>
                         <TabItem x:Name="Cam1SetupTabItem"
                                  IsEnabled="{Binding IsSetupTabsEnabled}"
-                                 Style="{StaticResource MainWindowTabItemStyle}">
+                                 Style="{StaticResource MainWindowSubTabItemStyle}">
                             <TabItem.Header>
                                 <StackPanel>
-                                    <Image Height="30" Width="30"
-                                           Source="/Resources/MainWindow/TabItemIcons/Cam1SettingsIcon.png" />
+                                    <Image Source="/Resources/MainWindow/TabItemIcons/Cam1SettingsIcon.png" />
                                 </StackPanel>
                             </TabItem.Header>
                             <Grid x:Name="Cam1Grid" ShowGridLines="False">
@@ -961,11 +952,10 @@
                         </TabItem>
                         <TabItem x:Name="Cam2SetupTabItem"
                                  IsEnabled="{Binding IsSetupTabsEnabled}"
-                                 Style="{StaticResource MainWindowTabItemStyle}">
+                                 Style="{StaticResource MainWindowSubTabItemStyle}">
                             <TabItem.Header>
                                 <StackPanel>
-                                    <Image Height="30" Width="30"
-                                           Source="/Resources/MainWindow/TabItemIcons/Cam2SettingsIcon.png" />
+                                    <Image Source="/Resources/MainWindow/TabItemIcons/Cam2SettingsIcon.png" />
                                 </StackPanel>
                             </TabItem.Header>
                             <Grid x:Name="Cam2Grid" ShowGridLines="False">
@@ -1108,11 +1098,10 @@
                         </TabItem>
                         <TabItem x:Name="Cam3SetupTabItem"
                                  IsEnabled="{Binding IsSetupTabsEnabled}"
-                                 Style="{StaticResource MainWindowTabItemStyle}">
+                                 Style="{StaticResource MainWindowSubTabItemStyle}">
                             <TabItem.Header>
                                 <StackPanel>
-                                    <Image Height="30" Width="30"
-                                           Source="/Resources/MainWindow/TabItemIcons/Cam3SettingsIcon.png" />
+                                    <Image Source="/Resources/MainWindow/TabItemIcons/Cam3SettingsIcon.png" />
                                 </StackPanel>
                             </TabItem.Header>
                             <Grid x:Name="Cam3Grid" ShowGridLines="False">
@@ -1258,11 +1247,10 @@
                         </TabItem>
                         <TabItem x:Name="Cam4SetupTabItem"
                                  IsEnabled="{Binding IsSetupTabsEnabled}"
-                                 Style="{StaticResource MainWindowTabItemStyle}">
+                                 Style="{StaticResource MainWindowSubTabItemStyle}">
                             <TabItem.Header>
                                 <StackPanel>
-                                    <Image Height="30" Width="30"
-                                           Source="/Resources/MainWindow/TabItemIcons/Cam4SettingsIcon.png" />
+                                    <Image Source="/Resources/MainWindow/TabItemIcons/Cam4SettingsIcon.png" />
                                 </StackPanel>
                             </TabItem.Header>
                             <Grid x:Name="Cam4Grid" ShowGridLines="False">
@@ -1409,7 +1397,7 @@
                      Style="{StaticResource MainWindowTabItemStyle}">
                 <TabItem.Header>
                     <StackPanel>
-                        <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/AboutIcon.png" />
+                        <Image Source="/Resources/MainWindow/TabItemIcons/AboutIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid ShowGridLines="False">
