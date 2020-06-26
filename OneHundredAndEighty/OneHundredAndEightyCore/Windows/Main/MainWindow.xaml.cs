@@ -82,6 +82,28 @@ namespace OneHundredAndEightyCore.Windows.Main
             viewModel.OnMainWindowClosing();
         }
 
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void OnCloseButtonClick(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
+
+        private void OnMaximizeButtonClick(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState == WindowState.Normal
+                              ? WindowState.Maximized
+                              : WindowState.Normal;
+        }
+
+        private void OnMinimizeButtonClick(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
         private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)
         {
             viewModel.CalibrateCamsSetupPoints();

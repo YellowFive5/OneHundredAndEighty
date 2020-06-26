@@ -42,6 +42,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\MainWindow\CloseIcon.png" />
+    <Resource Include="Resources\MainWindow\MinimizeIcon.png" />
+    <Resource Include="Resources\MainWindow\MaximizeIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\AboutIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\AddNewPlayerIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\Cam1SettingsIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\Cam2SettingsIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\Cam3SettingsIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\Cam4SettingsIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\GameIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\GeneralSettingsIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\PlayerIcon.png" />
+    <Resource Include="Resources\MainWindow\TabItemIcons\SettingsIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

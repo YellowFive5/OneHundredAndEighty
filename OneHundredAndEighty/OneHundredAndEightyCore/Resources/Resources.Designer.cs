@@ -79,29 +79,11 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cam1.
-        /// </summary>
-        public static string Cam1SettingsTabName {
-            get {
-                return ResourceManager.GetString("Cam1SettingsTabName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cam 2 enabled.
         /// </summary>
         public static string Cam2EnabledCheckBoxText {
             get {
                 return ResourceManager.GetString("Cam2EnabledCheckBoxText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cam2.
-        /// </summary>
-        public static string Cam2SettingsTabName {
-            get {
-                return ResourceManager.GetString("Cam2SettingsTabName", resourceCulture);
             }
         }
         
@@ -115,29 +97,11 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cam3.
-        /// </summary>
-        public static string Cam3SettingsTabName {
-            get {
-                return ResourceManager.GetString("Cam3SettingsTabName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cam 4 enabled.
         /// </summary>
         public static string Cam4EnabledCheckBoxText {
             get {
                 return ResourceManager.GetString("Cam4EnabledCheckBoxText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cam4.
-        /// </summary>
-        public static string Cam4SettingsTabName {
-            get {
-                return ResourceManager.GetString("Cam4SettingsTabName", resourceCulture);
             }
         }
         
@@ -307,30 +271,12 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to General.
-        /// </summary>
-        public static string GeneralSettingsTabName {
-            get {
-                return ResourceManager.GetString("GeneralSettingsTabName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon icon2 {
             get {
                 object obj = ResourceManager.GetObject("icon2", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Setup.
-        /// </summary>
-        public static string MainSettingsTabName {
-            get {
-                return ResourceManager.GetString("MainSettingsTabName", resourceCulture);
             }
         }
         
