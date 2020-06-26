@@ -48,7 +48,11 @@
     <Window.DataContext>
         <main:MainWindowViewModel />
     </Window.DataContext>
-    <Grid>
+    <Grid Name="MainGrid"
+          Style="{StaticResource MainWindowMainGridStyle}">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/MainWindow/Background/MainBackground5.jpg" />
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
@@ -72,9 +76,14 @@
                     Background="{x:Null}"
                     TabStripPlacement="Left"
                     Grid.Row="1"
-                    Grid.ColumnSpan="4">
+                    Grid.ColumnSpan="4"
+                    BorderBrush="{x:Null}"
+                    Foreground="{x:Null}">
             <TabItem x:Name="GameTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}">
+                     IsEnabled="{Binding IsMainTabsEnabled}"
+                     Background="{x:Null}"
+                     BorderBrush="{x:Null}"
+                     Foreground="{x:Null}">
                 <TabItem.Header>
                     <StackPanel>
                         <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/GameIcon.png" />
@@ -166,7 +175,7 @@
                               Width="150"
                               ItemsSource="{Binding Players}"
                               SelectedItem="{Binding NewGamePlayer2}"
-                              IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
+                              IsEnabled="{Binding IsGameRunning, Converter={StaticResource Inverted}}"
                               Visibility="{Binding IsNewGameForPair, Converter={StaticResource BoolToVisibility}}" />
                     <Label x:Name="NewGamePlayer2Label"
                            Content="Player"
@@ -218,15 +227,23 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="PlayersTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}">
+                     IsEnabled="{Binding IsMainTabsEnabled}"
+                     Background="{x:Null}"
+                     BorderBrush="{x:Null}"
+                     Foreground="{x:Null}">
                 <TabItem.Header>
                     <StackPanel>
                         <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/PlayerIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TabControl>
-                        <TabItem x:Name="NewPlayerTabItem">
+                    <TabControl Background="{x:Null}"
+                                BorderBrush="{x:Null}"
+                                Foreground="{x:Null}">
+                        <TabItem x:Name="NewPlayerTabItem"
+                                 Background="{x:Null}"
+                                 BorderBrush="{x:Null}"
+                                 Foreground="{x:Null}">
                             <TabItem.Header>
                                 <StackPanel>
                                     <Image Height="30" Width="30"
@@ -310,16 +327,25 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="SetupTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}">
+                     IsEnabled="{Binding IsMainTabsEnabled}"
+                     Background="{x:Null}"
+                     BorderBrush="{x:Null}"
+                     Foreground="{x:Null}">
                 <TabItem.Header>
                     <StackPanel>
                         <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/SettingsIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TabControl x:Name="SetupTabControl">
+                    <TabControl x:Name="SetupTabControl"
+                                Background="{x:Null}"
+                                BorderBrush="{x:Null}"
+                                Foreground="{x:Null}">
                         <TabItem x:Name="GeneralSetupTabItem"
-                                 IsEnabled="{Binding IsSetupTabsEnabled}">
+                                 IsEnabled="{Binding IsSetupTabsEnabled}"
+                                 Background="{x:Null}"
+                                 BorderBrush="{x:Null}"
+                                 Foreground="{x:Null}">
                             <TabItem.Header>
                                 <StackPanel>
                                     <Image Height="30" Width="30"
@@ -793,7 +819,10 @@
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="Cam1SetupTabItem"
-                                 IsEnabled="{Binding IsSetupTabsEnabled}">
+                                 IsEnabled="{Binding IsSetupTabsEnabled}"
+                                 Background="{x:Null}"
+                                 BorderBrush="{x:Null}"
+                                 Foreground="{x:Null}">
                             <TabItem.Header>
                                 <StackPanel>
                                     <Image Height="30" Width="30"
@@ -937,7 +966,8 @@
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="Cam2SetupTabItem"
-                                 IsEnabled="{Binding IsSetupTabsEnabled}">
+                                 IsEnabled="{Binding IsSetupTabsEnabled}" Foreground="{x:Null}" Background="{x:Null}"
+                                 BorderBrush="{x:Null}">
                             <TabItem.Header>
                                 <StackPanel>
                                     <Image Height="30" Width="30"
@@ -1083,7 +1113,8 @@
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="Cam3SetupTabItem"
-                                 IsEnabled="{Binding IsSetupTabsEnabled}">
+                                 IsEnabled="{Binding IsSetupTabsEnabled}" BorderBrush="{x:Null}" Background="{x:Null}"
+                                 Foreground="{x:Null}">
                             <TabItem.Header>
                                 <StackPanel>
                                     <Image Height="30" Width="30"
@@ -1232,7 +1263,8 @@
                             </Grid>
                         </TabItem>
                         <TabItem x:Name="Cam4SetupTabItem"
-                                 IsEnabled="{Binding IsSetupTabsEnabled}">
+                                 IsEnabled="{Binding IsSetupTabsEnabled}" Foreground="{x:Null}" Background="{x:Null}"
+                                 BorderBrush="{x:Null}">
                             <TabItem.Header>
                                 <StackPanel>
                                     <Image Height="30" Width="30"
@@ -1379,7 +1411,8 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="AboutTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}">
+                     IsEnabled="{Binding IsMainTabsEnabled}" Background="{x:Null}" BorderBrush="{x:Null}"
+                     Foreground="{x:Null}">
                 <TabItem.Header>
                     <StackPanel>
                         <Image Height="50" Width="50" Source="/Resources/MainWindow/TabItemIcons/AboutIcon.png" />

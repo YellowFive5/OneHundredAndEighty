@@ -83,6 +83,91 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="MainWindowMainGridStyle"
+               TargetType="Grid">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=GameTabItem, Path=IsSelected}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Name="StoryboardChangeImage1">
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
+                                                               Duration="0:0:0">
+                                    <DiscreteObjectKeyFrame>
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <ImageBrush
+                                                ImageSource="/Resources/MainWindow/Background/MainBackground5.jpg" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <RemoveStoryboard BeginStoryboardName="StoryboardChangeImage1" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=PlayersTabItem, Path=IsSelected}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Name="StoryboardChangeImage2">
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
+                                                               Duration="0:0:0">
+                                    <DiscreteObjectKeyFrame>
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <ImageBrush
+                                                ImageSource="/Resources/MainWindow/Background/MainBackground4.jpg" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <RemoveStoryboard BeginStoryboardName="StoryboardChangeImage2" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=SetupTabItem, Path=IsSelected}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Name="StoryboardChangeImage3">
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" 
+                                                               Duration="0:0:0">
+                                    <DiscreteObjectKeyFrame>
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <ImageBrush
+                                                ImageSource="/Resources/MainWindow/Background/MainBackground2.jpg" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <RemoveStoryboard BeginStoryboardName="StoryboardChangeImage3" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=AboutTabItem, Path=IsSelected}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Name="StoryboardChangeImage4">
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" 
+                                                               Duration="0:0:0">
+                                    <DiscreteObjectKeyFrame>
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <ImageBrush
+                                                ImageSource="/Resources/MainWindow/Background/MainBackground1.jpg" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <RemoveStoryboard BeginStoryboardName="StoryboardChangeImage4" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
         <Style x:Key="ScoreWindowTextStyle">
             <Setter Property="Control.FontFamily" Value="Agency FB" />
@@ -227,6 +312,5 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
     </Application.Resources>
 </Application>

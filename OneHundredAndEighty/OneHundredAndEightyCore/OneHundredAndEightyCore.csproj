@@ -9,10 +9,7 @@
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Database.db" />
-    <None Remove="nlog.config" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <Content Include="Database.db">
@@ -42,6 +39,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\MainWindow\Background\MainBackground1.jpg" />
+    <Resource Include="Resources\MainWindow\Background\MainBackground2.jpg" />
+    <Resource Include="Resources\MainWindow\Background\MainBackground3.jpg" />
+    <Resource Include="Resources\MainWindow\Background\MainBackground4.jpg" />
+    <Resource Include="Resources\MainWindow\Background\MainBackground5.jpg" />
     <Resource Include="Resources\MainWindow\CloseIcon.png" />
     <Resource Include="Resources\MainWindow\MinimizeIcon.png" />
     <Resource Include="Resources\MainWindow\MaximizeIcon.png" />
