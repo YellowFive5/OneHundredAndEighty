@@ -130,7 +130,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Name="StoryboardChangeImage3">
                             <Storyboard>
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" 
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
                                                                Duration="0:0:0">
                                     <DiscreteObjectKeyFrame>
                                         <DiscreteObjectKeyFrame.Value>
@@ -150,7 +150,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Name="StoryboardChangeImage4">
                             <Storyboard>
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" 
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
                                                                Duration="0:0:0">
                                     <DiscreteObjectKeyFrame>
                                         <DiscreteObjectKeyFrame.Value>
@@ -166,6 +166,40 @@
                         <RemoveStoryboard BeginStoryboardName="StoryboardChangeImage4" />
                     </DataTrigger.ExitActions>
                 </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MainWindowTabItemStyle"
+               TargetType="TabItem">
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="{x:Null}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True" />
+                <Trigger Property="IsSelected" Value="True" />
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MainWindowHeaderButtonsStyle"
+               TargetType="FrameworkElement">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Opacity" Value="0.8" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1"
+                                             Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.8"
+                                             Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
             </Style.Triggers>
         </Style>
 
