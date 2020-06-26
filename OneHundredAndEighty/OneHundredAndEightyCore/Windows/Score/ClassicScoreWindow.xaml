@@ -139,7 +139,8 @@
         <Grid Name="CheckoutGridPlayer1"
               Grid.Row="1"
               Grid.Column="0"
-              Visibility="{Binding Player1HintShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player1HintShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -190,7 +191,8 @@
             <Grid Name="OnLegPointPlayer1"
                   Grid.Row="0"
                   Grid.Column="4"
-                  Visibility="{Binding Player1OnLegPointShown, Converter={StaticResource BoolToVisibility}}">
+                  Visibility="{Binding Player1OnLegPointShown, Converter={StaticResource BoolToVisibility}}"
+                  Style="{StaticResource ScoreWindowGridFadeStyle}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2.5*" />
                     <RowDefinition Height="*" />
@@ -258,7 +260,8 @@
         <Grid Name="ThrowPointerGridPlayer1"
               Grid.Row="1"
               Grid.Column="3"
-              Visibility="{Binding Player1OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player1OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*" />
                 <RowDefinition Height="*" />
@@ -285,7 +288,8 @@
         <Grid Name="CheckoutGridPlayer2"
               Grid.Row="2"
               Grid.Column="0"
-              Visibility="{Binding Player2HintShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player2HintShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -336,7 +340,8 @@
             <Grid Name="OnLegPointPlayer2"
                   Grid.Row="0"
                   Grid.Column="4"
-                  Visibility="{Binding Player2OnLegPointShown, Converter={StaticResource BoolToVisibility}}">
+                  Visibility="{Binding Player2OnLegPointShown, Converter={StaticResource BoolToVisibility}}"
+                  Style="{StaticResource ScoreWindowGridFadeStyle}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2.5*" />
                     <RowDefinition Height="*" />
@@ -404,7 +409,8 @@
         <Grid Name="ThrowPointerGridPlayer2"
               Grid.Row="2"
               Grid.Column="3"
-              Visibility="{Binding Player2OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player2OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*" />
                 <RowDefinition Height="*" />

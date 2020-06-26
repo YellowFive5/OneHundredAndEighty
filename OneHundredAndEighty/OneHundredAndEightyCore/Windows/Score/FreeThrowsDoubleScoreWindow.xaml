@@ -122,7 +122,8 @@
         <Grid Name="CheckoutGridPlayer1"
               Grid.Row="1"
               Grid.Column="0"
-              Visibility="{Binding Player1HintShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player1HintShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -195,7 +196,8 @@
         <Grid Name="ThrowPointerGridPlayer1"
               Grid.Row="1"
               Grid.Column="3"
-              Visibility="{Binding Player1OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player1OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*" />
                 <RowDefinition Height="*" />
@@ -222,7 +224,8 @@
         <Grid Name="CheckoutGridPlayer2"
               Grid.Row="2"
               Grid.Column="0"
-              Visibility="{Binding Player2HintShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player2HintShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -295,7 +298,8 @@
         <Grid Name="ThrowPointerGridPlayer2"
               Grid.Row="2"
               Grid.Column="3"
-              Visibility="{Binding Player2OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player2OnThrowPointerShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*" />
                 <RowDefinition Height="*" />

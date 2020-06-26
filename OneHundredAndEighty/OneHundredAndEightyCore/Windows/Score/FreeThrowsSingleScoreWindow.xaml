@@ -120,7 +120,8 @@
         <Grid Name="CheckoutGrid"
               Grid.Row="1"
               Grid.Column="0"
-              Visibility="{Binding Player1HintShown, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding Player1HintShown, Converter={StaticResource BoolToVisibility}}"
+              Style="{StaticResource ScoreWindowGridFadeStyle}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
