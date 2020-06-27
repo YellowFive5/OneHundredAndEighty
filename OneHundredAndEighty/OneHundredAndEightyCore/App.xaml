@@ -6,9 +6,21 @@
              Startup="App_OnStartup">
     <Application.Resources>
         <Style x:Key="MainWindowTextBoxStyle">
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Control.Foreground" Value="CornflowerBlue" />
+            <Setter Property="Control.FontFamily" Value="Agency FB" />
+            <Setter Property="Control.FontSize" Value="20" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+            <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
             <Setter Property="Control.VerticalContentAlignment" Value="Center" />
-            <Setter Property="Control.Width" Value="50" />
-            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+        </Style>
+        <Style x:Key="MainWindowComboBoxStyle">
+            <Setter Property="Control.Foreground" Value="CornflowerBlue" />
+            <Setter Property="Control.FontFamily" Value="Agency FB" />
+            <Setter Property="Control.FontSize" Value="20" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+            <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
         </Style>
         <Style x:Key="MainWindowSetupSliderStyle">
             <Setter Property="Control.HorizontalAlignment" Value="Center" />
@@ -19,9 +31,13 @@
         <Style x:Key="MainWindowLabelStyle">
             <Setter Property="Control.HorizontalAlignment" Value="Left" />
             <Setter Property="Control.VerticalAlignment" Value="Center" />
+            <Setter Property="Control.FontFamily" Value="Agency FB" />
+            <Setter Property="Control.FontSize" Value="20" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+            <Setter Property="Control.Foreground" Value="CornflowerBlue" />
+
         </Style>
-        <Style x:Key="MainWindowSetupSectorsComboboxStyle"
-               TargetType="ComboBox">
+        <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox" BasedOn="{StaticResource MainWindowComboBoxStyle}">
             <Setter Property="ItemsSource">
                 <Setter.Value>
                     <x:Array Type="system:String">
@@ -69,7 +85,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="MainWindowLegsSetsComboboxStyle" TargetType="ComboBox">
+        <Style x:Key="MainWindowLegsSetsComboboxStyle" TargetType="ComboBox" BasedOn="{StaticResource MainWindowComboBoxStyle}">
             <Setter Property="ItemsSource">
                 <Setter.Value>
                     <x:Array Type="system:Int32">
@@ -166,6 +182,11 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="MainWindowTabControlStyle" TargetType="TabControl">
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="{x:Null}" />
+        </Style>
         <Style x:Key="MainWindowTabItemStyle" TargetType="TabItem">
             <Setter Property="Background" Value="{x:Null}" />
             <Setter Property="BorderBrush" Value="{x:Null}" />
@@ -173,6 +194,7 @@
             <Setter Property="Height" Value="65" />
             <Setter Property="Width" Value="65" />
             <Setter Property="Opacity" Value="0.8" />
+            <!--<Setter Property="OverridesDefaultStyle" Value="True" />-->
             <Style.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
@@ -193,11 +215,6 @@
                     </BeginStoryboard>
                 </EventTrigger>
             </Style.Triggers>
-        </Style>
-        <Style x:Key="MainWindowTabControlStyle" TargetType="TabControl">
-            <Setter Property="Background" Value="{x:Null}" />
-            <Setter Property="BorderBrush" Value="{x:Null}" />
-            <Setter Property="Foreground" Value="{x:Null}" />
         </Style>
         <Style x:Key="MainWindowSubTabItemStyle" TargetType="TabItem">
             <Setter Property="Background" Value="{x:Null}" />
