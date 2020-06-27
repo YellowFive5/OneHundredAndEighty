@@ -273,7 +273,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border  Background="MidnightBlue" Width="3"/>
+                        <Border Background="MidnightBlue" Width="3" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -284,7 +284,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border  Background="CornflowerBlue" Width="3"/>
+                        <Border Background="CornflowerBlue" Width="3" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -295,12 +295,12 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse Height="13" Width="13" Fill="#FF00FF99" Stroke="MidnightBlue" StrokeThickness="2"></Ellipse>
+                        <Ellipse Height="13" Width="13" Fill="#FF00FF99" Stroke="MidnightBlue" StrokeThickness="2" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+        <ControlTemplate x:Key="Slider" TargetType="Slider">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -309,10 +309,10 @@
                 </Grid.ColumnDefinitions>
                 <Track Grid.Column="1" x:Name="PART_Track">
                     <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource SliderOnSide}"  Command="Slider.DecreaseLarge" />
+                        <RepeatButton Style="{StaticResource SliderOnSide}" Command="Slider.DecreaseLarge" />
                     </Track.DecreaseRepeatButton>
                     <Track.Thumb>
-                        <Thumb Style="{StaticResource SliderThumb}"  />
+                        <Thumb Style="{StaticResource SliderThumb}" />
                     </Track.Thumb>
                     <Track.IncreaseRepeatButton>
                         <RepeatButton Style="{StaticResource SliderOffSide}" Command="Slider.IncreaseLarge" />
@@ -321,7 +321,7 @@
             </Grid>
         </ControlTemplate>
         <Style x:Key="MainWindowSetupSliderStyle" TargetType="Slider">
-            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Focusable" Value="False" />
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -334,6 +334,30 @@
                     <Setter Property="MinWidth" Value="21" />
                     <Setter Property="Template" Value="{StaticResource Slider}" />
                 </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
+            <Setter Property="Control.Foreground" Value="RoyalBlue" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#FF00FF99"
+                                            Storyboard.TargetProperty="(Hyperlink.Foreground).(SolidColorBrush.Color)"
+                                            Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="RoyalBlue"
+                                            Storyboard.TargetProperty="(Hyperlink.Foreground).(SolidColorBrush.Color)"
+                                            Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
             </Style.Triggers>
         </Style>
 
