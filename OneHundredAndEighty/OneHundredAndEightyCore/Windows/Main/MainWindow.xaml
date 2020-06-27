@@ -78,9 +78,9 @@
             <Image Source="/Resources/MainWindow/MinimizeIcon.png" />
         </Grid>
         <TabControl x:Name="MainTabControl"
-                    TabStripPlacement="Left"
                     Grid.Row="1"
                     Grid.ColumnSpan="4"
+                    TabStripPlacement="Left"
                     Style="{StaticResource MainWindowTabControlStyle}"
                     BorderBrush="#BF00A369"
                     BorderThickness="1 1 0 0">
@@ -230,7 +230,8 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TabControl Style="{StaticResource MainWindowTabControlStyle}">
+                    <TabControl Style="{StaticResource MainWindowTabControlStyle}"
+                                TabStripPlacement="Top">
                         <TabItem x:Name="NewPlayerTabItem"
                                  Style="{StaticResource MainWindowSubTabItemStyle}">
                             <TabItem.Header>
@@ -324,7 +325,8 @@
                 </TabItem.Header>
                 <Grid>
                     <TabControl x:Name="SetupTabControl"
-                                Style="{StaticResource MainWindowTabControlStyle}">
+                                Style="{StaticResource MainWindowTabControlStyle}"
+                                TabStripPlacement="Top">
                         <TabItem x:Name="GeneralSetupTabItem"
                                  IsEnabled="{Binding IsSetupTabsEnabled}"
                                  Style="{StaticResource MainWindowSubTabItemStyle}">
@@ -1406,8 +1408,9 @@
                         Grid.Row="5"
                         Grid.Column="1"
                         Style="{StaticResource MainWindowLabelStyle}">
-                        <Hyperlink NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-"
-                                   RequestNavigate="OnHyperlinkNavigate">
+                        <Hyperlink
+                            NavigateUri="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-"
+                            RequestNavigate="OnHyperlinkNavigate">
                             <InlineUIContainer>
                                 <TextBlock Text="Quick start guide" />
                             </InlineUIContainer>
