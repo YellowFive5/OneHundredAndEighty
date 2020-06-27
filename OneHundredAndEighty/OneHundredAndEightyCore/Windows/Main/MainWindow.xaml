@@ -132,7 +132,7 @@
                               SelectedItem="{Binding NewGameType}"
                               ItemsSource="{Binding Source={StaticResource GameTypeEnum}}"
                               IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
-                              Style="{StaticResource MainWindowComboBoxStyle}"/>
+                              Style="{StaticResource MainWindowComboBoxStyle}" />
                     <Label Content="Player"
                            Grid.Row="5"
                            Grid.Column="1"

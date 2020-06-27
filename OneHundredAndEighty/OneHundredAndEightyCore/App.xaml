@@ -26,12 +26,6 @@
             <Setter Property="Control.VerticalContentAlignment" Value="Center" />
             <Setter Property="Control.BorderBrush" Value="#7F0A8BF8" />
         </Style>
-        <Style x:Key="MainWindowSetupSliderStyle">
-            <Setter Property="Control.HorizontalAlignment" Value="Center" />
-            <Setter Property="Slider.Orientation" Value="Vertical" />
-            <Setter Property="Slider.Maximum" Value="1000" />
-            <Setter Property="Control.IsEnabled" Value="False" />
-        </Style>
         <Style x:Key="MainWindowLabelStyle">
             <Setter Property="Control.HorizontalAlignment" Value="Left" />
             <Setter Property="Control.VerticalAlignment" Value="Center" />
@@ -268,6 +262,78 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SliderOffSide" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  Background="MidnightBlue" Width="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderOnSide" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  Background="CornflowerBlue" Width="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Ellipse Height="13" Width="13" Fill="#FF00FF99" Stroke="MidnightBlue" StrokeThickness="2"></Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Track Grid.Column="1" x:Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderOnSide}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderOffSide}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="MainWindowSetupSliderStyle" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="Maximum" Value="1000" />
+            <Setter Property="IsEnabled" Value="False" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Vertical">
+                    <Setter Property="MinHeight" Value="104" />
+                    <Setter Property="MinWidth" Value="21" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
             </Style.Triggers>
         </Style>
 
