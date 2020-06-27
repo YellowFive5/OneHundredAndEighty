@@ -60,8 +60,8 @@
         </Grid.ColumnDefinitions>
         <Label Content="OneHundredAndEighty"
                Grid.Row="0"
-               Style="{StaticResource MainWindowLabelStyle}" 
-               FontSize="17" Foreground="#FF5CCDA4"/>
+               Style="{StaticResource MainWindowLabelStyle}"
+               FontSize="17" Foreground="#FF5CCDA4" />
         <Grid Grid.Column="3"
               MouseLeftButtonDown="OnCloseButtonClick"
               Style="{StaticResource MainWindowHeaderButtonsStyle}">
@@ -132,7 +132,7 @@
                               SelectedItem="{Binding NewGameType}"
                               ItemsSource="{Binding Source={StaticResource GameTypeEnum}}"
                               IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
-                              Style="{StaticResource MainWindowComboBoxStyle}" />
+                              Style="{StaticResource MainWindowComboBoxStyle}"/>
                     <Label Content="Player"
                            Grid.Row="5"
                            Grid.Column="1"
@@ -1282,7 +1282,7 @@
                                        Grid.Row="9"
                                        Grid.Column="5"
                                        Style="{StaticResource MainWindowLabelStyle}"
-                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image"/>
+                                       ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image" />
                                 <Label Content="ROI Y"
                                        Grid.Row="9"
                                        Grid.Column="11"

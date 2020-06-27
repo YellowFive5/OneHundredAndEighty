@@ -7,20 +7,24 @@
     <Application.Resources>
         <Style x:Key="MainWindowTextBoxStyle">
             <Setter Property="Control.HorizontalAlignment" Value="Stretch" />
-            <Setter Property="Control.Foreground" Value="CornflowerBlue" />
+            <Setter Property="Control.Foreground" Value="MidnightBlue" />
             <Setter Property="Control.FontFamily" Value="Agency FB" />
             <Setter Property="Control.FontSize" Value="20" />
             <Setter Property="Control.FontWeight" Value="Bold" />
             <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
             <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+            <Setter Property="Control.Background" Value="#3F0AF8A1" />
+            <Setter Property="Control.BorderBrush" Value="#7F0A8BF8" />
+            <Setter Property="TextBox.SelectionBrush" Value="#BF00A369" />
         </Style>
         <Style x:Key="MainWindowComboBoxStyle">
-            <Setter Property="Control.Foreground" Value="CornflowerBlue" />
+            <Setter Property="Control.Foreground" Value="MidnightBlue" />
             <Setter Property="Control.FontFamily" Value="Agency FB" />
             <Setter Property="Control.FontSize" Value="20" />
             <Setter Property="Control.FontWeight" Value="Bold" />
             <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
             <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+            <Setter Property="Control.BorderBrush" Value="#7F0A8BF8" />
         </Style>
         <Style x:Key="MainWindowSetupSliderStyle">
             <Setter Property="Control.HorizontalAlignment" Value="Center" />
@@ -35,9 +39,9 @@
             <Setter Property="Control.FontSize" Value="20" />
             <Setter Property="Control.FontWeight" Value="Bold" />
             <Setter Property="Control.Foreground" Value="CornflowerBlue" />
-
         </Style>
-        <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox" BasedOn="{StaticResource MainWindowComboBoxStyle}">
+        <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox"
+               BasedOn="{StaticResource MainWindowComboBoxStyle}">
             <Setter Property="ItemsSource">
                 <Setter.Value>
                     <x:Array Type="system:String">
@@ -85,7 +89,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="MainWindowLegsSetsComboboxStyle" TargetType="ComboBox" BasedOn="{StaticResource MainWindowComboBoxStyle}">
+        <Style x:Key="MainWindowLegsSetsComboboxStyle" TargetType="ComboBox"
+               BasedOn="{StaticResource MainWindowComboBoxStyle}">
             <Setter Property="ItemsSource">
                 <Setter.Value>
                     <x:Array Type="system:Int32">
@@ -199,7 +204,7 @@
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                              To="1"
                                              Duration="0:0:0.2" />
                         </Storyboard>
@@ -208,7 +213,7 @@
                 <EventTrigger RoutedEvent="MouseLeave">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                              To="0.8"
                                              Duration="0:0:0.2" />
                         </Storyboard>
