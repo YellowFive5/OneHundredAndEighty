@@ -81,7 +81,9 @@
                     TabStripPlacement="Left"
                     Grid.Row="1"
                     Grid.ColumnSpan="4"
-                    Style="{StaticResource MainWindowTabControlStyle}">
+                    Style="{StaticResource MainWindowTabControlStyle}"
+                    BorderBrush="#BF00A369"
+                    BorderThickness="1 1 0 0">
             <TabItem x:Name="GameTabItem"
                      IsEnabled="{Binding IsMainTabsEnabled}"
                      Style="{StaticResource MainWindowTabItemStyle}">
@@ -1181,11 +1183,6 @@
                                         Grid.Column="3"
                                         Click="CamSetupStopButtonClick"
                                         IsEnabled="{Binding IsCamsSetupRunning}" />
-                                <TextBox Grid.Row="5"
-                                         Grid.Column="3"
-                                         Grid.RowSpan="3"
-                                         IsReadOnly="True"
-                                         Text="{Binding ContoursBoxText, Mode=OneWay}" />
                                 <TextBox Grid.Row="5"
                                          Grid.Column="3"
                                          Grid.RowSpan="3"
