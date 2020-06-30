@@ -152,13 +152,15 @@
                             Grid.Row="7"
                             Grid.Column="3"
                             Click="StartGameButtonClick"
-                            IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}" />
+                            IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
+                            Style="{StaticResource MainWindowButtonStyle}" />
                     <Button x:Name="StopGameButton"
                             Content="Stop Game"
                             Grid.Row="9"
                             Grid.Column="3"
                             Click="StopGameButtonClick"
-                            IsEnabled="{Binding IsGameRunning}" />
+                            IsEnabled="{Binding IsGameRunning}"
+                            Style="{StaticResource MainWindowButtonStyle}" />
                     <ComboBox x:Name="NewGamePlayer2ComboBox"
                               Grid.Row="5"
                               Grid.Column="5"
@@ -292,7 +294,8 @@
                                         Grid.RowSpan="3"
                                         Width="65"
                                         Background="#FF72DC61"
-                                        Click="OnSaveNewPlayerButtonClick" />
+                                        Click="OnSaveNewPlayerButtonClick"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Image x:Name="NewPlayerAvatar"
                                        Grid.Row="5"
                                        Grid.Column="3"
@@ -309,7 +312,8 @@
                                         Grid.Row="7"
                                         Grid.Column="3"
                                         Width="150"
-                                        Click="SelectAvatarImageButton_OnClick" />
+                                        Click="SelectAvatarImageButton_OnClick"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -417,7 +421,8 @@
                                         Grid.Column="13"
                                         Grid.ColumnSpan="3"
                                         Click="CalibrateCamsSetupPointButtonClick"
-                                        ToolTip="Calibrate Cam X/Y setup point on projection.&#xA;Distance from Cam to bull must be setup" />
+                                        ToolTip="Calibrate Cam X/Y setup point on projection.&#xA;Distance from Cam to bull must be setup"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <CheckBox x:Name="WithDetectionCheckBox"
                                           Content="{x:Static resx:Resources.WithDetectionCheckBoxText}"
                                           Grid.Row="11"
@@ -770,24 +775,28 @@
                                         Content="Find cams"
                                         Grid.Row="13"
                                         Grid.Column="9"
-                                        Click="OnFindCamsButtonClick" />
+                                        Click="OnFindCamsButtonClick"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Button x:Name="CheckCams"
                                         Content="Check"
                                         Grid.Row="15"
                                         Grid.Column="9"
-                                        Click="OnCheckCamsButtonClick" />
+                                        Click="OnCheckCamsButtonClick"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Button x:Name="CrossingStartButton"
                                         Content="Start"
                                         Grid.Row="21"
                                         Grid.Column="5"
                                         Click="OnCrossingStartButtonClick"
-                                        IsEnabled="{Binding IsRuntimeCrossingRunning, Converter={StaticResource Inverted}}" />
+                                        IsEnabled="{Binding IsRuntimeCrossingRunning, Converter={StaticResource Inverted}}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Button x:Name="CrossingStopButton"
                                         Content="Stop"
                                         Grid.Row="21"
                                         Grid.Column="7"
                                         Click="OnCrossingStopButtonClick"
-                                        IsEnabled="{Binding IsRuntimeCrossingRunning}" />
+                                        IsEnabled="{Binding IsRuntimeCrossingRunning}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <TextBlock Grid.Row="19"
                                            Grid.Column="5"
                                            Grid.ColumnSpan="3"
@@ -917,13 +926,15 @@
                                         Grid.Row="1"
                                         Grid.Column="3"
                                         Click="CamSetupStartButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Button x:Name="Cam1StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
                                         Click="CamSetupStopButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <TextBox Grid.Row="5"
                                          Grid.Column="3"
                                          Grid.RowSpan="3"
@@ -1048,13 +1059,15 @@
                                         Grid.Row="1"
                                         Grid.Column="3"
                                         Click="CamSetupStartButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Button x:Name="Cam2StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
                                         Click="CamSetupStopButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <TextBox Grid.Row="5"
                                          Grid.Column="3"
                                          Grid.RowSpan="3"
@@ -1178,13 +1191,15 @@
                                         Grid.Row="1"
                                         Grid.Column="3"
                                         Click="CamSetupStartButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Button x:Name="Cam3StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
                                         Click="CamSetupStopButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <TextBox Grid.Row="5"
                                          Grid.Column="3"
                                          Grid.RowSpan="3"
@@ -1307,13 +1322,15 @@
                                         Grid.Row="1"
                                         Grid.Column="3"
                                         Click="CamSetupStartButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <Button x:Name="Cam4StopButton"
                                         Content="Stop"
                                         Grid.Row="3"
                                         Grid.Column="3"
                                         Click="CamSetupStopButtonClick"
-                                        IsEnabled="{Binding IsCamsSetupRunning}" />
+                                        IsEnabled="{Binding IsCamsSetupRunning}"
+                                        Style="{StaticResource MainWindowButtonStyle}" />
                                 <TextBox Grid.Row="5"
                                          Grid.Column="3"
                                          Grid.RowSpan="3"

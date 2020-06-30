@@ -5,34 +5,58 @@
              StartupUri="Windows/Main/MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
-        <SolidColorBrush x:Key="ColorBlue" Color="#7F0A8BF8" />
-        <SolidColorBrush x:Key="ColorBlueDark" Color="MidnightBlue" />
-        <SolidColorBrush x:Key="ColorBlueLight" Color="CornflowerBlue" />
+        <Color x:Key="Aqua">#FF00FF99</Color>
+        <Color x:Key="Aqua75A">#BF00A369</Color>
+        <Color x:Key="Aqua25A">#3F0AF8A1</Color>
+        <Color x:Key="Blue">#7F0A8BF8</Color>
+        <Color x:Key="BlueLight">CornflowerBlue</Color>
+        <Color x:Key="BlueDark">MidnightBlue</Color>
 
-        <SolidColorBrush x:Key="ColorAqua" Color="#FF00FF99" />
-        <SolidColorBrush x:Key="ColorAqua75A" Color="#BF00A369" />
-        <SolidColorBrush x:Key="ColorAqua25A" Color="#3F0AF8A1" />
+        <SolidColorBrush x:Key="BrushAqua" Color="{StaticResource Aqua}" />
+        <SolidColorBrush x:Key="BrushAqua75A" Color="{StaticResource Aqua75A}" />
+        <SolidColorBrush x:Key="BrushAqua25A" Color="{StaticResource Aqua25A}" />
+        <SolidColorBrush x:Key="BrushBlue" Color="{StaticResource Blue}" />
+        <SolidColorBrush x:Key="BrushBlueLight" Color="{StaticResource BlueLight}" />
+        <SolidColorBrush x:Key="BrushBlueDark" Color="{StaticResource BlueDark}" />
 
-        <Style x:Key="MainWindowTextBoxStyle">
-            <Setter Property="Control.HorizontalAlignment" Value="Stretch" />
-            <Setter Property="Control.Foreground" Value="{StaticResource ColorBlueDark}" />
-            <Setter Property="Control.FontFamily" Value="Agency FB" />
-            <Setter Property="Control.FontSize" Value="20" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-            <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
-            <Setter Property="Control.Background" Value="{StaticResource ColorAqua25A}" />
-            <Setter Property="Control.BorderBrush" Value="{StaticResource ColorBlue}" />
-            <Setter Property="TextBox.SelectionBrush" Value="{StaticResource ColorAqua75A}" />
+        <Style x:Key="MainWindowTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource BrushBlueDark}" />
+            <Setter Property="FontFamily" Value="Agency FB" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="{StaticResource BrushAqua25A}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BrushBlueDark}" />
+            <Setter Property="SelectionBrush" Value="{StaticResource BrushAqua75A}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid x:Name="grid">
+                            <Border CornerRadius="3"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="2">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="MainWindowComboBoxStyle">
-            <Setter Property="Control.Foreground" Value="{StaticResource ColorBlueDark}" />
+            <Setter Property="Control.Foreground" Value="{StaticResource BrushBlueDark}" />
             <Setter Property="Control.FontFamily" Value="Agency FB" />
             <Setter Property="Control.FontSize" Value="20" />
             <Setter Property="Control.FontWeight" Value="Bold" />
             <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
             <Setter Property="Control.VerticalContentAlignment" Value="Center" />
-            <Setter Property="Control.BorderBrush" Value="{StaticResource ColorBlue}" />
+            <Setter Property="Control.BorderBrush" Value="{StaticResource BrushBlue}" />
         </Style>
         <Style x:Key="MainWindowLabelStyle">
             <Setter Property="Control.HorizontalAlignment" Value="Left" />
@@ -40,7 +64,7 @@
             <Setter Property="Control.FontFamily" Value="Agency FB" />
             <Setter Property="Control.FontSize" Value="20" />
             <Setter Property="Control.FontWeight" Value="Bold" />
-            <Setter Property="Control.Foreground" Value="{StaticResource ColorBlueLight}" />
+            <Setter Property="Control.Foreground" Value="{StaticResource BrushBlueLight}" />
         </Style>
         <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox"
                BasedOn="{StaticResource MainWindowComboBoxStyle}">
@@ -376,7 +400,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border Background="{StaticResource ColorBlueDark}" Width="3" />
+                        <Border Background="{StaticResource BrushBlueDark}" Width="3" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -387,7 +411,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border Background="{StaticResource ColorBlueLight}" Width="3" />
+                        <Border Background="{StaticResource BrushBlueLight}" Width="3" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -398,8 +422,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse Height="13" Width="13" Fill="{StaticResource ColorAqua}"
-                                 Stroke="{StaticResource ColorBlueDark}" StrokeThickness="2" />
+                        <Ellipse Height="13" Width="13" Fill="{StaticResource BrushAqua}"
+                                 Stroke="{StaticResource BrushBlueDark}" StrokeThickness="2" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -438,16 +462,19 @@
                     <Setter Property="MinWidth" Value="21" />
                     <Setter Property="Template" Value="{StaticResource Slider}" />
                 </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.4" />
+                </Trigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
-            <Setter Property="Control.Foreground" Value="RoyalBlue" />
+            <Setter Property="Control.Foreground" Value="{StaticResource BrushBlueLight}" />
             <Style.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="#FF00FF99"
+                            <ColorAnimation To="{StaticResource  Aqua}"
                                             Storyboard.TargetProperty="(Hyperlink.Foreground).(SolidColorBrush.Color)"
                                             Duration="0:0:0.2" />
                         </Storyboard>
@@ -456,13 +483,79 @@
                 <EventTrigger RoutedEvent="MouseLeave">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="RoyalBlue"
+                            <ColorAnimation To="{StaticResource BlueLight}"
                                             Storyboard.TargetProperty="(Hyperlink.Foreground).(SolidColorBrush.Color)"
                                             Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MainWindowButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Agency FB" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="{StaticResource BrushAqua75A}" />
+            <Setter Property="Foreground" Value="{StaticResource BrushBlueDark}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border"
+                                    CornerRadius="3"
+                                    BorderBrush="{StaticResource BrushBlueDark}"
+                                    BorderThickness="2"
+                                    Background="{StaticResource BrushAqua75A}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  TextElement.FontWeight="Bold" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource Aqua25A}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="{StaticResource BlueDark}"
+                                                            Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="{StaticResource BlueDark}"
+                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.4" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="ScoreWindowTextStyle">
