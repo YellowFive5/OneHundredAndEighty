@@ -5,6 +5,9 @@
              StartupUri="Windows/Main/MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
+        <!--#region Brushes -->
+        <FontFamily x:Key="MainFontType">Agency FB</FontFamily>
+
         <Color x:Key="Aqua">#FF00FF99</Color>
         <Color x:Key="Aqua75A">#BF00A369</Color>
         <Color x:Key="Aqua25A">#3F0AF8A1</Color>
@@ -18,117 +21,8 @@
         <SolidColorBrush x:Key="BrushBlue" Color="{StaticResource Blue}" />
         <SolidColorBrush x:Key="BrushBlueLight" Color="{StaticResource BlueLight}" />
         <SolidColorBrush x:Key="BrushBlueDark" Color="{StaticResource BlueDark}" />
-
-        <Style x:Key="MainWindowTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Foreground" Value="{StaticResource BrushBlueDark}" />
-            <Setter Property="FontFamily" Value="Agency FB" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="{StaticResource BrushAqua25A}" />
-            <Setter Property="BorderBrush" Value="{StaticResource BrushBlueDark}" />
-            <Setter Property="SelectionBrush" Value="{StaticResource BrushAqua75A}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Grid x:Name="grid">
-                            <Border CornerRadius="3"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    Background="{TemplateBinding Background}"
-                                    BorderThickness="2">
-                                <ScrollViewer x:Name="PART_ContentHost" />
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" TargetName="grid" Value="0.4" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="MainWindowComboBoxStyle">
-            <Setter Property="Control.Foreground" Value="{StaticResource BrushBlueDark}" />
-            <Setter Property="Control.FontFamily" Value="Agency FB" />
-            <Setter Property="Control.FontSize" Value="20" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-            <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
-            <Setter Property="Control.BorderBrush" Value="{StaticResource BrushBlue}" />
-        </Style>
-        <Style x:Key="MainWindowLabelStyle">
-            <Setter Property="Control.HorizontalAlignment" Value="Left" />
-            <Setter Property="Control.VerticalAlignment" Value="Center" />
-            <Setter Property="Control.FontFamily" Value="Agency FB" />
-            <Setter Property="Control.FontSize" Value="20" />
-            <Setter Property="Control.FontWeight" Value="Bold" />
-            <Setter Property="Control.Foreground" Value="{StaticResource BrushBlueLight}" />
-        </Style>
-        <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox"
-               BasedOn="{StaticResource MainWindowComboBoxStyle}">
-            <Setter Property="ItemsSource">
-                <Setter.Value>
-                    <x:Array Type="system:String">
-                        <system:String>11</system:String>
-                        <system:String>11/14</system:String>
-                        <system:String>14</system:String>
-                        <system:String>14/9</system:String>
-                        <system:String>9</system:String>
-                        <system:String>9/12</system:String>
-                        <system:String>12</system:String>
-                        <system:String>12/5</system:String>
-                        <system:String>5</system:String>
-                        <system:String>5/20</system:String>
-                        <system:String>20</system:String>
-                        <system:String>20/1</system:String>
-                        <system:String>1</system:String>
-                        <system:String>1/18</system:String>
-                        <system:String>18</system:String>
-                        <system:String>18/4</system:String>
-                        <system:String>4</system:String>
-                        <system:String>4/13</system:String>
-                        <system:String>13</system:String>
-                        <system:String>13/6</system:String>
-                        <system:String>6</system:String>
-                        <system:String>6/10</system:String>
-                        <system:String>10</system:String>
-                        <system:String>10/15</system:String>
-                        <system:String>15</system:String>
-                        <system:String>15/2</system:String>
-                        <system:String>2</system:String>
-                        <system:String>2/17</system:String>
-                        <system:String>17</system:String>
-                        <system:String>17/3</system:String>
-                        <system:String>3</system:String>
-                        <system:String>3/19</system:String>
-                        <system:String>19</system:String>
-                        <system:String>19/7</system:String>
-                        <system:String>7</system:String>
-                        <system:String>7/16</system:String>
-                        <system:String>16</system:String>
-                        <system:String>16/8</system:String>
-                        <system:String>8</system:String>
-                        <system:String>8/11</system:String>
-                    </x:Array>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="MainWindowLegsSetsComboboxStyle" TargetType="ComboBox"
-               BasedOn="{StaticResource MainWindowComboBoxStyle}">
-            <Setter Property="ItemsSource">
-                <Setter.Value>
-                    <x:Array Type="system:Int32">
-                        <system:Int32>1</system:Int32>
-                        <system:Int32>3</system:Int32>
-                        <system:Int32>5</system:Int32>
-                        <system:Int32>7</system:Int32>
-                        <system:Int32>9</system:Int32>
-                    </x:Array>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <!--#endregion-->
+        <!--#region MainWindow -->
         <Style x:Key="MainWindowMainGridStyle" TargetType="Grid">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=GameTabItem, Path=IsSelected}" Value="True">
@@ -213,7 +107,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
         <Style x:Key="MainWindowHeaderButtonsStyle" TargetType="FrameworkElement">
             <Setter Property="Height" Value="30" />
             <Setter Property="Width" Value="30" />
@@ -237,6 +130,183 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="MainWindowTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource BrushBlueDark}" />
+            <Setter Property="FontFamily" Value="{StaticResource MainFontType}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="Background" Value="{StaticResource BrushAqua25A}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BrushBlueDark}" />
+            <Setter Property="SelectionBrush" Value="{StaticResource BrushAqua75A}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid x:Name="grid">
+                            <Border CornerRadius="3"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="2">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MainWindowButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource MainFontType}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="{StaticResource BrushAqua75A}" />
+            <Setter Property="Foreground" Value="{StaticResource BrushBlueDark}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border"
+                                    CornerRadius="3"
+                                    BorderBrush="{StaticResource BrushBlueDark}"
+                                    BorderThickness="2"
+                                    Background="{StaticResource BrushAqua75A}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  TextElement.FontWeight="Bold" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource Aqua25A}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="{StaticResource BlueDark}"
+                                                            Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="{StaticResource BlueDark}"
+                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.4" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MainWindowLabelStyle">
+            <Setter Property="Control.HorizontalAlignment" Value="Left" />
+            <Setter Property="Control.VerticalAlignment" Value="Center" />
+            <Setter Property="Control.FontFamily" Value="{StaticResource MainFontType}" />
+            <Setter Property="Control.FontSize" Value="20" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+            <Setter Property="Control.Foreground" Value="{StaticResource BrushBlueLight}" />
+        </Style>
+
+        <Style x:Key="MainWindowComboBoxStyle">
+            <Setter Property="Control.Foreground" Value="{StaticResource BrushBlueDark}" />
+            <Setter Property="Control.FontFamily" Value="{StaticResource MainFontType}" />
+            <Setter Property="Control.FontSize" Value="20" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+            <Setter Property="Control.HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+            <Setter Property="Control.BorderBrush" Value="{StaticResource BrushBlue}" />
+        </Style>
+        <Style x:Key="MainWindowSetupSectorsComboboxStyle" TargetType="ComboBox"
+               BasedOn="{StaticResource MainWindowComboBoxStyle}">
+            <Setter Property="ItemsSource">
+                <Setter.Value>
+                    <x:Array Type="system:String">
+                        <system:String>11</system:String>
+                        <system:String>11/14</system:String>
+                        <system:String>14</system:String>
+                        <system:String>14/9</system:String>
+                        <system:String>9</system:String>
+                        <system:String>9/12</system:String>
+                        <system:String>12</system:String>
+                        <system:String>12/5</system:String>
+                        <system:String>5</system:String>
+                        <system:String>5/20</system:String>
+                        <system:String>20</system:String>
+                        <system:String>20/1</system:String>
+                        <system:String>1</system:String>
+                        <system:String>1/18</system:String>
+                        <system:String>18</system:String>
+                        <system:String>18/4</system:String>
+                        <system:String>4</system:String>
+                        <system:String>4/13</system:String>
+                        <system:String>13</system:String>
+                        <system:String>13/6</system:String>
+                        <system:String>6</system:String>
+                        <system:String>6/10</system:String>
+                        <system:String>10</system:String>
+                        <system:String>10/15</system:String>
+                        <system:String>15</system:String>
+                        <system:String>15/2</system:String>
+                        <system:String>2</system:String>
+                        <system:String>2/17</system:String>
+                        <system:String>17</system:String>
+                        <system:String>17/3</system:String>
+                        <system:String>3</system:String>
+                        <system:String>3/19</system:String>
+                        <system:String>19</system:String>
+                        <system:String>19/7</system:String>
+                        <system:String>7</system:String>
+                        <system:String>7/16</system:String>
+                        <system:String>16</system:String>
+                        <system:String>16/8</system:String>
+                        <system:String>8</system:String>
+                        <system:String>8/11</system:String>
+                    </x:Array>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MainWindowLegsSetsComboboxStyle" TargetType="ComboBox"
+               BasedOn="{StaticResource MainWindowComboBoxStyle}">
+            <Setter Property="ItemsSource">
+                <Setter.Value>
+                    <x:Array Type="system:Int32">
+                        <system:Int32>1</system:Int32>
+                        <system:Int32>3</system:Int32>
+                        <system:Int32>5</system:Int32>
+                        <system:Int32>7</system:Int32>
+                        <system:Int32>9</system:Int32>
+                    </x:Array>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="MainWindowTabControlStyle" TargetType="TabControl">
             <Setter Property="Background" Value="{x:Null}" />
             <Setter Property="BorderBrush" Value="{x:Null}" />
@@ -382,6 +452,9 @@
                                     <RemoveStoryboard BeginStoryboardName="FadeOutSemi" />
                                 </MultiTrigger.ExitActions>
                             </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="TabItem.Opacity" Value="0.4" />
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -422,8 +495,43 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse Height="13" Width="13" Fill="{StaticResource BrushAqua}"
-                                 Stroke="{StaticResource BrushBlueDark}" StrokeThickness="2" />
+                        <Ellipse x:Name="thumbNippel"
+                                 Height="13" Width="13"
+                                 Fill="{StaticResource BrushAqua}"
+                                 Stroke="{StaticResource BrushBlueDark}"
+                                 StrokeThickness="2" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetName="thumbNippel"
+                                                            Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="{StaticResource BlueDark}"
+                                                            Storyboard.TargetName="thumbNippel"
+                                                            Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="{StaticResource BlueDark}"
+                                                            Storyboard.TargetName="thumbNippel"
+                                                            Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetName="thumbNippel"
+                                                            Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -491,75 +599,10 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
-
-        <Style x:Key="MainWindowButtonStyle" TargetType="Button">
-            <Setter Property="FontFamily" Value="Agency FB" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Background" Value="{StaticResource BrushAqua75A}" />
-            <Setter Property="Foreground" Value="{StaticResource BrushBlueDark}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="grid">
-                            <Border x:Name="border"
-                                    CornerRadius="3"
-                                    BorderBrush="{StaticResource BrushBlueDark}"
-                                    BorderThickness="2"
-                                    Background="{StaticResource BrushAqua75A}">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"
-                                                  TextElement.FontWeight="Bold" />
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" TargetName="border">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource Aqua25A}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation To="{StaticResource Aqua}"
-                                                            Storyboard.TargetName="border"
-                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.2" />
-                                            <ColorAnimation To="{StaticResource Aqua}"
-                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.2" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation To="{StaticResource BlueDark}"
-                                                            Storyboard.TargetName="border"
-                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.2" />
-                                            <ColorAnimation To="{StaticResource BlueDark}"
-                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
-                                                            Duration="0:0:0.2" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" TargetName="grid" Value="0.4" />
-                            </Trigger>
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        <!--#endregion-->
+        <!--#region ScoreWindow -->
         <Style x:Key="ScoreWindowTextStyle">
-            <Setter Property="Control.FontFamily" Value="Agency FB" />
+            <Setter Property="Control.FontFamily" Value="{StaticResource MainFontType}" />
             <Setter Property="Control.FontWeight" Value="Bold" />
             <Style.Triggers>
                 <EventTrigger RoutedEvent="Binding.TargetUpdated">
@@ -701,5 +744,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--#endregion-->
     </Application.Resources>
 </Application>
