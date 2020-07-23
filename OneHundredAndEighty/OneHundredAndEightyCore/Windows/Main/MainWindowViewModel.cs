@@ -17,6 +17,7 @@ using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.CamsDetection;
 using OneHundredAndEightyCore.Windows.Debug;
+using OneHundredAndEightyCore.Windows.MessageBox;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
@@ -26,7 +27,7 @@ namespace OneHundredAndEightyCore.Windows.Main
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly Logger logger;
-        private readonly MessageBoxService messageBoxService;
+        private readonly IMessageBoxService messageBoxService;
         private readonly IDBService dbService;
         private readonly IVersionChecker versionChecker;
         private readonly ScoreBoardService scoreBoardService;
@@ -1109,7 +1110,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         }
 
         public MainWindowViewModel(Logger logger,
-                                   MessageBoxService messageBoxService,
+                                   IMessageBoxService messageBoxService,
                                    IDBService dbService,
                                    IVersionChecker versionChecker,
                                    ScoreBoardService scoreBoardService,
@@ -1150,8 +1151,14 @@ namespace OneHundredAndEightyCore.Windows.Main
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
         }
 
-        public void OnMainWindowClosing()
+        public void OnMainWindowClosing(CancelEventArgs cancelEventArgs)
         {
+            if (!messageBoxService.AskQuestion(Resources.Resources.ExitMessageBoxText))
+            {
+                cancelEventArgs.Cancel = true;
+                return;
+            }
+
             StopGameByButton();
             manualThrowPanel.Close();
 
@@ -1306,7 +1313,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                                                                NewGamePlayer1,
                                                                NewGamePlayer2))
             {
-                messageBoxService.ShowError(Resources.Resources.NewGamePlayersNotSelectedErrorText);
+                messageBoxService.ShowInfo(Resources.Resources.NewGamePlayersNotSelectedErrorText);
                 return false;
             }
 

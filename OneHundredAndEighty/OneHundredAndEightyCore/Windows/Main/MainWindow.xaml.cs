@@ -15,6 +15,7 @@ using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Telemetry;
 using OneHundredAndEightyCore.Windows.CamsDetection;
 using OneHundredAndEightyCore.Windows.Debug;
+using OneHundredAndEightyCore.Windows.MessageBox;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
@@ -79,12 +80,15 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private void OnClosing(object sender, CancelEventArgs e)
         {
-            viewModel.OnMainWindowClosing();
+            viewModel.OnMainWindowClosing(e);
         }
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
 
         private void OnCloseButtonClick(object sender, MouseButtonEventArgs e)

@@ -2,6 +2,10 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ShowAllFiles>false</ShowAllFiles>
+    <ActiveDebugProfile>OneHundredAndEightyCore</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
@@ -13,6 +17,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\Debug\ManualThrowPanelWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\MessageBox\MessageWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\MessageBox\QuestionMessageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\Score\ClassicScoreWindow.xaml.cs">
@@ -35,6 +45,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\MessageBox\MessageWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\MessageBox\QuestionMessageWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Score\ClassicScoreWindow.xaml">

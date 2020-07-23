@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using OneHundredAndEightyCore.Enums;
+using OneHundredAndEightyCore.Windows.MessageBox;
 
 #endregion
 
@@ -13,14 +14,14 @@ namespace OneHundredAndEightyCore.Common
     {
         private readonly DBService dbService;
         private readonly IConfigService configService;
-        private readonly MessageBoxService messageBoxService;
+        private readonly IMessageBoxService messageBoxService;
 
         private const double AppVersion = 2.3;
         private double currentDbVersion;
 
         public VersionChecker(DBService dbService,
                               IConfigService configService,
-                              MessageBoxService messageBoxService)
+                              IMessageBoxService messageBoxService)
         {
             this.dbService = dbService;
             this.configService = configService;

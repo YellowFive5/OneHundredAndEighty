@@ -253,6 +253,15 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to exit?.
+        /// </summary>
+        public static string ExitMessageBoxText {
+            get {
+                return ResourceManager.GetString("ExitMessageBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Threshold sleep time in seconds for darts extraction from dartboard process. Default value is &apos;4&apos;.
         /// </summary>
         public static string ExtractionSleepTimeHelperText {
