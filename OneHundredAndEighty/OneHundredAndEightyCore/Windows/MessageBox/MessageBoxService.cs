@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -29,36 +30,63 @@ namespace OneHundredAndEightyCore.Windows.MessageBox
             QuestionResult = result;
         }
 
-        public bool AskQuestion(string questionText)
+        public void CopyToClipboard()
         {
-            var w = PrepareQuestionWindow();
-            MessageText = questionText;
-            w.ShowDialog();
-            Application.Current.MainWindow.Opacity = 1;
-            return QuestionResult;
-        }
-
-        private Window PrepareQuestionWindow()
-        {
-            var window = new QuestionMessageWindow(this)
-                         {
-                             Owner = Application.Current.MainWindow,
-                             Width = Application.Current.MainWindow.Width,
-                             Height = Application.Current.MainWindow.Height / 3
-                         };
-            Application.Current.MainWindow.Opacity = 0.6;
-            return window;
+            Clipboard.SetText(MessageText);
         }
 
         public void ShowInfo(string infoText, params object[] args)
         {
-            var w = PrepareInfoWindow();
+            var window = PrepareWindow(MessageType.InfoOk);
             MessageText = string.Format(infoText, args);
-            w.ShowDialog();
+            window.ShowDialog();
             Application.Current.MainWindow.Opacity = 1;
         }
 
-        private Window PrepareInfoWindow()
+        public bool AskInfoQuestion(string questionText, params object[] args)
+        {
+            var window = PrepareWindow(MessageType.InfoQuestion);
+            MessageText = string.Format(questionText, args);
+            window.ShowDialog();
+            Application.Current.MainWindow.Opacity = 1;
+            return QuestionResult;
+        }
+
+        public void ShowWarning(string warningText, params object[] args)
+        {
+            var window = PrepareWindow(MessageType.WarningOk);
+            MessageText = string.Format(warningText, args);
+            window.ShowDialog();
+            Application.Current.MainWindow.Opacity = 1;
+        }
+
+        public bool AskWarningQuestion(string questionText, params object[] args)
+        {
+            var window = PrepareWindow(MessageType.WarningQuestion);
+            MessageText = string.Format(questionText, args);
+            window.ShowDialog();
+            Application.Current.MainWindow.Opacity = 1;
+            return QuestionResult;
+        }
+
+        public void ShowError(string errorText, params object[] args)
+        {
+            var window = PrepareWindow(MessageType.ErrorOk);
+            MessageText = string.Format(errorText, args);
+            window.ShowDialog();
+            Application.Current.MainWindow.Opacity = 1;
+        }
+
+        public bool AskErrorQuestion(string questionText, params object[] args)
+        {
+            var window = PrepareWindow(MessageType.ErrorQuestion);
+            MessageText = string.Format(questionText, args);
+            window.ShowDialog();
+            Application.Current.MainWindow.Opacity = 1;
+            return QuestionResult;
+        }
+
+        private Window PrepareWindow(MessageType type)
         {
             var window = new MessageWindow(this)
                          {
@@ -66,18 +94,32 @@ namespace OneHundredAndEightyCore.Windows.MessageBox
                              Width = Application.Current.MainWindow.Width,
                              Height = Application.Current.MainWindow.Height / 3
                          };
+            switch (type)
+            {
+                case MessageType.InfoOk:
+                    window.InfoOkGrid.Visibility = Visibility.Visible;
+                    break;
+                case MessageType.InfoQuestion:
+                    window.InfoQuestionGrid.Visibility = Visibility.Visible;
+                    break;
+                case MessageType.WarningOk:
+                    window.WarningOkGrid.Visibility = Visibility.Visible;
+                    break;
+                case MessageType.WarningQuestion:
+                    window.WarningQuestionGrid.Visibility = Visibility.Visible;
+                    break;
+                case MessageType.ErrorOk:
+                    window.ErrorOkGrid.Visibility = Visibility.Visible;
+                    break;
+                case MessageType.ErrorQuestion:
+                    window.ErrorQuestionGrid.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+
             Application.Current.MainWindow.Opacity = 0.6;
             return window;
-        }
-
-        public void ShowError(string errorText, params object[] args)
-        {
-            System.Windows.MessageBox.Show(string.Format(errorText, args), "Error", MessageBoxButton.OK);
-        }
-
-        public bool AskWarningQuestion(string questionText, params object[] args)
-        {
-            return System.Windows.MessageBox.Show(string.Format(questionText, args), "Warning", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
 
         #region PropertyChangingFire

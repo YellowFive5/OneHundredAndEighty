@@ -17,7 +17,7 @@
     <Window.Background>
         <SolidColorBrush Opacity="0" />
     </Window.Background>
-    <Grid Style="{StaticResource MessageBoxWindowGridStyle}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.02*" />
             <RowDefinition Height="*" />
@@ -28,7 +28,11 @@
         </Grid.ColumnDefinitions>
         <Rectangle Grid.Row="0" Style="{StaticResource MessageBoxWindowBorderStyle}" />
         <Rectangle Grid.Row="2" Style="{StaticResource MessageBoxWindowBorderStyle}" />
-        <Grid Grid.Row="1">
+
+        <Grid Name="InfoOkGrid"
+              Grid.Row="1"
+              Visibility="Hidden"
+              Style="{StaticResource MessageBoxWindowInfoGridStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -41,14 +45,185 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="1"
-                   Grid.Column="1"
-                   Style="{StaticResource MessageBoxWindowLabelStyle}"
-                   Content="{Binding MessageText}" />
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1">
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding MessageText}"
+                           Style="{StaticResource MessageBoxWindowTextStyle}" />
+            </Viewbox>
             <Button Grid.Row="3"
                     Grid.Column="1"
                     Style="{StaticResource MessageBoxWindowOkButtonStyle}"
                     Click="OkButtonClick" />
         </Grid>
+
+        <Grid Name="InfoQuestionGrid"
+              Visibility="Hidden"
+              Grid.Row="1"
+              Style="{StaticResource MessageBoxWindowInfoGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     Grid.ColumnSpan="3">
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding MessageText}"
+                           Style="{StaticResource MessageBoxWindowTextStyle}" />
+            </Viewbox>
+            <Button Grid.Row="3"
+                    Grid.Column="3"
+                    Style="{StaticResource MessageBoxWindowNoButtonStyle}"
+                    Click="NoButtonClick" />
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource MessageBoxWindowYesButtonStyle}"
+                    Click="YesButtonClick" />
+        </Grid>
+
+        <Grid Name="WarningOkGrid"
+              Grid.Row="1"
+              Visibility="Hidden"
+              Style="{StaticResource MessageBoxWindowWarningGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1">
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding MessageText}"
+                           Style="{StaticResource MessageBoxWindowTextStyle}" />
+            </Viewbox>
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource MessageBoxWindowOkButtonStyle}"
+                    Click="OkButtonClick" />
+        </Grid>
+
+        <Grid Name="WarningQuestionGrid"
+              Visibility="Hidden"
+              Grid.Row="1"
+              Style="{StaticResource MessageBoxWindowWarningGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     Grid.ColumnSpan="3">
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding MessageText}"
+                           Style="{StaticResource MessageBoxWindowTextStyle}" />
+            </Viewbox>
+            <Button Grid.Row="3"
+                    Grid.Column="3"
+                    Style="{StaticResource MessageBoxWindowNoButtonStyle}"
+                    Click="NoButtonClick" />
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource MessageBoxWindowYesButtonStyle}"
+                    Click="YesButtonClick" />
+        </Grid>
+
+        <Grid Name="ErrorOkGrid"
+              Grid.Row="1"
+              Visibility="Hidden"
+              Style="{StaticResource MessageBoxWindowErrorGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     Grid.ColumnSpan="3">
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding MessageText}"
+                           Style="{StaticResource MessageBoxWindowTextStyle}" />
+            </Viewbox>
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource MessageBoxWindowOkButtonStyle}"
+                    Click="OkButtonClick" />
+            <Button Grid.Row="3"
+                    Grid.Column="3"
+                    Style="{StaticResource MessageBoxWindowCopyToClipboardButtonStyle}"
+                    Click="CopyToClipboardButtonClick" />
+        </Grid>
+
+        <Grid Name="ErrorQuestionGrid"
+              Visibility="Hidden"
+              Grid.Row="1"
+              Style="{StaticResource MessageBoxWindowErrorGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="1"
+                     Grid.Row="1"
+                     Grid.ColumnSpan="3">
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding MessageText}"
+                           Style="{StaticResource MessageBoxWindowTextStyle}" />
+            </Viewbox>
+            <Button Grid.Row="3"
+                    Grid.Column="3"
+                    Style="{StaticResource MessageBoxWindowNoButtonStyle}"
+                    Click="NoButtonClick" />
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource MessageBoxWindowYesButtonStyle}"
+                    Click="YesButtonClick" />
+        </Grid>
+
     </Grid>
 </Window>

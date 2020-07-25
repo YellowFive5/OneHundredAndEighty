@@ -954,28 +954,40 @@
         <!--#endregion-->
 
         <!--#region MessageBoxWindow -->
-        <Style x:Key="MessageBoxWindowLabelStyle" TargetType="Label"
-               BasedOn="{StaticResource MainWindowLabelStyle}">
-            <Setter Property="HorizontalAlignment" Value="Center" />
+        <Style x:Key="MessageBoxWindowTextStyle"
+               BasedOn="{StaticResource MainWindowLabelStyle}"
+               TargetType="TextBlock">
             <Setter Property="FontSize" Value="30" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Control.Foreground" Value="{StaticResource BrushAqua}" />
         </Style>
-        <Style x:Key="MessageBoxWindowButtonStyle" TargetType="Button"
+        <Style x:Key="MessageBoxWindowButtonStyle"
+               TargetType="Button"
                BasedOn="{StaticResource MainWindowButtonStyle}">
             <Setter Property="Cursor" Value="Hand" />
         </Style>
-        <Style x:Key="MessageBoxWindowYesButtonStyle" TargetType="Button"
+        <Style x:Key="MessageBoxWindowYesButtonStyle"
+               TargetType="Button"
                BasedOn="{StaticResource MessageBoxWindowButtonStyle}">
             <Setter Property="Content" Value="Yes" />
         </Style>
-        <Style x:Key="MessageBoxWindowNoButtonStyle" TargetType="Button"
+        <Style x:Key="MessageBoxWindowNoButtonStyle"
+               TargetType="Button"
                BasedOn="{StaticResource MessageBoxWindowButtonStyle}">
             <Setter Property="Content" Value="No" />
         </Style>
-        <Style x:Key="MessageBoxWindowOkButtonStyle" TargetType="Button"
+        <Style x:Key="MessageBoxWindowOkButtonStyle"
+               TargetType="Button"
                BasedOn="{StaticResource MessageBoxWindowButtonStyle}">
             <Setter Property="Content" Value="Ok" />
         </Style>
-        <Style x:Key="MessageBoxWindowBorderStyle" TargetType="Rectangle">
+        <Style x:Key="MessageBoxWindowCopyToClipboardButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource MessageBoxWindowButtonStyle}">
+            <Setter Property="Content" Value="Copy to clipboard" />
+        </Style>
+        <Style x:Key="MessageBoxWindowBorderStyle"
+               TargetType="Rectangle">
             <Setter Property="Fill">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -996,7 +1008,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="MessageBoxWindowGridStyle" TargetType="Grid">
+        <Style x:Key="MessageBoxWindowInfoGridStyle"
+               TargetType="Grid">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -1010,6 +1023,46 @@
                         </LinearGradientBrush.RelativeTransform>
                         <GradientStop Color="#FF03402F" Offset="0.288" />
                         <GradientStop Color="#FF47217D" Offset="0.73" />
+                        <GradientStop Color="#0003402F" Offset="0" />
+                        <GradientStop Color="#0047217D" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MessageBoxWindowWarningGridStyle"
+               TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFA58711" Offset="0.494" />
+                        <GradientStop Color="#0003402F" Offset="0" />
+                        <GradientStop Color="#0047217D" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MessageBoxWindowErrorGridStyle"
+               TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFA52C11" Offset="0.494" />
                         <GradientStop Color="#0003402F" Offset="0" />
                         <GradientStop Color="#0047217D" Offset="1" />
                     </LinearGradientBrush>

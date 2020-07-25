@@ -1153,7 +1153,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void OnMainWindowClosing(CancelEventArgs cancelEventArgs)
         {
-            if (!messageBoxService.AskQuestion(Resources.Resources.ExitMessageBoxText))
+            if (!messageBoxService.AskInfoQuestion(Resources.Resources.ExitMessageBoxText))
             {
                 cancelEventArgs.Cancel = true;
                 return;
@@ -1305,7 +1305,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             if (!Validator.ValidateImplementedGameTypes(NewGameType))
             {
-                messageBoxService.ShowError(Resources.Resources.NotImplementedYetErrorText);
+                messageBoxService.ShowWarning(Resources.Resources.NotImplementedYetErrorText);
                 return false;
             }
 
@@ -1313,14 +1313,14 @@ namespace OneHundredAndEightyCore.Windows.Main
                                                                NewGamePlayer1,
                                                                NewGamePlayer2))
             {
-                messageBoxService.ShowInfo(Resources.Resources.NewGamePlayersNotSelectedErrorText);
+                messageBoxService.ShowWarning(Resources.Resources.NewGamePlayersNotSelectedErrorText);
                 return false;
             }
 
             if (!Validator.ValidateStartNewClassicGame(NewGameType,
                                                        NewGamePoints))
             {
-                messageBoxService.ShowError(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
+                messageBoxService.ShowWarning(Resources.Resources.NewClassicGamePointsNotSelectedErrorText);
                 return false;
             }
 
@@ -1357,7 +1357,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             if (!Validator.ValidateNewPlayerNameAndNickName(NewPlayerNameText, NewPlayerNickNameText))
             {
-                messageBoxService.ShowError(Resources.Resources.NewPlayerEmptyDataErrorText);
+                messageBoxService.ShowWarning(Resources.Resources.NewPlayerEmptyDataErrorText);
                 return;
             }
 
@@ -1407,7 +1407,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                 }
                 else
                 {
-                    messageBoxService.ShowError(Resources.Resources.PlayerAvatarTooBigErrorText);
+                    messageBoxService.ShowWarning(Resources.Resources.PlayerAvatarTooBigErrorText);
                 }
             }
         }

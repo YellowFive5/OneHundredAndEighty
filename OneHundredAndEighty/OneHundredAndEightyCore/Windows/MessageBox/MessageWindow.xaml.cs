@@ -21,5 +21,22 @@ namespace OneHundredAndEightyCore.Windows.MessageBox
         {
             Close();
         }
+
+        private void NoButtonClick(object sender, RoutedEventArgs e)
+        {
+            messageBoxService.SetQuestionResult(false);
+            Close();
+        }
+
+        private void YesButtonClick(object sender, RoutedEventArgs e)
+        {
+            messageBoxService.SetQuestionResult(true);
+            Close();
+        }
+
+        private void CopyToClipboardButtonClick(object sender, RoutedEventArgs e)
+        {
+            messageBoxService.CopyToClipboard();
+        }
     }
 }

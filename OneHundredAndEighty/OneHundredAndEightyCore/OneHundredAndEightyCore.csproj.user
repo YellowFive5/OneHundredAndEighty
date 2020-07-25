@@ -22,9 +22,6 @@
     <Compile Update="Windows\MessageBox\MessageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\MessageBox\QuestionMessageWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Windows\Score\ClassicScoreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -48,9 +45,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\MessageBox\MessageWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Windows\MessageBox\QuestionMessageWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Score\ClassicScoreWindow.xaml">
