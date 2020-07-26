@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
 using System.Linq;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
@@ -12,19 +11,12 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class ClassicDoubleProcessor : ProcessorBase
     {
-        private readonly int legPoints;
-
         public ClassicDoubleProcessor(Domain.Game game,
-                                      List<Player> players,
                                       DBService dbService,
-                                      ScoreBoardService scoreBoard,
-                                      int legPoints,
-                                      int legs,
-                                      int sets)
-            : base(game, players, dbService, scoreBoard, legs, sets)
+                                      ScoreBoardService scoreBoard)
+            : base(game, dbService, scoreBoard)
         {
-            this.legPoints = legPoints;
-            players.ForEach(p => p.LegPoints = legPoints);
+            Game.Players.ForEach(p => p.LegPoints = Game.legPoints);
         }
 
         public override void OnThrow(DetectedThrow thrw)
@@ -34,10 +26,10 @@ namespace OneHundredAndEightyCore.Game.Processors
                 ConvertAndSaveThrow(thrw, ThrowResult.MatchWon);
 
                 dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-                dbService.StatisticUpdateAddLegsWonForPlayer(PlayerOnThrow, Game.Id);
+                dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
                 dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
-                dbService.StatisticUpdateAddSetsWonForPlayer(PlayerOnThrow, Game.Id);
+                dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
                 InvokeEndMatch();
                 return;
@@ -67,43 +59,43 @@ namespace OneHundredAndEightyCore.Game.Processors
                 return;
             }
 
-            PlayerOnThrow.HandPoints += thrw.TotalPoints;
-            PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsTo(PlayerOnThrow, thrw.TotalPoints * -1);
+            Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
+            scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
-            PlayerOnThrow.HandThrows.Push(dbThrow);
+            Game.PlayerOnThrow.HandThrows.Push(dbThrow);
 
             if (IsHandOver())
             {
                 Check180();
                 ClearPlayerOnThrowHand();
-                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
                 TogglePlayerOnThrow();
             }
             else
             {
-                PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(PlayerOnThrow.ThrowNumber);
-                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+                Game.PlayerOnThrow.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
             }
         }
 
         private void OnLegOver()
         {
             dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-            dbService.StatisticUpdateAddLegsWonForPlayer(PlayerOnThrow, Game.Id);
+            dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
-            PlayerOnThrow.LegsWon += 1;
-            scoreBoard.AddLegsWonTo(PlayerOnThrow);
+            Game.PlayerOnThrow.LegsWon += 1;
+            scoreBoard.AddLegsWonTo(Game.PlayerOnThrow);
 
             ClearPlayerOnThrowHand();
 
-            foreach (var player in Players)
+            foreach (var player in Game.Players)
             {
-                player.LegPoints = legPoints;
-                scoreBoard.SetPointsTo(player, legPoints);
+                player.LegPoints = Game.legPoints;
+                scoreBoard.SetPointsTo(player, Game.legPoints);
                 scoreBoard.CheckPointsHintFor(player);
             }
 
@@ -113,20 +105,20 @@ namespace OneHundredAndEightyCore.Game.Processors
         private void OnSetOver()
         {
             dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-            dbService.StatisticUpdateAddLegsWonForPlayer(PlayerOnThrow, Game.Id);
+            dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
             dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
-            dbService.StatisticUpdateAddSetsWonForPlayer(PlayerOnThrow, Game.Id);
+            dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
-            PlayerOnThrow.SetsWon += 1;
-            scoreBoard.AddSetsWonTo(PlayerOnThrow);
+            Game.PlayerOnThrow.SetsWon += 1;
+            scoreBoard.AddSetsWonTo(Game.PlayerOnThrow);
 
             ClearPlayerOnThrowHand();
 
-            foreach (var player in Players)
+            foreach (var player in Game.Players)
             {
-                player.LegPoints = legPoints;
-                scoreBoard.SetPointsTo(player, legPoints);
+                player.LegPoints = Game.legPoints;
+                scoreBoard.SetPointsTo(player, Game.legPoints);
                 player.LegsWon = 0;
                 scoreBoard.SetLegsWonTo(player, 0);
                 scoreBoard.CheckPointsHintFor(player);
@@ -137,10 +129,10 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         private void TogglePlayerOnLegAndOnThrow()
         {
-            PlayerOnLeg = Players.First(p => p != PlayerOnLeg);
-            scoreBoard.OnLegPointSetOn(PlayerOnLeg);
-            PlayerOnThrow = PlayerOnLeg;
-            scoreBoard.OnThrowPointerSetOn(PlayerOnThrow);
+            Game.PlayerOnLeg = Game.Players.First(p => p != Game.PlayerOnLeg);
+            scoreBoard.OnLegPointSetOn(Game.PlayerOnLeg);
+            Game.PlayerOnThrow = Game.PlayerOnLeg;
+            scoreBoard.OnThrowPointerSetOn(Game.PlayerOnThrow);
         }
     }
 }

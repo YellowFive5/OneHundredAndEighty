@@ -50,7 +50,7 @@ namespace OneHundredAndEightyCore.Common
             ExecuteNonQueryInternal(newGameQuery);
 
             var newGameId = Convert.ToInt32(ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Games}]"));
-            game.SetId(newGameId);
+            // game.SetId(newGameId);
 
             StatisticSaveNew(newGameId, players);
         }

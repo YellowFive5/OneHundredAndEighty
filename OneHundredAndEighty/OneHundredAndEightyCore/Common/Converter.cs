@@ -247,5 +247,24 @@ namespace OneHundredAndEightyCore.Common
                     throw new ArgumentOutOfRangeException(nameof(GridNameToCamNumber), gridName, null);
             }
         }
+
+        public static int GamePointsToInt(GamePoints points)
+        {
+            switch (points)
+            {
+                case GamePoints.Free:
+                    return 0;
+                case GamePoints._301:
+                    return 301;
+                case GamePoints._501:
+                    return 501;
+                case GamePoints._701:
+                    return 701;
+                case GamePoints._1001:
+                    return 1001;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(points), points, null);
+            }
+        }
     }
 }

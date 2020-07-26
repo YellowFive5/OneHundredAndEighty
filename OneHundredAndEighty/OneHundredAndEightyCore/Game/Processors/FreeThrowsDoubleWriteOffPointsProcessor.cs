@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System.Collections.Generic;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Windows.Score;
@@ -11,17 +10,12 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public class FreeThrowsDoubleWriteOffPointsProcessor : ProcessorBase
     {
-        private readonly int writeOffPoints;
-
         public FreeThrowsDoubleWriteOffPointsProcessor(Domain.Game game,
-                                                       List<Player> players,
                                                        DBService dbService,
-                                                       ScoreBoardService scoreBoard,
-                                                       int writeOffPoints)
-            : base(game, players, dbService, scoreBoard)
+                                                       ScoreBoardService scoreBoard)
+            : base(game, dbService, scoreBoard)
         {
-            this.writeOffPoints = writeOffPoints;
-            players.ForEach(p => p.LegPoints = writeOffPoints);
+            Game.Players.ForEach(p => p.LegPoints = Game.legPoints);
         }
 
         public override void OnThrow(DetectedThrow thrw)
@@ -31,12 +25,12 @@ namespace OneHundredAndEightyCore.Game.Processors
                 ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
 
                 dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-                dbService.StatisticUpdateAddLegsWonForPlayer(PlayerOnThrow, Game.Id);
+                dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
-                foreach (var player in Players)
+                foreach (var player in Game.Players)
                 {
-                    player.LegPoints = writeOffPoints;
-                    scoreBoard.SetPointsTo(player, writeOffPoints);
+                    player.LegPoints = Game.legPoints;
+                    scoreBoard.SetPointsTo(player, Game.legPoints);
                     scoreBoard.CheckPointsHintFor(player);
                 }
 
@@ -54,26 +48,26 @@ namespace OneHundredAndEightyCore.Game.Processors
                 return;
             }
 
-            PlayerOnThrow.HandPoints += thrw.TotalPoints;
-            PlayerOnThrow.LegPoints -= thrw.TotalPoints;
-            scoreBoard.AddPointsTo(PlayerOnThrow, thrw.TotalPoints * -1);
+            Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
+            scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
-            PlayerOnThrow.HandThrows.Push(dbThrow);
+            Game.PlayerOnThrow.HandThrows.Push(dbThrow);
 
             if (IsHandOver())
             {
                 Check180();
                 ClearPlayerOnThrowHand();
-                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
                 TogglePlayerOnThrow();
             }
             else
             {
-                PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(PlayerOnThrow.ThrowNumber);
-                scoreBoard.CheckPointsHintFor(PlayerOnThrow);
+                Game.PlayerOnThrow.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
             }
         }
     }

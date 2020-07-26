@@ -1,16 +1,16 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
 
 namespace OneHundredAndEightyCore.Domain
 {
-    public class Player
+    public class Player : ICloneable
     {
         #region DB
 
@@ -45,5 +45,37 @@ namespace OneHundredAndEightyCore.Domain
         {
             return $"{Name} '{NickName}'";
         }
+
+        #region IClonable
+
+        private Player(int setsWon,
+                       int legsWon,
+                       int legPoints,
+                       int handPoints,
+                       ThrowNumber throwNumber,
+                       Stack<Throw> handThrows,
+                       PlayerOrder order)
+        {
+            SetsWon = setsWon;
+            LegsWon = legsWon;
+            LegPoints = legPoints;
+            HandPoints = handPoints;
+            ThrowNumber = throwNumber;
+            HandThrows = handThrows;
+            Order = order;
+        }
+
+        public object Clone()
+        {
+            return new Player(SetsWon,
+                              LegsWon,
+                              LegPoints,
+                              HandPoints,
+                              ThrowNumber,
+                              HandThrows,
+                              Order);
+        }
+
+        #endregion
     }
 }

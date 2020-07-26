@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,7 +11,6 @@ using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 
 #endregion
@@ -374,20 +372,17 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public bool ForceClose { get; private set; }
 
-        public void OpenScoreBoard(GameType gameType,
-                                   List<Player> players,
-                                   string gameTypeString,
-                                   int legPoints = 0)
+        public void OpenScoreBoard(Domain.Game game)
         {
-            var player1 = players.ElementAt(0);
+            var player1 = game.Players.ElementAt(0);
 
             Player player2 = null; //  todo ugly
-            if (players.Count > 1)
+            if (game.Players.Count > 1)
             {
-                player2 = players.ElementAt(1);
+                player2 = game.Players.ElementAt(1);
             }
 
-            this.gameType = gameType;
+            gameType = game.Type;
             switch (gameType)
             {
                 case GameType.FreeThrowsSingle:
@@ -396,7 +391,7 @@ namespace OneHundredAndEightyCore.Windows.Score
                 case GameType.FreeThrowsDouble:
                     scoreBoardWindow = new FreeThrowsDoubleScoreWindow(this);
                     Player2Avatar = player2.Avatar;
-                    Player2Points = legPoints;
+                    Player2Points = game.legPoints;
                     Player2Name = $"{player2.Name} {player2.NickName}";
                     Player1OnLegPointShown = true;
                     Player1OnThrowPointerShown = true;
@@ -404,7 +399,7 @@ namespace OneHundredAndEightyCore.Windows.Score
                 case GameType.Classic:
                     scoreBoardWindow = new ClassicScoreWindow(this);
                     Player2Avatar = player2.Avatar;
-                    Player2Points = legPoints;
+                    Player2Points = game.legPoints;
                     Player2Name = $"{player2.Name} {player2.NickName}";
                     Player1OnLegPointShown = true;
                     Player1OnThrowPointerShown = true;
@@ -423,14 +418,30 @@ namespace OneHundredAndEightyCore.Windows.Score
             Player1HintShown = false;
             Player2HintShown = false;
 
-            HeaderString = gameTypeString;
             SetDetectionStatus(DetectionServiceStatus.WaitingThrow);
             SetThrowNumber(ThrowNumber.FirstThrow);
             Player1Avatar = player1.Avatar;
-            Player1Points = legPoints;
+            Player1Points = game.legPoints;
             Player1Name = $"{player1.Name} {player1.NickName}";
+            HeaderString = PrepareHeaderString(game);
 
             scoreBoardWindow.Show();
+        }
+
+        private string PrepareHeaderString(Domain.Game game)
+        {
+            switch (game.Type)
+            {
+                case GameType.FreeThrowsSingle:
+                case GameType.FreeThrowsDouble:
+                    return game.legPoints == 0
+                               ? "Free throws"
+                               : $"Write off {game.legPoints}";
+                case GameType.Classic:
+                    return $"First to {game.sets}";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void OnWindowLoaded()

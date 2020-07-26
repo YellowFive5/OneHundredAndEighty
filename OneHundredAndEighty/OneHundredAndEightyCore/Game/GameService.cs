@@ -55,9 +55,10 @@ namespace OneHundredAndEightyCore.Game
             players.AddIfNotNull(player1);
             players.AddIfNotNull(player2);
 
-            Game = new Domain.Game(gameType);
+            Game = new Domain.Game(gameType, players, gameLegs, gameSets, gamePoints);
 
-            dbService.GameSaveNew(Game, players);
+            scoreBoardService.OpenScoreBoard(Game);
+            // dbService.GameSaveNew(Game, players);
 
             switch (gameType)
             {
@@ -65,24 +66,13 @@ namespace OneHundredAndEightyCore.Game
                     switch (gamePoints)
                     {
                         case GamePoints.Free:
-                            GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, players, dbService, scoreBoardService);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Free throws");
+                            GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, dbService, scoreBoardService);
                             break;
                         case GamePoints._301:
-                            GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 301);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 301", 301);
-                            break;
                         case GamePoints._501:
-                            GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 501);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 501", 501);
-                            break;
                         case GamePoints._701:
-                            GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 701);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 701", 701);
-                            break;
                         case GamePoints._1001:
-                            GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 1001);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 1001", 1001);
+                            GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, dbService, scoreBoardService);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(gamePoints), gamePoints, null);
@@ -94,50 +84,20 @@ namespace OneHundredAndEightyCore.Game
                     switch (gamePoints)
                     {
                         case GamePoints.Free:
-                            GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, players, dbService, scoreBoardService);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Free throws");
+                            GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, dbService, scoreBoardService);
                             break;
                         case GamePoints._301:
-                            GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 301);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 301", 301);
-                            break;
                         case GamePoints._501:
-                            GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 501);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 501", 501);
-                            break;
                         case GamePoints._701:
-                            GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 701);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 701", 701);
-                            break;
                         case GamePoints._1001:
-                            GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, players, dbService, scoreBoardService, 1001);
-                            scoreBoardService.OpenScoreBoard(gameType, players, "Write off 1001", 1001);
+                            GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, dbService, scoreBoardService);
                             break;
                     }
 
                     break;
 
                 case GameType.Classic:
-                    switch (gamePoints)
-                    {
-                        case GamePoints._301:
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 301, gameLegs, gameSets);
-                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 301);
-                            break;
-                        case GamePoints._501:
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 501, gameLegs, gameSets);
-                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 501);
-                            break;
-                        case GamePoints._701:
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 701, gameLegs, gameSets);
-                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 701);
-                            break;
-                        case GamePoints._1001:
-                            GameProcessor = new ClassicDoubleProcessor(Game, players, dbService, scoreBoardService, 1001, gameLegs, gameSets);
-                            scoreBoardService.OpenScoreBoard(gameType, players, $"First to {gameSets}", 1001);
-                            break;
-                    }
-
+                    GameProcessor = new ClassicDoubleProcessor(Game, dbService, scoreBoardService);
                     break;
 
                 default:
