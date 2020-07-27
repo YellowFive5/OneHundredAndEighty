@@ -58,7 +58,6 @@ namespace OneHundredAndEightyCore.Game
             Game = new Domain.Game(gameType, players, gameLegs, gameSets, gamePoints);
 
             scoreBoardService.OpenScoreBoard(Game);
-            // dbService.GameSaveNew(Game, players);
 
             switch (gameType)
             {
@@ -66,13 +65,13 @@ namespace OneHundredAndEightyCore.Game
                     switch (gamePoints)
                     {
                         case GamePoints.Free:
-                            GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, dbService, scoreBoardService);
+                            GameProcessor = new FreeThrowsSingleFreePointsProcessor(Game, scoreBoardService);
                             break;
                         case GamePoints._301:
                         case GamePoints._501:
                         case GamePoints._701:
                         case GamePoints._1001:
-                            GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, dbService, scoreBoardService);
+                            GameProcessor = new FreeThrowsSingleWriteOffPointsProcessor(Game, scoreBoardService);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(gamePoints), gamePoints, null);
@@ -84,20 +83,20 @@ namespace OneHundredAndEightyCore.Game
                     switch (gamePoints)
                     {
                         case GamePoints.Free:
-                            GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, dbService, scoreBoardService);
+                            GameProcessor = new FreeThrowsDoubleFreePointsProcessor(Game, scoreBoardService);
                             break;
                         case GamePoints._301:
                         case GamePoints._501:
                         case GamePoints._701:
                         case GamePoints._1001:
-                            GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, dbService, scoreBoardService);
+                            GameProcessor = new FreeThrowsDoubleWriteOffPointsProcessor(Game, scoreBoardService);
                             break;
                     }
 
                     break;
 
                 case GameType.Classic:
-                    GameProcessor = new ClassicDoubleProcessor(Game, dbService, scoreBoardService);
+                    GameProcessor = new ClassicDoubleProcessor(Game, scoreBoardService);
                     break;
 
                 default:
@@ -115,14 +114,14 @@ namespace OneHundredAndEightyCore.Game
         {
             if (Game != null)
             {
-                dbService.GameEnd(Game, gameResultType: type);
+                // dbService.GameEnd(Game, gameResultType: type);
                 StopGameInternal();
             }
         }
 
         private void OnMatchEnd(Player winner)
         {
-            dbService.GameEnd(Game, winner);
+            // dbService.GameEnd(Game, winner);
             OnGameEnd?.Invoke();
 
             StopGameInternal();
@@ -130,12 +129,18 @@ namespace OneHundredAndEightyCore.Game
 
         private void StopGameInternal()
         {
+            SaveGameData();
             Game = null;
             detectionService.OnThrowDetected -= OnAnotherThrow;
             detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
             GameProcessor.OnMatchEnd -= OnMatchEnd;
             camsDetectionBoard.OnUndoThrowButtonPressed -= OnThrowUndo;
             camsDetectionBoard.OnCorrectThrowButtonPressed -= OnThrowCorrect;
+        }
+
+        private void SaveGameData()
+        {
+            //todo
         }
 
         #endregion

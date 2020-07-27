@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -11,13 +10,12 @@ namespace OneHundredAndEightyCore.Game.Processors
     public class FreeThrowsSingleFreePointsProcessor : ProcessorBase
     {
         public FreeThrowsSingleFreePointsProcessor(Domain.Game game,
-                                                   DBService dbService,
                                                    ScoreBoardService scoreBoard)
-            : base(game, dbService, scoreBoard)
+            : base(game, scoreBoard)
         {
         }
 
-        public override void OnThrow(DetectedThrow thrw)
+        protected override void OnThrowInternal(DetectedThrow thrw)
         {
             Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
 
@@ -25,7 +23,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
-            Game.PlayerOnThrow.HandThrows.Push(dbThrow);
+            Game.PlayerOnThrow.HandThrows.Add(dbThrow);
 
             if (IsHandOver())
             {

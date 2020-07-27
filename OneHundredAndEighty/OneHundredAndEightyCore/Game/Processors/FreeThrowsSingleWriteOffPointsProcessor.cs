@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -11,14 +10,12 @@ namespace OneHundredAndEightyCore.Game.Processors
     public class FreeThrowsSingleWriteOffPointsProcessor : ProcessorBase
     {
         public FreeThrowsSingleWriteOffPointsProcessor(Domain.Game game,
-                                                       DBService dbService,
                                                        ScoreBoardService scoreBoard)
-            : base(game, dbService, scoreBoard)
+            : base(game, scoreBoard)
         {
-            Game.Players.ForEach(p => p.LegPoints = Game.legPoints);
         }
 
-        public override void OnThrow(DetectedThrow thrw)
+        protected override void OnThrowInternal(DetectedThrow thrw)
         {
             if (IsLegOver(thrw))
             {
@@ -27,8 +24,8 @@ namespace OneHundredAndEightyCore.Game.Processors
 
                 ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
 
-                dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-                dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
+                // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
+                // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
                 ClearPlayerOnThrowHand();
                 scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
@@ -48,8 +45,8 @@ namespace OneHundredAndEightyCore.Game.Processors
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
+            Game.PlayerOnThrow.HandThrows.Add(dbThrow);
 
-            Game.PlayerOnThrow.HandThrows.Push(dbThrow);
             if (IsHandOver())
             {
                 Check180();

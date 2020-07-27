@@ -1,7 +1,7 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media.Imaging;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Enums;
@@ -10,7 +10,7 @@ using OneHundredAndEightyCore.Enums;
 
 namespace OneHundredAndEightyCore.Domain
 {
-    public class Player : ICloneable
+    public class Player
     {
         #region DB
 
@@ -23,12 +23,12 @@ namespace OneHundredAndEightyCore.Domain
 
         #region Game
 
-        public int SetsWon { get; set; } = 0;
-        public int LegsWon { get; set; } = 0;
-        public int LegPoints { get; set; } = 0;
-        public int HandPoints { get; set; } = 0;
-        public ThrowNumber ThrowNumber { get; set; } = ThrowNumber.FirstThrow;
-        public Stack<Throw> HandThrows { get; set; } = new Stack<Throw>();
+        public int SetsWon { get; set; }
+        public int LegsWon { get; set; }
+        public int LegPoints { get; set; }
+        public int HandPoints { get; set; }
+        public ThrowNumber ThrowNumber { get; set; }
+        public List<Throw> HandThrows { get; set; }
         public PlayerOrder Order { get; set; }
 
         #endregion
@@ -53,7 +53,7 @@ namespace OneHundredAndEightyCore.Domain
                        int legPoints,
                        int handPoints,
                        ThrowNumber throwNumber,
-                       Stack<Throw> handThrows,
+                       List<Throw> handThrows,
                        PlayerOrder order)
         {
             SetsWon = setsWon;
@@ -65,14 +65,14 @@ namespace OneHundredAndEightyCore.Domain
             Order = order;
         }
 
-        public object Clone()
+        public Player Copy()
         {
             return new Player(SetsWon,
                               LegsWon,
                               LegPoints,
                               HandPoints,
                               ThrowNumber,
-                              HandThrows,
+                              HandThrows.ToList(),
                               Order);
         }
 

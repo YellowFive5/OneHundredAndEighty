@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Globalization;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
 
@@ -28,16 +27,16 @@ namespace OneHundredAndEightyCore.Common
 
         #region Throws
 
-        public void ThrowSaveNew(Throw thrw)
-        {
-            var newThrowQuery = $"INSERT INTO [{Table.Throws}] ({Column.Player},{Column.Game},{Column.Sector},{Column.Type},{Column.Result},{Column.Number},{Column.Points},{Column.PoiX},{Column.PoiY},{Column.ProjectionResolution},{Column.Timestamp})" +
-                                $"VALUES ({thrw.Player.Id},{thrw.Game.Id},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Result},{thrw.Number}," +
-                                $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
-            ExecuteNonQueryInternal(newThrowQuery);
-
-            var newThrowId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Throws}]");
-            thrw.SetId(Convert.ToInt32(newThrowId));
-        }
+        // public void ThrowSaveNew(Throw thrw)
+        // {
+        //     var newThrowQuery = $"INSERT INTO [{Table.Throws}] ({Column.Player},{Column.Game},{Column.Sector},{Column.Type},{Column.Result},{Column.Number},{Column.Points},{Column.PoiX},{Column.PoiY},{Column.ProjectionResolution},{Column.Timestamp})" +
+        //                         $"VALUES ({thrw.Player.Id},{thrw.Game.Id},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Result},{thrw.Number}," +
+        //                         $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
+        //     ExecuteNonQueryInternal(newThrowQuery);
+        //
+        //     var newThrowId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Throws}]");
+        //     thrw.SetId(Convert.ToInt32(newThrowId));
+        // }
 
         #endregion
 
@@ -55,24 +54,24 @@ namespace OneHundredAndEightyCore.Common
             StatisticSaveNew(newGameId, players);
         }
 
-        public void GameEnd(Domain.Game game,
-                            Player winner = null,
-                            GameResultType gameResultType = GameResultType.NotDefined)
-        {
-            var gameEndTimestampQuery = $"UPDATE [{Table.Games}] SET [{Column.EndTimestamp}] = '{DateTime.Now}' " +
-                                        $"WHERE [Id] = {game.Id}";
-            ExecuteNonQueryInternal(gameEndTimestampQuery);
-
-            if (gameResultType == GameResultType.Aborted ||
-                gameResultType == GameResultType.Error)
-            {
-                StatisticUpdateAllPlayersSetGameResultAbortedOrError(game.Id, gameResultType);
-            }
-            else if (winner != null)
-            {
-                StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(game.Id, winner.Id);
-            }
-        }
+        // public void GameEnd(Domain.Game game,
+        //                     Player winner = null,
+        //                     GameResultType gameResultType = GameResultType.NotDefined)
+        // {
+        //     var gameEndTimestampQuery = $"UPDATE [{Table.Games}] SET [{Column.EndTimestamp}] = '{DateTime.Now}' " +
+        //                                 $"WHERE [Id] = {game.Id}";
+        //     ExecuteNonQueryInternal(gameEndTimestampQuery);
+        //
+        //     if (gameResultType == GameResultType.Aborted ||
+        //         gameResultType == GameResultType.Error)
+        //     {
+        //         StatisticUpdateAllPlayersSetGameResultAbortedOrError(game.Id, gameResultType);
+        //     }
+        //     else if (winner != null)
+        //     {
+        //         StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(game.Id, winner.Id);
+        //     }
+        // }
 
         #endregion
 
@@ -221,12 +220,12 @@ namespace OneHundredAndEightyCore.Common
 
         #region _180
 
-        public void _180SaveNew(Domain.Game game, Player player)
-        {
-            var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw3},{Column.Throw2},{Column.Throw1}, {Column.Timestamp})" +
-                              $" VALUES ('{player.Id}','{game.Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{DateTime.Now}')";
-            ExecuteNonQueryInternal(new180Query);
-        }
+        // public void _180SaveNew(Domain.Game game, Player player)
+        // {
+        //     var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw3},{Column.Throw2},{Column.Throw1}, {Column.Timestamp})" +
+        //                       $" VALUES ('{player.Id}','{game.Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{DateTime.Now}')";
+        //     ExecuteNonQueryInternal(new180Query);
+        // }
 
         #endregion
 

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -11,21 +10,19 @@ namespace OneHundredAndEightyCore.Game.Processors
     public class FreeThrowsDoubleWriteOffPointsProcessor : ProcessorBase
     {
         public FreeThrowsDoubleWriteOffPointsProcessor(Domain.Game game,
-                                                       DBService dbService,
                                                        ScoreBoardService scoreBoard)
-            : base(game, dbService, scoreBoard)
+            : base(game, scoreBoard)
         {
-            Game.Players.ForEach(p => p.LegPoints = Game.legPoints);
         }
 
-        public override void OnThrow(DetectedThrow thrw)
+        protected override void OnThrowInternal(DetectedThrow thrw)
         {
             if (IsLegOver(thrw))
             {
                 ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
 
-                dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-                dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
+                // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
+                // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
                 foreach (var player in Game.Players)
                 {
@@ -54,7 +51,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
-            Game.PlayerOnThrow.HandThrows.Push(dbThrow);
+            Game.PlayerOnThrow.HandThrows.Add(dbThrow);
 
             if (IsHandOver())
             {

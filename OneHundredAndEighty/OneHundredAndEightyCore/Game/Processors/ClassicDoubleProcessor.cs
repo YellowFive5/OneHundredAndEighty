@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Linq;
-using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Windows.Score;
 
@@ -12,24 +11,22 @@ namespace OneHundredAndEightyCore.Game.Processors
     public class ClassicDoubleProcessor : ProcessorBase
     {
         public ClassicDoubleProcessor(Domain.Game game,
-                                      DBService dbService,
                                       ScoreBoardService scoreBoard)
-            : base(game, dbService, scoreBoard)
+            : base(game, scoreBoard)
         {
-            Game.Players.ForEach(p => p.LegPoints = Game.legPoints);
         }
 
-        public override void OnThrow(DetectedThrow thrw)
+        protected override void OnThrowInternal(DetectedThrow thrw)
         {
             if (IsGameOver(thrw))
             {
                 ConvertAndSaveThrow(thrw, ThrowResult.MatchWon);
 
-                dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-                dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-
-                dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
-                dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
+                // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
+                // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
+                //
+                // dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
+                // dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
                 InvokeEndMatch();
                 return;
@@ -65,7 +62,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
 
-            Game.PlayerOnThrow.HandThrows.Push(dbThrow);
+            Game.PlayerOnThrow.HandThrows.Add(dbThrow);
 
             if (IsHandOver())
             {
@@ -84,8 +81,8 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         private void OnLegOver()
         {
-            dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-            dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
+            // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
+            // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
 
             Game.PlayerOnThrow.LegsWon += 1;
             scoreBoard.AddLegsWonTo(Game.PlayerOnThrow);
@@ -104,12 +101,12 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         private void OnSetOver()
         {
-            dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-            dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-
-            dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
-            dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-
+            // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
+            // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
+            //
+            // dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
+            // dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
+            //
             Game.PlayerOnThrow.SetsWon += 1;
             scoreBoard.AddSetsWonTo(Game.PlayerOnThrow);
 

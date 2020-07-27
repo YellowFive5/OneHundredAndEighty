@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Windows.Score;
@@ -13,8 +12,8 @@ namespace OneHundredAndEightyCore.Game.Processors
 {
     public abstract class ProcessorBase : IGameProcessor
     {
-        protected readonly DBService dbService;
         protected readonly ScoreBoardService scoreBoard;
+        protected Domain.Game Game { get; }
         protected Stack<GameSnapshot> GameSnapshots;
 
         public delegate void EndMatchDelegate(Player winner);
@@ -22,24 +21,50 @@ namespace OneHundredAndEightyCore.Game.Processors
         public event EndMatchDelegate OnMatchEnd;
 
         protected ProcessorBase(Domain.Game game,
-                                DBService dbService,
                                 ScoreBoardService scoreBoard)
         {
-            this.dbService = dbService;
             this.scoreBoard = scoreBoard;
-
+            Game = game;
             GameSnapshots = new Stack<GameSnapshot>();
 
-            Game = game;
+            PrepareGame();
         }
 
-        protected Domain.Game Game { get; }
+        private void PrepareGame()
+        {
+            Game.PlayerOnThrow = Game.Players.First();
+            Game.PlayerOnLeg = Game.Players.First();
+            if (Game.Players.Count == 1) //  todo maybe do another way cuz ugly
+            {
+                Game.Players.ElementAt(0).Order = PlayerOrder.First;
+            }
+            else
+            {
+                Game.Players.ElementAt(0).Order = PlayerOrder.First;
+                Game.Players.ElementAt(1).Order = PlayerOrder.Second;
+            }
+
+            foreach (var player in Game.Players)
+            {
+                player.SetsWon = 0;
+                player.LegsWon = 0;
+                player.LegPoints = Game.legPoints;
+                player.HandPoints = 0;
+                player.ThrowNumber = ThrowNumber.FirstThrow;
+                player.HandThrows = new List<Throw>();
+            }
+        }
+
+        private void TakeSnapshot()
+        {
+            GameSnapshots.Push(new GameSnapshot(Game));
+        }
 
         protected void Check180()
         {
             if (Game.PlayerOnThrow.HandThrows.Sum(t => t.Points) == 180)
             {
-                dbService._180SaveNew(Game, Game.PlayerOnThrow);
+                Game.Hands180.Add(new Hand180(Game.PlayerOnThrow));
             }
         }
 
@@ -102,7 +127,6 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected Throw ConvertAndSaveThrow(DetectedThrow thrw, ThrowResult throwResult)
         {
             var dbThrow = new Throw(Game.PlayerOnThrow,
-                                    Game,
                                     thrw.Sector,
                                     thrw.Type,
                                     throwResult,
@@ -110,7 +134,7 @@ namespace OneHundredAndEightyCore.Game.Processors
                                     thrw.TotalPoints,
                                     thrw.Poi,
                                     thrw.ProjectionResolution);
-            dbService.ThrowSaveNew(dbThrow);
+            Game.Throws.Push(dbThrow);
             return dbThrow;
         }
 
@@ -119,6 +143,12 @@ namespace OneHundredAndEightyCore.Game.Processors
             OnMatchEnd?.Invoke(Game.PlayerOnThrow);
         }
 
-        public abstract void OnThrow(DetectedThrow thrw);
+        public void OnThrow(DetectedThrow thrw)
+        {
+            TakeSnapshot();
+            OnThrowInternal(thrw);
+        }
+
+        protected abstract void OnThrowInternal(DetectedThrow thrw);
     }
 }
