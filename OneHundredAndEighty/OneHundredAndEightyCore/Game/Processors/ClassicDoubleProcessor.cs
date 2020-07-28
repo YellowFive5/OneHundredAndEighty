@@ -79,6 +79,11 @@ namespace OneHundredAndEightyCore.Game.Processors
             }
         }
 
+        protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void OnLegOver()
         {
             // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);

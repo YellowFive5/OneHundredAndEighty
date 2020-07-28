@@ -39,5 +39,10 @@ namespace OneHundredAndEightyCore.Game.Processors
                 scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
             }
         }
+
+        protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

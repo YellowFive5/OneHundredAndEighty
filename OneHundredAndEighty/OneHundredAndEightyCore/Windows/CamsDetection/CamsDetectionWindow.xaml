@@ -194,9 +194,8 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Row="0"
                     Grid.Column="1"
-                    Content="Undo trow"
-                    Click="UndoThrowButtonClick"
-                    Visibility="Hidden" />
+                    Content="Undo throw"
+                    Click="UndoThrowButtonClick" />
             <Button Grid.Row="0"
                     Grid.Column="2"
                     Content="Correct throw"

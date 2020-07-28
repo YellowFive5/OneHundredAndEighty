@@ -48,7 +48,8 @@ namespace OneHundredAndEightyCore.Domain
 
         #region IClonable
 
-        private Player(int setsWon,
+        private Player(int id,
+                       int setsWon,
                        int legsWon,
                        int legPoints,
                        int handPoints,
@@ -56,6 +57,7 @@ namespace OneHundredAndEightyCore.Domain
                        List<Throw> handThrows,
                        PlayerOrder order)
         {
+            Id = id;
             SetsWon = setsWon;
             LegsWon = legsWon;
             LegPoints = legPoints;
@@ -67,7 +69,8 @@ namespace OneHundredAndEightyCore.Domain
 
         public Player Copy()
         {
-            return new Player(SetsWon,
+            return new Player(Id,
+                              SetsWon,
                               LegsWon,
                               LegPoints,
                               HandPoints,

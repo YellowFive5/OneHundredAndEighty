@@ -10,5 +10,6 @@ namespace OneHundredAndEightyCore.Game.Processors
     {
         event ProcessorBase.EndMatchDelegate OnMatchEnd;
         void OnThrow(DetectedThrow thrw);
+        void UndoThrow();
     }
 }

@@ -14,7 +14,7 @@ namespace OneHundredAndEightyCore.Game.Processors
     {
         protected readonly ScoreBoardService scoreBoard;
         protected Domain.Game Game { get; }
-        protected Stack<GameSnapshot> GameSnapshots;
+        private Stack<GameSnapshot> GameSnapshots { get; }
 
         public delegate void EndMatchDelegate(Player winner);
 
@@ -150,5 +150,49 @@ namespace OneHundredAndEightyCore.Game.Processors
         }
 
         protected abstract void OnThrowInternal(DetectedThrow thrw);
+
+        public void UndoThrow()
+        {
+            if (GameSnapshots.Count == 0 &&
+                Game.Throws.Count == 0)
+            {
+                return;
+            }
+
+            Game.Throws.Pop();
+            var gameSnapshot = GameSnapshots.Pop();
+
+            foreach (var playerFromSnapshot in gameSnapshot.Players)
+            {
+                foreach (var player in Game.Players.Where(player => playerFromSnapshot.Id == player.Id))
+                {
+                    player.SetsWon = playerFromSnapshot.SetsWon;
+                    player.LegsWon = playerFromSnapshot.LegsWon;
+                    player.LegPoints = playerFromSnapshot.LegPoints;
+                    player.HandPoints = playerFromSnapshot.HandPoints;
+                    player.ThrowNumber = playerFromSnapshot.ThrowNumber;
+                    player.HandThrows = playerFromSnapshot.HandThrows.ToList();
+                    player.Order = playerFromSnapshot.Order;
+
+                    if (gameSnapshot.PlayerOnThrow.Id == player.Id)
+                    {
+                        Game.PlayerOnThrow = player;
+                    }
+
+                    if (gameSnapshot.PlayerOnLeg.Id == player.Id)
+                    {
+                        Game.PlayerOnLeg = player;
+                    }
+                }
+
+                Game.Hands180 = gameSnapshot.Hands180.ToList();
+            }
+
+            scoreBoard.OnThrowPointerSetOn(Game.PlayerOnThrow);
+
+            ThrowUndoInternal(gameSnapshot);
+        }
+
+        protected abstract void ThrowUndoInternal(GameSnapshot gameSnapshot);
     }
 }

@@ -67,5 +67,10 @@ namespace OneHundredAndEightyCore.Game.Processors
                 scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
             }
         }
+
+        protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

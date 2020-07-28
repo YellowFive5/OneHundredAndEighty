@@ -18,11 +18,11 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected override void OnThrowInternal(DetectedThrow thrw)
         {
             Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.LegPoints += thrw.TotalPoints;
 
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints);
 
             var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
-
             Game.PlayerOnThrow.HandThrows.Add(dbThrow);
 
             if (IsHandOver())
@@ -36,6 +36,12 @@ namespace OneHundredAndEightyCore.Game.Processors
                 Game.PlayerOnThrow.ThrowNumber += 1;
                 scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
             }
+        }
+
+        protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
+        {
+            scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.LegPoints);
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
         }
     }
 }

@@ -157,7 +157,7 @@ namespace OneHundredAndEightyCore.Game
 
         private void OnThrowUndo()
         {
-            // todo
+            GameProcessor.UndoThrow();
         }
 
         private void OnThrowCorrect()

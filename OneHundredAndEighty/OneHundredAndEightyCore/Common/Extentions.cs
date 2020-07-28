@@ -1,22 +1,26 @@
-﻿using System.Collections.Generic;
+﻿#region Usings
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace OneHundredAndEightyCore.Common
 {
     public static class Extentions
     {
-        public static void AddIfNotContains<T>(this List<T> lst, T item)
+        public static void AddIfNotContains<T>(this List<T> list, T item)
         {
-            if (!lst.Contains(item))
+            if (!list.Contains(item))
             {
-                lst.Add(item);
+                list.Add(item);
             }
         }
 
-        public static void AddIfNotNull<T>(this List<T> lst, T item)
+        public static void AddIfNotNull<T>(this List<T> list, T item)
         {
             if (item != null)
             {
-                lst.Add(item);
+                list.Add(item);
             }
         }
     }
