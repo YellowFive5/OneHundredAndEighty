@@ -182,7 +182,6 @@
         <Grid Grid.Row="1"
               Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="10" />
                 <RowDefinition Height="0.25*" />
@@ -192,17 +191,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0"
-                    Grid.Column="1"
-                    Content="Undo throw"
-                    Click="UndoThrowButtonClick" />
-            <Button Grid.Row="0"
-                    Grid.Column="2"
-                    Content="Correct throw"
-                    Click="CorrectThrowButtonClick"
-                    Visibility="Hidden" />
             <TextBox x:Name="PointsHistoryBox"
-                     Grid.Row="1"
+                     Grid.Row="0"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"
                      TextWrapping="Wrap"
@@ -211,7 +201,7 @@
                      VerticalContentAlignment="Bottom"
                      VerticalScrollBarVisibility="Auto"
                      Text="{Binding ThrowsHistoryText}" />
-            <Viewbox Grid.Row="3"
+            <Viewbox Grid.Row="2"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"
                      HorizontalAlignment="Center">

@@ -32,15 +32,5 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
                 e.Cancel = true;
             }
         }
-
-        private void UndoThrowButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.FireThrowUndo();
-        }
-
-        private void CorrectThrowButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.FireThrowCorrect();
-        }
     }
 }

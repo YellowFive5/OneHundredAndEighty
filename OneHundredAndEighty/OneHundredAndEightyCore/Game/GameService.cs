@@ -106,8 +106,8 @@ namespace OneHundredAndEightyCore.Game
             detectionService.OnThrowDetected += OnAnotherThrow;
             detectionService.OnStatusChanged += OnDetectionServiceStatusChanged;
             GameProcessor.OnMatchEnd += OnMatchEnd;
-            camsDetectionBoard.OnUndoThrowButtonPressed += OnThrowUndo;
-            camsDetectionBoard.OnCorrectThrowButtonPressed += OnThrowCorrect;
+            scoreBoardService.OnUndoThrowButtonPressed += OnThrowUndo;
+            scoreBoardService.OnCorrectThrowButtonPressed += OnThrowCorrect;
         }
 
         public void StopGame(GameResultType type)
@@ -134,8 +134,8 @@ namespace OneHundredAndEightyCore.Game
             detectionService.OnThrowDetected -= OnAnotherThrow;
             detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
             GameProcessor.OnMatchEnd -= OnMatchEnd;
-            camsDetectionBoard.OnUndoThrowButtonPressed -= OnThrowUndo;
-            camsDetectionBoard.OnCorrectThrowButtonPressed -= OnThrowCorrect;
+            scoreBoardService.OnUndoThrowButtonPressed -= OnThrowUndo;
+            scoreBoardService.OnCorrectThrowButtonPressed -= OnThrowCorrect;
         }
 
         private void SaveGameData()

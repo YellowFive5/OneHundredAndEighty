@@ -20,14 +20,6 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         private readonly DrawService drawService;
         private readonly ConfigService configService;
 
-        public delegate void UndoThrowButtonDelegate();
-
-        public event UndoThrowButtonDelegate OnUndoThrowButtonPressed;
-
-        public delegate void CorrectThrowButtonDelegate();
-
-        public event CorrectThrowButtonDelegate OnCorrectThrowButtonPressed;
-
         #region BindableProps
 
         #region Window position
@@ -394,16 +386,6 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
         private void ClearHistoryPointsBox()
         {
             ThrowsHistoryText = string.Empty;
-        }
-
-        public void FireThrowUndo()
-        {
-            OnUndoThrowButtonPressed?.Invoke();
-        }
-
-        public void FireThrowCorrect()
-        {
-            OnCorrectThrowButtonPressed?.Invoke();
         }
 
         #region PropertyChangingFire

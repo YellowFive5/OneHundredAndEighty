@@ -25,6 +25,14 @@ namespace OneHundredAndEightyCore.Windows.Score
         private Window scoreBoardWindow;
         private GameType gameType;
 
+        public delegate void UndoThrowButtonDelegate();
+
+        public event UndoThrowButtonDelegate OnUndoThrowButtonPressed;
+
+        public delegate void CorrectThrowButtonDelegate();
+
+        public event CorrectThrowButtonDelegate OnCorrectThrowButtonPressed;
+
         public ScoreBoardService()
         {
         }
@@ -697,6 +705,17 @@ namespace OneHundredAndEightyCore.Windows.Score
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public void FireThrowUndo()
+        {
+            OnUndoThrowButtonPressed?.Invoke();
+        }
+
+        public void FireThrowCorrect()
+        {
+            OnCorrectThrowButtonPressed?.Invoke();
+        }
+
 
         #region PropertyChangingFire
 
