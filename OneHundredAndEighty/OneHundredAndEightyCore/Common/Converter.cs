@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -9,11 +9,8 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Media.Imaging;
 using Emgu.CV;
-using Emgu.CV.Structure;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Game;
-using Image = System.Drawing.Image;
 
 #endregion
 
@@ -21,9 +18,9 @@ namespace OneHundredAndEightyCore.Common
 {
     public static class Converter
     {
-        public static List<Player> PlayersFromTable(DataTable playersTable)
+        public static ObservableCollection<Player> PlayersFromTable(DataTable playersTable)
         {
-            var playersList = new List<Player>();
+            var playersList = new ObservableCollection<Player>();
             foreach (DataRow playerRow in playersTable.Rows)
             {
                 playersList.Add(new Player(playerRow[$"{Column.Name}"].ToString(),

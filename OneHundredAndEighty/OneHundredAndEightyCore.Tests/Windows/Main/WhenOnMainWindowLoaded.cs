@@ -7,6 +7,8 @@ using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.Main;
+using OneHundredAndEightyCore.Windows.Main.Tabs;
+using OneHundredAndEightyCore.Windows.Main.Tabs.Game;
 
 #endregion
 
@@ -38,8 +40,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
                                            detectionService.Object,
                                            null,
                                            null,
-                                           configService,
-                                           null);
+                                           configService);
         }
 
         [Test]
@@ -95,7 +96,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.NewGameSets.Should().Be(MainWindowViewModel.DefaultNewGameSetsValue);
+            viewModel.NewGameSets.Should().Be(GameTabViewModel.DefaultNewGameSetsValue);
         }
 
         [Test]
@@ -105,7 +106,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.NewGameLegs.Should().Be(MainWindowViewModel.DefaultNewGameLegsValue);
+            viewModel.NewGameLegs.Should().Be(GameTabViewModel.DefaultNewGameLegsValue);
         }
 
         [Test]
@@ -115,7 +116,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.NewGameType.Should().Be(MainWindowViewModel.DefaultNewGameType);
+            viewModel.NewGameType.Should().Be(GameTabViewModel.DefaultNewGameType);
         }
 
         [Test]
@@ -125,7 +126,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
 
             viewModel.OnMainWindowLoaded();
 
-            viewModel.NewGamePoints.Should().Be(MainWindowViewModel.DefaultNewGamePoints);
+            viewModel.NewGamePoints.Should().Be(GameTabViewModel.DefaultNewGamePoints);
         }
 
         [Test]

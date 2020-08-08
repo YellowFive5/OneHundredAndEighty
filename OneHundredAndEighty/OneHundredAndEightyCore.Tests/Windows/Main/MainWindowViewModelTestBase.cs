@@ -24,8 +24,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main
                                                 detectionService.Object,
                                                 null,
                                                 null,
-                                                configService.Object,
-                                                null);
+                                                configService.Object);
         }
     }
 }

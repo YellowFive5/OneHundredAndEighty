@@ -19,6 +19,15 @@
     <Compile Update="Windows\Debug\ManualThrowPanelWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\Main\Tabs\About\AboutTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Main\Tabs\Player\PlayerTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Main\Tabs\Settings\SettingsTabView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\MessageBox\MessageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,7 +50,19 @@
     <Page Update="Windows\Debug\ManualThrowPanelWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Windows\Main\Tabs\About\AboutTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Main\Tabs\Game\GameTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Windows\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Main\Tabs\Player\PlayerTabView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Main\Tabs\Settings\SettingsTabView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\MessageBox\MessageWindow.xaml">

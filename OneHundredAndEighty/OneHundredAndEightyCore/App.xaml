@@ -2,9 +2,28 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:resources="clr-namespace:OneHundredAndEightyCore.Resources"
+             xmlns:enums="clr-namespace:OneHundredAndEightyCore.Enums"
+             xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
              StartupUri="Windows/Main/MainWindow.xaml"
              Startup="App_OnStartup">
     <Application.Resources>
+        <!--#region Converters -->
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <resources:InvertBoolConverter x:Key="Inverted" />
+        <ObjectDataProvider x:Key="GameTypeEnum" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:GameType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="GamePointsEnum" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:GamePoints" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <!--#endregion-->
         <!--#region Brushes -->
         <FontFamily x:Key="MainFontType">Agency FB</FontFamily>
 
@@ -65,7 +84,7 @@
                         <RemoveStoryboard BeginStoryboardName="StoryboardChangeImage2" />
                     </DataTrigger.ExitActions>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=SetupTabItem, Path=IsSelected}" Value="True">
+                <DataTrigger Binding="{Binding ElementName=SettingsTabItem, Path=IsSelected}" Value="True">
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Name="StoryboardChangeImage3">
                             <Storyboard>

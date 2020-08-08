@@ -1,12 +1,8 @@
 ﻿#region Usings
 
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using NLog;
 using NLog.Web;
 using OneHundredAndEightyCore.Common;
@@ -43,7 +39,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             telemetryWriter = new TelemetryWriter();
-            logger.Info($"\n\nApp start");
+            logger.Info("\n\nApp start");
             telemetryWriter.WriteAppStart();
             messageBoxService = new MessageBoxService();
             dbService = new DBService();
@@ -68,8 +64,7 @@ namespace OneHundredAndEightyCore.Windows.Main
                                                 detectionService,
                                                 manualThrowPanel,
                                                 gameService,
-                                                configService,
-                                                throwService);
+                                                configService);
             DataContext = viewModel;
         }
 
@@ -106,93 +101,6 @@ namespace OneHundredAndEightyCore.Windows.Main
         private void OnMinimizeButtonClick(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
-        }
-
-        private void CalibrateCamsSetupPointButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.CalibrateCamsSetupPoints();
-        }
-
-        private void CamSetupStartButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (e.Source is Button button)
-            {
-                var grid = button.Parent as Grid;
-                viewModel.StartCamSetupCapturing(Converter.GridNameToCamNumber(grid?.Name));
-            }
-        }
-
-        private void CamSetupStopButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.StopCamSetupCapturing();
-        }
-
-        private void StartGameButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.StartGame();
-        }
-
-        private void StopGameButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.StopGameByButton();
-        }
-
-        private void OnSaveNewPlayerButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.SaveNewPlayer();
-        }
-
-        private void SelectAvatarImageButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.SelectAvatarImage();
-        }
-
-        private void OnHyperlinkNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            // so ugly because of https://github.com/dotnet/runtime/issues/28005
-
-            var psi = new ProcessStartInfo
-                      {
-                          FileName = "cmd",
-                          WindowStyle = ProcessWindowStyle.Hidden,
-                          UseShellExecute = false,
-                          CreateNoWindow = true,
-                          Arguments = $"/c start {e.Uri.AbsoluteUri}"
-                      };
-
-            Process.Start(psi);
-        }
-
-        private void OnCrossingStartButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.StartCrossing();
-        }
-
-        private void OnCrossingStopButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.StopCrossing();
-        }
-
-        private void OnFindCamsButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.FindConnectedCams();
-        }
-
-        private void OnCheckCamsButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.CheckCamsSimultaneousWork();
-        }
-
-        private void DoubleValidation(object sender, TextCompositionEventArgs e)
-        {
-            var regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
-            e.Handled = !regex.IsMatch(e.Text);
-        }
-
-        private void IntValidation(object sender, TextCompositionEventArgs e)
-        {
-            var regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

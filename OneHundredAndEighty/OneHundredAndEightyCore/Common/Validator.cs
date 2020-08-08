@@ -1,9 +1,9 @@
 ﻿#region Usings
 
 using System;
+using System.Text.RegularExpressions;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Game;
 
 #endregion
 
@@ -66,6 +66,18 @@ namespace OneHundredAndEightyCore.Common
                 default:
                     return true;
             }
+        }
+
+        public static bool DoubleValidation(string text)
+        {
+            var regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
+            return !regex.IsMatch(text);
+        }
+
+        public static bool IntValidation(string text)
+        {
+            var regex = new Regex("[^0-9]+");
+            return regex.IsMatch(text);
         }
     }
 }

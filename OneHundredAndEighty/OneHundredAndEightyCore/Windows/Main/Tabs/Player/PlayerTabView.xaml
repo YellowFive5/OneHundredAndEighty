@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="OneHundredAndEightyCore.Windows.Main.Tabs.Player.PlayerTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:player="clr-namespace:OneHundredAndEightyCore.Windows.Main.Tabs.Player"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <UserControl.DataContext>
+        <player:PlayerTabViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <TabControl Style="{StaticResource MainWindowTabControlStyle}"
+                    TabStripPlacement="Top">
+            <TabItem x:Name="NewPlayerTabItem"
+                     Style="{StaticResource MainWindowSubTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel>
+                        <Image Source="/Resources/MainWindow/TabItemIcons/AddNewPlayerIcon.png" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Name"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           Style="{StaticResource MainWindowLabelStyle}" />
+                    <TextBox x:Name="NewPlayerNameTextBox"
+                             Grid.Row="1"
+                             Grid.Column="3"
+                             Width="150"
+                             Text="{Binding NewPlayerNameText, Mode=TwoWay}"
+                             Style="{StaticResource MainWindowTextBoxStyle}" />
+                    <Label Content="Nickname"
+                           Grid.Row="3"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           Style="{StaticResource MainWindowLabelStyle}" />
+                    <TextBox x:Name="NewPlayerNickNameTextBox"
+                             Grid.Row="3"
+                             Grid.Column="3"
+                             Width="150"
+                             Text="{Binding NewPlayerNickNameText, Mode=TwoWay}"
+                             Style="{StaticResource MainWindowTextBoxStyle}" />
+                    <Button Content="Save"
+                            Grid.Row="1"
+                            Grid.Column="5"
+                            Grid.RowSpan="3"
+                            Width="65"
+                            Background="#FF72DC61"
+                            Style="{StaticResource MainWindowButtonStyle}"
+                            Command="{Binding SaveNewPlayerCommand}" />
+                    <Image x:Name="NewPlayerAvatar"
+                           Grid.Row="5"
+                           Grid.Column="3"
+                           Height="150"
+                           Width="150"
+                           Source="{Binding NewPlayerAvatar, IsAsync=True}" />
+                    <Label Content="Avatar"
+                           Grid.Row="5"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           Style="{StaticResource MainWindowLabelStyle}" />
+                    <Button x:Name="SelectAvatarImageButton"
+                            Content="Select image"
+                            Grid.Row="7"
+                            Grid.Column="3"
+                            Width="150"
+                            Style="{StaticResource MainWindowButtonStyle}"
+                            Command="{Binding ChooseNewPlayerAvatarCommand}" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
