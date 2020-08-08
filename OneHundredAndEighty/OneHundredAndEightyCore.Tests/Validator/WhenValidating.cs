@@ -1,11 +1,9 @@
 ﻿#region Usings
 
-using System;
 using FluentAssertions;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Game;
 
 #endregion
 
@@ -139,6 +137,35 @@ namespace OneHundredAndEightyCore.Tests.Validator
         public bool StartNewClassicGameValidatesCorrectly(GameType type, GamePoints points)
         {
             var isValid = Common.Validator.ValidateStartNewClassicGame(type, points);
+
+            return isValid;
+        }
+
+        [TestCase("someText", ExpectedResult = false)]
+        [TestCase("-1", ExpectedResult = false)]
+        [TestCase("-1.5", ExpectedResult = false)]
+        [TestCase("0", ExpectedResult = true)]
+        [TestCase("5", ExpectedResult = true)]
+        [TestCase("5.3", ExpectedResult = false)]
+        [TestCase("5,3", ExpectedResult = false)]
+        public bool IntInputValidatesCorrectly(string input)
+        {
+            var isValid = Common.Validator.ValidateIntInput(input);
+
+            return isValid;
+        }
+
+        [TestCase("someText", ExpectedResult = false)]
+        [TestCase("-1", ExpectedResult = false)]
+        [TestCase("-1.5", ExpectedResult = false)]
+        [TestCase("-1,5", ExpectedResult = false)]
+        [TestCase("0", ExpectedResult = true)]
+        [TestCase("5", ExpectedResult = true)]
+        [TestCase("5.3", ExpectedResult = true)]
+        [TestCase("5,3", ExpectedResult = false)]
+        public bool DoubleInputValidatesCorrectly(string input)
+        {
+            var isValid = Common.Validator.ValidateDoubleInput(input);
 
             return isValid;
         }

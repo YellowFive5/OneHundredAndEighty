@@ -68,15 +68,15 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        public static bool DoubleValidation(string text)
+        public static bool ValidateDoubleInput(string text)
         {
-            var regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
-            return !regex.IsMatch(text);
+            var regex = new Regex("^[0-9]*(?:\\.[0-9]*)?$");
+            return regex.IsMatch(text);
         }
 
-        public static bool IntValidation(string text)
+        public static bool ValidateIntInput(string text)
         {
-            var regex = new Regex("[^0-9]+");
+            var regex = new Regex("(?<=\\s|^)\\d+(?=\\s|$)");
             return regex.IsMatch(text);
         }
     }

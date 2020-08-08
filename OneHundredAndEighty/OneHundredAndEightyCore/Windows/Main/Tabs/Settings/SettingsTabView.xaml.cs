@@ -17,12 +17,12 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
 
         private void IntValidation(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = Validator.IntValidation(e.Text);
+            e.Handled = !Validator.ValidateIntInput(e.Text);
         }
 
         private void DoubleValidation(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = Validator.DoubleValidation(e.Text);
+            e.Handled = !Validator.ValidateDoubleInput(e.Text);
         }
     }
 }
