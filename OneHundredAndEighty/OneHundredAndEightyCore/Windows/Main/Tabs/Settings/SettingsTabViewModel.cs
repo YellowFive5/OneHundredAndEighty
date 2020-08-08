@@ -25,7 +25,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
 
         public SettingsTabViewModel(DataContext dataContext,
                                     IDBService dbService,
-                                    Logger logger,
+                                    ILogger logger,
                                     IConfigService configService,
                                     DrawService drawService,
                                     IMessageBoxService messageBoxService,

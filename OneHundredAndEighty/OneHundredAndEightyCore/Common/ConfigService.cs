@@ -9,10 +9,10 @@ namespace OneHundredAndEightyCore.Common
 {
     public class ConfigService : IConfigService
     {
-        private readonly Logger logger;
+        private readonly ILogger logger;
         private readonly IDBService dbService;
 
-        public ConfigService(Logger logger, IDBService dbService)
+        public ConfigService(ILogger logger, IDBService dbService)
         {
             this.logger = logger;
             this.dbService = dbService;

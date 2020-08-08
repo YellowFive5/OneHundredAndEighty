@@ -15,7 +15,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
         {
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(It.IsAny<SettingsType>(), It.IsAny<string>()),
+            DbServiceMock.Verify(m => m.SettingsSetValue(It.IsAny<SettingsType>(), It.IsAny<string>()),
                              Times.Exactly(78));
         }
 
@@ -28,7 +28,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -41,7 +41,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -54,7 +54,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -67,7 +67,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -80,7 +80,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -93,7 +93,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -106,7 +106,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -119,7 +119,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -132,7 +132,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -145,7 +145,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -158,7 +158,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -171,7 +171,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -184,7 +184,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -197,7 +197,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -210,7 +210,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -223,7 +223,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -236,7 +236,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -249,7 +249,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -262,7 +262,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -275,7 +275,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -288,7 +288,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -301,7 +301,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -314,7 +314,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -327,7 +327,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -340,7 +340,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -353,7 +353,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -366,7 +366,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -379,7 +379,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -392,7 +392,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -405,7 +405,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -418,7 +418,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -431,7 +431,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -444,7 +444,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -457,7 +457,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -470,7 +470,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -483,7 +483,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -496,7 +496,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -509,7 +509,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -522,7 +522,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -535,7 +535,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -548,7 +548,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -561,7 +561,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -574,7 +574,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -587,7 +587,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -600,7 +600,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -613,7 +613,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -626,7 +626,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -639,7 +639,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -652,7 +652,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -665,7 +665,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -678,7 +678,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -691,7 +691,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -704,7 +704,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -717,7 +717,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -730,7 +730,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -743,7 +743,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -756,7 +756,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -769,7 +769,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -782,7 +782,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -795,7 +795,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -808,7 +808,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -821,7 +821,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -834,7 +834,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -847,7 +847,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -860,7 +860,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -873,7 +873,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -886,7 +886,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -899,7 +899,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -912,7 +912,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -925,7 +925,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -938,7 +938,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -951,7 +951,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -964,7 +964,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -977,7 +977,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -990,7 +990,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -1003,7 +1003,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -1016,7 +1016,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
 
@@ -1029,7 +1029,7 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
 
             configService.SaveSettings();
 
-            dbService.Verify(m => m.SettingsSetValue(settingsType,
+            DbServiceMock.Verify(m => m.SettingsSetValue(settingsType,
                                                      Common.Converter.ToString(value)));
         }
     }

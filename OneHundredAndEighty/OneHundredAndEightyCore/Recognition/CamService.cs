@@ -19,7 +19,7 @@ namespace OneHundredAndEightyCore.Recognition
 {
     public class CamService
     {
-        private readonly Logger logger;
+        private readonly ILogger logger;
         private readonly DrawService drawService;
         private readonly VideoCapture videoCapture;
         private readonly IConfigService configService;
@@ -44,7 +44,7 @@ namespace OneHundredAndEightyCore.Recognition
         public readonly double toBullAngle;
 
         public CamService(CamNumber camNumber,
-                          Logger logger,
+                          ILogger logger,
                           DrawService drawService,
                           IConfigService configService)
         {

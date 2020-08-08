@@ -19,7 +19,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.About
 
         public AboutTabViewModel(DataContext dataContext,
                                  IDBService dbService,
-                                 Logger logger,
+                                 ILogger logger,
                                  IConfigService configService,
                                  DrawService drawService,
                                  IMessageBoxService messageBoxService,

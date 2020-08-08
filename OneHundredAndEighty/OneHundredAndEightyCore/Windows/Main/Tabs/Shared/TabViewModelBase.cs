@@ -23,7 +23,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Shared
         }
 
         protected readonly IDBService dbService;
-        protected readonly Logger logger;
+        protected readonly ILogger logger;
         protected readonly IConfigService configService;
         protected readonly DrawService drawService;
         protected readonly IMessageBoxService messageBoxService;
@@ -34,7 +34,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Shared
 
         protected TabViewModelBase(DataContext dataContext,
                                    IDBService dbService,
-                                   Logger logger,
+                                   ILogger logger,
                                    IConfigService configService,
                                    DrawService drawService,
                                    IMessageBoxService messageBoxService,

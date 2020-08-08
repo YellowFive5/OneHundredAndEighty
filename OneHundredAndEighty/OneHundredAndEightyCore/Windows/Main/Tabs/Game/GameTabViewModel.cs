@@ -33,7 +33,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
 
         public GameTabViewModel(DataContext dataContext,
                                 IDBService dbService,
-                                Logger logger,
+                                ILogger logger,
                                 IConfigService configService,
                                 DrawService drawService,
                                 IMessageBoxService messageBoxService,

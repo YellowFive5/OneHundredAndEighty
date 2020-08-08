@@ -24,7 +24,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
         public SaveNewPlayerCommand SaveNewPlayerCommand { get; }
 
         public PlayerTabViewModel(DataContext dataContext,
-                                  Logger logger,
+                                  ILogger logger,
                                   IConfigService configService,
                                   DrawService drawService,
                                   IDBService dbService,

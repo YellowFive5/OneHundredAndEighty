@@ -11,8 +11,8 @@ namespace OneHundredAndEightyCore.Tests.ConfigService
         protected override void Setup()
         {
             base.Setup();
-            configService = new Common.ConfigService(logger.Object,
-                                                     dbService.Object);
+            configService = new Common.ConfigService(LoggerMock.Object,
+                                                     DbServiceMock.Object);
         }
     }
 }

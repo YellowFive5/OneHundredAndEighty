@@ -22,7 +22,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private readonly Logger logger;
+        private readonly ILogger logger;
         private readonly IMessageBoxService messageBoxService;
         private readonly IDBService dbService;
         private readonly IVersionChecker versionChecker;
@@ -104,7 +104,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         public SettingsTabViewModel SettingsTabViewModel { get; }
         public AboutTabViewModel AboutTabViewModel { get; }
 
-        public MainWindowViewModel(Logger logger,
+        public MainWindowViewModel(ILogger logger,
                                    IMessageBoxService messageBoxService,
                                    IDBService dbService,
                                    IVersionChecker versionChecker,
