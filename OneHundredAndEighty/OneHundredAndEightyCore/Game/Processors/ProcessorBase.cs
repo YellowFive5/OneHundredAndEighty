@@ -188,8 +188,6 @@ namespace OneHundredAndEightyCore.Game.Processors
                 Game.Hands180 = gameSnapshot.Hands180.ToList();
             }
 
-            scoreBoard.OnThrowPointerSetOn(Game.PlayerOnThrow);
-
             ThrowUndoInternal(gameSnapshot);
         }
 

@@ -676,6 +676,21 @@ namespace OneHundredAndEightyCore.Windows.Score
             }
         }
 
+        public void SetSetsWonTo(Player player, int setsToSet)
+        {
+            switch (player.Order)
+            {
+                case PlayerOrder.First:
+                    Player1Sets = setsToSet;
+                    break;
+                case PlayerOrder.Second:
+                    Player2Sets = setsToSet;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         public void OnThrowPointerSetOn(Player player)
         {
             switch (player.Order)

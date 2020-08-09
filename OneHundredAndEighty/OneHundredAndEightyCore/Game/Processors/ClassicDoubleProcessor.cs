@@ -79,11 +79,6 @@ namespace OneHundredAndEightyCore.Game.Processors
             }
         }
 
-        protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
-        {
-            throw new System.NotImplementedException();
-        }
-
         private void OnLegOver()
         {
             // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
@@ -135,6 +130,22 @@ namespace OneHundredAndEightyCore.Game.Processors
             scoreBoard.OnLegPointSetOn(Game.PlayerOnLeg);
             Game.PlayerOnThrow = Game.PlayerOnLeg;
             scoreBoard.OnThrowPointerSetOn(Game.PlayerOnThrow);
+        }
+
+        protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
+        {
+            scoreBoard.OnThrowPointerSetOn(Game.PlayerOnThrow);
+
+            scoreBoard.OnLegPointSetOn(Game.PlayerOnLeg);
+            foreach (var player in Game.Players)
+            {
+                scoreBoard.SetPointsTo(player, player.LegPoints);
+                scoreBoard.SetLegsWonTo(player, player.LegsWon);
+                scoreBoard.SetSetsWonTo(player, player.SetsWon);
+                scoreBoard.CheckPointsHintFor(player);
+            }
+
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
         }
     }
 }

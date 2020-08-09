@@ -70,7 +70,15 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
         {
-            throw new System.NotImplementedException();
+            scoreBoard.OnThrowPointerSetOn(Game.PlayerOnThrow);
+
+            foreach (var player in Game.Players)
+            {
+                scoreBoard.SetPointsTo(player, player.LegPoints);
+                scoreBoard.CheckPointsHintFor(player);
+            }
+
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
         }
     }
 }

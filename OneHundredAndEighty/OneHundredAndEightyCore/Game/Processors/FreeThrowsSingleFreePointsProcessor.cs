@@ -41,6 +41,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
         {
             scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.LegPoints);
+
             scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
         }
     }
