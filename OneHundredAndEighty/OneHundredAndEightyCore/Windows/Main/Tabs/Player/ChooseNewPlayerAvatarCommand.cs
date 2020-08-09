@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System;
-using OneHundredAndEightyCore.Windows.Main.Tabs.Shared;
+using OneHundredAndEightyCore.Windows.Shared;
 
 #endregion
 

@@ -32,6 +32,8 @@ namespace OneHundredAndEightyCore.Windows.Score
         public delegate void CorrectThrowButtonDelegate();
 
         public event CorrectThrowButtonDelegate OnCorrectThrowButtonPressed;
+        public UndoThrowCommand UndoThrowCommand { get; }
+        public CorrectThrowCommand CorrectThrowCommand { get; }
 
         public ScoreBoardService()
         {
@@ -42,6 +44,8 @@ namespace OneHundredAndEightyCore.Windows.Score
             this.logger = logger;
             this.configService = configService;
             this.drawService = drawService;
+            UndoThrowCommand = new UndoThrowCommand(FireThrowUndo);
+            CorrectThrowCommand = new CorrectThrowCommand(FireThrowCorrect);
         }
 
         #region Bindable props
@@ -706,12 +710,12 @@ namespace OneHundredAndEightyCore.Windows.Score
             }
         }
 
-        public void FireThrowUndo()
+        private void FireThrowUndo()
         {
             OnUndoThrowButtonPressed?.Invoke();
         }
 
-        public void FireThrowCorrect()
+        private void FireThrowCorrect()
         {
             OnCorrectThrowButtonPressed?.Invoke();
         }

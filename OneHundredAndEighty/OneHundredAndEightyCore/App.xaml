@@ -827,6 +827,67 @@
         </Style>
         <!--#endregion-->
         <!--#region ScoreWindow -->
+        <Style x:Key="ScoreWindowButtonStyle" TargetType="Button" BasedOn="{StaticResource MainWindowButtonStyle}">
+            <Setter Property="Foreground" Value="DarkGray" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border"
+                                    CornerRadius="3"
+                                    BorderBrush="DarkGray"
+                                    BorderThickness="2"
+                                    Background="Transparent">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  TextElement.FontWeight="Bold" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource Aqua25A}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="{StaticResource Aqua}"
+                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="DarkGray"
+                                                            Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                            <ColorAnimation To="DarkGray"
+                                                            Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                                            Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="ScoreWindowTextStyle">
             <Setter Property="Control.FontFamily" Value="{StaticResource MainFontType}" />
             <Setter Property="Control.FontWeight" Value="Bold" />

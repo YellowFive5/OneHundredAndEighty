@@ -450,10 +450,24 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.04*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.06*" />
+                <ColumnDefinition Width="0.01*" />
+                <ColumnDefinition Width="0.06*" />
+                <ColumnDefinition Width="0.07*" />
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.ColumnSpan="2"
+            <Rectangle Grid.ColumnSpan="6"
                        Grid.RowSpan="3"
                        Style="{StaticResource ScoreWindowFooterRectangleStyle}" />
+            <Button Grid.Column="2"
+                    Grid.Row="1"
+                    Style="{StaticResource ScoreWindowButtonStyle}"
+                    Command="{Binding UndoThrowCommand}"
+                    Content="↻" />
+            <Button Grid.Column="4"
+                    Grid.Row="1"
+                    Style="{StaticResource ScoreWindowButtonStyle}"
+                    Command="{Binding CorrectThrowCommand}"
+                    Content="⌖" />
             <Viewbox Grid.Column="1"
                      Grid.Row="1"
                      HorizontalAlignment="Left">

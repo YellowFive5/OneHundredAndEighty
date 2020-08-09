@@ -34,15 +34,5 @@ namespace OneHundredAndEightyCore.Windows.Score
         {
             DragMove();
         }
-
-        protected void UndoThrowButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.FireThrowUndo();
-        }
-
-        protected void CorrectThrowButtonClick(object sender, RoutedEventArgs e)
-        {
-            viewModel.FireThrowCorrect();
-        }
     }
 }

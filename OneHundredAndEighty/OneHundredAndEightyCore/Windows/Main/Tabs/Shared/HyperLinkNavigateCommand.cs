@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using OneHundredAndEightyCore.Windows.Shared;
 
 #endregion
 

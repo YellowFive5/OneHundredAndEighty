@@ -5,11 +5,11 @@ using OneHundredAndEightyCore.Windows.Shared;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
+namespace OneHundredAndEightyCore.Windows.Score
 {
-    public class FindCamsCommand : CommandBase
+    public class UndoThrowCommand : CommandBase
     {
-        public FindCamsCommand(Action execute)
+        public UndoThrowCommand(Action execute)
             : base(execute)
         {
         }

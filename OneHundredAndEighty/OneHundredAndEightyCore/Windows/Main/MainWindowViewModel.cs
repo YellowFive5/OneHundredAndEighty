@@ -182,7 +182,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             GameTabViewModel.StopGameByError();
         }
 
-        #region PropertyChangingFire
+        #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 

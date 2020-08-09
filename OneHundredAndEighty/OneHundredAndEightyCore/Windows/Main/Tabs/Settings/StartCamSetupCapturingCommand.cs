@@ -3,7 +3,7 @@
 using System;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Windows.Main.Tabs.Shared;
+using OneHundredAndEightyCore.Windows.Shared;
 
 #endregion
 

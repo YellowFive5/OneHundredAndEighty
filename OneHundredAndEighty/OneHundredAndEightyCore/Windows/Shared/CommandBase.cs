@@ -6,7 +6,7 @@ using OneHundredAndEightyCore.Enums;
 
 #endregion
 
-namespace OneHundredAndEightyCore.Windows.Main.Tabs.Shared
+namespace OneHundredAndEightyCore.Windows.Shared
 {
     public abstract class CommandBase : ICommand
     {
