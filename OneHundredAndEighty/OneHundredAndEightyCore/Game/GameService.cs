@@ -9,6 +9,7 @@ using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game.Processors;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.CamsDetection;
+using OneHundredAndEightyCore.Windows.Debug;
 using OneHundredAndEightyCore.Windows.Score;
 
 #endregion
@@ -22,6 +23,7 @@ namespace OneHundredAndEightyCore.Game
         private readonly CamsDetectionBoard camsDetectionBoard;
         private readonly DetectionService detectionService;
         private readonly DBService dbService;
+        private readonly ManualThrowPanel manualThrowPanel;
         private IGameProcessor GameProcessor { get; set; }
         private Domain.Game Game { get; set; }
 
@@ -33,13 +35,15 @@ namespace OneHundredAndEightyCore.Game
                            CamsDetectionBoard camsDetectionBoard,
                            DetectionService detectionService,
                            Logger logger,
-                           DBService dbService)
+                           DBService dbService,
+                           ManualThrowPanel manualThrowPanel)
         {
             this.logger = logger;
             this.scoreBoardService = scoreBoardService;
             this.camsDetectionBoard = camsDetectionBoard;
             this.detectionService = detectionService;
             this.dbService = dbService;
+            this.manualThrowPanel = manualThrowPanel;
         }
 
         #region Start/Stop
@@ -162,7 +166,8 @@ namespace OneHundredAndEightyCore.Game
 
         private void OnThrowCorrect()
         {
-            // todo
+            GameProcessor.UndoThrow();
+            manualThrowPanel.ShowPanel();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace OneHundredAndEightyCore.Windows.Shared
         private readonly Action execute;
         protected readonly Action<Uri> executeWithUriParameter;
         protected readonly Action<CamNumber> executeWithCamNumberParameter;
+        protected readonly Action<string> executeWithStringParameter;
 
         protected CommandBase(Action execute)
         {
@@ -28,6 +29,11 @@ namespace OneHundredAndEightyCore.Windows.Shared
         protected CommandBase(Action<CamNumber> executeWithCamNumberParameter)
         {
             this.executeWithCamNumberParameter = executeWithCamNumberParameter;
+        }
+
+        protected CommandBase(Action<string> executeWithStringParameter)
+        {
+            this.executeWithStringParameter = executeWithStringParameter;
         }
 
         public virtual bool CanExecute(object parameter)

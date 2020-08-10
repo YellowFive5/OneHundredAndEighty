@@ -22,6 +22,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.Tabs.Game
                                                     null,
                                                     DetectionServiceMock.Object,
                                                     null,
+                                                    null,
                                                     null);
         }
     }

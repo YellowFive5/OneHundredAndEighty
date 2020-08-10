@@ -428,13 +428,13 @@ namespace OneHundredAndEightyCore.Recognition
 
         #endregion
 
-        public void InvokeOnThrowDetected(DetectedThrow thrw, bool debug = false)
+        public void InvokeOnThrowDetected(DetectedThrow thrw, bool manual = false)
         {
             if (thrw != null)
             {
                 OnThrowDetected?.Invoke(thrw);
 
-                if (!debug)
+                if (!manual)
                 {
                     Application.Current.Dispatcher.Invoke(() => { camsDetectionBoard.PrintAndDrawThrow(thrw); });
                 }
@@ -498,12 +498,12 @@ namespace OneHundredAndEightyCore.Recognition
                                    : side2;
             }
 
-            return Converter.ToString($"Contour\n" +
-                                      $"Arc:\n" +
+            return Converter.ToString("Contour\n" +
+                                      "Arc:\n" +
                                       $"{(int) contourArс}\n" +
-                                      $"Area:\n" +
+                                      "Area:\n" +
                                       $"{(int) contourArea}\n" +
-                                      $"Width:\n" +
+                                      "Width:\n" +
                                       $"{(int) contourWidth}\n"
                                      );
         }

@@ -125,7 +125,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             this.configService = configService;
 
             DataContext = new DataContext();
-            GameTabViewModel = new GameTabViewModel(DataContext, dbService, logger, configService, drawService, messageBoxService, camsDetectionBoard, detectionService, gameService, scoreBoardService);
+            GameTabViewModel = new GameTabViewModel(DataContext, dbService, logger, configService, drawService, messageBoxService, camsDetectionBoard, detectionService, gameService, scoreBoardService, manualThrowPanel);
             PlayerTabViewModel = new PlayerTabViewModel(DataContext, logger, configService, drawService, dbService, messageBoxService, camsDetectionBoard, detectionService);
             SettingsTabViewModel = new SettingsTabViewModel(DataContext, dbService, logger, configService, drawService, messageBoxService, camsDetectionBoard, detectionService);
             AboutTabViewModel = new AboutTabViewModel(DataContext, dbService, logger, configService, drawService, messageBoxService, camsDetectionBoard, detectionService);
@@ -147,8 +147,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             }
 
             GameTabViewModel.StopGameByButton();
-            manualThrowPanel.Close();
-
+            manualThrowPanel.ClosePanel();
             configService.MainWindowWidth = MainWindowWidth;
             configService.MainWindowHeight = MainWindowHeight;
             configService.MainWindowPositionLeft = MainWindowPositionLeft;

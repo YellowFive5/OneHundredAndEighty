@@ -219,12 +219,14 @@
                     Grid.Row="1"
                     Style="{StaticResource ScoreWindowButtonStyle}"
                     Command="{Binding UndoThrowCommand}"
-                    Content="↻" />
+                    Content="↻" 
+                    ToolTip="Throw undo"/>
             <Button Grid.Column="4"
                     Grid.Row="1"
                     Style="{StaticResource ScoreWindowButtonStyle}"
                     Command="{Binding CorrectThrowCommand}"
-                    Content="⌖" />
+                    Content="⌖" 
+                    ToolTip="Throw undo and manual correct"/>
             <Viewbox Grid.Column="1"
                      Grid.Row="1"
                      HorizontalAlignment="Left">

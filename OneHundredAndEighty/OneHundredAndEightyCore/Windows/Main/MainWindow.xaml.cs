@@ -51,7 +51,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             versionChecker = new VersionChecker(dbService, configService, messageBoxService);
             detectionService = new DetectionService(drawService, configService, throwService, logger, camsDetectionBoard);
             manualThrowPanel = new ManualThrowPanel(logger, detectionService);
-            gameService = new GameService(scoreBoardService, camsDetectionBoard, detectionService, logger, dbService);
+            gameService = new GameService(scoreBoardService, camsDetectionBoard, detectionService, logger, dbService, manualThrowPanel);
 
             InitializeComponent();
             viewModel = new MainWindowViewModel(logger,

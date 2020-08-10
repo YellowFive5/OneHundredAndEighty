@@ -7,6 +7,7 @@ using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Game;
 using OneHundredAndEightyCore.Recognition;
 using OneHundredAndEightyCore.Windows.CamsDetection;
+using OneHundredAndEightyCore.Windows.Debug;
 using OneHundredAndEightyCore.Windows.Main.Tabs.Shared;
 using OneHundredAndEightyCore.Windows.MessageBox;
 using OneHundredAndEightyCore.Windows.Score;
@@ -23,6 +24,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
 
         private readonly GameService gameService;
         private readonly ScoreBoardService scoreBoardService;
+        private readonly ManualThrowPanel manualThrowPanel;
         public StartNewGameCommand StartNewGameCommand { get; }
         public StopGameCommand StopGameCommand { get; }
 
@@ -40,11 +42,13 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
                                 CamsDetectionBoard camsDetectionBoard,
                                 IDetectionService detectionService,
                                 GameService gameService,
-                                ScoreBoardService scoreBoardService)
+                                ScoreBoardService scoreBoardService,
+                                ManualThrowPanel manualThrowPanel)
             : base(dataContext, dbService, logger, configService, drawService, messageBoxService, camsDetectionBoard, detectionService)
         {
             this.gameService = gameService;
             this.scoreBoardService = scoreBoardService;
+            this.manualThrowPanel = manualThrowPanel;
 
             StartNewGameCommand = new StartNewGameCommand(StartGame);
             StopGameCommand = new StopGameCommand(StopGameByButton);
@@ -162,8 +166,12 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
 
             try
             {
-                camsDetectionBoard.Open();
+                if (App.ThrowPanel)
+                {
+                    manualThrowPanel.ShowPanel();
+                }
 
+                camsDetectionBoard.Open();
                 var cams = CreateCamsServices();
                 detectionService.CheckCamsAndTryCapture(cams);
                 detectionService.RunDetection(cams, DetectionServiceWorkingMode.Detection);
@@ -221,6 +229,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
             scoreBoardService.CloseScoreBoard();
             camsDetectionBoard.Close();
             detectionService.StopDetection();
+            manualThrowPanel.HidePanel();
             // IsMainTabsEnabled = true;
             IsGameRunning = false;
         }

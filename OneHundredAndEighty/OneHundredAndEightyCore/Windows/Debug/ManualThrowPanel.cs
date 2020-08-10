@@ -15,49 +15,62 @@ namespace OneHundredAndEightyCore.Windows.Debug
         private readonly DetectionService detectionService;
         private readonly Logger logger;
         private readonly ManualThrowPanelWindow manualThrowPanelWindow;
+        public MakeManualThrowCommand MakeManualThrowCommand { get; }
+
+        public ManualThrowPanel()
+        {
+        }
 
         public ManualThrowPanel(Logger logger, DetectionService detectionService)
         {
             this.logger = logger;
             this.detectionService = detectionService;
-
-            if (App.ThrowPanel)
-            {
-                manualThrowPanelWindow = new ManualThrowPanelWindow(this);
-                manualThrowPanelWindow.DartboardImage.Source = Converter.BitmapToBitmapImage(Resources.Resources.Dartboard);
-
-                manualThrowPanelWindow.Show();
-            }
+            MakeManualThrowCommand = new MakeManualThrowCommand(ThrowDartTo);
+            manualThrowPanelWindow = new ManualThrowPanelWindow
+                                     {
+                                         DartboardImage = {Source = Converter.BitmapToBitmapImage(Resources.Resources.Dartboard)},
+                                         DataContext = this
+                                     };
         }
 
-        public void Close()
+        public void HidePanel()
+        {
+            manualThrowPanelWindow.Hide();
+        }
+
+        public void ShowPanel()
+        {
+            manualThrowPanelWindow.Show();
+        }
+
+        public void ClosePanel()
         {
             manualThrowPanelWindow?.Close();
         }
 
-        public void ThrowDartTo(string multiplier, int sector)
+        private void ThrowDartTo(string str)
         {
             var point = new PointF(0.0f, 0.0f);
             var side = 0;
             ThrowType type;
-
-            if (multiplier.Contains("Tremble"))
+            var sector = Converter.ToInt(str.Substring(str.IndexOf("_") + 1));
+            if (str.Contains("Tremble"))
             {
                 type = ThrowType.Tremble;
             }
-            else if (multiplier.Contains("Double"))
+            else if (str.Contains("Double"))
             {
                 type = ThrowType.Double;
             }
-            else if (multiplier.Contains("Single"))
+            else if (str.Contains("Single"))
             {
                 type = ThrowType.Single;
             }
-            else if (multiplier == "_25")
+            else if (str.Contains("_25"))
             {
                 type = ThrowType._25;
             }
-            else if (multiplier == "Bulleye")
+            else if (str.Contains("Bulleye"))
             {
                 type = ThrowType.Bulleye;
             }
@@ -73,6 +86,10 @@ namespace OneHundredAndEightyCore.Windows.Debug
                                                                      type,
                                                                      side),
                                                    true);
+            if (!App.ThrowPanel)
+            {
+                HidePanel();
+            }
         }
     }
 }

@@ -736,7 +736,7 @@ namespace OneHundredAndEightyCore.Windows.Score
         }
 
 
-        #region PropertyChangingFire
+        #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
