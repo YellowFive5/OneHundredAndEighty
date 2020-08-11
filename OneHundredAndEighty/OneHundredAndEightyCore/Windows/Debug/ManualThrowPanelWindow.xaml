@@ -8,7 +8,7 @@
         Title="ManualThrowPanel"
         Height="800"
         Width="800"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         WindowStyle="None"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
@@ -99,6 +99,7 @@
         </Grid.ColumnDefinitions>
         <Image Name="DartboardImage"
                Source="../../Resources/Dartboard.jpg"
+               Stretch="Fill"
                Grid.ColumnSpan="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=ColumnDefinitions.Count, Mode=OneWay}"
                Grid.RowSpan="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=RowDefinitions.Count, Mode=OneWay}" />
         <Button Name="Zero_0"
