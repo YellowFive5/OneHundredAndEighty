@@ -54,7 +54,7 @@
             Grid.Column="1"
             Style="{StaticResource MainWindowLabelStyle}">
             <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                       CommandParameter="https://github.com/YellowFive5">
+                       CommandParameter="{x:Static resx:Resources.LinkGithubPage}">
                 <InlineUIContainer>
                     <TextBlock Text="My GitHub page" />
                 </InlineUIContainer>
@@ -65,7 +65,7 @@
             Grid.Column="1"
             Style="{StaticResource MainWindowLabelStyle}">
             <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                       CommandParameter="https://github.com/YellowFive5/OneHundredAndEighty">
+                       CommandParameter="{x:Static resx:Resources.LinkGithubProject}">
                 <InlineUIContainer>
                     <TextBlock Text="Project GitHub page" />
                 </InlineUIContainer>
@@ -76,7 +76,7 @@
             Grid.Column="1"
             Style="{StaticResource MainWindowLabelStyle}">
             <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                       CommandParameter="https://www.facebook.com/yellowfive">
+                       CommandParameter="{x:Static resx:Resources.LinkFacebookPage}">
                 <InlineUIContainer>
                     <TextBlock Text="My Facebook page" />
                 </InlineUIContainer>
@@ -87,7 +87,7 @@
             Grid.Column="1"
             Style="{StaticResource MainWindowLabelStyle}">
             <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                       CommandParameter="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-">
+                       CommandParameter="{x:Static resx:Resources.LinkQuickStartGuide}">
                 <InlineUIContainer>
                     <TextBlock Text="Quick start guide" />
                 </InlineUIContainer>
@@ -98,7 +98,7 @@
             Grid.Column="1"
             Style="{StaticResource MainWindowLabelStyle}">
             <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                       CommandParameter="https://www.facebook.com/groups/281778298914107">
+                       CommandParameter="{x:Static resx:Resources.LinkFaceBookGroup}">
                 <InlineUIContainer>
                     <TextBlock Text="Facebook community page" />
                 </InlineUIContainer>
@@ -109,7 +109,7 @@
             Grid.Column="1"
             Style="{StaticResource MainWindowLabelStyle}">
             <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                       CommandParameter="https://www.paypal.me/yellowfive5">
+                       CommandParameter="{x:Static resx:Resources.LinkPayPal}">
                 <InlineUIContainer>
                     <TextBlock Text="💜 Donate" />
                 </InlineUIContainer>

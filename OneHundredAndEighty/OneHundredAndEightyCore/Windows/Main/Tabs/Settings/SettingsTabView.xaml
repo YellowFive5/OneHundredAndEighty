@@ -82,7 +82,7 @@
                                Style="{StaticResource MainWindowLabelStyle}"
                                Grid.ColumnSpan="3">
                         <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                                   CommandParameter="https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-">
+                                   CommandParameter="{x:Static resx:Resources.LinkQuickStartGuide}">
                             <InlineUIContainer>
                                 <TextBlock Text="Quick start guide" />
                             </InlineUIContainer>
@@ -93,7 +93,7 @@
                                Style="{StaticResource MainWindowLabelStyle}"
                                Grid.ColumnSpan="3">
                         <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                                   CommandParameter="https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#3-app-setup">
+                                   CommandParameter="{x:Static resx:Resources.LinkAppSetup}">
                             <InlineUIContainer>
                                 <TextBlock Text="App setup" />
                             </InlineUIContainer>
@@ -487,7 +487,7 @@
                                HorizontalAlignment="Center"
                                Style="{StaticResource MainWindowLabelStyle}">
                         <Hyperlink Command="{Binding HyperLinkNavigateCommand}"
-                                   CommandParameter="https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#runtime-crossing-mode">
+                                   CommandParameter="{x:Static resx:Resources.LinkRuntimeCrossing}">
                             <InlineUIContainer>
                                 <TextBlock Text="Runtime crossing" />
                             </InlineUIContainer>

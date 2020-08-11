@@ -290,6 +290,78 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#3-app-setup.
+        /// </summary>
+        public static string LinkAppSetup {
+            get {
+                return ResourceManager.GetString("LinkAppSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.facebook.com/groups/281778298914107.
+        /// </summary>
+        public static string LinkFaceBookGroup {
+            get {
+                return ResourceManager.GetString("LinkFaceBookGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.facebook.com/yellowfive.
+        /// </summary>
+        public static string LinkFacebookPage {
+            get {
+                return ResourceManager.GetString("LinkFacebookPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/YellowFive5.
+        /// </summary>
+        public static string LinkGithubPage {
+            get {
+                return ResourceManager.GetString("LinkGithubPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/YellowFive5/OneHundredAndEighty.
+        /// </summary>
+        public static string LinkGithubProject {
+            get {
+                return ResourceManager.GetString("LinkGithubProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.paypal.me/yellowfive5.
+        /// </summary>
+        public static string LinkPayPal {
+            get {
+                return ResourceManager.GetString("LinkPayPal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-.
+        /// </summary>
+        public static string LinkQuickStartGuide {
+            get {
+                return ResourceManager.GetString("LinkQuickStartGuide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#runtime-crossing-mode.
+        /// </summary>
+        public static string LinkRuntimeCrossing {
+            get {
+                return ResourceManager.GetString("LinkRuntimeCrossing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximal dart contour arc on ROI image to be detected. Default value is &apos;265&apos;.
         /// </summary>
         public static string MaxContourArcHelperText {

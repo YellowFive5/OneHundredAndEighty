@@ -194,6 +194,30 @@ Please, contact developer</value>
   <data name="icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>icon2.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LinkAppSetup" xml:space="preserve">
+    <value>https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#3-app-setup</value>
+  </data>
+  <data name="LinkFaceBookGroup" xml:space="preserve">
+    <value>https://www.facebook.com/groups/281778298914107</value>
+  </data>
+  <data name="LinkFacebookPage" xml:space="preserve">
+    <value>https://www.facebook.com/yellowfive</value>
+  </data>
+  <data name="LinkGithubPage" xml:space="preserve">
+    <value>https://github.com/YellowFive5</value>
+  </data>
+  <data name="LinkGithubProject" xml:space="preserve">
+    <value>https://github.com/YellowFive5/OneHundredAndEighty</value>
+  </data>
+  <data name="LinkPayPal" xml:space="preserve">
+    <value>https://www.paypal.me/yellowfive5</value>
+  </data>
+  <data name="LinkQuickStartGuide" xml:space="preserve">
+    <value>https://github.com/YellowFive5/OneHundredAndEighty#quick-start-guide-</value>
+  </data>
+  <data name="LinkRuntimeCrossing" xml:space="preserve">
+    <value>https://github.com/YellowFive5/OneHundredAndEighty/blob/master/README.md#runtime-crossing-mode</value>
+  </data>
   <data name="MaxContourArcHelperText" xml:space="preserve">
     <value>Maximal dart contour arc on ROI image to be detected. Default value is '265'</value>
   </data>
