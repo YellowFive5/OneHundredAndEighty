@@ -29,14 +29,15 @@ namespace OneHundredAndEightyCore.Game.Processors
 
                 ClearPlayerOnThrowHand();
                 scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
+
                 return;
             }
 
             if (IsFault(thrw))
             {
                 ConvertAndSaveThrow(thrw, ThrowResult.Fault);
-
                 OnFault();
+
                 return;
             }
 
@@ -44,7 +45,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
-            var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
+            var dbThrow = ConvertAndSaveThrow(thrw);
             Game.PlayerOnThrow.HandThrows.Add(dbThrow);
 
             if (IsHandOver())

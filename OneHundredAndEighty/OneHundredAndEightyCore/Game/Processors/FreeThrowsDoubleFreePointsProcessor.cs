@@ -22,14 +22,13 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints);
 
-            var dbThrow = ConvertAndSaveThrow(thrw, ThrowResult.Ordinary);
+            var dbThrow = ConvertAndSaveThrow(thrw);
 
             Game.PlayerOnThrow.HandThrows.Add(dbThrow);
 
             if (IsHandOver())
             {
                 Check180();
-
                 ClearPlayerOnThrowHand();
 
                 TogglePlayerOnThrow();

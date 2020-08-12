@@ -124,7 +124,8 @@ namespace OneHundredAndEightyCore.Game.Processors
             TogglePlayerOnThrow();
         }
 
-        protected Throw ConvertAndSaveThrow(DetectedThrow thrw, ThrowResult throwResult)
+        protected Throw ConvertAndSaveThrow(DetectedThrow thrw,
+                                            ThrowResult throwResult = ThrowResult.Ordinary)
         {
             var dbThrow = new Throw(Game.PlayerOnThrow,
                                     thrw.Sector,
