@@ -20,6 +20,9 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         public event EndMatchDelegate OnMatchEnd;
 
+        public bool CanUndoThrow => GameSnapshots.Count != 0 &&
+                               Game.Throws.Count != 0;
+
         protected ProcessorBase(Domain.Game game,
                                 ScoreBoardService scoreBoard)
         {
@@ -154,12 +157,6 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         public void UndoThrow()
         {
-            if (GameSnapshots.Count == 0 &&
-                Game.Throws.Count == 0)
-            {
-                return;
-            }
-
             Game.Throws.Pop();
             var gameSnapshot = GameSnapshots.Pop();
 

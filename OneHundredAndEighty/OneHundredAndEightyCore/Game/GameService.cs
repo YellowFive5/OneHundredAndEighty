@@ -161,13 +161,19 @@ namespace OneHundredAndEightyCore.Game
 
         private void OnThrowUndo()
         {
-            GameProcessor.UndoThrow();
+            if (GameProcessor.CanUndoThrow)
+            {
+                GameProcessor.UndoThrow();
+            }
         }
 
         private void OnThrowCorrect()
         {
-            GameProcessor.UndoThrow();
-            manualThrowPanel.ShowPanel();
+            if (GameProcessor.CanUndoThrow)
+            {
+                GameProcessor.UndoThrow();
+                manualThrowPanel.ShowPanel();
+            }
         }
     }
 }
