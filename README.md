@@ -46,10 +46,10 @@ timeline ↓
 ✅ [[**v.2.2 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)]
 
 - [x] Big technical and architecture improvements of code
-- [ ] Throw manual correction
-- [ ] Throw undo
+- [x] UI prettyfy
+- [x] Throw manual correction
+- [x] Throw undo
 - [ ] Manual hand end
-- [ ] UI prettyfy
 
 ⭕ [**v.2.3 Release**]
 - [ ] ...
