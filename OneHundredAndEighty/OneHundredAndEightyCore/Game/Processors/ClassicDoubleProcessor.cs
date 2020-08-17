@@ -21,14 +21,8 @@ namespace OneHundredAndEightyCore.Game.Processors
             if (IsGameOver(thrw))
             {
                 ConvertAndSaveThrow(thrw, ThrowResult.MatchWon);
-
-                // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-                // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-                //
-                // dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
-                // dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-
                 InvokeEndMatch();
+
                 return;
             }
 
@@ -60,29 +54,11 @@ namespace OneHundredAndEightyCore.Game.Processors
             Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
-            ConvertAndSaveThrow(thrw);
-
-            if (IsHandOver())
-            {
-                Check180();
-                ClearPlayerOnThrowHand();
-
-                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
-                TogglePlayerOnThrow();
-            }
-            else
-            {
-                Game.PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
-                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
-            }
+            OnHandOverDoublePlayersCheck(thrw);
         }
 
         private void OnLegOver()
         {
-            // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-            // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-
             Game.PlayerOnThrow.LegsWon += 1;
             scoreBoard.AddLegsWonTo(Game.PlayerOnThrow);
 
@@ -100,12 +76,6 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         private void OnSetOver()
         {
-            // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-            // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-            //
-            // dbService.StatisticUpdateAddSetsPlayedForPlayers(Game.Id);
-            // dbService.StatisticUpdateAddSetsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-            //
             Game.PlayerOnThrow.SetsWon += 1;
             scoreBoard.AddSetsWonTo(Game.PlayerOnThrow);
 

@@ -21,7 +21,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         public event EndMatchDelegate OnMatchEnd;
 
         public bool CanUndoThrow => GameSnapshots.Count != 0 &&
-                               Game.Throws.Count != 0;
+                                    Game.Throws.Count != 0;
 
         protected ProcessorBase(Domain.Game game,
                                 ScoreBoardService scoreBoard)
@@ -125,6 +125,42 @@ namespace OneHundredAndEightyCore.Game.Processors
             scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
 
             TogglePlayerOnThrow();
+        }
+
+        protected void OnHandOverSinglePlayerCheck(DetectedThrow thrw)
+        {
+            ConvertAndSaveThrow(thrw);
+
+            if (IsHandOver())
+            {
+                Check180();
+                ClearPlayerOnThrowHand();
+            }
+            else
+            {
+                Game.PlayerOnThrow.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+            }
+        }
+
+        protected void OnHandOverDoublePlayersCheck(DetectedThrow thrw)
+        {
+            ConvertAndSaveThrow(thrw);
+
+            if (IsHandOver())
+            {
+                Check180();
+                ClearPlayerOnThrowHand();
+
+                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
+                TogglePlayerOnThrow();
+            }
+            else
+            {
+                Game.PlayerOnThrow.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+                scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
+            }
         }
 
         protected void ConvertAndSaveThrow(DetectedThrow thrw,

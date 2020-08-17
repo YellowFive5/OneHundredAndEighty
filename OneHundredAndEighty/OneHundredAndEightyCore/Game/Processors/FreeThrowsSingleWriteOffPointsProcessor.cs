@@ -42,18 +42,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
-            ConvertAndSaveThrow(thrw);
-
-            if (IsHandOver())
-            {
-                Check180();
-                ClearPlayerOnThrowHand();
-            }
-            else
-            {
-                Game.PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
-            }
+            OnHandOverSinglePlayerCheck(thrw);
 
             scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
         }

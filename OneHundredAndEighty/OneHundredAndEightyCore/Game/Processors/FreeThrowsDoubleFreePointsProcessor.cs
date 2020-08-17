@@ -28,7 +28,6 @@ namespace OneHundredAndEightyCore.Game.Processors
             {
                 Check180();
                 ClearPlayerOnThrowHand();
-
                 TogglePlayerOnThrow();
             }
             else

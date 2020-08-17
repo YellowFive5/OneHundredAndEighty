@@ -22,18 +22,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints);
 
-            ConvertAndSaveThrow(thrw);
-
-            if (IsHandOver())
-            {
-                Check180();
-                ClearPlayerOnThrowHand();
-            }
-            else
-            {
-                Game.PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
-            }
+            OnHandOverSinglePlayerCheck(thrw);
         }
 
         protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
