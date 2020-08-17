@@ -127,8 +127,8 @@ namespace OneHundredAndEightyCore.Game.Processors
             TogglePlayerOnThrow();
         }
 
-        protected Throw ConvertAndSaveThrow(DetectedThrow thrw,
-                                            ThrowResult throwResult = ThrowResult.Ordinary)
+        protected void ConvertAndSaveThrow(DetectedThrow thrw,
+                                           ThrowResult throwResult = ThrowResult.Ordinary)
         {
             var dbThrow = new Throw(Game.PlayerOnThrow,
                                     thrw.Sector,
@@ -138,8 +138,9 @@ namespace OneHundredAndEightyCore.Game.Processors
                                     thrw.TotalPoints,
                                     thrw.Poi,
                                     thrw.ProjectionResolution);
+
             Game.Throws.Push(dbThrow);
-            return dbThrow;
+            Game.PlayerOnThrow.HandThrows.Add(dbThrow);
         }
 
         protected void InvokeEndMatch()

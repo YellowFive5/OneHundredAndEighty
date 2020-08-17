@@ -24,9 +24,6 @@ namespace OneHundredAndEightyCore.Game.Processors
 
                 ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
 
-                // dbService.StatisticUpdateAddLegsPlayedForPlayers(Game.Id);
-                // dbService.StatisticUpdateAddLegsWonForPlayer(Game.PlayerOnThrow, Game.Id);
-
                 ClearPlayerOnThrowHand();
                 scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
 
@@ -45,8 +42,7 @@ namespace OneHundredAndEightyCore.Game.Processors
             Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
-            var dbThrow = ConvertAndSaveThrow(thrw);
-            Game.PlayerOnThrow.HandThrows.Add(dbThrow);
+            ConvertAndSaveThrow(thrw);
 
             if (IsHandOver())
             {
