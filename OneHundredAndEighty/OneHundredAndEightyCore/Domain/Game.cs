@@ -15,13 +15,16 @@ namespace OneHundredAndEightyCore.Domain
         public readonly int sets;
         public readonly int legs;
         public readonly int legPoints;
+        public int Id { get; set; }
         public DateTime StartTimeStamp { get; }
-        public DateTime EndTimeStamp { get; private set; }
+        public DateTime EndTimeStamp { get; set; }
         public List<Player> Players { get; }
         public Player PlayerOnThrow { get; set; }
         public Player PlayerOnLeg { get; set; }
         public Stack<Throw> Throws { get; set; }
         public List<Hand180> Hands180 { get; set; }
+        public GameResultType Result { get; set; }
+        public Player Winner { get; set; }
 
         public Game(GameType type,
                     List<Player> players,
@@ -35,9 +38,9 @@ namespace OneHundredAndEightyCore.Domain
             legPoints = Converter.GamePointsToInt(points);
             StartTimeStamp = DateTime.Now;
             Players = players;
-
             Throws = new Stack<Throw>();
             Hands180 = new List<Hand180>();
+            Result = GameResultType.NotDefined;
         }
     }
 }

@@ -103,7 +103,7 @@
                Grid.ColumnSpan="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=ColumnDefinitions.Count, Mode=OneWay}"
                Grid.RowSpan="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=RowDefinitions.Count, Mode=OneWay}" />
         <Button Name="Zero_0"
-                Grid.Row="2" Grid.Column="22" Grid.ColumnSpan="4" Grid.RowSpan="4"
+                Grid.Row="1" Grid.Column="20" Grid.ColumnSpan="4" Grid.RowSpan="4"
                 Style="{StaticResource SectorButtonStyle}" />
         <Button Name="Bulleye_50"
                 Grid.Row="15" Grid.Column="15"

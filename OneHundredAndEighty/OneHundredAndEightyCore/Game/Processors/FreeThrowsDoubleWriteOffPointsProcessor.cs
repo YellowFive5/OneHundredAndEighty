@@ -19,18 +19,8 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             if (IsLegOver(thrw))
             {
-                ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
-
-                foreach (var player in Game.Players)
-                {
-                    player.LegPoints = Game.legPoints;
-                    scoreBoard.SetPointsTo(player, Game.legPoints);
-                    scoreBoard.CheckPointsHintFor(player);
-                }
-
-                ClearPlayerOnThrowHand();
-                TogglePlayerOnThrow();
-
+                Game.PlayerOnThrow.LegsWon += 1;
+                OnMatchOver(thrw);
                 return;
             }
 

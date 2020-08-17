@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
+using System.Linq;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
 
@@ -27,124 +29,104 @@ namespace OneHundredAndEightyCore.Common
 
         #region Throws
 
-        // public void ThrowSaveNew(Throw thrw)
-        // {
-        //     var newThrowQuery = $"INSERT INTO [{Table.Throws}] ({Column.Player},{Column.Game},{Column.Sector},{Column.Type},{Column.Result},{Column.Number},{Column.Points},{Column.PoiX},{Column.PoiY},{Column.ProjectionResolution},{Column.Timestamp})" +
-        //                         $"VALUES ({thrw.Player.Id},{thrw.Game.Id},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Result},{thrw.Number}," +
-        //                         $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
-        //     ExecuteNonQueryInternal(newThrowQuery);
-        //
-        //     var newThrowId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Throws}]");
-        //     thrw.SetId(Convert.ToInt32(newThrowId));
-        // }
+        public void ThrowSaveNew(Throw thrw, Domain.Game game)
+        {
+            var newThrowQuery = $"INSERT INTO [{Table.Throws}] ({Column.Player},{Column.Game},{Column.Sector},{Column.Type},{Column.Result},{Column.Number},{Column.Points},{Column.PoiX},{Column.PoiY},{Column.ProjectionResolution},{Column.Timestamp})" +
+                                $"VALUES ({thrw.Player.Id},{game.Id},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Result},{thrw.Number}," +
+                                $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
+            ExecuteNonQueryInternal(newThrowQuery);
+
+            var newThrowId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Throws}]");
+        }
 
         #endregion
 
         #region Game
 
-        public void GameSaveNew(Domain.Game game, List<Player> players)
+        public int GameSaveNew(Domain.Game game)
         {
             var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartTimestamp},{Column.EndTimestamp},{Column.Type})" +
-                               $" VALUES ('{game.StartTimeStamp}','','{(int) game.Type}')";
+                               $" VALUES ('{game.StartTimeStamp}','{game.EndTimeStamp}','{(int) game.Type}')";
             ExecuteNonQueryInternal(newGameQuery);
 
             var newGameId = Convert.ToInt32(ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Games}]"));
-            // game.SetId(newGameId);
 
-            StatisticSaveNew(newGameId, players);
+            StatisticSaveNew(newGameId, game.Players);
+
+            return newGameId;
         }
-
-        // public void GameEnd(Domain.Game game,
-        //                     Player winner = null,
-        //                     GameResultType gameResultType = GameResultType.NotDefined)
-        // {
-        //     var gameEndTimestampQuery = $"UPDATE [{Table.Games}] SET [{Column.EndTimestamp}] = '{DateTime.Now}' " +
-        //                                 $"WHERE [Id] = {game.Id}";
-        //     ExecuteNonQueryInternal(gameEndTimestampQuery);
-        //
-        //     if (gameResultType == GameResultType.Aborted ||
-        //         gameResultType == GameResultType.Error)
-        //     {
-        //         StatisticUpdateAllPlayersSetGameResultAbortedOrError(game.Id, gameResultType);
-        //     }
-        //     else if (winner != null)
-        //     {
-        //         StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(game.Id, winner.Id);
-        //     }
-        // }
 
         #endregion
 
         #region Statistics
 
-        public void StatisticUpdateAddLegsPlayedForPlayers(int gameId)
+        public void StatisticUpdateSetLegsWonForPlayer(Player player, Domain.Game game)
         {
-            var addLegsPlayedForPlayersQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsPlayed}] = [{Column.LegsPlayed}] + 1 " +
-                                               $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
-                                               $"WHERE [{Column.Game}] = {gameId})";
-
-            ExecuteNonQueryInternal(addLegsPlayedForPlayersQuery);
-        }
-
-        public void StatisticUpdateAddLegsWonForPlayer(Player player, int gameId)
-        {
-            var addLegsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsWon}] = [{Column.LegsWon}] + 1 " +
+            var setLegsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsWon}] = {player.LegsWon} " +
                                            $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                            $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                           $"ON [GS].[{Column.Game}] = {gameId} " +
+                                           $"ON [GS].[{Column.Game}] = {game.Id} " +
                                            $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
                                            $"WHERE[{Column.Player}] = {player.Id})";
 
-            ExecuteNonQueryInternal(addLegsWonForPlayerQuery);
+            ExecuteNonQueryInternal(setLegsWonForPlayerQuery);
         }
 
-        public void StatisticUpdateAddSetsPlayedForPlayers(int gameId)
+        public void StatisticUpdateSetSetsWonForPlayer(Player player, Domain.Game game)
         {
-            var addSetsPlayedForPlayersQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsPlayed}] = [{Column.SetsPlayed}] + 1 " +
-                                               $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
-                                               $"WHERE [{Column.Game}] = {gameId})";
-
-            ExecuteNonQueryInternal(addSetsPlayedForPlayersQuery);
-        }
-
-        public void StatisticUpdateAddSetsWonForPlayer(Player player, int gameId)
-        {
-            var addSetsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsWon}] = [{Column.SetsWon}] + 1 " +
+            var setSetsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsWon}] = {player.SetsWon} " +
                                            $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                            $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                           $"ON [GS].[{Column.Game}] = {gameId} " +
+                                           $"ON [GS].[{Column.Game}] = {game.Id} " +
                                            $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
                                            $"WHERE[{Column.Player}] = {player.Id})";
 
-            ExecuteNonQueryInternal(addSetsWonForPlayerQuery);
+            ExecuteNonQueryInternal(setSetsWonForPlayerQuery);
         }
 
-
-        private void StatisticUpdateAllPlayersSetGameResultAbortedOrError(int gameId, GameResultType gameResultType)
+        public void StatisticUpdateSetLegsPlayedForPlayer(Domain.Game game)
         {
-            var playersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) gameResultType} " +
+            var setLegsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsPlayed}] = {game.Players.Sum(p => p.LegsWon)} " +
+                                              $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
+                                              $"WHERE [{Column.Game}] = {game.Id})";
+
+            ExecuteNonQueryInternal(setLegsPlayedForPlayerQuery);
+        }
+
+        public void StatisticUpdateSetSetsPlayedForPlayer(Domain.Game game)
+        {
+            var setSetsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsPlayed}] = {game.Players.Sum(p => p.SetsWon)} " +
+                                              $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
+                                              $"WHERE [{Column.Game}] = {game.Id})";
+
+            ExecuteNonQueryInternal(setSetsPlayedForPlayerQuery);
+        }
+
+        public void StatisticUpdateAllPlayersSetGameResultAbortedOrError(Domain.Game game)
+        {
+            var playersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) game.Result} " +
                                                    $"WHERE [{Column.Id}] IN (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                    $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                                   $"ON [GS].[{Column.Game}] = {gameId} " +
+                                                   $"ON [GS].[{Column.Game}] = {game.Id} " +
                                                    $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}])";
 
             ExecuteNonQueryInternal(playersGameStatisticsResultQuery);
         }
 
-        private void StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(int gameId, int winnerId)
+        public void StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(Domain.Game game)
         {
             var winnerGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) GameResultType.Win} " +
                                                   $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                   $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                                  $"ON [GS].[{Column.Game}] = {gameId} " +
+                                                  $"ON [GS].[{Column.Game}] = {game.Id} " +
                                                   $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
-                                                  $"WHERE[{Column.Player}] = {winnerId})";
+                                                  $"WHERE[{Column.Player}] = {game.Winner.Id})";
             var losersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) GameResultType.Loose} " +
                                                   $"WHERE [{Column.Id}] IN (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                   $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                                  $"ON [GS].[{Column.Game}] = {gameId} " +
+                                                  $"ON [GS].[{Column.Game}] = {game.Id} " +
                                                   $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
-                                                  $"WHERE[{Column.Player}] <> {winnerId})";
+                                                  $"WHERE[{Column.Player}] <> {game.Winner.Id})";
 
             ExecuteNonQueryInternal(winnerGameStatisticsResultQuery);
             ExecuteNonQueryInternal(losersGameStatisticsResultQuery);
@@ -220,12 +202,16 @@ namespace OneHundredAndEightyCore.Common
 
         #region _180
 
-        // public void _180SaveNew(Domain.Game game, Player player)
-        // {
-        //     var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw3},{Column.Throw2},{Column.Throw1}, {Column.Timestamp})" +
-        //                       $" VALUES ('{player.Id}','{game.Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{player.HandThrows.Pop().Id}','{DateTime.Now}')";
-        //     ExecuteNonQueryInternal(new180Query);
-        // }
+        public void _180SaveNew(Hand180 _180Hand, Domain.Game game)
+        {
+            var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw3},{Column.Throw2},{Column.Throw1}, {Column.Timestamp})" +
+                              $" VALUES ('{_180Hand.Player.Id}','{game.Id}'," +
+                              $"'{_180Hand.HandThrows.ElementAt(0).Id}'," +
+                              $"'{_180Hand.HandThrows.ElementAt(1).Id}'," +
+                              $"'{_180Hand.HandThrows.ElementAt(2).Id}'," +
+                              $"'{_180Hand.HandThrows.ElementAt(2).TimeStamp}')";
+            ExecuteNonQueryInternal(new180Query);
+        }
 
         #endregion
 
@@ -330,58 +316,58 @@ namespace OneHundredAndEightyCore.Common
 
             // add some settings
             var addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                               $"VALUES ('CamsDetectionWindowPositionLeft',50)";
+                               "VALUES ('CamsDetectionWindowPositionLeft',50)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('CamsDetectionWindowPositionTop',50)";
+                           "VALUES ('CamsDetectionWindowPositionTop',50)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('CamsDetectionWindowHeight',1056)";
+                           "VALUES ('CamsDetectionWindowHeight',1056)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('CamsDetectionWindowWidth',1944)";
+                           "VALUES ('CamsDetectionWindowWidth',1944)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('MainWindowHeight',638)";
+                           "VALUES ('MainWindowHeight',638)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('MainWindowWidth',1197)";
+                           "VALUES ('MainWindowWidth',1197)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowPositionLeft',1046)";
+                           "VALUES ('FreeThrowsSingleScoreWindowPositionLeft',1046)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowPositionTop',906)";
+                           "VALUES ('FreeThrowsSingleScoreWindowPositionTop',906)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowHeight',293)";
+                           "VALUES ('FreeThrowsSingleScoreWindowHeight',293)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsSingleScoreWindowWidth',1406)";
+                           "VALUES ('FreeThrowsSingleScoreWindowWidth',1406)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsDoubleScoreWindowPositionLeft',1056)";
+                           "VALUES ('FreeThrowsDoubleScoreWindowPositionLeft',1056)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsDoubleScoreWindowPositionTop',828)";
+                           "VALUES ('FreeThrowsDoubleScoreWindowPositionTop',828)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsDoubleScoreWindowHeight',376)";
+                           "VALUES ('FreeThrowsDoubleScoreWindowHeight',376)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('FreeThrowsDoubleScoreWindowWidth',1473)";
+                           "VALUES ('FreeThrowsDoubleScoreWindowWidth',1473)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('ClassicScoreWindowPositionLeft',1056)";
+                           "VALUES ('ClassicScoreWindowPositionLeft',1056)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('ClassicScoreWindowPositionTop',815)";
+                           "VALUES ('ClassicScoreWindowPositionTop',815)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('ClassicScoreWindowHeight',386)";
+                           "VALUES ('ClassicScoreWindowHeight',386)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('ClassicScoreWindowWidth',1472)";
+                           "VALUES ('ClassicScoreWindowWidth',1472)";
             ExecuteNonQueryInternal(addParameter);
             // add some settings
 
@@ -398,19 +384,19 @@ namespace OneHundredAndEightyCore.Common
             ExecuteNonQueryInternal(deleteParameter);
 
             var addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                               $"VALUES ('MaxContourArc',265)";
+                               "VALUES ('MaxContourArc',265)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('MinContourArea',336)";
+                           "VALUES ('MinContourArea',336)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('MaxContourArea',3300)";
+                           "VALUES ('MaxContourArea',3300)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('MinContourWidth',8)";
+                           "VALUES ('MinContourWidth',8)";
             ExecuteNonQueryInternal(addParameter);
             addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
-                           $"VALUES ('MaxContourWidth',44)";
+                           "VALUES ('MaxContourWidth',44)";
             ExecuteNonQueryInternal(addParameter);
 
             UpdateDbVersion("2.3");

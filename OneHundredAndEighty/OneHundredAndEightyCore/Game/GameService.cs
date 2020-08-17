@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Domain;
@@ -118,21 +119,28 @@ namespace OneHundredAndEightyCore.Game
         {
             if (Game != null)
             {
-                // dbService.GameEnd(Game, gameResultType: type);
+                if (Game.legPoints == 0 && type == GameResultType.Aborted) // todo do another way
+                {
+                    Game.Result = GameResultType.NotDefined;
+                }
+                else
+                {
+                    Game.Result = type;
+                }
+
                 StopGameInternal();
             }
         }
 
-        private void OnMatchEnd(Player winner)
+        private void OnMatchEnd()
         {
-            // dbService.GameEnd(Game, winner);
             OnGameEnd?.Invoke();
-
             StopGameInternal();
         }
 
         private void StopGameInternal()
         {
+            Game.EndTimeStamp = DateTime.Now;
             SaveGameData();
             Game = null;
             detectionService.OnThrowDetected -= OnAnotherThrow;
@@ -144,7 +152,39 @@ namespace OneHundredAndEightyCore.Game
 
         private void SaveGameData()
         {
-            //todo
+            Game.Id = dbService.GameSaveNew(Game);
+
+            foreach (var thrw in Game.Throws.Reverse())
+            {
+                dbService.ThrowSaveNew(thrw,Game);
+            }
+
+            foreach (var player in Game.Players)
+            {
+                dbService.StatisticUpdateSetLegsPlayedForPlayer(Game);
+                dbService.StatisticUpdateSetLegsWonForPlayer(player, Game);
+
+                dbService.StatisticUpdateSetSetsPlayedForPlayer(Game);
+                dbService.StatisticUpdateSetSetsWonForPlayer(player, Game);
+            }
+
+            foreach (var hand180 in Game.Hands180)
+            {
+                dbService._180SaveNew(hand180, Game); // todo 180 save problem - no throw id
+            }
+
+            switch (Game.Result)
+            {
+                case GameResultType.NotDefined:
+                    dbService.StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(Game); // todo no winner problem
+                    break;
+                case GameResultType.Aborted:
+                case GameResultType.Error:
+                    dbService.StatisticUpdateAllPlayersSetGameResultAbortedOrError(Game);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         #endregion

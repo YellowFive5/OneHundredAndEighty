@@ -20,8 +20,9 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             if (IsGameOver(thrw))
             {
-                ConvertAndSaveThrow(thrw, ThrowResult.MatchWon);
-                InvokeEndMatch();
+                Game.PlayerOnThrow.SetsWon += 1;
+                Game.PlayerOnThrow.LegsWon += 1;
+                OnMatchOver(thrw);
                 return;
             }
 

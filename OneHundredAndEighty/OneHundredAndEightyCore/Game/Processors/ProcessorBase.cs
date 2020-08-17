@@ -16,7 +16,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected Domain.Game Game { get; }
         private Stack<GameSnapshot> GameSnapshots { get; }
 
-        public delegate void EndMatchDelegate(Player winner);
+        public delegate void EndMatchDelegate();
 
         public event EndMatchDelegate OnMatchEnd;
 
@@ -161,6 +161,13 @@ namespace OneHundredAndEightyCore.Game.Processors
             }
         }
 
+        protected void OnMatchOver(DetectedThrow thrw)
+        {
+            ConvertAndSaveThrow(thrw, ThrowResult.MatchWon);
+            Game.Winner = Game.PlayerOnThrow;
+            InvokeEndMatch();
+        }
+
         protected void ConvertAndSaveThrow(DetectedThrow thrw,
                                            ThrowResult throwResult = ThrowResult.Ordinary)
         {
@@ -179,7 +186,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected void InvokeEndMatch()
         {
-            OnMatchEnd?.Invoke(Game.PlayerOnThrow);
+            OnMatchEnd?.Invoke();
         }
 
         public void OnThrow(DetectedThrow thrw)
