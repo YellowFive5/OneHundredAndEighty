@@ -22,31 +22,24 @@ namespace OneHundredAndEightyCore.Game.Processors
             {
                 ConvertAndSaveThrow(thrw, ThrowResult.MatchWon);
                 InvokeEndMatch();
-
                 return;
             }
 
             if (IsSetOver(thrw))
             {
-                ConvertAndSaveThrow(thrw, ThrowResult.SetWon);
-                OnSetOver();
-
+                OnSetOver(thrw);
                 return;
             }
 
             if (IsLegOver(thrw))
             {
-                ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
-                OnLegOver();
-
+                OnLegOver(thrw);
                 return;
             }
 
             if (IsFault(thrw))
             {
-                ConvertAndSaveThrow(thrw, ThrowResult.Fault);
-                OnFault();
-
+                OnFault(thrw);
                 return;
             }
 
@@ -57,11 +50,11 @@ namespace OneHundredAndEightyCore.Game.Processors
             OnHandOverDoublePlayersCheck(thrw);
         }
 
-        private void OnLegOver()
+        private void OnLegOver(DetectedThrow thrw)
         {
+            ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
             Game.PlayerOnThrow.LegsWon += 1;
             scoreBoard.AddLegsWonTo(Game.PlayerOnThrow);
-
             ClearPlayerOnThrowHand();
 
             foreach (var player in Game.Players)
@@ -74,11 +67,11 @@ namespace OneHundredAndEightyCore.Game.Processors
             TogglePlayerOnLegAndOnThrow();
         }
 
-        private void OnSetOver()
+        private void OnSetOver(DetectedThrow thrw)
         {
+            ConvertAndSaveThrow(thrw, ThrowResult.SetWon);
             Game.PlayerOnThrow.SetsWon += 1;
             scoreBoard.AddSetsWonTo(Game.PlayerOnThrow);
-
             ClearPlayerOnThrowHand();
 
             foreach (var player in Game.Players)

@@ -32,9 +32,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             if (IsFault(thrw))
             {
-                ConvertAndSaveThrow(thrw, ThrowResult.Fault);
-                OnFault();
-
+                OnFault(thrw);
                 return;
             }
 

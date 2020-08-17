@@ -115,15 +115,13 @@ namespace OneHundredAndEightyCore.Game.Processors
                    Game.PlayerOnThrow.LegPoints - thrw.TotalPoints == 0;
         }
 
-        protected void OnFault()
+        protected void OnFault(DetectedThrow thrw)
         {
+            ConvertAndSaveThrow(thrw, ThrowResult.Fault);
             Game.PlayerOnThrow.LegPoints += Game.PlayerOnThrow.HandPoints;
             scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.LegPoints);
-
             ClearPlayerOnThrowHand();
-
             scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
-
             TogglePlayerOnThrow();
         }
 
