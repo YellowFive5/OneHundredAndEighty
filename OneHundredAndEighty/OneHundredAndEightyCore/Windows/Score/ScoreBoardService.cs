@@ -29,11 +29,11 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public event UndoThrowButtonDelegate OnUndoThrowButtonPressed;
 
-        public delegate void CorrectThrowButtonDelegate();
+        public delegate void ManualThrowButtonDelegate();
 
-        public event CorrectThrowButtonDelegate OnCorrectThrowButtonPressed;
+        public event ManualThrowButtonDelegate OnManualThrowButtonPressed;
         public UndoThrowCommand UndoThrowCommand { get; }
-        public CorrectThrowCommand CorrectThrowCommand { get; }
+        public ManualThrowCommand CorrectThrowCommand { get; }
 
         public ScoreBoardService()
         {
@@ -45,7 +45,7 @@ namespace OneHundredAndEightyCore.Windows.Score
             this.configService = configService;
             this.drawService = drawService;
             UndoThrowCommand = new UndoThrowCommand(FireThrowUndo);
-            CorrectThrowCommand = new CorrectThrowCommand(FireThrowCorrect);
+            CorrectThrowCommand = new ManualThrowCommand(FireThrowCorrect);
         }
 
         #region Bindable props
@@ -732,7 +732,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         private void FireThrowCorrect()
         {
-            OnCorrectThrowButtonPressed?.Invoke();
+            OnManualThrowButtonPressed?.Invoke();
         }
 
 

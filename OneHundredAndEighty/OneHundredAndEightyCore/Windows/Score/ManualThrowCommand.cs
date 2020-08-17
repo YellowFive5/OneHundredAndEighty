@@ -7,9 +7,9 @@ using OneHundredAndEightyCore.Windows.Shared;
 
 namespace OneHundredAndEightyCore.Windows.Score
 {
-    public class CorrectThrowCommand : CommandBase
+    public class ManualThrowCommand : CommandBase
     {
-        public CorrectThrowCommand(Action execute) : base(execute)
+        public ManualThrowCommand(Action execute) : base(execute)
         {
         }
     }

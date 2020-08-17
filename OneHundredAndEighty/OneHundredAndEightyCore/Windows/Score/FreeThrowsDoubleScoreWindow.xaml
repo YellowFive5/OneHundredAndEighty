@@ -356,7 +356,7 @@
                     Style="{StaticResource ScoreWindowButtonStyle}"
                     Command="{Binding CorrectThrowCommand}"
                     Content="⌖" 
-                    ToolTip="Throw undo and manual correct"/>
+                    ToolTip="Manual throw"/>
             <Viewbox Grid.Column="1"
                      Grid.Row="1"
                      HorizontalAlignment="Left">
