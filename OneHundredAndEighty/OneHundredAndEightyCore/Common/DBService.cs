@@ -29,14 +29,14 @@ namespace OneHundredAndEightyCore.Common
 
         #region Throws
 
-        public void ThrowSaveNew(Throw thrw, Domain.Game game)
+        public int ThrowSaveNew(Throw thrw, Domain.Game game)
         {
             var newThrowQuery = $"INSERT INTO [{Table.Throws}] ({Column.Player},{Column.Game},{Column.Sector},{Column.Type},{Column.Result},{Column.Number},{Column.Points},{Column.PoiX},{Column.PoiY},{Column.ProjectionResolution},{Column.Timestamp})" +
                                 $"VALUES ({thrw.Player.Id},{game.Id},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Result},{thrw.Number}," +
                                 $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
             ExecuteNonQueryInternal(newThrowQuery);
 
-            var newThrowId = ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Throws}]");
+            return Convert.ToInt32(ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.Throws}]"));
         }
 
         #endregion
@@ -204,7 +204,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void _180SaveNew(Hand180 _180Hand, Domain.Game game)
         {
-            var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw3},{Column.Throw2},{Column.Throw1}, {Column.Timestamp})" +
+            var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw1},{Column.Throw2},{Column.Throw3}, {Column.Timestamp})" +
                               $" VALUES ('{_180Hand.Player.Id}','{game.Id}'," +
                               $"'{_180Hand.HandThrows.ElementAt(0).Id}'," +
                               $"'{_180Hand.HandThrows.ElementAt(1).Id}'," +

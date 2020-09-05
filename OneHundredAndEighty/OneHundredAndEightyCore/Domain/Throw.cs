@@ -28,7 +28,7 @@ namespace OneHundredAndEightyCore.Domain
 
     public class Throw
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public Player Player { get; }
         public int Sector { get; }
         public ThrowType Type { get; }
@@ -59,6 +59,11 @@ namespace OneHundredAndEightyCore.Domain
             Poi = poi;
             ProjectionResolution = projectionResolution;
             TimeStamp = DateTime.Now;
+        }
+
+        public void SetId(int id)
+        {
+            Id = id;
         }
     }
 }

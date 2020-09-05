@@ -156,7 +156,8 @@ namespace OneHundredAndEightyCore.Game
 
             foreach (var thrw in Game.Throws.Reverse())
             {
-                dbService.ThrowSaveNew(thrw,Game);
+                var throwId = dbService.ThrowSaveNew(thrw, Game);
+                thrw.SetId(throwId);
             }
 
             foreach (var player in Game.Players)
@@ -170,7 +171,7 @@ namespace OneHundredAndEightyCore.Game
 
             foreach (var hand180 in Game.Hands180)
             {
-                dbService._180SaveNew(hand180, Game); // todo 180 save problem - no throw id
+                dbService._180SaveNew(hand180, Game);
             }
 
             switch (Game.Result)
