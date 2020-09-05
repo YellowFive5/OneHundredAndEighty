@@ -11,20 +11,22 @@ namespace OneHundredAndEightyCore.Domain
 {
     public class Game
     {
-        public GameType Type { get; }
-        public readonly int sets;
         public readonly int legs;
+        public readonly int sets;
         public readonly int legPoints;
         public int Id { get; set; }
+        public GameType Type { get; }
+        public GamePoints Points { get; }
+        public List<Player> Players { get; }
         public DateTime StartTimeStamp { get; }
         public DateTime EndTimeStamp { get; set; }
-        public List<Player> Players { get; }
         public Player PlayerOnThrow { get; set; }
         public Player PlayerOnLeg { get; set; }
-        public Stack<Throw> Throws { get; set; }
+        public Stack<Throw> Throws { get; }
         public List<Hand180> Hands180 { get; set; }
         public GameResultType Result { get; set; }
         public Player Winner { get; set; }
+        public bool IsSingle => Players.Count == 1;
 
         public Game(GameType type,
                     List<Player> players,
@@ -33,11 +35,12 @@ namespace OneHundredAndEightyCore.Domain
                     GamePoints points)
         {
             Type = type;
+            Players = players;
             this.legs = legs;
             this.sets = sets;
+            Points = points;
             legPoints = Converter.GamePointsToInt(points);
             StartTimeStamp = DateTime.Now;
-            Players = players;
             Throws = new Stack<Throw>();
             Hands180 = new List<Hand180>();
             Result = GameResultType.NotDefined;

@@ -37,13 +37,10 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             Game.PlayerOnThrow = Game.Players.First();
             Game.PlayerOnLeg = Game.Players.First();
-            if (Game.Players.Count == 1) //  todo maybe do another way cuz ugly
+            
+            Game.Players.First().Order = PlayerOrder.First;
+            if (!Game.IsSingle)
             {
-                Game.Players.ElementAt(0).Order = PlayerOrder.First;
-            }
-            else
-            {
-                Game.Players.ElementAt(0).Order = PlayerOrder.First;
                 Game.Players.ElementAt(1).Order = PlayerOrder.Second;
             }
 
@@ -165,28 +162,24 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             ConvertAndSaveThrow(thrw, ThrowResult.MatchWon);
             Game.Winner = Game.PlayerOnThrow;
-            InvokeEndMatch();
+
+            OnMatchEnd?.Invoke();
         }
 
-        protected void ConvertAndSaveThrow(DetectedThrow thrw,
+        protected void ConvertAndSaveThrow(DetectedThrow detectedThrow,
                                            ThrowResult throwResult = ThrowResult.Ordinary)
         {
-            var dbThrow = new Throw(Game.PlayerOnThrow,
-                                    thrw.Sector,
-                                    thrw.Type,
-                                    throwResult,
-                                    (int) Game.PlayerOnThrow.ThrowNumber,
-                                    thrw.TotalPoints,
-                                    thrw.Poi,
-                                    thrw.ProjectionResolution);
+            var convertedThrow = new Throw(Game.PlayerOnThrow,
+                                           detectedThrow.Sector,
+                                           detectedThrow.Type,
+                                           throwResult,
+                                           (int) Game.PlayerOnThrow.ThrowNumber,
+                                           detectedThrow.TotalPoints,
+                                           detectedThrow.Poi,
+                                           detectedThrow.ProjectionResolution);
 
-            Game.Throws.Push(dbThrow);
-            Game.PlayerOnThrow.HandThrows.Add(dbThrow);
-        }
-
-        protected void InvokeEndMatch()
-        {
-            OnMatchEnd?.Invoke();
+            Game.Throws.Push(convertedThrow);
+            Game.PlayerOnThrow.HandThrows.Add(convertedThrow);
         }
 
         public void OnThrow(DetectedThrow thrw)

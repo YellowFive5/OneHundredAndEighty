@@ -386,14 +386,11 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void OpenScoreBoard(Domain.Game game)
         {
-            var player1 = game.Players.ElementAt(0);
-
-            Player player2 = null; //  todo ugly
-            if (game.Players.Count > 1)
-            {
-                player2 = game.Players.ElementAt(1);
-            }
-
+            var player1 = game.Players.First();
+            var player2 = game.IsSingle
+                              ? null
+                              : game.Players.ElementAt(1);
+            
             gameType = game.Type;
             switch (gameType)
             {
@@ -514,6 +511,11 @@ namespace OneHundredAndEightyCore.Windows.Score
                     throw new ArgumentOutOfRangeException();
             }
 
+            Player1OnLegPointShown = false;
+            Player2OnLegPointShown = false;
+            Player1OnThrowPointerShown = false;
+            Player2OnThrowPointerShown = false;
+            
             ForceClose = true;
             scoreBoardWindow?.Close();
             scoreBoardWindow = null;

@@ -64,7 +64,7 @@ namespace OneHundredAndEightyCore.Game
 
             scoreBoardService.OpenScoreBoard(Game);
 
-            switch (gameType)
+            switch (gameType) // todo ugly-spaghetti
             {
                 case GameType.FreeThrowsSingle:
                     switch (gamePoints)
@@ -119,7 +119,8 @@ namespace OneHundredAndEightyCore.Game
         {
             if (Game != null)
             {
-                if (Game.legPoints == 0 && type == GameResultType.Aborted) // todo do another way
+                if (type == GameResultType.Aborted &&
+                    Game.Points == GamePoints.Free) // todo ugly
                 {
                     Game.Result = GameResultType.NotDefined;
                 }
@@ -143,6 +144,7 @@ namespace OneHundredAndEightyCore.Game
             Game.EndTimeStamp = DateTime.Now;
             SaveGameData();
             Game = null;
+            
             detectionService.OnThrowDetected -= OnAnotherThrow;
             detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
             GameProcessor.OnMatchEnd -= OnMatchEnd;
@@ -150,7 +152,7 @@ namespace OneHundredAndEightyCore.Game
             scoreBoardService.OnManualThrowButtonPressed -= OnManualThrow;
         }
 
-        private void SaveGameData()
+        private void SaveGameData() // todo ugly-spaghetti
         {
             Game.Id = dbService.GameSaveNew(Game);
 
@@ -177,7 +179,10 @@ namespace OneHundredAndEightyCore.Game
             switch (Game.Result)
             {
                 case GameResultType.NotDefined:
-                    dbService.StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(Game); // todo no winner problem
+                    if (Game.Winner != null)
+                    {
+                        dbService.StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(Game);
+                    }
                     break;
                 case GameResultType.Aborted:
                 case GameResultType.Error:
