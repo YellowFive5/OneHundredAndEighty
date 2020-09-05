@@ -503,10 +503,8 @@
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam1SettingsIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid x:Name="Cam1Grid" ShowGridLines="False">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
@@ -521,7 +519,7 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="10" />
@@ -535,93 +533,86 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="Cam1ThresholdSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="5"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam1ThresholdSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam1RoiPosYSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="11"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam1RoiPosYSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam1RoiHeightSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="13"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam1RoiHeightSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam1SurfaceSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="7"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam1SurfaceSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam1SurfaceCenterSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="9"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam1SurfaceCenterSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Image x:Name="Cam1ImageBox"
-                           Grid.Row="1"
-                           Grid.RowSpan="5"
+                    <Image Grid.Row="3"
+                           Grid.ColumnSpan="3"
                            Grid.Column="1"
                            Source="{Binding CamImage, IsAsync=True}" />
-                    <Image x:Name="Cam1ImageBoxRoi"
-                           Grid.Row="7"
+                    <Image Grid.Row="5"
                            Grid.Column="1"
+                           Grid.ColumnSpan="3"
                            Source="{Binding CamRoiImage, IsAsync=True}" />
                     <Label Content="Threshold"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="5"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image" />
                     <Label Content="ROI Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="11"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI Y position" />
                     <Label Content="ROI height"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="13"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI height" />
                     <Label Content="Surface Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="7"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface line of dartboard surface" />
                     <Label Content="Surface center"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="9"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface center point. Stick dart into bull and set" />
-                    <Button x:Name="Cam1StartButton"
-                            Content="Start"
+                    <Button Content="Start"
                             Grid.Row="1"
-                            Grid.Column="3"
+                            Grid.Column="9"
                             IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam1Grid" />
-                    <Button x:Name="Cam1StopButton"
-                            Content="Stop"
-                            Grid.Row="3"
-                            Grid.Column="3"
+                    <Button Content="Stop"
+                            Grid.Row="1"
+                            Grid.Column="11"
+                            Grid.ColumnSpan="3"
                             IsEnabled="{Binding IsCamsSetupRunning}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StopCamSetupCapturingCommand}" />
-                    <TextBox Grid.Row="5"
-                             Grid.Column="3"
-                             Grid.RowSpan="3"
+                    <TextBox Grid.Row="1"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="7"
                              IsReadOnly="True"
                              Text="{Binding ContoursBoxText, Mode=OneWay}"
                              Style="{StaticResource MainWindowTextBoxStyle}" />
@@ -635,10 +626,8 @@
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam2SettingsIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid x:Name="Cam2Grid" ShowGridLines="False">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
@@ -653,7 +642,7 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="10" />
@@ -667,95 +656,86 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="Cam2ThresholdSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="5"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam2ThresholdSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam2RoiPosYSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="11"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam2RoiPosYSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam2RoiHeightSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="13"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam2RoiHeightSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam2SurfaceSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="7"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam2SurfaceSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam2SurfaceCenterSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="9"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam2SurfaceCenterSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Image x:Name="Cam2ImageBox"
-                           Grid.Row="1"
-                           Grid.RowSpan="5"
+                    <Image Grid.Row="3"
+                           Grid.ColumnSpan="3"
                            Grid.Column="1"
                            Source="{Binding CamImage, IsAsync=True}" />
-                    <Image x:Name="Cam2ImageBoxRoi"
-                           Grid.Row="7"
+                    <Image Grid.Row="5"
                            Grid.Column="1"
+                           Grid.ColumnSpan="3"
                            Source="{Binding CamRoiImage, IsAsync=True}" />
                     <Label Content="Threshold"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="5"
-                           FontWeight="Bold"
                            Style="{StaticResource MainWindowLabelStyle}"
-                           ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image"
-                           RenderTransformOrigin="0.5,0.5" />
+                           ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image" />
                     <Label Content="ROI Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="11"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI Y position" />
                     <Label Content="ROI height"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="13"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI height" />
                     <Label Content="Surface Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="7"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface line of dartboard surface" />
                     <Label Content="Surface center"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="9"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface center point. Stick dart into bull and set" />
-                    <Button x:Name="Cam2StartButton"
-                            Content="Start"
+                    <Button Content="Start"
                             Grid.Row="1"
-                            Grid.Column="3"
+                            Grid.Column="9"
                             IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam2Grid" />
-                    <Button x:Name="Cam2StopButton"
-                            Content="Stop"
-                            Grid.Row="3"
-                            Grid.Column="3"
+                    <Button Content="Stop"
+                            Grid.Row="1"
+                            Grid.Column="11"
+                            Grid.ColumnSpan="3"
                             IsEnabled="{Binding IsCamsSetupRunning}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StopCamSetupCapturingCommand}" />
-                    <TextBox Grid.Row="5"
-                             Grid.Column="3"
-                             Grid.RowSpan="3"
+                    <TextBox Grid.Row="1"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="7"
                              IsReadOnly="True"
                              Text="{Binding ContoursBoxText, Mode=OneWay}"
                              Style="{StaticResource MainWindowTextBoxStyle}" />
@@ -769,10 +749,8 @@
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam3SettingsIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid x:Name="Cam3Grid" ShowGridLines="False">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
@@ -787,7 +765,7 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="10" />
@@ -801,94 +779,86 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="Cam3ThresholdSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="5"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam3ThresholdSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam3RoiPosYSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="11"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam3RoiPosYSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam3RoiHeightSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="13"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam3RoiHeightSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam3SurfaceSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="7"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam3SurfaceSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam3SurfaceCenterSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="9"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam3SurfaceCenterSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Image x:Name="Cam3ImageBox"
-                           Grid.Row="1"
-                           Grid.RowSpan="5"
+                    <Image Grid.Row="3"
+                           Grid.ColumnSpan="3"
                            Grid.Column="1"
                            Source="{Binding CamImage, IsAsync=True}" />
-                    <Image x:Name="Cam3ImageBoxRoi"
-                           Grid.Row="7"
+                    <Image Grid.Row="5"
                            Grid.Column="1"
+                           Grid.ColumnSpan="3"
                            Source="{Binding CamRoiImage, IsAsync=True}" />
                     <Label Content="Threshold"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="5"
                            Style="{StaticResource MainWindowLabelStyle}"
-                           ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image"
-                           RenderTransformOrigin="0.5,0.5" />
+                           ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image" />
                     <Label Content="ROI Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="11"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI Y position" />
                     <Label Content="ROI height"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="13"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI height" />
                     <Label Content="Surface Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="7"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface line of dartboard surface" />
                     <Label Content="Surface center"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="9"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface center point. Stick dart into bull and set" />
-                    <Button x:Name="Cam3StartButton"
-                            Content="Start"
+                    <Button Content="Start"
                             Grid.Row="1"
-                            Grid.Column="3"
+                            Grid.Column="9"
                             IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam3Grid" />
-                    <Button x:Name="Cam3StopButton"
-                            Content="Stop"
-                            Grid.Row="3"
-                            Grid.Column="3"
+                    <Button Content="Stop"
+                            Grid.Row="1"
+                            Grid.Column="11"
+                            Grid.ColumnSpan="3"
                             IsEnabled="{Binding IsCamsSetupRunning}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StopCamSetupCapturingCommand}" />
-                    <TextBox Grid.Row="5"
-                             Grid.Column="3"
-                             Grid.RowSpan="3"
+                    <TextBox Grid.Row="1"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="7"
                              IsReadOnly="True"
                              Text="{Binding ContoursBoxText, Mode=OneWay}"
                              Style="{StaticResource MainWindowTextBoxStyle}" />
@@ -902,10 +872,8 @@
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam4SettingsIcon.png" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid x:Name="Cam4Grid" ShowGridLines="False">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="10" />
@@ -920,7 +888,7 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="10" />
@@ -934,93 +902,86 @@
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="Cam4ThresholdSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="5"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam4ThresholdSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam4RoiPosYSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="11"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam4RoiPosYSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam4RoiHeightSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="13"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam4RoiHeightSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam4SurfaceSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="7"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam4SurfaceSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Slider x:Name="Cam4SurfaceCenterSlider"
-                            Grid.Row="1"
-                            Grid.RowSpan="7"
+                    <Slider Grid.Row="3"
+                            Grid.RowSpan="3"
                             Grid.Column="9"
                             Style="{StaticResource MainWindowSetupSliderStyle}"
                             Value="{Binding Cam4SurfaceCenterSliderValue, Mode=TwoWay}"
                             IsEnabled="{Binding IsCamsSetupRunning}" />
-                    <Image x:Name="Cam4ImageBox"
-                           Grid.Row="1"
-                           Grid.RowSpan="5"
+                    <Image Grid.Row="3"
+                           Grid.ColumnSpan="3"
                            Grid.Column="1"
                            Source="{Binding CamImage, IsAsync=True}" />
-                    <Image x:Name="Cam4ImageBoxRoi"
-                           Grid.Row="7"
+                    <Image Grid.Row="5"
                            Grid.Column="1"
+                           Grid.ColumnSpan="3"
                            Source="{Binding CamRoiImage, IsAsync=True}" />
                     <Label Content="Threshold"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="5"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI image threshold slider. Stick dart into dartboard and set slider in position, &#xA;when you can see only white dart contour, without any light noise from sides of image" />
                     <Label Content="ROI Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="11"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI Y position" />
                     <Label Content="ROI height"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="13"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="ROI height" />
                     <Label Content="Surface Y"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="7"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface line of dartboard surface" />
                     <Label Content="Surface center"
-                           Grid.Row="9"
+                           Grid.Row="7"
                            Grid.Column="9"
                            Style="{StaticResource MainWindowLabelStyle}"
                            ToolTip="Surface center point. Stick dart into bull and set" />
-                    <Button x:Name="Cam4StartButton"
-                            Content="Start"
+                    <Button Content="Start"
                             Grid.Row="1"
-                            Grid.Column="3"
+                            Grid.Column="9"
                             IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam4Grid" />
-                    <Button x:Name="Cam4StopButton"
-                            Content="Stop"
-                            Grid.Row="3"
-                            Grid.Column="3"
+                    <Button Content="Stop"
+                            Grid.Row="1"
+                            Grid.Column="11"
+                            Grid.ColumnSpan="3"
                             IsEnabled="{Binding IsCamsSetupRunning}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StopCamSetupCapturingCommand}" />
-                    <TextBox Grid.Row="5"
-                             Grid.Column="3"
-                             Grid.RowSpan="3"
+                    <TextBox Grid.Row="1"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="7"
                              IsReadOnly="True"
                              Text="{Binding ContoursBoxText, Mode=OneWay}"
                              Style="{StaticResource MainWindowTextBoxStyle}" />

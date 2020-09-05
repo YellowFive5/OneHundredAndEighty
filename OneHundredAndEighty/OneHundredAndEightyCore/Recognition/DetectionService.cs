@@ -498,14 +498,7 @@ namespace OneHundredAndEightyCore.Recognition
                                    : side2;
             }
 
-            return Converter.ToString("Contour\n" +
-                                      "Arc:\n" +
-                                      $"{(int) contourArс}\n" +
-                                      "Area:\n" +
-                                      $"{(int) contourArea}\n" +
-                                      "Width:\n" +
-                                      $"{(int) contourWidth}\n"
-                                     );
+            return Converter.ToString($"Contour Arc:{(int) contourArс}\tArea:{(int) contourArea}\tWidth:{(int) contourWidth}");
         }
     }
 }
