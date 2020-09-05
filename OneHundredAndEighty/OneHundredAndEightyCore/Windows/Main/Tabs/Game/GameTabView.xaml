@@ -82,7 +82,7 @@
         <ComboBox x:Name="NewGamePlayer2ComboBox"
                   Grid.Row="5"
                   Grid.Column="5"
-                  Grid.ColumnSpan="4"
+                  Grid.ColumnSpan="3"
                   Width="170"
                   ItemsSource="{Binding DataContext.Players}"
                   SelectedItem="{Binding NewGamePlayer2}"
