@@ -57,6 +57,7 @@
     <Resource Include="Resources\MainWindow\TabItemIcons\GeneralSettingsIcon.png" />
     <Resource Include="Resources\MainWindow\TabItemIcons\PlayerIcon.png" />
     <Resource Include="Resources\MainWindow\TabItemIcons\SettingsIcon.png" />
+    <Resource Include="Resources\SplashScreenLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
