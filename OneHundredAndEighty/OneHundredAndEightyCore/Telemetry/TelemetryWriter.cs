@@ -10,7 +10,7 @@ namespace OneHundredAndEightyCore.Telemetry
 {
     public class TelemetryWriter
     {
-        private static readonly object syncTelemetryWrite = new object();
+        private static readonly object SyncTelemetryWrite = new object();
         private readonly TelemetryClient telemetryClient;
         private const string AppInsightsInstrumentationKey = "d72980ab-a100-4605-8e57-b47d7814f5cd";
 
@@ -30,13 +30,13 @@ namespace OneHundredAndEightyCore.Telemetry
 
         private void Flush()
         {
-            lock (syncTelemetryWrite)
+            lock (SyncTelemetryWrite)
             {
                 telemetryClient.Flush();
             }
         }
 
-        public async Task WriteEventAsync(TelemetryEvent telemetryEvent)
+        private async Task WriteEventAsync(TelemetryEvent telemetryEvent)
         {
             if (telemetryEvent == null)
             {
