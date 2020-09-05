@@ -10,7 +10,8 @@
     <Application.Resources>
         <!--#region Converters -->
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-        <resources:InvertBoolConverter x:Key="Inverted" />
+        <resources:BoolInvertedConverter x:Key="BoolInvertedConverter" />
+        <resources:MultipleBoolInvertedAndConverter x:Key="MultipleBoolAndInvertedConverter" />
         <ObjectDataProvider x:Key="GameTypeEnum" MethodName="GetValues"
                             ObjectType="{x:Type system:Enum}">
             <ObjectDataProvider.MethodParameters>

@@ -56,16 +56,6 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.MainWindowViewModel
         }
 
         [Test]
-        public void MainTabsIsEnabled()
-        {
-            MainWindowViewModel.IsMainTabsEnabled = false;
-
-            MainWindowViewModel.OnMainWindowLoaded();
-
-            MainWindowViewModel.IsMainTabsEnabled.Should().BeTrue();
-        }
-
-        [Test]
         public void MainWindowHeightSets()
         {
             ConfigServiceMock.Object.MainWindowHeight = 1555.55;

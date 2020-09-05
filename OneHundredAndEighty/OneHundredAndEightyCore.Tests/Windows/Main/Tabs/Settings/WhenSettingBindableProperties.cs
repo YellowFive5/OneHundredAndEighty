@@ -925,18 +925,6 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.Tabs.Settings
             newValue.Should().Be("[HBV HD CAMERA]-[ID:'8&2f223cfb']");
             tester.AssertOnPropertyChangedInvoke(0, nameof(SettingsTabViewModel.CheckCamsBoxText));
         }
-        [Test]
-        public void IsSetupTabsEnabledSetsAndChangeFired()
-        {
-            var oldValue = SettingsTabViewModel.IsSetupTabsEnabled;
-
-            SettingsTabViewModel.IsSetupTabsEnabled = true;
-            var newValue = SettingsTabViewModel.IsSetupTabsEnabled;
-
-            oldValue.Should().BeFalse();
-            newValue.Should().BeTrue();
-            tester.AssertOnPropertyChangedInvoke(0, nameof(SettingsTabViewModel.IsSetupTabsEnabled));
-        }
 
         [Test]
         public void IsCamsSetupRunningSetsAndChangeFired()

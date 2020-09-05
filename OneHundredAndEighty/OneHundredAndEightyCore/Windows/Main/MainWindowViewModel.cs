@@ -80,18 +80,6 @@ namespace OneHundredAndEightyCore.Windows.Main
             }
         }
 
-        private bool isMainTabsEnabled;
-
-        public bool IsMainTabsEnabled
-        {
-            get => isMainTabsEnabled;
-            set
-            {
-                isMainTabsEnabled = value;
-                OnPropertyChanged(nameof(IsMainTabsEnabled));
-            }
-        }
-
         #endregion
 
         public MainWindowViewModel()
@@ -158,8 +146,6 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         private void LoadSettings()
         {
-            IsMainTabsEnabled = true;
-
             configService.LoadSettings();
 
             DataContext.Players = Converter.PlayersFromTable(dbService.PlayersLoadAll());

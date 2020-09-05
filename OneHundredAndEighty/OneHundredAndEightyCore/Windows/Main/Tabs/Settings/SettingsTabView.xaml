@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
              xmlns:resx="clr-namespace:OneHundredAndEightyCore.Resources"
-             xmlns:tabs="clr-namespace:OneHundredAndEightyCore.Windows.Main.Tabs"
              xmlns:settings="clr-namespace:OneHundredAndEightyCore.Windows.Main.Tabs.Settings"
              mc:Ignorable="d"
              d:DesignHeight="618.353"
@@ -18,8 +16,14 @@
                     Style="{StaticResource MainWindowTabControlStyle}"
                     TabStripPlacement="Top">
             <TabItem x:Name="GeneralSetupTabItem"
-                     IsEnabled="{Binding IsSetupTabsEnabled}"
                      Style="{StaticResource MainWindowSubTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="IsCamsSetupRunning" />
+                        <Binding Path="IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
+
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/GeneralSettingsIcon.png" />
@@ -471,7 +475,7 @@
                             Content="Start"
                             Grid.Row="21"
                             Grid.Column="5"
-                            IsEnabled="{Binding IsRuntimeCrossingRunning, Converter={StaticResource Inverted}}"
+                            IsEnabled="{Binding IsRuntimeCrossingRunning, Converter={StaticResource BoolInvertedConverter}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartRuntimeCrossingCommand}" />
                     <Button x:Name="CrossingStopButton"
@@ -496,8 +500,14 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="Cam1SetupTabItem"
-                     IsEnabled="{Binding IsSetupTabsEnabled}"
                      Style="{StaticResource MainWindowSubTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="IsCamsSetupRunning" />
+                        <Binding Path="IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
+
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam1SettingsIcon.png" />
@@ -599,7 +609,7 @@
                     <Button Content="Start"
                             Grid.Row="1"
                             Grid.Column="9"
-                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource BoolInvertedConverter}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam1Grid" />
@@ -619,8 +629,13 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="Cam2SetupTabItem"
-                     IsEnabled="{Binding IsSetupTabsEnabled}"
                      Style="{StaticResource MainWindowSubTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="IsCamsSetupRunning" />
+                        <Binding Path="IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam2SettingsIcon.png" />
@@ -722,7 +737,7 @@
                     <Button Content="Start"
                             Grid.Row="1"
                             Grid.Column="9"
-                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource BoolInvertedConverter}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam2Grid" />
@@ -742,8 +757,13 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="Cam3SetupTabItem"
-                     IsEnabled="{Binding IsSetupTabsEnabled}"
                      Style="{StaticResource MainWindowSubTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="IsCamsSetupRunning" />
+                        <Binding Path="IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam3SettingsIcon.png" />
@@ -845,7 +865,7 @@
                     <Button Content="Start"
                             Grid.Row="1"
                             Grid.Column="9"
-                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource BoolInvertedConverter}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam3Grid" />
@@ -865,8 +885,13 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="Cam4SetupTabItem"
-                     IsEnabled="{Binding IsSetupTabsEnabled}"
                      Style="{StaticResource MainWindowSubTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="IsCamsSetupRunning" />
+                        <Binding Path="IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam4SettingsIcon.png" />
@@ -968,7 +993,7 @@
                     <Button Content="Start"
                             Grid.Row="1"
                             Grid.Column="9"
-                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource Inverted}}"
+                            IsEnabled="{Binding IsCamsSetupRunning, Converter={StaticResource BoolInvertedConverter}}"
                             Style="{StaticResource MainWindowButtonStyle}"
                             Command="{Binding StartCamSetupCapturingCommand}"
                             CommandParameter="Cam4Grid" />

@@ -68,18 +68,6 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.MainWindowViewModel
             newValue.Should().Be(555.05);
             tester.AssertOnPropertyChangedInvoke(0, nameof(MainWindowViewModel.MainWindowWidth));
         }
-
-        [Test]
-        public void IsMainTabsEnabledSetsAndChangeFired()
-        {
-            var oldValue = MainWindowViewModel.IsMainTabsEnabled;
-
-            MainWindowViewModel.IsMainTabsEnabled = true;
-            var newValue = MainWindowViewModel.IsMainTabsEnabled;
-
-            oldValue.Should().BeFalse();
-            newValue.Should().BeTrue();
-            tester.AssertOnPropertyChangedInvoke(0, nameof(MainWindowViewModel.IsMainTabsEnabled));
-        }
+        
     }
 }

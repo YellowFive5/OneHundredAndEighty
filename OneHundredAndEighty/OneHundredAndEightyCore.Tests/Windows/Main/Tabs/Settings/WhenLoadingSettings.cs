@@ -590,14 +590,5 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.Tabs.Settings
             SettingsTabViewModel.Cam4SetupSector.Should().Be("20/1");
         }
 
-        [Test]
-        public void SetupTabsIsEnabled()
-        {
-            SettingsTabViewModel.IsSetupTabsEnabled = false;
-
-            SettingsTabViewModel.LoadSettings();
-
-            SettingsTabViewModel.IsSetupTabsEnabled.Should().BeTrue();
-        }
     }
 }

@@ -74,8 +74,14 @@
                     BorderBrush="#BF00A369"
                     BorderThickness="1 1 0 0">
             <TabItem x:Name="GameTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}"
                      Style="{StaticResource MainWindowTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="GameTabViewModel.IsGameRunning" />
+                        <Binding Path="SettingsTabViewModel.IsCamsSetupRunning" />
+                        <Binding Path="SettingsTabViewModel.IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
                 <TabItem.Header>
                     <Grid>
                         <Image Source="/Resources/MainWindow/TabItemIcons/GameIcon.png" />
@@ -84,8 +90,14 @@
                 <game:GameTabView DataContext="{Binding GameTabViewModel}" />
             </TabItem>
             <TabItem x:Name="PlayersTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}"
                      Style="{StaticResource MainWindowTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="GameTabViewModel.IsGameRunning" />
+                        <Binding Path="SettingsTabViewModel.IsCamsSetupRunning" />
+                        <Binding Path="SettingsTabViewModel.IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/PlayerIcon.png" />
@@ -94,8 +106,14 @@
                 <player:PlayerTabView DataContext="{Binding PlayerTabViewModel}" />
             </TabItem>
             <TabItem x:Name="SettingsTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}"
                      Style="{StaticResource MainWindowTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="GameTabViewModel.IsGameRunning" />
+                        <Binding Path="SettingsTabViewModel.IsCamsSetupRunning" />
+                        <Binding Path="SettingsTabViewModel.IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/SettingsIcon.png" />
@@ -104,8 +122,15 @@
                 <settings:SettingsTabView DataContext="{Binding SettingsTabViewModel}" />
             </TabItem>
             <TabItem x:Name="AboutTabItem"
-                     IsEnabled="{Binding IsMainTabsEnabled}"
                      Style="{StaticResource MainWindowTabItemStyle}">
+                <TabItem.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultipleBoolAndInvertedConverter}">
+                        <Binding Path="GameTabViewModel.IsGameRunning" />
+                        <Binding Path="SettingsTabViewModel.IsCamsSetupRunning" />
+                        <Binding Path="SettingsTabViewModel.IsRuntimeCrossingRunning" />
+                    </MultiBinding>
+                </TabItem.IsEnabled>
+
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/AboutIcon.png" />

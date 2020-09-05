@@ -51,7 +51,7 @@
                   Grid.Column="3"
                   SelectedItem="{Binding NewGameType}"
                   ItemsSource="{Binding Source={StaticResource GameTypeEnum}}"
-                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
+                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource BoolInvertedConverter}}"
                   Style="{StaticResource MainWindowComboBoxStyle}" />
         <Label Content="Player"
                Grid.Row="5"
@@ -63,13 +63,13 @@
                   Grid.Column="3"
                   ItemsSource="{Binding DataContext.Players}"
                   SelectedItem="{Binding NewGamePlayer1}"
-                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}, Mode=OneWay}"
+                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource BoolInvertedConverter}, Mode=OneWay}"
                   Style="{StaticResource MainWindowComboBoxStyle}" />
         <Button x:Name="StartGameButton"
                 Content="Start Game"
                 Grid.Row="7"
                 Grid.Column="3"
-                IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
+                IsEnabled="{Binding IsGameRunning,  Converter={StaticResource BoolInvertedConverter}}"
                 Style="{StaticResource MainWindowButtonStyle}"
                 Command="{Binding StartNewGameCommand}" />
         <Button x:Name="StopGameButton"
@@ -86,7 +86,7 @@
                   Width="170"
                   ItemsSource="{Binding DataContext.Players}"
                   SelectedItem="{Binding NewGamePlayer2}"
-                  IsEnabled="{Binding IsGameRunning, Converter={StaticResource Inverted}}"
+                  IsEnabled="{Binding IsGameRunning, Converter={StaticResource BoolInvertedConverter}}"
                   Visibility="{Binding IsNewGameForPair, Converter={StaticResource BoolToVisibility}}"
                   Style="{StaticResource MainWindowComboBoxStyle}" />
         <Label x:Name="NewGamePlayer2Label"
@@ -101,14 +101,14 @@
                   Width="75"
                   Style="{StaticResource MainWindowLegsSetsComboboxStyle}"
                   SelectedItem="{Binding NewGameSets}"
-                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
+                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource BoolInvertedConverter}}"
                   Visibility="{Binding IsNewGameIsClassic, Converter={StaticResource BoolToVisibility}}" />
         <ComboBox x:Name="NewGameLegsComboBox"
                   Grid.Row="3"
                   Grid.Column="9"
                   Width="75"
                   SelectedItem="{Binding NewGameLegs}"
-                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
+                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource BoolInvertedConverter}}"
                   Visibility="{Binding IsNewGameIsClassic, Converter={StaticResource BoolToVisibility}}"
                   Style="{StaticResource MainWindowLegsSetsComboboxStyle}" />
         <Label x:Name="NewGameSetsLabel"
@@ -131,7 +131,7 @@
                   Width="75"
                   SelectedItem="{Binding NewGamePoints}"
                   ItemsSource="{Binding Source={StaticResource GamePointsEnum}}"
-                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource Inverted}}"
+                  IsEnabled="{Binding IsGameRunning,  Converter={StaticResource BoolInvertedConverter}}"
                   Style="{StaticResource MainWindowComboBoxStyle}" />
         <Label x:Name="NewGamePointsLabel"
                Content="Points"

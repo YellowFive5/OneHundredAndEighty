@@ -856,18 +856,6 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
             }
         }
 
-        private bool isSetupTabsEnabled;
-
-        public bool IsSetupTabsEnabled
-        {
-            get => isSetupTabsEnabled;
-            set
-            {
-                isSetupTabsEnabled = value;
-                OnPropertyChanged(nameof(IsSetupTabsEnabled));
-            }
-        }
-
         private bool isCamsSetupRunning;
 
         public bool IsCamsSetupRunning
@@ -896,8 +884,6 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
 
         public void LoadSettings()
         {
-            IsSetupTabsEnabled = true;
-
             Cam1ThresholdSliderValue = configService.Cam1ThresholdSliderValue;
             Cam2ThresholdSliderValue = configService.Cam2ThresholdSliderValue;
             Cam3ThresholdSliderValue = configService.Cam3ThresholdSliderValue;
@@ -1028,8 +1014,6 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
 
         private async void StartCamSetupCapturing(CamNumber camNumber)
         {
-            // IsMainTabsEnabled = false;
-            IsSetupTabsEnabled = false;
             IsCamsSetupRunning = true;
 
             cts = new CancellationTokenSource();
@@ -1073,8 +1057,6 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
         private void StopCamSetupCapturing()
         {
             cts?.Cancel();
-            // IsMainTabsEnabled = true;
-            IsSetupTabsEnabled = true;
             IsCamsSetupRunning = false;
         }
     }
