@@ -34,7 +34,7 @@
                     BorderBrush="Black">
                 <Image x:Name="ProjectionImage"
                        Stretch="Uniform"
-                       Source="{Binding ProjectionImage, IsAsync=True}" />
+                       Source="{Binding ProjectionImage}" />
             </Border>
         </Grid>
         <Grid Grid.Row="0"
@@ -53,7 +53,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam1Image"
                        Stretch="Uniform"
-                       Source="{Binding Cam1Image, IsAsync=True}" />
+                       Source="{Binding Cam1Image}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -61,7 +61,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam1RoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam1RoiImage, IsAsync=True}" />
+                       Source="{Binding Cam1RoiImage}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -69,7 +69,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam1LastRoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam1LastRoiImage, IsAsync=True}" />
+                       Source="{Binding Cam1LastRoiImage}" />
             </Border>
 
         </Grid>
@@ -89,7 +89,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam2Image"
                        Stretch="Uniform"
-                       Source="{Binding Cam2Image, IsAsync=True}" />
+                       Source="{Binding Cam2Image}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -97,7 +97,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam2RoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam2RoiImage, IsAsync=True}" />
+                       Source="{Binding Cam2RoiImage}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -105,7 +105,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam2LastRoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam2LastRoiImage, IsAsync=True}" />
+                       Source="{Binding Cam2LastRoiImage}" />
             </Border>
 
         </Grid>
@@ -125,7 +125,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam3Image"
                        Stretch="Uniform"
-                       Source="{Binding Cam3Image, IsAsync=True}" />
+                       Source="{Binding Cam3Image}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -133,7 +133,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam3RoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam3RoiImage, IsAsync=True}" />
+                       Source="{Binding Cam3RoiImage}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -141,7 +141,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam3LastRoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam3LastRoiImage, IsAsync=True}" />
+                       Source="{Binding Cam3LastRoiImage}" />
             </Border>
         </Grid>
         <Grid Grid.Row="1"
@@ -160,7 +160,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam4Image"
                        Stretch="Uniform"
-                       Source="{Binding Cam4Image, IsAsync=True}" />
+                       Source="{Binding Cam4Image}" />
             </Border>
             <Border
                 Grid.Row="1"
@@ -168,7 +168,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam4RoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam4RoiImage, IsAsync=True}" />
+                       Source="{Binding Cam4RoiImage}" />
             </Border>
             <Border
                 Grid.Row="2"
@@ -176,7 +176,7 @@
                 BorderBrush="Black">
                 <Image x:Name="Cam4LastRoiImage"
                        Stretch="Uniform"
-                       Source="{Binding Cam4LastRoiImage, IsAsync=True}" />
+                       Source="{Binding Cam4LastRoiImage}" />
             </Border>
         </Grid>
         <Grid Grid.Row="1"

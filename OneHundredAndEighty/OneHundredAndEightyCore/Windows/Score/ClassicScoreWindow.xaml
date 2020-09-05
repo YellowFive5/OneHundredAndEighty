@@ -188,7 +188,7 @@
                    Grid.Row="0"
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
-                   Source="{Binding Player1Avatar, IsAsync=True}" />
+                   Source="{Binding Player1Avatar}" />
             <Grid Name="OnLegPointPlayer1"
                   Grid.Row="0"
                   Grid.Column="4"
@@ -337,7 +337,7 @@
                    Grid.Row="0"
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
-                   Source="{Binding Player2Avatar, IsAsync=True}" />
+                   Source="{Binding Player2Avatar}" />
             <Grid Name="OnLegPointPlayer2"
                   Grid.Row="0"
                   Grid.Column="4"

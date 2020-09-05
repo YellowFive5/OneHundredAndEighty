@@ -80,7 +80,7 @@
                            Grid.Column="3"
                            Height="150"
                            Width="150"
-                           Source="{Binding NewPlayerAvatar, IsAsync=True}" />
+                           Source="{Binding NewPlayerAvatar}" />
                     <Label Content="Avatar"
                            Grid.Row="5"
                            Grid.Column="1"

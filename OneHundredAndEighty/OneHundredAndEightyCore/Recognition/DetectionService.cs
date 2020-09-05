@@ -135,20 +135,20 @@ namespace OneHundredAndEightyCore.Recognition
                                                    camToRefresh.RoiFrameUpdateBlackBlank();
                                                    camToRefresh.PreviousRoiFrameUpdateBlackBlank();
                                                    camToRefresh.ThrowExtractedRoiFrameUpdateBlackBlank();
-                                                   Application.Current.Dispatcher.Invoke(() =>
-                                                                                         {
-                                                                                             camsDetectionBoard.SetCamImages(camToRefresh.camNumber,
-                                                                                                                             camToRefresh.GetImage(),
-                                                                                                                             camToRefresh.GetRoiImage(),
-                                                                                                                             camToRefresh.GetThrowExtractedRoiFrameImage());
-                                                                                         });
+                                                   Application.Current.Dispatcher.InvokeAsync(() =>
+                                                                                              {
+                                                                                                  camsDetectionBoard.SetCamImages(camToRefresh.camNumber,
+                                                                                                                                  camToRefresh.GetImage(),
+                                                                                                                                  camToRefresh.GetRoiImage(),
+                                                                                                                                  camToRefresh.GetThrowExtractedRoiFrameImage());
+                                                                                              });
                                                }
 
-                                               Application.Current.Dispatcher.Invoke(() =>
-                                                                                     {
-                                                                                         camsDetectionBoard.ClearProjectionImage();
-                                                                                         camsDetectionBoard.ClearPointsBox();
-                                                                                     });
+                                               Application.Current.Dispatcher.InvokeAsync(() =>
+                                                                                          {
+                                                                                              camsDetectionBoard.ClearProjectionImage();
+                                                                                              camsDetectionBoard.ClearPointsBox();
+                                                                                          });
 
                                                OnStatusChanged?.Invoke(DetectionServiceStatus.WaitingThrow);
                                                continue;
@@ -166,13 +166,13 @@ namespace OneHundredAndEightyCore.Recognition
                                                    camWithThrow.ThrowExtractedRoiFrameExtractFromRoiPreviousFrame();
                                                    FindAndProcessDartContour(camWithThrow);
                                                    camWithThrow.PreviousRoiFrameUpdateFromRoiFrame();
-                                                   Application.Current.Dispatcher.Invoke(() =>
-                                                                                         {
-                                                                                             camsDetectionBoard.SetCamImages(camWithThrow.camNumber,
-                                                                                                                             camWithThrow.GetImage(),
-                                                                                                                             camWithThrow.GetRoiImage(),
-                                                                                                                             camWithThrow.GetThrowExtractedRoiFrameImage());
-                                                                                         });
+                                                   Application.Current.Dispatcher.InvokeAsync(() =>
+                                                                                              {
+                                                                                                  camsDetectionBoard.SetCamImages(camWithThrow.camNumber,
+                                                                                                                                  camWithThrow.GetImage(),
+                                                                                                                                  camWithThrow.GetRoiImage(),
+                                                                                                                                  camWithThrow.GetThrowExtractedRoiFrameImage());
+                                                                                              });
                                                }
 
                                                var thrw = throwService.GetThrow();

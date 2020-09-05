@@ -1021,31 +1021,32 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
 
             try
             {
-                await Task.Run(() =>
-                               {
-                                   var cam = new CamService(camNumber,
-                                                            logger,
-                                                            drawService,
-                                                            configService);
-                                   while (!cancelToken.IsCancellationRequested)
-                                   {
-                                       cam.DoSetupCaptures();
-                                       Application.Current.Dispatcher.Invoke(() =>
-                                                                             {
-                                                                                 CamImage = cam.GetImage();
-                                                                                 CamRoiImage = cam.GetRoiImage();
-                                                                                 ContoursBoxText = detectionService.FindContourOnRoiFrame(cam);
-                                                                             });
-                                   }
+                await Task.Factory.StartNew(() =>
+                                            {
+                                                var cam = new CamService(camNumber,
+                                                                         logger,
+                                                                         drawService,
+                                                                         configService);
+                                                while (!cancelToken.IsCancellationRequested)
+                                                {
+                                                    cam.DoSetupCaptures();
+                                                    Application.Current.Dispatcher.InvokeAsync(() =>
+                                                                                               {
+                                                                                                   CamImage = cam.GetImage();
+                                                                                                   CamRoiImage = cam.GetRoiImage();
+                                                                                                   ContoursBoxText = detectionService.FindContourOnRoiFrame(cam);
+                                                                                               });
+                                                }
 
-                                   Application.Current.Dispatcher.Invoke(() =>
-                                                                         {
-                                                                             CamImage = new BitmapImage();
-                                                                             CamRoiImage = new BitmapImage();
-                                                                             ContoursBoxText = string.Empty;
-                                                                         });
-                                   cam.Dispose();
-                               });
+                                                Application.Current.Dispatcher.InvokeAsync(() =>
+                                                                                           {
+                                                                                               CamImage = new BitmapImage();
+                                                                                               CamRoiImage = new BitmapImage();
+                                                                                               ContoursBoxText = string.Empty;
+                                                                                           });
+                                                cam.Dispose();
+                                            },
+                                            cancelToken);
             }
             catch (Exception e)
             {

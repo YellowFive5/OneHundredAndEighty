@@ -169,7 +169,7 @@
                    Grid.Row="0"
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
-                   Source="{Binding Player1Avatar, IsAsync=True}" />
+                   Source="{Binding Player1Avatar}" />
         </Grid>
         <Grid Name="PointsGrid"
               Grid.Row="1"

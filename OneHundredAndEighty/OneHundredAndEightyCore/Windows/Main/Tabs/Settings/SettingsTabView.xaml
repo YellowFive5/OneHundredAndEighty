@@ -507,7 +507,6 @@
                         <Binding Path="IsRuntimeCrossingRunning" />
                     </MultiBinding>
                 </TabItem.IsEnabled>
-
                 <TabItem.Header>
                     <StackPanel>
                         <Image Source="/Resources/MainWindow/TabItemIcons/Cam1SettingsIcon.png" />
@@ -576,11 +575,11 @@
                     <Image Grid.Row="3"
                            Grid.ColumnSpan="3"
                            Grid.Column="1"
-                           Source="{Binding CamImage, IsAsync=True}" />
+                           Source="{Binding CamImage}" />
                     <Image Grid.Row="5"
                            Grid.Column="1"
                            Grid.ColumnSpan="3"
-                           Source="{Binding CamRoiImage, IsAsync=True}" />
+                           Source="{Binding CamRoiImage}" />
                     <Label Content="Threshold"
                            Grid.Row="7"
                            Grid.Column="5"
@@ -704,11 +703,11 @@
                     <Image Grid.Row="3"
                            Grid.ColumnSpan="3"
                            Grid.Column="1"
-                           Source="{Binding CamImage, IsAsync=True}" />
+                           Source="{Binding CamImage}" />
                     <Image Grid.Row="5"
                            Grid.Column="1"
                            Grid.ColumnSpan="3"
-                           Source="{Binding CamRoiImage, IsAsync=True}" />
+                           Source="{Binding CamRoiImage}" />
                     <Label Content="Threshold"
                            Grid.Row="7"
                            Grid.Column="5"
@@ -832,11 +831,11 @@
                     <Image Grid.Row="3"
                            Grid.ColumnSpan="3"
                            Grid.Column="1"
-                           Source="{Binding CamImage, IsAsync=True}" />
+                           Source="{Binding CamImage}" />
                     <Image Grid.Row="5"
                            Grid.Column="1"
                            Grid.ColumnSpan="3"
-                           Source="{Binding CamRoiImage, IsAsync=True}" />
+                           Source="{Binding CamRoiImage}" />
                     <Label Content="Threshold"
                            Grid.Row="7"
                            Grid.Column="5"
@@ -960,11 +959,11 @@
                     <Image Grid.Row="3"
                            Grid.ColumnSpan="3"
                            Grid.Column="1"
-                           Source="{Binding CamImage, IsAsync=True}" />
+                           Source="{Binding CamImage}" />
                     <Image Grid.Row="5"
                            Grid.Column="1"
                            Grid.ColumnSpan="3"
-                           Source="{Binding CamRoiImage, IsAsync=True}" />
+                           Source="{Binding CamRoiImage}" />
                     <Label Content="Threshold"
                            Grid.Row="7"
                            Grid.Column="5"
