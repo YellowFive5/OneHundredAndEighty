@@ -14,7 +14,7 @@
   
 # OneHundredAndEightyCore
 * All-in-one steel tip darts desktop app
-* Version [2.2 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)
+* Version [2.3 released](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.3)
 * Main community, united this idea is [here](https://www.facebook.com/groups/281778298914107/)
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
   - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly
@@ -47,12 +47,11 @@ timeline ↓
 ✅ [[**v.2.2 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.2)]
 
 - [x] Big technical and architecture improvements of code
-- [x] UI prettyfy
+- [x] UI prettify
 - [x] Throw manual correction
 - [x] Throw undo
-- [ ] Manual hand end
 
-⭕ [**v.2.3 Release**]
+✅ [[**v.2.3 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.3)]
 - [ ] ...
 - **Unsorted todo's:**
 - [ ] CamCalibrator itegration
