@@ -5,8 +5,7 @@
              xmlns:resources="clr-namespace:OneHundredAndEightyCore.Resources"
              xmlns:enums="clr-namespace:OneHundredAndEightyCore.Enums"
              xmlns:main="clr-namespace:OneHundredAndEightyCore.Windows.Main"
-             StartupUri="Windows/Main/MainWindow.xaml"
-             Startup="App_OnStartup">
+             StartupUri="Windows/Main/MainWindow.xaml">
     <Application.Resources>
         <!--#region Converters -->
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />

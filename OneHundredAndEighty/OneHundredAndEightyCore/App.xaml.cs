@@ -26,16 +26,12 @@ namespace OneHundredAndEightyCore
             var splashScreen = new SplashScreen("Resources/SplashScreenLogo.png");
             splashScreen.Show(true, true);
 
-            base.OnStartup(e);
-        }
-
-        private void App_OnStartup(object sender, StartupEventArgs e)
-        {
             Parser.Default.ParseArguments<Options>(e.Args).WithParsed(o =>
                                                                       {
                                                                           NoCams = o.NoCams;
                                                                           ThrowPanel = o.ThrowPanel;
                                                                       });
+            base.OnStartup(e);
         }
     }
 }
