@@ -972,11 +972,11 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Settings
             {
                 var cams = CreateCamsServices();
                 detectionService.CheckCamsAndTryCapture(cams);
-                CheckCamsBoxText = "Checked cams simultaneous work: OK";
+                CheckCamsBoxText = "Cams simultaneous work: OK";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                CheckCamsBoxText = "Checked cams simultaneous work: ERROR";
+                CheckCamsBoxText = "Cams simultaneous work: ERROR";
             }
         }
 
