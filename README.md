@@ -103,7 +103,8 @@ Classic positions for cams setup:
 ![Untitled Diagram](https://user-images.githubusercontent.com/42347722/79052102-ac5ed700-7c3c-11ea-8d13-7ed0de6bfa70.jpg)
 
 Notice, that it can be situation, when all your connected cams will not be work together at same time. It happens because there are not enough power in 1 PC usb port for working 2+ cams at same time. You can see all 4 cams connected via Control Panel but they don't work under load simultaneously. To check this situation go to Setup tab, check cams, and hit 'Check' button
-<img width="243" alt="2020-06-07 10_34_45-" src="https://user-images.githubusercontent.com/42347722/83964244-52813300-a8b4-11ea-9372-5e1528478be5.png">
+
+<img width="284" alt="2020-09-06 09_58_42-OneHundredAndEighty" src="https://user-images.githubusercontent.com/42347722/92320759-85aa9e00-f02c-11ea-918c-1056cbe243d7.png">
 
 When ERROR prints - you need to reconnect cams different way.
   
@@ -146,11 +147,11 @@ Most of this values you don’t need to change, but if you want you can experime
 
 ### Cams setup
 
-<img width="586" alt="2020-06-07 11_56_37-Фотографии" src="https://user-images.githubusercontent.com/42347722/83964526-6332a880-a8b6-11ea-9580-62b4f9023a04.png">
+<img width="846" alt="2020-09-06 09_51_26-" src="https://user-images.githubusercontent.com/42347722/92320778-ad016b00-f02c-11ea-86fe-e7a70b64f9b2.png">
 
 1. Set general values
 2. Set cams ID's (use 'Find cams' button to find cam ID)
-<img width="260" alt="2020-06-07 10_34_14-" src="https://user-images.githubusercontent.com/42347722/83964279-a68c1780-a8b4-11ea-9ccc-fffbc26a61ff.png">
+<img width="286" alt="2020-09-06 09_59_31-OneHundredAndEighty" src="https://user-images.githubusercontent.com/42347722/92320790-cbfffd00-f02c-11ea-8fa6-17711b9b8805.png">
 
 Keep in mind one thing - when you plug off cams and plug it again, but in another usb - ID of cam will change. So, try to connect cams one way to not change setups every time.
 
@@ -163,7 +164,7 @@ Keep in mind one thing - when you plug off cams and plug it again, but in anothe
 
 Go to each cams tab
 
-![91749790_2282946622009939_7528721286386679808_o](https://user-images.githubusercontent.com/42347722/79063258-27f66d80-7ca9-11ea-90a9-b1187ada2bf5.png)
+![2020-09-06 10_02_03-OneHundredAndEighty](https://user-images.githubusercontent.com/42347722/92320802-f356ca00-f02c-11ea-9348-29ff366b77db.jpg)
 
 1. Stick one dart in bull.
 2. Click "Start"
@@ -179,7 +180,7 @@ This mode can help you to check and fix all setups you have done.
 You can check detection process with all of cams, or combination of some (at least 2)
 Check necessary cams and detection checkbox on Setup/General tab
 
-<img width="103" alt="2020-04-26 11_24_48-" src="https://user-images.githubusercontent.com/42347722/80302424-a75c6480-87b2-11ea-845e-33d93be919fe.png">
+<img width="123" alt="2020-09-06 10_38_27-OneHundredAndEighty" src="https://user-images.githubusercontent.com/42347722/92320822-20a37800-f02d-11ea-91de-1f20a8e44afb.png">
 
 On Match/Projection tab start runtime crossing mode. Then, with manual sticking dart in dartboard you can see how detection works and check accuracy of your setups.
 
