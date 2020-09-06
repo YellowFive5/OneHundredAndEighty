@@ -134,14 +134,16 @@ Now, when you build cabinet, you can setup remaining things in main app.
 - **Cameras HFOV** - Horizontal field of view of your cameras [default is 85]. 
 - **Cam resolution width**  - [default is 1028]
 - **Cam resolution height** - [default is 720]
-- **Moves extraction value** - calculated after two images difference find value, with the help of which system understand, that you move your hand to extract darts from dartboard. [default is 8000]
-- **Move detected sleep time** - delay in seconds after moves on cam detected. Need to wait until dart fully sticks in dartboard after flight. [default is 0.75]
-- **Moves noise value** - calculated after two images difference find value to reduce noise moves. [default is 175]
-- **Smooth gaussian value** - value to smooth images in process of work. Not need to change it. [default is 5]
-- **Threshold sleep time** - delay in seconds after all cams working circle. [default is 0.3]
+- **Move detected sleep time** - delay in seconds after moves on cam detected. Need to wait until dart fully sticks in dartboard after flight. [default is 0.25]
+- **Threshold sleep time** - delay in seconds after all cams working circle. [default is 0.25]
 - **Extraction sleep time** - delay in seconds to stop detection process, when you extract darts from dartboard. [default is 4]
+- **Smooth gaussian value** - value to smooth images in process of work. Not need to change it. [default is 5]
 - **Minimal contour arc** - value, with the help of which system search dart contour after throw detected. [default is 105]
-- **Moves dart value** - calculated after two images difference find value, with the help of which system detects dart-moves. [default is 600]
+- **Maximal contour arc** - value, with the help of which system search dart contour after throw detected. [default is 265]
+- **Minimal contour area** - value, with the help of which system search dart contour after throw detected. [default is 336]
+- **Maximal contour area** - value, with the help of which system search dart contour after throw detected. [default is 3300]
+- **Minimal contour width** - value, with the help of which system search dart contour after throw detected. [default is 8]
+- **Maximal contour width** - value, with the help of which system search dart contour after throw detected. [default is 44]
 
 Most of this values you don’t need to change, but if you want you can experiment.
 
@@ -149,7 +151,7 @@ Most of this values you don’t need to change, but if you want you can experime
 
 <img width="846" alt="2020-09-06 09_51_26-" src="https://user-images.githubusercontent.com/42347722/92320778-ad016b00-f02c-11ea-86fe-e7a70b64f9b2.png">
 
-1. Set general values
+1. Set general values, (or leave dafault values )
 2. Set cams ID's (use 'Find cams' button to find cam ID)
 <img width="286" alt="2020-09-06 09_59_31-OneHundredAndEighty" src="https://user-images.githubusercontent.com/42347722/92320790-cbfffd00-f02c-11ea-8fa6-17711b9b8805.png">
 
@@ -172,17 +174,24 @@ Go to each cams tab
 4. Click "Stop"
 5. Go to next cam
 6. Setup all cams this way
-7. All app setups complete
+
+Then go to any cam tab. Click "Start". Stick dart into "Max point" and write down Arc/Area/Width values. Then stick dart into "Min point" and write down values.
+
+![1](https://user-images.githubusercontent.com/42347722/92320977-965c1380-f02e-11ea-8f79-9e0b0f57e6f6.jpg)
+
+This values you need to enter on main setup tab
+
+<img width="942" alt="2020-09-06 10_05_40-" src="https://user-images.githubusercontent.com/42347722/92320976-93612300-f02e-11ea-9acb-4fb7b04ca933.png">
 
 ### Runtime crossing mode
 
 This mode can help you to check and fix all setups you have done.
 You can check detection process with all of cams, or combination of some (at least 2)
-Check necessary cams and detection checkbox on Setup/General tab
+Check necessary cams and detection checkbox.
 
 <img width="123" alt="2020-09-06 10_38_27-OneHundredAndEighty" src="https://user-images.githubusercontent.com/42347722/92320822-20a37800-f02d-11ea-91de-1f20a8e44afb.png">
 
-On Match/Projection tab start runtime crossing mode. Then, with manual sticking dart in dartboard you can see how detection works and check accuracy of your setups.
+With manual sticking dart in dartboard you can see how detection works and check accuracy of your setups.
 
 ## 4. Database.db
 
