@@ -16,7 +16,7 @@ namespace OneHundredAndEightyCore.Common
         private readonly IConfigService configService;
         private readonly IMessageBoxService messageBoxService;
 
-        private const double AppVersion = 2.3;
+        private const double AppVersion = 2.4;
         private double currentDbVersion;
 
         public VersionChecker(DBService dbService,
@@ -74,13 +74,19 @@ namespace OneHundredAndEightyCore.Common
                         From2_0to2_1();
                         From2_1to2_2();
                         From2_2to2_3();
+                        From2_3to2_4();
                         break;
                     case 2.1:
                         From2_1to2_2();
                         From2_2to2_3();
+                        From2_3to2_4();
                         break;
                     case 2.2:
                         From2_2to2_3();
+                        From2_3to2_4();
+                        break;
+                    case 2.3:
+                        From2_3to2_4();
                         break;
                     default:
                         messageBoxService.ShowError(Resources.Resources.ErrorDbMigrationText,
@@ -89,7 +95,7 @@ namespace OneHundredAndEightyCore.Common
                         throw new Exception("DB migrating error");
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 RevertDb();
 
@@ -97,7 +103,7 @@ namespace OneHundredAndEightyCore.Common
                                             currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
                                             AppVersion.ToString("F1", CultureInfo.InvariantCulture));
 
-                throw e;
+                throw;
             }
 
             DeleteCopyOfOldDb();
@@ -122,6 +128,11 @@ namespace OneHundredAndEightyCore.Common
         private void From2_2to2_3()
         {
             dbService.MigrateFrom2_2to2_3();
+        }
+
+        private void From2_3to2_4()
+        {
+            dbService.MigrateFrom2_3to2_4();
         }
 
         #endregion

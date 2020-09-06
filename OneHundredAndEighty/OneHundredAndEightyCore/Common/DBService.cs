@@ -231,6 +231,81 @@ namespace OneHundredAndEightyCore.Common
 
         #endregion
 
+        #region Low level internals
+
+        private object ExecuteScalarInternal(string query)
+        {
+            var cmd = new SQLiteCommand(query) {Connection = connection};
+            try
+            {
+                lock (locker)
+                {
+                    connection.Open();
+                    var result = cmd.ExecuteScalar();
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                //todo errorMessage
+                throw e;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void ExecuteNonQueryInternal(string query)
+        {
+            var cmd = new SQLiteCommand(query) {Connection = connection};
+            try
+            {
+                lock (locker)
+                {
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                //todo errorMessage
+                throw e;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private DataTable ExecuteReaderInternal(string query)
+        {
+            var cmd = new SQLiteCommand(query) {Connection = connection};
+
+            try
+            {
+                lock (locker)
+                {
+                    connection.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    var dataTable = new DataTable();
+                    dataTable.Load(dataReader);
+                    return dataTable;
+                }
+            }
+            catch (Exception e)
+            {
+                //todo errorMessage
+                throw e;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        #endregion
+
         #region Migrations
 
         private void UpdateDbVersion(string version)
@@ -402,79 +477,11 @@ namespace OneHundredAndEightyCore.Common
             UpdateDbVersion("2.3");
         }
 
-        #endregion
-
-        #region Low level internals
-
-        private object ExecuteScalarInternal(string query)
+        public void MigrateFrom2_3to2_4()
         {
-            var cmd = new SQLiteCommand(query) {Connection = connection};
-            try
-            {
-                lock (locker)
-                {
-                    connection.Open();
-                    var result = cmd.ExecuteScalar();
-                    return result;
-                }
-            }
-            catch (Exception e)
-            {
-                //todo errorMessage
-                throw e;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-
-        private void ExecuteNonQueryInternal(string query)
-        {
-            var cmd = new SQLiteCommand(query) {Connection = connection};
-            try
-            {
-                lock (locker)
-                {
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                //todo errorMessage
-                throw e;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-
-        private DataTable ExecuteReaderInternal(string query)
-        {
-            var cmd = new SQLiteCommand(query) {Connection = connection};
-
-            try
-            {
-                lock (locker)
-                {
-                    connection.Open();
-                    var dataReader = cmd.ExecuteReader();
-                    var dataTable = new DataTable();
-                    dataTable.Load(dataReader);
-                    return dataTable;
-                }
-            }
-            catch (Exception e)
-            {
-                //todo errorMessage
-                throw e;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            //
+            
+            UpdateDbVersion("2.4");
         }
 
         #endregion
