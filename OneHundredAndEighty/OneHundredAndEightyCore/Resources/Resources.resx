@@ -142,7 +142,7 @@
     <value>Cameras HFOV</value>
   </data>
   <data name="CamIdHelperText" xml:space="preserve">
-    <value>Camera Id. Use CamCalibrator to find it</value>
+    <value>Camera Id. Click "Find cams" button</value>
   </data>
   <data name="CamResHHelperText" xml:space="preserve">
     <value>Cam vertical resolution. For now 720 max available</value>

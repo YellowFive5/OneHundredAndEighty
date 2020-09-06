@@ -133,7 +133,7 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Camera Id. Use CamCalibrator to find it.
+        ///   Looks up a localized string similar to Camera Id. Click &quot;Find cams&quot; button.
         /// </summary>
         public static string CamIdHelperText {
             get {
