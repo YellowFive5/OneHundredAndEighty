@@ -19,8 +19,9 @@
 * ❗ Applies to automatic throw detection with [[DartboardRecognition]](https://github.com/YellowFive5/DartboardRecognition) 
   - Please keep in mind, that all of this stuff is under heavy development now. Problems of performance and optimization stays not on first place for me now. So I can't guarantee perfect work of this stuff on your "piece of sh*t" notebook. On my system (4.2 Ghz, 6 cores, 16RAM) all works correctly
   
+<img width="826" alt="2020-09-06 09_42_55-OneHundredAndEighty" src="https://user-images.githubusercontent.com/42347722/92320695-06b56580-f02c-11ea-9d8c-e459b82792dd.png">
 <img width="1453" alt="2020-06-07 10_43_46-" src="https://user-images.githubusercontent.com/42347722/83963874-a2aac600-a8b1-11ea-8f36-37952bed37f1.png">
-<img width="1125" alt="2020-06-07 10_55_27-" src="https://user-images.githubusercontent.com/42347722/83963876-a50d2000-a8b1-11ea-9b25-eb9e79b0907f.png">
+<img width="1105" alt="2020-09-06 09_45_22-" src="https://user-images.githubusercontent.com/42347722/92320704-0ddc7380-f02c-11ea-9f4a-8fd3563f23e4.png">
 
 ## Release notes:
 timeline ↓
