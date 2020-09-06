@@ -353,10 +353,14 @@ namespace OneHundredAndEightyCore.Windows.CamsDetection
             ProjectionImage = Converter.EmguImageToBitmapImage(imageWithRay);
         }
 
-        public void PrintAndDrawThrow(DetectedThrow thrw)
+        public void PrintThrow(DetectedThrow thrw)
         {
             ThrowText = thrw.ToString();
             ThrowsHistoryText = $"{ThrowsHistoryText}\n{thrw}";
+        }
+
+        public void DrawThrow(DetectedThrow thrw)
+        {
             var imageWithThrowAndRays = drawService.ProjectionDrawThrow(thrw);
             ProjectionImage = Converter.EmguImageToBitmapImage(imageWithThrowAndRays);
         }

@@ -428,16 +428,26 @@ namespace OneHundredAndEightyCore.Recognition
 
         #endregion
 
-        public void InvokeOnThrowDetected(DetectedThrow thrw, bool manual = false)
+        public void InvokeOnThrowDetected(DetectedThrow thrw, bool manualThrow = false)
         {
             if (thrw != null)
             {
                 OnThrowDetected?.Invoke(thrw);
+                
+                Application.Current.Dispatcher.Invoke(() =>
+                                                      {
+                                                          if (workingMode == DetectionServiceWorkingMode.Crossing)
+                                                          {
+                                                              camsDetectionBoard.DrawThrow(thrw);
+                                                              return;
+                                                          }
 
-                if (!manual)
-                {
-                    Application.Current.Dispatcher.Invoke(() => { camsDetectionBoard.PrintAndDrawThrow(thrw); });
-                }
+                                                          if (!manualThrow)
+                                                          {
+                                                              camsDetectionBoard.PrintThrow(thrw);
+                                                              camsDetectionBoard.DrawThrow(thrw);
+                                                          }
+                                                      });
             }
         }
 
