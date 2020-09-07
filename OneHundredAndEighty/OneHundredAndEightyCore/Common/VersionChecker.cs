@@ -1,8 +1,9 @@
 ﻿#region Usings
 
 using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Windows.MessageBox;
 
@@ -12,42 +13,51 @@ namespace OneHundredAndEightyCore.Common
 {
     public class VersionChecker : IVersionChecker
     {
-        private readonly DBService dbService;
+        private readonly IDbService dbService;
         private readonly IConfigService configService;
         private readonly IMessageBoxService messageBoxService;
 
-        private const double AppVersion = 2.4;
-        private double currentDbVersion;
+        private readonly Version appVersion = new Version(2, 4);
+        private Version currentDbVersion;
+        private readonly List<Migration> migrations;
 
-        public VersionChecker(DBService dbService,
+
+        public VersionChecker(IDbService dbService,
                               IConfigService configService,
                               IMessageBoxService messageBoxService)
         {
             this.dbService = dbService;
             this.configService = configService;
             this.messageBoxService = messageBoxService;
+            migrations = new List<Migration>
+                         {
+                             new Migration(new Version(2, 1), dbService.MigrateFrom2_0to2_1),
+                             new Migration(new Version(2, 2), dbService.MigrateFrom2_1to2_2),
+                             new Migration(new Version(2, 3), dbService.MigrateFrom2_2to2_3),
+                             new Migration(new Version(2, 4), dbService.MigrateFrom2_3to2_4),
+                         };
         }
 
         public void CheckVersions()
         {
             CheckDbExists();
 
-            currentDbVersion = Converter.ToDouble(dbService.SettingsGetValue(SettingsType.DBVersion));
+            currentDbVersion = Converter.ToVersion(dbService.SettingsGetValue(SettingsType.DBVersion));
 
-            if (AppVersion != currentDbVersion)
+            if (appVersion > currentDbVersion)
             {
-                var answer = messageBoxService.AskWarningQuestion(Resources.Resources.VersionsMismatchWarningQuestionText,
-                                                                  currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                                                  AppVersion.ToString("F1", CultureInfo.InvariantCulture));
-                if (answer)
+                var confirm = messageBoxService.AskWarningQuestion(Resources.Resources.VersionsMismatchWarningQuestionText,
+                                                                   currentDbVersion.ToString(),
+                                                                   appVersion.ToString());
+                if (confirm)
                 {
                     DoMigrations();
                 }
                 else
                 {
                     messageBoxService.ShowError(Resources.Resources.VersionsMismatchErrorText,
-                                                AppVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                                currentDbVersion.ToString("F1", CultureInfo.InvariantCulture));
+                                                appVersion.ToString(),
+                                                currentDbVersion.ToString());
                     throw new Exception("DB version and App version is different");
                 }
             }
@@ -68,31 +78,9 @@ namespace OneHundredAndEightyCore.Common
 
             try
             {
-                switch (currentDbVersion)
+                foreach (var migration in migrations.Where(migration => migration.ToVersion > currentDbVersion))
                 {
-                    case 2.0:
-                        From2_0to2_1();
-                        From2_1to2_2();
-                        From2_2to2_3();
-                        From2_3to2_4();
-                        break;
-                    case 2.1:
-                        From2_1to2_2();
-                        From2_2to2_3();
-                        From2_3to2_4();
-                        break;
-                    case 2.2:
-                        From2_2to2_3();
-                        From2_3to2_4();
-                        break;
-                    case 2.3:
-                        From2_3to2_4();
-                        break;
-                    default:
-                        messageBoxService.ShowError(Resources.Resources.ErrorDbMigrationText,
-                                                    currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                                    AppVersion.ToString("F1", CultureInfo.InvariantCulture));
-                        throw new Exception("DB migrating error");
+                    migration.DoMigration();
                 }
             }
             catch (Exception)
@@ -100,8 +88,8 @@ namespace OneHundredAndEightyCore.Common
                 RevertDb();
 
                 messageBoxService.ShowError(Resources.Resources.ErrorDbMigrationText,
-                                            currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                            AppVersion.ToString("F1", CultureInfo.InvariantCulture));
+                                            currentDbVersion.ToString(),
+                                            appVersion.ToString());
 
                 throw;
             }
@@ -109,33 +97,9 @@ namespace OneHundredAndEightyCore.Common
             DeleteCopyOfOldDb();
 
             messageBoxService.ShowInfo(Resources.Resources.SuccessDbMigrationText,
-                                       currentDbVersion.ToString("F1", CultureInfo.InvariantCulture),
-                                       AppVersion.ToString("F1", CultureInfo.InvariantCulture));
+                                       currentDbVersion.ToString(),
+                                       appVersion.ToString());
         }
-
-        #region Migrations
-
-        private void From2_0to2_1()
-        {
-            dbService.MigrateFrom2_0to2_1();
-        }
-
-        private void From2_1to2_2()
-        {
-            dbService.MigrateFrom2_1to2_2();
-        }
-
-        private void From2_2to2_3()
-        {
-            dbService.MigrateFrom2_2to2_3();
-        }
-
-        private void From2_3to2_4()
-        {
-            dbService.MigrateFrom2_3to2_4();
-        }
-
-        #endregion
 
         #region CRUD
 

@@ -34,7 +34,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
         public const GamePoints DefaultNewGamePoints = GamePoints._501;
 
         public GameTabViewModel(DataContext dataContext,
-                                IDBService dbService,
+                                IDbService dbService,
                                 ILogger logger,
                                 IConfigService configService,
                                 DrawService drawService,

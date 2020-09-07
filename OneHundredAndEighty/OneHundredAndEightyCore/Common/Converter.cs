@@ -228,6 +228,11 @@ namespace OneHundredAndEightyCore.Common
             return Convert.ToBoolean(value);
         }
 
+        public static Version ToVersion(string value)
+        {
+            return new Version(value);
+        }
+
         public static CamNumber GridNameToCamNumber(string gridName)
         {
             switch (gridName)

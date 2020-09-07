@@ -9,11 +9,15 @@ using OneHundredAndEightyCore.Game;
 
 namespace OneHundredAndEightyCore.Common
 {
-    public interface IDBService
+    public interface IDbService
     {
         void SettingsSetValue(SettingsType name, string value);
         string SettingsGetValue(SettingsType name);
         void PlayerSaveNew(Player player);
         DataTable PlayersLoadAll();
+        void MigrateFrom2_0to2_1();
+        void MigrateFrom2_1to2_2();
+        void MigrateFrom2_2to2_3();
+        void MigrateFrom2_3to2_4();
     }
 }

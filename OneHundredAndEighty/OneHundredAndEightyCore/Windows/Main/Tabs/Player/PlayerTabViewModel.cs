@@ -27,7 +27,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
                                   ILogger logger,
                                   IConfigService configService,
                                   DrawService drawService,
-                                  IDBService dbService,
+                                  IDbService dbService,
                                   IMessageBoxService messageBoxService,
                                   CamsDetectionBoard camsDetectionBoard,
                                   IDetectionService detectionService)

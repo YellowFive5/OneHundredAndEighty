@@ -24,7 +24,7 @@ namespace OneHundredAndEightyCore.Windows.Main
     {
         private readonly ILogger logger;
         private readonly IMessageBoxService messageBoxService;
-        private readonly IDBService dbService;
+        private readonly IDbService dbService;
         private readonly IVersionChecker versionChecker;
         private readonly IDetectionService detectionService;
         private readonly ManualThrowPanel manualThrowPanel;
@@ -94,7 +94,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public MainWindowViewModel(ILogger logger,
                                    IMessageBoxService messageBoxService,
-                                   IDBService dbService,
+                                   IDbService dbService,
                                    IVersionChecker versionChecker,
                                    ScoreBoardService scoreBoardService,
                                    CamsDetectionBoard camsDetectionBoard,

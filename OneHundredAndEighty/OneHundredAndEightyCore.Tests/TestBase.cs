@@ -20,7 +20,7 @@ namespace OneHundredAndEightyCore.Tests
 
         protected Mock<ILogger> LoggerMock { get; private set; }
         protected Mock<IMessageBoxService> MessageBoxServiceMock { get; private set; }
-        protected Mock<IDBService> DbServiceMock { get; private set; }
+        protected Mock<IDbService> DbServiceMock { get; private set; }
         protected Mock<IVersionChecker> VersionCheckerMock { get; private set; }
         protected Mock<IConfigService> ConfigServiceMock { get; private set; }
         protected Mock<IDetectionService> DetectionServiceMock { get; private set; }
@@ -34,7 +34,7 @@ namespace OneHundredAndEightyCore.Tests
             MessageBoxServiceMock = new Mock<IMessageBoxService>();
             MessageBoxServiceMock.SetupAllProperties();
 
-            DbServiceMock = new Mock<IDBService>();
+            DbServiceMock = new Mock<IDbService>();
             DbServiceMock.Setup(x => x.SettingsSetValue(It.IsAny<SettingsType>(),
                                                         It.IsAny<string>()));
             VersionCheckerMock = new Mock<IVersionChecker>();

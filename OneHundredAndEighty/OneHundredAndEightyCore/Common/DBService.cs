@@ -13,7 +13,7 @@ using OneHundredAndEightyCore.Enums;
 
 namespace OneHundredAndEightyCore.Common
 {
-    public class DBService : IDBService, IDisposable
+    public class DBService : IDbService, IDisposable
     {
         private readonly SQLiteConnection connection;
         private readonly object locker;
