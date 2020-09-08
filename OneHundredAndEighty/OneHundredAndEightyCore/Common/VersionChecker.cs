@@ -76,7 +76,7 @@ namespace OneHundredAndEightyCore.Common
 
         private void CheckDbExists()
         {
-            if (fileSystemService.CheckFileExists(DBService.DatabaseName))
+            if (!fileSystemService.CheckFileExists(DBService.DatabaseName))
             {
                 messageBoxService.ShowError(Resources.Resources.DbNotExistsErrorText, DBService.DatabaseName);
                 throw new Exception("DB not exists in root folder");
