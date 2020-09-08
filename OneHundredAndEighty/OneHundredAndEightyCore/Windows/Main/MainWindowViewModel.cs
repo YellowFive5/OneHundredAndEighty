@@ -121,7 +121,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 
         public void OnMainWindowLoaded()
         {
-            versionChecker.CheckVersions();
+            versionChecker.CheckAndUpdate();
             LoadSettings();
             detectionService.OnErrorOccurred += OnDetectionServiceErrorOccurred;
         }

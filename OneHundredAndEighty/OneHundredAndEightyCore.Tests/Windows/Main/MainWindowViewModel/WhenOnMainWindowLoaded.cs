@@ -44,7 +44,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.MainWindowViewModel
         {
             MainWindowViewModel.OnMainWindowLoaded();
 
-            VersionCheckerMock.Verify(v => v.CheckVersions(), Times.Once);
+            VersionCheckerMock.Verify(v => v.CheckAndUpdate(), Times.Once);
         }
 
         [Test]

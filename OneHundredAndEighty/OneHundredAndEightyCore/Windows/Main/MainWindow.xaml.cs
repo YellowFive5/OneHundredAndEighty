@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -20,12 +21,15 @@ namespace OneHundredAndEightyCore.Windows.Main
 {
     public partial class MainWindow
     {
+        private readonly Version appVersion = new Version(2, 4);
+
         private readonly Logger logger;
         private readonly TelemetryWriter telemetryWriter;
         private readonly MainWindowViewModel viewModel;
         private readonly MessageBoxService messageBoxService;
         private readonly DBService dbService;
         private readonly ConfigService configService;
+        private readonly FileSystemService fileSystemService;
         private readonly VersionChecker versionChecker;
         private readonly ScoreBoardService scoreBoardService;
         private readonly CamsDetectionBoard camsDetectionBoard;
@@ -48,7 +52,8 @@ namespace OneHundredAndEightyCore.Windows.Main
             configService = new ConfigService(logger, dbService);
             scoreBoardService = new ScoreBoardService(logger, configService, drawService);
             camsDetectionBoard = new CamsDetectionBoard(configService, logger, drawService);
-            versionChecker = new VersionChecker(dbService, configService, messageBoxService);
+            fileSystemService = new FileSystemService();
+            versionChecker = new VersionChecker(appVersion, fileSystemService, dbService, configService, messageBoxService);
             detectionService = new DetectionService(drawService, configService, throwService, logger, camsDetectionBoard);
             manualThrowPanel = new ManualThrowPanel(logger, detectionService);
             gameService = new GameService(scoreBoardService, camsDetectionBoard, detectionService, logger, dbService, manualThrowPanel);

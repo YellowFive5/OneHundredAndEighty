@@ -2,6 +2,6 @@
 {
     public interface IVersionChecker
     {
-        void CheckVersions();
+        void CheckAndUpdate();
     }
 }

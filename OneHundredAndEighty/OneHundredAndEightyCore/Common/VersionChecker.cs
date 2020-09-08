@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using OneHundredAndEightyCore.Enums;
 using OneHundredAndEightyCore.Windows.MessageBox;
@@ -13,19 +12,24 @@ namespace OneHundredAndEightyCore.Common
 {
     public class VersionChecker : IVersionChecker
     {
+        private readonly Version appVersion;
+        private readonly IFileSystemService fileSystemService;
         private readonly IDbService dbService;
         private readonly IConfigService configService;
         private readonly IMessageBoxService messageBoxService;
 
-        private readonly Version appVersion = new Version(2, 4);
         private Version currentDbVersion;
         private readonly List<Migration> migrations;
 
 
-        public VersionChecker(IDbService dbService,
+        public VersionChecker(Version appVersion,
+                              IFileSystemService fileSystemService,
+                              IDbService dbService,
                               IConfigService configService,
                               IMessageBoxService messageBoxService)
         {
+            this.appVersion = appVersion;
+            this.fileSystemService = fileSystemService;
             this.dbService = dbService;
             this.configService = configService;
             this.messageBoxService = messageBoxService;
@@ -38,7 +42,7 @@ namespace OneHundredAndEightyCore.Common
                          };
         }
 
-        public void CheckVersions()
+        public void CheckAndUpdate()
         {
             CheckDbExists();
 
@@ -61,11 +65,18 @@ namespace OneHundredAndEightyCore.Common
                     throw new Exception("DB version and App version is different");
                 }
             }
+            else if (appVersion < currentDbVersion)
+            {
+                messageBoxService.ShowError(Resources.Resources.VersionsMismatchDbVersionGreaterErrorText,
+                                            currentDbVersion.ToString(),
+                                            appVersion.ToString());
+                throw new Exception("DB version is greater than App version. This is impossible =)");
+            }
         }
 
         private void CheckDbExists()
         {
-            if (!File.Exists(DBService.DatabaseName))
+            if (fileSystemService.CheckFileExists(DBService.DatabaseName))
             {
                 messageBoxService.ShowError(Resources.Resources.DbNotExistsErrorText, DBService.DatabaseName);
                 throw new Exception("DB not exists in root folder");
@@ -101,28 +112,25 @@ namespace OneHundredAndEightyCore.Common
                                        appVersion.ToString());
         }
 
-        #region CRUD
-
-        private void DeleteCopyOfOldDb()
-        {
-            File.Delete(DBService.DatabaseCopyName);
-        }
-
         private void CreateCopyOfOldDb()
         {
-            File.Copy(DBService.DatabaseName,
-                      DBService.DatabaseCopyName,
-                      true);
+            fileSystemService.CreateFileCopy(DBService.DatabaseName,
+                                             DBService.DatabaseCopyName,
+                                             true);
         }
 
         private void RevertDb()
         {
-            File.Copy(DBService.DatabaseCopyName,
-                      DBService.DatabaseName,
-                      true);
+            fileSystemService.CreateFileCopy(DBService.DatabaseCopyName,
+                                             DBService.DatabaseName,
+                                             true);
+
             DeleteCopyOfOldDb();
         }
 
-        #endregion
+        private void DeleteCopyOfOldDb()
+        {
+            fileSystemService.DeleteFile(DBService.DatabaseCopyName);
+        }
     }
 }

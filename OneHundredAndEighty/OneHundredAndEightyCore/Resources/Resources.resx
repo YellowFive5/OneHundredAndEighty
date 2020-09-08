@@ -309,4 +309,7 @@ Would you like to migrate your DB to version {1} ?</value>
   <data name="WithDetectionCheckBoxText" xml:space="preserve">
     <value>Detection enabled</value>
   </data>
+  <data name="VersionsMismatchDbVersionGreaterErrorText" xml:space="preserve">
+    <value>[{0}] version of DB is greater than [{1}] version of App. Are you from future man?</value>
+  </data>
 </root>

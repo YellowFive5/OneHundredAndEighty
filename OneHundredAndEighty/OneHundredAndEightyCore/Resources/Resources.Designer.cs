@@ -605,6 +605,15 @@ namespace OneHundredAndEightyCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [{0}] version of DB is greater than [{1}] version of App. Are you from future man?.
+        /// </summary>
+        public static string VersionsMismatchDbVersionGreaterErrorText {
+            get {
+                return ResourceManager.GetString("VersionsMismatchDbVersionGreaterErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [{0}] version App can&apos;t work with [{1}] version DB.
         /// </summary>
         public static string VersionsMismatchErrorText {
