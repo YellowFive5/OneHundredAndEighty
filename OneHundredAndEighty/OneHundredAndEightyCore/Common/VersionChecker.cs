@@ -44,6 +44,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void CheckAndUpdate()
         {
+            
             CheckDbExists();
 
             currentDbVersion = Converter.ToVersion(dbService.SettingsGetValue(SettingsType.DBVersion));
