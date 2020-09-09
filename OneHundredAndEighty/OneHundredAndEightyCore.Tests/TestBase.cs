@@ -1,5 +1,6 @@
 #region Usings
 
+using System;
 using System.Data;
 using Moq;
 using NLog;
@@ -53,6 +54,17 @@ namespace OneHundredAndEightyCore.Tests
             PlayersDataTableFromDb.Columns.Add(Column.Name.ToString(), typeof(string));
             PlayersDataTableFromDb.Columns.Add(Column.NickName.ToString(), typeof(string));
             PlayersDataTableFromDb.Columns.Add(Column.Avatar.ToString(), typeof(string));
+        }
+
+        protected void InvokeAndSwallowException(Action action)
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception e)
+            {
+            }
         }
     }
 }

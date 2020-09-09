@@ -49,7 +49,26 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
         }
 
         [Test]
-        public void ErrorShowsAndThrowsWhenAppVersionIsGreaterThatDbVersionAndNoConfirm()
+        public void ErrorShowsWhenAppVersionIsGreaterThatDbVersionAndNoConfirm()
+        {
+            var appVersion = new Version(3, 1);
+            var currentDbVersion = "2.0";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+            MessageBoxServiceMock.Setup(mbs => mbs.AskWarningQuestion(It.IsAny<string>(),
+                                                                      It.IsAny<object>(),
+                                                                      It.IsAny<object>())).Returns(false);
+
+            InvokeAndSwallowException(() => VersionChecker.CheckAndUpdate());
+
+            MessageBoxServiceMock.Verify(mbs => mbs.ShowError(Resources.Resources.VersionsMismatchErrorText,
+                                                              appVersion.ToString(),
+                                                              currentDbVersion),
+                                         Times.Once);
+        }
+
+        [Test]
+        public void ErrorThrowsWhenAppVersionIsGreaterThatDbVersionAndNoConfirm()
         {
             var appVersion = new Version(3, 1);
             var currentDbVersion = "2.0";
@@ -60,15 +79,28 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
                                                                       It.IsAny<object>())).Returns(false);
 
             Action act = () => { VersionChecker.CheckAndUpdate(); };
+
             act.Should().Throw<Exception>();
-            MessageBoxServiceMock.Verify(mbs => mbs.ShowError(Resources.Resources.VersionsMismatchErrorText,
-                                                              appVersion.ToString(),
-                                                              currentDbVersion),
+        }
+
+        [Test]
+        public void ErrorShowsWhenDbVersionIsGreaterThatAppVersion()
+        {
+            var appVersion = new Version(2, 0);
+            var currentDbVersion = "3.1";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+
+            InvokeAndSwallowException(() => VersionChecker.CheckAndUpdate());
+
+            MessageBoxServiceMock.Verify(mbs => mbs.ShowError(Resources.Resources.VersionsMismatchDbVersionGreaterErrorText,
+                                                              currentDbVersion,
+                                                              appVersion.ToString()),
                                          Times.Once);
         }
 
         [Test]
-        public void ErrorShowsAndThrowsWhenDbVersionIsGreaterThatAppVersion()
+        public void ErrorThrowsWhenDbVersionIsGreaterThatAppVersion()
         {
             var appVersion = new Version(2, 0);
             var currentDbVersion = "3.1";
@@ -78,10 +110,120 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
             Action act = () => { VersionChecker.CheckAndUpdate(); };
 
             act.Should().Throw<Exception>();
-            MessageBoxServiceMock.Verify(mbs => mbs.ShowError(Resources.Resources.VersionsMismatchDbVersionGreaterErrorText,
+        }
+
+        [Test]
+        public void CopyOfOldDbCreatesWhenDoingMigrations()
+        {
+            var appVersion = new Version(2, 1);
+            var currentDbVersion = "2.0";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+            MessageBoxServiceMock.Setup(mbs => mbs.AskWarningQuestion(It.IsAny<string>(),
+                                                                      It.IsAny<object>(),
+                                                                      It.IsAny<object>())).Returns(true);
+
+            VersionChecker.CheckAndUpdate();
+
+            FileSystemServiceMock.Verify(fss => fss.CreateFileCopy(DBService.DatabaseName,
+                                                                   DBService.DatabaseCopyName,
+                                                                   true),
+                                         Times.Once);
+        }
+
+        [Test]
+        public void CopyOfOldDbDeletesWhenMigrationsSuccessfulDone()
+        {
+            var appVersion = new Version(2, 1);
+            var currentDbVersion = "2.0";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+            MessageBoxServiceMock.Setup(mbs => mbs.AskWarningQuestion(It.IsAny<string>(),
+                                                                      It.IsAny<object>(),
+                                                                      It.IsAny<object>())).Returns(true);
+
+            VersionChecker.CheckAndUpdate();
+
+            FileSystemServiceMock.Verify(fss => fss.DeleteFile(DBService.DatabaseCopyName),
+                                         Times.Once);
+        }
+
+        [Test]
+        public void InfoShowsWhenMigrationsSuccessfulDone()
+        {
+            var appVersion = new Version(2, 1);
+            var currentDbVersion = "2.0";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+            MessageBoxServiceMock.Setup(mbs => mbs.AskWarningQuestion(It.IsAny<string>(),
+                                                                      It.IsAny<object>(),
+                                                                      It.IsAny<object>())).Returns(true);
+
+            VersionChecker.CheckAndUpdate();
+
+            MessageBoxServiceMock.Verify(mbs => mbs.ShowInfo(Resources.Resources.SuccessDbMigrationText,
+                                                             currentDbVersion,
+                                                             appVersion.ToString()),
+                                         Times.Once);
+        }
+
+        [Test]
+        public void DbRevertedOnMigrationError()
+        {
+            var appVersion = new Version(2, 1);
+            var currentDbVersion = "2.0";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+            DbServiceMock.Setup(ds => ds.MigrateFrom2_0to2_1()).Throws<Exception>();
+            MessageBoxServiceMock.Setup(mbs => mbs.AskWarningQuestion(It.IsAny<string>(),
+                                                                      It.IsAny<object>(),
+                                                                      It.IsAny<object>())).Returns(true);
+
+            InvokeAndSwallowException(() => VersionChecker.CheckAndUpdate());
+
+            FileSystemServiceMock.Verify(fss => fss.CreateFileCopy(DBService.DatabaseCopyName,
+                                                                   DBService.DatabaseName,
+                                                                   true),
+                                         Times.Once);
+            FileSystemServiceMock.Verify(fss => fss.DeleteFile(DBService.DatabaseCopyName),
+                                         Times.Once);
+        }
+
+        [Test]
+        public void ErrorShowsOnMigrationError()
+        {
+            var appVersion = new Version(2, 1);
+            var currentDbVersion = "2.0";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+            DbServiceMock.Setup(ds => ds.MigrateFrom2_0to2_1()).Throws<Exception>();
+            MessageBoxServiceMock.Setup(mbs => mbs.AskWarningQuestion(It.IsAny<string>(),
+                                                                      It.IsAny<object>(),
+                                                                      It.IsAny<object>())).Returns(true);
+
+            InvokeAndSwallowException(() => VersionChecker.CheckAndUpdate());
+
+            MessageBoxServiceMock.Verify(mbs => mbs.ShowError(Resources.Resources.ErrorDbMigrationText,
                                                               currentDbVersion,
                                                               appVersion.ToString()),
                                          Times.Once);
+        }
+
+        [Test]
+        public void ErrorThrowsOnMigrationError()
+        {
+            var appVersion = new Version(2, 1);
+            var currentDbVersion = "2.0";
+            CreateVersionChecker(appVersion);
+            DbServiceMock.Setup(ds => ds.SettingsGetValue(SettingsType.DBVersion)).Returns(currentDbVersion);
+            DbServiceMock.Setup(ds => ds.MigrateFrom2_0to2_1()).Throws<Exception>();
+            MessageBoxServiceMock.Setup(mbs => mbs.AskWarningQuestion(It.IsAny<string>(),
+                                                                      It.IsAny<object>(),
+                                                                      It.IsAny<object>())).Returns(true);
+
+            Action act = () => { VersionChecker.CheckAndUpdate(); };
+
+            act.Should().Throw<Exception>();
         }
     }
 }

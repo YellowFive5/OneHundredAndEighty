@@ -17,11 +17,9 @@ namespace OneHundredAndEightyCore.Common
         private readonly IDbService dbService;
         private readonly IConfigService configService;
         private readonly IMessageBoxService messageBoxService;
-
         private Version currentDbVersion;
         private readonly List<Migration> migrations;
-
-
+        
         public VersionChecker(Version appVersion,
                               IFileSystemService fileSystemService,
                               IDbService dbService,
@@ -39,12 +37,11 @@ namespace OneHundredAndEightyCore.Common
                              new Migration(new Version(2, 2), dbService.MigrateFrom2_1to2_2),
                              new Migration(new Version(2, 3), dbService.MigrateFrom2_2to2_3),
                              new Migration(new Version(2, 4), dbService.MigrateFrom2_3to2_4),
-                         };
+                         }; // todo do dependency fabric
         }
 
         public void CheckAndUpdate()
         {
-            
             CheckDbExists();
 
             currentDbVersion = Converter.ToVersion(dbService.SettingsGetValue(SettingsType.DBVersion));
