@@ -15,9 +15,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.MainWindowViewModel
         protected override void Setup()
         {
             base.Setup();
-            PlayersDataTableFromDb.Rows.Add(1, "doesNotMatter", "doesNotMatter", base64ImageString);
-            PlayersDataTableFromDb.Rows.Add(2, "doesNotMatter", "doesNotMatter", base64ImageString);
-
+            
             DbServiceMock.Setup(x => x.PlayersLoadAll()).Returns(PlayersDataTableFromDb);
 
             DetectionServiceMock.Setup(x => x.FindConnectedCams()).Returns("[HBV HD CAMERA]-[ID:'8&2f223cfb']");

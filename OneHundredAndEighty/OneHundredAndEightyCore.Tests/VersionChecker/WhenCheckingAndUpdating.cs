@@ -14,6 +14,7 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
         public void DbExistsChecks()
         {
             CreateVersionChecker();
+            FileSystemServiceMock.Setup(fss => fss.CheckFileExists(It.IsAny<string>())).Returns(true);
 
             VersionChecker.CheckAndUpdate();
 
