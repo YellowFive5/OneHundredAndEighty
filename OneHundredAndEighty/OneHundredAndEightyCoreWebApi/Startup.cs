@@ -31,15 +31,11 @@ namespace OneHundredAndEightyCoreWebApi
 
             app.UseRouting();
 
+            app.UseWhen(context => context.Request.Path.StartsWithSegments("/uptime"),
+                        appBuilder => { appBuilder.UseMiddleware<UptimeMiddleware>(); });
+
+
             app.Map("/ping", Ping);
-
-            app.Map("/uptime", Uptime);
-        }
-
-        private void Uptime(IApplicationBuilder app)
-        {
-            var dateTimeService = app.ApplicationServices.GetService<IDateTimeService>();
-            app.Run(async context => { await context.Response.WriteAsync($"{dateTimeService.GetUptimeString()}"); });
         }
 
         private void Ping(IApplicationBuilder app)

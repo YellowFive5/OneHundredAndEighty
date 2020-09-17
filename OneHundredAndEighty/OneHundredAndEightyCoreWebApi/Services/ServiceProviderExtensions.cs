@@ -10,7 +10,7 @@ namespace OneHundredAndEightyCoreWebApi.Services
     {
         public static void AddDateTimeService(this IServiceCollection services)
         {
-            services.AddTransient<IDateTimeService, DateTimeService>();
+            services.AddSingleton<IDateTimeService, DateTimeService>();
         }
     }
 }
