@@ -1,5 +1,7 @@
 #region Usings
 
+using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +14,13 @@ namespace OneHundredAndEightyCoreWebApi
 {
     public class Startup
     {
+        private TimeSpan AppUptime => FindUptime();
+
+        private TimeSpan FindUptime()
+        {
+            return DateTime.Now - Process.GetCurrentProcess().StartTime;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -26,11 +35,22 @@ namespace OneHundredAndEightyCoreWebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting(); 
-            
+            app.UseRouting();
+
             app.Map("/ping", Ping);
 
-            // app.UseEndpoints(endpoints => { endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); }); });
+            app.Map("/uptime", Uptime);
+        }
+
+        private void Uptime(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+                    {
+                        await context.Response.WriteAsync($"App runs for {AppUptime.Days} days, " +
+                                                          $"{AppUptime.Hours} hours, " +
+                                                          $"{AppUptime.Minutes} minutes and " +
+                                                          $"{AppUptime.Seconds} seconds");
+                    });
         }
 
         private void Ping(IApplicationBuilder app)
