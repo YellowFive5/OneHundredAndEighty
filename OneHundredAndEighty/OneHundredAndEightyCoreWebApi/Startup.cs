@@ -40,8 +40,11 @@ namespace OneHundredAndEightyCoreWebApi
             }
 
             var routeBuilder = new RouteBuilder(app);
+
             routeBuilder.MapGet("ping", Ping);
             routeBuilder.MapMiddlewareGet("uptime", appBuilder => { appBuilder.UseMiddleware<UptimeMiddleware>(); });
+            routeBuilder.MapRoute("{id:int}", PrintFromRoute);
+
             app.UseRouter(routeBuilder.Build());
 
             app.Run(async context => { await context.Response.WriteAsync("Hello BullEyed World!"); });
@@ -50,6 +53,14 @@ namespace OneHundredAndEightyCoreWebApi
         private async Task Ping(HttpContext context)
         {
             await context.Response.WriteAsync("Pong !");
+        }
+
+        private async Task PrintFromRoute(HttpContext context)
+        {
+            var dataFromRoute = context.GetRouteData()
+                                       .Values["id"]
+                                       .ToString();
+            await context.Response.WriteAsync($"You pass '{dataFromRoute}' to route");
         }
     }
 }
