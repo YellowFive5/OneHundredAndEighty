@@ -57,6 +57,7 @@ timeline ↓
 - [ ] Players lobby (web api)
 - [ ] ...
 
+⭕ [**v.2.4 Release**]
 - **Unsorted todo's:**
 - [ ] CamCalibrator itegration
 - [ ] Around the clock game type
