@@ -52,7 +52,12 @@ timeline ↓
 - [x] Throw undo
 
 ✅ [[**v.2.3 Release**](https://github.com/YellowFive5/OneHundredAndEighty/releases/tag/v.2.3)]
+- [ ] Player statistics browse
+- [ ] Players statistics comparison
+- [ ] Players lobby (web api)
 - [ ] ...
+
+⭕ [**v.2.4 Release**]
 - **Unsorted todo's:**
 - [ ] CamCalibrator itegration
 - [ ] Around the clock game type
@@ -60,8 +65,6 @@ timeline ↓
 - [ ] Cricket game type
 - [ ] Killer game type
 - [ ] Training game types
-- [ ] Player statistics browse
-- [ ] Players statistics comparison
 - [ ] Leaderboards by statistic items
 - [ ] Player achieves
 - [ ] Detection performance improve
