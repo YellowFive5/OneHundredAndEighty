@@ -12,5 +12,10 @@ namespace OneHundredAndEightyCore.WebApi.Services
         {
             services.AddSingleton<IDateTimeService, DateTimeService>();
         }
+
+        public static void AddLobbyUsersService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILobbyUsersService, LobbyUsersService>();
+        }
     }
 }

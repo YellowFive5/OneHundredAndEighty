@@ -24,6 +24,7 @@ namespace OneHundredAndEightyCore.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDateTimeService();
+            services.AddLobbyUsersService();
             services.AddControllers();
         }
 
