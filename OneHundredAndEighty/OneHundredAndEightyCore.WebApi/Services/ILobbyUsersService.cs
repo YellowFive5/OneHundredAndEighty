@@ -4,7 +4,7 @@ namespace OneHundredAndEightyCore.WebApi.Services
 {
     public interface ILobbyUsersService
     {
-        void AddActiveUserIfNotExists(string userInfo);
+        void AddActiveUser(string userInfo);
         List<string> GetActiveUsers();
     }
 }

@@ -29,14 +29,14 @@ namespace OneHundredAndEightyCore.WebApi.Controllers
 
         [HttpPost]
         [Route("addActiveUser")]
-        public async Task<ActionResult<string>> AddActiveUserIfNotExists(string userInfo)
+        public async Task<ActionResult<string>> AddActiveUser(string userInfo)
         {
             if (userInfo == null)
             {
                 return BadRequest();
             }
 
-            lobbyUsersService.AddActiveUserIfNotExists(userInfo);
+            lobbyUsersService.AddActiveUser(userInfo);
             return Ok(userInfo);
         }
     }
