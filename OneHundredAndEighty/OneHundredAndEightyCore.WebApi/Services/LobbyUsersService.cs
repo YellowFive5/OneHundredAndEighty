@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 #endregion
 
@@ -11,10 +12,12 @@ namespace OneHundredAndEightyCore.WebApi.Services
     public class LobbyUsersService : ILobbyUsersService
     {
         private Dictionary<string, DateTime> ActiveUsers { get; set; }
-        private readonly TimeSpan userActivityOffset = TimeSpan.FromMinutes(1); // todo from appSettings
+        private readonly IConfiguration configuration;
+        private TimeSpan UserActiveTime => TimeSpan.FromMinutes(double.Parse(configuration["AppConfig:UserActiveTimeMinutes"]));
 
-        public LobbyUsersService()
+        public LobbyUsersService(IConfiguration configuration)
         {
+            this.configuration = configuration;
             ActiveUsers = new Dictionary<string, DateTime>();
         }
 
@@ -24,7 +27,7 @@ namespace OneHundredAndEightyCore.WebApi.Services
             {
                 ActiveUsers.Add(userInfo, DateTime.Now);
             }
-            else if (ActiveUsers[userInfo] + userActivityOffset > DateTime.Now)
+            else if (ActiveUsers[userInfo] + UserActiveTime > DateTime.Now)
             {
                 ActiveUsers[userInfo] = DateTime.Now;
             }
@@ -32,7 +35,7 @@ namespace OneHundredAndEightyCore.WebApi.Services
 
         public List<string> GetActiveUsers()
         {
-            ActiveUsers = ActiveUsers.Where(au => au.Value + userActivityOffset > DateTime.Now)
+            ActiveUsers = ActiveUsers.Where(au => au.Value + UserActiveTime > DateTime.Now)
                                      .ToDictionary(au => au.Key, au => au.Value);
 
             return new List<string>(ActiveUsers.Keys);
