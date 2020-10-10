@@ -432,10 +432,10 @@ namespace OneHundredAndEightyCore.Recognition
         {
             if (thrw != null)
             {
-                OnThrowDetected?.Invoke(thrw);
-                
                 Application.Current.Dispatcher.Invoke(() =>
                                                       {
+                                                          OnThrowDetected?.Invoke(thrw);
+
                                                           if (workingMode == DetectionServiceWorkingMode.Crossing)
                                                           {
                                                               camsDetectionBoard.DrawThrow(thrw);
