@@ -27,7 +27,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         private readonly TelemetryWriter telemetryWriter;
         private readonly MainWindowViewModel viewModel;
         private readonly MessageBoxService messageBoxService;
-        private readonly DBService dbService;
+        private readonly DbService dbService;
         private readonly ConfigService configService;
         private readonly FileSystemService fileSystemService;
         private readonly VersionChecker versionChecker;
@@ -46,7 +46,7 @@ namespace OneHundredAndEightyCore.Windows.Main
             logger.Info("\n\nApp start");
             telemetryWriter.WriteAppStart();
             messageBoxService = new MessageBoxService();
-            dbService = new DBService();
+            dbService = new DbService();
             drawService = new DrawService(logger);
             throwService = new ThrowService(logger);
             configService = new ConfigService(logger, dbService);

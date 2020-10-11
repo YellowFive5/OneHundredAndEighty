@@ -26,7 +26,7 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
 
             VersionChecker.CheckAndUpdate();
 
-            FileSystemServiceMock.Verify(fss => fss.CheckFileExists(DBService.DatabaseName), Times.Once);
+            FileSystemServiceMock.Verify(fss => fss.CheckFileExists(DbService.DatabaseName), Times.Once);
         }
 
         [Test]
@@ -125,8 +125,8 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
 
             VersionChecker.CheckAndUpdate();
 
-            FileSystemServiceMock.Verify(fss => fss.CreateFileCopy(DBService.DatabaseName,
-                                                                   DBService.DatabaseCopyName,
+            FileSystemServiceMock.Verify(fss => fss.CreateFileCopy(DbService.DatabaseName,
+                                                                   DbService.DatabaseCopyName,
                                                                    true),
                                          Times.Once);
         }
@@ -144,7 +144,7 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
 
             VersionChecker.CheckAndUpdate();
 
-            FileSystemServiceMock.Verify(fss => fss.DeleteFile(DBService.DatabaseCopyName),
+            FileSystemServiceMock.Verify(fss => fss.DeleteFile(DbService.DatabaseCopyName),
                                          Times.Once);
         }
 
@@ -181,11 +181,11 @@ namespace OneHundredAndEightyCore.Tests.VersionChecker
 
             InvokeAndSwallowException(() => VersionChecker.CheckAndUpdate());
 
-            FileSystemServiceMock.Verify(fss => fss.CreateFileCopy(DBService.DatabaseCopyName,
-                                                                   DBService.DatabaseName,
+            FileSystemServiceMock.Verify(fss => fss.CreateFileCopy(DbService.DatabaseCopyName,
+                                                                   DbService.DatabaseName,
                                                                    true),
                                          Times.Once);
-            FileSystemServiceMock.Verify(fss => fss.DeleteFile(DBService.DatabaseCopyName),
+            FileSystemServiceMock.Verify(fss => fss.DeleteFile(DbService.DatabaseCopyName),
                                          Times.Once);
         }
 

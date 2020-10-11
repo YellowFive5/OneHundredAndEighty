@@ -13,7 +13,7 @@ using OneHundredAndEightyCore.Enums;
 
 namespace OneHundredAndEightyCore.Common
 {
-    public class DBService : IDbService, IDisposable
+    public class DbService : IDbService, IDisposable
     {
         private readonly SQLiteConnection connection;
         private readonly object locker;
@@ -21,7 +21,7 @@ namespace OneHundredAndEightyCore.Common
         public const string DatabaseCopyName = "Database_old.db";
         public const string DatabaseName = "Database.db";
 
-        public DBService()
+        public DbService()
         {
             locker = new object();
             connection = new SQLiteConnection($"Data Source={DatabaseName}; Pooling=true;");

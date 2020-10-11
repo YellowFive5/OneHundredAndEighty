@@ -74,9 +74,9 @@ namespace OneHundredAndEightyCore.Common
 
         private void CheckDbExists()
         {
-            if (!fileSystemService.CheckFileExists(DBService.DatabaseName))
+            if (!fileSystemService.CheckFileExists(DbService.DatabaseName))
             {
-                messageBoxService.ShowError(Resources.Resources.DbNotExistsErrorText, DBService.DatabaseName);
+                messageBoxService.ShowError(Resources.Resources.DbNotExistsErrorText, DbService.DatabaseName);
                 throw new Exception("DB not exists in root folder");
             }
         }
@@ -112,15 +112,15 @@ namespace OneHundredAndEightyCore.Common
 
         private void CreateCopyOfOldDb()
         {
-            fileSystemService.CreateFileCopy(DBService.DatabaseName,
-                                             DBService.DatabaseCopyName,
+            fileSystemService.CreateFileCopy(DbService.DatabaseName,
+                                             DbService.DatabaseCopyName,
                                              true);
         }
 
         private void RevertDb()
         {
-            fileSystemService.CreateFileCopy(DBService.DatabaseCopyName,
-                                             DBService.DatabaseName,
+            fileSystemService.CreateFileCopy(DbService.DatabaseCopyName,
+                                             DbService.DatabaseName,
                                              true);
 
             DeleteCopyOfOldDb();
@@ -128,7 +128,7 @@ namespace OneHundredAndEightyCore.Common
 
         private void DeleteCopyOfOldDb()
         {
-            fileSystemService.DeleteFile(DBService.DatabaseCopyName);
+            fileSystemService.DeleteFile(DbService.DatabaseCopyName);
         }
     }
 }

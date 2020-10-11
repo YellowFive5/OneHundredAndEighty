@@ -21,18 +21,6 @@ namespace OneHundredAndEightyCore.Domain
 
         #endregion
 
-        #region Game
-
-        public int SetsWon { get; set; }
-        public int LegsWon { get; set; }
-        public int LegPoints { get; set; }
-        public int HandPoints { get; set; }
-        public ThrowNumber ThrowNumber { get; set; }
-        public List<Throw> HandThrows { get; set; }
-        public PlayerOrder Order { get; set; }
-
-        #endregion
-
         public Player(string name, string nickName, int id = -1, BitmapImage avatar = null)
         {
             Id = id;
@@ -45,6 +33,18 @@ namespace OneHundredAndEightyCore.Domain
         {
             return $"{Name} '{NickName}'";
         }
+
+        #region Game
+
+        public int SetsWon { get; set; }
+        public int LegsWon { get; set; }
+        public int LegPoints { get; set; }
+        public int HandPoints { get; set; }
+        public ThrowNumber ThrowNumber { get; set; }
+        public List<Throw> HandThrows { get; set; }
+        public PlayerOrder Order { get; set; }
+
+        #endregion
 
         #region IClonable
 

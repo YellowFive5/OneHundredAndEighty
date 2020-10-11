@@ -23,7 +23,7 @@ namespace OneHundredAndEightyCore.Game
         private readonly ScoreBoardService scoreBoardService;
         private readonly CamsDetectionBoard camsDetectionBoard;
         private readonly DetectionService detectionService;
-        private readonly DBService dbService;
+        private readonly DbService dbService;
         private readonly ManualThrowPanel manualThrowPanel;
         private IGameProcessor GameProcessor { get; set; }
         private Domain.Game Game { get; set; }
@@ -36,7 +36,7 @@ namespace OneHundredAndEightyCore.Game
                            CamsDetectionBoard camsDetectionBoard,
                            DetectionService detectionService,
                            Logger logger,
-                           DBService dbService,
+                           DbService dbService,
                            ManualThrowPanel manualThrowPanel)
         {
             this.logger = logger;
