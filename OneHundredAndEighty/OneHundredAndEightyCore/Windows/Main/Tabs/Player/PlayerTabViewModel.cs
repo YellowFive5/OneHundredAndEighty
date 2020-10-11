@@ -22,6 +22,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
 
         public ChooseNewPlayerAvatarCommand ChooseNewPlayerAvatarCommand { get; }
         public SaveNewPlayerCommand SaveNewPlayerCommand { get; }
+        public PlayerStatisticsLoadCommand PlayerStatisticsLoadCommand { get; }
 
         public PlayerTabViewModel(DataContext dataContext,
                                   ILogger logger,
@@ -35,6 +36,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
         {
             ChooseNewPlayerAvatarCommand = new ChooseNewPlayerAvatarCommand(SelectAvatarImage);
             SaveNewPlayerCommand = new SaveNewPlayerCommand(SaveNewPlayer);
+            PlayerStatisticsLoadCommand = new PlayerStatisticsLoadCommand(PlayerStatisticsLoad);
         }
 
         #region Bindable props
@@ -72,6 +74,32 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
             {
                 newPlayerAvatar = value;
                 OnPropertyChanged(nameof(NewPlayerAvatar));
+            }
+        }
+
+        public Domain.Player PlayerForStatisticsBrowse { get; set; }
+
+        private BitmapImage playerForStatisticsAvatar;
+
+        public BitmapImage PlayerForStatisticsAvatar
+        {
+            get => playerForStatisticsAvatar;
+            set
+            {
+                playerForStatisticsAvatar = value;
+                OnPropertyChanged(nameof(PlayerForStatisticsAvatar));
+            }
+        }
+
+        private string playerForStatisticsBrowseText;
+
+        public string PlayerForStatisticsBrowseText
+        {
+            get => playerForStatisticsBrowseText;
+            set
+            {
+                playerForStatisticsBrowseText = value;
+                OnPropertyChanged(nameof(PlayerForStatisticsBrowseText));
             }
         }
 
@@ -133,6 +161,22 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
         public void LoadSettings()
         {
             NewPlayerAvatar = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
+            
+            PlayerForStatisticsAvatar = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
+            PlayerForStatisticsBrowseText = "Choose player for statistics browse";
+        }
+
+        private void PlayerStatisticsLoad()
+        {
+            if (PlayerForStatisticsBrowse != null)
+            {
+                PlayerForStatisticsAvatar = PlayerForStatisticsBrowse.Avatar;
+            }
+            else
+            {
+                PlayerForStatisticsAvatar = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
+                PlayerForStatisticsBrowseText = "Choose player for statistics browse";
+            }
         }
     }
 }

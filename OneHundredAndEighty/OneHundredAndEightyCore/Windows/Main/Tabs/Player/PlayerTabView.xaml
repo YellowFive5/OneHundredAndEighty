@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:player="clr-namespace:OneHundredAndEightyCore.Windows.Main.Tabs.Player"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
@@ -103,7 +104,50 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="0.35*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Player"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource MainWindowLabelStyle}" />
+                    <ComboBox Grid.Row="3"
+                              Grid.Column="1"
+                              ItemsSource="{Binding DataContext.Players}"
+                              SelectedItem="{Binding PlayerForStatisticsBrowse}"
+                              Style="{StaticResource MainWindowComboBoxStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding PlayerStatisticsLoadCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <Image Grid.Row="5"
+                           Grid.Column="1"
+                           Source="{Binding PlayerForStatisticsAvatar}" />
+                    <TextBox Grid.Row="3"
+                             Grid.Column="3"
+                             Grid.RowSpan="5"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Stretch"
+                             Text="{Binding PlayerForStatisticsBrowseText}"
+                             Style="{StaticResource MainWindowTextBoxStyle}" />
                 </Grid>
             </TabItem>
         </TabControl>
