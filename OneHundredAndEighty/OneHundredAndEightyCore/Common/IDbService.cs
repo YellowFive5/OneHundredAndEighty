@@ -3,7 +3,6 @@
 using System.Data;
 using OneHundredAndEightyCore.Domain;
 using OneHundredAndEightyCore.Enums;
-using OneHundredAndEightyCore.Game;
 
 #endregion
 
@@ -19,5 +18,6 @@ namespace OneHundredAndEightyCore.Common
         void MigrateFrom2_1to2_2();
         void MigrateFrom2_2to2_3();
         void MigrateFrom2_3to2_4();
+        DataTable StatisticsGetForPlayer(int playerId);
     }
 }

@@ -170,6 +170,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
         {
             if (PlayerForStatisticsBrowse != null)
             {
+                PlayerForStatisticsBrowseText = Converter.PlayerStatisticsFromTable(dbService.StatisticsGetForPlayer(PlayerForStatisticsBrowse.Id));
                 PlayerForStatisticsAvatar = PlayerForStatisticsBrowse.Avatar;
             }
             else

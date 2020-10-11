@@ -14,7 +14,7 @@ namespace OneHundredAndEightyCore.Domain
         Tremble,
         Zero,
         _25,
-        Bulleye
+        Bull
     }
 
     public enum ThrowResult

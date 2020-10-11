@@ -48,7 +48,7 @@ namespace OneHundredAndEightyCore.Domain
                     Multiplier = 2;
                     TotalPoints = 25;
                     break;
-                case ThrowType.Bulleye:
+                case ThrowType.Bull:
                     Multiplier = 3;
                     TotalPoints = 50;
                     break;
@@ -62,7 +62,7 @@ namespace OneHundredAndEightyCore.Domain
             string str;
             switch (Type)
             {
-                case ThrowType.Bulleye:
+                case ThrowType.Bull:
                     str = "Bull";
                     break;
                 case ThrowType._25:

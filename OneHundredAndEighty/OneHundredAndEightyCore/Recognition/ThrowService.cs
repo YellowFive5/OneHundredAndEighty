@@ -89,7 +89,7 @@ namespace OneHundredAndEightyCore.Recognition
             if (distance <= DrawService.ProjectionCoefficient * 7)
             {
                 sector = 50;
-                type = ThrowType.Bulleye;
+                type = ThrowType.Bull;
             }
             else if (distance > DrawService.ProjectionCoefficient * 7 &&
                      distance <= DrawService.ProjectionCoefficient * 17)

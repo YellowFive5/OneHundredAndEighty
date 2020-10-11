@@ -70,9 +70,9 @@ namespace OneHundredAndEightyCore.Windows.Debug
             {
                 type = ThrowType._25;
             }
-            else if (str.Contains("Bulleye"))
+            else if (str.Contains("Bull"))
             {
-                type = ThrowType.Bulleye;
+                type = ThrowType.Bull;
             }
             else
             {

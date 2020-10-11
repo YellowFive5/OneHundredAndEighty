@@ -32,6 +32,35 @@ namespace OneHundredAndEightyCore.Common
             return playersList;
         }
 
+        public static string PlayerStatisticsFromTable(DataTable playerStatisticsDataTable) // todo add Statistics object maybe instead of string
+        {
+            var dataRow = playerStatisticsDataTable.Rows[0];
+            return $"Player name: {dataRow[$"{Column.Name}"]} \n" +
+                   $"Player nickname: {dataRow[$"{Column.NickName}"]} \n" +
+                   $"Player registration date: {dataRow[$"{Column.RegistrationTimestamp}"]} \n" +
+                   $"Games played: {dataRow["GamesPlayed"]} \n" +
+                   $"Games won: {dataRow["GamesWon"]} \n" +
+                   $"FreeThrowsSingle games played: {dataRow["FreeThrowsSingleGamesPlayed"]} \n" +
+                   $"FreeThrowsDouble games played: {dataRow["FreeThrowsDoubleGamesPlayed"]} \n" +
+                   $"FreeThrowsDouble games won: {dataRow["FreeThrowsDoubleGamesWon"]} \n" +
+                   $"Classic games played: {dataRow["ClassicGamesPlayed"]} \n" +
+                   $"Classic games won: {dataRow["ClassicGamesGamesWon"]} \n" +
+                   $"Legs played: {dataRow["LegsPlayed"]} \n" +
+                   $"Legs won: {dataRow["LegsWon"]} \n" +
+                   $"Sets played: {dataRow["SetsPlayed"]} \n" +
+                   $"Sets won: {dataRow["SetsWon"]} \n" +
+                   $"Total throws: {dataRow["TotalThrows"]} \n" +
+                   $"Total points: {dataRow["TotalPoints"]} \n" +
+                   $"AVG points per throw: {dataRow["AvgPointsPerThrow"]} \n" +
+                   $"OneHundredAndEighty's: {dataRow["_180"]} \n" +
+                   $"Single throws: {dataRow["SingleThrows"]} \n" +
+                   $"Double throws: {dataRow["DoubleThrows"]} \n" +
+                   $"Tremble throws: {dataRow["TrembleThrows"]} \n" +
+                   $"Bull throws: {dataRow["BullThrows"]} \n" +
+                   $"25 throws: {dataRow["_25Throws"]} \n" +
+                   $"Zero throws: {dataRow["ZeroThrows"]} \n";
+        }
+
         public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
         {
             var ms = new MemoryStream();

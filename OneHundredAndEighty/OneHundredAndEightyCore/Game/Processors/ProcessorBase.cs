@@ -102,7 +102,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         protected bool IsLegOver(DetectedThrow thrw)
         {
             return Game.PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
-                   (thrw.Type == ThrowType.Double || thrw.Type == ThrowType.Bulleye);
+                   (thrw.Type == ThrowType.Double || thrw.Type == ThrowType.Bull);
         }
 
         protected bool IsFault(DetectedThrow thrw)

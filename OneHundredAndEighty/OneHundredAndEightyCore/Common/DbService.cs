@@ -174,17 +174,60 @@ namespace OneHundredAndEightyCore.Common
             {
                 ExecuteNonQueryInternal(newPlayerQuery);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //todo errorMessage
                 ExecuteNonQueryInternal($"DELETE FROM [{Table.PlayerAchieves}] WHERE [{Column.Id}]={newPlayerAchievesId}");
-                throw e;
+                throw;
             }
         }
 
         public DataTable PlayersLoadAll()
         {
-            return ExecuteReaderInternal($"SELECT * FROM [{Table.Players}]");
+            return ExecuteDataTableInternal($"SELECT * FROM [{Table.Players}]");
+        }
+
+        #endregion
+
+        #region PlayerStatistics
+
+        public DataTable StatisticsGetForPlayer(int playerId)
+        {
+            var playerStatisticsQuery = $"SELECT P.{Column.Name}, P.{Column.NickName}, P.{Column.RegistrationTimestamp}, " +
+                                        $"COUNT(S.{Column.Id}) AS GamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResult} = {(int) GameResultType.Win}),0)  AS GamesWon, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResult} = {(int) GameResultType.Loose}),0)  AS GamesLoose, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.FreeThrowsSingle}),0)  AS FreeThrowsSingleGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.FreeThrowsDouble}),0)  AS FreeThrowsDoubleGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.FreeThrowsDouble} AND S.{Column.GameResult} = {(int) GameResultType.Win}),0)  AS FreeThrowsDoubleGamesWon, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.Classic}),0)  AS ClassicGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.Classic} AND S.{Column.GameResult} = {(int) GameResultType.Win}),0)  AS ClassicGamesGamesWon, " +
+                                        $"IFNULL(SUM(S.{Column.LegsPlayed}),0)  AS LegsPlayed, " +
+                                        $"IFNULL(SUM(S.{Column.LegsWon}),0)  AS LegsWon, " +
+                                        $"IFNULL(SUM(S.{Column.SetsPlayed}),0)  AS SetsPlayed, " +
+                                        $"IFNULL(SUM(S.{Column.SetsWon}),0)  AS SetsWon, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId}),0)  AS TotalThrows, " +
+                                        $"IFNULL((SELECT SUM(T.Points) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId}),0)  AS TotalPoints, " +
+                                        $"IFNULL((SELECT ROUND(AVG(T.Points),3) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId}),0)  AS AvgPointsPerThrow, " +
+                                        $"IFNULL((SELECT COUNT(_180.{Column.Id}) WHERE _180.{Column.Player} = {playerId}),0)  AS _180, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Single}),0)  AS SingleThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Double}),0)  AS DoubleThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Tremble}),0)  AS TrembleThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Bull}),0)  AS BullThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType._25}),0)  AS _25Throws, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Zero}),0)  AS ZeroThrows " +
+                                        $"FROM {Table.Players} AS P " +
+                                        $"LEFT JOIN {Table.Statistic} AS S " +
+                                        $"ON S.{Column.Player} = P.{Column.Id} " +
+                                        $"LEFT JOIN {Table.GameStatistic} AS GS " +
+                                        $"ON GS.{Column.Statistic} = S.{Column.Id} " +
+                                        $"LEFT JOIN {Table.Games} AS G " +
+                                        $"ON G.{Column.Id} = GS.{Column.Game} " +
+                                        $"LEFT JOIN {Table._180} AS _180 " +
+                                        $"ON _180.{Column.Player} = P.{Column.Id} " +
+                                        $"WHERE P.{Column.Id} = {playerId}";
+
+            return ExecuteDataTableInternal(playerStatisticsQuery);
         }
 
         #endregion
@@ -278,7 +321,7 @@ namespace OneHundredAndEightyCore.Common
             }
         }
 
-        private DataTable ExecuteReaderInternal(string query)
+        private DataTable ExecuteDataTableInternal(string query)
         {
             var cmd = new SQLiteCommand(query) {Connection = connection};
 
@@ -287,10 +330,20 @@ namespace OneHundredAndEightyCore.Common
                 lock (locker)
                 {
                     connection.Open();
-                    var dataReader = cmd.ExecuteReader();
-                    var dataTable = new DataTable();
-                    dataTable.Load(dataReader);
-                    return dataTable;
+                    using (var dataReader = cmd.ExecuteReader())
+                    {
+                        using (var dataSet = new DataSet())
+                        {
+                            using (var dataTable = new DataTable())
+                            {
+                                dataSet.Tables.Add(dataTable);
+                                dataSet.EnforceConstraints = false;
+                                dataTable.Load(dataReader);
+                                dataReader.Close();
+                                return dataTable;
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -480,7 +533,7 @@ namespace OneHundredAndEightyCore.Common
         public void MigrateFrom2_3to2_4()
         {
             //
-            
+
             UpdateDbVersion("2.4");
         }
 
