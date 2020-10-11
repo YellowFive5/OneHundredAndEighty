@@ -95,6 +95,17 @@
                             Command="{Binding ChooseNewPlayerAvatarCommand}" />
                 </Grid>
             </TabItem>
+            <TabItem x:Name="PlayerStatisticsTabItem"
+                     Style="{StaticResource MainWindowSubTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel>
+                        <Image Source="/Resources/MainWindow/TabItemIcons/PlayerStatisticsIcon.png" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
