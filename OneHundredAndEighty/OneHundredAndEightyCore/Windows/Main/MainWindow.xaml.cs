@@ -21,7 +21,7 @@ namespace OneHundredAndEightyCore.Windows.Main
 {
     public partial class MainWindow
     {
-        private readonly Version appVersion = new Version(2, 4);
+        private readonly Version appVersion = new Version(2, 3);
 
         private readonly Logger logger;
         private readonly TelemetryWriter telemetryWriter;
