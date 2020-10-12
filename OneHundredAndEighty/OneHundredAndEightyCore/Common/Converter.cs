@@ -35,9 +35,9 @@ namespace OneHundredAndEightyCore.Common
         public static string PlayerStatisticsFromTable(DataTable playerStatisticsDataTable) // todo add Statistics object maybe instead of string
         {
             var dataRow = playerStatisticsDataTable.Rows[0];
-            return $"Player name: {dataRow[$"{Column.Name}"]} \n" +
-                   $"Player nickname: {dataRow[$"{Column.NickName}"]} \n" +
-                   $"Player registration date: {dataRow[$"{Column.RegistrationTimestamp}"]} \n" +
+            return $"Name: {dataRow[$"{Column.Name}"]} \n" +
+                   $"Nickname: {dataRow[$"{Column.NickName}"]} \n" +
+                   $"Registration date: {DateTime.Parse(dataRow[$"{Column.RegistrationTimestamp}"].ToString()):dd.MM.yyyy} \n" +
                    $"Games played: {dataRow["GamesPlayed"]} \n" +
                    $"Games won: {dataRow["GamesWon"]} \n" +
                    $"FreeThrowsSingle games played: {dataRow["FreeThrowsSingleGamesPlayed"]} \n" +
