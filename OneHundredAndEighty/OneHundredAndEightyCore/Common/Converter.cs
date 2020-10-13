@@ -58,7 +58,8 @@ namespace OneHundredAndEightyCore.Common
                    $"Tremble throws: {dataRow["TrembleThrows"]} \n" +
                    $"Bull throws: {dataRow["BullThrows"]} \n" +
                    $"25 throws: {dataRow["_25Throws"]} \n" +
-                   $"Zero throws: {dataRow["ZeroThrows"]} \n";
+                   $"Zero throws: {dataRow["ZeroThrows"]} \n" +
+                   $"Achieves obtained: {dataRow["TotalAchieves"]}/18 \n";
         }
 
         public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
