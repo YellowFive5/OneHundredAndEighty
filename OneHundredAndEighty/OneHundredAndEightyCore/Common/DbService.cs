@@ -216,7 +216,7 @@ namespace OneHundredAndEightyCore.Common
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Bull}),0)  AS BullThrows, " +
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType._25}),0)  AS _25Throws, " +
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Zero}),0)  AS ZeroThrows, " +
-                                        $"(SELECT(MatchesPlayed10+MatchesPlayed100+MatchesPlayed1000+MatchesWon10+MatchesWon100+MatchesWon1000+Throws1000+Throws10000+Throws100000+Points10000+Points100000+Points1000000+[180x10]+[180x100]+[180x1000]+First180+Bullx3+MrZ) FROM {Table.PlayerAchieves}) AS TotalAchieves " + // todo add enums
+                                        $"(SELECT({Column.MatchesPlayed10}+{Column.MatchesPlayed100}+{Column.MatchesPlayed1000}+{Column.MatchesWon10}+{Column.MatchesWon100}+{Column.MatchesWon1000}+{Column.Throws1000}+{Column.Throws10000}+{Column.Throws100000}+{Column.Points10000}+{Column.Points100000}+{Column.Points1000000}+[180x10]+[180x100]+[180x1000]+{Column.First180}+{Column.Bullx3}+{Column.MrZ}) FROM {Table.PlayerAchieves}) AS TotalAchieves " + // todo add enums
                                         $"FROM {Table.Players} AS P " +
                                         $"LEFT JOIN {Table.Statistic} AS S " +
                                         $"ON S.{Column.Player} = P.{Column.Id} " +
