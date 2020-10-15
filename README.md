@@ -60,11 +60,17 @@ timeline ↓
 ⭕ [**v.2.4 Release**]
 - **Unsorted todo's:**
 - [ ] CamCalibrator itegration
+- [ ] Player update / delete
+- [ ] Game pause / resume
+- [ ] Match information window
+- [ ] Sounds
+- [ ] Darts extraction process improve
 - [ ] Around the clock game type
 - [ ] Shanghai game type
 - [ ] Cricket game type
 - [ ] Killer game type
 - [ ] Training game types
+- [ ] Classic with more than 2 players game type
 - [ ] Leaderboards by statistic items
 - [ ] Player achieves
 - [ ] Detection performance improve
