@@ -19,7 +19,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             if (IsLegOver(thrw))
             {
-                Game.PlayerOnThrow.LegsWon += 1;
+                Game.PlayerOnThrow.GameData.LegsWon += 1;
                 OnMatchOver(thrw);
                 return;
             }
@@ -30,8 +30,8 @@ namespace OneHundredAndEightyCore.Game.Processors
                 return;
             }
 
-            Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
-            Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.LegPoints -= thrw.TotalPoints;
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
             OnHandOverDoublePlayersCheck(thrw);
@@ -43,11 +43,11 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             foreach (var player in Game.Players)
             {
-                scoreBoard.SetPointsTo(player, player.LegPoints);
+                scoreBoard.SetPointsTo(player, player.GameData.LegPoints);
                 scoreBoard.CheckPointsHintFor(player);
             }
 
-            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
         }
     }
 }

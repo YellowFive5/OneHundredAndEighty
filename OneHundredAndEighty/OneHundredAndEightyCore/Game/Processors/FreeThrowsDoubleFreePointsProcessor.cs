@@ -17,8 +17,8 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected override void OnThrowInternal(DetectedThrow thrw)
         {
-            Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
-            Game.PlayerOnThrow.LegPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.LegPoints += thrw.TotalPoints;
 
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints);
 
@@ -32,8 +32,8 @@ namespace OneHundredAndEightyCore.Game.Processors
             }
             else
             {
-                Game.PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+                Game.PlayerOnThrow.GameData.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
             }
         }
 
@@ -43,10 +43,10 @@ namespace OneHundredAndEightyCore.Game.Processors
 
             foreach (var player in Game.Players)
             {
-                scoreBoard.SetPointsTo(player, player.LegPoints);
+                scoreBoard.SetPointsTo(player, player.GameData.LegPoints);
             }
 
-            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
         }
     }
 }

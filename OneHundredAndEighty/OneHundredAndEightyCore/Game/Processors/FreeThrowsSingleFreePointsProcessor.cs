@@ -17,8 +17,8 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected override void OnThrowInternal(DetectedThrow thrw)
         {
-            Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
-            Game.PlayerOnThrow.LegPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.LegPoints += thrw.TotalPoints;
 
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints);
 
@@ -27,9 +27,9 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
         {
-            scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.LegPoints);
+            scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.GameData.LegPoints);
 
-            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
         }
     }
 }

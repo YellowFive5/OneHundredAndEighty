@@ -15,7 +15,7 @@ namespace OneHundredAndEightyCore.Domain
         public Hand180(Player player)
         {
             Player = player;
-            HandThrows = player.HandThrows.ToList();
+            HandThrows = player.GameData.HandThrows.ToList();
         }
     }
 }

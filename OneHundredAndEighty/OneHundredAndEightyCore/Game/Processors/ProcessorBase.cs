@@ -37,21 +37,21 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             Game.PlayerOnThrow = Game.Players.First();
             Game.PlayerOnLeg = Game.Players.First();
-            
-            Game.Players.First().Order = PlayerOrder.First;
+
+            Game.Players.First().GameData.Order = PlayerOrder.First;
             if (!Game.IsSingle)
             {
-                Game.Players.ElementAt(1).Order = PlayerOrder.Second;
+                Game.Players.ElementAt(1).GameData.Order = PlayerOrder.Second;
             }
 
             foreach (var player in Game.Players)
             {
-                player.SetsWon = 0;
-                player.LegsWon = 0;
-                player.LegPoints = Game.legPoints;
-                player.HandPoints = 0;
-                player.ThrowNumber = ThrowNumber.FirstThrow;
-                player.HandThrows = new List<Throw>();
+                player.GameData.SetsWon = 0;
+                player.GameData.LegsWon = 0;
+                player.GameData.LegPoints = Game.legPoints;
+                player.GameData.HandPoints = 0;
+                player.GameData.ThrowNumber = ThrowNumber.FirstThrow;
+                player.GameData.HandThrows = new List<Throw>();
             }
         }
 
@@ -62,7 +62,7 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected void Check180()
         {
-            if (Game.PlayerOnThrow.HandThrows.Sum(t => t.Points) == 180)
+            if (Game.PlayerOnThrow.GameData.HandThrows.Sum(t => t.Points) == 180)
             {
                 Game.Hands180.Add(new Hand180(Game.PlayerOnThrow));
             }
@@ -70,15 +70,15 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected bool IsHandOver()
         {
-            return Game.PlayerOnThrow.ThrowNumber == ThrowNumber.ThirdThrow;
+            return Game.PlayerOnThrow.GameData.ThrowNumber == ThrowNumber.ThirdThrow;
         }
 
         protected void ClearPlayerOnThrowHand()
         {
-            Game.PlayerOnThrow.HandThrows.Clear();
-            Game.PlayerOnThrow.ThrowNumber = ThrowNumber.FirstThrow;
-            Game.PlayerOnThrow.HandPoints = 0;
-            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+            Game.PlayerOnThrow.GameData.HandThrows.Clear();
+            Game.PlayerOnThrow.GameData.ThrowNumber = ThrowNumber.FirstThrow;
+            Game.PlayerOnThrow.GameData.HandPoints = 0;
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
         }
 
         protected void TogglePlayerOnThrow()
@@ -91,32 +91,32 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected bool IsGameOver(DetectedThrow thrw)
         {
-            return IsSetOver(thrw) && Game.PlayerOnThrow.SetsWon + 1 == Game.sets;
+            return IsSetOver(thrw) && Game.PlayerOnThrow.GameData.SetsWon + 1 == Game.sets;
         }
 
         protected bool IsSetOver(DetectedThrow thrw)
         {
-            return IsLegOver(thrw) && Game.PlayerOnThrow.LegsWon + 1 == Game.legs;
+            return IsLegOver(thrw) && Game.PlayerOnThrow.GameData.LegsWon + 1 == Game.legs;
         }
 
         protected bool IsLegOver(DetectedThrow thrw)
         {
-            return Game.PlayerOnThrow.LegPoints - thrw.TotalPoints == 0 &&
+            return Game.PlayerOnThrow.GameData.LegPoints - thrw.TotalPoints == 0 &&
                    (thrw.Type == ThrowType.Double || thrw.Type == ThrowType.Bull);
         }
 
         protected bool IsFault(DetectedThrow thrw)
         {
-            return Game.PlayerOnThrow.LegPoints - thrw.TotalPoints == 1 ||
-                   Game.PlayerOnThrow.LegPoints - thrw.TotalPoints < 0 ||
-                   Game.PlayerOnThrow.LegPoints - thrw.TotalPoints == 0;
+            return Game.PlayerOnThrow.GameData.LegPoints - thrw.TotalPoints == 1 ||
+                   Game.PlayerOnThrow.GameData.LegPoints - thrw.TotalPoints < 0 ||
+                   Game.PlayerOnThrow.GameData.LegPoints - thrw.TotalPoints == 0;
         }
 
         protected void OnFault(DetectedThrow thrw)
         {
             ConvertAndSaveThrow(thrw, ThrowResult.Fault);
-            Game.PlayerOnThrow.LegPoints += Game.PlayerOnThrow.HandPoints;
-            scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.LegPoints);
+            Game.PlayerOnThrow.GameData.LegPoints += Game.PlayerOnThrow.GameData.HandPoints;
+            scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.GameData.LegPoints);
             ClearPlayerOnThrowHand();
             scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
             TogglePlayerOnThrow();
@@ -133,8 +133,8 @@ namespace OneHundredAndEightyCore.Game.Processors
             }
             else
             {
-                Game.PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+                Game.PlayerOnThrow.GameData.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
             }
         }
 
@@ -152,8 +152,8 @@ namespace OneHundredAndEightyCore.Game.Processors
             }
             else
             {
-                Game.PlayerOnThrow.ThrowNumber += 1;
-                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+                Game.PlayerOnThrow.GameData.ThrowNumber += 1;
+                scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
                 scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
             }
         }
@@ -173,13 +173,13 @@ namespace OneHundredAndEightyCore.Game.Processors
                                            detectedThrow.Sector,
                                            detectedThrow.Type,
                                            throwResult,
-                                           (int) Game.PlayerOnThrow.ThrowNumber,
+                                           (int) Game.PlayerOnThrow.GameData.ThrowNumber,
                                            detectedThrow.TotalPoints,
                                            detectedThrow.Poi,
                                            detectedThrow.ProjectionResolution);
 
             Game.Throws.Push(convertedThrow);
-            Game.PlayerOnThrow.HandThrows.Add(convertedThrow);
+            Game.PlayerOnThrow.GameData.HandThrows.Add(convertedThrow);
         }
 
         public void OnThrow(DetectedThrow thrw)
@@ -195,24 +195,24 @@ namespace OneHundredAndEightyCore.Game.Processors
             Game.Throws.Pop();
             var gameSnapshot = GameSnapshots.Pop();
 
-            foreach (var playerFromSnapshot in gameSnapshot.Players)
+            foreach (var playerFromSnapshot in gameSnapshot.PlayersGameData)
             {
-                foreach (var player in Game.Players.Where(player => playerFromSnapshot.Id == player.Id))
+                foreach (var player in Game.Players.Where(player => playerFromSnapshot.PlayerId == player.Id))
                 {
-                    player.SetsWon = playerFromSnapshot.SetsWon;
-                    player.LegsWon = playerFromSnapshot.LegsWon;
-                    player.LegPoints = playerFromSnapshot.LegPoints;
-                    player.HandPoints = playerFromSnapshot.HandPoints;
-                    player.ThrowNumber = playerFromSnapshot.ThrowNumber;
-                    player.HandThrows = playerFromSnapshot.HandThrows.ToList();
-                    player.Order = playerFromSnapshot.Order;
+                    player.GameData.SetsWon = playerFromSnapshot.SetsWon;
+                    player.GameData.LegsWon = playerFromSnapshot.LegsWon;
+                    player.GameData.LegPoints = playerFromSnapshot.LegPoints;
+                    player.GameData.HandPoints = playerFromSnapshot.HandPoints;
+                    player.GameData.ThrowNumber = playerFromSnapshot.ThrowNumber;
+                    player.GameData.HandThrows = playerFromSnapshot.HandThrows.ToList();
+                    player.GameData.Order = playerFromSnapshot.Order;
 
-                    if (gameSnapshot.PlayerOnThrow.Id == player.Id)
+                    if (gameSnapshot.PlayerOnThrowId == player.Id)
                     {
                         Game.PlayerOnThrow = player;
                     }
 
-                    if (gameSnapshot.PlayerOnLeg.Id == player.Id)
+                    if (gameSnapshot.PlayerOnLegId == player.Id)
                     {
                         Game.PlayerOnLeg = player;
                     }

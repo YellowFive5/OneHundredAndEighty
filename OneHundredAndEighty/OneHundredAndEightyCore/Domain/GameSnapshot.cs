@@ -9,21 +9,21 @@ namespace OneHundredAndEightyCore.Domain
 {
     public class GameSnapshot
     {
-        public List<Player> Players { get; }
-        public Player PlayerOnThrow { get; }
-        public Player PlayerOnLeg { get; }
+        public List<PlayerGameData> PlayersGameData { get; }
+        public int PlayerOnThrowId { get; }
+        public int PlayerOnLegId { get; }
         public List<Hand180> Hands180 { get; }
 
-        public GameSnapshot(Domain.Game game)
+        public GameSnapshot(Game game)
         {
-            Players = new List<Player>();
+            PlayersGameData = new List<PlayerGameData>();
             foreach (var player in game.Players)
             {
-                Players.Add(player.Copy());
+                PlayersGameData.Add(player.GameData.Copy());
             }
 
-            PlayerOnThrow = game.PlayerOnThrow.Copy();
-            PlayerOnLeg = game.PlayerOnLeg.Copy();
+            PlayerOnThrowId = game.PlayerOnThrow.Id;
+            PlayerOnLegId = game.PlayerOnLeg.Id;
 
             Hands180 = game.Hands180.ToList();
         }

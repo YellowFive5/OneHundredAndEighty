@@ -568,7 +568,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void SetPointsTo(Player player, int pointsToSet)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1Points = pointsToSet;
@@ -583,7 +583,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void AddPointsTo(Player player, int pointsToAdd)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1Points = Player1Points + pointsToAdd;
@@ -598,10 +598,10 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void CheckPointsHintFor(Player player)
         {
-            var hint = CheckOut.Get(player.LegPoints, player.ThrowNumber);
+            var hint = CheckOut.Get(player.GameData.LegPoints, player.GameData.ThrowNumber);
             if (hint != null)
             {
-                switch (player.Order)
+                switch (player.GameData.Order)
                 {
                     case PlayerOrder.First:
                         Player1Hint = hint;
@@ -617,7 +617,7 @@ namespace OneHundredAndEightyCore.Windows.Score
             }
             else
             {
-                switch (player.Order)
+                switch (player.GameData.Order)
                 {
                     case PlayerOrder.First:
                         Player1Hint = string.Empty;
@@ -635,7 +635,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void AddLegsWonTo(Player player)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1Legs = Player1Legs + 1;
@@ -650,7 +650,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void SetLegsWonTo(Player player, int legsToSet)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1Legs = legsToSet;
@@ -665,7 +665,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void AddSetsWonTo(Player player)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1Sets = Player1Sets + 1;
@@ -680,7 +680,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void SetSetsWonTo(Player player, int setsToSet)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1Sets = setsToSet;
@@ -695,7 +695,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void OnThrowPointerSetOn(Player player)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1OnThrowPointerShown = true;
@@ -712,7 +712,7 @@ namespace OneHundredAndEightyCore.Windows.Score
 
         public void OnLegPointSetOn(Player player)
         {
-            switch (player.Order)
+            switch (player.GameData.Order)
             {
                 case PlayerOrder.First:
                     Player1OnLegPointShown = true;

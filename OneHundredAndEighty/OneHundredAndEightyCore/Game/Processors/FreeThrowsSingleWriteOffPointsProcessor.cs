@@ -19,7 +19,7 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             if (IsLegOver(thrw))
             {
-                Game.PlayerOnThrow.LegsWon += 1;
+                Game.PlayerOnThrow.GameData.LegsWon += 1;
                 OnMatchOver(thrw);
                 return;
             }
@@ -30,8 +30,8 @@ namespace OneHundredAndEightyCore.Game.Processors
                 return;
             }
 
-            Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
-            Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.LegPoints -= thrw.TotalPoints;
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
             OnHandOverSinglePlayerCheck(thrw);
@@ -41,9 +41,9 @@ namespace OneHundredAndEightyCore.Game.Processors
 
         protected override void ThrowUndoInternal(GameSnapshot gameSnapshot)
         {
-            scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.LegPoints);
+            scoreBoard.SetPointsTo(Game.PlayerOnThrow, Game.PlayerOnThrow.GameData.LegPoints);
 
-            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
             scoreBoard.CheckPointsHintFor(Game.PlayerOnThrow);
         }
     }

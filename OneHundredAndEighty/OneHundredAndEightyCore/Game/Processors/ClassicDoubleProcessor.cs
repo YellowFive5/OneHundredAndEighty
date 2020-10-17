@@ -20,8 +20,8 @@ namespace OneHundredAndEightyCore.Game.Processors
         {
             if (IsGameOver(thrw))
             {
-                Game.PlayerOnThrow.SetsWon += 1;
-                Game.PlayerOnThrow.LegsWon += 1;
+                Game.PlayerOnThrow.GameData.SetsWon += 1;
+                Game.PlayerOnThrow.GameData.LegsWon += 1;
                 OnMatchOver(thrw);
                 return;
             }
@@ -44,8 +44,8 @@ namespace OneHundredAndEightyCore.Game.Processors
                 return;
             }
 
-            Game.PlayerOnThrow.HandPoints += thrw.TotalPoints;
-            Game.PlayerOnThrow.LegPoints -= thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.HandPoints += thrw.TotalPoints;
+            Game.PlayerOnThrow.GameData.LegPoints -= thrw.TotalPoints;
             scoreBoard.AddPointsTo(Game.PlayerOnThrow, thrw.TotalPoints * -1);
 
             OnHandOverDoublePlayersCheck(thrw);
@@ -54,13 +54,13 @@ namespace OneHundredAndEightyCore.Game.Processors
         private void OnLegOver(DetectedThrow thrw)
         {
             ConvertAndSaveThrow(thrw, ThrowResult.LegWon);
-            Game.PlayerOnThrow.LegsWon += 1;
+            Game.PlayerOnThrow.GameData.LegsWon += 1;
             scoreBoard.AddLegsWonTo(Game.PlayerOnThrow);
             ClearPlayerOnThrowHand();
 
             foreach (var player in Game.Players)
             {
-                player.LegPoints = Game.legPoints;
+                player.GameData.LegPoints = Game.legPoints;
                 scoreBoard.SetPointsTo(player, Game.legPoints);
                 scoreBoard.CheckPointsHintFor(player);
             }
@@ -71,15 +71,15 @@ namespace OneHundredAndEightyCore.Game.Processors
         private void OnSetOver(DetectedThrow thrw)
         {
             ConvertAndSaveThrow(thrw, ThrowResult.SetWon);
-            Game.PlayerOnThrow.SetsWon += 1;
+            Game.PlayerOnThrow.GameData.SetsWon += 1;
             scoreBoard.AddSetsWonTo(Game.PlayerOnThrow);
             ClearPlayerOnThrowHand();
 
             foreach (var player in Game.Players)
             {
-                player.LegPoints = Game.legPoints;
+                player.GameData.LegPoints = Game.legPoints;
                 scoreBoard.SetPointsTo(player, Game.legPoints);
-                player.LegsWon = 0;
+                player.GameData.LegsWon = 0;
                 scoreBoard.SetLegsWonTo(player, 0);
                 scoreBoard.CheckPointsHintFor(player);
             }
@@ -102,13 +102,13 @@ namespace OneHundredAndEightyCore.Game.Processors
             scoreBoard.OnLegPointSetOn(Game.PlayerOnLeg);
             foreach (var player in Game.Players)
             {
-                scoreBoard.SetPointsTo(player, player.LegPoints);
-                scoreBoard.SetLegsWonTo(player, player.LegsWon);
-                scoreBoard.SetSetsWonTo(player, player.SetsWon);
+                scoreBoard.SetPointsTo(player, player.GameData.LegPoints);
+                scoreBoard.SetLegsWonTo(player, player.GameData.LegsWon);
+                scoreBoard.SetSetsWonTo(player, player.GameData.SetsWon);
                 scoreBoard.CheckPointsHintFor(player);
             }
 
-            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.ThrowNumber);
+            scoreBoard.SetThrowNumber(Game.PlayerOnThrow.GameData.ThrowNumber);
         }
     }
 }

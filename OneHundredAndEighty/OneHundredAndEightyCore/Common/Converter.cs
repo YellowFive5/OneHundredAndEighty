@@ -23,10 +23,11 @@ namespace OneHundredAndEightyCore.Common
             var playersList = new ObservableCollection<Player>();
             foreach (DataRow playerRow in playersTable.Rows)
             {
-                playersList.Add(new Player(playerRow[$"{Column.Name}"].ToString(),
-                                           playerRow[$"{Column.NickName}"].ToString(),
-                                           Convert.ToInt32(playerRow[$"{Column.Id}"]),
-                                           Base64ToBitmapImage(playerRow[$"{Column.Avatar}"].ToString())));
+                var player = new Player(playerRow[$"{Column.Name}"].ToString(),
+                                        playerRow[$"{Column.NickName}"].ToString(),
+                                        Base64ToBitmapImage(playerRow[$"{Column.Avatar}"].ToString()),
+                                        Convert.ToInt32(playerRow[$"{Column.Id}"]));
+                playersList.Add(player);
             }
 
             return playersList;

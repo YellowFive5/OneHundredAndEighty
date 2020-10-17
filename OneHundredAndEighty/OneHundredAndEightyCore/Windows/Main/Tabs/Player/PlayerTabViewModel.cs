@@ -115,7 +115,6 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
 
             var newPlayer = new Domain.Player(NewPlayerNameText,
                                               NewPlayerNickNameText,
-                                              -1,
                                               newPlayerAvatar);
             try
             {

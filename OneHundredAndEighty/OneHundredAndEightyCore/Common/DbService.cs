@@ -62,7 +62,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void StatisticUpdateSetLegsWonForPlayer(Player player, Domain.Game game)
         {
-            var setLegsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsWon}] = {player.LegsWon} " +
+            var setLegsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsWon}] = {player.GameData.LegsWon} " +
                                            $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                            $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
                                            $"ON [GS].[{Column.Game}] = {game.Id} " +
@@ -74,7 +74,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void StatisticUpdateSetSetsWonForPlayer(Player player, Domain.Game game)
         {
-            var setSetsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsWon}] = {player.SetsWon} " +
+            var setSetsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsWon}] = {player.GameData.SetsWon} " +
                                            $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                            $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
                                            $"ON [GS].[{Column.Game}] = {game.Id} " +
@@ -86,7 +86,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void StatisticUpdateSetLegsPlayedForPlayer(Domain.Game game)
         {
-            var setLegsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsPlayed}] = {game.Players.Sum(p => p.LegsWon)} " +
+            var setLegsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsPlayed}] = {game.Players.Sum(p => p.GameData.LegsWon)} " +
                                               $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
                                               $"WHERE [{Column.Game}] = {game.Id})";
 
@@ -95,7 +95,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void StatisticUpdateSetSetsPlayedForPlayer(Domain.Game game)
         {
-            var setSetsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsPlayed}] = {game.Players.Sum(p => p.SetsWon)} " +
+            var setSetsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsPlayed}] = {game.Players.Sum(p => p.GameData.SetsWon)} " +
                                               $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
                                               $"WHERE [{Column.Game}] = {game.Id})";
 
