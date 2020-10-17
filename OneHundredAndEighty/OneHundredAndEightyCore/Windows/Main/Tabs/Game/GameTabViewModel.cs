@@ -160,8 +160,6 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
                 return;
             }
 
-            //
-            // IsMainTabsEnabled = false;
             IsGameRunning = true;
 
             try
@@ -230,7 +228,6 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
             camsDetectionBoard.Close();
             detectionService.StopDetection();
             manualThrowPanel.HidePanel();
-            // IsMainTabsEnabled = true;
             IsGameRunning = false;
         }
     }
