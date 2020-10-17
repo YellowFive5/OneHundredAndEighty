@@ -14,6 +14,7 @@ namespace OneHundredAndEightyCore.Domain
         public string NickName { get; }
         public BitmapImage Avatar { get; }
 
+        public PlayerStatistics Statistics  { get; } // todo 
         public PlayerGameData GameData { get; }
 
         public Player(string name, string nickName, BitmapImage avatar = null, int id = -1)

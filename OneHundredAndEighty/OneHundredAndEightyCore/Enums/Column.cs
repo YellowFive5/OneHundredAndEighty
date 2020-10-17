@@ -31,25 +31,5 @@
         SetsPlayed,
         LegsWon,
         SetsWon,
-
-        #region Achieves
-
-        MatchesPlayed10,
-        MatchesPlayed100,
-        MatchesPlayed1000,
-        MatchesWon10,
-        MatchesWon100,
-        MatchesWon1000,
-        Throws1000,
-        Throws10000,
-        Throws100000,
-        Points10000,
-        Points100000,
-        Points1000000,
-        First180,
-        Bullx3,
-        MrZ
-
-        #endregion
     }
 }
