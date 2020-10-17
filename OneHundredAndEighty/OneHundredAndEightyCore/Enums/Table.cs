@@ -11,6 +11,7 @@
         Statistic,
         _180,
         ThrowType,
-        GameType
+        GameType,
+        Achieves
     }
 }

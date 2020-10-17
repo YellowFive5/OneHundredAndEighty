@@ -8,7 +8,6 @@
         NickName,
         RegistrationTimestamp,
         Statistic,
-        Achieves,
         StartTimestamp,
         EndTimestamp,
         Type,
@@ -31,5 +30,7 @@
         SetsPlayed,
         LegsWon,
         SetsWon,
+        AchieveId,
+        PlayerId
     }
 }

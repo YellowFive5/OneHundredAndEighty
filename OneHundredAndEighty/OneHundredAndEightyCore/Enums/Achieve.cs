@@ -2,7 +2,7 @@
 {
     public enum Achieve
     {
-        MatchesPlayed10,
+        MatchesPlayed10 = 1,
         MatchesPlayed100,
         MatchesPlayed1000,
         MatchesWon10,

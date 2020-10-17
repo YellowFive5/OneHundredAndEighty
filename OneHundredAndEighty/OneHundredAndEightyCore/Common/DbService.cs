@@ -166,10 +166,8 @@ namespace OneHundredAndEightyCore.Common
                 throw new Exception($"Player with nickname: '{player.NickName}' is already exists in DB");
             }
 
-            var newPlayerAchievesId = PlayerAchievesSaveNew();
-
-            var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Achieves}, {Column.Avatar})" +
-                                 $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{newPlayerAchievesId}', '{Converter.BitmapImageToBase64(player.Avatar)}')";
+            var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Avatar})" +
+                                 $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{Converter.BitmapImageToBase64(player.Avatar)}')";
             try
             {
                 ExecuteNonQueryInternal(newPlayerQuery);
@@ -177,7 +175,6 @@ namespace OneHundredAndEightyCore.Common
             catch (Exception)
             {
                 //todo errorMessage
-                ExecuteNonQueryInternal($"DELETE FROM [{Table.PlayerAchieves}] WHERE [{Column.Id}]={newPlayerAchievesId}");
                 throw;
             }
         }
@@ -216,7 +213,6 @@ namespace OneHundredAndEightyCore.Common
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Bull}),0)  AS BullThrows, " +
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType._25}),0)  AS _25Throws, " +
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Zero}),0)  AS ZeroThrows, " +
-                                        $"(SELECT({Achieve.MatchesPlayed10}+{Achieve.MatchesPlayed100}+{Achieve.MatchesPlayed1000}+{Achieve.MatchesWon10}+{Achieve.MatchesWon100}+{Achieve.MatchesWon1000}+{Achieve.Throws1000}+{Achieve.Throws10000}+{Achieve.Throws100000}+{Achieve.Points10000}+{Achieve.Points100000}+{Achieve.Points1000000}+[180x10]+[180x100]+[180x1000]+{Achieve.First180}+{Achieve.Bullx3}+{Achieve.MrZ}) FROM {Table.PlayerAchieves}) AS TotalAchieves " + // todo add enums
                                         $"FROM {Table.Players} AS P " +
                                         $"LEFT JOIN {Table.Statistic} AS S " +
                                         $"ON S.{Column.Player} = P.{Column.Id} " +
@@ -226,22 +222,9 @@ namespace OneHundredAndEightyCore.Common
                                         $"ON G.{Column.Id} = GS.{Column.Game} " +
                                         $"LEFT JOIN {Table._180} AS _180 " +
                                         $"ON _180.{Column.Player} = P.{Column.Id} " +
-                                        $"LEFT JOIN {Table.PlayerAchieves} AS PA " +
-                                        $"ON PA.{Column.Id} = P.{Column.Achieves} " +
                                         $"WHERE P.{Column.Id} = {playerId}";
 
             return ExecuteDataTableInternal(playerStatisticsQuery);
-        }
-
-        #endregion
-
-        #region PlayerAchieves
-
-        private object PlayerAchievesSaveNew()
-        {
-            var newPlayerAchievesQuery = $"INSERT INTO [{Table.PlayerAchieves}] DEFAULT VALUES";
-            ExecuteNonQueryInternal(newPlayerAchievesQuery);
-            return ExecuteScalarInternal($"SELECT MAX({Column.Id}) FROM [{Table.PlayerAchieves}]");
         }
 
         #endregion
@@ -535,7 +518,10 @@ namespace OneHundredAndEightyCore.Common
 
         public void MigrateFrom2_3to2_4()
         {
-            //
+            // Achieves scheme update
+
+            var achievesUpdate = $"DROP TABLE [{Table.PlayerAchieves}]";
+            ExecuteNonQueryInternal(achievesUpdate);
 
             UpdateDbVersion("2.4");
         }
