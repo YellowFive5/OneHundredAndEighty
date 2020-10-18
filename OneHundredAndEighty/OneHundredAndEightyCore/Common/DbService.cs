@@ -168,15 +168,7 @@ namespace OneHundredAndEightyCore.Common
 
             var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Avatar})" +
                                  $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{Converter.BitmapImageToBase64(player.Avatar)}')";
-            try
-            {
-                ExecuteNonQueryInternal(newPlayerQuery);
-            }
-            catch (Exception)
-            {
-                //todo errorMessage
-                throw;
-            }
+            ExecuteNonQueryInternal(newPlayerQuery);
         }
 
         public DataTable PlayersLoadAll()
@@ -519,8 +511,16 @@ namespace OneHundredAndEightyCore.Common
         public void MigrateFrom2_3to2_4()
         {
             // Achieves scheme update
-
-            var achievesUpdate = $"DROP TABLE [{Table.PlayerAchieves}]";
+            var achievesUpdate = "PRAGMA foreign_keys = OFF; " +
+                                 $"CREATE TABLE [{Table.Achieves}] ('{Column.Id}' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, '{Column.Name}' INTEGER NOT NULL UNIQUE); " +
+                                 $"DROP TABLE [{Table.PlayerAchieves}]; " +
+                                 $"CREATE TABLE [{Table.PlayerAchieves}] ('{Column.AchieveId}' INTEGER NOT NULL, '{Column.PlayerId}' INTEGER NOT NULL, '{Column.ObtainedTimeStamp}' TEXT NOT NULL, FOREIGN KEY('{Column.PlayerId}') REFERENCES '{Table.Players}'('{Column.Id}'), FOREIGN KEY('{Column.AchieveId}') REFERENCES '{Table.Achieves}'('{Column.Id}')); " +
+                                 $"CREATE TABLE PlayersTemp ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL CHECK(Name!=''), 'NickName' TEXT NOT NULL CHECK(NickName!='') UNIQUE, 'RegistrationTimestamp' TEXT NOT NULL, 'Avatar' TEXT); " +
+                                 $"INSERT INTO PlayersTemp (Id, Name, NickName, RegistrationTimestamp, Avatar) SELECT Id, Name, NickName, RegistrationTimestamp, Avatar FROM Players; " +
+                                 $"DROP TABLE [{Table.Players}]; " +
+                                 $"ALTER TABLE PlayersTemp RENAME TO [{Table.Players}]; " +
+                                 $"PRAGMA foreign_keys = ON; " +
+                                 $"INSERT INTO [{Table.Achieves}] ({Column.Name}) VALUES ('{Achieve.MatchesPlayed10}'),('{Achieve.MatchesPlayed100}'),('{Achieve.MatchesPlayed1000}'),('{Achieve.MatchesWon10}'),('{Achieve.MatchesWon100}'),('{Achieve.MatchesWon1000}'),('{Achieve.Throws1000}'),('{Achieve.Throws10000}'),('{Achieve.Throws100000}'),('{Achieve.Points10000}'),('{Achieve.Points100000}'),('{Achieve.Points1000000}'),('{Achieve._180x10}'),('{Achieve._180x100}'),('{Achieve._180x1000}'),('{Achieve.First180}'),('{Achieve.Bullx3}'),('{Achieve.MrZ}')";
             ExecuteNonQueryInternal(achievesUpdate);
 
             UpdateDbVersion("2.4");
