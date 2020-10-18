@@ -205,6 +205,7 @@ namespace OneHundredAndEightyCore.Common
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Bull}),0)  AS BullThrows, " +
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType._25}),0)  AS _25Throws, " +
                                         $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Zero}),0)  AS ZeroThrows, " +
+                                        $"COUNT(PA.{Column.AchieveId}) AS TotalAchieves " +
                                         $"FROM {Table.Players} AS P " +
                                         $"LEFT JOIN {Table.Statistic} AS S " +
                                         $"ON S.{Column.Player} = P.{Column.Id} " +
@@ -214,6 +215,8 @@ namespace OneHundredAndEightyCore.Common
                                         $"ON G.{Column.Id} = GS.{Column.Game} " +
                                         $"LEFT JOIN {Table._180} AS _180 " +
                                         $"ON _180.{Column.Player} = P.{Column.Id} " +
+                                        $"LEFT JOIN {Table.PlayerAchieves} AS PA " +
+                                        $"ON PA.{Column.PlayerId} = P.{Column.Id} " +
                                         $"WHERE P.{Column.Id} = {playerId}";
 
             return ExecuteDataTableInternal(playerStatisticsQuery);
