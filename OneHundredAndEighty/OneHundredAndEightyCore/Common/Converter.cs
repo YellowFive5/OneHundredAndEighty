@@ -43,7 +43,7 @@ namespace OneHundredAndEightyCore.Common
             var dataRow = playerStatisticsDataTable.Rows[0];
             return $"Name: {dataRow[$"{Column.Name}"]} \n" +
                    $"Nickname: {dataRow[$"{Column.NickName}"]} \n" +
-                   $"Registration date: {DateTime.Parse(dataRow[$"{Column.RegistrationTimestamp}"].ToString()):dd.MM.yyyy} \n" +
+                   $"Registration date: {DateTime.Parse(dataRow[$"{Column.RegistrationDateTime}"].ToString()):dd.MM.yyyy} \n" +
                    $"Games played: {dataRow["GamesPlayed"]} \n" +
                    $"Games won: {dataRow["GamesWon"]} \n" +
                    $"FreeThrowsSingle games played: {dataRow["FreeThrowsSingleGamesPlayed"]} \n" +

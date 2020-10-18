@@ -31,7 +31,7 @@ namespace OneHundredAndEightyCore.Common
 
         public int ThrowSaveNew(Throw thrw, Domain.Game game)
         {
-            var newThrowQuery = $"INSERT INTO [{Table.Throws}] ({Column.Player},{Column.Game},{Column.Sector},{Column.Type},{Column.Result},{Column.Number},{Column.Points},{Column.PoiX},{Column.PoiY},{Column.ProjectionResolution},{Column.Timestamp})" +
+            var newThrowQuery = $"INSERT INTO [{Table.Throws}] ({Column.PlayerId},{Column.GameId},{Column.Sector},{Column.ThrowTypeId},{Column.ThrowResultId},{Column.Number},{Column.Points},{Column.PoiX},{Column.PoiY},{Column.ProjectionResolution},{Column.DateTime})" +
                                 $"VALUES ({thrw.Player.Id},{game.Id},{thrw.Sector},{(int) thrw.Type},{(int) thrw.Result},{thrw.Number}," +
                                 $"{thrw.Points},{thrw.Poi.X.ToString(CultureInfo.InvariantCulture)},{thrw.Poi.Y.ToString(CultureInfo.InvariantCulture)},{thrw.ProjectionResolution},'{thrw.TimeStamp}')";
             ExecuteNonQueryInternal(newThrowQuery);
@@ -45,7 +45,7 @@ namespace OneHundredAndEightyCore.Common
 
         public int GameSaveNew(Domain.Game game)
         {
-            var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartTimestamp},{Column.EndTimestamp},{Column.Type})" +
+            var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartDateTime},{Column.EndDateTime},{Column.ThrowTypeId})" +
                                $" VALUES ('{game.StartTimeStamp}','{game.EndTimeStamp}','{(int) game.Type}')";
             ExecuteNonQueryInternal(newGameQuery);
 
@@ -65,9 +65,9 @@ namespace OneHundredAndEightyCore.Common
             var setLegsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsWon}] = {player.GameData.LegsWon} " +
                                            $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                            $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                           $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                           $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
-                                           $"WHERE[{Column.Player}] = {player.Id})";
+                                           $"ON [GS].[{Column.GameId}] = {game.Id} " +
+                                           $"AND [GS].[{Column.StatisticId}] = [S].[{Column.Id}] " +
+                                           $"WHERE[{Column.PlayerId}] = {player.Id})";
 
             ExecuteNonQueryInternal(setLegsWonForPlayerQuery);
         }
@@ -77,9 +77,9 @@ namespace OneHundredAndEightyCore.Common
             var setSetsWonForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsWon}] = {player.GameData.SetsWon} " +
                                            $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                            $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                           $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                           $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
-                                           $"WHERE[{Column.Player}] = {player.Id})";
+                                           $"ON [GS].[{Column.GameId}] = {game.Id} " +
+                                           $"AND [GS].[{Column.StatisticId}] = [S].[{Column.Id}] " +
+                                           $"WHERE[{Column.PlayerId}] = {player.Id})";
 
             ExecuteNonQueryInternal(setSetsWonForPlayerQuery);
         }
@@ -87,8 +87,8 @@ namespace OneHundredAndEightyCore.Common
         public void StatisticUpdateSetLegsPlayedForPlayer(Domain.Game game)
         {
             var setLegsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.LegsPlayed}] = {game.Players.Sum(p => p.GameData.LegsWon)} " +
-                                              $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
-                                              $"WHERE [{Column.Game}] = {game.Id})";
+                                              $"WHERE [{Column.Id}] IN (SELECT [{Column.StatisticId}] FROM [{Table.GameStatistic}] " +
+                                              $"WHERE [{Column.GameId}] = {game.Id})";
 
             ExecuteNonQueryInternal(setLegsPlayedForPlayerQuery);
         }
@@ -96,37 +96,37 @@ namespace OneHundredAndEightyCore.Common
         public void StatisticUpdateSetSetsPlayedForPlayer(Domain.Game game)
         {
             var setSetsPlayedForPlayerQuery = $"UPDATE [{Table.Statistic}] SET [{Column.SetsPlayed}] = {game.Players.Sum(p => p.GameData.SetsWon)} " +
-                                              $"WHERE [{Column.Id}] IN (SELECT [{Column.Statistic}] FROM [{Table.GameStatistic}] " +
-                                              $"WHERE [{Column.Game}] = {game.Id})";
+                                              $"WHERE [{Column.Id}] IN (SELECT [{Column.StatisticId}] FROM [{Table.GameStatistic}] " +
+                                              $"WHERE [{Column.GameId}] = {game.Id})";
 
             ExecuteNonQueryInternal(setSetsPlayedForPlayerQuery);
         }
 
         public void StatisticUpdateAllPlayersSetGameResultAbortedOrError(Domain.Game game)
         {
-            var playersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) game.Result} " +
+            var playersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResultTypeId}] = {(int) game.Result} " +
                                                    $"WHERE [{Column.Id}] IN (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                    $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                                   $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                                   $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}])";
+                                                   $"ON [GS].[{Column.GameId}] = {game.Id} " +
+                                                   $"AND [GS].[{Column.StatisticId}] = [S].[{Column.Id}])";
 
             ExecuteNonQueryInternal(playersGameStatisticsResultQuery);
         }
 
         public void StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(Domain.Game game)
         {
-            var winnerGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) GameResultType.Win} " +
+            var winnerGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResultTypeId}] = {(int) GameResultType.Win} " +
                                                   $"WHERE [{Column.Id}] = (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                   $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                                  $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                                  $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
-                                                  $"WHERE[{Column.Player}] = {game.Winner.Id})";
-            var losersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResult}] = {(int) GameResultType.Loose} " +
+                                                  $"ON [GS].[{Column.GameId}] = {game.Id} " +
+                                                  $"AND [GS].[{Column.StatisticId}] = [S].[{Column.Id}] " +
+                                                  $"WHERE[{Column.PlayerId}] = {game.Winner.Id})";
+            var losersGameStatisticsResultQuery = $"UPDATE [{Table.Statistic}] SET [{Column.GameResultTypeId}] = {(int) GameResultType.Loose} " +
                                                   $"WHERE [{Column.Id}] IN (SELECT [{Column.Id}] FROM [{Table.Statistic}] AS [S] " +
                                                   $"INNER JOIN [{Table.GameStatistic}] AS [GS] " +
-                                                  $"ON [GS].[{Column.Game}] = {game.Id} " +
-                                                  $"AND [GS].[{Column.Statistic}] = [S].[{Column.Id}] " +
-                                                  $"WHERE[{Column.Player}] <> {game.Winner.Id})";
+                                                  $"ON [GS].[{Column.GameId}] = {game.Id} " +
+                                                  $"AND [GS].[{Column.StatisticId}] = [S].[{Column.Id}] " +
+                                                  $"WHERE[{Column.PlayerId}] <> {game.Winner.Id})";
 
             ExecuteNonQueryInternal(winnerGameStatisticsResultQuery);
             ExecuteNonQueryInternal(losersGameStatisticsResultQuery);
@@ -139,7 +139,7 @@ namespace OneHundredAndEightyCore.Common
             foreach (var player in players)
             {
                 var newGameStatisticsQuery = $"INSERT INTO [{Table.Statistic}] " +
-                                             $"({Column.Player},{Column.GameResult})" +
+                                             $"({Column.PlayerId},{Column.GameResultTypeId})" +
                                              $"VALUES ({player.Id},{(int) GameResultType.NotDefined})";
                 ExecuteNonQueryInternal(newGameStatisticsQuery);
 
@@ -149,7 +149,7 @@ namespace OneHundredAndEightyCore.Common
 
             foreach (var id in newGameStatisticsIds)
             {
-                ExecuteNonQueryInternal($"INSERT INTO [{Table.GameStatistic}] ({Column.Game},{Column.Statistic})" +
+                ExecuteNonQueryInternal($"INSERT INTO [{Table.GameStatistic}] ({Column.GameId},{Column.StatisticId})" +
                                         $" VALUES ({newGameId},{id})");
             }
         }
@@ -166,7 +166,7 @@ namespace OneHundredAndEightyCore.Common
                 throw new Exception($"Player with nickname: '{player.NickName}' is already exists in DB");
             }
 
-            var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationTimestamp}, {Column.Avatar})" +
+            var newPlayerQuery = $"INSERT INTO [{Table.Players}] ({Column.Name}, {Column.NickName}, {Column.RegistrationDateTime}, {Column.Avatar})" +
                                  $" VALUES ('{player.Name}','{player.NickName}','{DateTime.Now}', '{Converter.BitmapImageToBase64(player.Avatar)}')";
             ExecuteNonQueryInternal(newPlayerQuery);
         }
@@ -187,39 +187,39 @@ namespace OneHundredAndEightyCore.Common
 
         public DataTable StatisticsGetForPlayer(int playerId)
         {
-            var playerStatisticsQuery = $"SELECT P.{Column.Name}, P.{Column.NickName}, P.{Column.RegistrationTimestamp}, " +
+            var playerStatisticsQuery = $"SELECT P.{Column.Name}, P.{Column.NickName}, P.{Column.RegistrationDateTime}, " +
                                         $"COUNT(S.{Column.Id}) AS GamesPlayed, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResult} = {(int) GameResultType.Win}),0)  AS GamesWon, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResult} = {(int) GameResultType.Loose}),0)  AS GamesLoose, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.FreeThrowsSingle}),0)  AS FreeThrowsSingleGamesPlayed, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.FreeThrowsDouble}),0)  AS FreeThrowsDoubleGamesPlayed, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.FreeThrowsDouble} AND S.{Column.GameResult} = {(int) GameResultType.Win}),0)  AS FreeThrowsDoubleGamesWon, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.Classic}),0)  AS ClassicGamesPlayed, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.Type} = {(int) GameType.Classic} AND S.{Column.GameResult} = {(int) GameResultType.Win}),0)  AS ClassicGamesGamesWon, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS GamesWon, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResultTypeId} = {(int) GameResultType.Loose}),0)  AS GamesLoose, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.FreeThrowsSingle}),0)  AS FreeThrowsSingleGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.FreeThrowsDouble}),0)  AS FreeThrowsDoubleGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.FreeThrowsDouble} AND S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS FreeThrowsDoubleGamesWon, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.Classic}),0)  AS ClassicGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.Classic} AND S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS ClassicGamesGamesWon, " +
                                         $"IFNULL(SUM(S.{Column.LegsPlayed}),0)  AS LegsPlayed, " +
                                         $"IFNULL(SUM(S.{Column.LegsWon}),0)  AS LegsWon, " +
                                         $"IFNULL(SUM(S.{Column.SetsPlayed}),0)  AS SetsPlayed, " +
                                         $"IFNULL(SUM(S.{Column.SetsWon}),0)  AS SetsWon, " +
-                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId}),0)  AS TotalThrows, " +
-                                        $"IFNULL((SELECT SUM(T.Points) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId}),0)  AS TotalPoints, " +
-                                        $"IFNULL((SELECT ROUND(AVG(T.Points),3) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId}),0)  AS AvgPointsPerThrow, " +
-                                        $"IFNULL((SELECT COUNT(_180.{Column.Id}) WHERE _180.{Column.Player} = {playerId}),0)  AS _180, " +
-                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Single}),0)  AS SingleThrows, " +
-                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Double}),0)  AS DoubleThrows, " +
-                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Tremble}),0)  AS TrembleThrows, " +
-                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Bull}),0)  AS BullThrows, " +
-                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType._25}),0)  AS _25Throws, " +
-                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.Player} = {playerId} AND T.{Column.Type} = {(int) ThrowType.Zero}),0)  AS ZeroThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId}),0)  AS TotalThrows, " +
+                                        $"IFNULL((SELECT SUM(T.Points) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId}),0)  AS TotalPoints, " +
+                                        $"IFNULL((SELECT ROUND(AVG(T.Points),3) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId}),0)  AS AvgPointsPerThrow, " +
+                                        $"IFNULL((SELECT COUNT(_180.{Column.Id}) WHERE _180.{Column.PlayerId} = {playerId}),0)  AS _180, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId} AND T.{Column.ThrowTypeId} = {(int) ThrowType.Single}),0)  AS SingleThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId} AND T.{Column.ThrowTypeId} = {(int) ThrowType.Double}),0)  AS DoubleThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId} AND T.{Column.ThrowTypeId} = {(int) ThrowType.Tremble}),0)  AS TrembleThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId} AND T.{Column.ThrowTypeId} = {(int) ThrowType.Bull}),0)  AS BullThrows, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId} AND T.{Column.ThrowTypeId} = {(int) ThrowType._25}),0)  AS _25Throws, " +
+                                        $"IFNULL((SELECT COUNT(T.{Column.Id}) FROM {Table.Throws} AS T WHERE T.{Column.PlayerId} = {playerId} AND T.{Column.ThrowTypeId} = {(int) ThrowType.Zero}),0)  AS ZeroThrows, " +
                                         $"COUNT(PA.{Column.AchieveId}) AS TotalAchieves " +
                                         $"FROM {Table.Players} AS P " +
                                         $"LEFT JOIN {Table.Statistic} AS S " +
-                                        $"ON S.{Column.Player} = P.{Column.Id} " +
+                                        $"ON S.{Column.PlayerId} = P.{Column.Id} " +
                                         $"LEFT JOIN {Table.GameStatistic} AS GS " +
-                                        $"ON GS.{Column.Statistic} = S.{Column.Id} " +
+                                        $"ON GS.{Column.StatisticId} = S.{Column.Id} " +
                                         $"LEFT JOIN {Table.Games} AS G " +
-                                        $"ON G.{Column.Id} = GS.{Column.Game} " +
+                                        $"ON G.{Column.Id} = GS.{Column.GameId} " +
                                         $"LEFT JOIN {Table._180} AS _180 " +
-                                        $"ON _180.{Column.Player} = P.{Column.Id} " +
+                                        $"ON _180.{Column.PlayerId} = P.{Column.Id} " +
                                         $"LEFT JOIN {Table.PlayerAchieves} AS PA " +
                                         $"ON PA.{Column.PlayerId} = P.{Column.Id} " +
                                         $"WHERE P.{Column.Id} = {playerId}";
@@ -233,7 +233,7 @@ namespace OneHundredAndEightyCore.Common
 
         public void _180SaveNew(Hand180 _180Hand, Domain.Game game)
         {
-            var new180Query = $"INSERT INTO [{Table._180}] ({Column.Player},{Column.Game},{Column.Throw1},{Column.Throw2},{Column.Throw3}, {Column.Timestamp})" +
+            var new180Query = $"INSERT INTO [{Table._180}] ({Column.PlayerId},{Column.GameId},{Column.Throw1Id},{Column.Throw2Id},{Column.Throw3Id}, {Column.DateTime})" +
                               $" VALUES ('{_180Hand.Player.Id}','{game.Id}'," +
                               $"'{_180Hand.HandThrows.ElementAt(0).Id}'," +
                               $"'{_180Hand.HandThrows.ElementAt(1).Id}'," +
@@ -379,20 +379,20 @@ namespace OneHundredAndEightyCore.Common
             var addTempThrowTypeForShuffle = $"INSERT INTO [{Table.ThrowType}] values (7, 'temp', 0)";
             ExecuteNonQueryInternal(addTempThrowTypeForShuffle);
 
-            var tremblesToTemp = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 7 " +
-                                 $"WHERE [{Column.Type}] = 4";
+            var tremblesToTemp = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 7 " +
+                                 $"WHERE [{Column.ThrowTypeId}] = 4";
             ExecuteNonQueryInternal(tremblesToTemp);
-            var zeroesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 4 " +
-                            $"WHERE [{Column.Type}] = 1";
+            var zeroesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 4 " +
+                            $"WHERE [{Column.ThrowTypeId}] = 1";
             ExecuteNonQueryInternal(zeroesFix);
-            var singlesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 1 " +
-                             $"WHERE [{Column.Type}] = 2";
+            var singlesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 1 " +
+                             $"WHERE [{Column.ThrowTypeId}] = 2";
             ExecuteNonQueryInternal(singlesFix);
-            var doublesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 2 " +
-                             $"WHERE [{Column.Type}] = 3";
+            var doublesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 2 " +
+                             $"WHERE [{Column.ThrowTypeId}] = 3";
             ExecuteNonQueryInternal(doublesFix);
-            var tremblesFix = $"UPDATE [{Table.Throws}] SET [{Column.Type}] = 3 " +
-                              $"WHERE [{Column.Type}] = 7";
+            var tremblesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 3 " +
+                              $"WHERE [{Column.ThrowTypeId}] = 7";
             ExecuteNonQueryInternal(tremblesFix);
 
             var deleteTempThrowTypeForShuffle = $"DELETE FROM [{Table.ThrowType}] WHERE [{Column.Id}] = 7";
@@ -400,30 +400,30 @@ namespace OneHundredAndEightyCore.Common
             // ThrowTypeBugFix
 
             // GameTypes simplify
-            var toFreeThrowsSingle = $"UPDATE [{Table.Games}] SET [{Column.Type}] = 1 " +
-                                     $"WHERE [{Column.Type}] IN (1,2,3,4,5)";
+            var toFreeThrowsSingle = $"UPDATE [{Table.Games}] SET [{Column.ThrowTypeId}] = 1 " +
+                                     $"WHERE [{Column.ThrowTypeId}] IN (1,2,3,4,5)";
             ExecuteNonQueryInternal(toFreeThrowsSingle);
 
-            var toFreeThrowsDouble = $"UPDATE [{Table.Games}] SET [{Column.Type}] = 2 " +
-                                     $"WHERE [{Column.Type}] IN (6,7,8,9,10)";
+            var toFreeThrowsDouble = $"UPDATE [{Table.Games}] SET [{Column.ThrowTypeId}] = 2 " +
+                                     $"WHERE [{Column.ThrowTypeId}] IN (6,7,8,9,10)";
             ExecuteNonQueryInternal(toFreeThrowsDouble);
 
-            var toClassic = $"UPDATE [{Table.Games}] SET [{Column.Type}] = 3 " +
-                            $"WHERE [{Column.Type}] IN (11,12,13,14)";
+            var toClassic = $"UPDATE [{Table.Games}] SET [{Column.ThrowTypeId}] = 3 " +
+                            $"WHERE [{Column.ThrowTypeId}] IN (11,12,13,14)";
             ExecuteNonQueryInternal(toClassic);
 
             var deleteTypes = $"DELETE FROM [{Table.GameType}] WHERE [{Column.Id}] > 3";
             ExecuteNonQueryInternal(deleteTypes);
 
-            var renameFreeThrowsSingle = $"UPDATE [{Table.GameType}] SET [{Column.Type}] = 'FreeThrowsSingle' " +
+            var renameFreeThrowsSingle = $"UPDATE [{Table.GameType}] SET [{Column.ThrowTypeId}] = 'FreeThrowsSingle' " +
                                          $"WHERE [{Column.Id}] = 1";
             ExecuteNonQueryInternal(renameFreeThrowsSingle);
 
-            var renameFreeThrowsDouble = $"UPDATE [{Table.GameType}] SET [{Column.Type}] = 'FreeThrowsDouble' " +
+            var renameFreeThrowsDouble = $"UPDATE [{Table.GameType}] SET [{Column.ThrowTypeId}] = 'FreeThrowsDouble' " +
                                          $"WHERE [{Column.Id}] = 2";
             ExecuteNonQueryInternal(renameFreeThrowsDouble);
 
-            var renameClassic = $"UPDATE [{Table.GameType}] SET [{Column.Type}] = 'Classic' " +
+            var renameClassic = $"UPDATE [{Table.GameType}] SET [{Column.ThrowTypeId}] = 'Classic' " +
                                 $"WHERE [{Column.Id}] = 3";
             ExecuteNonQueryInternal(renameClassic);
             // GameTypes simplify
@@ -522,15 +522,44 @@ namespace OneHundredAndEightyCore.Common
             var achievesUpdate = "PRAGMA foreign_keys = OFF; " +
                                  $"CREATE TABLE [{Table.Achieves}] ('{Column.Id}' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, '{Column.Name}' INTEGER NOT NULL UNIQUE); " +
                                  $"DROP TABLE [{Table.PlayerAchieves}]; " +
-                                 $"CREATE TABLE [{Table.PlayerAchieves}] ('{Column.AchieveId}' INTEGER NOT NULL, '{Column.PlayerId}' INTEGER NOT NULL, '{Column.ObtainedTimeStamp}' TEXT NOT NULL, FOREIGN KEY('{Column.PlayerId}') REFERENCES '{Table.Players}'('{Column.Id}'), FOREIGN KEY('{Column.AchieveId}') REFERENCES '{Table.Achieves}'('{Column.Id}')); " +
-                                 $"CREATE TABLE PlayersTemp ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL CHECK(Name!=''), 'NickName' TEXT NOT NULL CHECK(NickName!='') UNIQUE, 'RegistrationTimestamp' TEXT NOT NULL, 'Avatar' TEXT); " +
-                                 $"INSERT INTO PlayersTemp (Id, Name, NickName, RegistrationTimestamp, Avatar) SELECT Id, Name, NickName, RegistrationTimestamp, Avatar FROM Players; " +
+                                 $"CREATE TABLE [{Table.PlayerAchieves}] ('{Column.AchieveId}' INTEGER NOT NULL, '{Column.PlayerId}' INTEGER NOT NULL, '{Column.ObtainedDateTime}' TEXT NOT NULL, FOREIGN KEY('{Column.PlayerId}') REFERENCES '{Table.Players}'('{Column.Id}'), FOREIGN KEY('{Column.AchieveId}') REFERENCES '{Table.Achieves}'('{Column.Id}')); " +
+                                 $"CREATE TABLE PlayersTemp ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL CHECK(Name!=''), 'NickName' TEXT NOT NULL CHECK(NickName!='') UNIQUE, 'RegistrationDateTime' TEXT NOT NULL, 'Avatar' TEXT); " +
+                                 $"INSERT INTO PlayersTemp (Id, Name, NickName, RegistrationDateTime, Avatar) SELECT Id, Name, NickName, RegistrationTimestamp, Avatar FROM Players; " +
                                  $"DROP TABLE [{Table.Players}]; " +
                                  $"ALTER TABLE PlayersTemp RENAME TO [{Table.Players}]; " +
                                  $"PRAGMA foreign_keys = ON; " +
                                  $"INSERT INTO [{Table.Achieves}] ({Column.Name}) VALUES ('{Achieve.MatchesPlayed10}'),('{Achieve.MatchesPlayed100}'),('{Achieve.MatchesPlayed1000}'),('{Achieve.MatchesWon10}'),('{Achieve.MatchesWon100}'),('{Achieve.MatchesWon1000}'),('{Achieve.Throws1000}'),('{Achieve.Throws10000}'),('{Achieve.Throws100000}'),('{Achieve.Points10000}'),('{Achieve.Points100000}'),('{Achieve.Points1000000}'),('{Achieve._180x10}'),('{Achieve._180x100}'),('{Achieve._180x1000}'),('{Achieve.First180}'),('{Achieve.Bullx3}'),('{Achieve.MrZ}')";
             ExecuteNonQueryInternal(achievesUpdate);
 
+            var columnsRename = $"PRAGMA foreign_keys = OFF;" +
+                                $"CREATE TABLE [ThrowsTemp] ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,'PlayerId INTEGER NOT NULL, 'GameId' INTEGER NOT NULL,'Sector' INTEGER NOT NULL, 'ThrowTypeId' INTEGER NOT NULL, 'ThrowResultId' INTEGER NOT NULL, 'Number'	INTEGER NOT NULL,'Points' INTEGER NOT NULL,'PoiX'	INTEGER NOT NULL,'PoiY'	INTEGER NOT NULL,'ProjectionResolution'	INTEGER NOT NULL,'DateTime'	TEXT NOT NULL,FOREIGN KEY('GameId') REFERENCES 'Games'('Id'),FOREIGN KEY('ThrowTypeId') REFERENCES 'ThrowType'('Id'),FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'),FOREIGN KEY('ThrowResultId') REFERENCES 'ThrowResult'('Id'));" +
+                                $"INSERT INTO [ThrowsTemp] (Id,PlayerId,GameId,Sector,ThrowTypeId,ThrowResultId,Number,Points,PoiX,PoiY,ProjectionResolution,DateTime)" +
+                                $"SELECT Id,Player,Game,Sector,Type,Result,Number,Points,PoiX,PoiY,ProjectionResolution,Timestamp FROM [Throws];" +
+                                $"DROP TABLE [Throws];" +
+                                $"ALTER TABLE [ThrowsTemp] RENAME TO [Throws];" +
+                                $"CREATE TABLE 'GamesTemp' ('Id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,'StartDateTime'	TEXT NOT NULL,'EndDateTime'	TEXT NOT NULL,'GameTypeId'	INTEGER NOT NULL,FOREIGN KEY('GameTypeId') REFERENCES 'GameType'('Id'));" +
+                                $"INSERT INTO [GamesTemp] (Id,StartDateTime,EndDateTime,GameTypeId)" +
+                                $"SELECT Id,StartTimestamp,EndTimestamp,Type FROM [Games];" +
+                                $"DROP TABLE [Games];" +
+                                $"ALTER TABLE [GamesTemp] RENAME TO [Games];" +
+                                $"CREATE TABLE 'GameStatisticTemp' ('GameId'	INTEGER NOT NULL,'StatisticId'	INTEGER NOT NULL,FOREIGN KEY('GameId') REFERENCES 'Games'('Id'),FOREIGN KEY('StatisticId') REFERENCES 'Statistic'('Id'));" +
+                                $"INSERT INTO [GameStatisticTemp] (GameId,StatisticId)" +
+                                $"SELECT Game,Statistic FROM [GameStatistic];" +
+                                $"DROP TABLE [GameStatistic];" +
+                                $"ALTER TABLE [GameStatisticTemp] RENAME TO [GameStatistic];" +
+                                $"CREATE TABLE 'StatisticTemp' ('Id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'PlayerId'	INTEGER NOT NULL,'GameResultTypeId'	INTEGER NOT NULL,'LegsPlayed'	INTEGER NOT NULL DEFAULT 0,'LegsWon'	INTEGER NOT NULL DEFAULT 0,'SetsPlayed'	INTEGER NOT NULL DEFAULT 0,	'SetsWon'	INTEGER NOT NULL DEFAULT 0,FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'),FOREIGN KEY('GameResultTypeId') REFERENCES 'GameResultType'('Id'));" +
+                                $"INSERT INTO [StatisticTemp] (Id,PlayerId,GameResultTypeId,LegsPlayed,LegsWon,SetsPlayed,SetsWon)" +
+                                $"SELECT Id,Player,GameResult,LegsPlayed,LegsWon,SetsPlayed,SetsWon FROM [Statistic];" +
+                                $"DROP TABLE [Statistic];" +
+                                $"ALTER TABLE [StatisticTemp] RENAME TO [Statistic];" +
+                                $"CREATE TABLE '_180Temp' ('Id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'PlayerId'	INTEGER NOT NULL,'GameId'	INTEGER NOT NULL,'Throw1Id'	INTEGER NOT NULL,'Throw2Id'	INTEGER NOT NULL,'Throw3Id'	INTEGER NOT NULL,'DateTime'	TEXT NOT NULL,FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'),FOREIGN KEY('GameId') REFERENCES 'Games'('Id'),FOREIGN KEY('Throw1Id') REFERENCES 'Throws'('Id'),FOREIGN KEY('Throw2Id') REFERENCES 'Throws'('Id'),FOREIGN KEY('Throw3Id') REFERENCES 'Throws'('Id'));" +
+                                $"INSERT INTO [_180Temp] (Id,PlayerId,GameId,Throw1Id,Throw2Id,Throw3Id,DateTime)" +
+                                $"SELECT Id,Player,Game,Throw1,Throw2,Throw3,TimeStamp FROM [_180];" +
+                                $"DROP TABLE [_180];" +
+                                $"ALTER TABLE [_180Temp] RENAME TO [_180];" +
+                                $"PRAGMA foreign_keys = ON;";
+            ExecuteNonQueryInternal(columnsRename);
+            
             UpdateDbVersion("2.4");
         }
 
