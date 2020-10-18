@@ -354,20 +354,20 @@ namespace OneHundredAndEightyCore.Common
 
         public void MigrateFrom2_0to2_1()
         {
-            var renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam1ThresholdSlider}' " +
-                                 $"WHERE [{Column.Name}] = 'Cam1TresholdSlider' ";
+            var renameSettings = $"UPDATE [Settings] SET [Name] = 'Cam1ThresholdSlider' " +
+                                 $"WHERE [Name] = 'Cam1TresholdSlider' ";
             ExecuteNonQueryInternal(renameSettings);
 
-            renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam2ThresholdSlider}' " +
-                             $"WHERE [{Column.Name}] = 'Cam2TresholdSlider'";
+            renameSettings = $"UPDATE [Settings] SET [Name] = 'Cam2ThresholdSlider' " +
+                             $"WHERE [Name] = 'Cam2TresholdSlider'";
             ExecuteNonQueryInternal(renameSettings);
 
-            renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam3ThresholdSlider}' " +
-                             $"WHERE [{Column.Name}] = 'Cam3TresholdSlider'";
+            renameSettings = $"UPDATE [Settings] SET [Name] = 'Cam3ThresholdSlider' " +
+                             $"WHERE [Name] = 'Cam3TresholdSlider'";
             ExecuteNonQueryInternal(renameSettings);
 
-            renameSettings = $"UPDATE [{Table.Settings}] SET [{Column.Name}] = '{SettingsType.Cam4ThresholdSlider}' " +
-                             $"WHERE [{Column.Name}] = 'Cam4TresholdSlider'";
+            renameSettings = $"UPDATE [Settings] SET [Name] = 'Cam4ThresholdSlider' " +
+                             $"WHERE [Name] = 'Cam4TresholdSlider'";
             ExecuteNonQueryInternal(renameSettings);
 
             UpdateDbVersion("2.1");
@@ -376,111 +376,111 @@ namespace OneHundredAndEightyCore.Common
         public void MigrateFrom2_1to2_2()
         {
             // ThrowTypeBugFix
-            var addTempThrowTypeForShuffle = $"INSERT INTO [{Table.ThrowType}] values (7, 'temp', 0)";
+            var addTempThrowTypeForShuffle = $"INSERT INTO [ThrowType] values (7, 'temp', 0)";
             ExecuteNonQueryInternal(addTempThrowTypeForShuffle);
 
-            var tremblesToTemp = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 7 " +
-                                 $"WHERE [{Column.ThrowTypeId}] = 4";
+            var tremblesToTemp = $"UPDATE [Throws] SET [Type] = 7 " +
+                                 $"WHERE [Type] = 4";
             ExecuteNonQueryInternal(tremblesToTemp);
-            var zeroesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 4 " +
-                            $"WHERE [{Column.ThrowTypeId}] = 1";
+            var zeroesFix = $"UPDATE [Throws] SET [Type] = 4 " +
+                            $"WHERE [Type] = 1";
             ExecuteNonQueryInternal(zeroesFix);
-            var singlesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 1 " +
-                             $"WHERE [{Column.ThrowTypeId}] = 2";
+            var singlesFix = $"UPDATE [Throws] SET [Type] = 1 " +
+                             $"WHERE [Type] = 2";
             ExecuteNonQueryInternal(singlesFix);
-            var doublesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 2 " +
-                             $"WHERE [{Column.ThrowTypeId}] = 3";
+            var doublesFix = $"UPDATE [Throws] SET [Type] = 2 " +
+                             $"WHERE [Type] = 3";
             ExecuteNonQueryInternal(doublesFix);
-            var tremblesFix = $"UPDATE [{Table.Throws}] SET [{Column.ThrowTypeId}] = 3 " +
-                              $"WHERE [{Column.ThrowTypeId}] = 7";
+            var tremblesFix = $"UPDATE [Throws] SET [Type] = 3 " +
+                              $"WHERE [Type] = 7";
             ExecuteNonQueryInternal(tremblesFix);
 
-            var deleteTempThrowTypeForShuffle = $"DELETE FROM [{Table.ThrowType}] WHERE [{Column.Id}] = 7";
+            var deleteTempThrowTypeForShuffle = $"DELETE FROM [ThrowType] WHERE [Id] = 7";
             ExecuteNonQueryInternal(deleteTempThrowTypeForShuffle);
             // ThrowTypeBugFix
 
             // GameTypes simplify
-            var toFreeThrowsSingle = $"UPDATE [{Table.Games}] SET [{Column.ThrowTypeId}] = 1 " +
-                                     $"WHERE [{Column.ThrowTypeId}] IN (1,2,3,4,5)";
+            var toFreeThrowsSingle = $"UPDATE [Games] SET [Type] = 1 " +
+                                     $"WHERE [Type] IN (1,2,3,4,5)";
             ExecuteNonQueryInternal(toFreeThrowsSingle);
 
-            var toFreeThrowsDouble = $"UPDATE [{Table.Games}] SET [{Column.ThrowTypeId}] = 2 " +
-                                     $"WHERE [{Column.ThrowTypeId}] IN (6,7,8,9,10)";
+            var toFreeThrowsDouble = $"UPDATE [Games] SET [Type] = 2 " +
+                                     $"WHERE [Type] IN (6,7,8,9,10)";
             ExecuteNonQueryInternal(toFreeThrowsDouble);
 
-            var toClassic = $"UPDATE [{Table.Games}] SET [{Column.ThrowTypeId}] = 3 " +
-                            $"WHERE [{Column.ThrowTypeId}] IN (11,12,13,14)";
+            var toClassic = $"UPDATE [Games] SET [Type] = 3 " +
+                            $"WHERE [Type] IN (11,12,13,14)";
             ExecuteNonQueryInternal(toClassic);
 
-            var deleteTypes = $"DELETE FROM [{Table.GameType}] WHERE [{Column.Id}] > 3";
+            var deleteTypes = $"DELETE FROM [GameType] WHERE [Id] > 3";
             ExecuteNonQueryInternal(deleteTypes);
 
-            var renameFreeThrowsSingle = $"UPDATE [{Table.GameType}] SET [{Column.ThrowTypeId}] = 'FreeThrowsSingle' " +
-                                         $"WHERE [{Column.Id}] = 1";
+            var renameFreeThrowsSingle = $"UPDATE [GameType] SET [Type] = 'FreeThrowsSingle' " +
+                                         $"WHERE [Id] = 1";
             ExecuteNonQueryInternal(renameFreeThrowsSingle);
 
-            var renameFreeThrowsDouble = $"UPDATE [{Table.GameType}] SET [{Column.ThrowTypeId}] = 'FreeThrowsDouble' " +
-                                         $"WHERE [{Column.Id}] = 2";
+            var renameFreeThrowsDouble = $"UPDATE [GameType] SET [Type] = 'FreeThrowsDouble' " +
+                                         $"WHERE [Id] = 2";
             ExecuteNonQueryInternal(renameFreeThrowsDouble);
 
-            var renameClassic = $"UPDATE [{Table.GameType}] SET [{Column.ThrowTypeId}] = 'Classic' " +
-                                $"WHERE [{Column.Id}] = 3";
+            var renameClassic = $"UPDATE [GameType] SET [Type] = 'Classic' " +
+                                $"WHERE [Id] = 3";
             ExecuteNonQueryInternal(renameClassic);
             // GameTypes simplify
 
             // add some settings
-            var addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            var addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                                "VALUES ('CamsDetectionWindowPositionLeft',50)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('CamsDetectionWindowPositionTop',50)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('CamsDetectionWindowHeight',1056)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('CamsDetectionWindowWidth',1944)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('MainWindowHeight',638)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('MainWindowWidth',1197)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsSingleScoreWindowPositionLeft',1046)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsSingleScoreWindowPositionTop',906)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsSingleScoreWindowHeight',293)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsSingleScoreWindowWidth',1406)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsDoubleScoreWindowPositionLeft',1056)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsDoubleScoreWindowPositionTop',828)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsDoubleScoreWindowHeight',376)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('FreeThrowsDoubleScoreWindowWidth',1473)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('ClassicScoreWindowPositionLeft',1056)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('ClassicScoreWindowPositionTop',815)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('ClassicScoreWindowHeight',386)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('ClassicScoreWindowWidth',1472)";
             ExecuteNonQueryInternal(addParameter);
             // add some settings
@@ -490,26 +490,26 @@ namespace OneHundredAndEightyCore.Common
 
         public void MigrateFrom2_2to2_3()
         {
-            var deleteParameter = $"DELETE FROM [{Table.Settings}] WHERE [{Column.Name}] = 'MovesExtraction'";
+            var deleteParameter = $"DELETE FROM [Settings] WHERE [Name] = 'MovesExtraction'";
             ExecuteNonQueryInternal(deleteParameter);
-            deleteParameter = $"DELETE FROM [{Table.Settings}] WHERE [{Column.Name}] = 'MovesDart'";
+            deleteParameter = $"DELETE FROM [Settings] WHERE [Name] = 'MovesDart'";
             ExecuteNonQueryInternal(deleteParameter);
-            deleteParameter = $"DELETE FROM [{Table.Settings}] WHERE [{Column.Name}] = 'MovesNoise'";
+            deleteParameter = $"DELETE FROM [Settings] WHERE [Name] = 'MovesNoise'";
             ExecuteNonQueryInternal(deleteParameter);
 
-            var addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            var addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                                "VALUES ('MaxContourArc',265)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('MinContourArea',336)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('MaxContourArea',3300)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('MinContourWidth',8)";
             ExecuteNonQueryInternal(addParameter);
-            addParameter = $"INSERT INTO [{Table.Settings}] ({Column.Name},{Column.Value}) " +
+            addParameter = $"INSERT INTO [Settings] (Name, Value) " +
                            "VALUES ('MaxContourWidth',44)";
             ExecuteNonQueryInternal(addParameter);
 
@@ -520,15 +520,15 @@ namespace OneHundredAndEightyCore.Common
         {
             // Achieves scheme update
             var achievesUpdate = "PRAGMA foreign_keys = OFF; " +
-                                 $"CREATE TABLE [{Table.Achieves}] ('{Column.Id}' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, '{Column.Name}' INTEGER NOT NULL UNIQUE); " +
-                                 $"DROP TABLE [{Table.PlayerAchieves}]; " +
-                                 $"CREATE TABLE [{Table.PlayerAchieves}] ('{Column.AchieveId}' INTEGER NOT NULL, '{Column.PlayerId}' INTEGER NOT NULL, '{Column.ObtainedDateTime}' TEXT NOT NULL, FOREIGN KEY('{Column.PlayerId}') REFERENCES '{Table.Players}'('{Column.Id}'), FOREIGN KEY('{Column.AchieveId}') REFERENCES '{Table.Achieves}'('{Column.Id}')); " +
+                                 $"CREATE TABLE [Achieves] ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'Name' INTEGER NOT NULL UNIQUE); " +
+                                 $"DROP TABLE [PlayerAchieves]; " +
+                                 $"CREATE TABLE [PlayerAchieves] ('AchieveId' INTEGER NOT NULL, 'PlayerId' INTEGER NOT NULL, 'ObtainedDateTime' TEXT NOT NULL, FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'), FOREIGN KEY('AchieveId') REFERENCES 'Achieves'('Id')); " +
                                  $"CREATE TABLE PlayersTemp ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'Name' TEXT NOT NULL CHECK(Name!=''), 'NickName' TEXT NOT NULL CHECK(NickName!='') UNIQUE, 'RegistrationDateTime' TEXT NOT NULL, 'Avatar' TEXT); " +
                                  $"INSERT INTO PlayersTemp (Id, Name, NickName, RegistrationDateTime, Avatar) SELECT Id, Name, NickName, RegistrationTimestamp, Avatar FROM Players; " +
-                                 $"DROP TABLE [{Table.Players}]; " +
-                                 $"ALTER TABLE PlayersTemp RENAME TO [{Table.Players}]; " +
+                                 $"DROP TABLE [Players]; " +
+                                 $"ALTER TABLE PlayersTemp RENAME TO [Players]; " +
                                  $"PRAGMA foreign_keys = ON; " +
-                                 $"INSERT INTO [{Table.Achieves}] ({Column.Name}) VALUES ('{Achieve.MatchesPlayed10}'),('{Achieve.MatchesPlayed100}'),('{Achieve.MatchesPlayed1000}'),('{Achieve.MatchesWon10}'),('{Achieve.MatchesWon100}'),('{Achieve.MatchesWon1000}'),('{Achieve.Throws1000}'),('{Achieve.Throws10000}'),('{Achieve.Throws100000}'),('{Achieve.Points10000}'),('{Achieve.Points100000}'),('{Achieve.Points1000000}'),('{Achieve._180x10}'),('{Achieve._180x100}'),('{Achieve._180x1000}'),('{Achieve.First180}'),('{Achieve.Bullx3}'),('{Achieve.MrZ}')";
+                                 $"INSERT INTO [Achieves] (Name) VALUES ('MatchesPlayed10'),('MatchesPlayed100'),('MatchesPlayed1000'),('MatchesWon10'),('MatchesWon100'),('MatchesWon1000'),('Throws1000'),('Throws10000'),('Throws100000'),('Points10000'),('Points100000'),('Points1000000'),('_180x10'),('_180x100'),('_180x1000'),('First180'),('Bullx3'),('MrZ')";
             ExecuteNonQueryInternal(achievesUpdate);
 
             var columnsRename = $"PRAGMA foreign_keys = OFF; " +
