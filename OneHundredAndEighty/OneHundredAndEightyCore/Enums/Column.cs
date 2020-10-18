@@ -31,6 +31,7 @@
         LegsWon,
         SetsWon,
         AchieveId,
-        ObtainedDateTime
+        ObtainedDateTime,
+        GameTypeId
     }
 }

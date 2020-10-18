@@ -92,13 +92,15 @@ namespace OneHundredAndEightyCore.Common
                     migration.DoMigration();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 RevertDb();
 
                 messageBoxService.ShowError(Resources.Resources.ErrorDbMigrationText,
                                             currentDbVersion.ToString(),
-                                            appVersion.ToString());
+                                            appVersion.ToString(),
+                                            e.Message,
+                                            e.StackTrace);
 
                 throw;
             }

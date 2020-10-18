@@ -45,7 +45,7 @@ namespace OneHundredAndEightyCore.Common
 
         public int GameSaveNew(Domain.Game game)
         {
-            var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartDateTime},{Column.EndDateTime},{Column.ThrowTypeId})" +
+            var newGameQuery = $"INSERT INTO [{Table.Games}] ({Column.StartDateTime},{Column.EndDateTime},{Column.GameTypeId})" +
                                $" VALUES ('{game.StartTimeStamp}','{game.EndTimeStamp}','{(int) game.Type}')";
             ExecuteNonQueryInternal(newGameQuery);
 
@@ -191,11 +191,11 @@ namespace OneHundredAndEightyCore.Common
                                         $"COUNT(S.{Column.Id}) AS GamesPlayed, " +
                                         $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS GamesWon, " +
                                         $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE S.{Column.GameResultTypeId} = {(int) GameResultType.Loose}),0)  AS GamesLoose, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.FreeThrowsSingle}),0)  AS FreeThrowsSingleGamesPlayed, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.FreeThrowsDouble}),0)  AS FreeThrowsDoubleGamesPlayed, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.FreeThrowsDouble} AND S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS FreeThrowsDoubleGamesWon, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.Classic}),0)  AS ClassicGamesPlayed, " +
-                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.ThrowTypeId} = {(int) GameType.Classic} AND S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS ClassicGamesGamesWon, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.GameTypeId} = {(int) GameType.FreeThrowsSingle}),0)  AS FreeThrowsSingleGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.GameTypeId} = {(int) GameType.FreeThrowsDouble}),0)  AS FreeThrowsDoubleGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.GameTypeId} = {(int) GameType.FreeThrowsDouble} AND S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS FreeThrowsDoubleGamesWon, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.GameTypeId} = {(int) GameType.Classic}),0)  AS ClassicGamesPlayed, " +
+                                        $"IFNULL((SELECT COUNT(S.{Column.Id}) WHERE G.{Column.GameTypeId} = {(int) GameType.Classic} AND S.{Column.GameResultTypeId} = {(int) GameResultType.Win}),0)  AS ClassicGamesGamesWon, " +
                                         $"IFNULL(SUM(S.{Column.LegsPlayed}),0)  AS LegsPlayed, " +
                                         $"IFNULL(SUM(S.{Column.LegsWon}),0)  AS LegsWon, " +
                                         $"IFNULL(SUM(S.{Column.SetsPlayed}),0)  AS SetsPlayed, " +
@@ -531,33 +531,33 @@ namespace OneHundredAndEightyCore.Common
                                  $"INSERT INTO [{Table.Achieves}] ({Column.Name}) VALUES ('{Achieve.MatchesPlayed10}'),('{Achieve.MatchesPlayed100}'),('{Achieve.MatchesPlayed1000}'),('{Achieve.MatchesWon10}'),('{Achieve.MatchesWon100}'),('{Achieve.MatchesWon1000}'),('{Achieve.Throws1000}'),('{Achieve.Throws10000}'),('{Achieve.Throws100000}'),('{Achieve.Points10000}'),('{Achieve.Points100000}'),('{Achieve.Points1000000}'),('{Achieve._180x10}'),('{Achieve._180x100}'),('{Achieve._180x1000}'),('{Achieve.First180}'),('{Achieve.Bullx3}'),('{Achieve.MrZ}')";
             ExecuteNonQueryInternal(achievesUpdate);
 
-            var columnsRename = $"PRAGMA foreign_keys = OFF;" +
-                                $"CREATE TABLE [ThrowsTemp] ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,'PlayerId INTEGER NOT NULL, 'GameId' INTEGER NOT NULL,'Sector' INTEGER NOT NULL, 'ThrowTypeId' INTEGER NOT NULL, 'ThrowResultId' INTEGER NOT NULL, 'Number'	INTEGER NOT NULL,'Points' INTEGER NOT NULL,'PoiX'	INTEGER NOT NULL,'PoiY'	INTEGER NOT NULL,'ProjectionResolution'	INTEGER NOT NULL,'DateTime'	TEXT NOT NULL,FOREIGN KEY('GameId') REFERENCES 'Games'('Id'),FOREIGN KEY('ThrowTypeId') REFERENCES 'ThrowType'('Id'),FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'),FOREIGN KEY('ThrowResultId') REFERENCES 'ThrowResult'('Id'));" +
-                                $"INSERT INTO [ThrowsTemp] (Id,PlayerId,GameId,Sector,ThrowTypeId,ThrowResultId,Number,Points,PoiX,PoiY,ProjectionResolution,DateTime)" +
-                                $"SELECT Id,Player,Game,Sector,Type,Result,Number,Points,PoiX,PoiY,ProjectionResolution,Timestamp FROM [Throws];" +
-                                $"DROP TABLE [Throws];" +
-                                $"ALTER TABLE [ThrowsTemp] RENAME TO [Throws];" +
-                                $"CREATE TABLE 'GamesTemp' ('Id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,'StartDateTime'	TEXT NOT NULL,'EndDateTime'	TEXT NOT NULL,'GameTypeId'	INTEGER NOT NULL,FOREIGN KEY('GameTypeId') REFERENCES 'GameType'('Id'));" +
-                                $"INSERT INTO [GamesTemp] (Id,StartDateTime,EndDateTime,GameTypeId)" +
-                                $"SELECT Id,StartTimestamp,EndTimestamp,Type FROM [Games];" +
-                                $"DROP TABLE [Games];" +
-                                $"ALTER TABLE [GamesTemp] RENAME TO [Games];" +
-                                $"CREATE TABLE 'GameStatisticTemp' ('GameId'	INTEGER NOT NULL,'StatisticId'	INTEGER NOT NULL,FOREIGN KEY('GameId') REFERENCES 'Games'('Id'),FOREIGN KEY('StatisticId') REFERENCES 'Statistic'('Id'));" +
-                                $"INSERT INTO [GameStatisticTemp] (GameId,StatisticId)" +
-                                $"SELECT Game,Statistic FROM [GameStatistic];" +
-                                $"DROP TABLE [GameStatistic];" +
-                                $"ALTER TABLE [GameStatisticTemp] RENAME TO [GameStatistic];" +
-                                $"CREATE TABLE 'StatisticTemp' ('Id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'PlayerId'	INTEGER NOT NULL,'GameResultTypeId'	INTEGER NOT NULL,'LegsPlayed'	INTEGER NOT NULL DEFAULT 0,'LegsWon'	INTEGER NOT NULL DEFAULT 0,'SetsPlayed'	INTEGER NOT NULL DEFAULT 0,	'SetsWon'	INTEGER NOT NULL DEFAULT 0,FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'),FOREIGN KEY('GameResultTypeId') REFERENCES 'GameResultType'('Id'));" +
-                                $"INSERT INTO [StatisticTemp] (Id,PlayerId,GameResultTypeId,LegsPlayed,LegsWon,SetsPlayed,SetsWon)" +
-                                $"SELECT Id,Player,GameResult,LegsPlayed,LegsWon,SetsPlayed,SetsWon FROM [Statistic];" +
-                                $"DROP TABLE [Statistic];" +
-                                $"ALTER TABLE [StatisticTemp] RENAME TO [Statistic];" +
-                                $"CREATE TABLE '_180Temp' ('Id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'PlayerId'	INTEGER NOT NULL,'GameId'	INTEGER NOT NULL,'Throw1Id'	INTEGER NOT NULL,'Throw2Id'	INTEGER NOT NULL,'Throw3Id'	INTEGER NOT NULL,'DateTime'	TEXT NOT NULL,FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'),FOREIGN KEY('GameId') REFERENCES 'Games'('Id'),FOREIGN KEY('Throw1Id') REFERENCES 'Throws'('Id'),FOREIGN KEY('Throw2Id') REFERENCES 'Throws'('Id'),FOREIGN KEY('Throw3Id') REFERENCES 'Throws'('Id'));" +
-                                $"INSERT INTO [_180Temp] (Id,PlayerId,GameId,Throw1Id,Throw2Id,Throw3Id,DateTime)" +
-                                $"SELECT Id,Player,Game,Throw1,Throw2,Throw3,TimeStamp FROM [_180];" +
-                                $"DROP TABLE [_180];" +
-                                $"ALTER TABLE [_180Temp] RENAME TO [_180];" +
-                                $"PRAGMA foreign_keys = ON;";
+            var columnsRename = $"PRAGMA foreign_keys = OFF; " +
+                                $"CREATE TABLE [ThrowsTemp] ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'PlayerId' INTEGER NOT NULL, 'GameId' INTEGER NOT NULL, 'Sector' INTEGER NOT NULL, 'ThrowTypeId' INTEGER NOT NULL, 'ThrowResultId' INTEGER NOT NULL, 'Number' INTEGER NOT NULL, 'Points' INTEGER NOT NULL, 'PoiX' INTEGER NOT NULL, 'PoiY' INTEGER NOT NULL, 'ProjectionResolution' INTEGER NOT NULL, 'DateTime' TEXT NOT NULL, FOREIGN KEY('GameId') REFERENCES 'Games'('Id'), FOREIGN KEY('ThrowTypeId') REFERENCES 'ThrowType'('Id'), FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'), FOREIGN KEY('ThrowResultId') REFERENCES 'ThrowResult'('Id')); " +
+                                $"INSERT INTO [ThrowsTemp] (Id, PlayerId, GameId, Sector, ThrowTypeId, ThrowResultId, Number, Points, PoiX, PoiY, ProjectionResolution, DateTime) " +
+                                $"SELECT Id, Player, Game, Sector, Type, Result, Number, Points, PoiX, PoiY, ProjectionResolution, Timestamp FROM [Throws]; " +
+                                $"DROP TABLE [Throws]; " +
+                                $"ALTER TABLE [ThrowsTemp] RENAME TO [Throws]; " +
+                                $"CREATE TABLE [GamesTemp] ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'StartDateTime' TEXT NOT NULL, 'EndDateTime' TEXT NOT NULL, 'GameTypeId' INTEGER NOT NULL, FOREIGN KEY('GameTypeId') REFERENCES 'GameType'('Id')); " +
+                                $"INSERT INTO [GamesTemp] (Id, StartDateTime, EndDateTime, GameTypeId) " +
+                                $"SELECT Id, StartTimestamp, EndTimestamp, Type FROM [Games]; " +
+                                $"DROP TABLE [Games]; " +
+                                $"ALTER TABLE [GamesTemp] RENAME TO [Games]; " +
+                                $"CREATE TABLE 'GameStatisticTemp' ('GameId' INTEGER NOT NULL, 'StatisticId' INTEGER NOT NULL, FOREIGN KEY('GameId') REFERENCES 'Games'('Id'), FOREIGN KEY('StatisticId') REFERENCES 'Statistic'('Id')); " +
+                                $"INSERT INTO [GameStatisticTemp] (GameId, StatisticId) " +
+                                $"SELECT Game, Statistic FROM [GameStatistic]; " +
+                                $"DROP TABLE [GameStatistic]; " +
+                                $"ALTER TABLE [GameStatisticTemp] RENAME TO [GameStatistic]; " +
+                                $"CREATE TABLE [StatisticTemp] ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'PlayerId' INTEGER NOT NULL, 'GameResultTypeId' INTEGER NOT NULL, 'LegsPlayed' INTEGER NOT NULL DEFAULT 0, 'LegsWon' INTEGER NOT NULL DEFAULT 0, 'SetsPlayed' INTEGER NOT NULL DEFAULT 0, 'SetsWon' INTEGER NOT NULL DEFAULT 0, FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'), FOREIGN KEY('GameResultTypeId') REFERENCES 'GameResultType'('Id')); " +
+                                $"INSERT INTO [StatisticTemp] (Id, PlayerId, GameResultTypeId, LegsPlayed, LegsWon, SetsPlayed, SetsWon) " +
+                                $"SELECT Id, Player, GameResult, LegsPlayed, LegsWon, SetsPlayed, SetsWon FROM [Statistic]; " +
+                                $"DROP TABLE [Statistic]; " +
+                                $"ALTER TABLE [StatisticTemp] RENAME TO [Statistic]; " +
+                                $"CREATE TABLE [_180Temp] ('Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'PlayerId' INTEGER NOT NULL, 'GameId' INTEGER NOT NULL, 'Throw1Id' INTEGER NOT NULL, 'Throw2Id' INTEGER NOT NULL, 'Throw3Id' INTEGER NOT NULL, 'DateTime' TEXT NOT NULL, FOREIGN KEY('PlayerId') REFERENCES 'Players'('Id'), FOREIGN KEY('GameId') REFERENCES 'Games'('Id'), FOREIGN KEY('Throw1Id') REFERENCES 'Throws'('Id'), FOREIGN KEY('Throw2Id') REFERENCES 'Throws'('Id'), FOREIGN KEY('Throw3Id') REFERENCES 'Throws'('Id')); " +
+                                $"INSERT INTO [_180Temp] (Id, PlayerId, GameId, Throw1Id, Throw2Id, Throw3Id, DateTime) " +
+                                $"SELECT Id, Player, Game, Throw1, Throw2, Throw3, TimeStamp FROM [_180]; " +
+                                $"DROP TABLE [_180]; " +
+                                $"ALTER TABLE [_180Temp] RENAME TO [_180]; " +
+                                $"PRAGMA foreign_keys = ON; ";
             ExecuteNonQueryInternal(columnsRename);
             
             UpdateDbVersion("2.4");
