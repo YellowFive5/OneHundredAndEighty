@@ -13,7 +13,8 @@ namespace OneHundredAndEightyCore.Common
         void SettingsSetValue(SettingsType name, string value);
         string SettingsGetValue(SettingsType name);
         void PlayerSaveNew(Player player);
-        DataTable PlayersLoadAll();
+        DataTable PlayersAllLoad();
+        DataSet PlayerLoad(int playerId);
         void MigrateFrom2_0to2_1();
         void MigrateFrom2_1to2_2();
         void MigrateFrom2_2to2_3();

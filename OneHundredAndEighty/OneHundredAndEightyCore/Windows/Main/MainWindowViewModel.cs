@@ -148,7 +148,7 @@ namespace OneHundredAndEightyCore.Windows.Main
         {
             configService.LoadSettings();
 
-            DataContext.Players = Converter.PlayersFromTable(dbService.PlayersLoadAll());
+            DataContext.Players = Converter.PlayersFromTable(dbService.PlayersAllLoad());
 
             MainWindowHeight = configService.MainWindowHeight;
             MainWindowWidth = configService.MainWindowWidth;

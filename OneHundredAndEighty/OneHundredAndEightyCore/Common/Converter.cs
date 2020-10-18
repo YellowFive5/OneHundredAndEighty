@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -18,9 +18,9 @@ namespace OneHundredAndEightyCore.Common
 {
     public static class Converter
     {
-        public static ObservableCollection<Player> PlayersFromTable(DataTable playersTable)
+        public static List<Player> PlayersFromTable(DataTable playersTable)
         {
-            var playersList = new ObservableCollection<Player>();
+            var playersList = new List<Player>();
             foreach (DataRow playerRow in playersTable.Rows)
             {
                 var player = new Player(playerRow[$"{Column.Name}"].ToString(),
@@ -31,6 +31,11 @@ namespace OneHundredAndEightyCore.Common
             }
 
             return playersList;
+        }
+
+        public static Player PlayerFromTable(DataSet playerData)
+        {
+            return null; // todo
         }
 
         public static string PlayerStatisticsFromTable(DataTable playerStatisticsDataTable) // todo add Statistics object maybe instead of string

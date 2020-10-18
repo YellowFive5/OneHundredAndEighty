@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using NLog;
 using OneHundredAndEightyCore.Common;
 using OneHundredAndEightyCore.Enums;
@@ -32,7 +33,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
         public const int DefaultNewGameLegsValue = 3;
         public const GameType DefaultNewGameType = GameType.Classic;
         public const GamePoints DefaultNewGamePoints = GamePoints._501;
-
+        private List<Domain.Player> newGamePlayers;
         public GameTabViewModel(DataContext dataContext,
                                 IDbService dbService,
                                 ILogger logger,
@@ -174,7 +175,15 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
                 detectionService.CheckCamsAndTryCapture(cams);
                 detectionService.RunDetection(cams, DetectionServiceWorkingMode.Detection);
                 gameService.OnGameEnd += StopGameInternal;
-                gameService.StartGame(NewGamePlayer1, NewGamePlayer2, NewGameType, NewGamePoints, NewGameSets, NewGameLegs);
+                
+                newGamePlayers = new List<Domain.Player>(); // todo not beauty
+                newGamePlayers.AddIfNotNull(NewGamePlayer1);
+                if (IsNewGameForPair)
+                {
+                    newGamePlayers.AddIfNotNull(NewGamePlayer2);
+                }
+                
+                gameService.StartGame(newGamePlayers, NewGameType, NewGamePoints, NewGameSets, NewGameLegs);
             }
             catch (Exception e)
             {
@@ -229,6 +238,15 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Game
             detectionService.StopDetection();
             manualThrowPanel.HidePanel();
             IsGameRunning = false;
+
+            // foreach (var player in newGamePlayers) todo use this when will be complete
+            // {
+            //     ReloadPlayer(player.Id);
+            // }
+
+            LoadPlayers();
+            
+            newGamePlayers = new List<Domain.Player>();
         }
     }
 }

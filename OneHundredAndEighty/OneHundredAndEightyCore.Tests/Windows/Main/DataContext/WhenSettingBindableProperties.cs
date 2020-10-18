@@ -1,6 +1,6 @@
 ﻿#region Usings
 
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using OneHundredAndEightyCore.Domain;
@@ -23,7 +23,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.DataContext
         public void PlayersSetsAndChangeFired()
         {
             var oldValue = DataContext.Players;
-            var list = new ObservableCollection<Player>
+            var list = new List<Player>
                        {
                            new Player("Phil", "The Power"),
                            new Player("Michael", "Mighty Mike")

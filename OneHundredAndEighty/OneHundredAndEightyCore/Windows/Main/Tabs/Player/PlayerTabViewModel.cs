@@ -132,7 +132,7 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Player
             NewPlayerNickNameText = string.Empty;
             NewPlayerAvatar = Converter.BitmapToBitmapImage(Resources.Resources.EmptyUserIcon);
 
-            LoadPlayers();
+            LoadPlayers(); // todo maybe reload not all but last?
         }
 
         private void SelectAvatarImage()

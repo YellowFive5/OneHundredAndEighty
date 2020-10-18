@@ -16,7 +16,7 @@ namespace OneHundredAndEightyCore.Tests.Windows.Main.MainWindowViewModel
         {
             base.Setup();
             
-            DbServiceMock.Setup(x => x.PlayersLoadAll()).Returns(PlayersDataTableFromDb);
+            DbServiceMock.Setup(x => x.PlayersAllLoad()).Returns(PlayersDataTableFromDb);
 
             DetectionServiceMock.Setup(x => x.FindConnectedCams()).Returns("[HBV HD CAMERA]-[ID:'8&2f223cfb']");
             DetectionServiceMock.SetupAdd(m => m.OnErrorOccurred += e => { });

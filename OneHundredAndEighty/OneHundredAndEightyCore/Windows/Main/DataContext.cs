@@ -1,6 +1,6 @@
 ﻿#region Usings
 
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using OneHundredAndEightyCore.Domain;
@@ -13,12 +13,12 @@ namespace OneHundredAndEightyCore.Windows.Main
     {
         public DataContext()
         {
-            Players = new ObservableCollection<Player>();
+            Players = new List<Player>();
         }
 
-        private ObservableCollection<Player> players;
+        private List<Player> players;
 
-        public ObservableCollection<Player> Players
+        public List<Player> Players
         {
             get => players;
             set

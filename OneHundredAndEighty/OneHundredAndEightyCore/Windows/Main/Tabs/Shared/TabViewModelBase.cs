@@ -55,7 +55,13 @@ namespace OneHundredAndEightyCore.Windows.Main.Tabs.Shared
 
         protected void LoadPlayers()
         {
-            DataContext.Players = Converter.PlayersFromTable(dbService.PlayersLoadAll());
+            DataContext.Players = Converter.PlayersFromTable(dbService.PlayersAllLoad());
+        }
+
+        protected void ReloadPlayer(int playerId)
+        {
+            DataContext.Players.RemoveAll(p => p.Id == playerId);
+            DataContext.Players.Add(Converter.PlayerFromTable(dbService.PlayerLoad(playerId)));
         }
 
         protected List<CamService> CreateCamsServices()

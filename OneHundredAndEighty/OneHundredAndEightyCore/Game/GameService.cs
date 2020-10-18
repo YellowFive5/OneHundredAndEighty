@@ -49,17 +49,12 @@ namespace OneHundredAndEightyCore.Game
 
         #region Start/Stop
 
-        public void StartGame(Player player1,
-                              Player player2,
+        public void StartGame(List<Player> players,
                               GameType gameType,
                               GamePoints gamePoints,
                               int gameSets,
                               int gameLegs)
         {
-            var players = new List<Player>();
-            players.AddIfNotNull(player1);
-            players.AddIfNotNull(player2);
-
             Game = new Domain.Game(gameType, players, gameLegs, gameSets, gamePoints);
 
             scoreBoardService.OpenScoreBoard(Game);
@@ -144,7 +139,7 @@ namespace OneHundredAndEightyCore.Game
             Game.EndTimeStamp = DateTime.Now;
             SaveGameData();
             Game = null;
-            
+
             detectionService.OnThrowDetected -= OnAnotherThrow;
             detectionService.OnStatusChanged -= OnDetectionServiceStatusChanged;
             GameProcessor.OnMatchEnd -= OnMatchEnd;
@@ -183,6 +178,7 @@ namespace OneHundredAndEightyCore.Game
                     {
                         dbService.StatisticUpdateAllPlayersSetGameResultForWinnersAndLosers(Game);
                     }
+
                     break;
                 case GameResultType.Aborted:
                 case GameResultType.Error:

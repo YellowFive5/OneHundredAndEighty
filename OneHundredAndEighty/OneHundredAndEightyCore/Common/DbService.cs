@@ -171,9 +171,14 @@ namespace OneHundredAndEightyCore.Common
             ExecuteNonQueryInternal(newPlayerQuery);
         }
 
-        public DataTable PlayersLoadAll()
+        public DataTable PlayersAllLoad()
         {
             return ExecuteDataTableInternal($"SELECT * FROM [{Table.Players}]");
+        }
+
+        public DataSet PlayerLoad(int playerId)
+        {
+            return new DataSet(); // todo
         }
 
         #endregion
